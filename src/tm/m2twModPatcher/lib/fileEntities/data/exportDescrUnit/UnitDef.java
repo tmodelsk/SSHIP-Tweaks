@@ -10,7 +10,7 @@ public class UnitDef {
 	public String Name;		// type
 	public String Dictionary;
 	public String Category;
-	public String Class;
+	public String Class; 
 
 	public String Accent;
 	public String VoiceType;
