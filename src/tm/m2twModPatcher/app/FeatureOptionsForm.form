@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="tm.m2twModPatcher.app.FeatureOptionsForm">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="6" column-count="3" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="3" left="5" bottom="5" right="5"/>
+    <constraints>
+      <xy x="20" y="20" width="500" height="553"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="6f3ff" class="javax.swing.JLabel" binding="headerLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Feature name"/>
+        </properties>
+      </component>
+      <tabbedpane id="7c8d8" binding="mainTabbedPane">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="3" vsize-policy="3" hsize-policy="3" anchor="0" fill="3" indent="1" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <grid id="3482" binding="mainTabPanel" layout-manager="GridLayoutManager" row-count="2" column-count="1" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+            <margin top="0" left="0" bottom="0" right="0"/>
+            <constraints>
+              <tabbedpane title="Parameters"/>
+            </constraints>
+            <properties/>
+            <border type="none"/>
+            <children>
+              <component id="47d04" class="javax.swing.JLabel">
+                <constraints>
+                  <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties>
+                  <text value="Available Feature parameters: "/>
+                </properties>
+              </component>
+              <scrollpane id="41e62">
+                <constraints>
+                  <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+                </constraints>
+                <properties/>
+                <border type="none"/>
+                <children>
+                  <component id="74b3d" class="javax.swing.JTable" binding="paramsTable">
+                    <constraints/>
+                    <properties>
+                      <preferredScrollableViewportSize width="650" height="200"/>
+                    </properties>
+                  </component>
+                </children>
+              </scrollpane>
+            </children>
+          </grid>
+        </children>
+      </tabbedpane>
+      <component id="2d3b2" class="javax.swing.JButton" binding="descriptionUrlBtn">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <background color="-1"/>
+          <borderPainted value="false"/>
+          <contentAreaFilled value="false"/>
+          <defaultCapable value="false"/>
+          <foreground color="-11973400"/>
+          <horizontalAlignment value="2"/>
+          <text value="Button"/>
+        </properties>
+      </component>
+      <component id="e1fef" class="javax.swing.JButton" binding="okButton" default-binding="true">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Ok"/>
+        </properties>
+      </component>
+      <component id="60c46" class="javax.swing.JButton" binding="cancelButton" default-binding="true">
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Cancel"/>
+        </properties>
+      </component>
+      <component id="65a19" class="javax.swing.JLabel" binding="featureIdLb">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="2" use-parent-layout="false">
+            <maximum-size width="1" height="1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <enabled value="false"/>
+          <name value="featureIdLb"/>
+          <text value="Label"/>
+        </properties>
+      </component>
+      <component id="3c70c" class="javax.swing.JLabel" binding="descriptionShortLabel">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Description short"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>

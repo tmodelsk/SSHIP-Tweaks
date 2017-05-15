@@ -1,0 +1,17 @@
+;------------------------------------------
+Trigger Heir_excandidate
+    WhenToTest BecomesFactionHeir
+
+    Condition Trait HeirCandidate > 0
+
+    Affects HeirCandidate  -1  Chance  100 
+
+;------------------------------------------
+Trigger Leader_excandidate
+    WhenToTest BecomesFactionLeader
+
+    Condition Trait HeirCandidate > 0
+
+    Affects HeirCandidate  -1  Chance  100 
+
+;------------------------------------------

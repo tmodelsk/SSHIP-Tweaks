@@ -1,0 +1,3 @@
+{Heir_Candidate}Candidate for heir
+{Heir_Candidate_desc}It’s one of the main candidates in the line of succession to the throne.
+{Heir_Candidate_effects_desc}It has a good degree of authority and leader skills.

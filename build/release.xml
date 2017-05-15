@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="sship-tweaks-release" default="makeReleasePackage">
+    <property file="release.properties" />
+    <property name="projectDir" value="${basedir}/.."/>
+    <property name="artifactsDir" value="${projectDir}/out/artifacts/SSHIP-Tweaks-jar"/>
+    <property name="releaseDir" value="${projectDir}/out/release"/>
+    <property name="appReleaseDir" value="${releaseDir}/SSHIP-Tweaks"/>
+
+    <target name="makeReleasePackage"
+            depends="
+                cleanReleaseDir,
+                prepareReleaseDir,
+                copyArtifacts,
+                copyOverrides,
+                zipPackage">
+
+    </target>
+
+    <target name="zipPackage">
+        <zip destfile="${releaseDir}/SSHIP-Tweaks.zip" basedir="${releaseDir}">
+        </zip>
+    </target>
+
+    <target name="cleanReleaseDir">
+        <delete includeemptydirs="true">
+            <fileset dir="${releaseDir}">
+                <include name="**/*" />
+            </fileset>
+        </delete>
+    </target>
+
+    <target name="prepareReleaseDir">
+        <mkdir dir="${appReleaseDir}" />
+        <mkdir dir="${appReleaseDir}/Backup"/>
+    </target>
+
+    <target name="copyArtifacts">
+        <copydir src="${artifactsDir}" dest="${appReleaseDir}" />
+    </target>
+
+    <target name="copyOverrides">
+        <mkdir dir="${appReleaseDir}/Overrides"/>
+        <copydir src="${path.overrides}" dest="${appReleaseDir}/Overrides" />
+    </target>
+
+
+</project>

@@ -1,0 +1,114 @@
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;                                                   ;;;
+;;;          Script for selecting the heir            ;;;
+;;;                                                   ;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+
+	declare_counter candidate
+	declare_counter first_candidate
+	declare_counter checking
+	declare_counter active_heir_bucle
+	declare_counter decline_sh
+
+
+	monitor_event CeasedFactionHeir CharacterIsLocal
+		and I_CompareCounter candidate = 0
+
+		historic_event select_candidate true
+		set_counter first_candidate 1
+		
+	end_monitor
+
+	monitor_event BrotherAdopted CharacterIsLocal
+		and I_TurnNumber >= 0
+		and I_CompareCounter candidate = 0
+		and I_CompareCounter first_candidate = 0
+        	and I_CompareCounter active_heir_bucle = 0
+
+		historic_event select_candidate true
+		set_counter first_candidate 1
+		set_counter active_heir_bucle 1
+
+		terminate_monitor		
+	end_monitor
+
+	monitor_event CharacterComesOfAge FactionIsLocal
+		and IsGeneral
+		and I_CompareCounter candidate = 0
+		and I_CompareCounter first_candidate = 0
+        	and I_CompareCounter active_heir_bucle = 0
+		
+		historic_event select_candidate true
+		set_counter first_candidate 1
+		set_counter active_heir_bucle 1
+
+		terminate_monitor		
+	end_monitor
+
+    	monitor_event FactionTurnEnd FactionType slave
+        	set_counter checking 1
+   	end_monitor
+
+    	monitor_event CharacterTurnEnd CharacterIsLocal
+        	and I_TurnNumber > 0
+        	and Trait HeirCandidate > 0
+
+        	set_counter checking 2
+    	end_monitor
+
+   	monitor_event FactionTurnEnd FactionIsLocal
+        	and I_CompareCounter checking = 1
+        	and I_CompareCounter active_heir_bucle = 1
+        	and I_CompareCounter decline_sh = 0
+        	and I_CompareCounter candidate = 0
+
+        	historic_event select_candidate true
+        	set_counter first_candidate 1
+    	end_monitor
+
+	monitor_event EventCounter EventCounterType select_candidate_accepted
+		and I_EventCounter select_candidate_accepted = 1
+
+		select_ui_element faction_button
+		simulate_mouse_click lclick_down
+		simulate_mouse_click lclick_up
+
+		select_ui_element family_tree_button
+		simulate_mouse_click lclick_down
+		simulate_mouse_click lclick_up
+
+		select_ui_element faction_button
+		simulate_mouse_click lclick_down
+		simulate_mouse_click lclick_up
+
+		ui_flash_start family_tree_zoom_to_button
+		set_event_counter select_candidate_accepted 0
+		set_counter candidate 1
+		
+	end_monitor
+
+	monitor_event CharacterSelected CharacterIsLocal
+		and I_CompareCounter candidate = 1
+		and I_ScrollOpen family_tree_scroll
+		and IsGeneral
+          	and not IsFactionLeader
+          	and not IsFactionHeir
+
+		ui_flash_stop
+		console_command give_trait this HeirCandidate 1
+		set_counter candidate 0
+		historic_event selected
+
+	end_monitor
+
+	monitor_event EventCounter EventCounterType select_candidate_declined
+		and I_EventCounter select_candidate_declined = 1
+
+		set_counter decline_sh 1
+	end_monitor
+
+
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+

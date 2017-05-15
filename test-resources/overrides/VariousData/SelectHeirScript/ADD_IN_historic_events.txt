@@ -1,0 +1,4 @@
+{SELECT_CANDIDATE_BODY}You want choose the family member who will be the next heir of the faction?\n\n\n\n(INSTRUCTIONS: If you decline the option of select the candidate, don't reappears until the faction's leader dies. If you accept, appears the family tree screen. At that moment, you can choose a family member (except leader and heir) and press the zoom button to select the next heir. But if you aren't interested in any existing family member at this moment, you can close the window and choosing the general in other "turn", opening the panel again manually.)
+{SELECT_CANDIDATE_TITLE}Select the next heir
+{SELECTED_BODY}The selected general will have rights of inheritance to the throne, followed by the current heir.
+{SELECTED_TITLE}Inheritance privileges granted

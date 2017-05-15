@@ -1,0 +1,1597 @@
+;SS6.4 EDG edited by gracul: Jan-2011
+
+;=========================================;
+;========= GUILD LIST START HERE =========;
+;=========================================;
+;------------------------------------------
+Guild theologians_guild
+ building guild_theologians_guild
+ levels 100 200 400
+ 
+;------------------------------------------
+Guild masons_guild
+ building guild_masons_guild
+ levels 90 175 450
+
+;------------------------------------------
+Guild merchants_guild
+ building guild_merchants_guild
+ levels 100 250 400
+
+;------------------------------------------
+Guild explorers_guild
+ building guild_explorers_guild
+ levels 100 150 400
+
+;------------------------------------------
+Guild assassins_guild
+ building guild_assassins_guild
+ levels 110 175 450
+
+;------------------------------------------
+Guild thiefs_guild
+ building guild_thiefs_guild
+ levels 110 175 450
+
+;------------------------------------------
+Guild swordsmiths_guild
+ building guild_swordsmiths_guild
+ levels 90 200 400
+
+;------------------------------------------
+Guild woodsmens_guild
+ building guild_woodsmens_guild
+ levels 100 200 400
+
+;------------------------------------------
+Guild horse_breeders_guild
+ building guild_horse_breeders_guild
+ levels 100 200 400
+
+;------------------------------------------
+Guild hanseatic_guild
+ building guild_hanseatic_guild
+ levels 100
+
+;=========================================;
+;======= GUILD TRIGGERS START HERE =======;
+;=========================================;
+
+;------------------------------------------
+;---------------- Global ------------------
+;------------------------------------------
+Trigger Global_GuildUpgraded
+ WhenToTest GuildUpgraded
+
+ Guild this o -20
+
+;------------------------------------------
+Trigger Global_GuildDestroyed
+ WhenToTest GuildDestroyed
+
+ Guild this s -100
+ Guild this o -20
+
+;------------------------------------------
+Trigger Global_SettlementUpgraded
+ WhenToTest SettlementUpgraded
+
+ Guild all s 20
+ Guild all o 3
+ Guild hanseatic_guild s -20
+ Guild hanseatic_guild o -3
+
+;------------------------------------------
+Trigger Global_WarDeclared
+ WhenToTest FactionWarDeclared
+
+ Guild theologians_guild a -10
+ Guild masons_guild a -10
+ Guild merchants_guild a -10
+ Guild explorers_guild a 5
+ Guild assassins_guild a 10
+ Guild thiefs_guild a 10
+ Guild swordsmiths_guild a 10
+ Guild woodsmens_guild a 10
+ Guild horse_breeders_guild a 10
+
+;------------------------------------------
+Trigger Global_AllianceDeclared
+ WhenToTest FactionAllianceDeclared
+
+ Guild theologians_guild a 4
+ Guild masons_guild a 4
+ Guild merchants_guild a 4
+ Guild explorers_guild a 4
+ Guild assassins_guild a -2
+ Guild thiefs_guild a -2
+ Guild swordsmiths_guild a -2
+ Guild woodsmens_guild a -2
+ Guild horse_breeders_guild a -2
+
+;------------------------------------------
+Trigger Global_NewLeader
+ WhenToTest BecomesFactionLeader
+
+ Guild all a -25
+
+;------------------------------------------
+Trigger Global_DecreaseOverTime
+ WhenToTest FactionTurnStart
+
+ Condition I_TurnNumber >= 5
+
+ Guild all a -12
+ Guild hanseatic_guild a 12
+
+;------------------------------------------
+Trigger Global_Settlement_Type_City
+ WhenToTest SettlementTurnStart
+
+ Condition SettlementType city
+
+ Guild theologians_guild s 2
+ Guild masons_guild s 2
+ Guild merchants_guild s 3
+ Guild explorers_guild s 3
+ Guild assassins_guild s 2
+ Guild thiefs_guild s 2
+
+;------------------------------------------
+Trigger Global_Settlement_Type_Castle
+ WhenToTest SettlementTurnStart
+
+ Condition SettlementType castle
+
+ Guild swordsmiths_guild s 1
+ Guild horse_breeders_guild s 2
+ Guild woodsmens_guild s 2
+ Guild masons_guild s 3
+
+;------------------------------------------
+Trigger Global_Building_Exists_Stone_Wall
+ WhenToTest SettlementTurnStart
+
+ Condition SettlementBuildingExists = stone_wall
+
+ Guild theologians_guild s 2
+ Guild masons_guild s 2
+ Guild merchants_guild s 2
+ Guild explorers_guild s 2
+ Guild assassins_guild s 2
+ Guild thiefs_guild s 2
+
+;------------------------------------------
+Trigger Global_Building_Exists_Castle
+ WhenToTest SettlementTurnStart
+
+ Condition SettlementBuildingExists = castle
+
+ Guild swordsmiths_guild s 2
+ Guild horse_breeders_guild s 2
+ Guild woodsmens_guild s 2
+ Guild masons_guild s 2
+
+;------------------------------------------
+Trigger Global_Tax_Level_Low
+ WhenToTest SettlementTurnStart
+
+ Condition SettlementTaxLevel = tax_low
+
+ Guild merchants_guild s 1
+ Guild theologians_guild s 1
+ Guild thiefs_guild s 1
+ Guild assassins_guild s 1
+ Guild masons_guild s -5
+ Guild explorers_guild s -5
+
+;------------------------------------------
+Trigger Global_Tax_Level_High_And_Very_High
+ WhenToTest SettlementTurnStart
+
+ Condition SettlementTaxLevel > tax_normal
+
+ Guild merchants_guild s -3
+ Guild theologians_guild s -3
+ Guild thiefs_guild s 3
+ Guild assassins_guild s 1
+
+;------------------------------------------
+Trigger Global_Loyalty_Level_Penalty
+ WhenToTest SettlementTurnStart
+
+ Condition SettlementLoyaltyLevel < loyalty_disillusioned
+
+ Guild all s -10
+ Guild all o -1
+
+;------------------------------------------
+Trigger Global_Loyalty_Level_Bonus
+ WhenToTest SettlementTurnStart
+
+ Condition SettlementLoyaltyLevel = loyalty_happy
+
+ Guild all s 5
+ Guild hanseatic_guild s -5
+
+;------------------------------------------
+Trigger Global_Building_Idle
+ WhenToTest SettlementTurnStart
+
+ Condition BuildingQueueIdleDespiteCash
+
+ Guild masons_guild s -5
+ Guild merchants_guild s -5
+ Guild explorers_guild s -5
+
+;------------------------------------------
+Trigger Global_Training_Idle
+ WhenToTest SettlementTurnStart
+
+ Condition TrainingQueueIdleDespiteCash
+
+ Guild swordsmiths_guild s -2
+ Guild woodsmens_guild s -1
+ Guild horse_breeders_guild s -1
+
+;------------------------------------------
+Trigger Global_Settlement_Plague
+ WhenToTest SettlementTurnStart
+
+ Condition SettlementHasPlague
+
+ Guild all s -20
+ Guild all o -2
+
+;------------------------------------------
+Trigger Global_Settlement_Has_Governor
+ WhenToTest SettlementTurnStart
+
+ Condition GovernorInResidence
+
+ Guild all s 2
+ Guild hanseatic_guild s -2
+
+;------------------------------------------
+Trigger Global_Settlement_Building_Completed
+ WhenToTest BuildingCompleted
+
+ Guild all s 2
+ Guild hanseatic_guild s -2
+
+;------------------------------------------
+;-------------- Theologians ---------------
+;------------------------------------------
+Trigger Theologians_Recruit_Priest
+ WhenToTest AgentCreated
+
+ Condition AgentType = priest
+
+ Guild theologians_guild s 5
+
+;------------------------------------------
+Trigger Theologians_Exist_Priest_Attribute_Piety
+ WhenToTest CharacterTurnStart
+
+ Condition AgentType = priest
+       and Attribute Piety > 5
+
+ Guild theologians_guild a 1
+
+;------------------------------------------
+Trigger Theologians_Successful_Denouncement
+ WhenToTest DenouncementMission
+
+ Condition MissionSucceeded
+
+ Guild theologians_guild a 5
+
+;------------------------------------------
+Trigger Theologians_Cardinal_Promoted
+ WhenToTest CardinalPromoted
+
+ Guild theologians_guild a 10
+
+;------------------------------------------
+Trigger Theologians_Priest_to_Heretic
+ WhenToTest PriestBecomesHeretic
+
+ Guild theologians_guild a -15
+
+;------------------------------------------
+Trigger Theologians_Mission_Success_Min
+ WhenToTest LeaderMissionSuccess
+
+ Condition PaybackID guild_theologians_min
+
+ Guild theologians_guild a 10
+
+;------------------------------------------
+Trigger Theologians_Mission_Fail_Min
+ WhenToTest LeaderMissionFailed
+
+ Condition PaybackID guild_theologians_min
+
+ Guild theologians_guild a -10
+
+;------------------------------------------
+Trigger Theologians_Leader_Trait_StrictlyReligious
+ WhenToTest FactionTurnStart
+
+ Condition I_EventCounter strictly_religious = 1
+
+ Guild theologians_guild a 2
+
+;------------------------------------------
+Trigger Theologians_Leader_Attribute_Piety
+ WhenToTest CharacterTurnStart
+
+ Condition IsFactionLeader
+       and Attribute Piety > 5
+
+ Guild theologians_guild a 6
+
+;------------------------------------------
+Trigger Theologians_Governor_Attribute_Piety
+ WhenToTest SettlementTurnStart
+
+ Condition GovernorAttribute Piety > 5
+
+ Guild theologians_guild s 10
+
+;------------------------------------------
+Trigger Theologians_Excommunication
+ WhenToTest FactionExcommunicated
+
+ Guild theologians_guild a -20
+
+;------------------------------------------
+Trigger Theologians_Catholic_City_Church01
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = small_church
+
+ Guild theologians_guild s 10
+
+;------------------------------------------
+Trigger Theologians_Catholic_City_Church02
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = church
+
+ Guild theologians_guild s 10
+
+;------------------------------------------
+Trigger Theologians_Catholic_City_Church03
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = abbey
+
+ Guild theologians_guild s 15
+
+;------------------------------------------
+Trigger Theologians_Catholic_City_Church04
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = cathedral
+
+ Guild theologians_guild s 15
+ Guild theologians_guild o 2 
+
+;------------------------------------------
+Trigger Theologians_Catholic_City_Church05
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = huge_cathedral
+
+ Guild theologians_guild s 15
+ Guild theologians_guild o 5 
+
+;------------------------------------------
+Trigger Theologians_Catholic_Castle_Church01
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = small_chapel
+
+ Guild theologians_guild a 10
+
+;------------------------------------------
+Trigger Theologians_Catholic_Castle_Church02
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = chapel
+
+ Guild theologians_guild a 10
+
+;------------------------------------------
+Trigger Theologians_Orthodox_City_Church01
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = small_church_o
+
+ Guild theologians_guild s 10
+
+;------------------------------------------
+Trigger Theologians_Orthodox_City_Church02
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = church_o
+
+ Guild theologians_guild s 10
+
+;------------------------------------------
+Trigger Theologians_Orthodox_City_Church03
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = abbey_o
+
+ Guild theologians_guild s 15
+
+;------------------------------------------
+Trigger Theologians_Orthodox_City_Church04
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = cathedral_o
+
+ Guild theologians_guild s 15
+ Guild theologians_guild o 2
+
+;------------------------------------------
+Trigger Theologians_Orthodox_City_Church05
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = huge_cathedral_o
+
+ Guild theologians_guild s 15
+ Guild theologians_guild o 5
+
+;------------------------------------------
+Trigger Theologians_Orthodox_Castle_Church01
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = small_chapel_o
+
+ Guild theologians_guild a 10
+
+;------------------------------------------
+Trigger Theologians_Orthodox_Castle_Church02
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = chapel_o
+
+ Guild theologians_guild a 10
+
+;------------------------------------------
+Trigger Theologians_Islam_Church01
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = small_masjid
+
+ Guild theologians_guild s 10
+
+;------------------------------------------
+Trigger Theologians_Islam_City_Church02
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = masjid
+
+ Guild theologians_guild s 10
+
+;------------------------------------------
+Trigger Theologians_Islam_City_Church03
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = minareted_masjid
+
+ Guild theologians_guild s 15
+
+;------------------------------------------
+Trigger Theologians_Islam_City_Church04
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = jama
+
+ Guild theologians_guild s 15
+ Guild theologians_guild o 2
+
+;------------------------------------------
+Trigger Theologians_Islam_City_Church05
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = great_jama
+
+ Guild theologians_guild s 15
+ Guild theologians_guild o 5 
+
+;------------------------------------------
+Trigger Theologians_Islam_Castle_Church01
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = c_small_masjid
+
+ Guild theologians_guild a 10
+
+;------------------------------------------
+Trigger Theologians_Islam_Castle_Church02
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = c_masjid
+
+ Guild theologians_guild a 10
+
+;------------------------------------------
+Trigger Theologians_Pagan_City_Church01
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = tengir_altar
+
+ Guild theologians_guild s 25
+
+;------------------------------------------
+Trigger Theologians_Pagan_City_Church02
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = tengir_sanctuary
+
+ Guild theologians_guild s 25
+ Guild theologians_guild o 5
+
+;------------------------------------------
+Trigger Theologians_Pagan_City_Church03
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = tengir_temple
+
+ Guild theologians_guild s 25
+ Guild theologians_guild o 10
+
+;------------------------------------------
+Trigger Theologians_Pagan_City_Church04
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = dievas_altar
+
+ Guild theologians_guild s 25
+
+;------------------------------------------
+Trigger Theologians_Pagan_City_Church05
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = dievas_sanctuary
+
+ Guild theologians_guild s 25
+ Guild theologians_guild o 5
+
+;------------------------------------------
+Trigger Theologians_Pagan_City_Church06
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = dievas_temple
+
+ Guild theologians_guild s 25
+ Guild theologians_guild o 10
+
+;------------------------------------------
+Trigger Theologians_Pagan_City_Church07
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = giltine_altar
+
+ Guild theologians_guild s 25
+
+;------------------------------------------
+Trigger Theologians_Pagan_City_Church08
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = giltine_sanctuary
+
+ Guild theologians_guild s 25
+ Guild theologians_guild o 5
+
+;------------------------------------------
+Trigger Theologians_Pagan_City_Church09
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = giltine_temple
+
+ Guild theologians_guild s 25
+ Guild theologians_guild o 10
+
+;------------------------------------------
+Trigger Theologians_Pagan_City_Church10
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = perkunas_altar
+
+ Guild theologians_guild s 25
+
+;------------------------------------------
+Trigger Theologians_Pagan_City_Church11
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = perkunas_sanctuary
+
+ Guild theologians_guild s 25
+ Guild theologians_guild o 5
+
+;------------------------------------------
+Trigger Theologians_Pagan_City_Church12
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = perkunas_temple
+
+ Guild theologians_guild s 25
+ Guild theologians_guild o 10
+
+;------------------------------------------
+Trigger Theologians_Pagan_Castle_Church01
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = c_tengir_altar
+
+ Guild theologians_guild a 10
+
+;------------------------------------------
+Trigger Theologians_Pagan_Castle_Church02
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = c_dievas_altar
+
+ Guild theologians_guild a 10
+
+;------------------------------------------
+Trigger Theologians_Pagan_Castle_Church03
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = c_giltine_altar
+
+ Guild theologians_guild a 10
+
+;------------------------------------------
+Trigger Theologians_Pagan_Castle_Church04
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = c_perkunas_altar
+
+ Guild theologians_guild a 10
+
+;------------------------------------------
+Trigger Theologians_No_Guild_Bonus
+ WhenToTest FactionTurnStart
+
+ Condition not FactionBuildingExists >= theologians_guild
+       and I_TurnNumber > 30
+
+ Guild theologians_guild a 6
+
+;------------------------------------------
+;----------------- Masons -----------------
+;------------------------------------------
+Trigger Masons_Governor_Building_Completed
+ WhenToTest GovernorBuildingCompleted
+
+ Guild masons_guild s 3
+
+;------------------------------------------
+Trigger Masons_Leader_Trait_WiseAdministrator
+ WhenToTest FactionTurnStart
+
+ Condition I_EventCounter wise_administrator = 1
+
+ Guild masons_guild a 2
+
+;------------------------------------------
+Trigger Masons_Building_Completed_CityUpg1
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = stone_wall
+
+ Guild masons_guild s 10
+ Guild masons_guild o 5
+
+;------------------------------------------
+Trigger Masons_Building_Completed_CityUpg2
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = large_stone_wall
+
+ Guild masons_guild s 15
+ Guild masons_guild o 5
+
+;------------------------------------------
+Trigger Masons_Building_Completed_CityUpg3
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = huge_stone_wall
+
+ Guild masons_guild s 25
+ Guild masons_guild o 5
+
+;------------------------------------------
+Trigger Masons_Building_Completed_CastleUpg1
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = castle
+
+ Guild masons_guild s 10
+ Guild masons_guild o 5
+
+;------------------------------------------
+Trigger Masons_Building_Completed_CastleUpg2
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = fortress
+
+ Guild masons_guild s 15
+ Guild masons_guild o 5
+
+;------------------------------------------
+Trigger Masons_Building_Completed_CastleUpg3
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = citadel
+
+ Guild masons_guild s 25
+ Guild masons_guild o 5
+
+;------------------------------------------
+Trigger Masons_Building_Completed_Stonemason
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = stonemason
+
+ Guild masons_guild s 5
+ Guild masons_guild o 1
+
+;------------------------------------------
+Trigger Masons_No_Guild_Bonus
+ WhenToTest FactionTurnStart
+
+ Condition not FactionBuildingExists >= masons_guild
+       and I_TurnNumber > 30
+
+ Guild masons_guild a 9
+
+;------------------------------------------
+;--------------- Merchants ----------------
+;------------------------------------------
+Trigger Merchants_Recruit_Merchant
+ WhenToTest AgentCreated
+
+ Condition AgentType = merchant
+
+ Guild merchants_guild s 10
+
+;------------------------------------------
+Trigger Merchants_Exist_Merchant_Attribute_Finance
+ WhenToTest CharacterTurnStart
+
+ Condition AgentType = merchant
+       and Attribute Finance > 5
+
+ Guild merchants_guild a 1
+
+;------------------------------------------
+Trigger Merchants_Exist_OnResource
+ WhenToTest CharacterTurnStart
+
+ Condition AgentType = merchant
+       and OnResource
+
+ Guild merchants_guild a 2
+
+;------------------------------------------
+Trigger Merchants_Leader_Trait_MerchantSkills
+ WhenToTest FactionTurnStart
+
+ Condition I_EventCounter merchant_skills = 1
+
+ Guild merchants_guild a 5
+
+;------------------------------------------
+Trigger Merchants_Building_Completed_SeaTrade01
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = port
+
+ Guild merchants_guild s 10
+ Guild merchants_guild a 2
+
+;------------------------------------------
+Trigger Merchants_Building_Completed_SeaTrade02
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = merchants_wharf
+
+ Guild merchants_guild s 10
+ Guild merchants_guild a 2
+
+;------------------------------------------
+Trigger Merchants_Building_Completed_SeaTrade03
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = warehouse
+
+ Guild merchants_guild s 15
+ Guild merchants_guild a 2
+
+;------------------------------------------
+Trigger Merchants_Building_Completed_LandTrade01
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = fairground
+
+ Guild merchants_guild s 5
+
+;------------------------------------------
+Trigger Merchants_Building_Completed_LandTrade02
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = great_market
+
+ Guild merchants_guild s 10
+ Guild merchants_guild a 2
+
+;------------------------------------------
+Trigger Merchants_Building_Completed_LandTrade03
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = merchants_quarter
+
+ Guild merchants_guild s 15
+ Guild merchants_guild a 5
+
+;------------------------------------------
+Trigger Merchants_Trade_Agreement
+ WhenToTest FactionTradeAgreementMade
+
+ Guild merchants_guild a 10
+
+;------------------------------------------
+Trigger Merchants_Successful_Acquisition
+ WhenToTest AcquisitionMission
+
+ Condition MissionSucceeded
+
+ Guild merchants_guild a 5
+
+;------------------------------------------
+Trigger Merchants_Mission_Success_Min
+ WhenToTest LeaderMissionSuccess
+
+ Condition PaybackID guild_merchants_min
+
+ Guild merchants_guild a 10
+
+;------------------------------------------
+Trigger Merchants_Mission_Fail_Min
+ WhenToTest LeaderMissionFailed
+
+ Condition PaybackID guild_merchants_min
+
+ Guild merchants_guild a -10
+
+;------------------------------------------
+Trigger Merchants_Mission_Success_Mod
+ WhenToTest LeaderMissionSuccess
+
+ Condition PaybackID guild_merchants_mod
+
+ Guild merchants_guild a 20
+
+;------------------------------------------
+Trigger Merchants_Mission_Fail_Mod
+ WhenToTest LeaderMissionFailed
+
+ Condition PaybackID guild_merchants_mod
+
+ Guild merchants_guild a -20
+
+;------------------------------------------
+Trigger Merchants_No_Guild_Bonus
+ WhenToTest FactionTurnStart
+
+ Condition not FactionBuildingExists >= merchants_guild
+       and I_TurnNumber > 30
+
+ Guild merchants_guild a 6
+
+;------------------------------------------
+;--------------- Explorers ----------------
+;------------------------------------------
+Trigger Explorers_Train_Ship
+ WhenToTest UnitTrained
+
+ Condition TrainedUnitCategory ship
+
+ Guild explorers_guild s 4
+ Guild explorers_guild o 1
+
+;------------------------------------------
+Trigger Explorers_Recruit_Diplomat
+ WhenToTest AgentCreated
+
+ Condition AgentType = diplomat
+
+ Guild explorers_guild s 2
+
+;------------------------------------------
+Trigger Explorers_Successful_Bribe
+ WhenToTest BriberyMission
+
+ Condition MissionSucceeded
+
+ Guild explorers_guild a 5
+
+;------------------------------------------
+Trigger Explorers_Building_Completed_Docks01
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = shipwright
+
+ Guild explorers_guild s 35
+
+;------------------------------------------
+Trigger Explorers_Building_Completed_Docks02
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = dockyard
+
+ Guild explorers_guild s 40
+
+;------------------------------------------
+Trigger Explorers_Building_Completed_Docks03
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = naval_drydock
+
+ Guild explorers_guild s 30
+
+;------------------------------------------
+Trigger Explorers_Building_Completed_Docks04
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = docklands
+
+ Guild explorers_guild s 40
+
+;------------------------------------------
+Trigger Explorers_Exist_Ship_Stack
+ WhenToTest CharacterTurnEnd
+
+ Condition AgentType = admiral
+
+ Guild explorers_guild a 1
+
+;------------------------------------------
+Trigger Explorers_Exist_Exploring_Fleet
+ WhenToTest CharacterTurnEnd
+
+ Condition AgentType = admiral
+       and DistanceCapital > 150
+
+ Guild explorers_guild a 3
+
+;------------------------------------------
+Trigger Explorers_Mission_Success_Min
+ WhenToTest LeaderMissionSuccess
+
+ Condition PaybackID guild_explorers_min
+
+ Guild explorers_guild a 10
+
+;------------------------------------------
+Trigger Explorers_Mission_Fail_Min
+ WhenToTest LeaderMissionFailed
+
+ Condition PaybackID guild_explorers_min
+
+ Guild explorers_guild a -10
+
+;------------------------------------------
+Trigger Explorers_No_Guild_Bonus
+ WhenToTest FactionTurnStart
+
+ Condition not FactionBuildingExists >= explorers_guild
+       and I_TurnNumber > 30
+
+ Guild explorers_guild a 10
+
+;------------------------------------------
+;----------- Assassins & Thiefs -----------
+;------------------------------------------
+Trigger Assassins_Recruit_Assassin
+ WhenToTest AgentCreated
+
+ Condition AgentType = assassin
+
+ Guild assassins_guild s 15
+ Guild assassins_guild o 1
+
+;------------------------------------------
+Trigger Assassins_Exist_Assassin_Attribute_Subterfuge
+ WhenToTest CharacterTurnStart
+
+ Condition AgentType = assassin
+       and Attribute Subterfuge > 5
+
+ Guild assassins_guild a 1
+
+;------------------------------------------
+Trigger Thiefs_Recruit_Spy
+ WhenToTest AgentCreated
+
+ Condition AgentType = spy
+
+ Guild thiefs_guild s 10
+ Guild thiefs_guild o 1
+
+;------------------------------------------
+Trigger Thiefs_Exist_Spy_Attribute_Subterfuge
+ WhenToTest CardinalPromoted
+
+ Condition AgentType = spy
+       and Attribute Subterfuge > 5
+
+ Guild assassins_guild a 1
+
+;------------------------------------------
+Trigger Assassins_Successful_Assassination
+ WhenToTest AssassinationMission
+
+ Condition MissionSucceeded
+
+ Guild assassins_guild a 10
+
+;------------------------------------------
+Trigger Thiefs_Successful_Spying
+ WhenToTest SpyMission
+
+ Condition MissionSucceeded
+
+ Guild thiefs_guild a 5
+
+;------------------------------------------
+Trigger Thiefs_Successful_Sabotage
+ WhenToTest SabotageMission
+
+ Condition MissionSucceeded
+
+ Guild thiefs_guild a 5
+
+;------------------------------------------
+Trigger Assassins_Thiefs_Leader_Attribute_Dread
+ WhenToTest CharacterTurnStart
+
+ Condition IsFactionLeader
+       and Attribute Chivalry < 0
+
+ Guild assassins_guild a 2
+ Guild thiefs_guild a 2
+
+;------------------------------------------
+Trigger Assassins_Thiefs_Governor_Attribute_Dread
+ WhenToTest SettlementTurnStart
+
+ Condition GovernorAttribute Chivalry < 0
+
+ Guild assassins_guild s 2
+ Guild thiefs_guild s 2
+
+;------------------------------------------
+Trigger Assassins_Thiefs_Leader_Trait_GreedyRuler
+ WhenToTest FactionTurnStart
+
+ Condition I_EventCounter greedy_ruler = 1
+
+ Guild assassins_guild a 1
+ Guild thiefs_guild a 1
+
+;------------------------------------------
+Trigger Assassins_Thiefs_Leader_Trait_ShadyConnections
+ WhenToTest FactionTurnStart
+
+ Condition I_EventCounter shady_connections = 1
+
+ Guild assassins_guild a 4
+ Guild thiefs_guild a 4
+
+;------------------------------------------
+Trigger Assassins_Thiefs_Building_Completed_Taverns01
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = brothel
+
+ Guild assassins_guild s 10
+ Guild thiefs_guild s 10
+
+;------------------------------------------
+Trigger Assassins_Thiefs_Building_Completed_Taverns02
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = inn
+
+ Guild assassins_guild s 10
+ Guild thiefs_guild s 10
+
+;------------------------------------------
+Trigger Assassins_Thiefs_Building_Completed_Taverns03
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = tavern
+
+ Guild assassins_guild s 15
+ Guild thiefs_guild s 15
+
+;------------------------------------------
+Trigger Assassins_Thiefs_Building_Completed_Taverns04
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = coaching_house
+
+ Guild assassins_guild s 20
+ Guild thiefs_guild s 20
+
+;------------------------------------------
+Trigger Assassins_Thiefs_Building_Completed_Taverns05
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = pleasure_palace
+
+ Guild assassins_guild s 20
+ Guild thiefs_guild s 20
+
+;------------------------------------------
+Trigger Assassins_Mission_Success_Payback
+ WhenToTest LeaderMissionSuccess
+
+ Condition PaybackID guild_assassin_payback
+
+ Guild assassins_guild a 10
+
+;------------------------------------------
+Trigger Assassins_Mission_Fail_Payback
+ WhenToTest LeaderMissionFailed
+
+ Condition PaybackID guild_assassin_payback
+
+ Guild assassins_guild a -10
+
+;------------------------------------------
+Trigger Thiefs_Mission_Success_Min
+ WhenToTest LeaderMissionSuccess
+
+ Condition PaybackID guild_thiefs_min
+
+ Guild thiefs_guild a 10
+
+;------------------------------------------
+Trigger Thiefs_Mission_Fail_Min
+ WhenToTest LeaderMissionFailed
+
+ Condition PaybackID guild_thiefs_min
+
+ Guild thiefs_guild a -10
+
+;------------------------------------------
+Trigger Thiefs_No_Guild_Bonus
+ WhenToTest FactionTurnStart
+
+ Condition not FactionBuildingExists >= thieves_guild
+       and I_TurnNumber > 30
+
+ Guild thiefs_guild a 6
+
+;------------------------------------------
+Trigger Assassins_No_Guild_Bonus
+ WhenToTest FactionTurnStart
+
+ Condition not FactionBuildingExists >= assassins_guild
+       and I_TurnNumber > 30
+
+ Guild assassins_guild a 6
+
+;------------------------------------------
+;- Swordsmiths & Horse Breeder & Woodsmen -
+;------------------------------------------
+Trigger Swordsmiths_Train_Infantry
+ WhenToTest UnitTrained
+
+ Condition TrainedUnitCategory infantry
+
+ Guild swordsmiths_guild s 1
+
+;------------------------------------------
+Trigger HorseBreeders_Train_Cavalry
+ WhenToTest UnitTrained
+
+ Condition TrainedUnitCategory cavalry
+
+ Guild horse_breeders_guild s 10
+
+;------------------------------------------
+Trigger Woodsmens_Train_Missile
+ WhenToTest UnitTrained
+
+ Condition TrainedUnitClass missile
+
+ Guild woodsmens_guild s 4
+
+;------------------------------------------
+Trigger Woodsmens_Train_Skirmish
+ WhenToTest UnitTrained
+
+ Condition TrainedUnitClass skirmish
+
+ Guild woodsmens_guild s 4
+
+;------------------------------------------
+Trigger Swordsmiths_HorseBreeders_Woodsmens_Leader_Trait_Protector
+ WhenToTest FactionTurnStart
+
+ Condition I_EventCounter protector = 1
+
+ Guild swordsmiths_guild a 2
+ Guild horse_breeders_guild a 3
+ Guild woodsmens_guild a 2
+
+;------------------------------------------
+Trigger Swordsmiths_HorseBreeders_Woodsmens_Leader_Attribute_Command
+ WhenToTest CharacterTurnStart
+
+ Condition IsFactionLeader
+       and Attribute Command > 4
+
+ Guild swordsmiths_guild a 2
+ Guild horse_breeders_guild a 3
+ Guild woodsmens_guild a 2
+
+;------------------------------------------
+Trigger Swordsmiths_HorseBreeders_Woodsmens_Governor_Attribute_Command
+ WhenToTest SettlementTurnStart
+
+ Condition GovernorAttribute Command > 4
+
+ Guild swordsmiths_guild s 5
+ Guild horse_breeders_guild s 6
+ Guild woodsmens_guild s 8
+
+;------------------------------------------
+Trigger Swordsmiths_HorseBreeders_Woodsmens_No_Garrision
+ WhenToTest SettlementTurnStart
+
+ Condition not IsSettlementGarrisoned
+
+ Guild swordsmiths_guild s -5
+ Guild horse_breeders_guild s -2
+ Guild woodsmens_guild s -2
+ Guild swordsmiths_guild o -2
+ Guild horse_breeders_guild o -2
+ Guild woodsmens_guild o -2
+
+;------------------------------------------
+Trigger Swordsmiths_Woodsmens_Governor_Games
+ WhenToTest GovernorThrowGames
+
+ Guild swordsmiths_guild s 5
+ Guild woodsmens_guild s 5
+
+;------------------------------------------
+Trigger HorseBreeders_Governor_Races
+ WhenToTest GovernorThrowRaces
+
+ Guild horse_breeders_guild s 5
+
+;------------------------------------------
+Trigger Swordsmiths_Building_Completed_City_Smith01
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = armourer
+
+ Guild swordsmiths_guild s 15
+ Guild swordsmiths_guild a 5
+
+;------------------------------------------
+Trigger Swordsmiths_Building_Completed_City_Smith02
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = heavy_armourer
+
+ Guild swordsmiths_guild s 15
+ Guild swordsmiths_guild a 5
+
+;------------------------------------------
+Trigger Swordsmiths_Building_Completed_City_Smith03
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = plate_armourer
+
+ Guild swordsmiths_guild s 20
+ Guild swordsmiths_guild a 5
+
+;------------------------------------------
+Trigger Swordsmiths_Building_Completed_City_Smith04
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = gothic_armourer
+
+ Guild swordsmiths_guild s 20
+ Guild swordsmiths_guild a 5
+
+;------------------------------------------
+Trigger Swordsmiths_Building_Completed_Castle_Smith01
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = c_armourer
+
+ Guild swordsmiths_guild s 15
+ Guild swordsmiths_guild a 5
+
+;------------------------------------------
+Trigger Swordsmiths_Building_Completed_Castle_Smith02
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = c_heavy_armourer
+
+ Guild swordsmiths_guild s 15
+ Guild swordsmiths_guild a 5
+
+;------------------------------------------
+Trigger Swordsmiths_Building_Completed_Castle_Smith03
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = c_plate_armourer
+
+ Guild swordsmiths_guild s 20
+ Guild swordsmiths_guild a 5
+
+;------------------------------------------
+Trigger Swordsmiths_Building_Completed_Castle_Smith04
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = c_gothic_armourer
+
+ Guild swordsmiths_guild s 20
+ Guild swordsmiths_guild a 5
+
+;------------------------------------------
+Trigger Woodsmens_Building_Completed_Archery01
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = bowyer
+
+ Guild woodsmens_guild s 5
+ Guild woodsmens_guild a 2
+
+;------------------------------------------
+Trigger Woodsmens_Building_Completed_Archery02
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = practice_range
+
+ Guild woodsmens_guild s 10
+ Guild woodsmens_guild a 5
+
+;------------------------------------------
+Trigger Woodsmens_Building_Completed_Archery03
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = archery_range
+
+ Guild woodsmens_guild s 15
+ Guild woodsmens_guild a 5
+
+;------------------------------------------
+Trigger Woodsmens_Building_Completed_Archery04
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = marksmans_range
+
+ Guild woodsmens_guild s 20
+ Guild woodsmens_guild a 10
+
+;------------------------------------------
+Trigger HorseBreeders_Building_Completed_Tourney01
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = jousting_lists
+
+ Guild woodsmens_guild s 5
+ Guild swordsmiths_guild s 5
+
+;------------------------------------------
+Trigger HorseBreeders_Building_Completed_Tourney02
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = tourney_fields
+
+ Guild woodsmens_guild s 10
+ Guild swordsmiths_guild s 10
+
+;------------------------------------------
+Trigger HorseBreeders_Building_Completed_Stables01
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = stables
+
+ Guild swordsmiths_guild s 10
+ Guild swordsmiths_guild a 2
+
+;------------------------------------------
+Trigger HorseBreeders_Building_Completed_Stables02
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = knights_stables
+
+ Guild swordsmiths_guild s 10
+ Guild swordsmiths_guild a 2
+
+;------------------------------------------
+Trigger HorseBreeders_Building_Completed_Stables03
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = earls_stables
+
+ Guild woodsmens_guild s 15
+ Guild woodsmens_guild a 5
+
+;------------------------------------------
+Trigger HorseBreeders_Building_Completed_Stables04
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = barons_stables
+
+ Guild woodsmens_guild s 15
+ Guild woodsmens_guild a 5
+
+;------------------------------------------
+Trigger HorseBreeders_Building_Completed_Stables05
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = kings_stables
+
+ Guild woodsmens_guild s 20
+ Guild woodsmens_guild a 10
+
+;------------------------------------------
+Trigger HorseBreeders_Building_Completed_Race01
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = racing_track
+
+ Guild horse_breeders_guild s 5
+
+;------------------------------------------
+Trigger HorseBreeders_Building_Completed_Race02
+ WhenToTest BuildingCompleted
+
+ Condition SettlementBuildingFinished = sultans_racing_track
+
+ Guild horse_breeders_guild s 10
+
+;------------------------------------------
+Trigger Swordsmiths_No_Guild_Bonus
+ WhenToTest FactionTurnStart
+
+ Condition not FactionBuildingExists >= swordsmiths_guild
+       and I_TurnNumber > 30
+
+ Guild swordsmiths_guild a 6
+
+;------------------------------------------
+Trigger Woodsmens_No_Guild_Bonus
+ WhenToTest FactionTurnStart
+
+ Condition not FactionBuildingExists >= woodsmens_guild
+       and I_TurnNumber > 30
+
+ Guild woodsmens_guild a 6
+
+;------------------------------------------
+Trigger HorseBreeders_No_Guild_Bonus
+ WhenToTest FactionTurnStart
+
+ Condition not FactionBuildingExists >= horse_breeders_guild
+       and I_TurnNumber > 30
+
+ Guild horse_breeders_guild a 6
+
+;------------------------------------------
+;-------------- Hanseatic -----------------
+;------------------------------------------
+Trigger Hanseatic_Exists_City_Plugin01
+ WhenToTest CharacterTurnEnd
+
+ Condition GovernorPlugInExists = hansa
+       and I_EventCounter hanseatic_count >= 0
+       and I_EventCounter hanseatic_constructed = 0
+
+ Guild hanseatic_guild s 8
+
+;------------------------------------------
+Trigger Hanseatic_Exists_City_Plugin02
+ WhenToTest CharacterTurnEnd
+
+ Condition GovernorPlugInExists = hansa
+       and I_EventCounter hanseatic_count >= 1
+       and I_EventCounter hanseatic_constructed = 0
+
+ Guild hanseatic_guild s 5
+
+;------------------------------------------
+Trigger Hanseatic_Exists_City_Plugin03
+ WhenToTest CharacterTurnEnd
+
+ Condition GovernorPlugInExists = hansa
+       and I_EventCounter hanseatic_count >= 2
+       and I_EventCounter hanseatic_constructed = 0
+
+ Guild hanseatic_guild s 3
+
+;------------------------------------------
+Trigger Hanseatic_Exists_City_Plugin04
+ WhenToTest CharacterTurnEnd
+
+ Condition GovernorPlugInExists = hansa
+       and I_EventCounter hanseatic_count >= 3
+       and I_EventCounter hanseatic_constructed = 0
+
+ Guild hanseatic_guild s 2
+
+;------------------------------------------
+Trigger Hanseatic_Exists_Castle_Plugin01
+ WhenToTest CharacterTurnEnd
+
+ Condition GovernorPlugInExists = c_hansa
+       and I_EventCounter hanseatic_count >= 0
+       and I_EventCounter hanseatic_constructed = 0
+
+ Guild hanseatic_guild s 8
+
+;------------------------------------------
+Trigger Hanseatic_Exists_Castle_Plugin02
+ WhenToTest CharacterTurnEnd
+
+ Condition GovernorPlugInExists = c_hansa
+       and I_EventCounter hanseatic_count >= 1
+       and I_EventCounter hanseatic_constructed = 0
+
+ Guild hanseatic_guild s 5
+
+;------------------------------------------
+Trigger Hanseatic_Exists_Castle_Plugin03
+ WhenToTest CharacterTurnEnd
+
+ Condition GovernorPlugInExists = c_hansa
+       and I_EventCounter hanseatic_count >= 2
+       and I_EventCounter hanseatic_constructed = 0
+
+ Guild hanseatic_guild s 3
+
+;------------------------------------------
+Trigger Hanseatic_Exists_Castle_Plugin04
+ WhenToTest CharacterTurnEnd
+
+ Condition GovernorPlugInExists = c_hansa
+       and I_EventCounter hanseatic_count >= 3
+       and I_EventCounter hanseatic_constructed = 0
+
+ Guild hanseatic_guild s 2
+
+;------------------------------------------
+Trigger Hanseatic_Loyalty_Level_Bonus_City
+ WhenToTest CharacterTurnEnd
+
+ Condition GovernorLoyaltyLevel = loyalty_happy
+       and GovernorPlugInExists = hansa
+
+ Guild hanseatic_guild s 5
+ 
+;------------------------------------------
+Trigger Hanseatic_Loyalty_Level_Bonus_Castle
+ WhenToTest CharacterTurnEnd
+
+ Condition GovernorLoyaltyLevel = loyalty_happy
+       and GovernorPlugInExists = c_hansa
+
+ Guild hanseatic_guild s 5
