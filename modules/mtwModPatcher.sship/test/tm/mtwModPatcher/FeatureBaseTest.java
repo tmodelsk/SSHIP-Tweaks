@@ -29,6 +29,9 @@ public class FeatureBaseTest {
 		val inputStreamProvider = createInputStreamProvider();
 		val fileEntityFactory = new FileEntityFactory();
 		fileEntityFactory.setInputStreamProvider(inputStreamProvider);
+
+		// modules\mtwModPatcher.sship
+		// mtwModPatcher.sship/
 		fileEntityFactory.setRootPath("test-resources/modFiles");
 
 		return fileEntityFactory;

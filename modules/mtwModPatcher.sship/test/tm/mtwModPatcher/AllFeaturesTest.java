@@ -45,6 +45,9 @@ public class AllFeaturesTest extends FeatureBaseTest {
 
 		//ConfigurationSettings.OverrideRootPath = 	"test-resources/overrides";
 												//   test-resources\overrides\SelectHeirScript\
+
+		// c:\Tomek\Projects\SSHIP-Tweaks\SSHIP-Tweaks-src\modules\mtwModPatcher.sship\test-resources\
+
 		ConfigurationSettings.setDevOverrideRootPath("test-resources/overrides");
 
 		val sshipFeature = new SsHipFeatures(garrisonManager, unitsManager, createInputStreamProvider(), fileEntityFactory, consoleLogger);
