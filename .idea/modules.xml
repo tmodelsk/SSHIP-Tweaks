@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SSHIP-Tweaks.iml" filepath="$PROJECT_DIR$/SSHIP-Tweaks.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/mtwModPatcher.lib/mtwModPatcher.lib.iml" filepath="$PROJECT_DIR$/modules/mtwModPatcher.lib/mtwModPatcher.lib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/mtwModPatcher.sship/mtwModPatcher.sship.iml" filepath="$PROJECT_DIR$/modules/mtwModPatcher.sship/mtwModPatcher.sship.iml" />
       <module fileurl="file://$PROJECT_DIR$/modules/tm.common/tm.common.iml" filepath="$PROJECT_DIR$/modules/tm.common/tm.common.iml" />
     </modules>
   </component>
