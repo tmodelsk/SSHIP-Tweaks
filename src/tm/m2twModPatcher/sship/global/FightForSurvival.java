@@ -1,6 +1,5 @@
 package tm.m2twModPatcher.sship.global;
 
-import lombok.val;
 import tm.common.Ctm;
 import tm.common.Tuple2;
 import tm.m2twModPatcher.lib.common.entities.FactionsDefs;

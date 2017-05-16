@@ -3,7 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/SSHIP-Tweaks.iml" filepath="$PROJECT_DIR$/SSHIP-Tweaks.iml" />
-      <module fileurl="file://$PROJECT_DIR$/tm.common/tm.common.iml" filepath="$PROJECT_DIR$/tm.common/tm.common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modules/tm.common/tm.common.iml" filepath="$PROJECT_DIR$/modules/tm.common/tm.common.iml" />
     </modules>
   </component>
 </project>

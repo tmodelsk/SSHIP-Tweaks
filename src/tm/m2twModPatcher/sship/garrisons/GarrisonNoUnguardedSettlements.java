@@ -7,7 +7,6 @@ import tm.common.collections.ArrayUniqueList;
 import tm.common.collections.ListUnique;
 import tm.m2twModPatcher.lib.common.core.features.params.ParamId;
 import tm.m2twModPatcher.lib.common.core.features.params.ParamIdBoolean;
-import tm.m2twModPatcher.lib.common.core.features.params.ParamIdInteger;
 import tm.m2twModPatcher.lib.common.entities.FactionsDefs;
 import tm.m2twModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.m2twModPatcher.lib.common.core.features.Feature;

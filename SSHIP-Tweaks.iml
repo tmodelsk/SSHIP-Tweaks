@@ -24,7 +24,7 @@
     <orderEntry type="library" name="com.google.guava:guava:18.0" level="project" />
     <orderEntry type="library" name="com.google.dagger:dagger:2.9" level="project" />
     <orderEntry type="library" name="org.assertj:assertj-core:3.6.2" level="project" />
-    <orderEntry type="module" module-name="tm.common" />
     <orderEntry type="library" name="org.projectlombok:lombok:1.16.16" level="project" />
+    <orderEntry type="module" module-name="tm.common" />
   </component>
 </module>

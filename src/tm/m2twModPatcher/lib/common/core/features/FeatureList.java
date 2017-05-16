@@ -4,7 +4,6 @@ import lombok.val;
 import tm.common.Tuple2;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /** Container for Features */
 public class FeatureList {
