@@ -3,7 +3,7 @@ package tm.mtwModPatcher.lib.managers;
 import lombok.val;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
-import tm.m2twModPatcher.FeatureBaseTest;
+import tm.mtwModPatcher.FeatureBaseTest;
 import tm.mtwModPatcher.lib.fileEntities.data.world.maps.base.DescrRegions;
 import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.DescrStratSectioned;
 

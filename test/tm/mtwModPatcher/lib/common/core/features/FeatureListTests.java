@@ -2,10 +2,10 @@ package tm.mtwModPatcher.lib.common.core.features;
 
 import lombok.val;
 import org.junit.Test;
-import tm.m2twModPatcher.sship.agentsCharacters.NobilityManyGeneralsGovernors;
-import tm.m2twModPatcher.sship.armyUnits.ArmySuppliesCosts;
-import tm.m2twModPatcher.sship.map.LandBridgeGibraltar;
-import tm.m2twModPatcher.sship.map.LandBridgeGibraltarLaManche;
+import tm.mtwModPatcher.sship.agentsCharacters.NobilityManyGeneralsGovernors;
+import tm.mtwModPatcher.sship.armyUnits.ArmySuppliesCosts;
+import tm.mtwModPatcher.sship.map.LandBridgeGibraltar;
+import tm.mtwModPatcher.sship.map.LandBridgeGibraltarLaManche;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
