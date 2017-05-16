@@ -27,7 +27,8 @@ public class ConfigurationSettings {
 
 
 	@Setter
-	private static String devOverrideRootPath = "c:\\Tomek\\Projects\\SSHIP-Tweaks\\SSHIP-Tweaks-Res\\overrides";
+	private static String devOverrideRootPath = "c:\\Tomek\\Projects\\SSHIP-Tweaks\\SSHIP-Tweaks-src\\Overrides";
+												//"c:\\Tomek\\Projects\\SSHIP-Tweaks\\SSHIP-Tweaks-Res\\overrides";
 	private static String devBackupRootPath = "c:\\Tomek\\Projects\\SSHIP-Tweaks\\SSHIP-Tweaks-Res\\Backup";
 	private static String devDestinationRootPath = "c:\\Gry\\Steam\\steamapps\\common\\Medieval II Total War\\mods\\SSHIP-TM";
 

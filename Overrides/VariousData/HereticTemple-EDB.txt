@@ -1,0 +1,107 @@
+building temple_heretic
+{
+  convert_to temple_heretic
+  religion heretic
+  levels small_church church abbey cathedral huge_cathedral
+  {
+    small_church requires factions { slave,  }
+    {
+      convert_to 0
+      capability
+      {
+        happiness_bonus bonus 10
+        religion_level bonus 50
+        population_health_bonus bonus 1
+        recruit_pool  "Religious Fanatics"  2   0.5   2  0
+
+        ;happiness_bonus bonus 2 requires factions { slave, }
+        ;religion_level bonus 5 requires factions { slave, }
+        ;recruit_pool  "Religious Fanatics"  1   0.10   1  0  requires factions { slave, }
+      }
+      material wooden
+      construction  3
+      cost  650
+      settlement_min village
+      upgrades
+      {
+        church
+      }
+    }
+    church requires factions { slave, }
+    {
+      convert_to 1
+      capability
+      {
+        happiness_bonus bonus 5
+        religion_level bonus 25
+        recruit_pool  "Religious Fanatics"  1   0.33   1  0
+        ;agent heretic  1
+        ;agent_limit heretic 10
+      }
+      material stone
+      construction  6
+      cost  1250
+      settlement_min large_town
+      upgrades
+      {
+        abbey
+      }
+    }
+    abbey requires factions { slave, }
+    {
+      capability
+      {
+        happiness_bonus bonus 10
+        religion_level bonus 50
+        population_health_bonus bonus 1
+        recruit_pool  "Religious Fanatics"  2   0.5   2  0
+      }
+      material stone
+      construction  7
+      cost  2100
+      settlement_min city
+      upgrades
+      {
+        cathedral
+      }
+    }
+    cathedral requires factions { slave, }
+    {
+      capability
+      {
+        happiness_bonus bonus 14
+        religion_level bonus 70
+        population_health_bonus bonus 1
+        population_growth_bonus bonus 5
+      }
+      material stone
+      construction  15
+      cost  5250
+      settlement_min large_city
+      upgrades
+      {
+        huge_cathedral
+      }
+    }
+    huge_cathedral requires factions { slave, }
+    {
+      capability
+      {
+        happiness_bonus bonus 20
+        religion_level bonus 100
+        population_health_bonus bonus 2
+        population_growth_bonus bonus 6
+      }
+      material stone
+      construction  25
+      cost  20000
+      settlement_min huge_city
+      upgrades
+      {
+      }
+    }
+  }
+  plugins
+  {
+  }
+}

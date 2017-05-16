@@ -1,0 +1,14 @@
+;------------------------------------------
+Trait HeirCandidate
+    Characters family
+
+    Level Heir_Candidate
+        Description Heir_Candidate_desc
+        EffectsDescription Heir_Candidate_effects_desc
+        Threshold  1 
+ 
+        Effect Authority  8 
+        Effect PersonalSecurity  2 
+
+
+;------------------------------------------
