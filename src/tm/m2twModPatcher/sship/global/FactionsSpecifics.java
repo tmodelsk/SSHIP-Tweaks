@@ -1,12 +1,12 @@
 package tm.m2twModPatcher.sship.global;
 
 import lombok.val;
-import tm.m2twModPatcher.lib.common.entities.FactionsDefs;
-import tm.m2twModPatcher.lib.common.core.features.PatcherLibBaseEx;
-import tm.m2twModPatcher.lib.common.core.features.Feature;
-import tm.m2twModPatcher.lib.fileEntities.data.exportDescrBuilding.ExportDescrBuilding;
-import tm.m2twModPatcher.lib.fileEntities.data.exportDescrUnit.ExportDescrUnitTyped;
-import tm.m2twModPatcher.lib.managers.UnitsManager;
+import tm.mtwModPatcher.lib.common.entities.FactionsDefs;
+import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.fileEntities.data.exportDescrBuilding.ExportDescrBuilding;
+import tm.mtwModPatcher.lib.fileEntities.data.exportDescrUnit.ExportDescrUnitTyped;
+import tm.mtwModPatcher.lib.managers.UnitsManager;
 
 import java.util.UUID;
 

@@ -1,7 +1,7 @@
 package tm.m2twModPatcher.sship.global;
 
-import tm.m2twModPatcher.lib.common.core.features.Feature;
-import tm.m2twModPatcher.lib.fileEntities.data.world.maps.campaign.DescrStratSectioned;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.DescrStratSectioned;
 
 import java.util.UUID;
 

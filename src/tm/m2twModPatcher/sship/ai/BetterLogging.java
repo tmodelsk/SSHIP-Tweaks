@@ -1,15 +1,15 @@
 package tm.m2twModPatcher.sship.ai;
 
 import lombok.val;
-import tm.m2twModPatcher.lib.common.core.features.Feature;
-import tm.m2twModPatcher.lib.common.scripting.campaignScript.blocks.*;
-import tm.m2twModPatcher.lib.common.scripting.campaignScript.commands.LogLevel;
-import tm.m2twModPatcher.lib.common.scripting.campaignScript.commands.WriteToLog;
-import tm.m2twModPatcher.lib.common.scripting.campaignScript.conditions.various.ButtonPressed;
-import tm.m2twModPatcher.lib.common.scripting.campaignScript.conditions.various.TurnNumber;
-import tm.m2twModPatcher.lib.common.scripting.campaignScript.core.EventType;
-import tm.m2twModPatcher.lib.common.scripting.campaignScript.core.ScriptElement;
-import tm.m2twModPatcher.lib.fileEntities.data.world.maps.campaign.CampaignScript;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.scripting.campaignScript.blocks.*;
+import tm.mtwModPatcher.lib.common.scripting.campaignScript.commands.LogLevel;
+import tm.mtwModPatcher.lib.common.scripting.campaignScript.commands.WriteToLog;
+import tm.mtwModPatcher.lib.common.scripting.campaignScript.conditions.various.ButtonPressed;
+import tm.mtwModPatcher.lib.common.scripting.campaignScript.conditions.various.TurnNumber;
+import tm.mtwModPatcher.lib.common.scripting.campaignScript.core.EventType;
+import tm.mtwModPatcher.lib.common.scripting.campaignScript.core.ScriptElement;
+import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.CampaignScript;
 
 import java.util.UUID;
 

@@ -2,8 +2,8 @@ package tm.m2twModPatcher.app.featuresTab;
 
 import lombok.Getter;
 import lombok.val;
-import tm.m2twModPatcher.lib.common.core.features.Feature;
-import tm.m2twModPatcher.lib.common.core.features.FeatureList;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.core.features.FeatureList;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;

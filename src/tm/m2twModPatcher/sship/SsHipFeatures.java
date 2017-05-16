@@ -1,14 +1,14 @@
 package tm.m2twModPatcher.sship;
 
 import lombok.val;
-import tm.m2twModPatcher.lib.common.core.features.Feature;
-import tm.m2twModPatcher.lib.common.core.features.FeatureList;
-import tm.m2twModPatcher.lib.common.core.features.fileEntities.InputStreamProvider;
-import tm.m2twModPatcher.lib.engines.ConfigurationSettings;
-import tm.m2twModPatcher.lib.engines.ConsoleLogger;
-import tm.m2twModPatcher.lib.engines.FileEntityFactory;
-import tm.m2twModPatcher.lib.managers.UnitsManager;
-import tm.m2twModPatcher.lib.managers.garrisons.GarrisonManager;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.core.features.FeatureList;
+import tm.mtwModPatcher.lib.common.core.features.fileEntities.InputStreamProvider;
+import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
+import tm.mtwModPatcher.lib.engines.ConsoleLogger;
+import tm.mtwModPatcher.lib.engines.FileEntityFactory;
+import tm.mtwModPatcher.lib.managers.UnitsManager;
+import tm.mtwModPatcher.lib.managers.garrisons.GarrisonManager;
 import tm.m2twModPatcher.sship.agentsCharacters.*;
 import tm.m2twModPatcher.sship.ai.BeeMugCampaignAI;
 import tm.m2twModPatcher.sship.ai.BeeMugCarlAITweaks;

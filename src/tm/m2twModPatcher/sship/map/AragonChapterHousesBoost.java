@@ -1,9 +1,9 @@
 package tm.m2twModPatcher.sship.map;
 
-import tm.m2twModPatcher.lib.common.core.features.Feature;
-import tm.m2twModPatcher.lib.common.core.features.OverrideDeleteFilesTask;
-import tm.m2twModPatcher.lib.engines.ConfigurationSettings;
-import tm.m2twModPatcher.lib.fileEntities.data.world.maps.base.DescrRegions;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.core.features.OverrideDeleteFilesTask;
+import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
+import tm.mtwModPatcher.lib.fileEntities.data.world.maps.base.DescrRegions;
 
 import java.util.Arrays;
 import java.util.UUID;

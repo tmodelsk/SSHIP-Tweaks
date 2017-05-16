@@ -1,13 +1,13 @@
 package tm.m2twModPatcher;
 
 import lombok.val;
-import tm.m2twModPatcher.lib.common.core.features.Feature;
-import tm.m2twModPatcher.lib.common.core.features.FeatureList;
-import tm.m2twModPatcher.lib.common.core.features.fileEntities.InputStreamProvider;
-import tm.m2twModPatcher.lib.common.core.features.fileEntities.ResourceInputStreamProvider;
-import tm.m2twModPatcher.lib.engines.ConsoleLogWriterNull;
-import tm.m2twModPatcher.lib.engines.ConsoleLogger;
-import tm.m2twModPatcher.lib.engines.FileEntityFactory;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.core.features.FeatureList;
+import tm.mtwModPatcher.lib.common.core.features.fileEntities.InputStreamProvider;
+import tm.mtwModPatcher.lib.common.core.features.fileEntities.ResourceInputStreamProvider;
+import tm.mtwModPatcher.lib.engines.ConsoleLogWriterNull;
+import tm.mtwModPatcher.lib.engines.ConsoleLogger;
+import tm.mtwModPatcher.lib.engines.FileEntityFactory;
 
 /**
  * Unit Testing base class for Features testing

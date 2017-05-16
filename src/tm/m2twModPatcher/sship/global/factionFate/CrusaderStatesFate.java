@@ -1,10 +1,10 @@
 package tm.m2twModPatcher.sship.global.factionFate;
 
-import tm.m2twModPatcher.lib.common.core.features.Feature;
-import tm.m2twModPatcher.lib.common.entities.FactionsDefs;
-import tm.m2twModPatcher.lib.common.entities.RegionOwnershipInfo;
-import tm.m2twModPatcher.lib.fileEntities.data.world.maps.campaign.CampaignScript;
-import tm.m2twModPatcher.lib.managers.FateScriptManager;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.entities.FactionsDefs;
+import tm.mtwModPatcher.lib.common.entities.RegionOwnershipInfo;
+import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.CampaignScript;
+import tm.mtwModPatcher.lib.managers.FateScriptManager;
 
 import java.util.Arrays;
 import java.util.List;

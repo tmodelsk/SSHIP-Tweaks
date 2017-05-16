@@ -2,8 +2,8 @@ package tm.m2twModPatcher.sship.armyUnits;
 
 import lombok.val;
 import tm.common.Ctm;
-import tm.m2twModPatcher.lib.common.core.features.Feature;
-import tm.m2twModPatcher.lib.fileEntities.data.WeatherDb;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.fileEntities.data.WeatherDb;
 
 import javax.xml.xpath.XPathExpressionException;
 import java.util.UUID;

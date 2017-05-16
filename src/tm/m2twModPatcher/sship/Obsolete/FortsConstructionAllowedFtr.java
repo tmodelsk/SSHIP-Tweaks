@@ -1,8 +1,8 @@
 package tm.m2twModPatcher.sship.Obsolete;
 
-import tm.m2twModPatcher.lib.common.core.features.Feature;
-import tm.m2twModPatcher.lib.fileEntities.data.DescrCampaignDb;
-import tm.m2twModPatcher.lib.fileEntities.data.DescrCultures;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.fileEntities.data.DescrCampaignDb;
+import tm.mtwModPatcher.lib.fileEntities.data.DescrCultures;
 
 import java.util.UUID;
 

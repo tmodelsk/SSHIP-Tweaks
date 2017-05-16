@@ -1,9 +1,9 @@
 package tm.m2twModPatcher.sship.agentsCharacters;
 
-import tm.m2twModPatcher.lib.common.core.features.Feature;
-import tm.m2twModPatcher.lib.fileEntities.data.DescrCharacter;
-import tm.m2twModPatcher.lib.fileEntities.data.DescrCultures;
-import tm.m2twModPatcher.lib.fileEntities.data.ExportDescrCharacterTraits;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.fileEntities.data.DescrCharacter;
+import tm.mtwModPatcher.lib.fileEntities.data.DescrCultures;
+import tm.mtwModPatcher.lib.fileEntities.data.ExportDescrCharacterTraits;
 
 import java.util.UUID;
 

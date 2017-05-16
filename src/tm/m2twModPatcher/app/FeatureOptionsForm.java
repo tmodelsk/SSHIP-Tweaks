@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.val;
 import tm.m2twModPatcher.app.featuresTab.FeatureParamsTableModel;
-import tm.m2twModPatcher.lib.common.core.features.PatcherLibBaseEx;
-import tm.m2twModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
 
 import javax.swing.*;
 import java.awt.*;

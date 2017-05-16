@@ -1,10 +1,10 @@
 package tm.m2twModPatcher.sship.map;
 
 import lombok.val;
-import tm.m2twModPatcher.lib.common.core.features.Feature;
-import tm.m2twModPatcher.lib.common.core.features.OverrideCopyTask;
-import tm.m2twModPatcher.lib.common.core.features.OverrideDeleteFilesTask;
-import tm.m2twModPatcher.lib.engines.ConfigurationSettings;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.core.features.OverrideCopyTask;
+import tm.mtwModPatcher.lib.common.core.features.OverrideDeleteFilesTask;
+import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
 
 import java.util.HashSet;
 import java.util.Set;

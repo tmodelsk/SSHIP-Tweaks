@@ -1,19 +1,20 @@
 package tm.m2twModPatcher.sship.agentsCharacters;
 
-import tm.m2twModPatcher.lib.common.entities.FactionInfo;
-import tm.m2twModPatcher.lib.common.entities.FactionsDefs;
-import tm.m2twModPatcher.lib.common.core.features.Feature;
-import tm.m2twModPatcher.lib.common.scripting.campaignScript.commands.*;
-import tm.m2twModPatcher.lib.common.scripting.campaignScript.core.EventType;
-import tm.m2twModPatcher.lib.common.scripting.campaignScript.blocks.MonitorEventBlock;
-import tm.m2twModPatcher.lib.common.scripting.campaignScript.blocks.IfBlock;
-import tm.m2twModPatcher.lib.common.scripting.campaignScript.conditions.various.CompareCounter;
-import tm.m2twModPatcher.lib.common.scripting.campaignScript.conditions.character.IsInEnemyLands;
-import tm.m2twModPatcher.lib.common.scripting.campaignScript.blocks.RegionBlock;
-import tm.m2twModPatcher.lib.common.scripting.campaignScript.engines.FactionExpensesAdditional;
-import tm.m2twModPatcher.lib.common.scripting.campaignScript.keywords.IncrementVariable;
-import tm.m2twModPatcher.lib.fileEntities.data.world.maps.campaign.CampaignScript;
-import tm.m2twModPatcher.lib.fileEntities.data.world.maps.campaign.FactionAiEcId;
+import tm.mtwModPatcher.lib.common.entities.FactionInfo;
+import tm.mtwModPatcher.lib.common.entities.FactionsDefs;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.scripting.campaignScript.commands.AddMoney;
+import tm.mtwModPatcher.lib.common.scripting.campaignScript.commands.IncrementKingsPurse;
+import tm.mtwModPatcher.lib.common.scripting.campaignScript.core.EventType;
+import tm.mtwModPatcher.lib.common.scripting.campaignScript.blocks.MonitorEventBlock;
+import tm.mtwModPatcher.lib.common.scripting.campaignScript.blocks.IfBlock;
+import tm.mtwModPatcher.lib.common.scripting.campaignScript.conditions.various.CompareCounter;
+import tm.mtwModPatcher.lib.common.scripting.campaignScript.conditions.character.IsInEnemyLands;
+import tm.mtwModPatcher.lib.common.scripting.campaignScript.blocks.RegionBlock;
+import tm.mtwModPatcher.lib.common.scripting.campaignScript.engines.FactionExpensesAdditional;
+import tm.mtwModPatcher.lib.common.scripting.campaignScript.keywords.IncrementVariable;
+import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.CampaignScript;
+import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.FactionAiEcId;
 
 import java.util.List;
 import java.util.UUID;

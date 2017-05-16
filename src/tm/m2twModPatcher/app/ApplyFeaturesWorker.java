@@ -2,9 +2,9 @@ package tm.m2twModPatcher.app;
 
 import lombok.Getter;
 import tm.common.Ctm;
-import tm.m2twModPatcher.lib.common.core.features.Feature;
-import tm.m2twModPatcher.lib.engines.ConsoleLogger;
-import tm.m2twModPatcher.lib.engines.PatcherEngine;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.engines.ConsoleLogger;
+import tm.mtwModPatcher.lib.engines.PatcherEngine;
 
 import javax.swing.*;
 import java.util.List;

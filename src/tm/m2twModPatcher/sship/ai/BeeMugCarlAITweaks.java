@@ -1,17 +1,17 @@
 package tm.m2twModPatcher.sship.ai;
 
-import tm.m2twModPatcher.lib.common.core.features.PatcherLibBaseEx;
-import tm.m2twModPatcher.lib.common.core.features.Feature;
-import tm.m2twModPatcher.lib.common.core.features.OverrideDeleteFilesTask;
-import tm.m2twModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
-import tm.m2twModPatcher.lib.engines.ConfigurationSettings;
-import tm.m2twModPatcher.lib.fileEntities.data.DescrCampaignDb;
-import tm.m2twModPatcher.lib.fileEntities.data.DescrCharacter;
-import tm.m2twModPatcher.lib.fileEntities.data.exportDescrBuilding.ExportDescrBuilding;
-import tm.m2twModPatcher.lib.fileEntities.data.ExportDescrCharacterTraits;
-import tm.m2twModPatcher.lib.fileEntities.data.DescrSMFactions;
-import tm.m2twModPatcher.lib.fileEntities.data.text.ExportVnvs;
-import tm.m2twModPatcher.lib.fileEntities.data.world.maps.campaign.DescrStratSectioned;
+import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.core.features.OverrideDeleteFilesTask;
+import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
+import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
+import tm.mtwModPatcher.lib.fileEntities.data.DescrCampaignDb;
+import tm.mtwModPatcher.lib.fileEntities.data.DescrCharacter;
+import tm.mtwModPatcher.lib.fileEntities.data.exportDescrBuilding.ExportDescrBuilding;
+import tm.mtwModPatcher.lib.fileEntities.data.ExportDescrCharacterTraits;
+import tm.mtwModPatcher.lib.fileEntities.data.DescrSMFactions;
+import tm.mtwModPatcher.lib.fileEntities.data.text.ExportVnvs;
+import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.DescrStratSectioned;
 
 import java.util.UUID;
 

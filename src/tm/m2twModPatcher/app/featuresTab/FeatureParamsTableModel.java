@@ -4,8 +4,8 @@ import com.google.common.collect.ImmutableMap;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.val;
-import tm.m2twModPatcher.lib.common.core.features.PatcherLibBaseEx;
-import tm.m2twModPatcher.lib.common.core.features.params.ParamValue;
+import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
+import tm.mtwModPatcher.lib.common.core.features.params.ParamValue;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.List;

@@ -1,17 +1,17 @@
 package tm.m2twModPatcher.sship.agentsCharacters;
 
 import lombok.val;
-import tm.m2twModPatcher.lib.common.core.features.PatcherLibBaseEx;
-import tm.m2twModPatcher.lib.common.core.features.Feature;
-import tm.m2twModPatcher.lib.common.core.features.OverrideCopyTask;
-import tm.m2twModPatcher.lib.common.core.features.OverrideDeleteFilesTask;
-import tm.m2twModPatcher.lib.common.core.features.fileEntities.InputStreamProvider;
-import tm.m2twModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
-import tm.m2twModPatcher.lib.engines.ConfigurationSettings;
-import tm.m2twModPatcher.lib.fileEntities.data.ExportDescrCharacterTraits;
-import tm.m2twModPatcher.lib.fileEntities.data.text.ExportVnvs;
-import tm.m2twModPatcher.lib.fileEntities.data.text.HistoricEvents;
-import tm.m2twModPatcher.lib.fileEntities.data.world.maps.campaign.CampaignScript;
+import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.core.features.OverrideCopyTask;
+import tm.mtwModPatcher.lib.common.core.features.OverrideDeleteFilesTask;
+import tm.mtwModPatcher.lib.common.core.features.fileEntities.InputStreamProvider;
+import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
+import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
+import tm.mtwModPatcher.lib.fileEntities.data.ExportDescrCharacterTraits;
+import tm.mtwModPatcher.lib.fileEntities.data.text.ExportVnvs;
+import tm.mtwModPatcher.lib.fileEntities.data.text.HistoricEvents;
+import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.CampaignScript;
 
 import java.io.IOException;
 import java.util.UUID;

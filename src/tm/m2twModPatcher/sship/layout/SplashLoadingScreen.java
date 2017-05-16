@@ -1,7 +1,7 @@
 package tm.m2twModPatcher.sship.layout;
 
-import tm.m2twModPatcher.lib.common.core.features.Feature;
-import tm.m2twModPatcher.lib.common.core.features.OverrideCopyTask;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.core.features.OverrideCopyTask;
 
 import java.util.UUID;
 

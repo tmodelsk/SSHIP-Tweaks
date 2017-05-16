@@ -2,10 +2,10 @@ package tm.m2twModPatcher;
 
 import lombok.val;
 import org.junit.Test;
-import tm.m2twModPatcher.lib.engines.ConfigurationSettings;
-import tm.m2twModPatcher.lib.managers.UnitsManager;
-import tm.m2twModPatcher.lib.managers.garrisons.GarrisonManager;
-import tm.m2twModPatcher.lib.managers.garrisons.GarrisonMetaManager;
+import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
+import tm.mtwModPatcher.lib.managers.UnitsManager;
+import tm.mtwModPatcher.lib.managers.garrisons.GarrisonManager;
+import tm.mtwModPatcher.lib.managers.garrisons.GarrisonMetaManager;
 import tm.m2twModPatcher.sship.SsHipFeatures;
 
 import static org.assertj.core.api.Assertions.assertThat;

@@ -2,9 +2,9 @@ package tm.m2twModPatcher.sship.layout;
 
 import lombok.val;
 import tm.common.Tuple2;
-import tm.m2twModPatcher.lib.common.core.features.Feature;
-import tm.m2twModPatcher.lib.common.core.features.OverrideCopyTask;
-import tm.m2twModPatcher.lib.fileEntities.data.DescrCultures;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.core.features.OverrideCopyTask;
+import tm.mtwModPatcher.lib.fileEntities.data.DescrCultures;
 
 import java.util.ArrayList;
 import java.util.UUID;

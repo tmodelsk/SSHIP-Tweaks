@@ -1,10 +1,10 @@
 package tm.m2twModPatcher.sship.Obsolete;
 
-import tm.m2twModPatcher.lib.common.entities.FactionInfo;
-import tm.m2twModPatcher.lib.common.entities.FactionsDefs;
-import tm.m2twModPatcher.lib.common.core.features.PatcherLibBaseEx;
-import tm.m2twModPatcher.lib.common.core.features.Feature;
-import tm.m2twModPatcher.lib.fileEntities.data.world.maps.campaign.CampaignScript;
+import tm.mtwModPatcher.lib.common.entities.FactionInfo;
+import tm.mtwModPatcher.lib.common.entities.FactionsDefs;
+import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.CampaignScript;
 import tm.m2twModPatcher.sship.agentsCharacters.FactionsDropZones;
 import tm.m2twModPatcher.sship.agentsCharacters.GeneralDropZone;
 import tm.m2twModPatcher.sship.armyUnits.ArmySuppliesCosts;

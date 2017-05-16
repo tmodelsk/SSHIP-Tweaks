@@ -1,7 +1,7 @@
 package tm.m2twModPatcher.sship.buildings;
 
-import tm.m2twModPatcher.lib.common.core.features.Feature;
-import tm.m2twModPatcher.lib.fileEntities.data.DescrSettlementMechanics;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.fileEntities.data.DescrSettlementMechanics;
 
 import java.util.UUID;
 

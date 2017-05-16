@@ -3,7 +3,7 @@ package tm.m2twModPatcher.app;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.val;
-import tm.m2twModPatcher.lib.engines.ConsoleLogWriter;
+import tm.mtwModPatcher.lib.engines.ConsoleLogWriter;
 
 import javax.swing.*;
 

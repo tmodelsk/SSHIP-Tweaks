@@ -1,9 +1,9 @@
 package tm.m2twModPatcher.sship.ai;
 
-import tm.m2twModPatcher.lib.common.core.features.PatcherLibBaseEx;
-import tm.m2twModPatcher.lib.common.core.features.Feature;
-import tm.m2twModPatcher.lib.common.core.features.OverrideCopyTask;
-import tm.m2twModPatcher.lib.fileEntities.data.DescrSMFactions;
+import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.core.features.OverrideCopyTask;
+import tm.mtwModPatcher.lib.fileEntities.data.DescrSMFactions;
 
 import java.util.UUID;
 

@@ -1,8 +1,8 @@
 package tm.m2twModPatcher.sship.global.factionFate;
 
-import tm.m2twModPatcher.lib.managers.FateScriptManager;
-import tm.m2twModPatcher.lib.common.core.features.Feature;
-import tm.m2twModPatcher.lib.fileEntities.data.world.maps.campaign.CampaignScript;
+import tm.mtwModPatcher.lib.managers.FateScriptManager;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.CampaignScript;
 
 import java.util.UUID;
 

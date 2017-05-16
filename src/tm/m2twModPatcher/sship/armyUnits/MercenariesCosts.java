@@ -6,14 +6,14 @@ import lombok.Setter;
 import lombok.val;
 import tm.common.collections.ArrayUniqueList;
 import tm.common.collections.ListUnique;
-import tm.m2twModPatcher.lib.common.core.features.Feature;
-import tm.m2twModPatcher.lib.common.core.features.params.ParamId;
-import tm.m2twModPatcher.lib.common.core.features.params.ParamIdDouble;
-import tm.m2twModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
-import tm.m2twModPatcher.lib.fileEntities.data.exportDescrBuilding.ExportDescrBuilding;
-import tm.m2twModPatcher.lib.fileEntities.data.exportDescrUnit.ExportDescrUnitTyped;
-import tm.m2twModPatcher.lib.fileEntities.data.exportDescrUnit.UnitDef;
-import tm.m2twModPatcher.lib.fileEntities.data.world.maps.campaign.DescrMercenaries;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
+import tm.mtwModPatcher.lib.common.core.features.params.ParamIdDouble;
+import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
+import tm.mtwModPatcher.lib.fileEntities.data.exportDescrBuilding.ExportDescrBuilding;
+import tm.mtwModPatcher.lib.fileEntities.data.exportDescrUnit.ExportDescrUnitTyped;
+import tm.mtwModPatcher.lib.fileEntities.data.exportDescrUnit.UnitDef;
+import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.DescrMercenaries;
 
 import java.util.*;
 
