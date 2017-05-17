@@ -1,7 +1,8 @@
-package tm.mtwModPatcher.lib.fileEntities.data.common;
+package tm.mtwModPatcher.lib.common;
 
 import lombok.val;
 import org.junit.Test;
+import tm.mtwModPatcher.lib.fileEntities.data.common.Format;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

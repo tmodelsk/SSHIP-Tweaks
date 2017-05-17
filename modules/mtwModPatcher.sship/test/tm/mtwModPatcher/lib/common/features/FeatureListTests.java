@@ -1,7 +1,8 @@
-package tm.mtwModPatcher.lib.common.core.features;
+package tm.mtwModPatcher.lib.common.features;
 
 import lombok.val;
 import org.junit.Test;
+import tm.mtwModPatcher.lib.common.core.features.FeatureList;
 import tm.mtwModPatcher.sship.agentsCharacters.NobilityManyGeneralsGovernors;
 import tm.mtwModPatcher.sship.armyUnits.ArmySuppliesCosts;
 import tm.mtwModPatcher.sship.map.LandBridgeGibraltar;

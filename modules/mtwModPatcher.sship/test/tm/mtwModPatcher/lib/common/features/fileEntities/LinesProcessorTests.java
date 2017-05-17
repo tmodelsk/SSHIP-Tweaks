@@ -1,7 +1,8 @@
-package tm.mtwModPatcher.lib.common.core.features.fileEntities;
+package tm.mtwModPatcher.lib.common.features.fileEntities;
 
 import lombok.val;
 import org.junit.Test;
+import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
 
 import java.util.Arrays;
 

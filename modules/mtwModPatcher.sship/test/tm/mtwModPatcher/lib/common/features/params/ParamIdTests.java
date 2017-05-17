@@ -1,7 +1,9 @@
-package tm.mtwModPatcher.lib.common.core.features.params;
+package tm.mtwModPatcher.lib.common.features.params;
 
 import lombok.val;
 import org.junit.Test;
+import tm.mtwModPatcher.lib.common.core.features.params.ParamIdDouble;
+import tm.mtwModPatcher.lib.common.core.features.params.ParamIdString;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
