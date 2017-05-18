@@ -9,19 +9,20 @@
     </properties>
     <root id="archive" name="SSHIP-Tweaks.jar">
       <element id="module-output" name="SSHIP-Tweaks" />
+      <element id="module-output" name="tm.common" />
+      <element id="module-output" name="mtwModPatcher.sship" />
+      <element id="module-output" name="mtwModPatcher.libs" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/org.apache.commons.io-2.4.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/commons-io-2.4.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/annotations-1.0.0.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/lombok-1.16.16.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/assertj-core-3.6.2.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/junit-4.12.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/lib/guava-18.0.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/dagger-2.9.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$PROJECT_DIR$/lib/javax.inject-1.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$APPLICATION_HOME_DIR$/lib/junit-4.12.jar" path-in-jar="/" />
       <element id="extracted-dir" path="$APPLICATION_HOME_DIR$/lib/hamcrest-core-1.3.jar" path-in-jar="/" />
-      <element id="extracted-dir" path="$PROJECT_DIR$/lib/guava-18.0.jar" path-in-jar="/" />
-      <element id="module-output" name="tm.common" />
-      <element id="library" level="project" name="org.projectlombok:lombok:1.16.16" />
-      <element id="library" level="project" name="org.assertj:assertj-core:3.6.2" />
     </root>
   </artifact>
 </component>

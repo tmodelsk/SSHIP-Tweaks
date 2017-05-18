@@ -4,10 +4,10 @@ import org.xml.sax.SAXException;
 import tm.mtwModPatcher.lib.common.entities.FactionsDefs;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
-import tm.mtwModPatcher.lib.fileEntities.data.DescrSettlementMechanics;
+import tm.mtwModPatcher.lib.data.DescrSettlementMechanics;
 import tm.mtwModPatcher.lib.managers.UnitsManager;
-import tm.mtwModPatcher.lib.fileEntities.data.exportDescrBuilding.ExportDescrBuilding;
-import tm.mtwModPatcher.lib.fileEntities.data.exportDescrUnit.ExportDescrUnitTyped;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
+import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;

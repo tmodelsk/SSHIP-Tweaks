@@ -9,7 +9,7 @@ import tm.mtwModPatcher.lib.common.scripting.campaignScript.conditions.various.B
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.conditions.various.TurnNumber;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.core.EventType;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.core.ScriptElement;
-import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.CampaignScript;
+import tm.mtwModPatcher.lib.data.world.maps.campaign.CampaignScript;
 
 import java.util.UUID;
 

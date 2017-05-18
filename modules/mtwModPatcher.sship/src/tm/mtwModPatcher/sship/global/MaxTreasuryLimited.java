@@ -16,7 +16,7 @@ import tm.mtwModPatcher.lib.common.scripting.campaignScript.blocks.ContainerBloc
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.blocks.IfBlock;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.commands.AddMoneyLocalConsole;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.conditions.various.CompareCounter;
-import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.CampaignScript;
+import tm.mtwModPatcher.lib.data.world.maps.campaign.CampaignScript;
 
 import java.util.List;
 import java.util.UUID;

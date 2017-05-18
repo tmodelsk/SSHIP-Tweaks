@@ -3,7 +3,7 @@ package tm.mtwModPatcher.sship.map;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.OverrideDeleteFilesTask;
 import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
-import tm.mtwModPatcher.lib.fileEntities.data.world.maps.base.DescrRegions;
+import tm.mtwModPatcher.lib.data.world.maps.base.DescrRegions;
 
 import java.util.Arrays;
 import java.util.UUID;

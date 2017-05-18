@@ -8,7 +8,7 @@ import tm.common.collections.ListUnique;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdInteger;
-import tm.mtwModPatcher.lib.fileEntities.data.exportDescrBuilding.ExportDescrBuilding;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 
 import java.util.UUID;
 

@@ -9,8 +9,8 @@ import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdBoolean;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdDouble;
-import tm.mtwModPatcher.lib.fileEntities.data.BattleConfig;
-import tm.mtwModPatcher.lib.fileEntities.data.exportDescrUnit.ExportDescrUnitTyped;
+import tm.mtwModPatcher.lib.data.BattleConfig;
+import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
 
 import java.util.UUID;
 

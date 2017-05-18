@@ -8,10 +8,10 @@ import tm.mtwModPatcher.lib.common.core.features.OverrideDeleteFilesTask;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.InputStreamProvider;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
 import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
-import tm.mtwModPatcher.lib.fileEntities.data.ExportDescrCharacterTraits;
-import tm.mtwModPatcher.lib.fileEntities.data.text.ExportVnvs;
-import tm.mtwModPatcher.lib.fileEntities.data.text.HistoricEvents;
-import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.CampaignScript;
+import tm.mtwModPatcher.lib.data.ExportDescrCharacterTraits;
+import tm.mtwModPatcher.lib.data.text.ExportVnvs;
+import tm.mtwModPatcher.lib.data.text.HistoricEvents;
+import tm.mtwModPatcher.lib.data.world.maps.campaign.CampaignScript;
 
 import java.io.IOException;
 import java.util.UUID;

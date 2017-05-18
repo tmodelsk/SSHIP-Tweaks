@@ -5,12 +5,12 @@ import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.OverrideCopyTask;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
-import tm.mtwModPatcher.lib.fileEntities.data.exportDescrBuilding.ExportDescrBuilding;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.common.entities.UnitReplenishRate;
-import tm.mtwModPatcher.lib.fileEntities.data.exportDescrUnit.ExportDescrUnitTyped;
-import tm.mtwModPatcher.lib.fileEntities.data.unitModels.BattleModels;
-import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.DescrMercenaries;
-import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.DescrStratSectioned;
+import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
+import tm.mtwModPatcher.lib.data.unitModels.BattleModels;
+import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrMercenaries;
+import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrStratSectioned;
 
 import java.util.Arrays;
 import java.util.List;

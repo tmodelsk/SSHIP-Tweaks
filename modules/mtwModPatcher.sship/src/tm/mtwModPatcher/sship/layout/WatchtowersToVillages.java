@@ -4,7 +4,7 @@ import lombok.val;
 import tm.common.Tuple2;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.OverrideCopyTask;
-import tm.mtwModPatcher.lib.fileEntities.data.DescrCultures;
+import tm.mtwModPatcher.lib.data.DescrCultures;
 
 import java.util.ArrayList;
 import java.util.UUID;

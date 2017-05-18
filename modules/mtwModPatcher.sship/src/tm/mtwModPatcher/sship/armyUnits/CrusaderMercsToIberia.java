@@ -2,7 +2,7 @@ package tm.mtwModPatcher.sship.armyUnits;
 
 import lombok.val;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
-import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.DescrMercenaries;
+import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrMercenaries;
 
 import java.util.ArrayList;
 import java.util.List;

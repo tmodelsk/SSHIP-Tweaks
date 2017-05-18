@@ -5,13 +5,13 @@ import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.OverrideDeleteFilesTask;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
 import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
-import tm.mtwModPatcher.lib.fileEntities.data.DescrCampaignDb;
-import tm.mtwModPatcher.lib.fileEntities.data.DescrCharacter;
-import tm.mtwModPatcher.lib.fileEntities.data.exportDescrBuilding.ExportDescrBuilding;
-import tm.mtwModPatcher.lib.fileEntities.data.ExportDescrCharacterTraits;
-import tm.mtwModPatcher.lib.fileEntities.data.DescrSMFactions;
-import tm.mtwModPatcher.lib.fileEntities.data.text.ExportVnvs;
-import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.DescrStratSectioned;
+import tm.mtwModPatcher.lib.data.DescrCampaignDb;
+import tm.mtwModPatcher.lib.data.DescrCharacter;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
+import tm.mtwModPatcher.lib.data.ExportDescrCharacterTraits;
+import tm.mtwModPatcher.lib.data.DescrSMFactions;
+import tm.mtwModPatcher.lib.data.text.ExportVnvs;
+import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrStratSectioned;
 
 import java.util.UUID;
 

@@ -4,8 +4,8 @@ import lombok.val;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import tm.mtwModPatcher.FeatureBaseTest;
-import tm.mtwModPatcher.lib.fileEntities.data.world.maps.base.DescrRegions;
-import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.DescrStratSectioned;
+import tm.mtwModPatcher.lib.data.world.maps.base.DescrRegions;
+import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrStratSectioned;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

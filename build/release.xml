@@ -8,6 +8,7 @@
 
     <target name="makeReleasePackage"
             depends="
+                createReleaseDir,
                 cleanReleaseDir,
                 prepareReleaseDir,
                 copyArtifacts,
@@ -28,9 +29,10 @@
             </fileset>
         </delete>
     </target>
-
-    <target name="prepareReleaseDir">
+    <target name="createReleaseDir">
         <mkdir dir="${appReleaseDir}" />
+    </target>
+    <target name="prepareReleaseDir">
         <mkdir dir="${appReleaseDir}/Backup"/>
     </target>
 

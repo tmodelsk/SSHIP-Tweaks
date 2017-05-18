@@ -2,7 +2,7 @@ package tm.mtwModPatcher.sship.armyUnits;
 
 import lombok.val;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
-import tm.mtwModPatcher.lib.fileEntities.data.exportDescrBuilding.ExportDescrBuilding;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 
 import java.util.Arrays;
 import java.util.UUID;

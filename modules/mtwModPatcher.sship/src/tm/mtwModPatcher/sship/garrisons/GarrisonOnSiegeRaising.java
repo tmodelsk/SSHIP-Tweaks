@@ -32,10 +32,10 @@ import tm.mtwModPatcher.lib.common.scripting.campaignScript.keywords.DeclareVari
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.keywords.IncrementVariable;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.keywords.SetVariable;
 import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
-import tm.mtwModPatcher.lib.fileEntities.data.exportDescrUnit.ExportDescrUnitTyped;
-import tm.mtwModPatcher.lib.fileEntities.data.world.maps.base.DescrRegions;
-import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.CampaignScript;
-import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.DescrStratSectioned;
+import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
+import tm.mtwModPatcher.lib.data.world.maps.base.DescrRegions;
+import tm.mtwModPatcher.lib.data.world.maps.campaign.CampaignScript;
+import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrStratSectioned;
 import tm.mtwModPatcher.lib.managers.SettlementManager;
 import tm.mtwModPatcher.lib.managers.garrisons.GarrisonManager;
 import tm.mtwModPatcher.lib.managers.garrisons.UnitGarrisonInfo;

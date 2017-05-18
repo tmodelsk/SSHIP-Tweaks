@@ -9,9 +9,9 @@ import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.entities.FactionsDefs;
 import tm.mtwModPatcher.lib.common.entities.SettlementInfo;
-import tm.mtwModPatcher.lib.fileEntities.data.DescrCampaignDb;
-import tm.mtwModPatcher.lib.fileEntities.data.world.maps.base.DescrRegions;
-import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.DescrStratSectioned;
+import tm.mtwModPatcher.lib.data.DescrCampaignDb;
+import tm.mtwModPatcher.lib.data.world.maps.base.DescrRegions;
+import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrStratSectioned;
 import tm.mtwModPatcher.lib.managers.SettlementManager;
 
 import java.util.UUID;

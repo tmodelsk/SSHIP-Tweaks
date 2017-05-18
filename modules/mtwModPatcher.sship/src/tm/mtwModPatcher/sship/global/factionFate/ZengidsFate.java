@@ -3,7 +3,7 @@ package tm.mtwModPatcher.sship.global.factionFate;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.entities.FactionsDefs;
 import tm.mtwModPatcher.lib.common.entities.RegionOwnershipInfo;
-import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.CampaignScript;
+import tm.mtwModPatcher.lib.data.world.maps.campaign.CampaignScript;
 import tm.mtwModPatcher.lib.managers.FateScriptManager;
 
 import java.util.List;

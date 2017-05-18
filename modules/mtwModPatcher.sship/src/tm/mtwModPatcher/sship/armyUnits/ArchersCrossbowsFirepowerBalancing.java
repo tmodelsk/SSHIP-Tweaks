@@ -3,10 +3,10 @@ package tm.mtwModPatcher.sship.armyUnits;
 import lombok.val;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
-import tm.mtwModPatcher.lib.fileEntities.data.DescrProjectiles;
-import tm.mtwModPatcher.lib.fileEntities.data.exportDescrBuilding.ExportDescrBuilding;
-import tm.mtwModPatcher.lib.fileEntities.data.exportDescrUnit.ExportDescrUnitTyped;
-import tm.mtwModPatcher.lib.fileEntities.data.exportDescrUnit.UnitDef;
+import tm.mtwModPatcher.lib.data.DescrProjectiles;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
+import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
+import tm.mtwModPatcher.lib.data.exportDescrUnit.UnitDef;
 
 import java.util.List;
 import java.util.UUID;

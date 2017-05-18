@@ -1,5 +1,6 @@
 package tm.mtwModPatcher.app;
 
+import aaapackage.BbClass;
 import lombok.val;
 import tm.common.Ctm;
 import tm.mtwModPatcher.app.featuresTab.FeaturesTableModel;
@@ -265,6 +266,8 @@ public class PatcherApp {
 		consoleWriter.setStatusBar(statusLbl);
 
 		consoleLogger = new ConsoleLogger(consoleWriter);
+
+		val bbClass = new BbClass();
 
 		val inputStreamProvider = new FileInputStreamProvider();
 		val fileEntityFactory = new FileEntityFactory();

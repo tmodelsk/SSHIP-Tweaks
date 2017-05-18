@@ -13,8 +13,8 @@ import tm.mtwModPatcher.lib.common.scripting.campaignScript.conditions.character
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.blocks.RegionBlock;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.engines.FactionExpensesAdditional;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.keywords.IncrementVariable;
-import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.CampaignScript;
-import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.FactionAiEcId;
+import tm.mtwModPatcher.lib.data.world.maps.campaign.CampaignScript;
+import tm.mtwModPatcher.lib.data.world.maps.campaign.FactionAiEcId;
 
 import java.util.List;
 import java.util.UUID;

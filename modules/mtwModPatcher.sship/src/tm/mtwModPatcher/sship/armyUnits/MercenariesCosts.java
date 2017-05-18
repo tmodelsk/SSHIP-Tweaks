@@ -10,10 +10,10 @@ import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdDouble;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
-import tm.mtwModPatcher.lib.fileEntities.data.exportDescrBuilding.ExportDescrBuilding;
-import tm.mtwModPatcher.lib.fileEntities.data.exportDescrUnit.ExportDescrUnitTyped;
-import tm.mtwModPatcher.lib.fileEntities.data.exportDescrUnit.UnitDef;
-import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.DescrMercenaries;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
+import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
+import tm.mtwModPatcher.lib.data.exportDescrUnit.UnitDef;
+import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrMercenaries;
 
 import java.util.*;
 

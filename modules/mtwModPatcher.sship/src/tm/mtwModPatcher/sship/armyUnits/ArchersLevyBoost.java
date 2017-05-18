@@ -4,8 +4,8 @@ import lombok.val;
 import tm.common.collections.ArrayUniqueList;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.entities.UnitReplenishRate;
-import tm.mtwModPatcher.lib.fileEntities.data.exportDescrBuilding.ExportDescrBuilding;
-import tm.mtwModPatcher.lib.fileEntities.data.exportDescrUnit.ExportDescrUnitTyped;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
+import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
 
 import java.util.UUID;
 import java.util.stream.Collectors;

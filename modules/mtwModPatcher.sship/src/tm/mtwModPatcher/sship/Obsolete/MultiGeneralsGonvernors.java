@@ -4,7 +4,7 @@ import tm.mtwModPatcher.lib.common.entities.FactionInfo;
 import tm.mtwModPatcher.lib.common.entities.FactionsDefs;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
-import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.CampaignScript;
+import tm.mtwModPatcher.lib.data.world.maps.campaign.CampaignScript;
 import tm.mtwModPatcher.sship.agentsCharacters.FactionsDropZones;
 import tm.mtwModPatcher.sship.agentsCharacters.GeneralDropZone;
 import tm.mtwModPatcher.sship.armyUnits.ArmySuppliesCosts;

@@ -18,9 +18,9 @@ import tm.mtwModPatcher.lib.common.scripting.campaignScript.keywords.DeclareVari
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.keywords.IncrementVariable;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.keywords.SetEventCounter;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.keywords.SetVariable;
-import tm.mtwModPatcher.lib.fileEntities.data.exportDescrBuilding.ExportDescrBuilding;
-import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.CampaignScript;
-import tm.mtwModPatcher.lib.fileEntities.data.world.maps.campaign.FactionAiEcId;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
+import tm.mtwModPatcher.lib.data.world.maps.campaign.CampaignScript;
+import tm.mtwModPatcher.lib.data.world.maps.campaign.FactionAiEcId;
 import tm.mtwModPatcher.lib.managers.CampaignScriptManager;
 
 import java.util.ArrayList;

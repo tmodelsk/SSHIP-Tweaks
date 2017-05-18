@@ -25,7 +25,7 @@
     <orderEntry type="library" name="org.assertj:assertj-core:3.6.2" level="project" />
     <orderEntry type="library" name="org.projectlombok:lombok:1.16.16" level="project" />
     <orderEntry type="module" module-name="tm.common" />
-    <orderEntry type="module" module-name="mtwModPatcher.lib" />
     <orderEntry type="module" module-name="mtwModPatcher.sship" />
+    <orderEntry type="module" module-name="mtwModPatcher.libs" />
   </component>
 </module>

@@ -3,7 +3,7 @@ package tm.mtwModPatcher.sship.ai;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.OverrideCopyTask;
-import tm.mtwModPatcher.lib.fileEntities.data.DescrSMFactions;
+import tm.mtwModPatcher.lib.data.DescrSMFactions;
 
 import java.util.UUID;
 
