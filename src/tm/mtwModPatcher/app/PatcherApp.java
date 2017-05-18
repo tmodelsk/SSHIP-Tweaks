@@ -128,7 +128,20 @@ public class PatcherApp {
 
 									Exception ex = applyWorker.getException();
 									writeExceptionToConsole(ex);
-									JOptionPane.showMessageDialog(mainPanel, "Error : Unhandled exception " + ex.getMessage());
+
+									val featureEx = Ctm.as(FeatureEx.class, ex);
+									if(featureEx != null) {
+										String msg="";
+										msg += "Feature ["+featureEx.getFeatureName()+"] Error !" +nl;
+										msg += featureEx.getMessage() +nl+nl;
+										msg += "You can exclude this feature & try again" +nl;
+										msg += "If you want to report bug, please attach output log";
+
+										JOptionPane.showMessageDialog(mainPanel, msg);
+									}
+									else {
+										JOptionPane.showMessageDialog(mainPanel, "Error : Unhandled exception " + ex.getMessage());
+									}
 
 									consoleLogger.getWriter().scrollToEnd();
 								}
@@ -394,4 +407,6 @@ public class PatcherApp {
 		descriptionUrlBtn.setForeground(LayoutDef.LinkUrlColor);
 
 	}
+
+	private static final String nl = System.lineSeparator();
 }

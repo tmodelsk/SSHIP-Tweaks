@@ -77,8 +77,16 @@ public class PatcherEngine {
 		for (Feature feature : featureList) {
 
 			consoleLogger.writeLine("PatcherEngine: Feature ["+feature.Name+"] execution started ...");
-			feature.preExecuteUpdates();
-			feature.executeUpdates();
+
+			try {
+				feature.preExecuteUpdates();
+				feature.executeUpdates();
+			}
+			catch (Exception ex) {
+				val ftName = feature.getName();
+				throw new FeatureEx(ex.getMessage(), ex, ftName);
+			}
+
 			val filesUpdated = feature.getFilesUpdated();
 			filesToUpdate.addAll(filesUpdated);
 			consoleLogger.writeLine("PatcherEngine: Feature ["+feature.Name+"] execution done, updated ("+filesUpdated.size()+") files");
