@@ -341,12 +341,12 @@ public class LinesProcessor {
 	}
 
 	// finds expected -> throws if not found
-	public int findExpFirstByRegexLine(Pattern pattern) throws PatcherLibBaseEx {
+	public int findExpFirstByRegexLine(Pattern pattern) {
 		return findFirstByRegexLine(pattern, 0);
 	}
 
 	// finds expected -> throws if not found
-	public int findExpFirstByRegexLine(Pattern pattern, int startFromIndex) throws PatcherLibBaseEx {
+	public int findExpFirstByRegexLine(Pattern pattern, int startFromIndex) {
 
 		int indexFound = -1;
 		for (int i = startFromIndex; indexFound < 0 && i < _Lines.size(); i++) {
@@ -361,7 +361,7 @@ public class LinesProcessor {
 		}
 
 		if (indexFound < 0)
-			throw new PatcherLibBaseEx("Pattern '" + pattern.pattern() + "' not found from add " + startFromIndex);
+			throw new LineNotFoundEx("Pattern '" + pattern.pattern() + "' not found from add " + startFromIndex);
 		return indexFound;
 	}
 
@@ -390,11 +390,9 @@ public class LinesProcessor {
 	}
 
 	// expects to find, if not - throws
-	public int findExpFirstRegexLine(String regex) throws PatcherLibBaseEx {
-
+	public int findExpFirstRegexLine(String regex) {
 		int index = findFirstRegexLine(regex);
-
-		if (index < 0) throw new PatcherLibBaseEx("Regex '" + regex + "' in not found !");
+		if (index < 0) throw new LineNotFoundEx("Line with Regex '" + regex + "' not found in" + uri);
 
 		return index;
 	}
@@ -469,4 +467,13 @@ public class LinesProcessor {
 	protected List<String> _Lines = new ArrayList<>();
 
 	protected String nl = System.lineSeparator();
+
+	protected String uri = null;
+
+	public LinesProcessor(String uri) {
+		this.uri = uri;
+	}
+
+	public LinesProcessor() {
+	}
 }

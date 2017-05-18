@@ -1,5 +1,5 @@
 <component name="ArtifactManager">
-  <artifact type="jar" build-on-make="true" name="SSHIP-Tweaks:jar">
+  <artifact type="jar" name="SSHIP-Tweaks:jar">
     <output-path>$PROJECT_DIR$/out/artifacts/SSHIP-Tweaks-jar</output-path>
     <properties id="ant-postprocessing">
       <options enabled="true">

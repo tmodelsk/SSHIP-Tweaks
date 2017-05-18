@@ -30,7 +30,7 @@ public class LinesProcessorFileEntity extends FileEntity {
 	@Override
 	public void load() throws ParserConfigurationException, IOException, SAXException {
 
-		_Lines = new LinesProcessor();
+		_Lines = new LinesProcessor(filePath);
 		_Lines.setLines(loadAsTextLines());
 	}
 

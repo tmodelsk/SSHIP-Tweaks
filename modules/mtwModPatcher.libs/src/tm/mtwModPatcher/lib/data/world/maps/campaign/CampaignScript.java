@@ -2,19 +2,27 @@ package tm.mtwModPatcher.lib.data.world.maps.campaign;
 
 import lombok.val;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
+import tm.mtwModPatcher.lib.common.core.features.fileEntities.LineNotFoundEx;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessorFileEntity;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.blocks.ScriptBlock;
 
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by Tomek on 2016-05-06.
- */
+/** data\world\maps\campaign\imperial_campaign\campaign_script.txt */
 public class CampaignScript extends LinesProcessorFileEntity {
 
-	public int getLastInsertLineForMonitors() throws PatcherLibBaseEx {
-		return getLines().findExpFirstRegexLine("^wait_monitors");
+	public int getLastInsertLineForMonitors() {
+		int index;
+
+		try {
+			index = getLines().findExpFirstRegexLine("^wait_monitors");
+		}
+		catch (LineNotFoundEx lineNotFoundEx) {
+			throw new PatcherLibBaseEx("Unable to determine wait_monitors tag (end of file) in campaign_script.txt",lineNotFoundEx);
+		}
+
+		return index;
 	}
 
 	public void insertAtEndOfFile(ScriptBlock scriptBlock) throws PatcherLibBaseEx {
