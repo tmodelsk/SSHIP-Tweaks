@@ -36,9 +36,9 @@ public class MaxTreasuryLimited extends Feature {
 
 		LinesProcessor lines = _CampaignScript.getLines();
 
-		int insertIndex = lines.findExpFirstRegexLine("^;============= G5 FACTION ECONOMY SCRIPT");
-		insertIndex = lines.findExpFirstRegexLine(";Part 7", insertIndex + 1);
-		insertIndex = lines.findExpFirstRegexLine(";Part 7", insertIndex + 1);
+		int insertIndex = lines.findExpFirstRegexLine("^\\s*;============= G5 FACTION ECONOMY SCRIPT");
+		insertIndex = lines.findExpFirstRegexLine("\\s*;Part 7", insertIndex + 1);
+		insertIndex = lines.findExpFirstRegexLine("\\s*;Part 7", insertIndex + 1);
 		//lines.findFirstByRexexLines("^;============= G5 FACTION ECONOMY SCRIPT" , "monitor_event");
 		if (insertIndex < 0) throw new PatcherLibBaseEx("G5 Faction Script / Part 7 - not found !");
 		insertIndex++;
