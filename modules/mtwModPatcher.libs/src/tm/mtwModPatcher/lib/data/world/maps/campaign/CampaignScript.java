@@ -16,7 +16,7 @@ public class CampaignScript extends LinesProcessorFileEntity {
 		int index;
 
 		try {
-			index = getLines().findExpFirstRegexLine("^wait_monitors");
+			index = getLines().findExpFirstRegexLine("^\\s*wait_monitors");
 		}
 		catch (LineNotFoundEx lineNotFoundEx) {
 			throw new PatcherLibBaseEx("Unable to determine wait_monitors tag (end of file) in campaign_script.txt",lineNotFoundEx);
