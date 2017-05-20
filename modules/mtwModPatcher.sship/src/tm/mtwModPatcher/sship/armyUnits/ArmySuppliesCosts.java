@@ -454,9 +454,9 @@ public class ArmySuppliesCosts extends Feature {
 
 		// ### Remove Existing Besiege upkeep ###
 		// ;================== BESIEGE UPKEEP ======================
-		int indexStart = lines.findFirstRegexLine("^;=+ BESIEGE UPKEEP ");
+		int indexStart = lines.findFirstRegexLine("^\\s*;=+ BESIEGE UPKEEP ");
 		if(indexStart < 0) throw new PatcherLibBaseEx("== BESIEGE UPKEEP == script not found");
-		int indexEnd = lines.findFirstRegexLine("^end_monitor",indexStart+1);
+		int indexEnd = lines.findFirstRegexLine("^\\s*end_monitor",indexStart+1);
 		if(indexEnd< 0) throw new PatcherLibBaseEx("== BESIEGE UPKEEP == end script not found");
 
 		lines.removeRange(indexStart, indexEnd);
