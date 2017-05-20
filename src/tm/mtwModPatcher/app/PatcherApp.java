@@ -197,6 +197,7 @@ public class PatcherApp {
 			consoleLogger.writeLine("++++++++++++++++++++++++++++++++");
 			backupEngine.restoreBackup();
 			backupEngine.cleanBackup();
+			consoleLogger.writeLine("Restoring backup: Done");
 		} catch (IOException e1) {
 			e1.printStackTrace();
 			consoleLogger.writeLine("Unhandled Error : \n " + e1.toString());
