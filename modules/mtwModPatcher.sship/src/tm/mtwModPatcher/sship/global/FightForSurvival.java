@@ -83,7 +83,7 @@ public class FightForSurvival extends Feature {
 	}
 
 	protected void createMonitorScripts() throws PatcherLibBaseEx {
-		int insertLine = campaignScript.getLines().findExpFirstRegexLine("^wait_monitors")-1;
+		int insertLine = campaignScript.getLines().findExpFirstRegexLine("^\\s*wait_monitors")-1;
 
 		String str="";
 
