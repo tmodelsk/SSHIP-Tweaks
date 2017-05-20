@@ -2,40 +2,32 @@ package tm.mtwModPatcher.lib.engines;
 
 import lombok.val;
 import tm.common.collections.ArrayUniqueList;
+import tm.common.collections.ListUnique;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.FileEntity;
 import tm.mtwModPatcher.lib.common.core.features.OverrideTask;
 
+import javax.xml.transform.TransformerException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-/**
- * Created by Tomek on 2016-04-11.
- */
+/**  */
 public class PatcherEngine {
 
-	public void Patch(List<Feature> featureFullList) throws Exception {
-		consoleLogger.writeLine("PatcherEngine: Patching process has started ... ");
-		InitializeFeatures(featureFullList);
-		_FileEntityFactory.reset();
+	private BackupEngine backupEngine;
 
+	private void restoreCleanBackup() throws IOException {
 		consoleLogger.writeLine("PatcherEngine: Restore & clean Backup started ...");
-		BackupEngine backupEngine = new BackupEngine(consoleLogger);
-		backupEngine.BackupRootPath = BackupRootPath;
-		backupEngine.DestinationRootPath = DestinationRootPath;
-		backupEngine.RestoreBackup();
-		backupEngine.CleanBackup();
+		backupEngine.restoreBackup();
+		backupEngine.cleanBackup();
 		consoleLogger.writeLine("PatcherEngine: Restore & clean Backup done");
+	}
 
-		List<Feature> featureList = new ArrayList<>();
-		// ### Only Enabled Features ###
-		featureList.addAll(featureFullList.stream().filter(feature -> feature.isEnabled()).collect(Collectors.toList()));
-
-		consoleLogger.writeLine("PatcherEngine: Found "+featureList.size()+" features to apply");
-
+	private ListUnique<OverrideTask> executeOverrides(List<Feature> featureList) throws IOException {
 		// ## Do Overrides Tasks ##
 		consoleLogger.writeLine("PatcherEngine: Override tasks execution started ...");
 		List<String> overrideRelativePaths = new ArrayList<>();
@@ -71,6 +63,10 @@ public class PatcherEngine {
 		}
 		consoleLogger.writeLine("PatcherEngine: Override tasks execution done");
 
+		return overrideTasks;
+	}
+
+	private void executeFeatures(List<Feature> featureList, ListUnique<OverrideTask> overrideTasks) throws IOException, TransformerException {
 		// ## Execute Features ##
 		consoleLogger.writeLine("PatcherEngine: Apply Features started ... ");
 		Set<FileEntity> filesToUpdate = new HashSet<>();
@@ -113,8 +109,35 @@ public class PatcherEngine {
 			consoleLogger.writeLine("PatcherEngine: Saved updated file ["+file.getFullPath()+"]");
 		}
 		consoleLogger.writeLine("PatcherEngine: Save updated files done");
+	}
 
-		consoleLogger.writeLine("PatcherEngine: Patching process finished. Selected Features applied.");
+	public void Patch(List<Feature> featureFullList) throws Exception {
+		consoleLogger.writeLine("PatcherEngine: Patching process has started ... ");
+		InitializeFeatures(featureFullList);
+		fileEntityFactory.reset();
+
+		restoreCleanBackup();
+
+		// Determine Features to apply
+		List<Feature> featureList = new ArrayList<>();
+		// ### Only Enabled Features ###
+		featureList.addAll(featureFullList.stream().filter(feature -> feature.isEnabled()).collect(Collectors.toList()));
+		consoleLogger.writeLine("PatcherEngine: Found "+featureList.size()+" features to apply");
+
+		try {
+			// ## Execute Overrides ##
+			val overrideTasks = executeOverrides(featureList);
+			// ## Execute Features ##
+			executeFeatures(featureList, overrideTasks);
+
+			consoleLogger.writeLine("PatcherEngine: Patching process finished. Selected Features applied.");
+		}
+		catch (Exception ex) {
+			consoleLogger.writeLine("PatcherEngine: Error in overrides or features encountered!");
+			consoleLogger.writeLine("PatcherEngine: Trying to clean up after error - reverting any changes");
+			restoreCleanBackup();
+			throw ex;
+		}
 	}
 
 	protected void InitializeFeatures(List<Feature> featureList) {
@@ -123,14 +146,19 @@ public class PatcherEngine {
 
 	public void Initialize() {
 		consoleLogger.writeLine("PatcherEngine initialization started ...");
-		//fileEntityFactory = new FileEntityFactory();
-		_FileEntityFactory.rootPath = DestinationRootPath;
+
+		fileEntityFactory.rootPath = DestinationRootPath;
+
+		backupEngine = new BackupEngine(consoleLogger);
+		backupEngine.BackupRootPath = BackupRootPath;
+		backupEngine.DestinationRootPath = DestinationRootPath;
+
 		consoleLogger.writeLine("PatcherEngine initialization done");
 	}
 
 	protected ConsoleLogger consoleLogger;
 
-	protected FileEntityFactory _FileEntityFactory;
+	protected FileEntityFactory fileEntityFactory;
 
 	public String OverrideRootPath;
 	public String BackupRootPath;
@@ -138,6 +166,6 @@ public class PatcherEngine {
 
 	public PatcherEngine(ConsoleLogger consoleLogger, FileEntityFactory fileEntityFactory) {
 		this.consoleLogger = consoleLogger;
-		_FileEntityFactory = fileEntityFactory;
+		this.fileEntityFactory = fileEntityFactory;
 	}
 }

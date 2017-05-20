@@ -41,13 +41,13 @@ public class BackupEngine {
 		BackupPaths(paths);
 	}
 
-	public void RestoreBackup() throws IOException {
+	public void restoreBackup() throws IOException {
 		consoleLogger.writeLine("BackupEngine: Restoring all files from ["+BackupRootPath+"] into ["+DestinationRootPath+"]");
 		FileUtils.copyDirectory(new File(BackupRootPath), new File(DestinationRootPath));
 		consoleLogger.writeLine("BackupEngine: Backup is restored.");
 	}
 
-	public void CleanBackup() throws IOException {
+	public void cleanBackup() throws IOException {
 		consoleLogger.writeLine("BackupEngine: Cleaning backup directory ["+BackupRootPath+"]");
 		FileUtils.cleanDirectory(new File(BackupRootPath));
 		consoleLogger.writeLine("BackupEngine: Backup is purged.");

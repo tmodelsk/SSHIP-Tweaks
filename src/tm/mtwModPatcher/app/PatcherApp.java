@@ -195,7 +195,8 @@ public class PatcherApp {
 
 		try {
 			consoleLogger.writeLine("++++++++++++++++++++++++++++++++");
-			backupEngine.RestoreBackup();
+			backupEngine.restoreBackup();
+			backupEngine.cleanBackup();
 		} catch (IOException e1) {
 			e1.printStackTrace();
 			consoleLogger.writeLine("Unhandled Error : \n " + e1.toString());
@@ -293,10 +294,6 @@ public class PatcherApp {
 		ssHipFeatures = new SsHipFeatures(garrisonManager, unitsManager, inputStreamProvider, fileEntityFactory, consoleLogger);
 		featuresList = ssHipFeatures.configureFeatures();
 		ssHipFeatures.enableDefaults();
-
-		//ConfigurationSettings.OverrideRootPath = OverrideRootPath;
-		//ConfigurationSettings.DestinationRootPath = DestinationRootPath;
-		//ConfigurationSettings.BackupRootPath = BackupRootPath;
 
 		patcherEngine = new PatcherEngine(consoleLogger, fileEntityFactory);
 		patcherEngine.OverrideRootPath = ConfigurationSettings.OverrideRootPath();			// OverrideRootPath;

@@ -22,6 +22,7 @@ public class CampaignScript extends LinesProcessorFileEntity {
 			throw new PatcherLibBaseEx("Unable to determine wait_monitors tag (end of file) in campaign_script.txt",lineNotFoundEx);
 		}
 
+		//throw new PatcherLibBaseEx("aaa");
 		return index;
 	}
 
