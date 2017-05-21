@@ -1,6 +1,12 @@
 package tm.mtwModPatcher.sship.global;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.val;
+import tm.common.collections.ArrayUniqueList;
+import tm.common.collections.ListUnique;
+import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
+import tm.mtwModPatcher.lib.common.core.features.params.ParamIdInteger;
 import tm.mtwModPatcher.lib.common.entities.FactionsDefs;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
@@ -12,6 +18,13 @@ import java.util.UUID;
 
 /**  */
 public class FactionsSpecifics extends Feature {
+
+	@Getter @Setter
+	private int byzantiumPopulationPenaltyPlayer = 7;
+	@Getter @Setter
+	private int byzantiumPopulationPenaltyAi = 9;
+	@Getter @Setter
+	private int byzantiumPopulationPenaltyMilitaryBuildings = 1;
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -90,46 +103,50 @@ public class FactionsSpecifics extends Feature {
 		ByzantiumTradeMinus();
 
 		// ##### POPULATION GROWTH MINUS - BIZANTIUM ONLY !! #####
-		ByzantiumPopulationMinus(7,6 , " and event_counter is_the_player 1");		// Player version
-		ByzantiumPopulationMinus(9,8 , " and not event_counter is_the_player 1");	// AI version
+		if(byzantiumPopulationPenaltyPlayer > 0)
+			ByzantiumPopulationMinus(byzantiumPopulationPenaltyPlayer,byzantiumPopulationPenaltyPlayer-1 , " and event_counter is_the_player 1");		// Player version
+		if(byzantiumPopulationPenaltyAi > 0)
+			ByzantiumPopulationMinus(byzantiumPopulationPenaltyAi,byzantiumPopulationPenaltyAi-1 , " and not event_counter is_the_player 1");	// AI version
 
 		val unitsManager = new UnitsManager();
 		val updatedLines = unitsManager.addToAllUnitsReplenishRates(FactionsDefs.byzantiumCsv(), 3.0 , 2.0 , null , exportDescrBuilding);
 	}
 
 	protected void ByzantiumMilitaryBuildingsPenalties() throws PatcherLibBaseEx {
-
 		String requirements = "factions { " + FactionsDefs.byzantiumCsv() + " } ";
+		int bonus = - byzantiumPopulationPenaltyMilitaryBuildings;
 
-		// ### City Barracks ### : levels town_watch town_guard city_watch militia_drill_square militia_barracks army_barracks royal_armoury
-		exportDescrBuilding.addPopulationGrowthBonus("barracks", "town_watch", "city", -1 , requirements);				// 0
-		exportDescrBuilding.addPopulationGrowthBonus("barracks", "town_guard", "city", -1 , requirements);				// -1
-		exportDescrBuilding.addPopulationGrowthBonus("barracks", "city_watch", "city", -1 , requirements);				// -2
-		exportDescrBuilding.addPopulationGrowthBonus("barracks", "militia_drill_square", "city", -1 , requirements);	// -2
-		exportDescrBuilding.addPopulationGrowthBonus("barracks", "militia_barracks", "city", -1 , requirements);		// -3
-		exportDescrBuilding.addPopulationGrowthBonus("barracks", "army_barracks", "city", -1 , requirements);			// -5
-		exportDescrBuilding.addPopulationGrowthBonus("barracks", "royal_armoury", "city", -1 , requirements);			// -4
+		if(bonus != 0) {
+			// ### City Barracks ### : levels town_watch town_guard city_watch militia_drill_square militia_barracks army_barracks royal_armoury
+			exportDescrBuilding.addPopulationGrowthBonus("barracks", "town_watch", "city", bonus , requirements);				// 0
+			exportDescrBuilding.addPopulationGrowthBonus("barracks", "town_guard", "city", bonus , requirements);				// -1
+			exportDescrBuilding.addPopulationGrowthBonus("barracks", "city_watch", "city", bonus , requirements);				// -2
+			exportDescrBuilding.addPopulationGrowthBonus("barracks", "militia_drill_square", "city", bonus , requirements);	// -2
+			exportDescrBuilding.addPopulationGrowthBonus("barracks", "militia_barracks", "city", bonus , requirements);		// -3
+			exportDescrBuilding.addPopulationGrowthBonus("barracks", "army_barracks", "city", bonus , requirements);			// -5
+			exportDescrBuilding.addPopulationGrowthBonus("barracks", "royal_armoury", "city", bonus , requirements);			// -4
 
-		// ### Castle ### : levels mustering_hall garrison_quarters drill_square barracks armoury
-		// # Barracks #
-		exportDescrBuilding.addPopulationGrowthBonus("castle_barracks", "mustering_hall", "castle", -1 , requirements);		// 0
-		exportDescrBuilding.addPopulationGrowthBonus("castle_barracks", "garrison_quarters", "castle", -1 , requirements);		// -1
-		exportDescrBuilding.addPopulationGrowthBonus("castle_barracks", "drill_square", "castle", -1 , requirements);			// -2
-		exportDescrBuilding.addPopulationGrowthBonus("castle_barracks", "barracks", "castle", -1 , requirements);				// -3
-		exportDescrBuilding.addPopulationGrowthBonus("castle_barracks", "armoury", "castle", -1 , requirements);				// -3
+			// ### Castle ### : levels mustering_hall garrison_quarters drill_square barracks armoury
+			// # Barracks #
+			exportDescrBuilding.addPopulationGrowthBonus("castle_barracks", "mustering_hall", "castle", bonus , requirements);		// 0
+			exportDescrBuilding.addPopulationGrowthBonus("castle_barracks", "garrison_quarters", "castle", bonus , requirements);		// -1
+			exportDescrBuilding.addPopulationGrowthBonus("castle_barracks", "drill_square", "castle", bonus , requirements);			// -2
+			exportDescrBuilding.addPopulationGrowthBonus("castle_barracks", "barracks", "castle", bonus , requirements);				// -3
+			exportDescrBuilding.addPopulationGrowthBonus("castle_barracks", "armoury", "castle", bonus , requirements);				// -3
 
-		// # Archers # : levels bowyer practice_range archery_range marksmans_range
-		exportDescrBuilding.addPopulationGrowthBonus("missiles", "bowyer", "castle", -1 , requirements);				// 0
-		exportDescrBuilding.addPopulationGrowthBonus("missiles", "practice_range", "castle", -1 , requirements);		// 0
-		exportDescrBuilding.addPopulationGrowthBonus("missiles", "archery_range", "castle", -1 , requirements);		// -1
-		exportDescrBuilding.addPopulationGrowthBonus("missiles", "marksmans_range", "castle", -1 , requirements);		// -2
+			// # Archers # : levels bowyer practice_range archery_range marksmans_range
+			exportDescrBuilding.addPopulationGrowthBonus("missiles", "bowyer", "castle", bonus , requirements);				// 0
+			exportDescrBuilding.addPopulationGrowthBonus("missiles", "practice_range", "castle", bonus , requirements);		// 0
+			exportDescrBuilding.addPopulationGrowthBonus("missiles", "archery_range", "castle", bonus , requirements);		// -1
+			exportDescrBuilding.addPopulationGrowthBonus("missiles", "marksmans_range", "castle", bonus , requirements);		// -2
 
-		// # Stables # : levels stables knights_stables barons_stables earls_stables kings_stables
-		exportDescrBuilding.addPopulationGrowthBonus("equestrian", "stables", "castle", -1 , requirements);			// 0
-		exportDescrBuilding.addPopulationGrowthBonus("equestrian", "knights_stables", "castle", -1 , requirements);	// 0
-		exportDescrBuilding.addPopulationGrowthBonus("equestrian", "barons_stables", "castle", -1 , requirements);		// -1
-		exportDescrBuilding.addPopulationGrowthBonus("equestrian", "earls_stables", "castle", -1 , requirements);		// -2
-		exportDescrBuilding.addPopulationGrowthBonus("equestrian", "kings_stables", "castle", -1 , requirements);		// -3
+			// # Stables # : levels stables knights_stables barons_stables earls_stables kings_stables
+			exportDescrBuilding.addPopulationGrowthBonus("equestrian", "stables", "castle", bonus , requirements);			// 0
+			exportDescrBuilding.addPopulationGrowthBonus("equestrian", "knights_stables", "castle", bonus , requirements);	// 0
+			exportDescrBuilding.addPopulationGrowthBonus("equestrian", "barons_stables", "castle", bonus , requirements);		// -1
+			exportDescrBuilding.addPopulationGrowthBonus("equestrian", "earls_stables", "castle", bonus , requirements);		// -2
+			exportDescrBuilding.addPopulationGrowthBonus("equestrian", "kings_stables", "castle", bonus , requirements);		// -3
+		}
 	}
 
 	protected void ByzantiumTradeMinus() throws PatcherLibBaseEx {
@@ -209,6 +226,25 @@ public class FactionsSpecifics extends Feature {
 	protected void turksRumBoost() {
 		UnitsManager unitsManager = new UnitsManager();
 		val updatedLines = unitsManager.addToAllUnitsReplenishRates("rum,", 3.0 , -2.0 , null , exportDescrBuilding);
+	}
+
+	@Override
+	public ListUnique<ParamId> defineParamsIds() {
+		val pars = new ArrayUniqueList<ParamId>();
+
+		pars.add(new ParamIdInteger("ByzantiumPopulationPenaltyMilitaryBuildings", "Byzantium Population Penalty Military Buildings",
+				feature -> ((FactionsSpecifics)feature).getByzantiumPopulationPenaltyMilitaryBuildings(),
+				(feature, value) -> ((FactionsSpecifics)feature).setByzantiumPopulationPenaltyMilitaryBuildings(value)));
+
+		pars.add(new ParamIdInteger("ByzantiumPopulationPenaltyPlayer", "Byzantium Population Penalty Player",
+				feature -> ((FactionsSpecifics)feature).getByzantiumPopulationPenaltyPlayer(),
+				(feature, value) -> ((FactionsSpecifics)feature).setByzantiumPopulationPenaltyPlayer(value)));
+
+		pars.add(new ParamIdInteger("ByzantiumPopulationPenaltyAi", "Byzantium Population Penalty Ai",
+				feature -> ((FactionsSpecifics)feature).getByzantiumPopulationPenaltyAi(),
+				(feature, value) -> ((FactionsSpecifics)feature).setByzantiumPopulationPenaltyAi(value)));
+
+		return pars;
 	}
 
 	protected ExportDescrBuilding exportDescrBuilding;
