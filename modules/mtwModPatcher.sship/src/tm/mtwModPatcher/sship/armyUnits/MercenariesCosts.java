@@ -25,9 +25,9 @@ public class MercenariesCosts extends Feature {
 	private ExportDescrBuilding _ExportDescrBuilding;
 
 	@Getter @Setter
-	private Double recruitCostMulti = 0.33;
+	private Double recruitCostMulti = 0.30;	// 0.33
 	@Getter @Setter
-	private Double upkeepCostsMulti = 1.8;
+	private Double upkeepCostsMulti = 1.9;	// 18.
 
 	@Override
 	public void executeUpdates() throws Exception {
