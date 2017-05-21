@@ -38,7 +38,7 @@ public class FactionBalancingFtr extends Feature {
 
 		//_DescrStrat.addKingsPurse("PISA",2000);
 		//_DescrStrat.addKingsPurse("VENICE",1000);
-		_DescrStrat.addKingsPurse("SERBIA",2000);
+		_DescrStrat.addKingsPurse("SERBIA",3000);
 		_DescrStrat.addKingsPurse("PAPAL STATES",500);
 		//_DescrStrat.addKingsPurse("SICILY",-2000);
 		//_DescrStrat.addKingsPurse("SERBIA",2000);
