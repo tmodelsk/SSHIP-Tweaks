@@ -19,6 +19,7 @@ import tm.mtwModPatcher.sship.garrisons.GarrisonNoUnguardedSettlements;
 import tm.mtwModPatcher.sship.garrisons.GarrisonOnSiegeRaising;
 import tm.mtwModPatcher.sship.global.*;
 import tm.mtwModPatcher.sship.global.factionFate.*;
+import tm.mtwModPatcher.sship.layout.CampaignMapHudToggler;
 import tm.mtwModPatcher.sship.layout.MenuScreenSS;
 import tm.mtwModPatcher.sship.layout.SplashLoadingScreen;
 import tm.mtwModPatcher.sship.layout.WatchtowersToVillages;
@@ -65,6 +66,7 @@ public class SsHipFeatures {
 		features.add(new MenuScreenSS());
 		features.add(new SplashLoadingScreen());
 		features.add(new WatchtowersToVillages());
+		features.add(new CampaignMapHudToggler(inputStreamProvider));
 
 		features.add(new LandBridgeGibraltarLaManche());
 		features.add(new LandBridgeGibraltar());

@@ -16,9 +16,7 @@ import tm.mtwModPatcher.lib.data.world.maps.campaign.CampaignScript;
 import java.io.IOException;
 import java.util.UUID;
 
-/**
- * Created by tomek on 22.04.2017.
- */
+/** */
 public class SelectHeirScript extends Feature {
 
 

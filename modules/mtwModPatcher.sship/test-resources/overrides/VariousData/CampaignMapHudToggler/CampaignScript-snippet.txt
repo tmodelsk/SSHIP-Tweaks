@@ -1,0 +1,16 @@
+declare_counter ui_showing
+monitor_event ShortcutTriggered ShortcutTriggered object_manager hide_gui
+        wait 0.1
+            if I_CompareCounter ui_showing = 0
+                hide_ui
+                disable_movie_view
+                set_counter ui_showing 2
+            end_if
+            if I_CompareCounter ui_showing = 1
+                show_ui
+                set_counter ui_showing 0
+            end_if
+            if I_CompareCounter ui_showing = 2
+                set_counter ui_showing 1
+            end_if
+end_monitor
