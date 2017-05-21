@@ -86,7 +86,7 @@ public class FateScriptManager {
 			LinesProcessor lines = _CampaignScript.getLines();
 			String s = "";
 
-			int insertLine = lines.findExpFirstRegexLine("^wait_monitors");
+			int insertLine = lines.findExpFirstRegexLine("^\\s*wait_monitors");
 
 			s += nl + tagStr +nl;
 			s += "monitor_event PreFactionTurnStart FactionType "+factionName +nl;
