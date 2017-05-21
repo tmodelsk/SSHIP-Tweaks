@@ -57,5 +57,6 @@ public class SnowStormNerfed extends Feature {
 		addCategory("Battle");
 
 		setDescriptionShort("Snow Storm has smaller fog & overall probability");
+		setDescriptionUrl("http://tmsship.wikidot.com/snow-storm-nerfed");
 	}
 }
