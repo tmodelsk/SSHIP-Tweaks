@@ -6,9 +6,7 @@ import tm.mtwModPatcher.lib.common.entities.SettlementLevel;
 
 import java.util.UUID;
 
-/**
- * Created by Tomek on 2016-04-26.
- */
+/**  */
 public class TemplesTweaks extends Feature {
 
 	@Override
