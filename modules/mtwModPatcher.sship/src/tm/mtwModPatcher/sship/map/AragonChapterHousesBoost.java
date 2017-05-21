@@ -44,7 +44,7 @@ public class AragonChapterHousesBoost extends Feature {
 		setDescriptionUrl("http://tmsship.wikidot.com/aragon-chapter-houses-boost");
 
 		boolean isDevMachine=false;
-		if (ConfigurationSettings.isDevMachine()) isDevMachine = true;
+		if (ConfigurationSettings.isDevEnvironment()) isDevMachine = true;
 		else isDevMachine = false;
 
 		if(!isDevMachine)

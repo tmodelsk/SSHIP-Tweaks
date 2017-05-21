@@ -136,7 +136,7 @@ public class SsHipFeatures {
 
 		features.getEnabled( LandBridgeGibraltar.Id).disable();
 
-		if(!ConfigurationSettings.isDevMachine()) {
+		if(!ConfigurationSettings.isDevEnvironment()) {
 			features.getEnabled( LandBridgeGibraltarLaManche.Id).disable();
 			features.getEnabled( BeeMugCarlAITweaks.Id).disable();
 			features.getEnabled( CrusadeJihadMoreSettl.Id).disable();

@@ -13,6 +13,12 @@ public class Ctm {
 		return t.isInstance(o) ? t.cast(o) : null;
 	}
 
+	public static String getWorkingDirectory() {
+		String dirStr = System.getProperty("user.dir");
+
+		return dirStr;
+	}
+
 	/** Message Format like 'Some String {0} / {1}' with arguments */
 	public static String msgFormat(String s, Object... args) {
 

@@ -210,7 +210,7 @@ public class BeeMugCarlAITweaks extends Feature {
 		setDescriptionShort("Additional AI related tweaks by BeeMugCarl");
 		setDescriptionUrl("http://tmsship.wikidot.com/beemugcarl-ai-tweaks");
 
-		boolean isDevMachine = ConfigurationSettings.isDevMachine();
+		boolean isDevMachine = ConfigurationSettings.isDevEnvironment();
 
 		if(!isDevMachine)
 			addOverrideTask(new OverrideDeleteFilesTask("data\\world\\maps\\base\\map.rwm"));

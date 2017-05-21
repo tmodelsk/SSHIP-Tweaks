@@ -303,6 +303,8 @@ public class PatcherApp {
 		patcherEngine.Initialize();
 
 		optionsOpenedMap = new HashMap<>();
+
+		consoleLogger.writeLine("Working directory: " +Ctm.getWorkingDirectory());
 	}
 	private void setUpFeaturesTable() throws PatcherLibBaseEx, ClassNotFoundException {
 

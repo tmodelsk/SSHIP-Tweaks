@@ -44,7 +44,7 @@ public class LandBridgeGibraltar extends Feature {
 		addOverrideTask(new OverrideCopyTask("GibraltarLandBridge"));
 
 		boolean isDevMachine=false;
-		isDevMachine = ConfigurationSettings.isDevMachine();
+		isDevMachine = ConfigurationSettings.isDevEnvironment();
 
 		if(!isDevMachine)
 			addOverrideTask(new OverrideDeleteFilesTask("data\\world\\maps\\base\\map.rwm"));

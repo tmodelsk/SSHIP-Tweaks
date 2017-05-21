@@ -466,7 +466,7 @@ public class GarrisonOnSiegeRaising extends Feature {
 
 		_GarrisonMnager = garrisonManager;
 
-		createUnitsLogging = ConfigurationSettings.isDevMachine();
+		createUnitsLogging = ConfigurationSettings.isDevEnvironment();
 
 	}
 }
