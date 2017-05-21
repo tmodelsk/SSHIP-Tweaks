@@ -36,7 +36,7 @@ public class NobilityManyGeneralsGovernors extends Feature {
 	@Setter
 	private int castleReplenishTurnsBonus = 2;
 	@Getter @Setter
-	private double aiReplenishTurnsMulti = 2.0;
+	private double aiReplenishTurnsMulti = 1.5;
 
 	@Override
 	public void executeUpdates() throws Exception {
