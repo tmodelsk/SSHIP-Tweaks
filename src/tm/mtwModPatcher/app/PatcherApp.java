@@ -391,7 +391,7 @@ public class PatcherApp {
 
 
 	public static void main(String[] args) {
-		JFrame frame = new JFrame("SSHIP Tweaks by TM , version 1.1");
+		JFrame frame = new JFrame("SSHIP Tweaks by TM , version 1.1 ");
 		frame.setContentPane(new PatcherApp().mainPanel);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
