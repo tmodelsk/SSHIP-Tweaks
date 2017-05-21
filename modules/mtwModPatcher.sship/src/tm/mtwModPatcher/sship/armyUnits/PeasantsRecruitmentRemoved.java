@@ -31,6 +31,9 @@ public class PeasantsRecruitmentRemoved extends Feature {
 	public PeasantsRecruitmentRemoved() {
 		setName("Peasants Recruitment Removed");
 
+		addCategory("Units");
+
 		setDescriptionShort("Peasants Recruitment Removed, \"Peasants\" , \"Southern Peasants\", \"EE Peasants\" ");
+		setDescriptionUrl("http://tmsship.wikidot.com/peasants-recruitment-removed");
 	}
 }
