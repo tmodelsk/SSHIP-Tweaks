@@ -25,13 +25,13 @@ public class NobilityManyGeneralsGovernors extends Feature {
 
 	@Getter
 	@Setter
-	private int cityReplenishTurnsStarting = 40;
+	private int cityReplenishTurnsStarting = 44;
 	@Getter
 	@Setter
 	private int cityReplenishTurnsBonus = 2;
 	@Getter
 	@Setter
-	private int castleReplenishTurnsStarting = 36;
+	private int castleReplenishTurnsStarting = 40;
 	@Getter
 	@Setter
 	private int castleReplenishTurnsBonus = 2;
