@@ -19,7 +19,7 @@ public class SettlementUnrestLowered extends Feature {
 
 	@Getter
 	@Setter
-	private double orderSqualorValue = 0.18;		// 0.29		 org 0.45
+	private double orderSqualorValue = 0.20;		// 0.18 0.29		 org 0.45
 	@Getter
 	@Setter
 	private double orderReligiousUnrestValue = 2.3;	// 1.5	org 0.7
