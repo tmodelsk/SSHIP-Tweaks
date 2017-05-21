@@ -44,6 +44,9 @@ public class FactionsSpecifics extends Feature {
 
 		// France: Eldest Daughter of the Church - Religion Bonus
 		exportDescrBuilding.insertIntoCityCastleWallsCapabilities("       religion_level bonus 1 requires factions { france, }");
+
+		// Moors: -1 Law
+		exportDescrBuilding.insertIntoCityCastleWallsCapabilities("		law_bonus bonus -1 requires factions { moors, }");
 	}
 
 	protected void HolyRomanEmpireLawMinus() throws PatcherLibBaseEx {
