@@ -10,8 +10,10 @@ import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdBoolean;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdDouble;
 import tm.mtwModPatcher.lib.data.BattleConfig;
+import tm.mtwModPatcher.lib.data.aiSets.*;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
 
+import javax.xml.xpath.XPathExpressionException;
 import java.util.UUID;
 
 /** Longer Battles - killing hit ration is reduced */
@@ -32,11 +34,20 @@ public class LongerBattles extends Feature {
 	@Override
 	public void executeUpdates() throws Exception {
 		_ExportDescrUnit = getFileRegisterForUpdated(ExportDescrUnitTyped.class);
-		_BattleConfig = getFileRegisterForUpdated(BattleConfig.class);
+		battleConfig = getFileRegisterForUpdated(BattleConfig.class);
+		battleConfigSet1 = getFileRegisterForUpdated(BattleConfigSet1.class);
+		battleConfigSet2 = getFileRegisterForUpdated(BattleConfigSet2.class);
+		battleConfigSet3 = getFileRegisterForUpdated(BattleConfigSet3.class);
+		battleConfigSet4 = getFileRegisterForUpdated(BattleConfigSet4.class);
+		battleConfigSet5 = getFileRegisterForUpdated(BattleConfigSet5.class);
 
 		// ## Set low melee-hit-rate
-		_BattleConfig.setValue("/config/combat-balancing/melee-hit-rate", MeleeHitRate);
-
+		updateBattleConfig(battleConfig, null);
+		updateBattleConfig(battleConfigSet1, 1);
+		updateBattleConfig(battleConfigSet2, 2);
+		updateBattleConfig(battleConfigSet3, 3);
+		updateBattleConfig(battleConfigSet4, 4);
+		updateBattleConfig(battleConfigSet5, 5);
 
 		val allUnits = _ExportDescrUnit.getUnits(); //_ExportDescrUnit.getUnits().stream().filter(u -> u.isCategoryCavalry()).collect(Collectors.toList());
 
@@ -62,6 +73,18 @@ public class LongerBattles extends Feature {
 			}
 		}
 
+	}
+
+	private void updateBattleConfig(BattleConfig bt, Integer setNumber) throws XPathExpressionException {
+
+		double meleeHitRate = MeleeHitRate;
+
+		if(setNumber != null) {
+			double shift = 3 - setNumber;
+			meleeHitRate += shift * 0.1;
+		}
+
+		bt.setValue("/config/combat-balancing/melee-hit-rate", meleeHitRate);
 	}
 
 	@Override
@@ -92,7 +115,12 @@ public class LongerBattles extends Feature {
 	}
 
 	private ExportDescrUnitTyped _ExportDescrUnit;
-	private BattleConfig _BattleConfig;
+	private BattleConfig battleConfig;
+	private BattleConfigSet1 battleConfigSet1;
+	private BattleConfigSet2 battleConfigSet2;
+	private BattleConfigSet3 battleConfigSet3;
+	private BattleConfigSet4 battleConfigSet4;
+	private BattleConfigSet5 battleConfigSet5;
 
 
 	public LongerBattles() {
