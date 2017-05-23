@@ -1,0 +1,753 @@
+; *********************************************************************************************
+;	EBII Battle Scripts
+;	2/2/2016
+;	z3n
+; *********************************************************************************************
+
+script
+
+while ! I_BattleStarted
+end_while
+
+;;;;*************************************************************************************************
+;;;;	Initialize Battle
+;;;;*************************************************************************************************
+
+log always EBII Battle Scripts
+log always Activated
+restart_timer deployment_timer
+;generate_random_counter AI_RHTC 1 100 (event counter only works in the campaign script)
+
+;;;;*************************************************************************************************
+;;;;	Counters
+;;;;*************************************************************************************************
+
+declare_counter deploy_check
+declare_counter start_battle
+declare_counter FaW_and_S
+declare_counter Release_Labels
+declare_counter End_Labels
+declare_counter AI_GRP
+declare_counter AI_HTC
+declare_counter AI_reinforcements
+declare_timer deployment_timer
+declare_timer AI_reinforcements_timer
+;suspend_unscripted_advice true
+
+monitor_conditions I_TimerElapsed deployment_timer > 101
+and I_InBattle
+and not I_BattleStarted
+
+restart_timer deployment_timer
+set_counter AI_GRP 0
+set_counter AI_reinforcements 0
+
+end_monitor
+
+monitor_conditions I_TimerElapsed deployment_timer < 101
+and I_InBattle
+
+prepare_for_battle
+set_counter AI_HTC 0
+set_counter deploy_check 1
+
+end_monitor
+
+monitor_conditions I_CompareCounter deploy_check = 1
+and I_BattleStarted
+
+set_counter start_battle 1
+
+end_monitor
+
+monitor_conditions I_CompareCounter start_battle = 1
+and I_BattleStarted
+
+set_counter Release_Labels 1
+set_counter FaW_and_S 1
+
+if I_CompareCounter Release_Labels = 1
+set_counter start_battle 0
+end_if
+
+;;;;*************************************************************************************************
+;;;;	Create Labels
+;;;;*************************************************************************************************
+; *********************************************************************************************
+;	Main Army Unit Labels
+; *********************************************************************************************
+
+	label_unit 0 0 0 MAu1
+	label_unit 0 0 1 MAu2
+	label_unit 0 0 2 MAu3
+	label_unit 0 0 3 MAu4
+	label_unit 0 0 4 MAu5
+	label_unit 0 0 5 MAu6
+	label_unit 0 0 6 MAu7
+	label_unit 0 0 7 MAu8
+	label_unit 0 0 8 MAu9
+	label_unit 0 0 9 MAu10
+	label_unit 0 0 10 MAu11
+	label_unit 0 0 11 MAu12
+	label_unit 0 0 12 MAu13
+	label_unit 0 0 13 MAu14
+	label_unit 0 0 14 MAu15
+	label_unit 0 0 15 MAu16
+	label_unit 0 0 16 MAu17
+	label_unit 0 0 17 MAu18
+	label_unit 0 0 18 MAu19
+	label_unit 0 0 19 MAu20
+	label_unit 0 0 20 MAu21
+	label_unit 0 0 21 MAu22
+	label_unit 0 0 22 MAu23
+	label_unit 0 0 23 MAu24
+	label_unit 0 0 24 MAu25
+	label_unit 0 0 25 MAu26
+	label_unit 0 0 26 MAu27
+	label_unit 0 0 27 MAu28
+	label_unit 0 0 28 MAu29
+	label_unit 0 0 29 MAu30
+	label_unit 0 0 30 MAu31
+	label_unit 0 0 31 MAu32
+	label_unit 0 0 32 MAu33
+	label_unit 0 0 33 MAu34
+	label_unit 0 0 34 MAu35
+	label_unit 0 0 35 MAu36
+	label_unit 0 0 36 MAu37
+	label_unit 0 0 37 MAu38
+	label_unit 0 0 38 MAu39
+	label_unit 0 0 39 MAu40
+
+; *********************************************************************************************
+;	Allied Unit Labels
+; *********************************************************************************************
+
+	label_unit 1 0 0 Eu1
+	label_unit 1 0 1 Eu2
+	label_unit 1 0 2 Eu3
+	label_unit 1 0 3 Eu4
+	label_unit 1 0 4 Eu5
+	label_unit 1 0 5 Eu6
+	label_unit 1 0 6 Eu7
+	label_unit 1 0 7 Eu8
+	label_unit 1 0 8 Eu9
+	label_unit 1 0 9 Eu10
+	label_unit 1 0 10 Eu11
+	label_unit 1 0 11 Eu12
+	label_unit 1 0 12 Eu13
+	label_unit 1 0 13 Eu14
+	label_unit 1 0 14 Eu15
+	label_unit 1 0 15 Eu16
+	label_unit 1 0 16 Eu17
+	label_unit 1 0 17 Eu18
+	label_unit 1 0 18 Eu19
+	label_unit 1 0 19 Eu20
+	label_unit 1 0 20 Eu21
+	label_unit 1 0 21 Eu22
+	label_unit 1 0 22 Eu23
+	label_unit 1 0 23 Eu24
+	label_unit 1 0 24 Eu25
+	label_unit 1 0 25 Eu26
+	label_unit 1 0 26 Eu27
+	label_unit 1 0 27 Eu28
+	label_unit 1 0 28 Eu29
+	label_unit 1 0 29 Eu30
+	label_unit 1 0 30 Eu31
+	label_unit 1 0 31 Eu32
+	label_unit 1 0 32 Eu33
+	label_unit 1 0 33 Eu34
+	label_unit 1 0 34 Eu35
+	label_unit 1 0 35 Eu36
+	label_unit 1 0 36 Eu37
+	label_unit 1 0 37 Eu38
+	label_unit 1 0 38 Eu39
+	label_unit 1 0 39 Eu40
+
+; *********************************************************************************************
+;	Group Labels
+; *********************************************************************************************
+
+define_unit_group Allies MAu1 MAu2 MAu3 MAu4 MAu5 MAu6 MAu7 MAu8 MAu9 MAu10 MAu11 MAu12 MAu13 MAu14 MAu15 MAu16 MAu17 MAu18 MAu19 MAu20 MAu21 MAu22 MAu23 MAu24 MAu25 MAu26 MAu27 MAu28 MAu29 MAu30 MAu31 MAu32 MAu33 MAu34 MAu35 MAu36 MAu37 MAu38 MAu39 MAu40
+
+define_unit_group Enemy Eu1 Eu2 Eu3 Eu4 Eu5 Eu6 Eu7 Eu8 Eu9 Eu10 Eu11 Eu12 Eu13 Eu14 Eu15 Eu16 Eu17 Eu18 Eu19 Eu20 Eu21 Eu22 Eu23 Eu24 Eu25 Eu26 Eu27 Eu28 Eu29 Eu30 Eu31 Eu32 Eu33 Eu34 Eu35 Eu36 Eu37 Eu38 Eu39 Eu40
+
+end_monitor
+
+monitor_conditions I_CompareCounter FaW_and_S > 0
+and I_BattleStarted
+
+set_counter End_Labels 1
+
+; *********************************************************************************************
+;	FaW - Active
+; *********************************************************************************************
+
+; *********************************************************************************************
+;	FaW - Player
+; *********************************************************************************************
+
+	unit_set_fire_at_will_mode MAu1 on
+	unit_set_fire_at_will_mode MAu2 on
+	unit_set_fire_at_will_mode MAu3 on
+	unit_set_fire_at_will_mode MAu4 on
+	unit_set_fire_at_will_mode MAu5 on
+	unit_set_fire_at_will_mode MAu6 on
+	unit_set_fire_at_will_mode MAu7 on
+	unit_set_fire_at_will_mode MAu8 on
+	unit_set_fire_at_will_mode MAu9 on
+	unit_set_fire_at_will_mode MAu10 on
+	unit_set_fire_at_will_mode MAu11 on
+	unit_set_fire_at_will_mode MAu12 on
+	unit_set_fire_at_will_mode MAu13 on
+	unit_set_fire_at_will_mode MAu14 on
+	unit_set_fire_at_will_mode MAu15 on
+	unit_set_fire_at_will_mode MAu16 on
+	unit_set_fire_at_will_mode MAu17 on
+	unit_set_fire_at_will_mode MAu18 on
+	unit_set_fire_at_will_mode MAu19 on
+	unit_set_fire_at_will_mode MAu20 on
+	unit_set_fire_at_will_mode MAu21 on
+	unit_set_fire_at_will_mode MAu22 on
+	unit_set_fire_at_will_mode MAu23 on
+	unit_set_fire_at_will_mode MAu24 on
+	unit_set_fire_at_will_mode MAu25 on
+	unit_set_fire_at_will_mode MAu26 on
+	unit_set_fire_at_will_mode MAu27 on
+	unit_set_fire_at_will_mode MAu28 on
+	unit_set_fire_at_will_mode MAu29 on
+	unit_set_fire_at_will_mode MAu30 on
+	unit_set_fire_at_will_mode MAu31 on
+	unit_set_fire_at_will_mode MAu32 on
+	unit_set_fire_at_will_mode MAu33 on
+	unit_set_fire_at_will_mode MAu34 on
+	unit_set_fire_at_will_mode MAu35 on
+	unit_set_fire_at_will_mode MAu36 on
+	unit_set_fire_at_will_mode MAu37 on
+	unit_set_fire_at_will_mode MAu38 on
+	unit_set_fire_at_will_mode MAu39 on
+	unit_set_fire_at_will_mode MAu40 on
+
+; *********************************************************************************************
+;	FaW - AI
+; *********************************************************************************************
+
+	unit_set_fire_at_will_mode Eu1 on
+	unit_set_fire_at_will_mode Eu2 on
+	unit_set_fire_at_will_mode Eu3 on
+	unit_set_fire_at_will_mode Eu4 on
+	unit_set_fire_at_will_mode Eu5 on
+	unit_set_fire_at_will_mode Eu6 on
+	unit_set_fire_at_will_mode Eu7 on
+	unit_set_fire_at_will_mode Eu8 on
+	unit_set_fire_at_will_mode Eu9 on
+	unit_set_fire_at_will_mode Eu10 on
+	unit_set_fire_at_will_mode Eu11 on
+	unit_set_fire_at_will_mode Eu12 on
+	unit_set_fire_at_will_mode Eu13 on
+	unit_set_fire_at_will_mode Eu14 on
+	unit_set_fire_at_will_mode Eu15 on
+	unit_set_fire_at_will_mode Eu16 on
+	unit_set_fire_at_will_mode Eu17 on
+	unit_set_fire_at_will_mode Eu18 on
+	unit_set_fire_at_will_mode Eu19 on
+	unit_set_fire_at_will_mode Eu20 on
+	unit_set_fire_at_will_mode Eu21 on
+	unit_set_fire_at_will_mode Eu22 on
+	unit_set_fire_at_will_mode Eu23 on
+	unit_set_fire_at_will_mode Eu24 on
+	unit_set_fire_at_will_mode Eu25 on
+	unit_set_fire_at_will_mode Eu26 on
+	unit_set_fire_at_will_mode Eu27 on
+	unit_set_fire_at_will_mode Eu28 on
+	unit_set_fire_at_will_mode Eu29 on
+	unit_set_fire_at_will_mode Eu30 on
+	unit_set_fire_at_will_mode Eu31 on
+	unit_set_fire_at_will_mode Eu32 on
+	unit_set_fire_at_will_mode Eu33 on
+	unit_set_fire_at_will_mode Eu34 on
+	unit_set_fire_at_will_mode Eu35 on
+	unit_set_fire_at_will_mode Eu36 on
+	unit_set_fire_at_will_mode Eu37 on
+	unit_set_fire_at_will_mode Eu38 on
+	unit_set_fire_at_will_mode Eu39 on
+	unit_set_fire_at_will_mode Eu40 on
+
+; *********************************************************************************************
+;	Skirmish Mode - Active
+; *********************************************************************************************
+
+	unit_set_skirmish_mode Eu1 on
+	unit_set_skirmish_mode Eu2 on
+	unit_set_skirmish_mode Eu3 on
+	unit_set_skirmish_mode Eu4 on
+	unit_set_skirmish_mode Eu5 on
+	unit_set_skirmish_mode Eu6 on
+	unit_set_skirmish_mode Eu7 on
+	unit_set_skirmish_mode Eu8 on
+	unit_set_skirmish_mode Eu9 on
+	unit_set_skirmish_mode Eu10 on
+	unit_set_skirmish_mode Eu11 on
+	unit_set_skirmish_mode Eu12 on
+	unit_set_skirmish_mode Eu13 on
+	unit_set_skirmish_mode Eu14 on
+	unit_set_skirmish_mode Eu15 on
+	unit_set_skirmish_mode Eu16 on
+	unit_set_skirmish_mode Eu17 on
+	unit_set_skirmish_mode Eu18 on
+	unit_set_skirmish_mode Eu19 on
+	unit_set_skirmish_mode Eu20 on
+	unit_set_skirmish_mode Eu21 on
+	unit_set_skirmish_mode Eu22 on
+	unit_set_skirmish_mode Eu23 on
+	unit_set_skirmish_mode Eu24 on
+	unit_set_skirmish_mode Eu25 on
+	unit_set_skirmish_mode Eu26 on
+	unit_set_skirmish_mode Eu27 on
+	unit_set_skirmish_mode Eu28 on
+	unit_set_skirmish_mode Eu29 on
+	unit_set_skirmish_mode Eu30 on
+	unit_set_skirmish_mode Eu31 on
+	unit_set_skirmish_mode Eu32 on
+	unit_set_skirmish_mode Eu33 on
+	unit_set_skirmish_mode Eu34 on
+	unit_set_skirmish_mode Eu35 on
+	unit_set_skirmish_mode Eu36 on
+	unit_set_skirmish_mode Eu37 on
+	unit_set_skirmish_mode Eu38 on
+	unit_set_skirmish_mode Eu39 on
+	unit_set_skirmish_mode Eu40 on
+
+end_monitor
+
+monitor_conditions I_CompareCounter Release_Labels > 0
+and I_BattleStarted
+
+;Must release Main Army, internal army label is recalibrated upon arrival of AI reinforcements causing 1 (previously the main AI army) to become 0 and 1 to become the secondary AI army.
+	release_unit MAu1
+	release_unit MAu2
+	release_unit MAu3
+	release_unit MAu4
+	release_unit MAu5
+	release_unit MAu6
+	release_unit MAu7
+	release_unit MAu8
+	release_unit MAu9
+	release_unit MAu10
+	release_unit MAu11
+	release_unit MAu12
+	release_unit MAu13
+	release_unit MAu14
+	release_unit MAu15
+	release_unit MAu16
+	release_unit MAu17
+	release_unit MAu18
+	release_unit MAu19
+	release_unit MAu20
+	release_unit MAu21
+	release_unit MAu22
+	release_unit MAu23
+	release_unit MAu24
+	release_unit MAu25
+	release_unit MAu26
+	release_unit MAu27
+	release_unit MAu28
+	release_unit MAu29
+	release_unit MAu30
+	release_unit MAu31
+	release_unit MAu32
+	release_unit MAu33
+	release_unit MAu34
+	release_unit MAu35
+	release_unit MAu36
+	release_unit MAu37
+	release_unit MAu38
+	release_unit MAu39
+	release_unit MAu40
+	release_unit Eu1
+	release_unit Eu2
+	release_unit Eu3
+	release_unit Eu4
+	release_unit Eu5
+	release_unit Eu6
+	release_unit Eu7
+	release_unit Eu8
+	release_unit Eu9
+	release_unit Eu10
+	release_unit Eu11
+	release_unit Eu12
+	release_unit Eu13
+	release_unit Eu14
+	release_unit Eu15
+	release_unit Eu16
+	release_unit Eu17
+	release_unit Eu18
+	release_unit Eu19
+	release_unit Eu20
+	release_unit Eu21
+	release_unit Eu22
+	release_unit Eu23
+	release_unit Eu24
+	release_unit Eu25
+	release_unit Eu26
+	release_unit Eu27
+	release_unit Eu28
+	release_unit Eu29
+	release_unit Eu30
+	release_unit Eu31
+	release_unit Eu32
+	release_unit Eu33
+	release_unit Eu34
+	release_unit Eu35
+	release_unit Eu36
+	release_unit Eu37
+	release_unit Eu38
+	release_unit Eu39
+	release_unit Eu40
+
+end_monitor
+
+monitor_conditions I_CompareCounter End_Labels = 1
+and I_BattleStarted
+
+set_counter Release_Labels 0
+
+if I_CompareCounter Release_Labels = 0
+set_counter FaW_and_S 0
+set_counter End_Labels 0
+set_counter deploy_check 0
+end_if
+
+end_monitor
+
+; *********************************************************************************************
+;	Initialize Battle Plans & Monitors
+; *********************************************************************************************
+
+; *********************************************************************************************
+;	Shared Reinforcements Monitor
+; *********************************************************************************************
+monitor_event BattleReinforcementsArrive
+
+;AI Reinforcements
+inc_counter AI_reinforcements 1
+
+if I_CompareCounter AI_reinforcements = 1
+restart_timer AI_reinforcements_timer
+end_if
+
+end_monitor
+
+; *********************************************************************************************
+;	AI Reinforcements Defend Plan
+; *********************************************************************************************
+
+monitor_conditions I_CompareCounter AI_reinforcements > 0
+and I_BattlePlayerAllianceOddsInFavour > 1
+and I_TimerElapsed AI_reinforcements_timer < 90000
+
+;AI Units from Army 1 Battle Objective
+ai_gta_add_objective 0 DEFEND_LINE 999
+;AI Army 1 Battle Objective
+ai_gta_plan_set 0 DEFEND_FEATURE
+;AI Units from Army 2 Battle Objective
+ai_gta_add_objective 1 DEFEND_LINE 999
+;AI Army 2 Battle Objective
+ai_gta_plan_set 1 DEFEND_FEATURE
+
+end_monitor
+
+; *********************************************************************************************
+;	AI Reinforcements Attack Plan
+; *********************************************************************************************
+
+monitor_conditions I_CompareCounter AI_reinforcements > 0
+and not I_BattlePlayerArmyIsAttacker
+and I_TimerElapsed AI_reinforcements_timer > 90000
+
+;AI Units from Army 1 Battle Objective
+ai_gta_add_objective 0 ATTACK_ENEMY_BATTLEGROUP 999
+;AI Army 1 Battle Objective
+ai_gta_plan_set 0 ATTACK_ALL
+;AI Units from Army 2 Battle Objective
+ai_gta_add_objective 1 ATTACK_ENEMY_BATTLEGROUP 999
+;AI Army 2 Battle Objective
+ai_gta_plan_set 1 ATTACK_ALL
+
+end_monitor
+
+; *********************************************************************************************
+;	AI Unit Monitors & AI Reactions
+; *********************************************************************************************
+
+monitor_conditions I_PercentageUnitKilled Eu1 > 5
+and I_BattleStarted
+and not I_BattleIsSiegeBattle
+
+inc_counter AI_GRP 1
+
+;AI Units Battle Objective
+ai_gta_add_objective 1 ATTACK_ENEMY_BATTLEGROUP 999
+;AI Alliance Battle Objective
+ai_gta_plan_set 1 ATTACK_ALL
+
+end_monitor
+
+monitor_conditions I_PercentageOfArmyKilled 1 0 > 3
+and I_BattleStarted
+and I_BattlePlayerArmyIsAttacker
+and not I_BattleIsSiegeBattle
+
+inc_counter AI_GRP 1
+
+;AI Units Battle Objective
+ai_gta_add_objective 1 ATTACK_ENEMY_BATTLEGROUP 999
+;AI Alliance Battle Objective
+ai_gta_plan_set 1 ATTACK_ALL
+
+end_monitor
+
+; *********************************************************************************************
+;	Unit Group Orders - Disabled
+; *********************************************************************************************
+
+;monitor_conditions I_InBattle
+;and I_ConflictType Normal
+;and I_BattleEnemyArmyNumberOfClassAndCategory missile cavalry > 9
+;and I_PercentageOfArmyKilled 1 0 >= 5
+
+;unit_group_set_morale Enemy routing
+
+;end_monitor
+
+monitor_conditions I_BattlePlayerArmyNumberOfAttribute general_unit > 0
+and I_BattleEnemyArmyNumberOfAttribute general_unit = 0
+and I_InBattle
+
+; *********************************************************************************************
+;	Help The Captain - AI (35% chance of an experienced captain)
+; *********************************************************************************************
+	unit_set_experience Eu1 3
+	unit_set_experience Eu2 3
+	unit_set_experience Eu3 3
+	unit_set_experience Eu4 3
+	unit_set_experience Eu5 3
+	unit_set_experience Eu6 3
+	unit_set_experience Eu7 3
+	unit_set_experience Eu8 3
+	unit_set_experience Eu9 3
+	unit_set_experience Eu10 3
+	unit_set_experience Eu11 3
+	unit_set_experience Eu12 3
+	unit_set_experience Eu13 3
+	unit_set_experience Eu14 3
+	unit_set_experience Eu15 3
+	unit_set_experience Eu16 3
+	unit_set_experience Eu17 3
+	unit_set_experience Eu18 3
+	unit_set_experience Eu19 3
+	unit_set_experience Eu20 3
+	unit_set_experience Eu21 3
+	unit_set_experience Eu22 3
+	unit_set_experience Eu23 3
+	unit_set_experience Eu24 3
+	unit_set_experience Eu25 3
+	unit_set_experience Eu26 3
+	unit_set_experience Eu27 3
+	unit_set_experience Eu28 3
+	unit_set_experience Eu29 3
+	unit_set_experience Eu30 3
+	unit_set_experience Eu31 3
+	unit_set_experience Eu32 3
+	unit_set_experience Eu33 3
+	unit_set_experience Eu34 3
+	unit_set_experience Eu35 3
+	unit_set_experience Eu36 3
+	unit_set_experience Eu37 3
+	unit_set_experience Eu38 3
+	unit_set_experience Eu39 3
+	unit_set_experience Eu40 3
+
+;AI Reinforcements/Main Army get set to the internal label 0 which was previously the players when reinforced
+;AI Reinforcing Army = MA = 0, AI Reinforcing Army 2 = (E) = 1, Player Army = 2 when there are two reinforcing AI armies
+;Internal Labels are counted from 0 onwards
+;No Random Help The Captain Conditions as this would be an important army/battle if two reinforcements
+if I_CompareCounter AI_Reinforcements > 0
+	unit_set_experience MAu1 3
+	unit_set_experience MAu2 3
+	unit_set_experience MAu3 3
+	unit_set_experience MAu4 3
+	unit_set_experience MAu5 3
+	unit_set_experience MAu6 3
+	unit_set_experience MAu7 3
+	unit_set_experience MAu8 3
+	unit_set_experience MAu9 3
+	unit_set_experience MAu10 3
+	unit_set_experience MAu11 3
+	unit_set_experience MAu12 3
+	unit_set_experience MAu13 3
+	unit_set_experience MAu14 3
+	unit_set_experience MAu15 3
+	unit_set_experience MAu16 3
+	unit_set_experience MAu17 3
+	unit_set_experience MAu18 3
+	unit_set_experience MAu19 3
+	unit_set_experience MAu20 3
+	unit_set_experience MAu21 3
+	unit_set_experience MAu22 3
+	unit_set_experience MAu23 3
+	unit_set_experience MAu24 3
+	unit_set_experience MAu25 3
+	unit_set_experience MAu26 3
+	unit_set_experience MAu27 3
+	unit_set_experience MAu28 3
+	unit_set_experience MAu29 3
+	unit_set_experience MAu30 3
+	unit_set_experience MAu31 3
+	unit_set_experience MAu32 3
+	unit_set_experience MAu33 3
+	unit_set_experience MAu34 3
+	unit_set_experience MAu35 3
+	unit_set_experience MAu36 3
+	unit_set_experience MAu37 3
+	unit_set_experience MAu38 3
+	unit_set_experience MAu39 3
+	unit_set_experience MAu40 3
+	unit_set_experience Eu1 3
+	unit_set_experience Eu2 3
+	unit_set_experience Eu3 3
+	unit_set_experience Eu4 3
+	unit_set_experience Eu5 3
+	unit_set_experience Eu6 3
+	unit_set_experience Eu7 3
+	unit_set_experience Eu8 3
+	unit_set_experience Eu9 3
+	unit_set_experience Eu10 3
+	unit_set_experience Eu11 3
+	unit_set_experience Eu12 3
+	unit_set_experience Eu13 3
+	unit_set_experience Eu14 3
+	unit_set_experience Eu15 3
+	unit_set_experience Eu16 3
+	unit_set_experience Eu17 3
+	unit_set_experience Eu18 3
+	unit_set_experience Eu19 3
+	unit_set_experience Eu20 3
+	unit_set_experience Eu21 3
+	unit_set_experience Eu22 3
+	unit_set_experience Eu23 3
+	unit_set_experience Eu24 3
+	unit_set_experience Eu25 3
+	unit_set_experience Eu26 3
+	unit_set_experience Eu27 3
+	unit_set_experience Eu28 3
+	unit_set_experience Eu29 3
+	unit_set_experience Eu30 3
+	unit_set_experience Eu31 3
+	unit_set_experience Eu32 3
+	unit_set_experience Eu33 3
+	unit_set_experience Eu34 3
+	unit_set_experience Eu35 3
+	unit_set_experience Eu36 3
+	unit_set_experience Eu37 3
+	unit_set_experience Eu38 3
+	unit_set_experience Eu39 3
+	unit_set_experience Eu40 3
+end_if
+
+end_monitor
+
+;Test Order - Player Allies Only
+; unit_group_order_relative_move_formed Allies 0 200
+; I_UnitGroupInRangeOfUnitGroup
+; I_PercentageUnitGroupKilled
+
+; *********************************************************************************************
+;	Normal Attack Plan
+; *********************************************************************************************
+
+monitor_conditions I_CompareCounter AI_reinforcements = 0
+and I_ConflictType Normal
+and I_InBattle
+and not I_BattlePlayerArmyIsAttacker
+
+;AI Units Battle Objective
+ai_gta_add_objective 1 ATTACK_ENEMY_BATTLEGROUP 999
+;AI Alliance Battle Objective
+ai_gta_plan_set 1 ATTACK_ALL
+
+end_monitor
+
+; *********************************************************************************************
+;	Normal Defend Plan
+;	Recurring counters fire above 0
+; *********************************************************************************************
+
+monitor_conditions I_CompareCounter AI_reinforcements = 0
+and I_ConflictType Normal
+and I_InBattle
+and not I_BattleAiAttacking
+and I_BattlePlayerArmyIsAttacker
+
+if I_CompareCounter AI_GRP = 0
+;AI Units Battle Objective Main Army
+ai_gta_add_objective 1 DEFEND_LINE 999
+;AI Alliance Battle Objective Main Army
+ai_gta_plan_set 1 DEFEND_FEATURE
+end_if
+
+if I_CompareCounter AI_GRP > 0
+;AI Units Battle Objective
+ai_gta_add_objective 1 ATTACK_ENEMY_BATTLEGROUP 999
+;AI Alliance Battle Objective
+ai_gta_plan_set 1 ATTACK_ALL
+end_if
+
+end_monitor
+
+; *********************************************************************************************
+;	 Assault Crossing
+; *********************************************************************************************
+
+monitor_conditions I_BattleIsRiverBattle
+and I_InBattle
+and not I_BattlePlayerArmyIsAttacker
+
+;AI Units Battle Objective
+ai_gta_add_objective 1 ASSAULT_CROSSING 999
+;AI Alliance Battle Objective
+ai_gta_plan_set 1 ATTACK_ALL
+
+end_monitor
+
+; *********************************************************************************************
+;	 Assault Settlement
+; *********************************************************************************************
+
+monitor_conditions I_BattleIsSiegeBattle
+and I_InBattle
+and not I_BattlePlayerArmyIsAttacker
+
+;AI Alliance Battle Objective
+ai_gta_plan_set 1 ATTACK_SETTLEMENT
+
+end_monitor
+
+; *********************************************************************************************
+;	 Sally Out
+; *********************************************************************************************
+
+monitor_conditions I_BattleIsSallyOutBattle
+and I_InBattle
+and not I_BattlePlayerArmyIsAttacker
+
+;AI Units Battle Objective
+ai_gta_add_objective 1 ATTACK_ENEMY_BATTLEGROUP 999
+;AI Alliance Battle Objective
+ai_gta_plan_set 1 ATTACK_ALL
+
+end_monitor
+
+while I_InBattle
+end_while
+
+end_script

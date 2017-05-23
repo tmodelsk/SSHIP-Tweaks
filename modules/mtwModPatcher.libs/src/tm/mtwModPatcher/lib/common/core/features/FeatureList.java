@@ -48,6 +48,11 @@ public class FeatureList {
 		return feature.isPresent();
 	}
 
+	public void disableFeatureIfExists(UUID id) {
+		val ft = get(id);
+
+		if(ft != null) ft.setEnabled(false);
+	}
 
 	public List<Feature> getFeaturesList() {
 		return Collections.unmodifiableList(features);

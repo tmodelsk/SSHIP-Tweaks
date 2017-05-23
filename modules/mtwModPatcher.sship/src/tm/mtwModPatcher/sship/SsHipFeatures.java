@@ -56,6 +56,7 @@ public class SsHipFeatures {
 		features.add(new FightForSurvival(unitsManager));
 		features.add(new BeeMugCampaignAI());
 		features.add(new BeeMugCarlAITweaks());
+		//features.add(new SkynetBattleAi(inputStreamProvider));
 
 		features.add(new BetterLogging());
 
@@ -137,6 +138,7 @@ public class SsHipFeatures {
 		enableAll();
 
 		features.getEnabled( LandBridgeGibraltar.Id).disable();
+		features.disableFeatureIfExists( SkynetBattleAi.Id);
 
 		if(!ConfigurationSettings.isDevEnvironment()) {
 			features.getEnabled( LandBridgeGibraltarLaManche.Id).disable();
