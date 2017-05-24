@@ -10,7 +10,7 @@ import java.io.InputStream;
  */
 public class ResourceInputStreamProvider implements InputStreamProvider {
 	@Override
-	public InputStream get(String fullPath) {
+	public InputStream getInputStream(String fullPath) {
 
 		ClassLoader classloader = Thread.currentThread().getContextClassLoader();
 

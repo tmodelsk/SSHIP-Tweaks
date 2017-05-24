@@ -16,5 +16,14 @@
     <orderEntry type="library" name="com.google.guava:guava:18.0" level="project" />
     <orderEntry type="module" module-name="tm.common" />
     <orderEntry type="module" module-name="mtwModPatcher.libs" />
+    <orderEntry type="module-library">
+      <library>
+        <CLASSES>
+          <root url="jar://$APPLICATION_HOME_DIR$/redist/annotations-java8.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
   </component>
 </module>

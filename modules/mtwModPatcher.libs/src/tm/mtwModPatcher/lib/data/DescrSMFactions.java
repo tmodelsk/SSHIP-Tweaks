@@ -45,6 +45,12 @@ public class DescrSMFactions extends LinesProcessorFileEntity {
 		lines.replaceLine(attribLine, lineNew);
 	}
 
+	public void updateNavalInvasion(String factionSymbol, boolean isNavalInvasion) {
+		String value = isNavalInvasion ? "yes" : "no";
+
+		updateFactionAtttribute(factionSymbol, "prefers_naval_invasions" , value);
+	}
+
 
 
 	public DescrSMFactions() {

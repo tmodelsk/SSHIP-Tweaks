@@ -2,6 +2,7 @@ package tm.mtwModPatcher.lib.data.world.maps.campaign;
 
 import lombok.val;
 import org.xml.sax.SAXException;
+import tm.common.Ctm;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.SectionsFileEntity;
@@ -28,15 +29,27 @@ public class DescrStratSectioned extends SectionsFileEntity {
 	public SectionDocTextLines Diplomacy;
 	public SectionDocTextLines Regions;
 
+	public void setFactionAiLabel(String factionSymbol, String aiLabel) {
+		val lines = Factions.getContent().getLines();
+
+		int index = lines.findFirstLineByLinePath(
+				Arrays.asList(
+						Ctm.msgFormat("^\\s*faction\\s+{0}", factionSymbol),
+						"^ai_label\\s+\\s+"), 0);
+		if (index < 0) throw new PatcherLibBaseEx("ai_label not found for faction " + factionSymbol);
+
+		lines.replaceLine(index, Ctm.msgFormat("ai_label\t\t{0}", aiLabel));
+	}
+
 	// !! NOT TESTED !!
-	protected void replaceInitialUnit(String factionName, String oldUnitName , String newUnitName, int experienceLevel) throws PatcherLibBaseEx {
+	protected void replaceInitialUnit(String factionName, String oldUnitName, String newUnitName, int experienceLevel) throws PatcherLibBaseEx {
 
 		LinesProcessor lines = Factions.getContent().getLines();
 
-		int factionStartIndex = lines.findExpFirstRegexLine("^faction "+factionName);
+		int factionStartIndex = lines.findExpFirstRegexLine("^faction " + factionName);
 
-		factionStartIndex = lines.findExpFirstRegexLine("^unit\\s+"+ oldUnitName + ".+" , factionStartIndex+1);
-		lines.replaceLine(factionStartIndex , "unit\t\t" + newUnitName + "\t\t\t\texp " + experienceLevel + " armour 0 weapon_lvl 0");
+		factionStartIndex = lines.findExpFirstRegexLine("^unit\\s+" + oldUnitName + ".+", factionStartIndex + 1);
+		lines.replaceLine(factionStartIndex, "unit\t\t" + newUnitName + "\t\t\t\texp " + experienceLevel + " armour 0 weapon_lvl 0");
 	}
 
 	public void insertSettlementBuilding(String provinceName, String name, String level) throws PatcherLibBaseEx {
@@ -46,36 +59,39 @@ public class DescrStratSectioned extends SectionsFileEntity {
 
 		rl.add("	building");
 		rl.add("	{");
-		rl.add("		type "+ name +" "+level);
+		rl.add("		type " + name + " " + level);
 		rl.add("	}");
 
 		val lines = Factions.getContent().getLines();
 		lines.insertAt(endIndex, rl);
 	}
+
 	public int loadSettlementBuildingIndex(String provinceName) throws PatcherLibBaseEx {
 		val lines = Factions.getContent().getLines();
 
 		int pamlponaFirstBuildingTag = lines.findFirstLineByLinePath(
-				Arrays.asList(	"^\\s*region\\s+" + provinceName,
+				Arrays.asList("^\\s*region\\s+" + provinceName,
 						"^\\s*building"));
-		if(pamlponaFirstBuildingTag < 0) throw new PatcherLibBaseEx("DescrStrat / Factions / Settlement Province "+ provinceName +" building not found !");
+		if (pamlponaFirstBuildingTag < 0)
+			throw new PatcherLibBaseEx("DescrStrat / Factions / Settlement Province " + provinceName + " building not found !");
 
 		return pamlponaFirstBuildingTag;
 	}
+
 	public int loadSettlemenBlockEndIndex(String provinceName) throws PatcherLibBaseEx {
 		val buildingIndex = loadSettlementBuildingIndex(provinceName);
 
-		int openBracketsCount = 0, endIndex = -1, i=buildingIndex+1;
-		String actLine="";
+		int openBracketsCount = 0, endIndex = -1, i = buildingIndex + 1;
+		String actLine = "";
 		val lines = Factions.getContent().getLines();
 
 		while (endIndex < 0) {
 			actLine = lines.getLine(i).trim();
 
-			if(actLine.equals("{")) openBracketsCount++;
+			if (actLine.equals("{")) openBracketsCount++;
 			else {
-				if(actLine.equals("}")) {
-					if(openBracketsCount > 0) openBracketsCount--;
+				if (actLine.equals("}")) {
+					if (openBracketsCount > 0) openBracketsCount--;
 					else {
 						// ## FOUND END BRACKER !! ##
 						endIndex = i;
@@ -89,9 +105,10 @@ public class DescrStratSectioned extends SectionsFileEntity {
 	}
 
 	private static Set<String> _SettlementNames = null;
+
 	public Set<String> getSettlementNames() throws PatcherLibBaseEx {
 
-		if(_SettlementNames == null) {
+		if (_SettlementNames == null) {
 			// Load, lazyloading
 
 			_SettlementNames = new HashSet<>();
@@ -108,23 +125,22 @@ public class DescrStratSectioned extends SectionsFileEntity {
 
 				// process
 				Matcher m = p.matcher(line);
-				if(m.matches())
-				{
+				if (m.matches()) {
 					String settlementName = m.group(1);
 					_SettlementNames.add(settlementName);
-				}
-				else throw new PatcherLibBaseEx("Provice not found "+line);
+				} else throw new PatcherLibBaseEx("Provice not found " + line);
 
-				index = lines.findFirstByRegexLine(p, index+1);
+				index = lines.findFirstByRegexLine(p, index + 1);
 			}
 		}
 
-		return  _SettlementNames;
+		return _SettlementNames;
 	}
 
 	private static List<SettlementInfo> _SettlementInfoList;
+
 	public List<SettlementInfo> getSettlementInfoList() throws PatcherLibBaseEx {
-		if(_SettlementInfoList == null) {
+		if (_SettlementInfoList == null) {
 			// lazyloading
 			_SettlementInfoList = new ArrayList<>();
 
@@ -139,8 +155,7 @@ public class DescrStratSectioned extends SectionsFileEntity {
 			while (index >= 0) {
 				String line = lines.getLine(index);
 
-				if(line.contains("Reggio"))
-				{
+				if (line.contains("Reggio")) {
 					String xx = "break";
 				}
 
@@ -149,32 +164,31 @@ public class DescrStratSectioned extends SectionsFileEntity {
 				SettlementLevel level;
 
 				Matcher m = p.matcher(line);
-				if(m.matches())
+				if (m.matches())
 					provinceName = m.group(1);
-				else throw new PatcherLibBaseEx("Provice not found "+line);
+				else throw new PatcherLibBaseEx("Provice not found " + line);
 
 
-
-				String levelLine = lines.getLine(index-1);
+				String levelLine = lines.getLine(index - 1);
 				// 	level city
 				Pattern levelPattern = Pattern.compile("^\\s*level\\s+(\\S+).*");
 				Matcher levelMatcher = levelPattern.matcher(levelLine);
-				if(levelMatcher.matches())
+				if (levelMatcher.matches())
 					level = SettlementLevelConverter.parse(levelMatcher.group(1));
-				else throw new PatcherLibBaseEx("Level not found "+line + ", Level : " + levelLine);
+				else throw new PatcherLibBaseEx("Level not found " + line + ", Level : " + levelLine);
 
 				// 	faction_creator aragon
 				String factionCreator;
 				Pattern factionCreatorPattern = Pattern.compile("^\\s*faction_creator\\s+(\\S+)");
-				String facionCreatorLine  = lines.loadLineByFirstRegexLine(factionCreatorPattern, index+1);
+				String facionCreatorLine = lines.loadLineByFirstRegexLine(factionCreatorPattern, index + 1);
 				Matcher factionCreatorMatcher = factionCreatorPattern.matcher(facionCreatorLine);
-				if(factionCreatorMatcher.matches())
+				if (factionCreatorMatcher.matches())
 					factionCreator = factionCreatorMatcher.group(1);
-				else throw new PatcherLibBaseEx("Province "+provinceName+" faction creator not found!");
+				else throw new PatcherLibBaseEx("Province " + provinceName + " faction creator not found!");
 
 				_SettlementInfoList.add(new SettlementInfo(null, provinceName, level, factionCreator));
 
-				index = lines.findFirstByRegexLine(p, index+1);
+				index = lines.findFirstByRegexLine(p, index + 1);
 			}
 		}
 		return _SettlementInfoList;
@@ -186,11 +200,11 @@ public class DescrStratSectioned extends SectionsFileEntity {
 
 		int factionKingPurse = lines.findFirstLineByLinePath(
 				Arrays.asList(
-						"^;## "+factionSymbol.toUpperCase()+" ##",
+						"^;## " + factionSymbol.toUpperCase() + " ##",
 						"^denari_kings_purse\\s+\\d+"), 0);
-		if(factionKingPurse < 0) throw new PatcherLibBaseEx("Kings Purse not found for faction "+factionSymbol);
+		if (factionKingPurse < 0) throw new PatcherLibBaseEx("Kings Purse not found for faction " + factionSymbol);
 
-		lines.replaceLine(factionKingPurse, "denari_kings_purse\t"+Integer.toString(kingsPurse));
+		lines.replaceLine(factionKingPurse, "denari_kings_purse\t" + Integer.toString(kingsPurse));
 	}
 
 	public void addKingsPurse(String factionSymbol, int kingsPurseAdd) throws PatcherLibBaseEx {
@@ -199,21 +213,20 @@ public class DescrStratSectioned extends SectionsFileEntity {
 
 		int factionKingPurse = lines.findFirstLineByLinePath(
 				Arrays.asList(
-						"^;## "+factionSymbol.toUpperCase()+" ##",
+						"^;## " + factionSymbol.toUpperCase() + " ##",
 						"^denari_kings_purse\\s+\\d+"), 0);
-		if(factionKingPurse < 0) throw new PatcherLibBaseEx("Kings Purse not found for faction "+factionSymbol);
+		if (factionKingPurse < 0) throw new PatcherLibBaseEx("Kings Purse not found for faction " + factionSymbol);
 
 		String lineOrg = lines.getLine(factionKingPurse);
 		Pattern regex = Pattern.compile("^denari_kings_purse\\s+(\\d+)\\s*");
 		Matcher matcher = regex.matcher(lineOrg);
 
-		if(matcher.matches()) {
+		if (matcher.matches()) {
 			int kingPurseOld = Integer.parseInt(matcher.group(1));
 
-			lines.replaceLine(factionKingPurse, "denari_kings_purse\t"+(kingPurseOld + kingsPurseAdd));
-		}
-		else
-			throw new PatcherLibBaseEx("Unexpected - no match for king purse "+lineOrg);
+			lines.replaceLine(factionKingPurse, "denari_kings_purse\t" + (kingPurseOld + kingsPurseAdd));
+		} else
+			throw new PatcherLibBaseEx("Unexpected - no match for king purse " + lineOrg);
 	}
 
 	public void addKingsPursesAll(int kingsPurseAdd) throws PatcherLibBaseEx {
@@ -223,22 +236,21 @@ public class DescrStratSectioned extends SectionsFileEntity {
 
 		int factionKingPurse = 0;
 
-		while(factionKingPurse >= 0) {
+		while (factionKingPurse >= 0) {
 
 			factionKingPurse = lines.findFirstByRegexLine(regex, factionKingPurse);
-			if(factionKingPurse < 0) break;
+			if (factionKingPurse < 0) break;
 
 			String lineOrg = lines.getLine(factionKingPurse);
 			Matcher matcher = regex.matcher(lineOrg);
 
-			if(matcher.matches()) {
+			if (matcher.matches()) {
 				int kingPurseOld = Integer.parseInt(matcher.group(2));
 
-				lines.replaceLine(factionKingPurse, "denari_kings_purse\t"+(kingPurseOld + kingsPurseAdd));
+				lines.replaceLine(factionKingPurse, "denari_kings_purse\t" + (kingPurseOld + kingsPurseAdd));
 				factionKingPurse++;
-			}
-			else
-				throw new PatcherLibBaseEx("Unexpected : no match for denari_kongs_purse Line : "+factionKingPurse+" "+lineOrg);
+			} else
+				throw new PatcherLibBaseEx("Unexpected : no match for denari_kongs_purse Line : " + factionKingPurse + " " + lineOrg);
 		}
 	}
 
@@ -246,7 +258,7 @@ public class DescrStratSectioned extends SectionsFileEntity {
 	public void load() throws ParserConfigurationException, IOException, SAXException, PatcherLibBaseEx {
 
 		LinesProcessor lines = new LinesProcessor();
-		lines.setLines(	loadAsTextLines() );
+		lines.setLines(loadAsTextLines());
 
 		// ## Find first section "Resources"
 		int resourcesIndex = lines.findFirstByRexexLines("^;;;;;;+", "^; >>>> start of resources section <<<<");
@@ -255,31 +267,31 @@ public class DescrStratSectioned extends SectionsFileEntity {
 		int regionIndex = lines.findFirstByRexexLines("^;;;;;;+", "; >>>> start of regions section <<<<");
 
 		Header = new SectionTextLines("Header");
-		Header.setLines( lines.subsetCopy(0, resourcesIndex-1) );
+		Header.setLines(lines.subsetCopy(0, resourcesIndex - 1));
 		_Sections.add(Header);
 
 		Resources = new SectionDocTextLines();
-		Resources.setHeader( new SectionTextLines("ResourcesHeader",lines.subsetCopy(resourcesIndex, resourcesIndex+1)));
-		Resources.setContent(new SectionTextLines("ResourcesContent", lines.subsetCopy(resourcesIndex+2, factionsIndex-1)));
+		Resources.setHeader(new SectionTextLines("ResourcesHeader", lines.subsetCopy(resourcesIndex, resourcesIndex + 1)));
+		Resources.setContent(new SectionTextLines("ResourcesContent", lines.subsetCopy(resourcesIndex + 2, factionsIndex - 1)));
 		_Sections.add(Resources);
 
 		Factions = new SectionDocTextLines();
-		Factions.setHeader(new SectionTextLines("FactionsHeader", lines.subsetCopy(factionsIndex, factionsIndex+1)));
-		Factions.setContent(new SectionTextLines("FactionContent", lines.subsetCopy(factionsIndex+2, diplomacyIndex-1)));
+		Factions.setHeader(new SectionTextLines("FactionsHeader", lines.subsetCopy(factionsIndex, factionsIndex + 1)));
+		Factions.setContent(new SectionTextLines("FactionContent", lines.subsetCopy(factionsIndex + 2, diplomacyIndex - 1)));
 		_Sections.add(Factions);
 
 		Diplomacy = new SectionDocTextLines();
-		Diplomacy.setHeader(new SectionTextLines("DiplomacyHeader", lines.subsetCopy(diplomacyIndex, diplomacyIndex+1)));
-		Diplomacy.setContent(new SectionTextLines("DiplomacyContent", lines.subsetCopy(diplomacyIndex+2, regionIndex-1)));
+		Diplomacy.setHeader(new SectionTextLines("DiplomacyHeader", lines.subsetCopy(diplomacyIndex, diplomacyIndex + 1)));
+		Diplomacy.setContent(new SectionTextLines("DiplomacyContent", lines.subsetCopy(diplomacyIndex + 2, regionIndex - 1)));
 		_Sections.add(Diplomacy);
 
 		Regions = new SectionDocTextLines();
-		Regions.setHeader(new SectionTextLines("RegionsHeader", lines.subsetCopy(regionIndex, regionIndex+1)));
-		Regions.setContent(new SectionTextLines("RegionsContent", lines.subsetCopy(regionIndex+2)));
+		Regions.setHeader(new SectionTextLines("RegionsHeader", lines.subsetCopy(regionIndex, regionIndex + 1)));
+		Regions.setContent(new SectionTextLines("RegionsContent", lines.subsetCopy(regionIndex + 2)));
 		_Sections.add(Regions);
 	}
 
-	public DescrStratSectioned()  {
+	public DescrStratSectioned() {
 
 		super("data\\world\\maps\\campaign\\imperial_campaign\\Descr_strat.txt");
 		_Sections = new ArrayList<>();

@@ -3,6 +3,7 @@ package tm.mtwModPatcher.sship;
 import lombok.val;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.FeatureList;
+import tm.mtwModPatcher.lib.common.core.features.ResourcesProvider;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.InputStreamProvider;
 import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
 import tm.mtwModPatcher.lib.engines.ConsoleLogger;
@@ -10,9 +11,7 @@ import tm.mtwModPatcher.lib.engines.FileEntityFactory;
 import tm.mtwModPatcher.lib.managers.UnitsManager;
 import tm.mtwModPatcher.lib.managers.garrisons.GarrisonManager;
 import tm.mtwModPatcher.sship.agentsCharacters.*;
-import tm.mtwModPatcher.sship.ai.BeeMugCampaignAI;
-import tm.mtwModPatcher.sship.ai.BeeMugCarlAITweaks;
-import tm.mtwModPatcher.sship.ai.BetterLogging;
+import tm.mtwModPatcher.sship.ai.*;
 import tm.mtwModPatcher.sship.armyUnits.*;
 import tm.mtwModPatcher.sship.buildings.*;
 import tm.mtwModPatcher.sship.garrisons.GarrisonNoUnguardedSettlements;
@@ -54,9 +53,13 @@ public class SsHipFeatures {
 		features.add(new ArmySuppliesCosts());
 		features.add(new MaxTreasuryLimited());
 		features.add(new FightForSurvival(unitsManager));
-		features.add(new BeeMugCampaignAI());
 		features.add(new BeeMugCarlAITweaks());
 		//features.add(new SkynetBattleAi(inputStreamProvider));
+
+		features.add(new CampaignAisCompilation(resourcesProvider));
+		features.add(new BeeMugCarlCampaignAi(resourcesProvider));
+		features.add(new QuieterAi(resourcesProvider));
+		features.add(new SkynetCampaignAi(resourcesProvider));
 
 		features.add(new BetterLogging());
 
@@ -137,8 +140,11 @@ public class SsHipFeatures {
 	public void enableDefaults() {
 		enableAll();
 
-		features.getEnabled( LandBridgeGibraltar.Id).disable();
+		features.disableFeatureIfExists( LandBridgeGibraltar.Id);
+		features.disableFeatureIfExists( BeeMugCarlCampaignAi.Id);
+		features.disableFeatureIfExists( QuieterAi.Id);
 		features.disableFeatureIfExists( SkynetBattleAi.Id);
+		features.disableFeatureIfExists( SkynetCampaignAi.Id);
 
 		if(!ConfigurationSettings.isDevEnvironment()) {
 			features.getEnabled( LandBridgeGibraltarLaManche.Id).disable();
@@ -183,16 +189,18 @@ public class SsHipFeatures {
 	private UnitsManager unitsManager;
 
 	private InputStreamProvider inputStreamProvider;
+	private ResourcesProvider resourcesProvider;
 	private FileEntityFactory fileEntityFactory;
 	private ConsoleLogger consoleLogger;
 
 	public SsHipFeatures(GarrisonManager garrisonManager, UnitsManager unitsManager,
-						 InputStreamProvider inputStreamProvider,
+						 ResourcesProvider resourcesProvider ,
 						 FileEntityFactory fileEntityFactory, ConsoleLogger logger) {
 		this.garrisonManager = garrisonManager;
 		this.unitsManager = unitsManager;
 
-		this.inputStreamProvider = inputStreamProvider;
+		this.inputStreamProvider = resourcesProvider.getInputStreamProvider();
+		this.resourcesProvider = resourcesProvider;
 
 		this.fileEntityFactory = fileEntityFactory;
 		this.consoleLogger = logger;

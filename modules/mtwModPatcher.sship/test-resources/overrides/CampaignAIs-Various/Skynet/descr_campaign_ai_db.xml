@@ -1,0 +1,241 @@
+<?xml version="1.0"?>
+<!-- EBII Campaign AI -->
+<!-- 21/8/2016 by z3n -->
+<root>
+	<!--
+	//////////////////////
+	// GLOBAL AI PARAMS //
+	//////////////////////
+	-->
+    <trusted_ally_fs_threshold float = "0.5"/>
+    <trusted_ally_target_fs_threshold float = "0.5"/>
+    <trusted_ally_target_human_fs_threshold float = "0.5"/>
+    <trusted_ally_gs_threshold float="-0.1"/>
+    <trusted_ally_target_gs_threshold float="-0.1"/>
+    <trusted_ally_enemy_auto_war bool = "true"/>
+
+    <use_cheat_overrides bool = "false"/>
+	<invade_priority_fs_modifier float = "-250.0"/>
+	<invade_priority_gs_modifier float = "0.0"/>
+    <invade_priority_assistance_offset int = "750"/>
+    <invade_priority_min int = "0"/>
+    <invade_priority_max int = "1000"/>
+    <merge_fort_priority_offset int = "-500"/>
+
+	<faction_ai_label name = "default">
+		<!-- Skynet AI default -->
+        <defend_decisions>
+
+	<!--
+	Diplomatic & Other Decisions
+	-->
+
+            <decision_entry>
+            <!--
+			ignore those who are not our neighbour
+			-->
+				<min_entry	num_settlements = "1"/>
+                <max_entry is_neighbour = "false"/>
+                <faction_attitude defense = "defend_minimal" pts_alliance = "-999" want_ally = "false" want_peace = "true"/>
+            </decision_entry>
+
+            <decision_entry>
+            <!--
+			neutral neighbour and at war
+			-->
+                <min_entry num_enemies = "1" num_settlements = "1" is_neighbour = "true" target_faction_standing = "-0.1"/>
+                <max_entry Stance = "Neutral" trusted_ally_enemy = "false"/>
+                <faction_attitude defense = "defend_minimal" want_ally = "true" want_peace = "true"/>
+            </decision_entry>
+
+			<decision_entry>
+				<!--
+					if not our neighbour, and we have any settlements, and we are at war, and they are not a trusted allies enemy, use defaults + want peace
+				-->
+				<min_entry	num_settlements = "1" stance = "AtWar"/>
+				<max_entry	is_neighbour = "false" trusted_ally_enemy = "false"/>
+				<faction_attitude	defense = "defend_minimal" want_peace = "true"/>
+			</decision_entry>
+
+            <decision_entry>
+            <!--
+			frontline/free strength peace decision 
+			-->
+                <min_entry stance = "AtWar" is_neighbour = "true"/>
+                <max_entry frontline_balance = "1.0" free_strength_balance = "1.0"/>
+                <faction_attitude defense = "defend_frontline" want_peace = "true"/>
+            </decision_entry>
+
+            <decision_entry>
+            <!--
+			frontline/free strength peace decision 
+			-->
+                <min_entry stance = "AtWar" is_neighbour = "true"/>
+                <max_entry frontline_balance = "0.99" num_enemies = "1"/>
+                <faction_attitude defense = "defend_frontline" want_peace = "true"/>
+            </decision_entry>
+
+            <decision_entry>
+            <!--
+			balance peace decision
+			-->
+                <min_entry stance = "AtWar" num_enemies = "2" is_neighbour = "true"/>
+                <max_entry military_balance_plus_enemies = "1.5"/>
+                <faction_attitude defense = "defend_frontline" want_peace = "true"/>
+            </decision_entry>
+
+	<!--
+	Absolute Defend Decisions
+	-->
+
+
+            <decision_entry>
+				<!--
+					neighbour & stance = atwar * defend frontline
+				-->
+                <min_entry stance = "AtWar" is_neighbour = "true"/>
+                <max_entry stance = "AtWar"/>
+                <faction_attitude defense = "defend_frontline"/>
+            </decision_entry>
+
+			<decision_entry>
+            <!--
+			stance = neutral * defend minimal
+			-->
+				<min_entry stance = "Neutral"/>
+				<max_entry stance = "Neutral"/>
+				<faction_attitude	defense = "defend_minimal"/>
+			</decision_entry>
+
+			<decision_entry>
+            <!--
+			stance = allied * defend minimal
+			-->
+				<min_entry stance = "Allied"/>
+				<max_entry stance = "Allied"/>
+				<faction_attitude	defense = "defend_minimal"/>
+			</decision_entry>
+
+        </defend_decisions>
+
+		<invasion_decisions>
+
+			<!--
+			War decisions are analysed first
+			-->
+
+		    <decision_entry>
+            <!--
+			ceasefire = signed * invade none and false * 20% chance over 20 turns to ignore this decision
+			-->
+				<min_entry	stance = "Neutral" num_turns_ceasfire = "0"/>
+				<max_entry	stance = "Neutral" num_turns_ceasfire = "20" rand = ".99"/>
+                <faction_attitude can_force_invade = "false" invade = "invade_none"/>
+            </decision_entry>
+
+			<decision_entry>
+				<!--
+					if absolutely no decisions apply do not invade (is neighbour, good standing and we have an enemy ignore them)
+				-->
+				<min_entry stance = "Allied"/>
+				<max_entry stance = "Allied" num_turns_allied = "100"/>
+                <faction_attitude can_force_invade = "false" invade = "invade_none"/>
+			</decision_entry>
+
+			<decision_entry>
+				<!--
+					if absolutely no decisions apply do not invade (is neighbour, good standing and we have an enemy ignore them)
+				-->
+				<min_entry stance = "Allied" num_turns_allied = "100"/>
+				<max_entry stance = "Allied" rand = ".99"/>
+                <faction_attitude can_force_invade = "true" invade = "invade_none"/>
+			</decision_entry>
+
+		    <decision_entry>
+            <!--
+			faction = slaves * invade immediate if we have no enemies
+			-->
+				<min_entry	target_faction = "slave"/>
+				<max_entry	num_enemies = "0" target_faction = "slave"/>
+                <faction_attitude invade_priority = "1000" at_war = "true" can_force_invade = "true" invade = "invade_immediate"/>
+            </decision_entry>
+
+		    <decision_entry>
+            <!--
+			stance = atwar * invade immediate
+			-->
+				<min_entry	stance = "AtWar"/>
+				<max_entry	stance = "AtWar"/>
+                <faction_attitude at_war = "true" invade_priority = "1000" can_force_invade = "true" invade = "invade_immediate"/>
+            </decision_entry>
+
+		    <decision_entry>
+            <!--
+			*invade immediate vs our allies enemy if we only have >=1 enemy
+			-->
+				<min_entry	trusted_ally_enemy = "true"/>
+				<max_entry	num_enemies = "1"/>
+                <faction_attitude at_war = "true" can_force_invade = "true" invade = "invade_immediate"/>
+            </decision_entry>
+
+
+	<!--
+	Neutral & Other Invasion Decisions
+	-->
+
+			<decision_entry>
+				<!--
+					invade immediate (is neighbour, bad standing, weak)
+				-->
+				<min_entry stance = "Neutral" target_human = "true" is_neighbour = "true"/>
+				<max_entry stance = "Neutral" frontline_balance = "5.0" target_faction_standing = "0.1" num_enemies = "0"/>
+                <faction_attitude at_war = "true" can_force_invade = "true" invade = "invade_immediate"/>
+			</decision_entry>
+
+			<decision_entry>
+				<!--
+					invade immediate (is neighbour, bad standing, weak)
+				-->
+				<min_entry turn_number = "100" stance = "Neutral" target_human = "false" is_neighbour = "true"/>
+				<max_entry stance = "Neutral" frontline_balance = "5.0" target_faction_standing = "0.1" num_enemies = "0"/>
+                <faction_attitude at_war = "true" can_force_invade = "true" invade = "invade_immediate"/>
+			</decision_entry>
+
+			<decision_entry>
+				<!--
+					if absolutely no decisions apply do not invade (first 100 turns)
+				-->
+				<max_entry target_human = "false" stance = "Neutral" turn_number = "100" rand = "0.9"/>
+                <faction_attitude can_force_invade = "false" invade = "invade_none"/>
+			</decision_entry>
+
+			<decision_entry>
+				<!--
+					if absolutely no decisions apply do not invade (is neighbour, good standing and we have an enemy ignore them)
+				-->
+				<min_entry stance = "Neutral" turn_number = "100" num_enemies = "1" is_neighbour = "true" target_faction_standing = "-0.1"/>
+				<max_entry stance = "Neutral" target_human = "false"/>
+                <faction_attitude can_force_invade = "true" invade = "invade_none"/>
+			</decision_entry>
+
+			<decision_entry>
+				<!--
+					if absolutely no decisions apply do not invade (is not our neighbour)
+				-->
+				<min_entry stance = "Neutral" num_enemies = "1" turn_number = "100"/>
+				<max_entry stance = "Neutral" target_human = "false" is_neighbour = "false"/>
+                <faction_attitude invade = "invade_none"/>
+			</decision_entry>
+
+			<decision_entry>
+				<!--
+					if absolutely no decisions apply do not invade (is our neighbour, good standing)
+				-->
+				<min_entry stance = "Neutral" num_enemies = "1" turn_number = "100" is_neighbour = "true" target_faction_standing = "-0.1"/>
+                <faction_attitude invade = "invade_none"/>
+			</decision_entry>
+
+        </invasion_decisions>
+
+    </faction_ai_label>	
+</root>

@@ -1,18 +1,23 @@
 package tm.mtwModPatcher.sship.ai;
 
+import lombok.val;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.OverrideCopyTask;
 import tm.mtwModPatcher.lib.data.DescrSMFactions;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
-/** http://www.twcenter.net/forums/showthread.php?594662-%2805-04-2016%29-My-new-and-improved-AI-errr-3-0  */
-public class BeeMugCampaignAI extends Feature {
+/**
+ * http://www.twcenter.net/forums/showthread.php?594662-%2805-04-2016%29-My-new-and-improved-AI-errr-3-0
+ */
+public class BeeMugOldCampaignAI extends Feature {
 
 	@Override
 	public void executeUpdates() throws Exception {
-		_DescrSMFactions = getFileRegisterForUpdated(DescrSMFactions.class);
+		descrSMFactions = getFileRegisterForUpdated(DescrSMFactions.class);
 
 		setFactionsAttributes();
 	}
@@ -29,22 +34,33 @@ public class BeeMugCampaignAI extends Feature {
 //		factionLines.updateAllRegexLines("^ai_label\\s+slave_faction","ai_label\t\tdefault");
 
 		// ## set naval invasions true for everybody except Egypt and ???
-		_DescrSMFactions.updateFactionAtttribute("egypt", "prefers_naval_invasions" , "no");
+		descrSMFactions.updateFactionAtttribute("egypt", "prefers_naval_invasions", "no");
 
-		_DescrSMFactions.updateFactionAtttribute("poland", "prefers_naval_invasions" , "yes");
-		_DescrSMFactions.updateFactionAtttribute("hungary", "prefers_naval_invasions" , "yes");
-		_DescrSMFactions.updateFactionAtttribute("teutonic_order", "prefers_naval_invasions" , "yes");
+		descrSMFactions.updateFactionAtttribute("poland", "prefers_naval_invasions", "yes");
+		descrSMFactions.updateFactionAtttribute("hungary", "prefers_naval_invasions", "yes");
+		descrSMFactions.updateFactionAtttribute("teutonic_order", "prefers_naval_invasions", "yes");
 	}
 
-	protected DescrSMFactions _DescrSMFactions;
+	@Override
+	public Set<UUID> getConflictingFeatures() {
+		val conflicts = new HashSet<UUID>();
+
+		conflicts.add(SkynetCampaignAi.Id);
+		conflicts.add(QuieterAi.Id);
+
+		return conflicts;
+	}
+
+	protected DescrSMFactions descrSMFactions;
 
 	@Override
 	public UUID getId() {
 		return Id;
 	}
+
 	public static UUID Id = UUID.randomUUID();
 
-	public BeeMugCampaignAI() {
+	public BeeMugOldCampaignAI() {
 		super("BeeMugCarl campaign AI");
 
 		addCategory("Campaign");

@@ -11,7 +11,7 @@ import java.io.InputStream;
  */
 public class FileInputStreamProvider implements InputStreamProvider {
 	@Override
-	public InputStream get(String fullPath) {
+	public InputStream getInputStream(String fullPath) {
 
 		try {
 			return new FileInputStream(fullPath);

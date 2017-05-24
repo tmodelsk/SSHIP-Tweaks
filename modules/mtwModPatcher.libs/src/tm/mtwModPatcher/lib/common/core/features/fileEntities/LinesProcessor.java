@@ -21,7 +21,7 @@ public class LinesProcessor {
 		//File file = new File(fullPath);
 		//reader = new FileReader(file);
 
-		val inputStream = inputStreamProvider.get(fullPath);
+		val inputStream = inputStreamProvider.getInputStream(fullPath);
 		reader = new InputStreamReader(inputStream);
 
 		List<String> lines = new ArrayList<>();

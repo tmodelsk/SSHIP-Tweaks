@@ -21,6 +21,12 @@ public class FactionInfo {
 	public String BodyguardUnitName;
 
 	public boolean IsSlave;
+	public boolean IsPapacy() {
+		return Symbol.equals("papal_states");
+	}
+	public boolean IsMongols() {
+		return Symbol.equals("mongols");
+	}
 
 	public String getCultureTypeStr() {
 		return convertCulture(this.Culture);

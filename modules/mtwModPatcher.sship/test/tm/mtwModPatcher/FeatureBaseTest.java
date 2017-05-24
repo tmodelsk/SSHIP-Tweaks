@@ -3,6 +3,7 @@ package tm.mtwModPatcher;
 import lombok.val;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.FeatureList;
+import tm.mtwModPatcher.lib.common.core.features.ResourcesProvider;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.InputStreamProvider;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.ResourceInputStreamProvider;
 import tm.mtwModPatcher.lib.engines.ConsoleLogWriterNull;
@@ -29,10 +30,11 @@ public class FeatureBaseTest {
 		val inputStreamProvider = createInputStreamProvider();
 		val fileEntityFactory = new FileEntityFactory();
 		fileEntityFactory.setInputStreamProvider(inputStreamProvider);
+		fileEntityFactory.reset();
 
 		// modules\mtwModPatcher.sship
 		// mtwModPatcher.sship/
-		fileEntityFactory.setRootPath("test-resources/modFiles");
+		fileEntityFactory.setRootPath("test-resources/modFiles");	// TODO when resource Provider will have Root Path
 
 		return fileEntityFactory;
 	}
@@ -42,6 +44,12 @@ public class FeatureBaseTest {
 		val consoleLogger = new ConsoleLogger(nullWriter);
 
 		return consoleLogger;
+	}
+
+	protected ResourcesProvider createResourcesProvider() {
+		val resourcesProvider = new ResourcesResourceProvider(createInputStreamProvider());
+
+		return resourcesProvider;
 	}
 
 	protected InputStreamProvider createInputStreamProvider() {

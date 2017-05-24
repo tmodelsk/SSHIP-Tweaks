@@ -24,7 +24,7 @@ public class AllFeaturesTest extends FeatureBaseTest {
 		val garrisonManager = new GarrisonManager(garrisonMetaManager);
 		val unitsManager = new UnitsManager();
 
-		val sshipFeature = new SsHipFeatures(garrisonManager, unitsManager, createInputStreamProvider(), fileEntityFactory, consoleLogger);
+		val sshipFeature = new SsHipFeatures(garrisonManager, unitsManager, createResourcesProvider(), fileEntityFactory, consoleLogger);
 		val features = sshipFeature.configureFeatures();
 
 		assertThat(features).isNotNull();
@@ -50,10 +50,11 @@ public class AllFeaturesTest extends FeatureBaseTest {
 
 		ConfigurationSettings.setDevOverrideRootPath("test-resources/overrides");
 
-		val sshipFeature = new SsHipFeatures(garrisonManager, unitsManager, createInputStreamProvider(), fileEntityFactory, consoleLogger);
+		val sshipFeature = new SsHipFeatures(garrisonManager, unitsManager, createResourcesProvider() , fileEntityFactory, consoleLogger);
 		val features = sshipFeature.configureFeatures();
+		sshipFeature.enableDefaults();
 
-		for (val ft : features.getFeaturesList()) {
+		for (val ft : features.getFeaturesEnabledList()) {
 			ft.executeUpdates();
 		}
 	}

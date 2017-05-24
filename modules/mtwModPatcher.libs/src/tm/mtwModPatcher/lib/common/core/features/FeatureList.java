@@ -4,6 +4,7 @@ import lombok.val;
 import tm.common.Tuple2;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /** Container for Features */
 public class FeatureList {
@@ -31,7 +32,7 @@ public class FeatureList {
 
 				for(val secondFtId : conflictedIds) {
 					val secondFt = get(secondFtId);
-					if(secondFt.isEnabled()) {
+					if(secondFt != null && secondFt.isEnabled()) {
 						conflicts.add(new Tuple2<>(srcFeature, secondFt));
 					}
 				}
@@ -56,6 +57,9 @@ public class FeatureList {
 
 	public List<Feature> getFeaturesList() {
 		return Collections.unmodifiableList(features);
+	}
+	public List<Feature> getFeaturesEnabledList() {
+		return Collections.unmodifiableList(features.stream().filter(f -> f.isEnabled()).collect(Collectors.toList()));
 	}
 
 	public Feature get(int index) {

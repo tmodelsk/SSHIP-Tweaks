@@ -7,6 +7,6 @@ import java.io.InputStream;
  */
 public interface InputStreamProvider {
 
-	InputStream get(String fullPath);
+	InputStream getInputStream(String fullPath);
 
 }

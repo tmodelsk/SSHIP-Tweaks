@@ -13,6 +13,7 @@ import tm.mtwModPatcher.lib.data.common.Format;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
 import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
@@ -54,6 +55,22 @@ public abstract class XmlFileEntity extends FileEntity {
 
 		double miningFactor =  getAttributeValueAsDouble(nodeXpath,attribute);
 		setAttribute(nodeXpath, attribute, miningFactor*multiplier);
+	}
+
+	public Node getNode(String nodeXpath) throws XPathExpressionException {
+		XPath xPath =  XPathFactory.newInstance().newXPath();
+
+		Node node = (Node) xPath.compile(nodeXpath).evaluate(xDoc, XPathConstants.NODE);
+
+		return node;
+	}
+	public Node loadNode(String nodeXpath) throws XPathExpressionException {
+		XPath xPath =  XPathFactory.newInstance().newXPath();
+
+		Node node = (Node) xPath.compile(nodeXpath).evaluate(xDoc, XPathConstants.NODE);
+		if(node == null) throw new PatcherLibBaseEx("xPath '"+nodeXpath+"' not found");
+
+		return node;
 	}
 
 	public void updateAttributeByMultiplier(String nodeXpath, String attribute, double multiplier) throws XPathExpressionException {
@@ -143,7 +160,7 @@ public abstract class XmlFileEntity extends FileEntity {
 
 			xDoc = builder.parse(fullPath);
 		} else {
-			val is = getInputStreamProvider().get(getFullPath());
+			val is = getInputStreamProvider().getInputStream(getFullPath());
 
 			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 			DocumentBuilder builder = factory.newDocumentBuilder();
@@ -159,6 +176,10 @@ public abstract class XmlFileEntity extends FileEntity {
 
 		TransformerFactory transformerFactory = TransformerFactory.newInstance();
 		Transformer transformer = transformerFactory.newTransformer();
+
+		transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+		transformer.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "3");
+
 		DOMSource source = new DOMSource(xDoc);
 		StreamResult result = new StreamResult(new File(filePath));
 		transformer.transform(source, result);

@@ -1,10 +1,10 @@
 package tm.mtwModPatcher.app;
 
-import aaapackage.BbClass;
 import lombok.val;
 import tm.common.Ctm;
 import tm.mtwModPatcher.app.featuresTab.FeaturesTableModel;
 import tm.mtwModPatcher.app.featuresTab.NameColRenderer;
+import tm.mtwModPatcher.lib.common.core.features.FileSystemResourcesProvider;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.FeatureList;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.FileInputStreamProvider;
@@ -282,9 +282,8 @@ public class PatcherApp {
 
 		consoleLogger = new ConsoleLogger(consoleWriter);
 
-		val bbClass = new BbClass();
-
 		val inputStreamProvider = new FileInputStreamProvider();
+		val resourcesProvider = new FileSystemResourcesProvider(inputStreamProvider);
 		val fileEntityFactory = new FileEntityFactory();
 		fileEntityFactory.rootPath = ConfigurationSettings.DestinationRootPath();	// this.DestinationRootPath;
 
@@ -292,7 +291,7 @@ public class PatcherApp {
 		val garrisonManager = new GarrisonManager(garrisonMetaManager);
 		val unitsManager = new UnitsManager();
 
-		ssHipFeatures = new SsHipFeatures(garrisonManager, unitsManager, inputStreamProvider, fileEntityFactory, consoleLogger);
+		ssHipFeatures = new SsHipFeatures(garrisonManager, unitsManager, resourcesProvider, fileEntityFactory, consoleLogger);
 		featuresList = ssHipFeatures.configureFeatures();
 		ssHipFeatures.enableDefaults();
 

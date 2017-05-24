@@ -39,7 +39,7 @@ public abstract class FileEntity {
 			}
 		}
 		else {
-			val inputStream = inputStreamProvider.get(fullPath);
+			val inputStream = inputStreamProvider.getInputStream(fullPath);
 			if(FileEncoding != null) {
 				reader = new InputStreamReader(inputStream, FileEncoding);
 			}
