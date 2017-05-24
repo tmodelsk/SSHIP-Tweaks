@@ -147,6 +147,28 @@ public abstract class CampaignAiConfigurator extends Feature {
 				aiLabel="slave_faction";
 				break;
 
+			case SSHIP_DEFAULT:
+				aiLabel="default";
+				break;
+			case SSHIP_PAPAL:
+				aiLabel="papal_faction";
+				break;
+			case SSHIP_CATHOLIC:
+				aiLabel="catholic";
+				break;
+			case SSHIP_MONGOL:
+				aiLabel="mongols";
+				break;
+			case SSHIP_ISLAM:
+				aiLabel="islam";
+				break;
+			case SSHIP_ORTHODOX:
+				aiLabel="orthodox";
+				break;
+			case SSHIP_SLAVE:
+				aiLabel="slave_faction";
+				break;
+
 			default:
 				throw new PatcherNotSupportedEx(campaignAiType.toString());
 		}
@@ -189,7 +211,18 @@ public abstract class CampaignAiConfigurator extends Feature {
 				path += "Quieter\\descr_campaign_ai_db.xml";
 				break;
 
-			default:
+
+			case SSHIP_DEFAULT:
+			case SSHIP_PAPAL:
+			case SSHIP_CATHOLIC:
+			case SSHIP_MONGOL:
+			case SSHIP_ISLAM:
+			case SSHIP_ORTHODOX:
+			case SSHIP_SLAVE:
+				path += "SSHIP\\descr_campaign_ai_db.xml";
+				break;
+
+				default:
 				throw new PatcherNotSupportedEx("descr_campaign_ai_db.xml not suported for " +campaignAiType.toString());
 		}
 

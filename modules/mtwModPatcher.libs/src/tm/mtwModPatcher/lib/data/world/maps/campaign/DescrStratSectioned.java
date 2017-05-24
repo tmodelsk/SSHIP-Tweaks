@@ -229,6 +229,28 @@ public class DescrStratSectioned extends SectionsFileEntity {
 			throw new PatcherLibBaseEx("Unexpected - no match for king purse " + lineOrg);
 	}
 
+	public void addStartingTreasury(String factionSymbol, int treasuryBonus) throws PatcherLibBaseEx {
+
+		LinesProcessor lines = Factions.getContent().getLines();
+
+		int factionKingPurse = lines.findFirstLineByLinePath(
+				Arrays.asList(
+						"^;## " + factionSymbol.toUpperCase() + " ##",
+						"^\\s*denari\\s+\\d+"), 0);
+		if (factionKingPurse < 0) throw new PatcherLibBaseEx("Kings Purse not found for faction " + factionSymbol);
+
+		String lineOrg = lines.getLine(factionKingPurse);
+		Pattern regex = Pattern.compile("^\\s*denari\\s+(\\d+)\\s*");
+		Matcher matcher = regex.matcher(lineOrg);
+
+		if (matcher.matches()) {
+			int treasuryOrg = Integer.parseInt(matcher.group(1));
+
+			lines.replaceLine(factionKingPurse, "denari\t" + (treasuryOrg + treasuryBonus));
+		} else
+			throw new PatcherLibBaseEx("Unexpected - no match for denari " + lineOrg);
+	}
+
 	public void addKingsPursesAll(int kingsPurseAdd) throws PatcherLibBaseEx {
 
 		LinesProcessor lines = Factions.getContent().getLines();

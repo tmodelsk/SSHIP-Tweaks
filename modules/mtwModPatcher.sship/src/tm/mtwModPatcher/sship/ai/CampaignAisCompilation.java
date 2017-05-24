@@ -18,24 +18,39 @@ public class CampaignAisCompilation extends CampaignAiConfigurator {
 		for (val fi : factionInfos) factionAiLabelsMap.put(fi.Symbol, CampaignAiType.BEEMUGCARL_DEFAULT);
 		factionAiLabelsMap.put("default", CampaignAiType.BEEMUGCARL_DEFAULT);
 
-		// ## Papacy - Quieter AI papacy
+		// ## Papacy - Quieter AI papacy : 1
 		factionAiLabelsMap.replace("papal_states", CampaignAiType.QUIETER_PAPAL);
 
-		// ## SkynetAI - Serbia, Lithuania, Cumans, Anatolia Turks
-		factionAiLabelsMap.replace("teutonic_order", CampaignAiType.SKYNET);	// serbia
+		// ## SkynetAI : 8: Serbia, Lithuania, Cumans, Anatolia Turks
+		factionAiLabelsMap.replace("teutonic_order", CampaignAiType.SKYNET);	// Serbia
 		factionAiLabelsMap.replace("lithuania", CampaignAiType.SKYNET);
 		factionAiLabelsMap.replace("cumans", CampaignAiType.SKYNET);
-		factionAiLabelsMap.replace("rum", CampaignAiType.SKYNET);	// Anatolia Seljuks
+		factionAiLabelsMap.replace("rum", CampaignAiType.SKYNET);				// Anatolia Seljuks
+		factionAiLabelsMap.replace("timurids", CampaignAiType.SKYNET);			// Georgia
+		factionAiLabelsMap.replace("denmark", CampaignAiType.SKYNET);
+		factionAiLabelsMap.replace("kwarezm", CampaignAiType.SKYNET);			// ZENGIDS
+		factionAiLabelsMap.replace("scotland", CampaignAiType.SKYNET);
 
-		// ## Quiter AI standard - SSHIP derived. Aggressive but loyal to allies
+		// ## Quiter AI : 7 : standard - SSHIP derived. Aggressive but loyal to allies - Chivalrus
 		factionAiLabelsMap.replace("portugal", CampaignAiType.QUIETER_CATHOLIC);
 		factionAiLabelsMap.replace("spain", CampaignAiType.QUIETER_CATHOLIC);
 		factionAiLabelsMap.replace("aragon", CampaignAiType.QUIETER_CATHOLIC);
+		factionAiLabelsMap.replace("sicily", CampaignAiType.QUIETER_CATHOLIC);
 
 		factionAiLabelsMap.replace("france", CampaignAiType.QUIETER_CATHOLIC);
 
 		factionAiLabelsMap.replace("poland", CampaignAiType.QUIETER_CATHOLIC);
 		factionAiLabelsMap.replace("hungary", CampaignAiType.QUIETER_CATHOLIC);
+
+		// ## SSHIP : 3 : HRE Germany , Byzantium
+		factionAiLabelsMap.replace("hre", CampaignAiType.SSHIP_CATHOLIC);
+		factionAiLabelsMap.replace("byzantium", CampaignAiType.SSHIP_ORTHODOX);
+		factionAiLabelsMap.replace("milan", CampaignAiType.SSHIP_ISLAM);		// ABBASSIDS
+
+		// BeeMugCarl AI : 30 - 19 = 11
+		// Moors , Fatamids , Seljuks Easter,
+		// Crusaders , England, Novogrod , Kiev , Pisa , Venetia, Norvegians
+		// Slaves
 	}
 
 	@Override
