@@ -52,6 +52,9 @@ public class CampaignAisCompilation extends CampaignAiConfigurator {
 
 	public CampaignAisCompilation(ResourcesProvider resourcesProvider) {
 		super("Campaign AI's compilation", resourcesProvider);
+
+		setDescriptionShort("Various campaign AI's assigned to various factions. BeeMugCarl AI , Quieter AI [kaiser29] , Skynet AI [z3n]");
+		setDescriptionUrl("http://tmsship.wikidot.com/campaign-ai-s-compilation");
 	}
 
 	@Override

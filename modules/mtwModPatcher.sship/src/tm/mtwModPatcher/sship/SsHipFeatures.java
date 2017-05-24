@@ -60,6 +60,7 @@ public class SsHipFeatures {
 		features.add(new BeeMugCarlCampaignAi(resourcesProvider));
 		features.add(new QuieterAi(resourcesProvider));
 		features.add(new SkynetCampaignAi(resourcesProvider));
+		features.add(new QuieterAiFactionStanding());
 
 		features.add(new BetterLogging());
 
