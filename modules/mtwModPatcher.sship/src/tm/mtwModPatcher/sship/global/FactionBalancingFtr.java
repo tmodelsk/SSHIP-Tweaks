@@ -10,40 +10,43 @@ import java.util.UUID;
  */
 public class FactionBalancingFtr extends Feature {
 
-	protected DescrStratSectioned _DescrStrat;
+	protected DescrStratSectioned descrStrat;
 
 	@Override
 	public void executeUpdates() throws Exception {
 
-		_DescrStrat = fileEntityFactory.getFile(DescrStratSectioned.class);
-		registerUpdatedFile(_DescrStrat);
+		descrStrat = fileEntityFactory.getFile(DescrStratSectioned.class);
+		registerUpdatedFile(descrStrat);
 
 		//_DescrStrat.addKingsPurse("KIEVAN RUS",2000);
-		_DescrStrat.addKingsPurse("NOVGOROD",2000);
+		descrStrat.addKingsPurse("NOVGOROD",2000);
 
-		//_DescrStrat.addKingsPurse("LITHUANIA",500);
-		_DescrStrat.addKingsPurse("POLAND",1500);
+		descrStrat.addKingsPurse("LITHUANIA",2000);
+		descrStrat.addStartingTreasury("LITHUANIA",2000);
+		descrStrat.addKingsPurse("POLAND",1500);
 
 		//_DescrStrat.addKingsPurse("NORWAY",1500);
-		_DescrStrat.addKingsPurse("DENMARK",500);
+		descrStrat.addKingsPurse("DENMARK",500);
 
 		//_DescrStrat.addKingsPurse("SCOTLAND",1000);
 		//_DescrStrat.addKingsPurse("ENGLAND",-1000);
 		//_DescrStrat.addKingsPurse("FRANCE",1500); // Topowa frakcja w zarobkach
 
 		//_DescrStrat.addKingsPurse("ARAGON",1500);
-		//_DescrStrat.addKingsPurse("PORTUGAL",2000);
+		descrStrat.addKingsPurse("PORTUGAL",1000);
+		descrStrat.addStartingTreasury("PORTUGAL",1500);
 		//_DescrStrat.addKingsPurse("CASTILE & LEON",500);
 		//_DescrStrat.addKingsPurse("ALMORAVID EMPIRE", 3000);	// MOORS
 
 		//_DescrStrat.addKingsPurse("PISA",2000);
 		//_DescrStrat.addKingsPurse("VENICE",1000);
-		_DescrStrat.addKingsPurse("SERBIA",3000);
-		_DescrStrat.addKingsPurse("PAPAL STATES",500);
+		descrStrat.addKingsPurse("SERBIA",3000);
+		descrStrat.addStartingTreasury("SERBIA", 3000);
+		descrStrat.addKingsPurse("PAPAL STATES",500);
 		//_DescrStrat.addKingsPurse("SICILY",-2000);
 		//_DescrStrat.addKingsPurse("SERBIA",2000);
 
-		_DescrStrat.addKingsPurse("BYZANTINE EMPIRE",-1000);		// Byzantie ciagle zywi !!!!
+		descrStrat.addKingsPurse("BYZANTINE EMPIRE",-1000);		// Byzantie ciagle zywi !!!!
 
 		//_DescrStrat.addKingsPurse("CRUSADER STATES", -1000);
 		//_DescrStrat.addKingsPurse("SULTANATE OF RUM",4000);
@@ -51,7 +54,7 @@ public class FactionBalancingFtr extends Feature {
 		//_DescrStrat.addKingsPurse("ABBASSIDS",3000);
 		//_DescrStrat.addKingsPurse("ZENGIDS",3000);
 
-		_DescrStrat.addKingsPurse("CUMANS",2000);					// Ok Cumans się rozwijaja
+		descrStrat.addKingsPurse("CUMANS",2000);					// Ok Cumans się rozwijaja
 
 	}
 
