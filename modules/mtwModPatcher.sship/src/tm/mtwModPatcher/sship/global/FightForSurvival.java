@@ -31,6 +31,10 @@ public class FightForSurvival extends Feature {
 		List<Tuple2<String, List<Integer>>> moneyBonuses;
 
 		String requires;
+		//construction_cost_bonus_stone bonus 90 requires event_counter is_the_ai 1
+		//construction_cost_bonus_wooden bonus 90 requires event_counter is_the_ai 1
+		String constructionStoneBonus = "        construction_cost_bonus_stone bonus ";
+		String constructionWoodenBonus = "        construction_cost_bonus_wooden bonus ";
 		// ###### WARNING Level #######
 		requires = " requires event_counter "+ EVENT_WARNING_NAME +" 1";
 		// last : 0.5
@@ -41,6 +45,9 @@ public class FightForSurvival extends Feature {
 				moneyBonuses.get(1).getItem1(), Ctm.toCsv(moneyBonuses.get(1).getItem2())));
 
 		exportDescrBuilding.insertIntoCityCastleWallsCapabilities("        law_bonus bonus 1" + requires);
+		exportDescrBuilding.insertIntoCityCastleWallsCapabilities(constructionStoneBonus + 5 + requires);
+		exportDescrBuilding.insertIntoCityCastleWallsCapabilities(constructionWoodenBonus + 5 + requires);
+
 
 		// ###### DANGER Level #######
 		requires = " requires event_counter "+ EVENT_DANGER_NAME +" 1";
@@ -53,6 +60,8 @@ public class FightForSurvival extends Feature {
 		exportDescrBuilding.insertIntoCityCastleWallsCapabilities("        recruits_exp_bonus bonus 1" + requires);		// +1 Experience
 
 		exportDescrBuilding.insertIntoCityCastleWallsCapabilities("        free_upkeep bonus 1" + requires);				// +2 Free Upkeep
+		exportDescrBuilding.insertIntoCityCastleWallsCapabilities(constructionStoneBonus + 10 + requires);
+		exportDescrBuilding.insertIntoCityCastleWallsCapabilities(constructionWoodenBonus + 10 + requires);
 
 		moneyBonuses = exportDescrBuilding.addFlatCityCastleIncome(requires , 1.25 );	// last 1.0
 		consoleLogger.writeLine(Ctm.msgFormat("[{0}]: {1} Flat money bonus: {2}[{3}], {4}[{5}]",
@@ -72,6 +81,8 @@ public class FightForSurvival extends Feature {
 		exportDescrBuilding.insertIntoCityCastleWallsCapabilities("        free_upkeep bonus 2" + requires);				// +2 Free Upkeep
 		// +1 Recruitment slot
 		exportDescrBuilding.insertIntoCityCastleWallsCapabilities("        recruitment_slots 1 requires not event_counter freeze_recr_pool 1 and event_counter "+ EVENT_CRITICAL_NAME +" 1");
+		exportDescrBuilding.insertIntoCityCastleWallsCapabilities(constructionStoneBonus + 20 + requires);
+		exportDescrBuilding.insertIntoCityCastleWallsCapabilities(constructionWoodenBonus + 20 + requires);
 
 		moneyBonuses = exportDescrBuilding.addFlatCityCastleIncome(requires , 2.0);
 		consoleLogger.writeLine(Ctm.msgFormat("[{0}]: {1} Flat money bonus: {2}[{3}], {4}[{5}]",
