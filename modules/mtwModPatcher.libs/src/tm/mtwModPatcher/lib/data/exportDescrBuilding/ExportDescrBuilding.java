@@ -220,7 +220,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 
 		return new Range<Integer, Integer>(capabilityBracekStart, capabilityBracketEnd);
 	}
-	
+
 	public int findBuildingCapabilityIndex(String buildingName, String levelName, String castleOrCity) throws PatcherLibBaseEx {
 		LinesProcessor lines = _Lines;
 
@@ -238,6 +238,22 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		return  capabilityIndex;
 	}
 
+	public int findBuidlingRequiresLine(String buildingName, String levelName, String castleOrCity) throws PatcherLibBaseEx {
+		LinesProcessor lines = _Lines;
+
+		String levelRegex = "^\\s*"+levelName;
+		if(castleOrCity != null && !castleOrCity.isEmpty())
+			levelRegex += "\\s+"+castleOrCity;
+		levelRegex += "\\s+requires\\s+factions\\s+";
+
+		int settlementRequirement = lines.findFirstLineByLinePath(
+				Arrays.asList(
+						"^building\\s+"+buildingName+"\\s*$",
+						levelRegex
+				), 0);
+
+		return settlementRequirement;
+	}
 
 	public int findBuidlingSettlementRequirementLine(String buildingName, String levelName, String castleOrCity) throws PatcherLibBaseEx {
 		LinesProcessor lines = _Lines;

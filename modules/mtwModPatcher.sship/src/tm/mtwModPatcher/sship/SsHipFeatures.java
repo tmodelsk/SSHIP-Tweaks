@@ -44,6 +44,7 @@ public class SsHipFeatures {
 		features.add(new FatiqueLowered());
 		features.add(new OrderKnightsAvailable());
 		features.add(new PeasantsRecruitmentRemoved());
+		features.add(new TrebuchetEarlyAdoption());
 
 		features.add(new MerchantsRemovedFtr());
 		features.add(new WorldEconomyScaling());
@@ -146,6 +147,7 @@ public class SsHipFeatures {
 		features.disableFeatureIfExists( QuieterAi.Id);
 		features.disableFeatureIfExists( SkynetBattleAi.Id);
 		features.disableFeatureIfExists( SkynetCampaignAi.Id);
+		features.disableFeatureIfExists( WatchtowersToForts.Id);
 
 		if(!ConfigurationSettings.isDevEnvironment()) {
 			features.getEnabled( LandBridgeGibraltarLaManche.Id).disable();
