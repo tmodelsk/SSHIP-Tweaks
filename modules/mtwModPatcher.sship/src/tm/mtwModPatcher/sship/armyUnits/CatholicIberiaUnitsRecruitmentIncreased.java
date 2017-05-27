@@ -266,6 +266,8 @@ public class CatholicIberiaUnitsRecruitmentIncreased extends Feature {
 
 		String orderHousesRequirement = "";
 		orderHousesRequirement += "hidden_resource aragon or hidden_resource spain or hidden_resource portugal or hidden_resource france";
+		orderHousesRequirement += " or hidden_resource moors or hidden_resource andalusia";
+
 
 		// ## Castle ## levels mustering_hall garrison_quarters drill_square barracks armoury
 		String factionsRequirement = "factions { spain, aragon, portugal, }";
