@@ -20,9 +20,11 @@ import java.util.UUID;
 public class LongerBattles extends Feature {
 
 	@Getter @Setter
-	private double MeleeHitRate = 1.0; 						// 0.5
+	private double meleeHitRate = 1.0; 						// 0.5
 	@Getter @Setter
-	private double ChargeMultiplier = 1.2;					// 2.0
+	private double missileCavalryAccuracy = 1.75;			// org 1.5
+	@Getter @Setter
+	private double chargeMultiplier = 1.1;					// 2.0
 	@Getter @Setter
 	private boolean powerfulChargeForHeavyInfantry = false;	// true
 	@Getter @Setter
@@ -54,7 +56,7 @@ public class LongerBattles extends Feature {
 		for (val unit : allUnits) {
 
 			// ### Updating Charge ###
-			unit.StatPri.ChargeBonus = (int)(unit.StatPri.ChargeBonus * ChargeMultiplier);
+			unit.StatPri.ChargeBonus = (int)(unit.StatPri.ChargeBonus * chargeMultiplier);
 
 			if(powerfulChargeForHeavyInfantry) {
 				// ### All Heavy Infantry gets powerful_charge attribute
@@ -64,7 +66,7 @@ public class LongerBattles extends Feature {
 
 			if(powerfulChargeForCavalry) {
 				// ### Cavalry : ###
-				int heavyCharge = (int)(8 * ChargeMultiplier);
+				int heavyCharge = (int)(8 * chargeMultiplier);
 				if(unit.isCategoryCavalry()) {
 					// # Add powerful_charge for heavy chargers OR heavy units #
 					if(unit.isClassHeavy() || unit.StatPri.ChargeBonus >= heavyCharge)
@@ -77,7 +79,7 @@ public class LongerBattles extends Feature {
 
 	private void updateBattleConfig(BattleConfig bt, Integer setNumber) throws XPathExpressionException {
 
-		double meleeHitRate = MeleeHitRate;
+		double meleeHitRate = this.meleeHitRate;
 
 		if(setNumber != null) {
 			double shift = 3 - setNumber;
@@ -85,16 +87,22 @@ public class LongerBattles extends Feature {
 		}
 
 		bt.setValue("/config/combat-balancing/melee-hit-rate", meleeHitRate);
+		bt.setValue("/config/combat-balancing/missile-target-accuracy/cavalry", meleeHitRate);
 	}
 
 	@Override
-	public ListUnique<ParamId> defineParamsIds() {
+	public ListUnique<ParamId> defineParamsIds()  {
 		val parIds = new ArrayUniqueList<ParamId>();
 
 		ParamIdDouble parDbl;
 		parDbl= new ParamIdDouble("HitRatio", "Hit Ration",
 				feature -> ((LongerBattles)feature).getMeleeHitRate(),
 				(feature, value) -> ((LongerBattles)feature).setMeleeHitRate(value));
+		parIds.add(parDbl);
+
+		parDbl= new ParamIdDouble("MissileCavalryAccuracy", "Missile Cavalry Accuracy",
+				feature -> ((LongerBattles)feature).getMissileCavalryAccuracy(),
+				(feature, value) -> ((LongerBattles)feature).setMissileCavalryAccuracy(value));
 		parIds.add(parDbl);
 
 		parDbl= new ParamIdDouble("ChargeMulti" , "Charge Multiplier",
