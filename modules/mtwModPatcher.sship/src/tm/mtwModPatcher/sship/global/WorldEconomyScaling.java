@@ -18,7 +18,7 @@ import java.util.UUID;
 public class WorldEconomyScaling extends Feature {
 
 	@Getter @Setter
-	private double economyMulti = 1.075;	// 1.1
+	private double economyMulti = 1.025;	// 1.075  1.1
 
 
 	@Override
