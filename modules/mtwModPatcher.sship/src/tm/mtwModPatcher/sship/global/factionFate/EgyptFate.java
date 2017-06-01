@@ -37,7 +37,7 @@ public class EgyptFate extends Feature {
 				"Fall of Jerusalem 1187: Aqaba");
 
 		fateScriptManager.writeRegionNegativeOwnershipScript("egypt" , 1170 , 1230,
-				new RegionOwnershipInfo("Jerusalem" , islamF) , 3000,
+				new RegionOwnershipInfo("Jerusalem" , islamF) , 2500,
 				"Fall of Jerusalem 1187: Jerusalem");
 
 		//fateScriptManager.writeRegionRangeScript("egypt" , 1180 , 1600 , 3 , 11 , 5000 );

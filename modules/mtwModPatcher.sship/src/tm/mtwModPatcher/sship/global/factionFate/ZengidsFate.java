@@ -30,7 +30,7 @@ public class ZengidsFate extends Feature {
 		//factions.addAll(FactionsDefs.orthodoxFactionsList());
 
 		fateScriptManager.writeRegionNegativeOwnershipScript("kwarezm" , 1138 , 1155 , new RegionOwnershipInfo("Edessa" , islamF),
-				4000, "1144 - Edessa taken");
+				3000, "1144 - Edessa taken");
 		fateScriptManager.writeRegionNegativeOwnershipScript("kwarezm" , 1140 , 1155 , new RegionOwnershipInfo("Damascus" , islamF),
 				2000, "1147-48 - Damasqus");
 

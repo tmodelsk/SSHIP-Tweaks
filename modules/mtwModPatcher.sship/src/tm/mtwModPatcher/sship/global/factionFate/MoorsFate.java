@@ -26,10 +26,10 @@ public class MoorsFate extends Feature {
 
 		// ## Offensive on Toledo :
 		fateScriptManager.writeRegionNegativeOwnershipScript("moors" , 1150 , 1190,
-				new RegionOwnershipInfo("Toledo" , Arrays.asList("moors")) , 4000 , "Offensive on Toledo");
+				new RegionOwnershipInfo("Toledo" , Arrays.asList("moors")) , 3000 , "Offensive on Toledo");
 
 		// #### Offensive before Battle of Las Navas Del Torras
-		fateScriptManager.writeRegionRangeScript("moors" , 1195 , 1220 , 1 , 18 , 4000 ,
+		fateScriptManager.writeRegionRangeScript("moors" , 1195 , 1220 , 1 , 18 , 3000 ,
 				"Offensive before Battle of Las Navas de Tolosa (org 1212)");
 
 }

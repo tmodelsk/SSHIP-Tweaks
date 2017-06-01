@@ -18,7 +18,7 @@ public class SpainFate extends Feature {
 		FateScriptManager fateScriptManager = new FateScriptManager(_CampaignScript);
 
 		// ### SPAIN : 5 initial regions ####
-		fateScriptManager.writeRegionRangeScript("spain" , 1132 , 1170 , 2 , 4 , 4000 ,
+		fateScriptManager.writeRegionRangeScript("spain" , 1132 , 1170 , 2 , 4 , 3000 ,
 				"bonus on ANY Region lose");
 	}
 
