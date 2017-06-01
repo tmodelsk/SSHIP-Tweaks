@@ -5,12 +5,14 @@ public class Format {
 
 	public static String toString(Double d) {
 
+		if(d.isInfinite()) {
+			throw new IllegalArgumentException("Input number is infinite!");
+		}
+
 		if(d == d.intValue())
 			return ""+d.intValue();
-		else
-			//return new DecimalFormat("#.0###", DecimalFormatSymbols.getInstance( Locale.ENGLISH )).msgFormat(d);
-		{
-			String temp = String.format("%.3f", d).replaceAll("(\\.\\d+?)0*$", "$1").replace(',','.');
+		else {
+			String temp = String.format("%.4f", d).replaceAll("(\\.\\d+?)0*$", "$1").replace(',','.');
 
 			String[] tab= temp.split("\\.");
 
