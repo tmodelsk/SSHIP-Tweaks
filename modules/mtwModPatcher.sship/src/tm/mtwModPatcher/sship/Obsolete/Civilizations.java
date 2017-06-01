@@ -1,4 +1,4 @@
-package tm.mtwModPatcher.sship.global;
+package tm.mtwModPatcher.sship.Obsolete;
 
 import org.xml.sax.SAXException;
 import tm.mtwModPatcher.lib.common.entities.FactionsDefs;
@@ -8,6 +8,7 @@ import tm.mtwModPatcher.lib.data.DescrSettlementMechanics;
 import tm.mtwModPatcher.lib.managers.UnitsManager;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
+import tm.mtwModPatcher.sship.global.FactionsSpecifics;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
