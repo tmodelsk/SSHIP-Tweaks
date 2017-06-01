@@ -5,7 +5,7 @@ package tm.mtwModPatcher.lib.common.entities;
  */
 public enum CultureType {
 
-	NOTHERN_EUROPEAN,
+	NORTHERN_EUROPEAN,
 	EASTERN_EUROPEAN,
 	SOUTHERN_EUROPEAN,
 	MIDDLE_EASTERN,

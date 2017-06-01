@@ -416,10 +416,14 @@ public class LinesProcessor {
 	}
 
 	public void insertAt(int indexToInsert, String line) {
-
 		List<String> splittedLines = new ArrayList<>(Arrays.asList(line.split(nl)));
 
-		_Lines.addAll(indexToInsert, splittedLines);
+		try {
+			_Lines.addAll(indexToInsert, splittedLines);
+		}
+		catch (Exception ex) {
+			throw new PatcherLibBaseEx("InsertAt line "+indexToInsert+" failed!", ex);
+		}
 	}
 
 	public void insertAt(int indexToInsert, List<String> lines) {

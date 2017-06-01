@@ -59,7 +59,7 @@ public class FactionInfo {
 		String res=null;
 		switch (cultureType) {
 
-			case NOTHERN_EUROPEAN:
+			case NORTHERN_EUROPEAN:
 				res = NOTHERN_EUROPEAN;
 				break;
 			case EASTERN_EUROPEAN:
@@ -89,7 +89,7 @@ public class FactionInfo {
 		switch (cultureTypeStr) {
 
 			case NOTHERN_EUROPEAN:
-				res = CultureType.NOTHERN_EUROPEAN;
+				res = CultureType.NORTHERN_EUROPEAN;
 				break;
 			case EASTERN_EUROPEAN:
 				res = CultureType.EASTERN_EUROPEAN;

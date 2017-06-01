@@ -1,10 +1,9 @@
 package tm.mtwModPatcher.lib.common.entities;
 
+import lombok.val;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class FactionsDefs {
@@ -178,13 +177,13 @@ public class FactionsDefs {
 			"pisa");	// 16
 
 	private static List<FactionInfo> _FactionInfos = Arrays.asList(
-			new FactionInfo("denmark","Denmark", CultureType.NOTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
-			new FactionInfo("jerusalem","Crusader States", CultureType.NOTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
-			new FactionInfo("norway","Norway", CultureType.NOTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "Royal Hirdsmen" ),
-			new FactionInfo("hre","Holy Roman Emprire - Germans", CultureType.NOTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
-			new FactionInfo("scotland","Scotland", CultureType.NOTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
-			new FactionInfo("france","France", CultureType.NOTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
-			new FactionInfo("england","England", CultureType.NOTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
+			new FactionInfo("denmark","Denmark", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
+			new FactionInfo("jerusalem","Crusader States", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
+			new FactionInfo("norway","Norway", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "Royal Hirdsmen" ),
+			new FactionInfo("hre","Holy Roman Emprire - Germans", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
+			new FactionInfo("scotland","Scotland", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
+			new FactionInfo("france","France", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
+			new FactionInfo("england","England", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
 			new FactionInfo("hungary","Hungary",CultureType.EASTERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
 			new FactionInfo("poland","Poland", CultureType.EASTERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
 			new FactionInfo("venice","Venice", CultureType.SOUTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "SE Bodyguard" ),
@@ -214,7 +213,44 @@ public class FactionsDefs {
 			new FactionInfo("slave", "Rebels", CultureType.SOUTHERN_EUROPEAN, Religion.Pagan , EducationStyle.None , null )
 			);
 
+	public static Set<String> csvToSet(String firstCsv) {
+		val res = new HashSet<String>();
 
+		String[] factionTab = firstCsv.split(",");
+		for (String factionSymbol : factionTab) {
+			factionSymbol = factionSymbol.trim();
+			if(!factionSymbol.isEmpty())
+				res.add(factionSymbol);
+		}
+
+		return res;
+	}
+
+	public static Set<String> resolveFactions(String factionsCsv) {
+		val factionsWithGroups = csvToSet(factionsCsv);
+		val res = resolveFactions(factionsWithGroups);
+		return res;
+	}
+	public static Set<String> resolveFactions(Set<String> factionsGroups) {
+		val res = new HashSet<String>();
+
+		for (val symbol : factionsGroups) {
+
+			CultureType cultureType = null;
+			try { cultureType = Enum.valueOf(CultureType.class, symbol.toUpperCase()); }
+			catch (IllegalArgumentException iaEx) {}
+
+			if(cultureType == null) res.add(symbol);
+			else {
+				CultureType finalCultureType = cultureType;
+				val factions = _FactionInfos.stream().filter(fi -> fi.Culture.equals(finalCultureType) ).collect(Collectors.toList());
+
+				factions.forEach( f -> res.add(f.Symbol) );
+			}
+		}
+
+		return res;
+	}
 
 	protected static List<String> _IslamFactions = Arrays.asList(
 			"egypt",
@@ -310,7 +346,6 @@ public class FactionsDefs {
 	}
 
 	public static boolean isAllFirstCsvFactorsInSecondCsv(String firstCsv, String factionsDefinitionCsv) {
-
 		String[] factionTab = firstCsv.split(",");
 
 		boolean isOk = true;
@@ -381,6 +416,9 @@ public class FactionsDefs {
 		str = "egypt, milan, moors, turks, rum, kwarezm,";
 
 		return str;
+	}
+	public static Set<String> islamFactionsSet() {
+		return csvToSet(islamFactionsCsv());
 	}
 
 	public static String turanianFactionsCsv() {

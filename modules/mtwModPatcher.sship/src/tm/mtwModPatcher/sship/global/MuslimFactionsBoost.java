@@ -49,6 +49,13 @@ public class MuslimFactionsBoost extends Feature {
 
 		unitsManager.addToAllUnitsReplenishRates(factionsFilterCsv, 2.0, -1.0, unitsToExclude, exportDescrBuilding);
 
+		// TODO : zmienic !!
+
+//		val islamFactions = FactionsDefs.islamFactionsSet();
+//		for (val factionSymbol : islamFactions) {
+//			unitsManager.addReplenishBonus(factionSymbol, 1, unitsToExclude, exportDescrBuilding);
+//		}
+
 		if (ahdathMilitiaBoost) {
 			val ahdathMilitia = exportDescrUnit.loadUnit("Ahdath Militia");
 			ahdathMilitia.StatCost.Cost *= 0.90;
@@ -107,7 +114,6 @@ public class MuslimFactionsBoost extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-
 	public static UUID Id = UUID.randomUUID();
 
 	public MuslimFactionsBoost() {

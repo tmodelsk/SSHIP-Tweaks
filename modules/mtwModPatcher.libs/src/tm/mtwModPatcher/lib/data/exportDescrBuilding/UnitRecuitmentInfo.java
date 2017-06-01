@@ -1,6 +1,11 @@
 package tm.mtwModPatcher.lib.data.exportDescrBuilding;
 
+import lombok.val;
+import tm.mtwModPatcher.lib.common.entities.FactionsDefs;
 import tm.mtwModPatcher.lib.data.common.Format;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /** Parsed Typed Unit Recruitment Information from ExportDescrBuildings */
 public class UnitRecuitmentInfo {
@@ -16,6 +21,24 @@ public class UnitRecuitmentInfo {
 	public int ExperienceBonus;
 
 	public String RequirementStr;
+
+	public UnitRequire getUnitRequireSimple() {
+		val factionsSplit = RequirementStr.split("factions");
+		if(factionsSplit.length > 2) return null;
+
+		UnitRequire res = null;
+
+		Matcher matcher = factionRegex.matcher(RequirementStr);
+		if (matcher.find()) {
+			res = new UnitRequire();
+			res.Factions = FactionsDefs.resolveFactions(matcher.group(1));
+			res.RestConditions = matcher.group(2);
+		}
+
+		return res;
+	}
+
+	private static final Pattern factionRegex = Pattern.compile("factions\\s+\\{(.+)}(.+)");
 
 
 	public String toRecruitmentPoolLine() {

@@ -1,6 +1,7 @@
 package tm.mtwModPatcher.lib.managers;
 
 import lombok.val;
+import tm.common.Ctm;
 import tm.mtwModPatcher.lib.common.entities.FactionsDefs;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
@@ -225,6 +226,59 @@ public class UnitsManager {
 		}
 
 		return updatedLines;
+	}
+
+	public void addReplenishBonus(String factionSymbol, int replenishTurnBonus,
+								  List<Pattern> unitsToExclude, ExportDescrBuilding exportDescrBuilding) {
+		LinesProcessor lines = exportDescrBuilding.getLines();
+
+		// ###### Loop throught all "recruit_pool ... " lines of building capabilities ######
+		Pattern regex = Pattern.compile("^^\\s*recruit_pool\\s+.+");
+		Pattern factionRegex = Pattern.compile("factions\\s+\\{(.+)}(.+)");
+		val updatedLines = new ArrayList<String>();
+
+		int index = 0;
+		while (index >= 0) {
+			index = lines.findFirstByRegexLine(regex, index + 1);
+			if (index >= 0) {
+				String lineOrg = lines.getLine(index);
+				UnitRecuitmentInfo unitRecrInfo = exportDescrBuilding.parseUnitRecruitmentInfo(lineOrg);
+
+				// ### Check if needs to be excluded - ommitted ###
+				boolean isShouldBeExcluded = false;
+				if (unitsToExclude != null)
+					for (Pattern excludeNameRegex : unitsToExclude) {
+						if (excludeNameRegex.matcher(unitRecrInfo.Name).find()) {
+							isShouldBeExcluded = true;
+							break;
+						}
+					}
+				if (isShouldBeExcluded) continue;
+
+				// ## Faction Check ##
+				val unitRequire = unitRecrInfo.getUnitRequireSimple();
+				if(unitRequire != null && unitRequire.Factions.contains(factionSymbol)) {
+					// ### Found, we need to add replenish line ####
+					val unitInfoNew = new UnitRecuitmentInfo();
+					unitInfoNew.Name = unitRecrInfo.Name;
+					unitInfoNew.MaxStack = 0;
+					unitInfoNew.InitialReplenishCounter = 0;
+					unitInfoNew.RequirementStr = " factions { "+ factionSymbol +", }" + unitRequire.RestConditions;
+
+					double replenishAddition = 0.99;
+
+					val initialTurns = (int)Math.floor (1.0 / unitRecrInfo.ReplenishRate);
+					if(initialTurns - replenishTurnBonus > 0) {
+						replenishAddition = (1.0 / (double)(initialTurns - replenishTurnBonus)) - unitRecrInfo.ReplenishRate;
+					}
+					else replenishAddition = 1 - unitRecrInfo.ReplenishRate-0.001;
+
+					unitInfoNew.ReplenishRate = replenishAddition;
+					lines.insertAt(index, unitInfoNew.toRecruitmentPoolLine());
+					index++;	// we want to ommit freshly added unit above
+				}
+			}
+		}
 	}
 
 	public void enableFreeUpkeepAllUnits(List<Pattern> unitsToExclude, ExportDescrUnitTyped exportDescrUnit) {
