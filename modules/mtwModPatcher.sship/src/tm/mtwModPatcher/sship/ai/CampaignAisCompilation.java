@@ -13,6 +13,17 @@ import java.util.UUID;
 public class CampaignAisCompilation extends CampaignAiConfigurator {
 
 	@Override
+	public void executeUpdates() throws Exception {
+		super.executeUpdates();
+
+		descrSMFactions.updateFactionAtttribute("egypt", "prefers_naval_invasions", "no");
+
+		descrSMFactions.updateFactionAtttribute("poland", "prefers_naval_invasions", "yes");
+		descrSMFactions.updateFactionAtttribute("hungary", "prefers_naval_invasions", "yes");
+		descrSMFactions.updateFactionAtttribute("teutonic_order", "prefers_naval_invasions", "yes");
+	}
+
+	@Override
 	protected void initializeDefaults() {
 		// ## Bee Mug Carl AI as base, for everyone
 		for (val fi : factionInfos) factionAiLabelsMap.put(fi.Symbol, CampaignAiType.BEEMUGCARL_DEFAULT);
@@ -25,10 +36,10 @@ public class CampaignAisCompilation extends CampaignAiConfigurator {
 		factionAiLabelsMap.replace("teutonic_order", CampaignAiType.SKYNET);	// Serbia
 		factionAiLabelsMap.replace("lithuania", CampaignAiType.SKYNET);
 		factionAiLabelsMap.replace("cumans", CampaignAiType.SKYNET);
-		factionAiLabelsMap.replace("rum", CampaignAiType.SKYNET);				// Anatolia Seljuks
+		//factionAiLabelsMap.replace("rum", CampaignAiType.SKYNET);				// Anatolia Seljuks
 		factionAiLabelsMap.replace("timurids", CampaignAiType.SKYNET);			// Georgia
 		factionAiLabelsMap.replace("denmark", CampaignAiType.SKYNET);
-		factionAiLabelsMap.replace("kwarezm", CampaignAiType.SKYNET);			// ZENGIDS
+		//factionAiLabelsMap.replace("kwarezm", CampaignAiType.SKYNET);			// ZENGIDS
 		factionAiLabelsMap.replace("scotland", CampaignAiType.SKYNET);
 
 		// ## Quiter AI : 7 : standard - SSHIP derived. Aggressive but loyal to allies - Chivalrus
