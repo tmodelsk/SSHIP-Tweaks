@@ -46,10 +46,14 @@ public class PopulationResourcesLimited extends Feature {
 					unitRecruitInfo.ReplenishRate *= replMultiTemp;
 					unitRecruitInfo.MaxStack *= maxStackMult;
 
-					val initial1 = unitRecruitInfo.InitialReplenishCounter + 1.0;
-					val initial2 = unitRecruitInfo.InitialReplenishCounter * (0.5 / replMultiTemp);
+					double newInitial;
+					if(unitRecruitInfo.InitialReplenishCounter < 1) {
+						newInitial = 1.0;
+					}
+					else {
+						newInitial = unitRecruitInfo.InitialReplenishCounter * (1.0+replMultiTemp);
+					}
 
-					double newInitial = Math.max(initial1, initial2);
 					newInitial = Math.min(unitRecruitInfo.MaxStack , newInitial);	// no more that MaxStack
 
 					unitRecruitInfo.InitialReplenishCounter = newInitial;
