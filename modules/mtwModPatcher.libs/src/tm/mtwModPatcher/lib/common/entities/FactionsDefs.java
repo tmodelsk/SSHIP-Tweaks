@@ -1,6 +1,9 @@
 package tm.mtwModPatcher.lib.common.entities;
 
+import com.sun.deploy.util.OrderedHashSet;
 import lombok.val;
+import tm.common.collections.ArrayUniqueList;
+import tm.common.collections.ListUnique;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 
 import java.util.*;
@@ -226,13 +229,13 @@ public class FactionsDefs {
 		return res;
 	}
 
-	public static Set<String> resolveFactions(String factionsCsv) {
+	public static ListUnique<String> resolveFactions(String factionsCsv) {
 		val factionsWithGroups = csvToSet(factionsCsv);
 		val res = resolveFactions(factionsWithGroups);
 		return res;
 	}
-	public static Set<String> resolveFactions(Set<String> factionsGroups) {
-		val res = new HashSet<String>();
+	public static ListUnique<String> resolveFactions(Set<String> factionsGroups) {
+		val res = new ArrayUniqueList<String>();
 
 		for (val symbol : factionsGroups) {
 

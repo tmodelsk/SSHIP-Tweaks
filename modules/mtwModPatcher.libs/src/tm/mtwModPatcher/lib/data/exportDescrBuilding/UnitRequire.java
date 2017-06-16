@@ -1,12 +1,12 @@
 package tm.mtwModPatcher.lib.data.exportDescrBuilding;
 
-import java.util.Set;
+import tm.common.collections.ListUnique;
 
 /** ExportDescBuidilng unit Requires single condition line
  */
 public class UnitRequire {
 
-	public Set<String> Factions;
+	public ListUnique<String> Factions;
 
 	public String RestConditions;
 
