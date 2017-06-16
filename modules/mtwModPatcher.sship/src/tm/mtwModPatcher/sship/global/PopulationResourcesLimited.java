@@ -37,7 +37,8 @@ public class PopulationResourcesLimited extends Feature {
 				val orgLine = lines.getLine(index);
 				val unitRecruitInfo = exportDescrBuilding.parseUnitRecruitmentInfo(orgLine);
 
-				if(unitRecruitInfo.MaxStack > 0 && unitRecruitInfo.ReplenishRate > 0.01) {
+				// unitRecruitInfo.MaxStack > 0 &&
+				if(unitRecruitInfo.ReplenishRate > 0.01) {
 
 					double replMultiTemp = replenishRateMult;
 					if(unitRecruitInfo.ReplenishRate <= 0.034)	// 30 turns

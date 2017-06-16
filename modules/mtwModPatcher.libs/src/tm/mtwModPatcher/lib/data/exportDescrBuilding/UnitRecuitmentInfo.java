@@ -38,6 +38,20 @@ public class UnitRecuitmentInfo {
 		return res;
 	}
 
+	public void setRequirementStr(UnitRequire unitRequire) {
+		val sb = new StringBuilder();
+
+		sb.append(" factions { " );
+
+		for(val factionSymbol : unitRequire.Factions)
+			sb.append(factionSymbol + ", ");
+		sb.append("} ");
+
+		sb.append(unitRequire.RestConditions);
+
+		RequirementStr = sb.toString();
+	}
+
 	private static final Pattern factionRegex = Pattern.compile("factions\\s+\\{(.+)}(.+)");
 
 

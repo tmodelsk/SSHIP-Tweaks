@@ -1,5 +1,6 @@
 package tm.mtwModPatcher.sship.global;
 
+import lombok.val;
 import tm.common.Ctm;
 import tm.common.Tuple2;
 import tm.mtwModPatcher.lib.common.entities.FactionsDefs;
@@ -10,8 +11,10 @@ import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.CampaignScript;
 import tm.mtwModPatcher.lib.managers.UnitsManager;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 /**
  * Smaller factions get survival bonuses
@@ -30,27 +33,24 @@ public class FightForSurvival extends Feature {
 	}
 
 	protected void createBenefits() throws PatcherLibBaseEx {
-		List<Tuple2<String, List<Integer>>> moneyBonuses;
-
-		String requires;
+		String requires, condition;
+		List<Pattern> unitsToExclude = null;
+		val unitReplenishBonusConditionList = new ArrayList<Tuple2<Double, String>>();
 
 		// ###### WARNING Level #######
-		requires = " requires event_counter " + EVENT_WARNING_NAME + " 1";
-		// last : 0.5
-		moneyBonuses = exportDescrBuilding.addFlatCityCastleIncome(requires, 0.75);    // Bonuses : [250 , 375 , 562 , 843 , 1264] with factor 1.0
-		consoleLogger.writeLine(Ctm.msgFormat("[{0}]: {1} Flat money bonus: {2}[{3}], {4}[{5}]",
-				FEATURE_NAME, EVENT_WARNING_NAME,
-				moneyBonuses.get(0).getItem1(), Ctm.toCsv(moneyBonuses.get(0).getItem2()),
-				moneyBonuses.get(1).getItem1(), Ctm.toCsv(moneyBonuses.get(1).getItem2())));
+		condition = "event_counter " + EVENT_WARNING_NAME + " 1";
+		requires = " requires " + condition;
 
+		addFlatMoneyBonus(0.75, EVENT_WARNING_NAME, requires); // last : 0.5
 		exportDescrBuilding.insertIntoCityCastleWallsCapabilities("        law_bonus bonus 1" + requires);
-
 		insertConstructionCostBonus(5, requires);
 		insertConstructionTimeBonus(10, requires);
+		unitReplenishBonusConditionList.add(new Tuple2<>(0.33, condition));
 
 
 		// ###### DANGER Level #######
-		requires = " requires event_counter " + EVENT_DANGER_NAME + " 1";
+		condition = "event_counter " + EVENT_DANGER_NAME + " 1";
+		requires = " requires " + condition;
 
 		exportDescrBuilding.insertIntoCityCastleWallsCapabilities("        law_bonus bonus 2" + requires);                    // +20 % Law
 		exportDescrBuilding.insertIntoCityCastleWallsCapabilities("        population_growth_bonus bonus 2" + requires);    // +0.5 % Pop Growth
@@ -62,15 +62,13 @@ public class FightForSurvival extends Feature {
 		exportDescrBuilding.insertIntoCityCastleWallsCapabilities("        free_upkeep bonus 1" + requires);                // +2 Free Upkeep
 		insertConstructionCostBonus(10, requires);
 		insertConstructionTimeBonus(6, requires);
+		unitReplenishBonusConditionList.add(new Tuple2<>(0.5, condition));
 
-		moneyBonuses = exportDescrBuilding.addFlatCityCastleIncome(requires, 1.25);    // last 1.0
-		consoleLogger.writeLine(Ctm.msgFormat("[{0}]: {1} Flat money bonus: {2}[{3}], {4}[{5}]",
-				FEATURE_NAME, EVENT_DANGER_NAME,
-				moneyBonuses.get(0).getItem1(), Ctm.toCsv(moneyBonuses.get(0).getItem2()),
-				moneyBonuses.get(1).getItem1(), Ctm.toCsv(moneyBonuses.get(1).getItem2())));
+		addFlatMoneyBonus(1.25, EVENT_DANGER_NAME, requires);	// last 1.0
 
 		// ###### CRITICAL Level #######
-		requires = " requires event_counter " + EVENT_CRITICAL_NAME + " 1";
+		condition = "event_counter " + EVENT_CRITICAL_NAME + " 1";
+		requires = " requires " + condition;
 
 		exportDescrBuilding.insertIntoCityCastleWallsCapabilities("        law_bonus bonus 4" + requires);                    // +20 % Law
 		exportDescrBuilding.insertIntoCityCastleWallsCapabilities("        population_growth_bonus bonus 3" + requires);    // +1 % Pop Growth
@@ -83,16 +81,22 @@ public class FightForSurvival extends Feature {
 		exportDescrBuilding.insertIntoCityCastleWallsCapabilities("        recruitment_slots 1 requires not event_counter freeze_recr_pool 1 and event_counter " + EVENT_CRITICAL_NAME + " 1");
 		insertConstructionCostBonus(20, requires);
 		insertConstructionTimeBonus(4, requires);
+		unitReplenishBonusConditionList.add(new Tuple2<>(0.66, condition));
 
-		moneyBonuses = exportDescrBuilding.addFlatCityCastleIncome(requires, 2.0);
-		consoleLogger.writeLine(Ctm.msgFormat("[{0}]: {1} Flat money bonus: {2}[{3}], {4}[{5}]",
-				FEATURE_NAME, EVENT_CRITICAL_NAME,
-				moneyBonuses.get(0).getItem1(), Ctm.toCsv(moneyBonuses.get(0).getItem2()),
-				moneyBonuses.get(1).getItem1(), Ctm.toCsv(moneyBonuses.get(1).getItem2())));
+		addFlatMoneyBonus(2.0 , EVENT_CRITICAL_NAME , requires);
 
+		// ## Final processing ##
 		unitsManager.enableFreeUpkeepAllUnits(null, exportDescrUnit);
+		unitsManager.addReplenishBonus(unitReplenishBonusConditionList, unitsToExclude, exportDescrBuilding);
 	}
 
+	private void addFlatMoneyBonus(double factor, String eventName, String requires) {
+		val moneyBonuses = exportDescrBuilding.addFlatCityCastleIncome(requires, factor);    // Bonuses : [250 , 375 , 562 , 843 , 1264] with factor 1.0
+		consoleLogger.writeLine(Ctm.msgFormat("[{0}]: {1} Flat money bonus: {2}[{3}], {4}[{5}]",
+				FEATURE_NAME, eventName,
+				moneyBonuses.get(0).getItem1(), Ctm.toCsv(moneyBonuses.get(0).getItem2()),
+				moneyBonuses.get(1).getItem1(), Ctm.toCsv(moneyBonuses.get(1).getItem2())));
+	}
 	private void insertConstructionCostBonus(int bonus, String requires) {
 		//construction_cost_bonus_stone bonus 90 requires event_counter is_the_ai 1
 		//construction_cost_bonus_wooden bonus 90 requires event_counter is_the_ai 1

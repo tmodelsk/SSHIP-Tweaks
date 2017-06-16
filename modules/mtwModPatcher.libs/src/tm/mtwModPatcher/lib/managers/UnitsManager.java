@@ -1,7 +1,7 @@
 package tm.mtwModPatcher.lib.managers;
 
 import lombok.val;
-import tm.common.Ctm;
+import tm.common.Tuple2;
 import tm.mtwModPatcher.lib.common.entities.FactionsDefs;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
@@ -234,26 +234,16 @@ public class UnitsManager {
 
 		// ###### Loop throught all "recruit_pool ... " lines of building capabilities ######
 		Pattern regex = Pattern.compile("^^\\s*recruit_pool\\s+.+");
-		Pattern factionRegex = Pattern.compile("factions\\s+\\{(.+)}(.+)");
-		val updatedLines = new ArrayList<String>();
 
 		int index = 0;
 		while (index >= 0) {
 			index = lines.findFirstByRegexLine(regex, index + 1);
 			if (index >= 0) {
 				String lineOrg = lines.getLine(index);
-				UnitRecuitmentInfo unitRecrInfo = exportDescrBuilding.parseUnitRecruitmentInfo(lineOrg);
+				val unitRecrInfo = exportDescrBuilding.parseUnitRecruitmentInfo(lineOrg);
 
 				// ### Check if needs to be excluded - ommitted ###
-				boolean isShouldBeExcluded = false;
-				if (unitsToExclude != null)
-					for (Pattern excludeNameRegex : unitsToExclude) {
-						if (excludeNameRegex.matcher(unitRecrInfo.Name).find()) {
-							isShouldBeExcluded = true;
-							break;
-						}
-					}
-				if (isShouldBeExcluded) continue;
+				if (isShouldBeExcluded(unitRecrInfo, unitsToExclude)) continue;
 
 				// ## Faction Check ##
 				val unitRequire = unitRecrInfo.getUnitRequireSimple();
@@ -265,7 +255,7 @@ public class UnitsManager {
 					unitInfoNew.InitialReplenishCounter = 0;
 					unitInfoNew.RequirementStr = " factions { "+ factionSymbol +", }" + unitRequire.RestConditions;
 
-					double replenishAddition = 0.99;
+					double replenishAddition;
 
 					val initialTurns = (int)Math.floor (1.0 / unitRecrInfo.ReplenishRate);
 					if(initialTurns - replenishTurnBonus > 0) {
@@ -279,6 +269,88 @@ public class UnitsManager {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Adds replenish bonus by coping unit entry + adds additional condition.
+	 * orgReplenishMult - orginal entry replenish multiplier will by multiplied by this.
+	 */
+	public void addReplenishBonus(double orgReplenishMult, String additionalCondition,
+								  List<Pattern> unitsToExclude, ExportDescrBuilding exportDescrBuilding) {
+
+		val list = new ArrayList<Tuple2<Double, String>>();
+		list.add(new Tuple2<>(orgReplenishMult, additionalCondition));
+
+		addReplenishBonus(list, unitsToExclude, exportDescrBuilding);
+	}
+	/**
+	 * Adds replenish bonus by coping unit entry + adds additional condition.
+	 * Works for list of [orgReplenishMult , condition]
+	 * orgReplenishMult - orginal entry replenish multiplier will by multiplied by this.
+	 */
+	public void addReplenishBonus(List<Tuple2<Double, String>> bonusConditioList,
+								  List<Pattern> unitsToExclude, ExportDescrBuilding exportDescrBuilding) {
+		LinesProcessor lines = exportDescrBuilding.getLines();
+
+		// ###### Loop throught all "recruit_pool ... " lines of building capabilities ######
+		Pattern regex = Pattern.compile("^^\\s*recruit_pool\\s+.+");
+
+		int index = 0;
+		while (index >= 0) {
+			index = lines.findFirstByRegexLine(regex, index + 1);
+			if (index >= 0) {
+				String lineOrg = lines.getLine(index);
+				val unitRecrInfo = exportDescrBuilding.parseUnitRecruitmentInfo(lineOrg);
+
+				// ### Check if needs to be excluded - ommitted ###
+				if (isShouldBeExcluded(unitRecrInfo, unitsToExclude)) continue;
+
+				for (val bonusCondition : bonusConditioList) {
+
+					double orgReplenishMult = bonusCondition.getItem1();
+					String additionalCondition = bonusCondition.getItem2();
+
+					val unitInfoNew = calculateNewUnitReplenishBonus(unitRecrInfo, orgReplenishMult, additionalCondition);
+					if(unitInfoNew != null) {
+						lines.insertAt(index, unitInfoNew.toRecruitmentPoolLine());
+						index++;	// we want to ommit freshly added unit above
+					}
+				}
+			}
+		}
+	}
+
+	private UnitRecuitmentInfo calculateNewUnitReplenishBonus(UnitRecuitmentInfo unitRecrInfo, double orgReplenishMult, String additionalCondition) {
+		UnitRecuitmentInfo unitInfoNew = null;
+
+		val unitRequire = unitRecrInfo.getUnitRequireSimple();
+		if( unitRequire != null ) {
+			// ### Found, we need to add replenish line ####
+			unitInfoNew = new UnitRecuitmentInfo();
+			unitInfoNew.Name = unitRecrInfo.Name;
+			unitInfoNew.MaxStack = 0;
+			unitInfoNew.InitialReplenishCounter = 0;
+
+			unitRequire.RestConditions = "and " + additionalCondition + " " + unitRequire.RestConditions;
+			unitInfoNew.setRequirementStr(unitRequire);
+
+			unitInfoNew.ReplenishRate = unitRecrInfo.ReplenishRate * orgReplenishMult;
+		}
+
+		return unitInfoNew;
+	}
+
+	private boolean isShouldBeExcluded(UnitRecuitmentInfo unitRecrInfo, List<Pattern> unitsToExclude) {
+		boolean isShouldBeExcluded = false;
+		if (unitsToExclude != null)
+			for (Pattern excludeNameRegex : unitsToExclude) {
+				if (excludeNameRegex.matcher(unitRecrInfo.Name).find()) {
+					isShouldBeExcluded = true;
+					break;
+				}
+			}
+
+			return isShouldBeExcluded;
 	}
 
 	public void enableFreeUpkeepAllUnits(List<Pattern> unitsToExclude, ExportDescrUnitTyped exportDescrUnit) {
