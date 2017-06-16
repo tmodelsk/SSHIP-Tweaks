@@ -216,14 +216,14 @@ public class FactionsDefs {
 			new FactionInfo("slave", "Rebels", CultureType.SOUTHERN_EUROPEAN, Religion.Pagan , EducationStyle.None , null )
 			);
 
-	public static Set<String> csvToSet(String firstCsv) {
-		val res = new HashSet<String>();
+	public static ListUnique<String> csvToSet(String firstCsv) {
+		val res = new ArrayUniqueList<String>();
 
 		String[] factionTab = firstCsv.split(",");
 		for (String factionSymbol : factionTab) {
 			factionSymbol = factionSymbol.trim();
 			if(!factionSymbol.isEmpty())
-				res.add(factionSymbol);
+				res.addUnique(factionSymbol);
 		}
 
 		return res;
@@ -234,7 +234,7 @@ public class FactionsDefs {
 		val res = resolveFactions(factionsWithGroups);
 		return res;
 	}
-	public static ListUnique<String> resolveFactions(Set<String> factionsGroups) {
+	public static ListUnique<String> resolveFactions(ListUnique<String> factionsGroups) {
 		val res = new ArrayUniqueList<String>();
 
 		for (val symbol : factionsGroups) {
@@ -420,7 +420,7 @@ public class FactionsDefs {
 
 		return str;
 	}
-	public static Set<String> islamFactionsSet() {
+	public static ListUnique<String> islamFactionsSet() {
 		return csvToSet(islamFactionsCsv());
 	}
 
