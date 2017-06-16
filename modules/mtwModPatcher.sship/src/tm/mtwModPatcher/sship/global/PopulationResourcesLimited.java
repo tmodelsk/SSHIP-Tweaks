@@ -41,7 +41,7 @@ public class PopulationResourcesLimited extends Feature {
 				if(unitRecruitInfo.ReplenishRate > 0.01) {
 
 					double replMultiTemp = replenishRateMult;
-					if(unitRecruitInfo.ReplenishRate <= 0.034)	// 30 turns
+					if(unitRecruitInfo.ReplenishRate <= 0.034 && unitRecruitInfo.MaxStack > 0)	// more than 30 turns for true entries - bonus *2
 						replMultiTemp *= 2;
 
 					unitRecruitInfo.ReplenishRate *= replMultiTemp;
