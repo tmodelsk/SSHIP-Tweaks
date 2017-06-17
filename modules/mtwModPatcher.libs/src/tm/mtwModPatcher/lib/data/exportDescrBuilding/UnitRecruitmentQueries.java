@@ -41,6 +41,30 @@ public class UnitRecruitmentQueries {
 		return unitRecrList;
 	}
 
+	public List<UnitRecuitmentInfo> getByFactionsNoHiddenResources(List<String> factions) {
+		String regex = "^\\s*recruit_pool\\s+\"([\\w\\s']+)\"\\s+([\\d\\.]+)\\s+([\\d\\.]+)\\s+([\\d\\.]+)\\s+(\\d+)\\s+";
+		regex += "requires\\s+";
+		regex += "factions\\s+\\{.*(";
+
+		boolean firstFaction = true;
+		for(val factionSymbol : factions) {
+			if(!firstFaction) regex += "|";
+			regex += factionSymbol  +"\\s*,";
+			firstFaction = false;
+		}
+
+		regex += ").*\\}";
+		//regex += ".*^(hidden_resource)";
+
+		val pattern = Pattern.compile(regex);
+
+		val unitRecrList = edb.findRecruitmentsByRegex(pattern);
+
+		unitRecrList.removeIf( u -> u.RequirementStr.contains("hidden_resource")  );
+
+		return unitRecrList;
+	}
+
 	private ExportDescrBuilding edb;
 
 	public UnitRecruitmentQueries(ExportDescrBuilding edb) {

@@ -9,9 +9,9 @@ import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdDouble;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdString;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
-import tm.mtwModPatcher.lib.data.DescrSettlementMechanics;
+import tm.mtwModPatcher.lib.data._root.DescrSettlementMechanics;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
-import tm.mtwModPatcher.lib.data.ExportDescrGuilds;
+import tm.mtwModPatcher.lib.data._root.ExportDescrGuilds;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrStratSectioned;
 
 import java.util.UUID;

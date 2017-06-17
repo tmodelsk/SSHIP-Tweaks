@@ -2,7 +2,7 @@ package tm.mtwModPatcher.sship.buildings;
 
 import lombok.val;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
-import tm.mtwModPatcher.lib.data.ExportDescrCharacterTraits;
+import tm.mtwModPatcher.lib.data._root.ExportDescrCharacterTraits;
 
 import java.util.UUID;
 

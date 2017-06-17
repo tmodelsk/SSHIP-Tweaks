@@ -24,7 +24,7 @@ import tm.mtwModPatcher.lib.common.scripting.campaignScript.core.Condition;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.core.EventType;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.engines.FactionExpensesAdditional;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.keywords.IncrementVariable;
-import tm.mtwModPatcher.lib.data.ExportDescrCharacterTraits;
+import tm.mtwModPatcher.lib.data._root.ExportDescrCharacterTraits;
 import tm.mtwModPatcher.lib.data.text.ExportVnvs;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.CampaignScript;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrStratSectioned;

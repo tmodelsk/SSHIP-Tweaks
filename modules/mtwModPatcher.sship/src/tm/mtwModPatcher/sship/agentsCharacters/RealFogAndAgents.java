@@ -1,9 +1,9 @@
 package tm.mtwModPatcher.sship.agentsCharacters;
 
 import tm.mtwModPatcher.lib.common.core.features.Feature;
-import tm.mtwModPatcher.lib.data.DescrCharacter;
-import tm.mtwModPatcher.lib.data.DescrCultures;
-import tm.mtwModPatcher.lib.data.ExportDescrCharacterTraits;
+import tm.mtwModPatcher.lib.data._root.DescrCharacter;
+import tm.mtwModPatcher.lib.data._root.DescrCultures;
+import tm.mtwModPatcher.lib.data._root.ExportDescrCharacterTraits;
 
 import java.util.UUID;
 

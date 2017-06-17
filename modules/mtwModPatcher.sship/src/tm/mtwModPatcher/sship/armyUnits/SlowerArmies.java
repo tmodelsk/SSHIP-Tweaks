@@ -10,8 +10,8 @@ import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdDouble;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdInteger;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
-import tm.mtwModPatcher.lib.data.DescrCampaignDb;
-import tm.mtwModPatcher.lib.data.DescrCharacter;
+import tm.mtwModPatcher.lib.data._root.DescrCampaignDb;
+import tm.mtwModPatcher.lib.data._root.DescrCharacter;
 
 import java.util.Arrays;
 import java.util.UUID;

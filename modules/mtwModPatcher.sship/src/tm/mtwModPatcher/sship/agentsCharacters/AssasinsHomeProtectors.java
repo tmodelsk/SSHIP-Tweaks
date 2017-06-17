@@ -1,7 +1,7 @@
 package tm.mtwModPatcher.sship.agentsCharacters;
 
 import tm.mtwModPatcher.lib.common.core.features.Feature;
-import tm.mtwModPatcher.lib.data.DescrCampaignDb;
+import tm.mtwModPatcher.lib.data._root.DescrCampaignDb;
 
 import java.util.UUID;
 

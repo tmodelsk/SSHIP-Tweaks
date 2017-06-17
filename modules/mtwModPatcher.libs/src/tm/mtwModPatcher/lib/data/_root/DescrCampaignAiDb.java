@@ -1,4 +1,4 @@
-package tm.mtwModPatcher.lib.data;
+package tm.mtwModPatcher.lib.data._root;
 
 import lombok.val;
 import org.w3c.dom.Document;

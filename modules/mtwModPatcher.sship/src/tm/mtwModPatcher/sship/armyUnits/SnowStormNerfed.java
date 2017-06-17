@@ -3,7 +3,7 @@ package tm.mtwModPatcher.sship.armyUnits;
 import lombok.val;
 import tm.common.Ctm;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
-import tm.mtwModPatcher.lib.data.WeatherDb;
+import tm.mtwModPatcher.lib.data._root.WeatherDb;
 
 import javax.xml.xpath.XPathExpressionException;
 import java.util.UUID;

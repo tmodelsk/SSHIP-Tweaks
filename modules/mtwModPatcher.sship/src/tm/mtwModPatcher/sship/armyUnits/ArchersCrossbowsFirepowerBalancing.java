@@ -3,7 +3,7 @@ package tm.mtwModPatcher.sship.armyUnits;
 import lombok.val;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
-import tm.mtwModPatcher.lib.data.DescrProjectiles;
+import tm.mtwModPatcher.lib.data._root.DescrProjectiles;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.UnitDef;

@@ -9,7 +9,7 @@ import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.lib.common.entities.SettlementInfo;
-import tm.mtwModPatcher.lib.data.DescrCampaignDb;
+import tm.mtwModPatcher.lib.data._root.DescrCampaignDb;
 import tm.mtwModPatcher.lib.data.world.maps.base.DescrRegions;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrStratSectioned;
 import tm.mtwModPatcher.lib.managers.SettlementManager;

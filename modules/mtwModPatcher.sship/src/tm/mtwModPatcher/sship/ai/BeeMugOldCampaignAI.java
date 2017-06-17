@@ -4,7 +4,7 @@ import lombok.val;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.OverrideCopyTask;
-import tm.mtwModPatcher.lib.data.DescrSMFactions;
+import tm.mtwModPatcher.lib.data._root.DescrSMFactions;
 
 import java.util.HashSet;
 import java.util.Set;

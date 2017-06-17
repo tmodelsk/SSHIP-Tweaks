@@ -1,4 +1,4 @@
-package tm.mtwModPatcher.lib.data;
+package tm.mtwModPatcher.lib.data._root;
 
 import javafx.util.Pair;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;

@@ -27,7 +27,7 @@ public class UnitRecruitmentQueriesTests extends FeatureBaseTest {
 	}
 
 	@Test
-	public void findMuslimRecruitments() throws Exception {
+	public void findMuslimRegionsRecruitments() throws Exception {
 		val fileEntityFactory = createFileEntityFactory();
 		val edb = fileEntityFactory.getFile(ExportDescrBuilding.class);
 		val queriesServ = new UnitRecruitmentQueries(edb);
@@ -38,6 +38,24 @@ public class UnitRecruitmentQueriesTests extends FeatureBaseTest {
 		hiddenResources.add("berber");
 
 		val res = queriesServ.getByFactionsHiddenResourcesPositive(factions, hiddenResources);
+
+		assertThat(res).isNotEmpty();
+
+		val units = new HashSet<String>();
+		res.forEach( u -> units.add(u.Name) );
+
+		assertThat(units).isNotEmpty();
+	}
+
+	@Test
+	public void findMuslimRecruitmentsNoHiddenResources() throws Exception {
+		val fileEntityFactory = createFileEntityFactory();
+		val edb = fileEntityFactory.getFile(ExportDescrBuilding.class);
+		val queriesServ = new UnitRecruitmentQueries(edb);
+
+		val factions = FactionsDefs.islamFactionsList();
+
+		val res = queriesServ.getByFactionsNoHiddenResources(factions);
 
 		assertThat(res).isNotEmpty();
 

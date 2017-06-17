@@ -4,7 +4,7 @@ import org.xml.sax.SAXException;
 import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
-import tm.mtwModPatcher.lib.data.DescrSettlementMechanics;
+import tm.mtwModPatcher.lib.data._root.DescrSettlementMechanics;
 import tm.mtwModPatcher.lib.managers.UnitsManager;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
