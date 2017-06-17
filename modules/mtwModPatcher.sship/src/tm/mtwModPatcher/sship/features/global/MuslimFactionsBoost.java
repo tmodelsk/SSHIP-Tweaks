@@ -7,6 +7,8 @@ import tm.common.collections.ArrayUniqueList;
 import tm.common.collections.ListUnique;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdBoolean;
+import tm.mtwModPatcher.lib.common.core.features.params.ParamIdDouble;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.UnitRecruitmentQueries;
 import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
@@ -14,6 +16,7 @@ import tm.mtwModPatcher.lib.data._root.DescrCampaignDb;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
 import tm.mtwModPatcher.lib.managers.UnitsManager;
+import tm.mtwModPatcher.sship.lib.UnitRecruitmentSshipQueries;
 
 import javax.xml.xpath.XPathExpressionException;
 import java.util.Arrays;
@@ -28,6 +31,8 @@ public class MuslimFactionsBoost extends Feature {
 
 	@Getter @Setter
 	private boolean ahdathMilitiaBoost = false;
+	@Getter @Setter
+	private double muslimReplenishMult = 1.5;
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -47,14 +52,14 @@ public class MuslimFactionsBoost extends Feature {
 		String factionsFilterCsv = FactionsDefs.islamFactionsCsv() + FactionsDefs.slaveCsv();
 		UnitsManager unitsManager = new UnitsManager();
 
-		//unitsManager.updateAllUnitsReplenishRates(factionsFilterCsv, 2.0, -1.0, unitsToExclude, exportDescrBuilding);
-
-		// TODO : zmienic !!
+		val queriesServ = new UnitRecruitmentSshipQueries(exportDescrBuilding);
+		val muslimUnitNames = UnitRecruitmentQueries.toUnitNames(queriesServ.findMuslim());
+		val replenishMult = muslimReplenishMult - 1;
 
 		val islamFactions = FactionsDefs.islamFactionsSet();
-		for (val factionSymbol : islamFactions) {
-			unitsManager.addReplenishBonusEntry(factionSymbol, null, 0.5, unitsToExclude, exportDescrBuilding);
-		}
+		unitsManager.updateOrAddReplenishBonusEntry(islamFactions, muslimUnitNames, replenishMult, unitsToExclude, exportDescrBuilding);
+//		for (val factionSymbol : islamFactions)
+//			unitsManager.addReplenishBonusEntry(factionSymbol, muslimUnitNames, replenishMult, unitsToExclude, exportDescrBuilding);
 
 		if (ahdathMilitiaBoost) {
 			val ahdathMilitia = exportDescrUnit.loadUnit("Ahdath Militia");
@@ -102,6 +107,10 @@ public class MuslimFactionsBoost extends Feature {
 		pars.add(new ParamIdBoolean("AhdathMilitiaBoost", "Ahdath Militia Boost",
 				feature -> ((MuslimFactionsBoost) feature).isAhdathMilitiaBoost(),
 				(feature, value) -> ((MuslimFactionsBoost) feature).setAhdathMilitiaBoost(value)));
+
+		pars.add(new ParamIdDouble("MuslimReplenishMultiplier", "Muslim Replenish Multiplier",
+				feature -> ((MuslimFactionsBoost) feature).getMuslimReplenishMult(),
+				(feature, value) -> ((MuslimFactionsBoost) feature).setMuslimReplenishMult(value)));
 
 		return pars;
 	}

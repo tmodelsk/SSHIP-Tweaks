@@ -5,7 +5,7 @@ import org.junit.Test;
 import tm.mtwModPatcher.FeatureBaseTest;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 
-import java.util.HashSet;
+import java.util.stream.Collectors;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -23,9 +23,7 @@ public class UnitRecruitmentSshipQueriesTests extends FeatureBaseTest {
 		val recruitments = queriesServ.findMuslim();
 		assertThat(recruitments).isNotEmpty();
 
-		val units = new HashSet<String>();
-
-		recruitments.forEach(r -> units.add(r.Name));
+		val units = UnitRecruitmentSshipQueries.toUnitNames(recruitments).stream().sorted().collect(Collectors.toList());
 		assertThat(units).isNotEmpty();
 	}
 }

@@ -1,6 +1,7 @@
 package tm.mtwModPatcher.lib.data.exportDescrBuilding;
 
 import lombok.val;
+import tm.common.collections.ArrayUniqueList;
 
 import java.util.List;
 import java.util.regex.Pattern;
@@ -63,6 +64,14 @@ public class UnitRecruitmentQueries {
 		unitRecrList.removeIf( u -> u.RequirementStr.contains("hidden_resource")  );
 
 		return unitRecrList;
+	}
+
+	public static List<String> toUnitNames(List<UnitRecuitmentInfo> recruitments) {
+		val uniqueList = new ArrayUniqueList<String>();
+
+		recruitments.forEach( r -> uniqueList.addUnique(r.Name) );
+
+		return uniqueList;
 	}
 
 	private ExportDescrBuilding edb;

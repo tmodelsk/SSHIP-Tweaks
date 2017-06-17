@@ -53,7 +53,6 @@ public class SsHipFeatures {
 
 		features.add(new ArmySuppliesCosts());
 		features.add(new MaxTreasuryLimited());
-		features.add(new FightForSurvival(unitsManager));
 		features.add(new BeeMugCarlAITweaks());
 		//features.add(new SkynetBattleAi(inputStreamProvider));
 
@@ -119,15 +118,10 @@ public class SsHipFeatures {
 		features.add(new GarrisonNoUnguardedSettlements(garrisonManager));
 		features.add(new GarrisonOnSiegeRaising(garrisonManager));
 
-		features.add(new PopulationResourcesLimited());	// Should be one of the last, globally modifies replenish & max stack rates
 		features.add(new MuslimFactionsBoost());
 		features.add(new CatholicFactionsBoost());
-
-//		features.add(new AgentsCostsInEnemyLands());
-
-		// ##### Obsolete ?? ######
-		//features.add(new RealFogAndAgents());
-		//features.add(new CatharsHereticTemple());
+		features.add(new FightForSurvival(unitsManager));	// adds replenish rates entries for existing stuff, should be almost last
+		features.add(new PopulationResourcesLimited());	// Should be one of the last, globally modifies replenish & max stack rates
 
 		initializeFeatures(features);
 
@@ -173,6 +167,11 @@ public class SsHipFeatures {
 
 	@Deprecated
 	protected void oldUnused(){
+		// ##### Obsolete ?? ######
+		//features.add(new AgentsCostsInEnemyLands());
+		//features.add(new RealFogAndAgents());
+		//features.add(new CatharsHereticTemple());
+
 		//		// ### UNUSED - OLD
 // 		//features.add(new FortsConstructionAllowedFtr());
 //		//features.add(new FreeUpkeepEconomy());

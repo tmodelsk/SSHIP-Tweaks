@@ -24,6 +24,9 @@ public class UnitRecruitmentQueriesTests extends FeatureBaseTest {
 		val res = queriesServ.getByFactionsHiddenResourcesPositive(Arrays.asList("moors"), Arrays.asList("moors","andalusia"));
 
 		assertThat(res).isNotEmpty();
+
+		val unitNames = UnitRecruitmentQueries.toUnitNames(res);
+		assertThat(unitNames).isNotEmpty();
 	}
 
 	@Test
