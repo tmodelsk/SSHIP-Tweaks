@@ -12,7 +12,7 @@ import tm.mtwModPatcher.lib.engines.*;
 import tm.mtwModPatcher.lib.managers.UnitsManager;
 import tm.mtwModPatcher.lib.managers.garrisons.GarrisonManager;
 import tm.mtwModPatcher.lib.managers.garrisons.GarrisonMetaManager;
-import tm.mtwModPatcher.sship.SsHipFeatures;
+import tm.mtwModPatcher.sship.features.SsHipFeatures;
 
 import javax.swing.*;
 import java.awt.*;

@@ -6,7 +6,7 @@ import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
 import tm.mtwModPatcher.lib.managers.UnitsManager;
 import tm.mtwModPatcher.lib.managers.garrisons.GarrisonManager;
 import tm.mtwModPatcher.lib.managers.garrisons.GarrisonMetaManager;
-import tm.mtwModPatcher.sship.SsHipFeatures;
+import tm.mtwModPatcher.sship.features.SsHipFeatures;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
