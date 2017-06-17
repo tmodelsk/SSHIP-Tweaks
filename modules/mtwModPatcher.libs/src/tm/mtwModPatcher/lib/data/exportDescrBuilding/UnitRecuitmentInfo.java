@@ -74,4 +74,8 @@ public class UnitRecuitmentInfo {
 		return line;
 	}
 
+	@Override
+	public String toString() {
+		return Name;
+	}
 }

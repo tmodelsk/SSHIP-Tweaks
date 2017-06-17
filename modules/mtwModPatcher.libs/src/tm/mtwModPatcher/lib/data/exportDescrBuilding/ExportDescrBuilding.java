@@ -363,7 +363,8 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 			result.ExperienceBonus = Integer.parseInt(matcher.group(5));
 			result.RequirementStr = matcher.group(6);
 		}
-		else throw new PatcherLibBaseEx("Unable to parse Building - Capabilities - Unit Recruitment Line - no match for regex !");
+		else
+			throw new PatcherLibBaseEx("Unable to parse Building - Capabilities - Unit Recruitment Line - no match for regex !");
 
 		return result;
 	}
@@ -408,6 +409,24 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 			}
 		}
 
+	}
+
+	public List<UnitRecuitmentInfo> findRecruitmentsByRegex(Pattern regexPattern) {
+		List<UnitRecuitmentInfo> res = new ArrayList<>();
+
+		val lines = getLines();
+		int index = 0;
+		do {
+			index = lines.findFirstByRegexLine(regexPattern, index+1);
+			if(index < 0) break;
+
+			val lineStr = lines.getLine(index);
+			val unitRecr = parseUnitRecruitmentInfo(lineStr);
+			res.add(unitRecr);
+		}
+		while(index > 0);
+
+		return res;
 	}
 
 	protected static Pattern unitRecruitmentLinePatters = Pattern.compile("^\\s*recruit_pool\\s+\"([\\w\\s']+)\"\\s+([\\d\\.]+)\\s+([\\d\\.]+)\\s+([\\d\\.]+)\\s+(\\d+)\\s+requires(.+)");

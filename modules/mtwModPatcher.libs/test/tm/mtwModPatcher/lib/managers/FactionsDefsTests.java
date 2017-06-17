@@ -1,6 +1,7 @@
-package tm.mtwModPatcher.lib.common.entities;
+package tm.mtwModPatcher.lib.managers;
 
 import lombok.val;
+import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import tm.common.collections.ArrayUniqueList;
 import tm.mtwModPatcher.lib.managers.FactionsDefs;
@@ -36,6 +37,13 @@ public class FactionsDefsTests {
 		assertThat(res).isNotEmpty();
 		assertThat(res).contains("denmark");
 		assertThat(res).doesNotContain("northern_european");
+	}
+
+	@Test
+	public void getFactionInfos_ShouldReturnAllList() {
+		val factions = FactionsDefs.getFactionInfos();
+
+		Assertions.assertThat(factions).isNotEmpty();
 	}
 
 }
