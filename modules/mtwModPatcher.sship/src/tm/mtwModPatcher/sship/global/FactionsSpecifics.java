@@ -56,12 +56,12 @@ public class FactionsSpecifics extends Feature {
 
 	protected void NorwegianDanesBoostReplenishRates() throws PatcherLibBaseEx {
 		UnitsManager unitsManager = new UnitsManager();
-		val updatedLines = unitsManager.addToAllUnitsReplenishRates("norway, denmark,", 3.0 , -2.0 , null , exportDescrBuilding);
+		val updatedLines = unitsManager.updateAllUnitsReplenishRates("norway, denmark,", 3.0 , -2.0 , null , exportDescrBuilding);
 	}
 
 	protected void CumansBoostReplenishRates() throws PatcherLibBaseEx {
 		UnitsManager unitsManager = new UnitsManager();
-		unitsManager.addToAllUnitsReplenishRates("cumans,", 3.0 , -2.0 , null , exportDescrBuilding);
+		unitsManager.updateAllUnitsReplenishRates("cumans,", 3.0 , -2.0 , null , exportDescrBuilding);
 	}
 
 	protected void RomanCatholicTradersBonuses() throws PatcherLibBaseEx {
@@ -112,7 +112,7 @@ public class FactionsSpecifics extends Feature {
 			ByzantiumPopulationMinus(byzantiumPopulationPenaltyAi,byzantiumPopulationPenaltyAi-1 , " and not event_counter is_the_player 1");	// AI version
 
 		val unitsManager = new UnitsManager();
-		val updatedLines = unitsManager.addToAllUnitsReplenishRates(FactionsDefs.byzantiumCsv(), 3.0 , 2.0 , null , exportDescrBuilding);
+		val updatedLines = unitsManager.updateAllUnitsReplenishRates(FactionsDefs.byzantiumCsv(), 3.0 , 2.0 , null , exportDescrBuilding);
 	}
 
 	protected void ByzantiumMilitaryBuildingsPenalties() throws PatcherLibBaseEx {
@@ -228,7 +228,7 @@ public class FactionsSpecifics extends Feature {
 
 	protected void turksRumBoost() {
 		UnitsManager unitsManager = new UnitsManager();
-		val updatedLines = unitsManager.addToAllUnitsReplenishRates("rum,", 3.0 , -2.0 , null , exportDescrBuilding);
+		val updatedLines = unitsManager.updateAllUnitsReplenishRates("rum,", 3.0 , -2.0 , null , exportDescrBuilding);
 	}
 
 	@Override

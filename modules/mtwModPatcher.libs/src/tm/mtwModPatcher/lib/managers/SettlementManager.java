@@ -22,6 +22,19 @@ public class SettlementManager {
 
 		List<SettlementInfo> settlements = DescrStrat.getSettlementInfoList();
 
+		Map<String, Point<Integer>> overrides = new HashMap<>();
+		overrides.put("Vienna", new Point<>(198, 193));
+		overrides.put("Durazzo", new Point<>(218, 142));
+		overrides.put("Al_Aqaba", new Point<>(329, 59));
+		overrides.put("Ani", new Point<>(393, 136));
+		overrides.put("Derbent", new Point<>(425, 146));
+		overrides.put("Caesarea", new Point<>(333, 124));
+		overrides.put("Al_Ahsa", new Point<>(435, 29));
+		overrides.put("Sives", new Point<>(344, 132));
+		overrides.put("Al-Mahdiya", new Point<>(156, 101));
+		overrides.put("Baku", new Point<>(434, 134));
+		overrides.put("Bulgar", new Point<>(434, 241));
+
 		for (SettlementInfo settl : settlements) {
 			settl.Resources = DescrRegions.getResources(settl.ProvinceName);
 			settl.Name = DescrRegions.getSettlementName(settl.ProvinceName);
@@ -30,22 +43,6 @@ public class SettlementManager {
 			if(settlName.equals("Edinburgh")) settlName = "Edinburg";
 
 			settl.Position = findPosition(settlName);
-
-			//val overrides = new HashMap<String, Point<Integer>>();
-
-			Map<String, Point<Integer>> overrides = new HashMap<>();
-			overrides.put("Vienna", new Point<>(198, 193));
-			overrides.put("Durazzo", new Point<>(218, 142));
-			overrides.put("Al_Aqaba", new Point<>(329, 59));
-			overrides.put("Ani", new Point<>(393, 136));
-			overrides.put("Derbent", new Point<>(425, 146));
-			overrides.put("Caesarea", new Point<>(333, 124));
-			overrides.put("Al_Ahsa", new Point<>(435, 29));
-			overrides.put("Sives", new Point<>(344, 132));
-			overrides.put("Al-Mahdiya", new Point<>(156, 101));
-			overrides.put("Baku", new Point<>(434, 134));
-			overrides.put("Bulgar", new Point<>(434, 241));
-
 
 			if(overrides.containsKey(settlName)) settl.Position = overrides.get(settlName);
 

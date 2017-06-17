@@ -87,7 +87,7 @@ public class FightForSurvival extends Feature {
 
 		// ## Final processing ##
 		unitsManager.enableFreeUpkeepAllUnits(null, exportDescrUnit);
-		unitsManager.addReplenishBonus(unitReplenishBonusConditionList, unitsToExclude, exportDescrBuilding);
+		unitsManager.addReplenishBonusEntryWithCondition(unitReplenishBonusConditionList, unitsToExclude, exportDescrBuilding);
 	}
 
 	private void addFlatMoneyBonus(double factor, String eventName, String requires) {

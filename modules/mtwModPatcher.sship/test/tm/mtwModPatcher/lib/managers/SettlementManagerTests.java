@@ -7,6 +7,8 @@ import tm.mtwModPatcher.FeatureBaseTest;
 import tm.mtwModPatcher.lib.data.world.maps.base.DescrRegions;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrStratSectioned;
 
+import java.util.HashSet;
+
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class SettlementManagerTests extends FeatureBaseTest {
@@ -33,6 +35,27 @@ public class SettlementManagerTests extends FeatureBaseTest {
 			}
 
 		}
+	}
+
+	@Test
+	public void sumHiddenResources() throws Exception {
+		val fileEntityFactory = createFileEntityFactory();
+
+		val settlementManager = new SettlementManager(
+				fileEntityFactory.getFile(DescrStratSectioned.class),
+				fileEntityFactory.getFile(DescrRegions.class));
+
+		val settlements = settlementManager.getAllSettlements();
+
+		assertThat(settlements).isNotEmpty();
+
+		val hiddenResources = new HashSet<String>();
+
+		settlements.forEach( si -> hiddenResources.addAll(si.Resources) );
+
+		System.out.println("Hidden Resourcec Total = "+hiddenResources.size());
+
+		hiddenResources.forEach( hr -> System.out.print(hr + ","));
 	}
 
 }

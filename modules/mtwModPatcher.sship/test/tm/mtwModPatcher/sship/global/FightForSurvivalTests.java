@@ -5,6 +5,8 @@ import org.junit.Test;
 import tm.mtwModPatcher.FeatureBaseTest;
 import tm.mtwModPatcher.lib.managers.UnitsManager;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 /**
  * Created by tomek on 07.06.2017.
  */
@@ -17,5 +19,8 @@ public class FightForSurvivalTests extends FeatureBaseTest {
 		initializeFeature(ft);
 
 		ft.executeUpdates();
+
+		val nullLine = ft.exportDescrBuilding.getLines().findFirstRegexLine("null");
+		assertThat(nullLine).isLessThanOrEqualTo(0);
 	}
 }

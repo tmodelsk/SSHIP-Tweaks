@@ -47,14 +47,14 @@ public class MuslimFactionsBoost extends Feature {
 		String factionsFilterCsv = FactionsDefs.islamFactionsCsv() + FactionsDefs.slaveCsv();
 		UnitsManager unitsManager = new UnitsManager();
 
-		unitsManager.addToAllUnitsReplenishRates(factionsFilterCsv, 2.0, -1.0, unitsToExclude, exportDescrBuilding);
+		//unitsManager.updateAllUnitsReplenishRates(factionsFilterCsv, 2.0, -1.0, unitsToExclude, exportDescrBuilding);
 
 		// TODO : zmienic !!
 
-//		val islamFactions = FactionsDefs.islamFactionsSet();
-//		for (val factionSymbol : islamFactions) {
-//			unitsManager.addReplenishBonus(factionSymbol, 1, unitsToExclude, exportDescrBuilding);
-//		}
+		val islamFactions = FactionsDefs.islamFactionsSet();
+		for (val factionSymbol : islamFactions) {
+			unitsManager.addReplenishBonusEntry(factionSymbol, null, 0.5, unitsToExclude, exportDescrBuilding);
+		}
 
 		if (ahdathMilitiaBoost) {
 			val ahdathMilitia = exportDescrUnit.loadUnit("Ahdath Militia");
@@ -63,12 +63,12 @@ public class MuslimFactionsBoost extends Feature {
 		}
 
 		// ## Additional Upgrade replenish for Ahdath Militia
-		//unitsManager.addToReplenishRates("Ahdath Militia" , factionsFilterCsv , 2.0 , -1.0 , exportDescrBuilding);
+		//unitsManager.updateReplenishRates("Ahdath Militia" , factionsFilterCsv , 2.0 , -1.0 , exportDescrBuilding);
 
 		// ## Additional Upgrade replenish for :
-		//unitsManager.addToReplenishRates("Fari Lancers" , factionsFilterCsv , 2.0 , -1.0 , exportDescrBuilding);
-		//unitsManager.addToReplenishRates("Tawashi Light Cavalry" , factionsFilterCsv , 2.0 , -1.0 , exportDescrBuilding);
-		//unitsManager.addToReplenishRates("Arab Cavalry" , factionsFilterCsv , 2.0 , -1.0 , exportDescrBuilding);
+		//unitsManager.updateReplenishRates("Fari Lancers" , factionsFilterCsv , 2.0 , -1.0 , exportDescrBuilding);
+		//unitsManager.updateReplenishRates("Tawashi Light Cavalry" , factionsFilterCsv , 2.0 , -1.0 , exportDescrBuilding);
+		//unitsManager.updateReplenishRates("Arab Cavalry" , factionsFilterCsv , 2.0 , -1.0 , exportDescrBuilding);
 
 
 		// Ahdath Militia - cheaper recruitment

@@ -28,11 +28,15 @@ public class UnitRecuitmentInfo {
 
 		UnitRequire res = null;
 
-		Matcher matcher = factionRegex.matcher(RequirementStr);
+		Matcher matcher = factionsConditionsRegex.matcher(RequirementStr);
 		if (matcher.find()) {
 			res = new UnitRequire();
 			res.Factions = FactionsDefs.resolveFactions(matcher.group(1));
 			res.RestConditions = matcher.group(2);
+		}
+		else if( (matcher = factionsRegex.matcher(RequirementStr)).find() ) {
+			res = new UnitRequire();
+			res.Factions = FactionsDefs.resolveFactions(matcher.group(1));
 		}
 
 		return res;
@@ -47,12 +51,14 @@ public class UnitRecuitmentInfo {
 			sb.append(factionSymbol + ", ");
 		sb.append("} ");
 
-		sb.append(unitRequire.RestConditions);
+		if(unitRequire.RestConditions != null)
+			sb.append(unitRequire.RestConditions);
 
 		RequirementStr = sb.toString();
 	}
 
-	private static final Pattern factionRegex = Pattern.compile("factions\\s+\\{(.+)}(.+)");
+	private static final Pattern factionsConditionsRegex = Pattern.compile("factions\\s+\\{(.+)}(.+)");
+	private static final Pattern factionsRegex = Pattern.compile("factions\\s+\\{(.+)}.*");
 
 
 	public String toRecruitmentPoolLine() {

@@ -509,15 +509,15 @@ public class Civilizations extends Feature {
 		String factionsFilterCsv = FactionsDefs.islamFactionsCsv() + FactionsDefs.slaveCsv();
 		UnitsManager unitsManager = new UnitsManager();
 
-		unitsManager.addToAllUnitsReplenishRates(factionsFilterCsv, 2.0 , -1.0 , unitsToExclude , _ExportDescrBuilding);
+		unitsManager.updateAllUnitsReplenishRates(factionsFilterCsv, 2.0 , -1.0 , unitsToExclude , _ExportDescrBuilding);
 
 		// ## Additional Upgrade replenish for Ahdath Militia
-		unitsManager.addToReplenishRates("Ahdath Militia" , factionsFilterCsv , 2.0 , -1.0 , _ExportDescrBuilding);
+		unitsManager.updateReplenishRates("Ahdath Militia" , factionsFilterCsv , 2.0 , -1.0 , _ExportDescrBuilding);
 
 		// ## Additional Upgrade replenish for :
-		unitsManager.addToReplenishRates("Fari Lancers" , factionsFilterCsv , 2.0 , -1.0 , _ExportDescrBuilding);
-		unitsManager.addToReplenishRates("Tawashi Light Cavalry" , factionsFilterCsv , 2.0 , -1.0 , _ExportDescrBuilding);
-		unitsManager.addToReplenishRates("Arab Cavalry" , factionsFilterCsv , 2.0 , -1.0 , _ExportDescrBuilding);
+		unitsManager.updateReplenishRates("Fari Lancers" , factionsFilterCsv , 2.0 , -1.0 , _ExportDescrBuilding);
+		unitsManager.updateReplenishRates("Tawashi Light Cavalry" , factionsFilterCsv , 2.0 , -1.0 , _ExportDescrBuilding);
+		unitsManager.updateReplenishRates("Arab Cavalry" , factionsFilterCsv , 2.0 , -1.0 , _ExportDescrBuilding);
 
 //		LinesProcessor lines = exportDescrBuilding.getLines();
 //
@@ -606,7 +606,7 @@ public class Civilizations extends Feature {
 
 		// ### Replenish Rates ###
 		UnitsManager unitsManager = new UnitsManager();
-		unitsManager.addToAllUnitsReplenishRates(FactionsDefs.turanianFactionsCsv(), 3.0 , -2.0 , null , _ExportDescrBuilding);
+		unitsManager.updateAllUnitsReplenishRates(FactionsDefs.turanianFactionsCsv(), 3.0 , -2.0 , null , _ExportDescrBuilding);
 	}
 
 	protected void TuraniaHappinesLasBonus() throws PatcherLibBaseEx {
