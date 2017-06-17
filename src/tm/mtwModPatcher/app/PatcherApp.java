@@ -303,6 +303,7 @@ public class PatcherApp {
 
 		optionsOpenedMap = new HashMap<>();
 
+		consoleLogger.writeLine("App version: " +PatcherAppVersion.Version);
 		consoleLogger.writeLine("Working directory: " +Ctm.getWorkingDirectory());
 	}
 	private void setUpFeaturesTable() throws PatcherLibBaseEx, ClassNotFoundException {
@@ -392,7 +393,7 @@ public class PatcherApp {
 
 
 	public static void main(String[] args) {
-		JFrame frame = new JFrame("SSHIP Tweaks by TM , version 1.1 ");
+		JFrame frame = new JFrame("SSHIP Tweaks by TM , version " + PatcherAppVersion.Version);
 		frame.setContentPane(new PatcherApp().mainPanel);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.pack();
