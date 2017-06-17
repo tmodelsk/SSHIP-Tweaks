@@ -1,7 +1,7 @@
 package tm.mtwModPatcher.lib.data.exportDescrBuilding;
 
 import lombok.val;
-import tm.mtwModPatcher.lib.common.entities.FactionsDefs;
+import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.lib.data.common.Format;
 
 import java.util.regex.Matcher;

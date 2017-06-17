@@ -3,7 +3,7 @@ package tm.mtwModPatcher.sship.agentsCharacters;
 import lombok.val;
 import tm.common.Ctm;
 import tm.mtwModPatcher.lib.common.entities.AgentType;
-import tm.mtwModPatcher.lib.common.entities.FactionsDefs;
+import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.blocks.*;

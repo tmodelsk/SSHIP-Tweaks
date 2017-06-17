@@ -1,6 +1,6 @@
 package tm.mtwModPatcher.lib.common.scripting.campaignScript.engines;
 
-import tm.mtwModPatcher.lib.common.entities.FactionsDefs;
+import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.blocks.*;

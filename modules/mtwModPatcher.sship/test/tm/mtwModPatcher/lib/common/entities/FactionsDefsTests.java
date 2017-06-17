@@ -3,6 +3,7 @@ package tm.mtwModPatcher.lib.common.entities;
 import lombok.val;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
+import tm.mtwModPatcher.lib.managers.FactionsDefs;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

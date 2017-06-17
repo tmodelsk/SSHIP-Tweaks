@@ -1,7 +1,7 @@
 package tm.mtwModPatcher.sship.armyUnits;
 
 import lombok.val;
-import tm.mtwModPatcher.lib.common.entities.FactionsDefs;
+import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;

@@ -1,6 +1,6 @@
 package tm.mtwModPatcher.sship.global.factionFate;
 
-import tm.mtwModPatcher.lib.common.entities.FactionsDefs;
+import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.lib.managers.FateScriptManager;
 import tm.mtwModPatcher.lib.common.entities.RegionOwnershipInfo;
 import tm.mtwModPatcher.lib.common.core.features.Feature;

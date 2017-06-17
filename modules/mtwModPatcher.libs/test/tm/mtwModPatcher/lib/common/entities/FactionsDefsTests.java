@@ -3,8 +3,7 @@ package tm.mtwModPatcher.lib.common.entities;
 import lombok.val;
 import org.junit.Test;
 import tm.common.collections.ArrayUniqueList;
-
-import java.util.HashSet;
+import tm.mtwModPatcher.lib.managers.FactionsDefs;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

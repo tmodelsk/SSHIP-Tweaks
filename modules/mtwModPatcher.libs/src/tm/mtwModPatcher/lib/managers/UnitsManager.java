@@ -2,7 +2,6 @@ package tm.mtwModPatcher.lib.managers;
 
 import lombok.val;
 import tm.common.Tuple2;
-import tm.mtwModPatcher.lib.common.entities.FactionsDefs;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;

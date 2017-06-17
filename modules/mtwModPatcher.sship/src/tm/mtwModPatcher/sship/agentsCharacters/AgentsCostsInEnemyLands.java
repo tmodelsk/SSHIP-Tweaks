@@ -1,7 +1,7 @@
 package tm.mtwModPatcher.sship.agentsCharacters;
 
 import tm.mtwModPatcher.lib.common.entities.FactionInfo;
-import tm.mtwModPatcher.lib.common.entities.FactionsDefs;
+import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.commands.AddMoney;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.commands.IncrementKingsPurse;

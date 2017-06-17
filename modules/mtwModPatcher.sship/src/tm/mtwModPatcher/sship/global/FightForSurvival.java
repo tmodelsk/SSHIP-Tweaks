@@ -3,7 +3,7 @@ package tm.mtwModPatcher.sship.global;
 import lombok.val;
 import tm.common.Ctm;
 import tm.common.Tuple2;
-import tm.mtwModPatcher.lib.common.entities.FactionsDefs;
+import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;

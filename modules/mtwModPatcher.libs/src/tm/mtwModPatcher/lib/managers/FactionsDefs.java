@@ -1,10 +1,14 @@
-package tm.mtwModPatcher.lib.common.entities;
+package tm.mtwModPatcher.lib.managers;
 
 import com.sun.deploy.util.OrderedHashSet;
 import lombok.val;
 import tm.common.collections.ArrayUniqueList;
 import tm.common.collections.ListUnique;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
+import tm.mtwModPatcher.lib.common.entities.CultureType;
+import tm.mtwModPatcher.lib.common.entities.EducationStyle;
+import tm.mtwModPatcher.lib.common.entities.FactionInfo;
+import tm.mtwModPatcher.lib.common.entities.Religion;
 
 import java.util.*;
 import java.util.stream.Collectors;

@@ -1,7 +1,7 @@
 package tm.mtwModPatcher.lib.managers.garrisons;
 
 import lombok.val;
-import tm.mtwModPatcher.lib.common.entities.FactionsDefs;
+import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.entities.SettlementInfo;
 import tm.mtwModPatcher.lib.engines.FileEntityFactory;
