@@ -18,7 +18,7 @@ public class UnitDef {
 	public String BannerUnit;
 	public String BannerHoly;
 
-	public String Soldier;
+	public Soldier Soldier;
 	public String Officer1;
 	public String Officer2;
 	public String Officer3;

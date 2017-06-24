@@ -108,7 +108,7 @@ public class ExportDescrUnitTyped extends FileEntity {
 		u.BannerHoly = getValue("banner holy" , unitLines);
 
 		u.Accent = getValue("accent" , unitLines);
-		u.Soldier = getValue("soldier" , unitLines);
+		u.Soldier = Soldier.parseEduEntry(getValue("soldier" , unitLines));
 		u.Officer1 = getValue("officer" , unitLines);
 		u.Officer2 = getValue("officer" , 2 , unitLines);
 		u.Officer3 = getValue("officer" , 3 , unitLines);
@@ -421,7 +421,7 @@ public class ExportDescrUnitTyped extends FileEntity {
 		writeUnitAttrib("banner unit" , unit.BannerUnit , bw);
 		writeUnitAttrib("banner holy" , unit.BannerHoly , bw);
 
-		writeUnitAttrib("soldier" , unit.Soldier , bw);
+		writeUnitAttrib("soldier" , unit.Soldier.toEduString() , bw);
 		writeUnitAttrib("officer" , unit.Officer1 , bw);
 		writeUnitAttrib("officer" , unit.Officer2 , bw);
 		writeUnitAttrib("officer" , unit.Officer3 , bw);

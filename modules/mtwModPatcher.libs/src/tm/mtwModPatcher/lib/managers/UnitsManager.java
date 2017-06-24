@@ -17,6 +17,8 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static org.assertj.core.api.Assertions.assertThat;
+
 /**
  * Helper methods for units related processing
  */
@@ -102,6 +104,7 @@ public class UnitsManager {
 	}
 
 	/** Update unit entry replenish rates ONLY if all faction from factionsFilterCsv are in entry */
+	@Deprecated
 	public void updateReplenishRates(String unitName, String factionsFilterCsv,
 									 double relpenishRateMin, double replenishRateAddition, ExportDescrBuilding exportDescrBuilding) {
 		LinesProcessor lines = exportDescrBuilding.getLines();
@@ -231,7 +234,7 @@ public class UnitsManager {
 	}
 
 
-	/** Adds replenish bonus by updating replensh (if all factions allpies)
+	/** Adds replenish bonus by updating replensh (if all factions applies)
 	 * 		or by coping unit entry but with single faction { factionSymbol} */
 	public void updateOrAddReplenishBonusEntry(List<String> factions, List<String> unitsFilter, double replenishMult,
 											   List<Pattern> unitsToExclude, ExportDescrBuilding exportDescrBuilding) {
@@ -259,6 +262,7 @@ public class UnitsManager {
 					lines.replaceLine(index, unitRecrInfo.toRecruitmentPoolLine());
 				}
 				else {	// ## Loop throught factions, add new entries per findividual faction
+					assertThat(replenishMult).isGreaterThan(0.0);
 					for(val factionSymbol : factions) {
 						val unitInfoNew = newUnitEntryReplenishBonusForFaction(unitRecrInfo, replenishMult, factionSymbol);
 						if(unitInfoNew != null) {
@@ -293,7 +297,7 @@ public class UnitsManager {
 				if(unitRecrInfo.ReplenishRate <= 0.001) continue;
 
 				// ## recruitmen line is ok basing on Unit criteria
-
+				assertThat(replenishMult).isGreaterThan(0.0);
 				val unitInfoNew = newUnitEntryReplenishBonusForFaction(unitRecrInfo, replenishMult, factionSymbol);
 				if(unitInfoNew != null) {
 					lines.insertAt(index, unitInfoNew.toRecruitmentPoolLine());
@@ -359,9 +363,10 @@ public class UnitsManager {
 				if(unitRecrInfo.ReplenishRate <= 0.001) continue;
 
 				for (val bonusCondition : bonusConditioList) {
-
 					double orgReplenishMult = bonusCondition.getItem1();
 					String additionalCondition = bonusCondition.getItem2();
+
+					assertThat(orgReplenishMult).isGreaterThan(0.0);
 
 					val unitInfoNew = newUnitEntryReplenishBonusWithCondition(unitRecrInfo, orgReplenishMult, additionalCondition);
 					if(unitInfoNew != null) {
