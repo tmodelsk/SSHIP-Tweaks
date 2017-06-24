@@ -45,6 +45,7 @@ public class SsHipFeatures {
 		features.add(new OrderKnightsAvailable());
 		features.add(new PeasantsRecruitmentRemoved());
 		features.add(new TrebuchetEarlyAdoption());
+		features.add(new VeryHugeUnitSize());
 
 		features.add(new MerchantsRemovedFtr());
 		features.add(new WorldEconomyScaling());
@@ -79,8 +80,6 @@ public class SsHipFeatures {
 		features.add(new CrusadeJihadMoreSettl());
 		features.add(new WatchtowersToForts());
 		features.add(new AuthenticFactionNamesCharacterTitles());
-
-		features.add(new NobilityManyGeneralsGovernors());
 
 		//features.add(new NoRegionBordersOnMiniMap());  TODO : zrobic !!
 
@@ -118,6 +117,7 @@ public class SsHipFeatures {
 		features.add(new GarrisonNoUnguardedSettlements(garrisonManager));
 		features.add(new GarrisonOnSiegeRaising(garrisonManager));
 
+		features.add(new NobilityManyGeneralsGovernors());
 		features.add(new MuslimFactionsBoost());
 		features.add(new CatholicFactionsBoost());
 		features.add(new FightForSurvival(unitsManager));	// adds replenish rates entries for existing stuff, should be almost last
@@ -145,6 +145,8 @@ public class SsHipFeatures {
 		features.disableFeatureIfExists( WatchtowersToForts.Id);
 
 		if(!ConfigurationSettings.isDevEnvironment()) {
+			features.disableFeatureIfExists(VeryHugeUnitSize.Id);
+
 			features.getEnabled( LandBridgeGibraltarLaManche.Id).disable();
 			features.getEnabled( BeeMugCarlAITweaks.Id).disable();
 			features.getEnabled( CrusadeJihadMoreSettl.Id).disable();
