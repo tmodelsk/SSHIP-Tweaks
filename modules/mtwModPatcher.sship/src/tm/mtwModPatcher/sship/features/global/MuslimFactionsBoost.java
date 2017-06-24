@@ -32,7 +32,7 @@ public class MuslimFactionsBoost extends Feature {
 	@Getter @Setter
 	private boolean ahdathMilitiaBoost = false;
 	@Getter @Setter
-	private double muslimReplenishMult = 1.5;
+	private double muslimReplenishMult = 1.1;
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -49,34 +49,22 @@ public class MuslimFactionsBoost extends Feature {
 
 		List<Pattern> unitsToExclude = Arrays.asList(Pattern.compile(".*[Cc]hristian.*"));
 
-		String factionsFilterCsv = FactionsDefs.islamFactionsCsv() + FactionsDefs.slaveCsv();
 		UnitsManager unitsManager = new UnitsManager();
 
 		val queriesServ = new UnitRecruitmentSshipQueries(exportDescrBuilding);
 		val muslimUnitNames = UnitRecruitmentQueries.toUnitNames(queriesServ.findMuslim());
-		val replenishMult = muslimReplenishMult - 1;
+		val replenishMult = muslimReplenishMult - 1.0;
 
-		val islamFactions = FactionsDefs.islamFactionsSet();
-		unitsManager.updateOrAddReplenishBonusEntry(islamFactions, muslimUnitNames, replenishMult, unitsToExclude, exportDescrBuilding);
-//		for (val factionSymbol : islamFactions)
-//			unitsManager.addReplenishBonusEntry(factionSymbol, muslimUnitNames, replenishMult, unitsToExclude, exportDescrBuilding);
+		if(replenishMult > 0) {
+			val islamFactions = FactionsDefs.islamFactionsSet();
+			unitsManager.updateOrAddReplenishBonusEntry(islamFactions, muslimUnitNames, replenishMult, unitsToExclude, exportDescrBuilding);
+		}
 
 		if (ahdathMilitiaBoost) {
 			val ahdathMilitia = exportDescrUnit.loadUnit("Ahdath Militia");
 			ahdathMilitia.StatCost.Cost *= 0.90;
 			ahdathMilitia.StatCost.RecruitTurns = 1;
 		}
-
-		// ## Additional Upgrade replenish for Ahdath Militia
-		//unitsManager.updateReplenishRates("Ahdath Militia" , factionsFilterCsv , 2.0 , -1.0 , exportDescrBuilding);
-
-		// ## Additional Upgrade replenish for :
-		//unitsManager.updateReplenishRates("Fari Lancers" , factionsFilterCsv , 2.0 , -1.0 , exportDescrBuilding);
-		//unitsManager.updateReplenishRates("Tawashi Light Cavalry" , factionsFilterCsv , 2.0 , -1.0 , exportDescrBuilding);
-		//unitsManager.updateReplenishRates("Arab Cavalry" , factionsFilterCsv , 2.0 , -1.0 , exportDescrBuilding);
-
-
-		// Ahdath Militia - cheaper recruitment
 	}
 
 	private void religiousConversionTempleBonus() throws PatcherLibBaseEx {

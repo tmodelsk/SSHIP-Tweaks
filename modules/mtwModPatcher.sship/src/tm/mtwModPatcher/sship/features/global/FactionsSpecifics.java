@@ -14,6 +14,7 @@ import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
 import tm.mtwModPatcher.lib.managers.UnitsManager;
 
+import java.util.Arrays;
 import java.util.UUID;
 
 /**  */
@@ -56,12 +57,14 @@ public class FactionsSpecifics extends Feature {
 
 	protected void NorwegianDanesBoostReplenishRates() throws PatcherLibBaseEx {
 		UnitsManager unitsManager = new UnitsManager();
-		val updatedLines = unitsManager.updateAllUnitsReplenishRates("norway, denmark,", 3.0 , -2.0 , null , exportDescrBuilding);
+		//val updatedLines = unitsManager.updateAllUnitsReplenishRates("norway, denmark,", 3.0 , -2.0 , null , exportDescrBuilding);
+		unitsManager.updateOrAddReplenishBonusEntry(Arrays.asList("norway","denmark"), null, 0.1, null, exportDescrBuilding);
 	}
 
 	protected void CumansBoostReplenishRates() throws PatcherLibBaseEx {
 		UnitsManager unitsManager = new UnitsManager();
-		unitsManager.updateAllUnitsReplenishRates("cumans,", 3.0 , -2.0 , null , exportDescrBuilding);
+		//unitsManager.updateAllUnitsReplenishRates("cumans,", 3.0 , -2.0 , null , exportDescrBuilding);
+		unitsManager.updateOrAddReplenishBonusEntry(Arrays.asList("cumans"), null, 0.1, null, exportDescrBuilding);
 	}
 
 	protected void RomanCatholicTradersBonuses() throws PatcherLibBaseEx {
@@ -112,6 +115,7 @@ public class FactionsSpecifics extends Feature {
 			ByzantiumPopulationMinus(byzantiumPopulationPenaltyAi,byzantiumPopulationPenaltyAi-1 , " and not event_counter is_the_player 1");	// AI version
 
 		val unitsManager = new UnitsManager();
+		// Longer units replenishes
 		val updatedLines = unitsManager.updateAllUnitsReplenishRates(FactionsDefs.byzantiumCsv(), 3.0 , 2.0 , null , exportDescrBuilding);
 	}
 
@@ -228,7 +232,8 @@ public class FactionsSpecifics extends Feature {
 
 	protected void turksRumBoost() {
 		UnitsManager unitsManager = new UnitsManager();
-		val updatedLines = unitsManager.updateAllUnitsReplenishRates("rum,", 3.0 , -2.0 , null , exportDescrBuilding);
+		//val updatedLines = unitsManager.updateAllUnitsReplenishRates("rum,", 3.0 , -2.0 , null , exportDescrBuilding);
+		unitsManager.updateOrAddReplenishBonusEntry(Arrays.asList("rum"), null, 0.1, null, exportDescrBuilding);
 	}
 
 	@Override

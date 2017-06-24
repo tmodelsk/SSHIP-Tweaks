@@ -1,8 +1,14 @@
 package tm.mtwModPatcher.sship.features.global;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.val;
 import tm.common.Ctm;
 import tm.common.Tuple2;
+import tm.common.collections.ArrayUniqueList;
+import tm.common.collections.ListUnique;
+import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
+import tm.mtwModPatcher.lib.common.core.features.params.ParamIdDouble;
 import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
@@ -20,6 +26,13 @@ import java.util.regex.Pattern;
  * Smaller factions get survival bonuses
  */
 public class FightForSurvival extends Feature {
+
+	@Getter @Setter
+	private double warningReplenishMult = 1.10;
+	@Getter @Setter
+	private double dangerReplenishMult = 1.20;
+	@Getter @Setter
+	private double criticalReplenishMult = 1.33;
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -45,7 +58,10 @@ public class FightForSurvival extends Feature {
 		exportDescrBuilding.insertIntoCityCastleWallsCapabilities("        law_bonus bonus 1" + requires);
 		insertConstructionCostBonus(5, requires);
 		insertConstructionTimeBonus(10, requires);
-		unitReplenishBonusConditionList.add(new Tuple2<>(0.33, condition));
+
+		val warningRepl = warningReplenishMult - 1.0;
+		if(warningRepl > 0.0)
+			unitReplenishBonusConditionList.add(new Tuple2<>(warningRepl, condition));
 
 
 		// ###### DANGER Level #######
@@ -62,7 +78,9 @@ public class FightForSurvival extends Feature {
 		exportDescrBuilding.insertIntoCityCastleWallsCapabilities("        free_upkeep bonus 1" + requires);                // +2 Free Upkeep
 		insertConstructionCostBonus(10, requires);
 		insertConstructionTimeBonus(6, requires);
-		unitReplenishBonusConditionList.add(new Tuple2<>(0.5, condition));
+
+		val dangerRepl = dangerReplenishMult -1.0;
+		if(dangerRepl > 0.0) unitReplenishBonusConditionList.add(new Tuple2<>(dangerRepl, condition));
 
 		addFlatMoneyBonus(1.25, EVENT_DANGER_NAME, requires);	// last 1.0
 
@@ -81,7 +99,9 @@ public class FightForSurvival extends Feature {
 		exportDescrBuilding.insertIntoCityCastleWallsCapabilities("        recruitment_slots 1 requires not event_counter freeze_recr_pool 1 and event_counter " + EVENT_CRITICAL_NAME + " 1");
 		insertConstructionCostBonus(20, requires);
 		insertConstructionTimeBonus(4, requires);
-		unitReplenishBonusConditionList.add(new Tuple2<>(0.66, condition));
+
+		val criticalRepl = criticalReplenishMult - 1.0;
+		if(criticalRepl > 0.0) unitReplenishBonusConditionList.add(new Tuple2<>(criticalRepl, condition));
 
 		addFlatMoneyBonus(2.0 , EVENT_CRITICAL_NAME , requires);
 
@@ -167,6 +187,25 @@ public class FightForSurvival extends Feature {
 		return str;
 	}
 
+	@Override
+	public ListUnique<ParamId> defineParamsIds() {
+		val pars = new ArrayUniqueList<ParamId>();
+
+		pars.add(new ParamIdDouble("WarningReplenishMult" , "Warning Replenish Mult",
+				feature -> ((FightForSurvival)feature).getWarningReplenishMult(),
+				(feature, value) -> ((FightForSurvival)feature).setWarningReplenishMult(value)));
+
+		pars.add(new ParamIdDouble("DangerReplenishMult" , "Danger Replenish Mult",
+				feature -> ((FightForSurvival)feature).getDangerReplenishMult(),
+				(feature, value) -> ((FightForSurvival)feature).setDangerReplenishMult(value)));
+
+		pars.add(new ParamIdDouble("CriticalReplenishMult" , "Critical Replenish Mult",
+				feature -> ((FightForSurvival)feature).getCriticalReplenishMult(),
+				(feature, value) -> ((FightForSurvival)feature).setCriticalReplenishMult(value)));
+
+		return pars;
+	}
+
 	protected CampaignScript campaignScript;
 	protected ExportDescrBuilding exportDescrBuilding;
 	private ExportDescrUnitTyped exportDescrUnit;
@@ -183,7 +222,6 @@ public class FightForSurvival extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-
 	public static UUID Id = UUID.randomUUID();
 
 	public FightForSurvival(UnitsManager unitsManager) {

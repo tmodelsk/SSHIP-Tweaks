@@ -18,7 +18,9 @@ import java.util.UUID;
 import java.util.regex.Pattern;
 
 /**
+ * Not used for a long time.
  */
+@Deprecated
 public class Civilizations extends Feature {
 
 	protected double WorldMultiplier = 1;
