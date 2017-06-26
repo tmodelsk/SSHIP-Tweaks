@@ -60,6 +60,11 @@ public class TrebuchetEarlyAdoption extends Feature {
 
 	public TrebuchetEarlyAdoption() {
 		super("Trebuchet Early Adoption");
+
+		addCategory("Units");
+
+		setDescriptionShort("Earlier access to trebuchet by 'adopting' technology from conquered muslim castles");
+		setDescriptionUrl("http://tmsship.wikidot.com/trebuchet-early-adoption");
 	}
 
 	@Override

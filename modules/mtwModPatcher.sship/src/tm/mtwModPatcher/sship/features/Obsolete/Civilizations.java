@@ -511,7 +511,7 @@ public class Civilizations extends Feature {
 		String factionsFilterCsv = FactionsDefs.islamFactionsCsv() + FactionsDefs.slaveCsv();
 		UnitsManager unitsManager = new UnitsManager();
 
-		unitsManager.updateAllUnitsReplenishRates(factionsFilterCsv, 2.0 , -1.0 , unitsToExclude , _ExportDescrBuilding);
+		unitsManager.updateAllUnitsReplenishRatesByTurnNumber(factionsFilterCsv, 2.0 , -1.0 , unitsToExclude , _ExportDescrBuilding);
 
 		// ## Additional Upgrade replenish for Ahdath Militia
 		unitsManager.updateReplenishRates("Ahdath Militia" , factionsFilterCsv , 2.0 , -1.0 , _ExportDescrBuilding);
@@ -608,7 +608,7 @@ public class Civilizations extends Feature {
 
 		// ### Replenish Rates ###
 		UnitsManager unitsManager = new UnitsManager();
-		unitsManager.updateAllUnitsReplenishRates(FactionsDefs.turanianFactionsCsv(), 3.0 , -2.0 , null , _ExportDescrBuilding);
+		unitsManager.updateAllUnitsReplenishRatesByTurnNumber(FactionsDefs.turanianFactionsCsv(), 3.0 , -2.0 , null , _ExportDescrBuilding);
 	}
 
 	protected void TuraniaHappinesLasBonus() throws PatcherLibBaseEx {

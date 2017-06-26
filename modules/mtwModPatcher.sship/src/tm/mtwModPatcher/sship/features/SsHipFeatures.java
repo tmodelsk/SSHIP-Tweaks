@@ -79,6 +79,7 @@ public class SsHipFeatures {
 		features.add(new AragonChapterHousesBoost());
 		features.add(new CrusadeJihadMoreSettl());
 		features.add(new WatchtowersToForts());
+		features.add(new RimlandHeartland());
 		features.add(new AuthenticFactionNamesCharacterTitles());
 
 		//features.add(new NoRegionBordersOnMiniMap());  TODO : zrobic !!
