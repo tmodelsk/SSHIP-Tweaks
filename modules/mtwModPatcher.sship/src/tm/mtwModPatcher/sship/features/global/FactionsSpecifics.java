@@ -57,14 +57,14 @@ public class FactionsSpecifics extends Feature {
 
 	protected void NorwegianDanesBoostReplenishRates() throws PatcherLibBaseEx {
 		UnitsManager unitsManager = new UnitsManager();
-		//val updatedLines = unitsManager.updateAllUnitsReplenishRates("norway, denmark,", 3.0 , -2.0 , null , exportDescrBuilding);
-		unitsManager.updateOrAddReplenishBonusEntry(Arrays.asList("norway","denmark"), null, 0.1, null, exportDescrBuilding);
+		//val updatedLines = unitsManager.updateAllUnitsReplenishRatesByTurnNumber("norway, denmark,", 3.0 , -2.0 , null , exportDescrBuilding);
+		unitsManager.updateOrAddReplenishBonusEntry(Arrays.asList("norway","denmark"), null, 1.1, null, exportDescrBuilding);
 	}
 
 	protected void CumansBoostReplenishRates() throws PatcherLibBaseEx {
 		UnitsManager unitsManager = new UnitsManager();
-		//unitsManager.updateAllUnitsReplenishRates("cumans,", 3.0 , -2.0 , null , exportDescrBuilding);
-		unitsManager.updateOrAddReplenishBonusEntry(Arrays.asList("cumans"), null, 0.1, null, exportDescrBuilding);
+		//unitsManager.updateAllUnitsReplenishRatesByTurnNumber("cumans,", 3.0 , -2.0 , null , exportDescrBuilding);
+		unitsManager.updateOrAddReplenishBonusEntry(Arrays.asList("cumans"), null, 1.1, null, exportDescrBuilding);
 	}
 
 	protected void RomanCatholicTradersBonuses() throws PatcherLibBaseEx {
@@ -116,7 +116,7 @@ public class FactionsSpecifics extends Feature {
 
 		val unitsManager = new UnitsManager();
 		// Longer units replenishes
-		val updatedLines = unitsManager.updateAllUnitsReplenishRates(FactionsDefs.byzantiumCsv(), 3.0 , 2.0 , null , exportDescrBuilding);
+		val updatedLines = unitsManager.updateAllUnitsReplenishRatesByTurnNumber(FactionsDefs.byzantiumCsv(), 3.0 , 2.0 , null , exportDescrBuilding);
 	}
 
 	protected void ByzantiumMilitaryBuildingsPenalties() throws PatcherLibBaseEx {
@@ -232,8 +232,8 @@ public class FactionsSpecifics extends Feature {
 
 	protected void turksRumBoost() {
 		UnitsManager unitsManager = new UnitsManager();
-		//val updatedLines = unitsManager.updateAllUnitsReplenishRates("rum,", 3.0 , -2.0 , null , exportDescrBuilding);
-		unitsManager.updateOrAddReplenishBonusEntry(Arrays.asList("rum"), null, 0.1, null, exportDescrBuilding);
+		//val updatedLines = unitsManager.updateAllUnitsReplenishRatesByTurnNumber("rum,", 3.0 , -2.0 , null , exportDescrBuilding);
+		unitsManager.updateOrAddReplenishBonusEntry(Arrays.asList("rum"), null, 1.1, null, exportDescrBuilding);
 	}
 
 	@Override

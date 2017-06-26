@@ -4,6 +4,7 @@ import lombok.val;
 import org.xml.sax.SAXException;
 import tm.common.Ctm;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
+import tm.mtwModPatcher.lib.common.core.features.fileEntities.LineNotFoundEx;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.SectionsFileEntity;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.sections.SectionDocTextLines;
@@ -66,20 +67,20 @@ public class DescrStratSectioned extends SectionsFileEntity {
 		lines.insertAt(endIndex, rl);
 	}
 
-	public int loadSettlementBuildingIndex(String provinceName) throws PatcherLibBaseEx {
+	public int loadSettlementFirstBuildingIndex(String provinceName) {
 		val lines = Factions.getContent().getLines();
 
 		int pamlponaFirstBuildingTag = lines.findFirstLineByLinePath(
 				Arrays.asList("^\\s*region\\s+" + provinceName,
 						"^\\s*building"));
 		if (pamlponaFirstBuildingTag < 0)
-			throw new PatcherLibBaseEx("DescrStrat / Factions / Settlement Province " + provinceName + " building not found !");
+			throw new LineNotFoundEx("DescrStrat / Factions / Settlement Province " + provinceName + " building not found !");
 
 		return pamlponaFirstBuildingTag;
 	}
 
 	public int loadSettlemenBlockEndIndex(String provinceName) throws PatcherLibBaseEx {
-		val buildingIndex = loadSettlementBuildingIndex(provinceName);
+		val buildingIndex = loadSettlementFirstBuildingIndex(provinceName);
 
 		int openBracketsCount = 0, endIndex = -1, i = buildingIndex + 1;
 		String actLine = "";
@@ -102,6 +103,30 @@ public class DescrStratSectioned extends SectionsFileEntity {
 		}
 
 		return endIndex;
+	}
+
+	public int getSettlementBuildingLine(String provinceName, String buildingType, String buildingLevel) {
+		val start = loadSettlementFirstBuildingIndex(provinceName);
+		val end = loadSettlemenBlockEndIndex(provinceName);
+
+		val lines = Factions.getContent().getLines();
+
+		val regex = Ctm.msgFormat("^\\s*type {0} {1}", buildingType, buildingLevel);
+		val index = lines.findFirstRegexLine(regex, start, end);
+		return index;
+	}
+
+	public boolean removeSettlementBuilding(String provinceName, String buildingType, String buildingLevel) {
+		boolean removed = false;
+
+		val index = getSettlementBuildingLine(provinceName, buildingType, buildingLevel);
+		if(index > 0) {
+			val lines = Factions.getContent().getLines();
+
+			lines.removeRange(index-2, index+1);
+		}
+
+		return removed;
 	}
 
 	private static Set<String> _SettlementNames = null;

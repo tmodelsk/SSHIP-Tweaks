@@ -1,6 +1,7 @@
 package tm.mtwModPatcher.lib.data.exportDescrBuilding;
 
 import lombok.val;
+import tm.common.Ctm;
 import tm.common.Range;
 import tm.common.Tuple2;
 import tm.common.Tuple3;
@@ -20,6 +21,13 @@ import java.util.regex.Pattern;
  * Created by Tomek on 2016-04-16.
  */
 public class ExportDescrBuilding extends LinesProcessorFileEntity {
+
+	public void addHiddenResourceDef(String hiddenResourceName) {
+		val lines = getLines();
+		int index = lines.findExpFirstRegexLine("^\\s*hidden_resources\\s+");
+		val orgLineStr = lines.getLine(index);
+		lines.replaceLine(index, orgLineStr+ " " + hiddenResourceName );
+	}
 
 	public List<Tuple2<String, List<Integer>>> addFlatCityCastleIncome(String requires, double factor) throws PatcherLibBaseEx {
 		String attributeStr = "       income_bonus bonus ";
@@ -253,6 +261,14 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 				), 0);
 
 		return settlementRequirement;
+	}
+	public void addBuildingRequirement(String buildingName, String levelName, String castleOrCity, String additionalRequirement) {
+		val index = findBuidlingRequiresLine(buildingName, levelName, castleOrCity);
+		if(index <=0 ) throw new PatcherLibBaseEx(Ctm.msgFormat("Builidng ({0},{1},{2}) not found", buildingName, levelName, castleOrCity));
+
+		val orgLine = getLines().getLine(index);
+
+		getLines().replaceLine(index, orgLine + " " + additionalRequirement);
 	}
 
 	public int findBuidlingSettlementRequirementLine(String buildingName, String levelName, String castleOrCity) throws PatcherLibBaseEx {

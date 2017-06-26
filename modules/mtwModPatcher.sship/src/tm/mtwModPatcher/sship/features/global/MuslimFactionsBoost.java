@@ -53,12 +53,12 @@ public class MuslimFactionsBoost extends Feature {
 
 		val queriesServ = new UnitRecruitmentSshipQueries(exportDescrBuilding);
 		val muslimUnitNames = UnitRecruitmentQueries.toUnitNames(queriesServ.findMuslim());
-		val replenishMult = muslimReplenishMult - 1.0;
 
-		if(replenishMult > 0) {
+		if(muslimReplenishMult > 1.0) {
 			val islamFactions = FactionsDefs.islamFactionsSet();
-			unitsManager.updateOrAddReplenishBonusEntry(islamFactions, muslimUnitNames, replenishMult, unitsToExclude, exportDescrBuilding);
+			unitsManager.updateOrAddReplenishBonusEntry(islamFactions, muslimUnitNames, muslimReplenishMult, unitsToExclude, exportDescrBuilding);
 		}
+		else consoleLogger.writeLine("MuslimReplenishMult="+muslimReplenishMult+" (no bonus, decrease), skipping");
 
 		if (ahdathMilitiaBoost) {
 			val ahdathMilitia = exportDescrUnit.loadUnit("Ahdath Militia");

@@ -138,11 +138,8 @@ public class UnitsManager {
 								isUpdated = true;
 
 								double newRate = 1.0 / (Double) (rateOrg + replenishRateAddition);
-
 								double rounded = Math.ceil(newRate * 1000) / 1000;
-
 								newRate = rounded;
-
 								if (newRate > 1.0)
 									throw new PatcherLibBaseEx("New relpenish rate > 1.0 , unit = " + unitRecrInfo.Name + " !!");
 
@@ -161,8 +158,8 @@ public class UnitsManager {
 	}
 
 	/** Updates all units entries replenish rates when ALL factions from factionsFilterCsv are in entry */
-	public List<String> updateAllUnitsReplenishRates(String factionsFilterCsv, double relpenishRateMin, double replenishRateAddition,
-													 List<Pattern> unitsToExclude, ExportDescrBuilding exportDescrBuilding) {
+	public List<String> updateAllUnitsReplenishRatesByTurnNumber(String factionsFilterCsv, double relpenishRateMin, double replenishTurnsAddition,
+																 List<Pattern> unitsToExclude, ExportDescrBuilding exportDescrBuilding) {
 		LinesProcessor lines = exportDescrBuilding.getLines();
 
 		// ###### Loop throught all "recruit_pool ... " lines of building capabilities ######
@@ -210,7 +207,7 @@ public class UnitsManager {
 								if (rateOrg > relpenishRateMin) {
 									isUpdated = true;
 
-									double newRate = 1.0 / (Double) (rateOrg + replenishRateAddition);
+									double newRate = 1.0 / (Double) (rateOrg + replenishTurnsAddition);
 									double rounded = Math.ceil(newRate * 1000) / 1000;
 									newRate = rounded;
 
@@ -233,9 +230,39 @@ public class UnitsManager {
 		return updatedLines;
 	}
 
+	/** Adds replenish bonus by updating replensh (if all factions applies)
+	 * 		or by coping unit entry but with single faction { factionSymbol}
+	 * 		replenishMult - 1.0 no change	*/
+	public void updateAllReplenish(List<String> unitsFilter, double replenishMult,
+									   List<Pattern> unitsToExclude, ExportDescrBuilding exportDescrBuilding) {
+		LinesProcessor lines = exportDescrBuilding.getLines();
+
+		// ###### Loop throught all "recruit_pool ... " lines of building capabilities ######
+		Pattern regex = Pattern.compile("^^\\s*recruit_pool\\s+.+");
+
+		int index = 0;
+		while (index >= 0) {
+			index = lines.findFirstByRegexLine(regex, index + 1);
+			if (index >= 0) {
+				String lineOrg = lines.getLine(index);
+				val unitRecrInfo = exportDescrBuilding.parseUnitRecruitmentInfo(lineOrg);
+
+				// ### Check if needs to be excluded - ommitted ###
+				if(unitsFilter != null && !unitsFilter.contains(unitRecrInfo.Name)) continue;
+				if (isShouldBeExcluded(unitRecrInfo, unitsToExclude)) continue;
+				if(unitRecrInfo.ReplenishRate <= 0.001) continue;
+
+				// ## recruitment line is ok for Unit criteria
+				unitRecrInfo.ReplenishRate *= replenishMult;
+				lines.replaceLine(index, unitRecrInfo.toRecruitmentPoolLine());
+			}
+		}
+	}
+
 
 	/** Adds replenish bonus by updating replensh (if all factions applies)
-	 * 		or by coping unit entry but with single faction { factionSymbol} */
+	 * 		or by coping unit entry but with single faction { factionSymbol}
+	 * 		replenishMult - 1.0 no change	*/
 	public void updateOrAddReplenishBonusEntry(List<String> factions, List<String> unitsFilter, double replenishMult,
 											   List<Pattern> unitsToExclude, ExportDescrBuilding exportDescrBuilding) {
 		LinesProcessor lines = exportDescrBuilding.getLines();
@@ -258,13 +285,14 @@ public class UnitsManager {
 				// ## recruitment line is ok for Unit criteria, ### try to work on bulk mode (all factions specified) ###
 				val requirments = unitRecrInfo.getUnitRequireSimple();
 				if(requirments != null && CollectionUtils.isAllFirstElementsAreInSecond(requirments.Factions, factions)) {
-					unitRecrInfo.ReplenishRate *= (1.0 + replenishMult);
+					unitRecrInfo.ReplenishRate *= replenishMult;
 					lines.replaceLine(index, unitRecrInfo.toRecruitmentPoolLine());
 				}
 				else {	// ## Loop throught factions, add new entries per findividual faction
-					assertThat(replenishMult).isGreaterThan(0.0);
+					assertThat(replenishMult).isGreaterThan(1.0);
+					val newEntryReplenighMult = replenishMult - 1.0;
 					for(val factionSymbol : factions) {
-						val unitInfoNew = newUnitEntryReplenishBonusForFaction(unitRecrInfo, replenishMult, factionSymbol);
+						val unitInfoNew = newUnitEntryReplenishBonusForFaction(unitRecrInfo, newEntryReplenighMult, factionSymbol);
 						if(unitInfoNew != null) {
 							lines.insertAt(index, unitInfoNew.toRecruitmentPoolLine());
 							index++;	// we want to ommit freshly added unit above

@@ -10,6 +10,7 @@ import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdBoolean;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdDouble;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
 import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
 import tm.mtwModPatcher.lib.managers.UnitsManager;
@@ -41,6 +42,7 @@ public class VeryHugeUnitSize extends Feature {
 	@Override
 	public void executeUpdates() throws Exception {
 		edu = getFileRegisterForUpdated(ExportDescrUnitTyped.class);
+		edb = getFileRegisterForUpdated(ExportDescrBuilding.class);
 
 		val sorted =  edu.getUnits().stream().sorted(Comparator.comparingInt(o -> o.Soldier.NumberOfMen)).collect(Collectors.toList());
 
@@ -65,11 +67,12 @@ public class VeryHugeUnitSize extends Feature {
 				unit.StatCost.Cost *= sizeMulti;
 				unit.StatCost.Upkeep *= sizeMulti;
 			}
+		}
 
-			if(updateReplenish) {
-				val unitMan = new UnitsManager();
-				//unitMan.updateOrAddReplenishBonusEntry();
-			}
+		if(updateReplenish) {
+			val unitMan = new UnitsManager();
+			val replenishMult = 1 / sizeMulti;
+			unitMan.updateAllReplenish(null, replenishMult, null, edb);
 		}
 	}
 
@@ -98,9 +101,11 @@ public class VeryHugeUnitSize extends Feature {
 		addCategory("Units");
 
 		setDescriptionShort("Very Huge Unit Size, number of men * 125%");
+		setDescriptionUrl("http://tmsship.wikidot.com/very-huge-unit-size");
 	}
 
 	private ExportDescrUnitTyped edu;
+	private ExportDescrBuilding edb;
 
 
 	@Override
