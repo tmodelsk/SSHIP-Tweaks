@@ -43,7 +43,6 @@ public class LandBridgeGibraltarLaManche extends Feature {
 		addOverrideTask(new OverrideCopyTask("GiblartarLaMancheLandBridge"));
 
 		boolean isDevMachine = ConfigurationSettings.isDevEnvironment();
-
 		if(!isDevMachine)
 			addOverrideTask(new OverrideDeleteFilesTask("data\\world\\maps\\base\\map.rwm"));
 	}
