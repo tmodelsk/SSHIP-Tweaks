@@ -59,7 +59,7 @@ public class RimlandHeartland extends Feature {
 	private void rimlandProvincesHiddenResources() {
 		val p = new RimlandProvinceList();
 
-		p.add("Novgorod_Province", H); 	// dsaf
+		p.add("Novgorod_Province", H);
 		p.add("Kolyvan_Province");	// Estonia
 		p.add("Riga_Province");
 		p.add("Kernave_Province");	// Litwa

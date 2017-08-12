@@ -144,9 +144,9 @@ public class SsHipFeatures {
 		features.disableFeatureIfExists( SkynetBattleAi.Id);
 		features.disableFeatureIfExists( SkynetCampaignAi.Id);
 		features.disableFeatureIfExists( WatchtowersToForts.Id);
+		features.disableFeatureIfExists(VeryHugeUnitSize.Id);
 
 		if(!ConfigurationSettings.isDevEnvironment()) {
-			features.disableFeatureIfExists(VeryHugeUnitSize.Id);
 
 			features.getEnabled( LandBridgeGibraltarLaManche.Id).disable();
 			features.getEnabled( BeeMugCarlAITweaks.Id).disable();
