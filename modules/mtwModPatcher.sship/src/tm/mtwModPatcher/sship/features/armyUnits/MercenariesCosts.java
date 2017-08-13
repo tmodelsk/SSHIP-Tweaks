@@ -20,9 +20,9 @@ import java.util.*;
 /** Mercenaries costs : low initial recruitment cost, high upkeep cost */
 public class MercenariesCosts extends Feature {
 
-	private DescrMercenaries _DescrMercenaries;
-	private ExportDescrUnitTyped _ExportDescrUnit;
-	private ExportDescrBuilding _ExportDescrBuilding;
+	private DescrMercenaries descrMercenaries;
+	private ExportDescrUnitTyped edu;
+	private ExportDescrBuilding edb;
 
 	@Getter @Setter
 	private Double recruitCostMulti = 0.30;	// 0.33
@@ -31,22 +31,20 @@ public class MercenariesCosts extends Feature {
 
 	@Override
 	public void executeUpdates() throws Exception {
-		_DescrMercenaries = fileEntityFactory.getFile(DescrMercenaries.class);
-		registerUpdatedFile(_DescrMercenaries);
-		_ExportDescrUnit = fileEntityFactory.getFile(ExportDescrUnitTyped.class);
-		registerUpdatedFile(_ExportDescrUnit);
-		_ExportDescrBuilding = getFileRegisterForUpdated(ExportDescrBuilding.class);
+		descrMercenaries = fileEntityFactory.getFile(DescrMercenaries.class);
+		registerUpdatedFile(descrMercenaries);
+		edu = fileEntityFactory.getFile(ExportDescrUnitTyped.class);
+		registerUpdatedFile(edu);
+		edb = getFileRegisterForUpdated(ExportDescrBuilding.class);
 
-		LinesProcessor lines = _ExportDescrBuilding.getLines();
+		LinesProcessor lines = edb.getLines();
 
 		List<String> unitNamesExcluded = new ArrayList<>();
 
 		// ### Exclude Recuitable units ###
-		Set<String> mercUnitNames = _DescrMercenaries.getAllUnitNames();
+		Set<String> mercUnitNames = descrMercenaries.getAllUnitNames();
 
 		// ## Check if unit if recruitable EXCEPT particular buildings : byzantine_mercenary_barracks tree
-		// building byzantine_mercenary_barracks
-
 		int mercBarracksStart = lines.findExpFirstRegexLine("^building\\s+byzantine_mercenary_barracks");
 		int mercBarracksEnd = lines.findExpFirstRegexLine("^building\\s+" , mercBarracksStart+1);	// search for ANY merc building tag
 
@@ -55,7 +53,7 @@ public class MercenariesCosts extends Feature {
 
 		for (String mercUnitName : mercUnitNames) {
 			String recruitPoolRegex = "^\\s*recruit_pool\\s+\""+ mercUnitName +"\"";
-			int mercIndex =  _ExportDescrBuilding.getLines().findFirstRegexLine(recruitPoolRegex , exeptRanges);
+			int mercIndex =  edb.getLines().findFirstRegexLine(recruitPoolRegex , exeptRanges);
 			if(mercIndex > 0) {
 				unitNamesExcluded.add(mercUnitName);
 			}
@@ -66,29 +64,29 @@ public class MercenariesCosts extends Feature {
 		List<String> crusadersMercs = Arrays.asList("Crusader Knights" , "Crusader Sergeants" , "Dismounted Crusader Knights");
 		unitNamesExcluded.addAll(crusadersMercs);
 
-		mercUnitNames = _DescrMercenaries.updateAllCostsByMultiplier(recruitCostMulti , unitNamesExcluded);
+		mercUnitNames = descrMercenaries.updateAllCostsByMultiplier(recruitCostMulti , unitNamesExcluded);
 		for (String mercUnitName : mercUnitNames) {
-			_ExportDescrUnit.updateUpkeepByMultiplier(mercUnitName, upkeepCostsMulti);
+			edu.updateUpkeepByMultiplier(mercUnitName, upkeepCostsMulti);
 		}
 
 		// ## Crusaders Mercenaries ##
-		_DescrMercenaries.updateUnitCostsByMultiplier("Crusader Sergeants" , 0.25);	// 0.5 - 40%
-		_ExportDescrUnit.updateUpkeepByMultiplier("Crusader Sergeants", 1.7);	// 1.7
+		descrMercenaries.updateUnitCostsByMultiplier("Crusader Sergeants" , 0.25);	// 0.5 - 40%
+		edu.updateUpkeepByMultiplier("Crusader Sergeants", 1.7);	// 1.7
 
-		_DescrMercenaries.updateUnitCostsByMultiplier("Crusader Knights" , 0.28); // 0.5 - 40%
-		_ExportDescrUnit.updateUpkeepByMultiplier("Crusader Knights", 1.128);	// bylo 1.25 ale -10%
+		descrMercenaries.updateUnitCostsByMultiplier("Crusader Knights" , 0.28); // 0.5 - 40%
+		edu.updateUpkeepByMultiplier("Crusader Knights", 1.128);	// bylo 1.25 ale -10%
 
-		_DescrMercenaries.updateUnitCostsByMultiplier("Dismounted Crusader Knights" , 0.3);
-		_ExportDescrUnit.updateUpkeepByMultiplier("Dismounted Crusader Knights", 1.128);
+		descrMercenaries.updateUnitCostsByMultiplier("Dismounted Crusader Knights" , 0.3);
+		edu.updateUpkeepByMultiplier("Dismounted Crusader Knights", 1.128);
 
 
 		// Moors Christian Guard Recuit -20%, Upkeep + 50%
 		double chgRecruitMulti = 0.8, chgUpkeepMulti = 1.5;
-		UnitDef christianGuard = _ExportDescrUnit.loadUnit("Christian Guard");
+		UnitDef christianGuard = edu.loadUnit("Christian Guard");
 		christianGuard.StatCost.Cost *= chgRecruitMulti;
 		christianGuard.StatCost.Upkeep *= chgUpkeepMulti;
 
-		christianGuard = _ExportDescrUnit.loadUnit("Dismounted Christian Guard");
+		christianGuard = edu.loadUnit("Dismounted Christian Guard");
 		christianGuard.StatCost.Cost *= chgRecruitMulti;
 		christianGuard.StatCost.Upkeep *= chgUpkeepMulti;
 	}

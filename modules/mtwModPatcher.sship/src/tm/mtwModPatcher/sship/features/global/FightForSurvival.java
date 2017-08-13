@@ -9,6 +9,7 @@ import tm.common.collections.ArrayUniqueList;
 import tm.common.collections.ListUnique;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdDouble;
+import tm.mtwModPatcher.lib.common.core.features.params.ParamIdInteger;
 import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
@@ -33,6 +34,8 @@ public class FightForSurvival extends Feature {
 	private double dangerReplenishMult = 1.20;
 	@Getter @Setter
 	private double criticalReplenishMult = 1.33;
+	@Getter @Setter
+	private int switchOffMoneyLevel = 20000;
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -149,7 +152,8 @@ public class FightForSurvival extends Feature {
 		campaignScript.getLines().insertAt(insertLine, str);
 	}
 
-	protected String getMonitorForFactions(List<String> factionNames, int settlementsCountWarning, int settlementCountDanger, int settlementCountCritical) {
+	protected String getMonitorForFactions(List<String> factionNames,
+										   	int settlementsCountWarning, int settlementCountDanger, int settlementCountCritical) {
 		String str = "";
 
 		for (String facionName : factionNames) {
@@ -159,10 +163,12 @@ public class FightForSurvival extends Feature {
 		return str;
 	}
 
-	protected String getMonitorForFaction(String factionName, int settlementsCountWarning, int settlementCountDanger, int settlementCountCritical) {
+	protected String getMonitorForFaction(String factionName,
+										  	int settlementsCountWarning, int settlementCountDanger, int settlementCountCritical) {
 		String str = "";
 
-		str += "monitor_event PreFactionTurnStart FactionType " + factionName + nl + nl;
+		str += "monitor_event PreFactionTurnStart FactionType " + factionName  +nl+nl;
+		// + " and Treasury < " + switchOffMoneyLevel // - not working
 
 		str += "    set_event_counter " + EVENT_WARNING_NAME + " 0" + nl;
 		str += "    set_event_counter " + EVENT_DANGER_NAME + " 0" + nl;
@@ -202,6 +208,10 @@ public class FightForSurvival extends Feature {
 		pars.add(new ParamIdDouble("CriticalReplenishMult" , "Critical Replenish Mult",
 				feature -> ((FightForSurvival)feature).getCriticalReplenishMult(),
 				(feature, value) -> ((FightForSurvival)feature).setCriticalReplenishMult(value)));
+
+		pars.add(new ParamIdInteger("SwitchOffMoneyLevel" , "Switch Off Money Level",
+				feature -> ((FightForSurvival)feature).getSwitchOffMoneyLevel(),
+				(feature, value) -> ((FightForSurvival)feature).setSwitchOffMoneyLevel(value)));
 
 		return pars;
 	}
