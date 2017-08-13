@@ -144,7 +144,21 @@ public class RimlandHeartland extends Feature {
 		p.add("Al_Aqaba_Province", H);	// Aqaba : Red Sea - Jerusalem/Askalon - Mediterian Sea
 		p.add("Cairo_Province", H);	// No heartland but Red Sea - Mediterian Sea trade route
 		p.add("Qus_Province");	// Southern Nile Delta, southern Africa trande routes
-		//p.add("");
+
+		// # Mediterian ISLANDS
+		p.add("Palma_Province");	// Baleary
+		p.add("Cagliari_Province");	// Sardinia
+		p.add("Palermo_Province");	// Sicily
+		p.add("Corinth_Province");	// Korinth, Peloponez
+		p.add("Chandax_Province");	// Crete
+		p.add("Lefkosia_Province");	// Cypr
+
+		// # Baltic/North Sea Islands
+
+		p.add("Visby_Province");	// Gotland
+		p.add("Roskilde_Province");	// Zealand - Danish straits
+		//p.add("");	//
+
 
 		edb.addHiddenResourceDef(HR_RIMLAND_LOW);
 		edb.addHiddenResourceDef(HR_RIMLAND_HIGH);
