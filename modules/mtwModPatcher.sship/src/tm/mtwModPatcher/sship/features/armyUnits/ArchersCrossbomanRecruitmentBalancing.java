@@ -1,6 +1,12 @@
 package tm.mtwModPatcher.sship.features.armyUnits;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.val;
+import tm.common.collections.ArrayUniqueList;
+import tm.common.collections.ListUnique;
+import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
+import tm.mtwModPatcher.lib.common.core.features.params.ParamIdInteger;
 import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
@@ -15,6 +21,9 @@ import java.util.stream.Collectors;
 
 /**  */
 public class ArchersCrossbomanRecruitmentBalancing extends Feature {
+
+	@Getter @Setter
+	private int replenishTurnsAddition = 4;
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -104,8 +113,19 @@ public class ArchersCrossbomanRecruitmentBalancing extends Feature {
 
 		for (UnitDef unit : archersWestern) {
 			unit.StatCost.RecruitTurns++;
-			exportDescrBuilding.updateUnitReplenishRates(unit.Name, 0 , 2);
+			exportDescrBuilding.updateUnitReplenishRates(unit.Name, 0 , replenishTurnsAddition);
 		}
+	}
+
+	@Override
+	public ListUnique<ParamId> defineParamsIds() {
+		val parIds = new ArrayUniqueList<ParamId>();
+
+		parIds.add(new ParamIdInteger("ReplenishTurnsAddition","Replenish Turns Addition",
+					feature -> ((ArchersCrossbomanRecruitmentBalancing)feature).getReplenishTurnsAddition(),
+					(feature, value) ->  ((ArchersCrossbomanRecruitmentBalancing)feature).setReplenishTurnsAddition(value)  ));
+
+		return parIds;
 	}
 
 	protected ExportDescrUnitTyped exportDescrUnit;
