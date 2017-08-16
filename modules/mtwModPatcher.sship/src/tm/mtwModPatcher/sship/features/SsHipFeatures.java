@@ -46,6 +46,7 @@ public class SsHipFeatures {
 		features.add(new PeasantsRecruitmentRemoved());
 		features.add(new TrebuchetEarlyAdoption());
 		features.add(new VeryHugeUnitSize());
+		features.add(new PeasantGarrisonsFix());
 
 		features.add(new MerchantsRemovedFtr());
 		features.add(new WorldEconomyScaling());

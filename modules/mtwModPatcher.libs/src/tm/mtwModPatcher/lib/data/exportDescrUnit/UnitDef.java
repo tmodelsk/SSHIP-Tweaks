@@ -73,6 +73,19 @@ public class UnitDef {
 		Attributes += ", "+ attributeName;
 	}
 
+	public void removeAttribute(String attributeName) {
+		if(! Attributes.contains(attributeName)) return;
+
+		String tmp = Attributes;
+
+		tmp = tmp.replaceAll(attributeName , "");
+		tmp = tmp.replaceAll(",\\s*," , ",");
+		tmp = tmp.replaceAll("^\\s*," , "");
+		tmp = tmp.replaceAll("\\s*,\\s*$" , "");
+
+		Attributes = tmp;
+	}
+
 	public void addStatPriAttribute(String newAttribute) {
 		if( StatPriAttr != null ) {
 			if(!StatPriAttr.isEmpty()) {
@@ -131,4 +144,5 @@ public class UnitDef {
 	}
 
 	public static final String AttribFreeUpkeep = "free_upkeep_unit";
+	public static final String ATTRIB_IS_PEASANT = "is_peasant";
 }

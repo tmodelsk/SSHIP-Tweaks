@@ -23,6 +23,9 @@ public class ExportDescrUnitTyped extends FileEntity {
 	public void setAttributeForAllUnits(String attribute) throws PatcherLibBaseEx {
 		for(UnitDef unit : _Units) unit.addAttribute(attribute);
 	}
+	public void removeAttributeForAllUnits(String attribute) throws PatcherLibBaseEx {
+		for(UnitDef unit : _Units) unit.removeAttribute (attribute);
+	}
 
 	public void addOwnership(String unitName, String factionName) throws PatcherLibBaseEx {
 		UnitDef unit = loadUnit(unitName);
