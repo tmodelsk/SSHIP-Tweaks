@@ -86,6 +86,12 @@ public class UnitDef {
 		Attributes = tmp;
 	}
 
+	public boolean hasAttribute(String attributeName) {
+		if(Attributes == null) return false;
+
+		return Attributes.contains(attributeName);
+	}
+
 	public void addStatPriAttribute(String newAttribute) {
 		if( StatPriAttr != null ) {
 			if(!StatPriAttr.isEmpty()) {

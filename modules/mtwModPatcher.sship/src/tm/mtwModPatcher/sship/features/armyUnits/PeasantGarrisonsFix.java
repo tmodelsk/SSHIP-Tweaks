@@ -19,6 +19,11 @@ public class PeasantGarrisonsFix extends Feature {
 	public void executeUpdates() throws Exception {
 		edu = getFileRegisterForUpdated(ExportDescrUnitTyped.class);
 
+		@SuppressWarnings("unused")
+		val peasantAttribUnitsOrg = edu.getUnits().stream()
+				.filter( u -> u.hasAttribute(UnitDef.ATTRIB_IS_PEASANT) )
+				.map( u -> u.Name ).collect(Collectors.toList());
+
 		edu.removeAttributeForAllUnits(UnitDef.ATTRIB_IS_PEASANT);
 
 		val peasants = new ArrayList<String>();
@@ -28,13 +33,18 @@ public class PeasantGarrisonsFix extends Feature {
 				.collect(Collectors.toList());
 
 		peasantArrowArchers.forEach( paa -> peasants.add(paa.Name) );
-		peasants.add("Hunters");
-		peasants.add("Woodsmen");
+
 		peasants.add("EE Peasants");
 		peasants.add("Peasants");
 		peasants.add("Southern Peasants");
 		peasants.add("Slav Levies");
 		peasants.add("Transilvanian Peasants");
+		peasants.add("Hunters");
+		peasants.add("Woodsmen");
+
+		peasants.add("Religious Fanatics");
+		peasants.add("Pisan and Geonese sailors");
+
 		//peasants.add("");
 
 		peasants.forEach( p -> edu.loadUnit(p).addAttribute(UnitDef.ATTRIB_IS_PEASANT) );
