@@ -215,7 +215,7 @@ public class FactionsDefs {
 			new FactionInfo("teutonic_order","SERBIA", CultureType.GREEK, Religion.Orthodox , EducationStyle.Western , "EE Bodyguard" ),  // ???? Culture = Western ???
 
 			new FactionInfo("cumans","CUMANS", CultureType.EASTERN_EUROPEAN, Religion.Pagan, EducationStyle.Pagan , "Cuman Bodyguard" ),
-			new FactionInfo("lithuania","LITHUANIA", CultureType.GREEK, Religion.Pagan, EducationStyle.Pagan , "Lith Bodyguard" ),
+			new FactionInfo("lithuania","LITHUANIA", CultureType.EASTERN_EUROPEAN, Religion.Pagan, EducationStyle.Pagan , "Lith Bodyguard" ),
 			new FactionInfo("mongols","Mongols", CultureType.MIDDLE_EASTERN, Religion.Pagan, EducationStyle.Pagan , "Keshikten Bodyguard" ),
 			new FactionInfo("slave", "Rebels", CultureType.SOUTHERN_EUROPEAN, Religion.Pagan , EducationStyle.None , null )
 			);
