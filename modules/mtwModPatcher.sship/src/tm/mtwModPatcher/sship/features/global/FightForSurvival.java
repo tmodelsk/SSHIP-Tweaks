@@ -36,6 +36,13 @@ public class FightForSurvival extends Feature {
 	private double criticalReplenishMult = 1.33;
 	@Getter @Setter
 	private int switchOffMoneyLevel = 20000;
+	@Getter @Setter
+	private int warningLevel = 6;
+	@Getter @Setter
+	private int dangerLevel = 4;
+	@Getter @Setter
+	private int criticalLevel = 2;
+
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -147,7 +154,7 @@ public class FightForSurvival extends Feature {
 		str += nl + nl;
 		str += "; ### Fight for survival - faction scripts ###" + nl + nl;
 
-		str += getMonitorForFactions(FactionsDefs.allFactionsList(), 5, 3, 1);
+		str += getMonitorForFactions(FactionsDefs.allFactionsList(), warningLevel, dangerLevel, criticalLevel);
 
 		campaignScript.getLines().insertAt(insertLine, str);
 	}
@@ -212,6 +219,20 @@ public class FightForSurvival extends Feature {
 		pars.add(new ParamIdInteger("SwitchOffMoneyLevel" , "Switch Off Money Level",
 				feature -> ((FightForSurvival)feature).getSwitchOffMoneyLevel(),
 				(feature, value) -> ((FightForSurvival)feature).setSwitchOffMoneyLevel(value)));
+
+		pars.add(new ParamIdInteger("WarningSettlementsCount" , "Warning Settlements Count",
+				feature -> ((FightForSurvival)feature).getWarningLevel(),
+				(feature, value) -> ((FightForSurvival)feature).setWarningLevel(value)));
+
+		pars.add(new ParamIdInteger("DangerSettlementsCount" , "Danger Settlements Count",
+				feature -> ((FightForSurvival)feature).getDangerLevel(),
+				(feature, value) -> ((FightForSurvival)feature).setDangerLevel(value)));
+
+		pars.add(new ParamIdInteger("CriticalSettlementsCount" , "Critical Settlements Count",
+				feature -> ((FightForSurvival)feature).getCriticalLevel(),
+				(feature, value) -> ((FightForSurvival)feature).setCriticalLevel(value)));
+
+
 
 		return pars;
 	}
