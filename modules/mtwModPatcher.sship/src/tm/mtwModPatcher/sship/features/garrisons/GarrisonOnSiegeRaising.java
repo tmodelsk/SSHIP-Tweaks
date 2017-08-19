@@ -197,10 +197,9 @@ public class GarrisonOnSiegeRaising extends Feature {
 	private ScriptBlock createFactionIfBlock(String factionName, SettlementInfo settlement) throws Exception {
 		IfBlock iff = new IfBlock(new SettlementOwner(settlement.Name, factionName));
 
-		List<UnitGarrisonInfo> units = _GarrisonMnager.getUnits(settlement, factionName);
+		val units = _GarrisonMnager.getUnits(settlement, factionName);
 		if(units == null || units.size() == 0)
 			throw new PatcherLibBaseEx("No units for "+settlement.Level + " Faction: "+factionName);
-
 
 		for (UnitGarrisonInfo unit : units) {
 			validateUnitInFaction(unit.Name, factionName, settlement);
