@@ -27,7 +27,7 @@ public class MercenariesCosts extends Feature {
 	@Getter @Setter
 	private Double recruitCostMulti = 0.30;	// 0.33
 	@Getter @Setter
-	private Double upkeepCostsMulti = 1.9;	// 18.
+	private Double upkeepCostsMulti = 2.0;	// 1.9 1.8
 
 	@Override
 	public void executeUpdates() throws Exception {
