@@ -32,6 +32,14 @@ public class VeryHugeUnitSize extends Feature {
 		sizeMulti = value;
 	}
 
+	@Getter
+	private double baseCostMulti = 0.75; //1.25;
+	public void setBaseCostMulti(double value) {
+		if(value > 1.25) throw new PatcherLibBaseEx("Size Multiplier max value is 1.25");
+
+		baseCostMulti = value;
+	}
+
 	@Getter @Setter
 	private boolean updateCosts = ConfigurationSettings.isDevEnvironment();
 	@Getter @Setter
@@ -64,8 +72,8 @@ public class VeryHugeUnitSize extends Feature {
 			}
 
 			if(updateCosts) {
-				unit.StatCost.Cost *= sizeMulti;
-				unit.StatCost.Upkeep *= sizeMulti;
+				unit.StatCost.Cost *= ( sizeMulti / baseCostMulti );
+				unit.StatCost.Upkeep *= ( sizeMulti / baseCostMulti );
 			}
 		}
 
@@ -77,8 +85,12 @@ public class VeryHugeUnitSize extends Feature {
 	}
 
 	@Override
-	public ListUnique<ParamId> defineParamsIds() {
+	public ListUnique<ParamId> defineParamsIds()  {
 		val pars = new ArrayUniqueList<ParamId>();
+
+		pars.add(new ParamIdDouble("BaseCostMulti" , "Base Cost Multi",
+				feature -> ((VeryHugeUnitSize)feature).getBaseCostMulti(),
+				(feature, value) -> ((VeryHugeUnitSize)feature).setBaseCostMulti(value)));
 
 		pars.add(new ParamIdDouble("SizeMulti" , "Size Multi",
 				feature -> ((VeryHugeUnitSize)feature).getSizeMulti(),
