@@ -30,12 +30,12 @@ public class CampaignAisCompilation extends CampaignAiConfigurator {
 		factionAiLabelsMap.put("default", CampaignAiType.BEEMUGCARL_DEFAULT);
 
 		// ## Papacy - Quieter AI papacy : 1
-		factionAiLabelsMap.replace("papal_states", CampaignAiType.QUIETER_PAPAL);
+		factionAiLabelsMap.replace("papal_states", CampaignAiType.SSHIP_PAPAL);
 
 		// ## SkynetAI : 8: Serbia, Lithuania, Cumans, Anatolia Turks
 		factionAiLabelsMap.replace("teutonic_order", CampaignAiType.SKYNET);	// Serbia
 		factionAiLabelsMap.replace("lithuania", CampaignAiType.SKYNET);
-		factionAiLabelsMap.replace("cumans", CampaignAiType.SKYNET);
+		//factionAiLabelsMap.replace("cumans", CampaignAiType.SKYNET);
 		//factionAiLabelsMap.replace("rum", CampaignAiType.SKYNET);				// Anatolia Seljuks
 		factionAiLabelsMap.replace("timurids", CampaignAiType.SKYNET);			// Georgia
 		factionAiLabelsMap.replace("denmark", CampaignAiType.SKYNET);
@@ -43,12 +43,12 @@ public class CampaignAisCompilation extends CampaignAiConfigurator {
 		factionAiLabelsMap.replace("scotland", CampaignAiType.SKYNET);
 
 		// ## Quiter AI : 7 : standard - SSHIP derived. Aggressive but loyal to allies - Chivalrus
-		factionAiLabelsMap.replace("portugal", CampaignAiType.QUIETER_CATHOLIC);
+		factionAiLabelsMap.replace("portugal", CampaignAiType.SSHIP_CATHOLIC);
 		factionAiLabelsMap.replace("spain", CampaignAiType.QUIETER_CATHOLIC);
 		factionAiLabelsMap.replace("aragon", CampaignAiType.QUIETER_CATHOLIC);
-		factionAiLabelsMap.replace("sicily", CampaignAiType.QUIETER_CATHOLIC);
+		//factionAiLabelsMap.replace("sicily", CampaignAiType.QUIETER_CATHOLIC);
 
-		factionAiLabelsMap.replace("france", CampaignAiType.QUIETER_CATHOLIC);
+		//factionAiLabelsMap.replace("france", CampaignAiType.QUIETER_CATHOLIC);
 
 		factionAiLabelsMap.replace("poland", CampaignAiType.QUIETER_CATHOLIC);
 		factionAiLabelsMap.replace("hungary", CampaignAiType.QUIETER_CATHOLIC);
