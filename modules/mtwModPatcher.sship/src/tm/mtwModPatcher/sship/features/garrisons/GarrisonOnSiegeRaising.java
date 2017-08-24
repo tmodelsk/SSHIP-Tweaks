@@ -2,11 +2,13 @@ package tm.mtwModPatcher.sship.features.garrisons;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.var;
 import lombok.val;
 import tm.common.Ctm;
 import tm.common.collections.ArrayUniqueList;
 import tm.common.collections.ListUnique;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdBoolean;
+import tm.mtwModPatcher.lib.common.core.features.params.ParamIdString;
 import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.lib.common.entities.Religion;
 import tm.mtwModPatcher.lib.common.entities.SettlementInfo;
@@ -41,10 +43,7 @@ import tm.mtwModPatcher.lib.managers.garrisons.GarrisonManager;
 import tm.mtwModPatcher.lib.managers.garrisons.UnitGarrisonInfo;
 
 import java.net.UnknownHostException;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /** Creates garrison when settlement walls are stormed */
@@ -56,6 +55,15 @@ public class GarrisonOnSiegeRaising extends Feature {
 	private int minimumLoyaltyLevel = 1;
 	@Getter @Setter
 	private boolean createUnitsLogging=true;
+	@Getter
+	private GarrisonSize garrisonSize = GarrisonSize.SMALL;
+	private void setGarrisonSize(String strSize) {
+		strSize = strSize.toUpperCase();
+		if(strSize.equals("SMALL")) garrisonSize = GarrisonSize.SMALL;
+		else if(strSize.equals("MEDIUM")) garrisonSize = GarrisonSize.MEDIUM;
+
+		else throw new PatcherLibBaseEx(Ctm.msgFormat("Garrison Size param value {0} not supported",strSize));
+	}
 
 	private String version = "1.20";
 
@@ -207,46 +215,54 @@ public class GarrisonOnSiegeRaising extends Feature {
 
 		UnitGarrisonInfo unit1 = units.get(0);
 
-		if(settlement.Level == SettlementLevel.L1_Village) {
-			iff.add(createRaiseUnits(factionName, settlement, unit1));
+		if(settlement.Level == SettlementLevel.L1_Village) {	// SMALL = 0 , MEDIUM = 1
+
+			if(garrisonSize == GarrisonSize.MEDIUM)	// medium only
+				iff.add(createRaiseUnits(factionName, settlement, unit1));
 		}
-		else if(settlement.Level == SettlementLevel.L2_Town) {
-			iff.add(createRaiseUnits(factionName, settlement, unit1));
+		else if(settlement.Level == SettlementLevel.L2_Town) {	// SMALL = 0 , MEDIUM = 2
 
-			// ### Player vs AI ####
-			IfBlock playerVsAi = new IfBlock(new CompareCounter("ai_ec_id" , "=" , 0));
+			if(garrisonSize == GarrisonSize.MEDIUM) {	// medium only
+				iff.add(createRaiseUnits(factionName, settlement, unit1));
 
-			UnitGarrisonInfo unit2 = units.get(1);
-			playerVsAi.add(createRaiseUnits(factionName, settlement, unit2));
+				// ### Player vs AI ####
+				IfBlock playerVsAi = new IfBlock(new CompareCounter("ai_ec_id" , "=" , 0));
 
-			iff.add(playerVsAi);
+				UnitGarrisonInfo unit2 = units.get(1);
+				playerVsAi.add(createRaiseUnits(factionName, settlement, unit2));
+
+				iff.add(playerVsAi);
+			}
 		}
-		else if(settlement.Level == SettlementLevel.L3_LargeTown) {
-			// ## Unit 1
-			iff.add(createRaiseUnits(factionName, settlement, unit1));
-
+		else if(settlement.Level == SettlementLevel.L3_LargeTown) {	// SMALL = 1 , MEDIUM = 3
 			UnitGarrisonInfo unit2 = units.get(1);
 			UnitGarrisonInfo unit3 = units.get(2);
 
-			// Czy defender to AI ??
-			IfBlock ifDefenderAI = new IfBlock(new IsNotLocalFaction(factionName));
-			ifDefenderAI.add(createRaiseUnits(factionName, settlement, unit2));	// ## Unit 2
+			iff.add(createRaiseUnits(factionName, settlement, unit1));	// small & medium
 
-			// ## Czy Attacker to Player ?
-			IfBlock isAttackerPlayer = new IfBlock(new CompareCounter("ai_ec_id" , "=" , 0));
-			isAttackerPlayer.add(createRaiseUnits(factionName, settlement, unit3)); // ## Unit 3
+			// ## Unit 1
+			if(garrisonSize == GarrisonSize.MEDIUM) {	// medium only
+				// Czy defender to AI ??
+				IfBlock ifDefenderAI = new IfBlock(new IsNotLocalFaction(factionName));
+				ifDefenderAI.add(createRaiseUnits(factionName, settlement, unit2));	// ## Unit 2
 
-			ifDefenderAI.add(isAttackerPlayer);
+				// ## Czy Attacker to Player ?
+				IfBlock isAttackerPlayer = new IfBlock(new CompareCounter("ai_ec_id" , "=" , 0));
+				isAttackerPlayer.add(createRaiseUnits(factionName, settlement, unit3)); // ## Unit 3
 
-			iff.add(ifDefenderAI);
+				ifDefenderAI.add(isAttackerPlayer);
+
+				iff.add(ifDefenderAI);
+			}
 		}
-		else if(settlement.Level == SettlementLevel.L4_City) {
+		else if(settlement.Level == SettlementLevel.L4_City) { 	// SMALL = 2 , MEDIUM = 4
 			UnitGarrisonInfo unit2 = units.get(1);
 			UnitGarrisonInfo unit3 = units.get(2);
 			UnitGarrisonInfo unit4 = units.get(3);
 
 			// ## Unit 1 i 2
-			iff.add(createRaiseUnits(factionName, settlement, Arrays.asList(unit1, unit2)));
+			if(garrisonSize == GarrisonSize.MEDIUM)	// Medium only
+				iff.add(createRaiseUnits(factionName, settlement, unit1, unit2));
 
 			// Czy defender to AI ??
 			IfBlock ifDefenderAI = new IfBlock(new IsNotLocalFaction(factionName));
@@ -260,14 +276,17 @@ public class GarrisonOnSiegeRaising extends Feature {
 
 			iff.add(ifDefenderAI);
 		}
-		else if(settlement.Level == SettlementLevel.L5_LargeCity) {
+		else if(settlement.Level == SettlementLevel.L5_LargeCity) {		// SMALL = 3 , MEDIUM = 5
 			UnitGarrisonInfo unit2 = units.get(1);
 			UnitGarrisonInfo unit3 = units.get(2);
 			UnitGarrisonInfo unit4 = units.get(3);
 			UnitGarrisonInfo unit5 = units.get(4);
 
 			// ## Unit 1 i 2 i 3
-			iff.add(createRaiseUnits(factionName, settlement, Arrays.asList(unit1, unit2, unit3)));
+			if(garrisonSize == GarrisonSize.MEDIUM)		// Medium only
+				iff.add(createRaiseUnits(factionName, settlement, unit1, unit2));
+
+			iff.add(createRaiseUnits(factionName, settlement, unit3));
 
 			// Czy defender to AI ??
 			IfBlock ifDefenderAI = new IfBlock(new IsNotLocalFaction(factionName));
@@ -281,7 +300,7 @@ public class GarrisonOnSiegeRaising extends Feature {
 
 			iff.add(ifDefenderAI);
 		}
-		else if(settlement.Level == SettlementLevel.L6_HugeCity) {
+		else if(settlement.Level == SettlementLevel.L6_HugeCity) {	// SMALL = 4 , MEDIUM = 6
 			UnitGarrisonInfo unit2 = units.get(1);
 			UnitGarrisonInfo unit3 = units.get(2);
 			UnitGarrisonInfo unit4 = units.get(3);
@@ -289,7 +308,10 @@ public class GarrisonOnSiegeRaising extends Feature {
 			UnitGarrisonInfo unit6 = units.get(5);
 
 			// ## Unit 1 i 2 i 3 i 4
-			iff.add(createRaiseUnits(factionName, settlement, Arrays.asList(unit1, unit2, unit3, unit4)));
+			if(garrisonSize == GarrisonSize.MEDIUM)
+				iff.add(createRaiseUnits(factionName, settlement, unit1, unit2));
+
+			iff.add(createRaiseUnits(factionName, settlement, unit3, unit4));
 
 			// Czy defender to AI ??
 			IfBlock ifDefenderAI = new IfBlock(new IsNotLocalFaction(factionName));
@@ -303,11 +325,19 @@ public class GarrisonOnSiegeRaising extends Feature {
 
 			iff.add(ifDefenderAI);
 		}
+		else throw new PatcherLibBaseEx(Ctm.msgFormat("Settlement level {0} not supported", settlement.Level));
 
 		return iff;
 	}
 	private ScriptBlock createRaiseUnits(String factionName, SettlementInfo settlement, UnitGarrisonInfo unit) throws PatcherLibBaseEx {
 		return createRaiseUnits(factionName , settlement, Collections.singletonList(unit));
+	}
+	private ScriptBlock createRaiseUnits(String factionName, SettlementInfo settlement, UnitGarrisonInfo unit1, UnitGarrisonInfo unit2) throws PatcherLibBaseEx {
+		val list = new ArrayList<UnitGarrisonInfo>();
+		list.add(unit1);
+		list.add(unit2);
+
+		return createRaiseUnits(factionName , settlement, list);
 	}
 
 	@SuppressWarnings("StringConcatenationInLoop")
@@ -434,6 +464,10 @@ public class GarrisonOnSiegeRaising extends Feature {
 		parIds.add(new ParamIdBoolean("CreateUnitsLogging" , "Create Units Logging" ,
 				feature -> ((GarrisonOnSiegeRaising)feature).isCreateUnitsLogging(),
 				(feature, value) -> ((GarrisonOnSiegeRaising)feature).setCreateUnitsLogging(value)));
+
+		parIds.add(new ParamIdString("GarrisonSize" , "Garrison Size" ,
+				feature -> ((GarrisonOnSiegeRaising)feature).getGarrisonSize().toString(),
+				(feature, value) -> ((GarrisonOnSiegeRaising)feature).setGarrisonSize(value)));
 
 		return parIds;
 	}
