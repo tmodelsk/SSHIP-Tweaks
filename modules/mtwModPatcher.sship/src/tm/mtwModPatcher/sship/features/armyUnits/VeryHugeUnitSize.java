@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
 public class VeryHugeUnitSize extends Feature {
 
 	@Getter
-	private double sizeMulti = 0.75; //1.25;
+	private double sizeMulti = 0.75; //0.75; //1.25;
 	public void setSizeMulti(double value) {
 		if(value > 1.25) throw new PatcherLibBaseEx("Size Multiplier max value is 1.25");
 
