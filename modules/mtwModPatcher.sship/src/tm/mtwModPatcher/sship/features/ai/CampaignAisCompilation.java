@@ -45,8 +45,9 @@ public class CampaignAisCompilation extends CampaignAiConfigurator {
 		// ## Quiter AI : 7 : standard - SSHIP derived. Aggressive but loyal to allies - Chivalrus
 		factionAiLabelsMap.replace("portugal", CampaignAiType.SSHIP_CATHOLIC);
 		factionAiLabelsMap.replace("spain", CampaignAiType.QUIETER_CATHOLIC);
-		factionAiLabelsMap.replace("aragon", CampaignAiType.QUIETER_CATHOLIC);
+		//factionAiLabelsMap.replace("aragon", CampaignAiType.QUIETER_CATHOLIC);
 		//factionAiLabelsMap.replace("sicily", CampaignAiType.QUIETER_CATHOLIC);
+		factionAiLabelsMap.replace("pisa", CampaignAiType.SKYNET);
 
 		//factionAiLabelsMap.replace("france", CampaignAiType.QUIETER_CATHOLIC);
 
