@@ -36,7 +36,7 @@ public class UnitDef {
 	public String StatHealth;
 	public UnitStatPri StatPri;
 	public String StatPriAttr;
-	public String StatSec;
+	public UnitStatPri StatSec;
 	public String StatSecAttr;
 	public String StatTer;
 	public String StatTerAttr;

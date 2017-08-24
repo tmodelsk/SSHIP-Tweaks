@@ -131,7 +131,7 @@ public class ExportDescrUnitTyped extends FileEntity {
 		u.StatHealth = getValue("stat_health" , unitLines);
 		u.StatPri =  parseStatPri( getValue("stat_pri" , unitLines) );
 		u.StatPriAttr = getValue("stat_pri_attr" , unitLines);
-		u.StatSec = getValue("stat_sec" , unitLines);
+		u.StatSec = parseStatPri( getValue("stat_sec" , unitLines) );
 		u.StatSecAttr = getValue("stat_sec_attr" , unitLines);
 		u.StatTer = getValue("stat_ter" , unitLines);
 		u.StatTerAttr = getValue("stat_ter_attr" , unitLines);
@@ -441,7 +441,7 @@ public class ExportDescrUnitTyped extends FileEntity {
 		writeUnitAttrib("stat_health" , unit.StatHealth , bw);
 		writeUnitAttrib("stat_pri" , serializeStatPri( unit.StatPri ) , bw);
 		writeUnitAttrib("stat_pri_attr" , unit.StatPriAttr , bw);
-		writeUnitAttrib("stat_sec" , unit.StatSec , bw);
+		writeUnitAttrib("stat_sec" , serializeStatPri( unit.StatSec ), bw);
 		writeUnitAttrib("stat_sec_attr" , unit.StatSecAttr , bw);
 		writeUnitAttrib("stat_ter" , unit.StatTer , bw);
 		writeUnitAttrib("stat_ter_attr" , unit.StatTerAttr , bw);
