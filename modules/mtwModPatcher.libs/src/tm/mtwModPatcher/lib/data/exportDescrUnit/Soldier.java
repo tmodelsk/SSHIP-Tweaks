@@ -42,10 +42,26 @@ public class Soldier {
 			s.SpecialNumber = Integer.parseInt(m.group(3));
 			s.Mass = Double.parseDouble(m.group(4));//.replace("." , ","));
 		}
-		else throw new PatcherLibBaseEx("Unable to parse: "+str);
+		else {
+			// sship bugfix, wrong entry soldier          Scots_Pike_Militia, 80, 1.2
+			m = eduWrongPattern.matcher(str);
+			if(m.find()) {
+				s = new Soldier();
+
+				s.Model = m.group(1);
+				if(s.Model.equals("Scots_Pike_Militia")) {
+					s.NumberOfMen = Integer.parseInt(m.group(2));
+					s.SpecialNumber = 0; //Integer.parseInt(m.group(3));
+					s.Mass = Double.parseDouble(m.group(3));//.replace("." , ","));
+				}
+				else throw new PatcherLibBaseEx("Unable to parse: "+str);
+			}
+			else throw new PatcherLibBaseEx("Unable to parse: "+str);
+		}
 
 		return s;
 	}
 
 	private static final Pattern eduPattern = Pattern.compile("\\s*(\\w+),\\s*(\\d+),\\s*(\\d+),\\s*([+-]?([0-9]*[.])?[0-9]+)");
+	private static final Pattern eduWrongPattern = Pattern.compile("\\s*(\\w+),\\s*(\\d+),\\s*([+-]?([0-9]*[.])?[0-9]+)");
 }
