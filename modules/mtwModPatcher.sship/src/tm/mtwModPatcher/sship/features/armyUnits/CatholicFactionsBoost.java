@@ -22,7 +22,7 @@ public class CatholicFactionsBoost extends Feature {
 		exportDescrBuilding = getFileRegisterForUpdated(ExportDescrBuilding.class);
 
 		knightsWesternArmorUp();
-		religiousConversionTempleBonus();;
+		religiousConversionTempleBonus();
 	}
 
 	private void knightsWesternArmorUp() {

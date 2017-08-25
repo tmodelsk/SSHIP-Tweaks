@@ -146,6 +146,7 @@ public class SsHipFeatures {
 		features.disableFeatureIfExists( SkynetBattleAi.Id);
 		features.disableFeatureIfExists( SkynetCampaignAi.Id);
 		features.disableFeatureIfExists( WatchtowersToForts.Id);
+		features.disableFeatureIfExists( NonSpearInfantryAttackBoost.Id);
 
 		if(!ConfigurationSettings.isDevEnvironment()) {
 
