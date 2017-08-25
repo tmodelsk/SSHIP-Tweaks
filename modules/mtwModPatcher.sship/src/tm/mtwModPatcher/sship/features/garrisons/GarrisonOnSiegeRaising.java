@@ -77,7 +77,11 @@ public class GarrisonOnSiegeRaising extends Feature {
 		_SettlementManager = new SettlementManager(_DescrStrat, _DescrRegions);
 
 		List<SettlementInfo> settlementInfos = _SettlementManager.getAllSettlements();
-				//_DescrStrat.getSettlementInfoList();
+		if(garrisonSize == GarrisonSize.SMALL)
+			settlementInfos = settlementInfos.stream()
+					.filter( si -> si.Resources.contains("capital")
+							|| !( si.Level.equals(SettlementLevel.L1_Village) || si.Level.equals(SettlementLevel.L2_Town)) )
+					.collect(Collectors.toList());
 
 		RegionBlock rootRegion = new RegionBlock(Ctm.msgFormat("{0} v.{1} MAIN REGION -----", garrisonScriptCommentPrefix, version));
 
@@ -178,7 +182,8 @@ public class GarrisonOnSiegeRaising extends Feature {
 		RegionBlock region = new RegionBlock(garrisonScriptCommentPrefix + ": Settlements individual monitors");
 
 		for(SettlementInfo settlement : settlementInfos) {
-			region.add(createSettlementMonitor(settlement));
+			val settMonitor = createSettlementMonitor(settlement);
+			if(settMonitor != null) region.add(settMonitor);
 		}
 
 		return region;
@@ -194,8 +199,12 @@ public class GarrisonOnSiegeRaising extends Feature {
 		monitor.andCondition(new CompareCounter(settlRecoveryVar , ">" , populationRecoveryTurns));
 
 		for(String factionName : FactionsDefs.allFactionsList()) {
-			monitor.add(createFactionIfBlock(factionName, settlement));
+			val ifBLock = createFactionIfBlock(factionName, settlement);
+			if(ifBLock != null) monitor.add(ifBLock);
 		}
+
+		if(monitor.isBodyEmpty())
+			return null;
 
 		monitor.add(new SetVariable(settlRecoveryVar, 0)); // reset siege mobilization counter
 
@@ -215,14 +224,16 @@ public class GarrisonOnSiegeRaising extends Feature {
 
 		UnitGarrisonInfo unit1 = units.get(0);
 
+		val isMedium = garrisonSize == GarrisonSize.MEDIUM ? true : settlement.Resources.contains("capital");
+
 		if(settlement.Level == SettlementLevel.L1_Village) {	// SMALL = 0 , MEDIUM = 1
 
-			if(garrisonSize == GarrisonSize.MEDIUM)	// medium only
+			if(isMedium)	// medium only
 				iff.add(createRaiseUnits(factionName, settlement, unit1));
 		}
 		else if(settlement.Level == SettlementLevel.L2_Town) {	// SMALL = 0 , MEDIUM = 2
 
-			if(garrisonSize == GarrisonSize.MEDIUM) {	// medium only
+			if(isMedium) {	// medium only
 				iff.add(createRaiseUnits(factionName, settlement, unit1));
 
 				// ### Player vs AI ####
@@ -241,7 +252,7 @@ public class GarrisonOnSiegeRaising extends Feature {
 			iff.add(createRaiseUnits(factionName, settlement, unit1));	// small & medium
 
 			// ## Unit 1
-			if(garrisonSize == GarrisonSize.MEDIUM) {	// medium only
+			if(isMedium) {	// medium only
 				// Czy defender to AI ??
 				IfBlock ifDefenderAI = new IfBlock(new IsNotLocalFaction(factionName));
 				ifDefenderAI.add(createRaiseUnits(factionName, settlement, unit2));	// ## Unit 2
@@ -261,7 +272,7 @@ public class GarrisonOnSiegeRaising extends Feature {
 			UnitGarrisonInfo unit4 = units.get(3);
 
 			// ## Unit 1 i 2
-			if(garrisonSize == GarrisonSize.MEDIUM)	// Medium only
+			if(isMedium)	// Medium only
 				iff.add(createRaiseUnits(factionName, settlement, unit1, unit2));
 
 			// Czy defender to AI ??
@@ -283,7 +294,7 @@ public class GarrisonOnSiegeRaising extends Feature {
 			UnitGarrisonInfo unit5 = units.get(4);
 
 			// ## Unit 1 i 2 i 3
-			if(garrisonSize == GarrisonSize.MEDIUM)		// Medium only
+			if(isMedium)		// Medium only
 				iff.add(createRaiseUnits(factionName, settlement, unit1, unit2));
 
 			iff.add(createRaiseUnits(factionName, settlement, unit3));
@@ -308,7 +319,7 @@ public class GarrisonOnSiegeRaising extends Feature {
 			UnitGarrisonInfo unit6 = units.get(5);
 
 			// ## Unit 1 i 2 i 3 i 4
-			if(garrisonSize == GarrisonSize.MEDIUM)
+			if(isMedium)
 				iff.add(createRaiseUnits(factionName, settlement, unit1, unit2));
 
 			iff.add(createRaiseUnits(factionName, settlement, unit3, unit4));
@@ -326,6 +337,8 @@ public class GarrisonOnSiegeRaising extends Feature {
 			iff.add(ifDefenderAI);
 		}
 		else throw new PatcherLibBaseEx(Ctm.msgFormat("Settlement level {0} not supported", settlement.Level));
+
+		if(iff.isBodyEmpty()) iff = null;
 
 		return iff;
 	}

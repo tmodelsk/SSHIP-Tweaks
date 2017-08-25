@@ -41,6 +41,10 @@ public class ScriptLines {
 		return _Lines;
 	}
 
+	public boolean isEmpty() {
+		return _Lines.size() == 0;
+	}
+
 	private List<String> _Lines = new ArrayList<>();
 	private String nl = System.lineSeparator();
 	private String _Indent = "	";

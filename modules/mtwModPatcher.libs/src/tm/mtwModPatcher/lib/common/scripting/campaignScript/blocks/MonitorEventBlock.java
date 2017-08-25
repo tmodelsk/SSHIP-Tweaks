@@ -68,6 +68,8 @@ public class MonitorEventBlock extends BlockWithConditions {
 		}
 	}
 
+
+
 //	public MonitorEventBlock(EventType eventType, List<CharacterCondition> conditions) {
 //		this(eventType, conditions.getFirst(0).getString());
 //

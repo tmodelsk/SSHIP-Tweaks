@@ -57,4 +57,8 @@ public abstract class BlockWithConditions extends ScriptBlock {
 	public void add(ScriptElement element) {
 		_Body.line(element.getString());
 	}
+
+	public boolean isBodyEmpty() {
+		return _Body.isEmpty();
+	}
 }
