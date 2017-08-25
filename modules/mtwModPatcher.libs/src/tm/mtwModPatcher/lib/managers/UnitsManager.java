@@ -13,7 +13,6 @@ import tm.mtwModPatcher.lib.data.exportDescrUnit.UnitDef;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -448,7 +447,7 @@ public class UnitsManager {
 		for (UnitDef unit : exportDescrUnit.getUnits()) {
 			if(isUnitShouldBeExcluded(unit, unitsToExclude)) continue;
 
-			unit.addAttribute(UnitDef.AttribFreeUpkeep);
+			unit.addAttribute(UnitDef.ATTRIB_FREE_UPKEEP);
 		}
 	}
 

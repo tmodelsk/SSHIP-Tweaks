@@ -92,6 +92,12 @@ public class UnitDef {
 		return Attributes.contains(attributeName);
 	}
 
+	public boolean hasFormation(String formationName) {
+		if(Formation == null) return false;
+
+		return Formation.contains(formationName);
+	}
+
 	public void addStatPriAttribute(String newAttribute) {
 		if( StatPriAttr != null ) {
 			if(!StatPriAttr.isEmpty()) {
@@ -149,6 +155,7 @@ public class UnitDef {
 
 	}
 
-	public static final String AttribFreeUpkeep = "free_upkeep_unit";
+	public static final String ATTRIB_FREE_UPKEEP = "free_upkeep_unit";
 	public static final String ATTRIB_IS_PEASANT = "is_peasant";
+	public static final String FORMATION_PHALANX = "phalanx";
 }

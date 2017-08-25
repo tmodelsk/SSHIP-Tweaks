@@ -3,6 +3,7 @@ package tm.mtwModPatcher.sship.features.armyUnits;
 import lombok.val;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
+import tm.mtwModPatcher.lib.data.exportDescrUnit.UnitDef;
 
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -18,7 +19,15 @@ public class NonSpearInfantryAttackBoost extends Feature {
 		val all = edu.getUnits();
 		val infantry = all.stream().filter( u -> u.isCategoryInfantry() ).collect(Collectors.toList());
 		val meleePri = infantry.stream().filter( u -> u.StatPri.WeaponType != null && u.StatPri.WeaponType.equals("melee") );
-		val noSpearPri = meleePri.filter( u -> u.StatPri.SoundType != null && ! u.StatPri.SoundType.equals("spear") && ! u.StatPri.SoundType.equals("knife") );
+		val noSpearPri = meleePri.filter( u -> u.StatPri.SoundType != null
+				&& !u.StatPri.SoundType.equals("spear")
+				&& !u.StatPri.SoundType.equals("knife")
+				&& !u.hasFormation(UnitDef.FORMATION_PHALANX)
+				&& !u.Name.toUpperCase().contains("BILLMEN")
+				&& !u.Name.toUpperCase().contains("BERDICHE")
+				&& !u.Name.toUpperCase().contains("HALBERD")
+
+		);
 
 		val unitsPri = noSpearPri.collect(Collectors.toList());
 		unitsPri.forEach( u -> u.StatPri.Damage++ );
