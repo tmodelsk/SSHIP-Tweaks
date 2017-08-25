@@ -28,7 +28,7 @@ public class MerchantsRemovedFtr extends Feature {
 
 	private Double tradeMulti = 1.85;	// 1.85
 	private Double miningMulti = 2.0;
-	private String merchantGuildLevelsStr = "25 60 120";
+	private String merchantGuildLevelsStr = "30 60 120";
 
 	@Override
 	public void executeUpdates() throws Exception {
