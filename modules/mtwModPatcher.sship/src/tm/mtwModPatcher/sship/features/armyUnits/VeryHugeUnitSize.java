@@ -33,7 +33,7 @@ public class VeryHugeUnitSize extends Feature {
 	}
 
 	@Getter
-	private double baseCostMulti = 0.75; //1.25;
+	private double baseCostMulti = 0.80; //1.25;
 	public void setBaseCostMulti(double value) {
 		if(value > 1.25) throw new PatcherLibBaseEx("Size Multiplier max value is 1.25");
 
