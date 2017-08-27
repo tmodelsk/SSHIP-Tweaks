@@ -1,6 +1,7 @@
 package tm.mtwModPatcher.sship.features.buildings;
 
 import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.entities.SettlementLevel;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 
 import java.util.UUID;
@@ -10,22 +11,28 @@ import java.util.UUID;
  */
 public class BuildingTweaks extends Feature {
 
-	protected ExportDescrBuilding _ExportDescrBuilding;
+	protected ExportDescrBuilding edb;
 
 	@Override
 	public void executeUpdates() throws Exception {
 
-		_ExportDescrBuilding = fileEntityFactory.getFile(ExportDescrBuilding.class);
-		registerUpdatedFile(_ExportDescrBuilding);
+		edb = fileEntityFactory.getFile(ExportDescrBuilding.class);
+		registerUpdatedFile(edb);
 
-		_ExportDescrBuilding.setBuildingSettlementRequirement("mines", "mines", "city", "town");
-		_ExportDescrBuilding.setBuildingSettlementRequirement("castle_mines", "c_mines", "castle", "town");
+		// MINES
+		edb.setBuildingSettlementRequirement("mines", "mines", "city", "town");
+		edb.setBuildingSettlementRequirement("castle_mines", "c_mines", "castle", "town");
 
-		_ExportDescrBuilding.setBuildingSettlementRequirement("castle_gallows", "c_gallows", null, "village");
+		// GALLOWS
+		edb.setBuildingSettlementRequirement("castle_gallows", "c_gallows", null, "village");
 
 		// orphan Hospital : + Health Bonus
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("orphan", "foundling_hospital", "city", "				population_health_bonus bonus 1");
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("orphan", "orphanage", "city", "				population_health_bonus bonus 2");
+		edb.insertIntoBuildingCapabilities("orphan", "foundling_hospital", "city", "				population_health_bonus bonus 1");
+		edb.insertIntoBuildingCapabilities("orphan", "orphanage", "city", "				population_health_bonus bonus 2");
+
+		// PORT earlies:
+		edb.setBuildingSettlementRequirement("port", "port", "city", SettlementLevel.L2_Town);
+		edb.setBuildingSettlementRequirement("castle_port", "c_port", "castle", SettlementLevel.L2_Town);
 
 		// city_hall :  levels town_hall council_chambers city_hall mayors_palace
 		//exportDescrBuilding.insertIntoBuildingCapabilities("city_hall", "council_chambers" , "city", "       recruitment_slots bonus 1  requires not event_counter freeze_recr_pool 1");
