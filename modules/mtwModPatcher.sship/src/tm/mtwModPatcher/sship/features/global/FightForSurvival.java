@@ -29,7 +29,7 @@ import java.util.regex.Pattern;
 public class FightForSurvival extends Feature {
 
 	@Getter @Setter
-	private double warningReplenishMult = 1.10;
+	private double warningReplenishMult = 1.0;
 	@Getter @Setter
 	private double dangerReplenishMult = 1.20;
 	@Getter @Setter
