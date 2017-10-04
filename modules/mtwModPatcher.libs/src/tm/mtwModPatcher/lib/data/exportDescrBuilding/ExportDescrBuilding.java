@@ -171,6 +171,11 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		lines.insertAt(insertIndex, newLine);
 	}
 
+	public void insertIntoBuildingCapabilities(String buildingName, List<String> levels, String castleOrCity, String newLine) {
+		for (val level: levels)
+			insertIntoBuildingCapabilities(buildingName, level, castleOrCity, newLine);
+	}
+
 	public void addToWallsRecruitmentSlots(int addNmber) {
 		val cityWallsList = Arrays.asList(
 				new Tuple3<String, String, String>("core_building", "wooden_pallisade" , "city"),
@@ -372,12 +377,15 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 
 		if (matcher.find()) {
 
-			result.Name = matcher.group(1);
-			result.InitialReplenishCounter = Double.parseDouble(matcher.group(2));
-			result.ReplenishRate = Double.parseDouble(matcher.group(3));
-			result.MaxStack = Double.parseDouble(matcher.group(4));
-			result.ExperienceBonus = Integer.parseInt(matcher.group(5));
-			result.RequirementStr = matcher.group(6);
+			try {
+				result.Name = matcher.group(1);
+				result.InitialReplenishCounter = Double.parseDouble(matcher.group(2));
+				result.ReplenishRate = Double.parseDouble(matcher.group(3));
+				result.MaxStack = Double.parseDouble(matcher.group(4));
+				result.ExperienceBonus = Integer.parseInt(matcher.group(5));
+				result.RequirementStr = matcher.group(6);
+			}
+			catch (Exception ex) {	throw new PatcherLibBaseEx("Error parsing unit recr info: " + recruitPoolStringLine, ex);	}
 		}
 		else
 			throw new PatcherLibBaseEx("Unable to parse Building - Capabilities - Unit Recruitment Line - no match for regex !");
@@ -450,4 +458,10 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 	public ExportDescrBuilding() {
 		super("data\\export_descr_buildings.txt");
 	}
+
+	public static final List<String> PortCityLevels = Arrays.asList("port", "shipwright" ,"dockyard" ,"naval_drydock");
+	public static final List<String> PortCastleLevels = Arrays.asList("c_port", "c_shipwright", "c_dockyard", "c_naval_drydock");
+
+	public static final List<String> MarketCityLevels = Arrays.asList("corn_exchange", "market", "fairground", "great_market", "merchants_quarter");
+	public static final List<String> MarketCastleLevels = Arrays.asList("corn_exchange", "market", "fairground");
 }
