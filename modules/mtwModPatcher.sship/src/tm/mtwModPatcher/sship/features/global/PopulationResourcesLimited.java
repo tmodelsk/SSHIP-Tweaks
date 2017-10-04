@@ -7,6 +7,7 @@ import tm.common.collections.ArrayUniqueList;
 import tm.common.collections.ListUnique;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
+import tm.mtwModPatcher.lib.common.core.features.params.ParamIdBoolean;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdDouble;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 
@@ -19,7 +20,10 @@ public class PopulationResourcesLimited extends Feature {
 	@Getter @Setter
 	private double replenishRateMult = 0.3334;	// 0.4
 	@Getter @Setter
-	private double maxStackMult = 2.0;
+	private double maxStackMult = 1.5;	// 2.0
+
+	@Getter @Setter
+	private boolean maxStackMinimumTwo = true;
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -45,7 +49,10 @@ public class PopulationResourcesLimited extends Feature {
 						replMultiTemp *= 1.5;
 
 					unitRecruitInfo.ReplenishRate *= replMultiTemp;
+
 					unitRecruitInfo.MaxStack *= maxStackMult;
+					if( maxStackMinimumTwo && unitRecruitInfo.MaxStack < 2.0 && unitRecruitInfo.MaxStack > 1.0)
+						unitRecruitInfo.MaxStack = 2.0;
 
 					double newInitial;
 					if(unitRecruitInfo.InitialReplenishCounter < 1) {
@@ -78,6 +85,10 @@ public class PopulationResourcesLimited extends Feature {
 		params.add(new ParamIdDouble("MaxStackMult", "Max Stack Mult",
 				feature -> ((PopulationResourcesLimited) feature).getMaxStackMult(),
 				(feature, value) -> ((PopulationResourcesLimited) feature).setMaxStackMult(value)));
+
+		params.add(new ParamIdBoolean("MaxStackMinimumTwo", "Max Stack Minimum Two",
+				feature -> ((PopulationResourcesLimited) feature).isMaxStackMinimumTwo(),
+				(feature, value) -> ((PopulationResourcesLimited) feature).setMaxStackMinimumTwo(value)));
 
 		return params;
 	}

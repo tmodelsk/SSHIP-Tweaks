@@ -32,7 +32,7 @@ public class MuslimFactionsBoost extends Feature {
 	@Getter @Setter
 	private boolean ahdathMilitiaBoost = false;
 	@Getter @Setter
-	private double muslimReplenishMult = 1.1;
+	private double muslimReplenishMult = 1.2;
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -47,7 +47,7 @@ public class MuslimFactionsBoost extends Feature {
 
 	private void unitsReplenishRatesBoost() {
 
-		List<Pattern> unitsToExclude = Arrays.asList(Pattern.compile(".*[Cc]hristian.*"));
+		List<Pattern> unitsToExclude = null; //Arrays.asList(Pattern.compile(".*[Cc]hristian.*"));
 
 		UnitsManager unitsManager = new UnitsManager();
 

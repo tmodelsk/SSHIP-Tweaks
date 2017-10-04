@@ -1,9 +1,12 @@
 package tm.mtwModPatcher.lib.managers;
 
 import lombok.val;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import tm.common.Tuple2;
+import tm.common.collections.ArrayUniqueList;
 import tm.common.collections.CollectionUtils;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
+import tm.mtwModPatcher.lib.common.core.features.PatcherNotSupportedEx;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.UnitStatPriArmor;
@@ -12,6 +15,7 @@ import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.UnitDef;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -157,6 +161,7 @@ public class UnitsManager {
 	}
 
 	/** Updates all units entries replenish rates when ALL factions from factionsFilterCsv are in entry */
+	@Deprecated
 	public List<String> updateAllUnitsReplenishRatesByTurnNumber(String factionsFilterCsv, double relpenishRateMin, double replenishTurnsAddition,
 																 List<Pattern> unitsToExclude, ExportDescrBuilding exportDescrBuilding) {
 		LinesProcessor lines = exportDescrBuilding.getLines();
@@ -249,7 +254,7 @@ public class UnitsManager {
 				// ### Check if needs to be excluded - ommitted ###
 				if(unitsFilter != null && !unitsFilter.contains(unitRecrInfo.Name)) continue;
 				if (isShouldBeExcluded(unitRecrInfo, unitsToExclude)) continue;
-				if(unitRecrInfo.ReplenishRate <= 0.001) continue;
+				if(unitRecrInfo.ReplenishRate <= 0.0001) continue;
 
 				// ## recruitment line is ok for Unit criteria
 				unitRecrInfo.ReplenishRate *= replenishMult;
@@ -259,12 +264,20 @@ public class UnitsManager {
 	}
 
 
-	/** Adds replenish bonus by updating replensh (if all factions applies)
+	/** Adds replenish bonus by updating replenish (if factions applies to faction)
+	 * 		or by coping unit entry but with single faction { factionSymbol}
+	 * 		replenishMult - 1.0 no change	*/
+	public void updateOrAddReplenishBonusEntry(String factionSymbol, List<String> unitsFilter, double replenishMult,
+											   List<Pattern> unitsToExclude, ExportDescrBuilding edb) {
+		updateOrAddReplenishBonusEntry(Arrays.asList(factionSymbol), unitsFilter, replenishMult, unitsToExclude, edb);
+	}
+
+	/** Adds replenish bonus by updating replenish (if all factions applies)
 	 * 		or by coping unit entry but with single faction { factionSymbol}
 	 * 		replenishMult - 1.0 no change	*/
 	public void updateOrAddReplenishBonusEntry(List<String> factions, List<String> unitsFilter, double replenishMult,
-											   List<Pattern> unitsToExclude, ExportDescrBuilding exportDescrBuilding) {
-		LinesProcessor lines = exportDescrBuilding.getLines();
+											   List<Pattern> unitsToExclude, ExportDescrBuilding edb) {
+		LinesProcessor lines = edb.getLines();
 
 		// ###### Loop throught all "recruit_pool ... " lines of building capabilities ######
 		Pattern regex = Pattern.compile("^^\\s*recruit_pool\\s+.+");
@@ -274,27 +287,63 @@ public class UnitsManager {
 			index = lines.findFirstByRegexLine(regex, index + 1);
 			if (index >= 0) {
 				String lineOrg = lines.getLine(index);
-				val unitRecrInfo = exportDescrBuilding.parseUnitRecruitmentInfo(lineOrg);
+				val unitRecrInfo = edb.parseUnitRecruitmentInfo(lineOrg);
+				val requirments = unitRecrInfo.getUnitRequireSimple();
 
 				// ### Check if needs to be excluded - ommitted ###
 				if(unitsFilter != null && !unitsFilter.contains(unitRecrInfo.Name)) continue;
-				if (isShouldBeExcluded(unitRecrInfo, unitsToExclude)) continue;
-				if(unitRecrInfo.ReplenishRate <= 0.001) continue;
+				if(isShouldBeExcluded(unitRecrInfo, unitsToExclude)) continue;
+				if(requirments == null) continue;
+				if(requirments.Factions != null && requirments.Factions.size() > 0 && !CollectionUtils.isAnyFirstElementInSecond(factions, requirments.Factions)) continue;
+				if(unitRecrInfo.ReplenishRate <= 0.0001) continue;
 
 				// ## recruitment line is ok for Unit criteria, ### try to work on bulk mode (all factions specified) ###
-				val requirments = unitRecrInfo.getUnitRequireSimple();
 				if(requirments != null && CollectionUtils.isAllFirstElementsAreInSecond(requirments.Factions, factions)) {
 					unitRecrInfo.ReplenishRate *= replenishMult;
 					lines.replaceLine(index, unitRecrInfo.toRecruitmentPoolLine());
 				}
-				else {	// ## Loop throught factions, add new entries per findividual faction
-					assertThat(replenishMult).isGreaterThan(1.0);
-					val newEntryReplenighMult = replenishMult - 1.0;
-					for(val factionSymbol : factions) {
-						val unitInfoNew = newUnitEntryReplenishBonusForFaction(unitRecrInfo, newEntryReplenighMult, factionSymbol);
-						if(unitInfoNew != null) {
-							lines.insertAt(index, unitInfoNew.toRecruitmentPoolLine());
-							index++;	// we want to ommit freshly added unit above
+				else {	// ## Loop throught factions, add new entries per individual faction
+					if(replenishMult > 1.0) {	// better replenish - add 'bonus' entry
+						val newEntryReplenishMult = replenishMult - 1.0;
+						for(val factionSymbol : factions) {
+							val unitInfoNew = newUnitEntryReplenishBonusForFaction(unitRecrInfo, newEntryReplenishMult, factionSymbol);
+							if(unitInfoNew != null) {
+								lines.insertAt(index, unitInfoNew.toRecruitmentPoolLine());
+								index++;	// we want to ommit freshly added unit above
+							}
+						}
+					} else {	// worse replenish - copy other entries, add new worse one
+						if(factions.size() > 1) throw new PatcherNotSupportedEx("Too complicated, not implemented");
+						val factionSymbol = factions.get(0);
+						val orgEntriesUngrouped = new ArrayList<UnitRecuitmentInfo>();
+
+						for (val orgFactionSymbol: requirments.Factions ) {
+							if(orgFactionSymbol.equals(factionSymbol)) continue;
+
+							val unitInfoNew = unitRecrInfo.clone();
+							val tmpRequire = unitRecrInfo.getUnitRequireSimple();
+							tmpRequire.setFactionSingle(orgFactionSymbol);
+							unitInfoNew.setRequirementStr(tmpRequire);
+
+							orgEntriesUngrouped.add(unitInfoNew);
+						}
+
+						val unitInfoNew = unitRecrInfo.clone();
+						unitInfoNew.ReplenishRate *= replenishMult;
+
+						val tmpRequire = unitRecrInfo.getUnitRequireSimple();
+						tmpRequire.setFactionSingle(factionSymbol);
+						unitInfoNew.setRequirementStr(tmpRequire);
+
+						orgEntriesUngrouped.add(unitInfoNew);
+
+						// we are replacing old entry with collection of entries
+						lines.remove(index);
+						index--;
+
+						for (val entry : orgEntriesUngrouped) {
+							lines.insertAt(index, entry.toRecruitmentPoolLine());
+							index++;
 						}
 					}
 				}
