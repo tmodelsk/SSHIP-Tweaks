@@ -56,6 +56,10 @@ public class CatholicFactionsBoost extends Feature {
 				unit.StatCost.Cost *= 1.10;
 			}
 
+			// ## Boost sword damage +1
+			//if(unit.isCategoryInfantry()) unit.StatPri.Damage++;
+			//if(unit.isCategoryCavalry()) unit.StatSec.Damage++;
+
 			//armors = unit.StatPriArmour;
 			//modifiedKnightsCsvStr += unit.Name+";"+ (armors.Armour + armors.DefenceSkill + armors.Shield)+";"+ armors.Armour + ";"+armors.DefenceSkill+";"+armors.Shield+";"+nl;
 		}
