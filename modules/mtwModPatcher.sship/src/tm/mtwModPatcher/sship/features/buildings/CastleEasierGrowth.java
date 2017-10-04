@@ -19,9 +19,9 @@ public class CastleEasierGrowth extends Feature {
 
 		//_DescrSettlementMechanics.UpdateAttribute("/root/population_levels/level[@name='castle']", "upgrade", 100);
 
-		_DescrSettlementMechanics.SetCityPopulationCastleData(1, 	300, 	500, 	1000, 	5000);	// motto & bailey	-> upgrade old 1500
-		_DescrSettlementMechanics.SetCityPopulationCastleData(2, 	500, 	800, 	4250, 	12000);	// wooden castle 	-> upgrade old 5000
-		_DescrSettlementMechanics.SetCityPopulationCastleData(3, 	500, 	1000, 	9000, 	25000);	// castle 			-> upgrade old 12000
+		_DescrSettlementMechanics.SetCityPopulationCastleData(1, 	300, 	500, 	1000, 	5000);	// motto & bailey	-> upgrade org 1500
+		_DescrSettlementMechanics.SetCityPopulationCastleData(2, 	500, 	800, 	4000, 	12000);	// wooden castle, old 4250	-> upgrade org 5000
+		_DescrSettlementMechanics.SetCityPopulationCastleData(3, 	500, 	1000, 	9000, 	25000);	// castle 			-> upgrade org 12000
 
 
 		registerUpdatedFile(_DescrSettlementMechanics);
