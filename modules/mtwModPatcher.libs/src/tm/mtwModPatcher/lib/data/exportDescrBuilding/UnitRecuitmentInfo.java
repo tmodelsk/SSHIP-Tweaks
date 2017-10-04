@@ -22,6 +22,19 @@ public class UnitRecuitmentInfo {
 
 	public String RequirementStr;
 
+	public UnitRecuitmentInfo clone() {
+		val u = new UnitRecuitmentInfo();
+
+		u.Name = Name;
+		u.InitialReplenishCounter = InitialReplenishCounter;
+		u.ReplenishRate = ReplenishRate;
+		u.MaxStack = MaxStack;
+		u.ExperienceBonus = ExperienceBonus;
+		u.RequirementStr = RequirementStr;
+
+		return u;
+	}
+
 	public UnitRequire getUnitRequireSimple() {
 		val factionsSplit = RequirementStr.split("factions");
 		if(factionsSplit.length > 2) return null;

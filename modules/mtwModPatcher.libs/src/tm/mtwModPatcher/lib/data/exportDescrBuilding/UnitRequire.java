@@ -10,4 +10,10 @@ public class UnitRequire {
 
 	public String RestConditions;
 
+
+	public void setFactionSingle(String factionSymbol) {
+		Factions.clear();
+		Factions.add(factionSymbol);
+	}
+
 }
