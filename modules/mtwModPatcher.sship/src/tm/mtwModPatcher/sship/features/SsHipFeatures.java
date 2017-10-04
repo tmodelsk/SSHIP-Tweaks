@@ -35,6 +35,9 @@ public class SsHipFeatures {
 
 		features.add(new SelectHeirScript(inputStreamProvider));
 
+		features.add(new MuslimFactionsBoost());
+		features.add(new CatholicFactionsBoost());
+
 		features.add(new LongerBattles());
 		features.add(new CavalrySpeedBonus());
 		features.add(new SnowStormNerfed());
@@ -48,6 +51,7 @@ public class SsHipFeatures {
 		features.add(new VeryHugeUnitSize());
 		features.add(new PeasantGarrisonsFix());
 		features.add(new NonSpearInfantryAttackBoost());
+		features.add(new UnitsBugFixes());
 
 		features.add(new MerchantsRemovedFtr());
 		features.add(new WorldEconomyScaling());
@@ -121,8 +125,6 @@ public class SsHipFeatures {
 		features.add(new GarrisonOnSiegeRaising(garrisonManager));
 
 		features.add(new NobilityManyGeneralsGovernors());
-		features.add(new MuslimFactionsBoost());
-		features.add(new CatholicFactionsBoost());
 		features.add(new FightForSurvival(unitsManager));	// adds replenish rates entries for existing stuff, should be almost last
 		features.add(new PopulationResourcesLimited());	// Should be one of the last, globally modifies replenish & max stack rates
 
