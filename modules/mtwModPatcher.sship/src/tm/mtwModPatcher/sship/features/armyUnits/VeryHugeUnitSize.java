@@ -114,6 +114,9 @@ public class VeryHugeUnitSize extends Feature {
 
 		setDescriptionShort("Very Huge Unit Size, number of men * 125%");
 		setDescriptionUrl("http://tmsship.wikidot.com/very-huge-unit-size");
+
+		if(ConfigurationSettings.isDevEnvironment())
+			sizeMulti = 0.85;
 	}
 
 	private ExportDescrUnitTyped edu;
