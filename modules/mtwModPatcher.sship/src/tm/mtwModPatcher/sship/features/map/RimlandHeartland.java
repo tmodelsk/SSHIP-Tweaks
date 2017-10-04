@@ -6,12 +6,12 @@ import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.OverrideDeleteFilesTask;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
+import tm.mtwModPatcher.sship.lib.Provinces;
 import tm.mtwModPatcher.lib.data.world.maps.base.DescrRegions;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrStratSectioned;
 import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.UUID;
 
 /**
@@ -20,8 +20,8 @@ import java.util.UUID;
 public class RimlandHeartland extends Feature {
 
 	private String eventAtlanticTrade = "first_magnetic_compass"; //"omar_khayyam" - turn 2
-	private List<String> cityPortLevels;
-	private List<String> castlePortLevels;
+	//private List<String> portCityLevels;
+	//private List<String> portCastleLevels;
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -29,6 +29,7 @@ public class RimlandHeartland extends Feature {
 		edb = getFileRegisterForUpdated(ExportDescrBuilding.class);
 		descrStrat = getFileRegisterForUpdated(DescrStratSectioned.class);
 
+		landGates();
 		atlanticHarderToTrade();
 		rimlandTrade();
 	}
@@ -39,44 +40,41 @@ public class RimlandHeartland extends Feature {
 	}
 
 	private void rimlandSeaTradeBonuses() {
-		val rimlandLow = "\t\ttrade_base_income_bonus bonus 1 requires hidden_resource "+ HR_RIMLAND_LOW;
-		val rimlandHigh = "\t\ttrade_base_income_bonus bonus 2 requires hidden_resource "+ HR_RIMLAND_HIGH;
+		val portRimlandLow = "\t\ttrade_base_income_bonus bonus 1 requires hidden_resource "+ HR_RIMLAND_LOW;
+		val portRimlandHigh = "\t\ttrade_base_income_bonus bonus 2 requires hidden_resource "+ HR_RIMLAND_HIGH;
 
 
-		for(val portLevel : cityPortLevels) {
-			edb.insertIntoBuildingCapabilities("port", portLevel, "city", rimlandLow);
-			edb.insertIntoBuildingCapabilities("port", portLevel, "city", rimlandHigh);
+		for(val portLevel : ExportDescrBuilding.PortCityLevels) {
+			edb.insertIntoBuildingCapabilities("port", portLevel, "city", portRimlandLow);
+			edb.insertIntoBuildingCapabilities("port", portLevel, "city", portRimlandHigh);
 		}
-		for(val portLevel : castlePortLevels) {
-			edb.insertIntoBuildingCapabilities("castle_port", portLevel, "castle", rimlandLow);
-			edb.insertIntoBuildingCapabilities("castle_port", portLevel, "castle", rimlandHigh);
+		for(val portLevel : ExportDescrBuilding.PortCastleLevels) {
+			edb.insertIntoBuildingCapabilities("castle_port", portLevel, "castle", portRimlandLow);
+			edb.insertIntoBuildingCapabilities("castle_port", portLevel, "castle", portRimlandHigh);
 		}
-
-
-
 	}
 
 	private void rimlandProvincesHiddenResources() {
 		val p = new RimlandProvinceList();
 
-		p.add("Novgorod_Province", H);
-		p.add("Kolyvan_Province");	// Estonia
+		p.add(Provinces.Novgorod, M);
+		p.add(Provinces.Estonia_Kolyvan, L);	// Estonia
 		p.add("Riga_Province");
 		p.add("Kernave_Province");	// Litwa
-		p.add("Twangste_Province", H);	// Prussia
-		p.add("Gdansk_Province", H);
-		p.add("Szczecin_Province", H);
-		p.add("Lubeck_Province", H);
-		p.add("Hamburg_Province", H);
-		p.add("Bremen_Province", H);
-		p.add("Utrecht_Province", H);
-		p.add("Leuven_Province", H);
-		p.add("Ghent_Province", H);
+		p.add("Twangste_Province", M);	// Prussia
+		p.add("Gdansk_Province", M);
+		p.add("Szczecin_Province", M);
+		p.add("Lubeck_Province", M);
+		p.add("Hamburg_Province", M);
+		p.add("Bremen_Province", M);
+		p.add("Utrecht_Province", M);
+		p.add("Leuven_Province", M);
+		p.add("Ghent_Province", M);
 		p.add("Rouen_Province");	// La Manche
-		p.add("Rennes_Province");
+		p.add(Provinces.Brittany_Rennes);
 		p.add("Poitiers_Province");
-		p.add("Bordeaux_Province");
-		p.add("Pamplona_Province");	// no heartland behind, but traderoute Atlantic - Mediterian Sea
+		p.add(Provinces.Bordeaux, M);
+		p.add(Provinces.Pamplona);	// no heartland behind, but traderoute Atlantic - Mediterian Sea
 		p.add("Burgos_Province");
 		p.add("Leon_Province");
 		// Santiago_Province  No heartland behind
@@ -87,16 +85,16 @@ public class RimlandHeartland extends Feature {
 		p.add("Granada_Province");
 		p.add("Murcia_Province");
 		p.add("Valencia_Province");
-		p.add("Zaragoza_Province");
-		// Barcelona - no Heartland behind
-		p.add("Toulouse_Province");
-		p.add("Arles_Province", H);
+		p.add(Provinces.Zaragoza);
+		p.add(Provinces.Barcelona);	// Barcelona - no Heartland behind but traderoute Atlantic - Mediterian Sea
+		p.add(Provinces.Toulouse, M);
+		p.add("Arles_Province", M);
 		// Nizza / Nice - mountains blocks heartleand
-		p.add("Genoa_Province", H);
+		p.add("Genoa_Province", M);
 		p.add("Verona_Province");
-		p.add("Venice_Province", H);
-		p.add("Freiberg_Province", H);
-		p.add("Zagreb_Province", H);
+		p.add("Venice_Province", M);
+		p.add("Freiberg_Province", M);
+		p.add("Zagreb_Province", M);
 		p.add("Zara_Province");
 		// Bosnia - no access to sea
 		p.add("Ragusa_Province");	// Mountains block
@@ -104,45 +102,45 @@ public class RimlandHeartland extends Feature {
 		p.add("Durazzo_Province");
 		p.add("Thessalonica_Province"); // Macedon ?? maybe low or high ?
 		// Adrianopolis - no, now going around Black Sea
-		p.add("Tarnovo_Province", H);
-		p.add("Iasi_Province", H);
-		p.add("Azaq_Province", H);
-		p.add("Tmutarakan_Province", H);
-		p.add("Sarkel_Province", H);
-		p.add("Kutaisi_Province", H);
+		p.add("Tarnovo_Province", M);
+		p.add("Iasi_Province", M);
+		p.add("Azaq_Province", M);
+		p.add("Tmutarakan_Province", M);
+		p.add("Sarkel_Province", M);
+		p.add("Kutaisi_Province", M);
 		p.add("Trebizond_Province");	// Mountains
 		p.add("Sinop_Province");	// Mountains
 		p.add("Nicaea_Province");	// High ?? Asia Minor
 		p.add("Smyrna_Province");
 		p.add("Attaleia_Province");
-		p.add("Sis_Province", H);
-		p.add("Antioch_Province", H);
-		p.add("Tripoli_Province", H);
-		p.add("Acre_Province", H);
-		p.add("Jerusalem_Province", H);
+		p.add("Sis_Province", M);
+		p.add("Antioch_Province", M);
+		p.add("Tripoli_Province", M);
+		p.add("Acre_Province", M);
+		p.add("Jerusalem_Province", M);
 		p.add("Ascalon_Province");
-		p.add("Damietta_Province", H);
+		p.add("Damietta_Province", M);
 		p.add("Alexandria_Province");
 		p.add("Tlemcen_Province");	// Algieria / Maroko
 		p.add("Fes_Province");
 		p.add("Marrakesh_Province");
 		// Mediterrian END, next Azow Sea
-		p.add("Saqsin_Province", H);
-		p.add("Aktobe_Province", H);
+		p.add("Saqsin_Province", M);
+		p.add("Aktobe_Province", M);
 		p.add("Urgench_Province");
 		p.add("Konjikala_Province");
-		p.add("Ray_Province", H);
+		p.add("Ray_Province", M);
 		p.add("Tabriz_Province");
 		p.add("Baku_Province");
 		// End Azow Sea, Start Persian Bay
 		p.add("Kerman_Province");
 		p.add("Shiraz_Province");
-		p.add("Basra_Province", H);
+		p.add("Basra_Province", M);
 		// End Persian Bay, Start Red Sea south
-		p.add("Mecca_Province", H);	// Also sea trade from India
+		p.add("Mecca_Province", M);	// Also sea trade from India
 		p.add("Tayma_Province");
-		p.add("Al_Aqaba_Province", H);	// Aqaba : Red Sea - Jerusalem/Askalon - Mediterian Sea
-		p.add("Cairo_Province", H);	// No heartland but Red Sea - Mediterian Sea trade route
+		p.add("Al_Aqaba_Province", M);	// Aqaba : Red Sea - Jerusalem/Askalon - Mediterian Sea
+		p.add("Cairo_Province", M);	// No heartland but Red Sea - Mediterian Sea trade route
 		p.add("Qus_Province");	// Southern Nile Delta, southern Africa trande routes
 
 		// # Mediterian ISLANDS
@@ -163,9 +161,21 @@ public class RimlandHeartland extends Feature {
 		edb.addHiddenResourceDef(HR_RIMLAND_LOW);
 		edb.addHiddenResourceDef(HR_RIMLAND_HIGH);
 		for(val prov : p.getList()) {
-			if(prov.getItem2() == 1) descrRegions.addResource(prov.getItem1(), HR_RIMLAND_LOW);
-			else if(prov.getItem2() == 2) descrRegions.addResource(prov.getItem1(), HR_RIMLAND_HIGH);
-			else throw new PatcherLibBaseEx("Not supoorted rimland type: "+prov.getItem2());
+			val level = prov.getItem2();
+			switch (level) {
+				case 1:
+					descrRegions.addResource(prov.getItem1(), HR_RIMLAND_LOW);
+					break;
+				case 2:
+					descrRegions.addResource(prov.getItem1(), HR_RIMLAND_HIGH);
+					break;
+				case 3:
+					descrRegions.addResource(prov.getItem1(), HR_RIMLAND_LOW);
+					descrRegions.addResource(prov.getItem1(), HR_RIMLAND_HIGH);
+					break;
+				default:
+					throw new PatcherLibBaseEx("Not supoorted rimland type: "+prov.getItem2());
+			}
 		}
 	}
 
@@ -173,19 +183,19 @@ public class RimlandHeartland extends Feature {
 		// ## Add requirements to ports
 		val reqAdditional = Ctm.msgFormat("and not hidden_resource atlantic or event_counter {0} 1", eventAtlanticTrade);
 
-		cityPortLevels = Arrays.asList("port", "shipwright" ,"dockyard" ,"naval_drydock");
-		cityPortLevels.forEach(cp -> edb.addBuildingRequirement("port", cp, "city", reqAdditional) );
+		//portCityLevels = Arrays.asList("port", "shipwright" ,"dockyard" ,"naval_drydock");
+		ExportDescrBuilding.PortCityLevels.forEach(cp -> edb.addBuildingRequirement("port", cp, "city", reqAdditional) );
 
-		castlePortLevels = Arrays.asList("c_port", "c_shipwright", "c_dockyard", "c_naval_drydock");
-		castlePortLevels.forEach(cp -> edb.addBuildingRequirement("castle_port", cp, "castle", reqAdditional) );
+		//portCastleLevels = Arrays.asList("c_port", "c_shipwright", "c_dockyard", "c_naval_drydock");
+		ExportDescrBuilding.PortCastleLevels.forEach(cp -> edb.addBuildingRequirement("castle_port", cp, "castle", reqAdditional) );
 
 		// ## Add Hidden Resource atlantic
 		edb.addHiddenResourceDef(HR_ATLANTIC);
 		val provinces = Arrays.asList(
-				"Rennes_Province"	// Brittany, west-sout of English channel
+				Provinces.Brittany_Rennes	// Brittany, west-south of English channel
 				,"Poitiers_Province"
-				,"Bordeaux_Province"
-				,"Pamplona_Province"
+				,Provinces.Bordeaux
+				,Provinces.Pamplona
 				,"Burgos_Province"
 				,"Leon_Province"
 				,"Santiago_Province"
@@ -199,16 +209,33 @@ public class RimlandHeartland extends Feature {
 
 		// ## Remove existing ports : Leon & Coimbra
 		for (val province : provinces) {
-			cityPortLevels.forEach(cp -> descrStrat.removeSettlementBuilding(province, "port", cp) );
-			castlePortLevels.forEach(cp -> descrStrat.removeSettlementBuilding(province, "castle_port", cp) );
+			ExportDescrBuilding.PortCityLevels.forEach(cp -> descrStrat.removeSettlementBuilding(province, "port", cp) );
+			ExportDescrBuilding.PortCastleLevels.forEach(cp -> descrStrat.removeSettlementBuilding(province, "castle_port", cp) );
 		}
 	}
 
-	private static final int H = 2;
+	private void landGates() {
+		edb.addHiddenResourceDef(HR_LAND_GATE);
+
+		val provinces = Arrays.asList(
+				// Iberia Land Gate
+				Provinces.Bordeaux, Provinces.Pamplona, Provinces.Zaragoza, Provinces.Barcelona, Provinces.Toulouse
+		);
+		provinces.forEach( p ->  descrRegions.addResource(p, HR_LAND_GATE));
+
+		val landGate = "\t\ttrade_base_income_bonus bonus 1 requires hidden_resource "+ HR_LAND_GATE;
+
+		edb.insertIntoBuildingCapabilities("market", ExportDescrBuilding.MarketCityLevels, "city", landGate);
+		edb.insertIntoBuildingCapabilities("market_castle", ExportDescrBuilding.MarketCastleLevels, "castle", landGate);
+	}
+
+	private static final int H = 3;
+	private static final int M = 2;
 	private static final int L = 1;
 	public static final String HR_ATLANTIC = "atlantic";
 	public static final String HR_RIMLAND_LOW = "rimlandLow";
 	public static final String HR_RIMLAND_HIGH = "rimlandHigh";
+	public static final String HR_LAND_GATE = "landgate";
 
 	private DescrRegions descrRegions;
 	private ExportDescrBuilding edb;

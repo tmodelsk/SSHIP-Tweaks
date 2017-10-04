@@ -21,6 +21,15 @@ public class RimlandProvinceList {
 	public void add(String provinceName) {
 		add(provinceName, 1);
 	}
+	public void add1(String provinceName) {
+		add(provinceName, 1);
+	}
+	public void add2(String provinceName) {
+		add(provinceName, 2);
+	}
+	public void add3(String provinceName) {
+		add(provinceName, 3);
+	}
 
 	public void add(String province, int level) {
 		provinces.add(new Tuple2<>(province, level));
