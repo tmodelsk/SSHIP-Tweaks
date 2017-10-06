@@ -24,9 +24,15 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 
 	public void addHiddenResourceDef(String hiddenResourceName) {
 		val lines = getLines();
-		int index = lines.findExpFirstRegexLine("^\\s*hidden_resources\\s+");
+		val index = lines.findExpFirstRegexLine("^\\s*hidden_resources\\s+");
 		val orgLineStr = lines.getLine(index);
-		lines.replaceLine(index, orgLineStr+ " " + hiddenResourceName );
+		val newLine = orgLineStr+ " " + hiddenResourceName;
+
+		val splitted = newLine.split(" ");
+		val hiddenResCount = splitted.length-1;	// hidden_resources tag is first
+		if(hiddenResCount > 64)	throw new PatcherLibBaseEx(Ctm.msgFormat("Too many ({0}) hidden resources!", hiddenResCount));
+
+		lines.replaceLine(index, newLine );
 	}
 
 	public List<Tuple2<String, List<Integer>>> addFlatCityCastleIncome(String requires, double factor) throws PatcherLibBaseEx {
@@ -461,6 +467,9 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 
 	public static final List<String> PortCityLevels = Arrays.asList("port", "shipwright" ,"dockyard" ,"naval_drydock");
 	public static final List<String> PortCastleLevels = Arrays.asList("c_port", "c_shipwright", "c_dockyard", "c_naval_drydock");
+
+	public static final List<String> SeaTradeCityLevels = Arrays.asList("merchants_wharf", "warehouse", "docklands");
+	public static final List<String> SeaTradeCastleLevels = Arrays.asList("merchants_wharf");
 
 	public static final List<String> MarketCityLevels = Arrays.asList("corn_exchange", "market", "fairground", "great_market", "merchants_quarter");
 	public static final List<String> MarketCastleLevels = Arrays.asList("corn_exchange", "market", "fairground");

@@ -9,8 +9,7 @@ import tm.mtwModPatcher.lib.common.scripting.campaignScript.core.Condition;
  */
 public class FactionReligion extends Condition {
 
-	@Getter
-	@Setter
+	@Getter @Setter
 	private String religion;
 
 	@Override

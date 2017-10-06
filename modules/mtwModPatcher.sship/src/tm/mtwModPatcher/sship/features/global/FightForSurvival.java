@@ -31,7 +31,7 @@ public class FightForSurvival extends Feature {
 	@Getter @Setter
 	private double warningReplenishMult = 1.0;
 	@Getter @Setter
-	private double dangerReplenishMult = 1.20;
+	private double dangerReplenishMult = 1.0;	// 1.20
 	@Getter @Setter
 	private double criticalReplenishMult = 1.33;
 	@Getter @Setter

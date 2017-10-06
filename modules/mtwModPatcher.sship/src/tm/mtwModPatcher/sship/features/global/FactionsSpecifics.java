@@ -41,7 +41,7 @@ public class FactionsSpecifics extends Feature {
 
 		Byzantium();
 
-		RomanCatholicTradersBonuses();
+		//RomanCatholicTradersBonuses();
 		NorwegianDanesBoostReplenishRates();
 		CumansBoostReplenishRates();
 		HolyRomanEmpireLawMinus();

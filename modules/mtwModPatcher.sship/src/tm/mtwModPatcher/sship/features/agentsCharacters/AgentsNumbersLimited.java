@@ -49,11 +49,11 @@ public class AgentsNumbersLimited extends Feature {
 		rootRegion.add(createAgentCountingMonitors());
 
 		// ## write Faction Agents limiting monitors via CS Framework ##
-		val csManafger = new CampaignScriptManager(_CampaignScript);
+		val csManager = new CampaignScriptManager(_CampaignScript);
 		for (val factionName : _FactionsList) {
 
 			val factionLimitingBlock = createFactionLimitingBody(factionName, AgentType.Assassin);
-			csManafger.insertAtEndOfPreFactionTurnStart(factionName, factionLimitingBlock);
+			csManager.insertAtEndOfPreFactionTurnStart(factionName, factionLimitingBlock);
 		}
 		_CampaignScript.insertAtEndOfFile(rootRegion);
 

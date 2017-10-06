@@ -7,6 +7,7 @@ import tm.mtwModPatcher.lib.common.scripting.campaignScript.conditions.base.NotC
  */
 public abstract class Condition extends ScriptElement {
 
+	/** Negates base condition */
 	public Condition not() {
 		return new NotCondition(this);
 	}

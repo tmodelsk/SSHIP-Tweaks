@@ -1,4 +1,4 @@
-package tm.mtwModPatcher.sship.features.map;
+package tm.mtwModPatcher.sship.features.global.rimlandHeartland;
 
 import tm.common.Tuple2;
 
