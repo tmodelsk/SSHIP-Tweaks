@@ -30,7 +30,7 @@ public class BuildingTweaks extends Feature {
 		edb.insertIntoBuildingCapabilities("orphan", "foundling_hospital", "city", "				population_health_bonus bonus 1");
 		edb.insertIntoBuildingCapabilities("orphan", "orphanage", "city", "				population_health_bonus bonus 2");
 
-		// PORT earlies:
+		// PORT earlier:
 		edb.setBuildingSettlementRequirement("port", "port", "city", SettlementLevel.L2_Town);
 		edb.setBuildingSettlementRequirement("castle_port", "c_port", "castle", SettlementLevel.L2_Town);
 
