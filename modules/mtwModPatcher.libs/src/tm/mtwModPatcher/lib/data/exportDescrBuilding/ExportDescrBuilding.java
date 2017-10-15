@@ -320,6 +320,9 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		return settlementRequirement;
 	}
 
+	public void setBuildingSettlementRequirement(String buildingName, String levelName, SettlType settlType, SettlementLevel level) {
+		setBuildingSettlementRequirement(buildingName, levelName, settlType.toLabelString(), level);
+	}
 	public void setBuildingSettlementRequirement(String buildingName, String levelName, String castleOrCity, SettlementLevel level) throws PatcherLibBaseEx {
 		setBuildingSettlementRequirement(buildingName, levelName, castleOrCity, getSettlementLevelStr(level));
 	}

@@ -3,6 +3,8 @@ package tm.mtwModPatcher.sship.features.buildings;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.entities.SettlementLevel;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.SettlType;
+import tm.mtwModPatcher.sship.lib.Buildings;
 
 import java.util.UUID;
 
@@ -31,8 +33,12 @@ public class BuildingTweaks extends Feature {
 		edb.insertIntoBuildingCapabilities("orphan", "orphanage", "city", "				population_health_bonus bonus 2");
 
 		// PORT earlier:
-		edb.setBuildingSettlementRequirement("port", "port", "city", SettlementLevel.L2_Town);
-		edb.setBuildingSettlementRequirement("castle_port", "c_port", "castle", SettlementLevel.L2_Town);
+		edb.setBuildingSettlementRequirement(Buildings.PortCity, Buildings.PortCityLevels.get(0), SettlType.City, SettlementLevel.L2_Town);
+		edb.setBuildingSettlementRequirement(Buildings.PortCastle, Buildings.PortCastleLevels.get(0), SettlType.City, SettlementLevel.L2_Town);
+
+		// SeaTrade earlier
+		edb.setBuildingSettlementRequirement(Buildings.SeaTradeCity, Buildings.SeaTradeCityLevels.get(0), SettlType.City, SettlementLevel.L2_Town);
+		edb.setBuildingSettlementRequirement(Buildings.SeaTradeCastle, Buildings.SeaTradeCastleLevels.get(0), SettlType.City, SettlementLevel.L2_Town);
 
 		// city_hall :  levels town_hall council_chambers city_hall mayors_palace
 		//exportDescrBuilding.insertIntoBuildingCapabilities("city_hall", "council_chambers" , "city", "       recruitment_slots bonus 1  requires not event_counter freeze_recr_pool 1");

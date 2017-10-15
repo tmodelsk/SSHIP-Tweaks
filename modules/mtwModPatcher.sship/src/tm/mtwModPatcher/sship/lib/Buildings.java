@@ -27,10 +27,10 @@ public class Buildings {
 	public static final List<String> PortCityLevels = Arrays.asList("port", "shipwright" ,"dockyard" ,"naval_drydock");
 	public static final List<String> PortCastleLevels = Arrays.asList("c_port", "c_shipwright", "c_dockyard", "c_naval_drydock");
 
+	public  static final String SeaTradeCity = "sea_trade";
+	public  static final String SeaTradeCastle = "castle_sea_trade";
 	public static final List<String> SeaTradeCityLevels = Arrays.asList("merchants_wharf", "warehouse", "docklands");
 	public static final List<String> SeaTradeCastleLevels = Arrays.asList("merchants_wharf");
-
-
 
 	public final static tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.WallsCity WallsCity =
 			tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.Buildings.WallsCity;
