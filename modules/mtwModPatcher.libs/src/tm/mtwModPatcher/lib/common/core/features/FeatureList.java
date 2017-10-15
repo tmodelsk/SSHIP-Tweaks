@@ -54,6 +54,11 @@ public class FeatureList {
 
 		if(ft != null) ft.setEnabled(false);
 	}
+	public void enableFeatureIfExists(UUID id) {
+		val ft = get(id);
+
+		if(ft != null) ft.setEnabled(true);
+	}
 
 	public List<Feature> getFeaturesList() {
 		return Collections.unmodifiableList(features);

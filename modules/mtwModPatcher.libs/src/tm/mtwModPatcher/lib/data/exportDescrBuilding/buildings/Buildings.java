@@ -9,8 +9,8 @@ public class Buildings {
 
 	public final static WallsCastle WallsCastle = new WallsCastle();
 
-
 	public final static String CityType = "city";
 	public final static String CastleType = "castle";
+
 
 }

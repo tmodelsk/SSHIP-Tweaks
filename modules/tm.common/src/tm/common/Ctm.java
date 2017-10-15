@@ -21,10 +21,12 @@ public class Ctm {
 
 	/** Message Format like 'Some String {0} / {1}' with arguments */
 	public static String msgFormat(String s, Object... args) {
-
 		val strReplaces = s.replace("'" , "''");
-
-		return new MessageFormat(strReplaces).format(args);
+		try {
+			return new MessageFormat(strReplaces).format(args);
+		} catch (IllegalArgumentException illegalArgEx) {
+			throw new IllegalArgumentException("Unmatched braces, pattern: "+s, illegalArgEx);
+		}
 	}
 	public static String msgFormat(String s) {
 		return s;

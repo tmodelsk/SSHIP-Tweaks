@@ -1,6 +1,7 @@
 package tm.mtwModPatcher.sship.features.global.rimlandHeartland;
 
 import tm.common.Tuple2;
+import tm.common.Tuple3;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -21,6 +22,9 @@ public class RimlandProvinceList {
 	public void add(String provinceName) {
 		add(provinceName, 1);
 	}
+	public void add(String province, boolean portWithRiver) {
+		add(province, 1, portWithRiver);
+	}
 	public void add1(String provinceName) {
 		add(provinceName, 1);
 	}
@@ -32,12 +36,16 @@ public class RimlandProvinceList {
 	}
 
 	public void add(String province, int level) {
-		provinces.add(new Tuple2<>(province, level));
+		add(province, level, false);
+	}
+	public void add(String province, int level, boolean portWithRiver) {
+		provinces.add(new Tuple3<>(province, level, portWithRiver));
 	}
 
+	//					Name , Rimland Level , Is River port ?
+	private List<Tuple3<String, Integer, Boolean>> provinces = new ArrayList<>();
 
-	private List<Tuple2<String, Integer>> provinces = new ArrayList<>();
-	public List<Tuple2<String, Integer>> getList() {
+	public List<Tuple3<String, Integer, Boolean>> getList() {
 		return provinces;
 	}
 

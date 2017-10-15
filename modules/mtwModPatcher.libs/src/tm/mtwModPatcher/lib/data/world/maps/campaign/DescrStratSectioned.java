@@ -180,10 +180,6 @@ public class DescrStratSectioned extends SectionsFileEntity {
 			while (index >= 0) {
 				String line = lines.getLine(index);
 
-				if (line.contains("Reggio")) {
-					String xx = "break";
-				}
-
 				// process
 				String provinceName;
 				SettlementLevel level;

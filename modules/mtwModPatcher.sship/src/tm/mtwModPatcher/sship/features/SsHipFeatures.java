@@ -160,6 +160,10 @@ public class SsHipFeatures {
 			features.getEnabled( AragonChapterHousesBoost.Id).disable();
 			features.getEnabled( BetterLogging.Id).disable();
 		}
+
+		//disableAll();
+		//features.enableFeatureIfExists(RimlandHeartland.Id);
+
 	}
 	public void disableAll() {
 		for (val ft : features.getFeaturesList()) {

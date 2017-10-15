@@ -10,6 +10,8 @@ import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessorFileEntity;
 import tm.mtwModPatcher.lib.common.entities.SettlementLevel;
 import tm.mtwModPatcher.lib.common.entities.SettlementLevelConverter;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.Buildings;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.SettlType;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -153,6 +155,16 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		insertIntoBuildingCapabilities(buildingName, levelName, castleOrCity, line);
 	}
 
+
+	public void insertIntoBuildingCapabilities(String buildingName, String levelName, SettlType settlType, String newLine) {
+		insertIntoBuildingCapabilities(buildingName, levelName, settlType.toLabelString(), newLine);
+	}
+
+	public void insertIntoBuildingCapabilities(String buildingName, String levelName, String newLine) {
+		String castleOrCity = null;
+		insertIntoBuildingCapabilities(buildingName, levelName, castleOrCity, newLine);
+	}
+
 	public void insertIntoBuildingCapabilities(String buildingName, String levelName, String castleOrCity, String newLine) throws PatcherLibBaseEx {
 
 		LinesProcessor lines = _Lines;
@@ -173,10 +185,18 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 
 		int capabilityBracketEnd = lines.findExpFirstRegexLine("^\\s+}",capabilityBracekStart);
 
-		int insertIndex = capabilityBracketEnd - 1;
-		lines.insertAt(insertIndex, newLine);
+		int insertIndex = capabilityBracketEnd;
+
+
+		String lineCorrected = "        " + newLine.trim();
+
+		lines.insertAt(insertIndex, lineCorrected);
 	}
 
+
+	public void insertIntoBuildingCapabilities(String buildingName, List<String> levels, SettlType settlType, String newLine) {
+		insertIntoBuildingCapabilities(buildingName, levels, settlType.toLabelString(), newLine);
+	}
 	public void insertIntoBuildingCapabilities(String buildingName, List<String> levels, String castleOrCity, String newLine) {
 		for (val level: levels)
 			insertIntoBuildingCapabilities(buildingName, level, castleOrCity, newLine);
@@ -465,12 +485,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		super("data\\export_descr_buildings.txt");
 	}
 
-	public static final List<String> PortCityLevels = Arrays.asList("port", "shipwright" ,"dockyard" ,"naval_drydock");
-	public static final List<String> PortCastleLevels = Arrays.asList("c_port", "c_shipwright", "c_dockyard", "c_naval_drydock");
-
-	public static final List<String> SeaTradeCityLevels = Arrays.asList("merchants_wharf", "warehouse", "docklands");
-	public static final List<String> SeaTradeCastleLevels = Arrays.asList("merchants_wharf");
-
-	public static final List<String> MarketCityLevels = Arrays.asList("corn_exchange", "market", "fairground", "great_market", "merchants_quarter");
-	public static final List<String> MarketCastleLevels = Arrays.asList("corn_exchange", "market", "fairground");
+	public final static String TradeBonus = "trade_base_income_bonus bonus ";
+	public final static String IncomeBonus = "income_bonus bonus ";
+	public final static String LawBonus = "law_bonus bonus ";
 }

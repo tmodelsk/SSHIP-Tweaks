@@ -2,6 +2,8 @@ package tm.mtwModPatcher.lib.common.core.features.fileEntities;
 
 import javafx.util.Pair;
 import lombok.val;
+import tm.common.Ctm;
+import tm.common.Range;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 
 import java.io.*;
@@ -263,6 +265,14 @@ public class LinesProcessor {
 		return findExpFirstByRegexLine(pattern, startFromIndex);
 	}
 
+	public int findExpFirstRegexLine(Pattern regex, Range<Integer, Integer> rangeInclusive) {
+		val index = findFirstRegexLine(regex, rangeInclusive);
+
+		if(index < 0) throw new LineNotFoundEx(Ctm.msgFormat("EDB: Not found in [{0},{1}] reg: {2}",
+				rangeInclusive.getStart(), rangeInclusive.getEnd(), regex.toString()));
+
+		return index;
+	}
 	public int findExpFirstRegexLine(String regex, int startFromIndex, int endIndexInclusive) throws PatcherLibBaseEx {
 
 		int index = findFirstRegexLine(regex, startFromIndex, endIndexInclusive);
@@ -302,6 +312,9 @@ public class LinesProcessor {
 		return findFirstRegexLine(pattern, startFromIndex, _Lines.size());
 	}
 
+	public int findFirstRegexLine(Pattern pattern, Range<Integer, Integer> rangeInclusive) {
+		return findFirstRegexLine(pattern, rangeInclusive.getStart(), rangeInclusive.getEnd());
+	}
 	// Finds rexeg add BETWEEN startFromIndex & endIndex - all inclusive
 	public int findFirstRegexLine(Pattern pattern, int startFromIndex, int endIndexInclusive) throws PatcherLibBaseEx {
 
