@@ -11,9 +11,16 @@ import java.util.List;
  */
 public class Buildings {
 
+	// ### Guilds ###
+	public static final String MerchantsGuild = "guild_merchants_guild";
+	public static final List<String> MerchantsGuildLevels = Arrays.asList("merchants_guild", "m_merchants_guild", "gm_merchants_guild");
+
+	public static final String ExplorersGuild = "guild_explorers_guild";
+	public static final List<String> ExplorersLevels = Arrays.asList("explorers_guild", "m_explorers_guild", "gm_explorers_guild");
+
 	// #### Markets ####
-	public  static final String MarketCity = "market";
-	public  static final String MarketCastle = "market_castle";
+	public static final String MarketCity = "market";
+	public static final String MarketCastle = "market_castle";
 	public static final List<String> MarketCityLevels = Arrays.asList("corn_exchange", "market", "fairground", "great_market", "merchants_quarter");
 	public static final List<String> MarketCastleLevels = Arrays.asList("corn_exchange", "market", "fairground");
 
@@ -37,6 +44,9 @@ public class Buildings {
 
 	public final static tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.WallsCastle WallsCastle =
 			tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.Buildings.WallsCastle;
+
+	public static final List<String> WallsCityLevels = Arrays.asList(WallsCity.L1_WoodenPalisade, WallsCity.L2_WoodenWall, WallsCity.L3_StoneWall, WallsCity.L4_LargeStoneWall, WallsCity.L5_HugeStoneWall);
+	public static final List<String> WallsCastleLevels = Arrays.asList(WallsCastle.L1_MotteAndBailey, WallsCastle.L2_WoodenCastle, WallsCastle.L3_Castle, WallsCastle.L4_Fortress, WallsCastle.L5_Citadel);
 
 	public final static String CityType = tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.Buildings.CityType;
 	public final static String CastleType = tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.Buildings.CastleType;

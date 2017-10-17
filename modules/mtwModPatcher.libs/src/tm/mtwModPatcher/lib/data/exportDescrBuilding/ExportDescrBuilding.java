@@ -10,6 +10,7 @@ import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessorFileEntity;
 import tm.mtwModPatcher.lib.common.entities.SettlementLevel;
 import tm.mtwModPatcher.lib.common.entities.SettlementLevelConverter;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingLevel;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.Buildings;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.SettlType;
 
@@ -156,6 +157,9 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 	}
 
 
+	public void insertIntoBuildingCapabilities(BuildingLevel buidlingLevel, String newLine) {
+		insertIntoBuildingCapabilities(buidlingLevel.Name, buidlingLevel.LevelName, buidlingLevel.SettlType, newLine);
+	}
 	public void insertIntoBuildingCapabilities(String buildingName, String levelName, SettlType settlType, String newLine) {
 		insertIntoBuildingCapabilities(buildingName, levelName, settlType.toLabelString(), newLine);
 	}
@@ -238,6 +242,10 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		}
 	}
 
+	public Range<Integer, Integer> getBuildingCapabilitiesStartEnd(BuildingLevel bl) {
+		String cityOrCastle = bl.SettlType == null ? null : bl.SettlType.toLabelString();
+		return getBuildingCapabilitiesStartEnd(bl.Name, bl.LevelName, cityOrCastle);
+	}
 	public Range<Integer, Integer> getBuildingCapabilitiesStartEnd(String buildingName, String levelName, String castleOrCity) {
 		LinesProcessor lines = _Lines;
 

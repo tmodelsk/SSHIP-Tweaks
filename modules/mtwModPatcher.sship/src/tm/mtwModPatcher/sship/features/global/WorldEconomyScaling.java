@@ -27,9 +27,9 @@ public class WorldEconomyScaling extends Feature {
 
 		descrSettlementMechanics.updateAttributeByMultiplier("/root/factor_modifiers/factor[@name='SIF_FARMS']/pip_modifier", "value", economyMulti);
 		descrSettlementMechanics.updateAttributeByMultiplier("/root/factor_modifiers/factor[@name='SIF_TAXES']/pip_modifier", "value", economyMulti);
-		// ## Boost MINING income ##
+		// ## MINING income ##
 		descrSettlementMechanics.updateAttributeByMultiplier("/root/factor_modifiers/factor[@name='SIF_MINING']/pip_modifier", "value", economyMulti);
-		// ## Boost TRADE income - to equalize removed mwechants ##
+		// ## TRADE income ##
 		descrSettlementMechanics.updateAttributeByMultiplier("/root/factor_modifiers/factor[@name='SIF_TRADE']/pip_modifier", "value", economyMulti);
 		// ## SIF_BUILDINGS - any bonus given from EDB (1 per building)
 		descrSettlementMechanics.updateAttributeByMultiplier("/root/factor_modifiers/factor[@name='SIF_BUILDINGS']/pip_modifier", "value", economyMulti);

@@ -14,6 +14,8 @@ import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data._root.ExportDescrGuilds;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrStratSectioned;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -186,5 +188,14 @@ public class MerchantsRemovedFtr extends Feature {
 
 		setDescriptionShort("All merchants are removed & economy is rebalanced to fulfill missing income");
 		setDescriptionUrl("http://tmsship.wikidot.com/merchants-removed");
+	}
+
+	@Override
+	public Set<UUID> getConflictingFeatures() {
+		val conflicts = new HashSet<UUID>();
+
+		conflicts.add(MerchantsNerfed.Id);
+
+		return conflicts;
 	}
 }

@@ -34,11 +34,11 @@ public class BuildingTweaks extends Feature {
 
 		// PORT earlier:
 		edb.setBuildingSettlementRequirement(Buildings.PortCity, Buildings.PortCityLevels.get(0), SettlType.City, SettlementLevel.L2_Town);
-		edb.setBuildingSettlementRequirement(Buildings.PortCastle, Buildings.PortCastleLevels.get(0), SettlType.City, SettlementLevel.L2_Town);
+		edb.setBuildingSettlementRequirement(Buildings.PortCastle, Buildings.PortCastleLevels.get(0), SettlType.Castle, SettlementLevel.L2_Town);
 
 		// SeaTrade earlier
 		edb.setBuildingSettlementRequirement(Buildings.SeaTradeCity, Buildings.SeaTradeCityLevels.get(0), SettlType.City, SettlementLevel.L2_Town);
-		edb.setBuildingSettlementRequirement(Buildings.SeaTradeCastle, Buildings.SeaTradeCastleLevels.get(0), SettlType.City, SettlementLevel.L2_Town);
+		edb.setBuildingSettlementRequirement(Buildings.SeaTradeCastle, Buildings.SeaTradeCastleLevels.get(0), SettlType.Castle, SettlementLevel.L2_Town);
 
 		// city_hall :  levels town_hall council_chambers city_hall mayors_palace
 		//exportDescrBuilding.insertIntoBuildingCapabilities("city_hall", "council_chambers" , "city", "       recruitment_slots bonus 1  requires not event_counter freeze_recr_pool 1");

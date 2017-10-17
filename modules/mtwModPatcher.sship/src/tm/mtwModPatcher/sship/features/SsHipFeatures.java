@@ -54,6 +54,7 @@ public class SsHipFeatures {
 		features.add(new NonSpearInfantryAttackBoost());
 		features.add(new UnitsBugFixes());
 
+		features.add(new MerchantsNerfed());
 		features.add(new MerchantsRemovedFtr());
 		features.add(new WorldEconomyScaling());
 		features.add(new SettlementUnrestLowered());
@@ -150,6 +151,7 @@ public class SsHipFeatures {
 		features.disableFeatureIfExists( SkynetCampaignAi.Id);
 		features.disableFeatureIfExists( WatchtowersToForts.Id);
 		features.disableFeatureIfExists( NonSpearInfantryAttackBoost.Id);
+		features.disableFeatureIfExists( MerchantsRemovedFtr.Id);
 
 		if(!ConfigurationSettings.isDevEnvironment()) {
 
