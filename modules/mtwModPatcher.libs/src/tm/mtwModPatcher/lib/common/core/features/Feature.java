@@ -61,6 +61,8 @@ public abstract class Feature {
 		this.fileEntityFactory = fileEntityFactory;
 		consoleLogger = logger;
 		parameterIds = defineParamsIds();
+		initializeParamValues();
+		setParamsDefaultValues();
 		featuresContainer.addConflictingFeature(this, getConflictingFeatures());
 	}
 
@@ -91,7 +93,12 @@ public abstract class Feature {
 			reloadParametersFromFeature();
 			return parameterValues;
 		}
+		// parameters still not ready, initialize
+		initializeParamValues();
 
+		return parameterValues;
+	}
+	private final void initializeParamValues() {
 		val pars = new ArrayUniqueList<ParamValue>();
 		for (val parId : parameterIds) {
 			ParamValue paramValue;
@@ -117,8 +124,6 @@ public abstract class Feature {
 			pars.add(paramValue);
 		}
 		parameterValues = pars;
-
-		return parameterValues;
 	}
 	private void reloadParametersFromFeature() {
 		for (val parValue : parameterValues) {
@@ -145,6 +150,9 @@ public abstract class Feature {
 		for (val parValue : parValues) {
 			setParValue(parValue);
 		}
+	}
+	public void setParamsDefaultValues() {
+		reloadParametersFromFeature();
 	}
 	// ### Parameters Section End ###
 

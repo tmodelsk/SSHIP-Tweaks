@@ -9,6 +9,8 @@ import tm.mtwModPatcher.lib.common.core.features.Feature;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.net.URI;
@@ -26,6 +28,7 @@ public class FeatureOptionsForm {
 	private JTable paramsTable;
 	private JLabel featureIdLb;
 	private JLabel descriptionShortLabel;
+	private JButton setDefaultValuesBt;
 
 	@SuppressWarnings("WeakerAccess")
 	public static String FeatureIdLbName="featureIdLb";
@@ -84,6 +87,10 @@ public class FeatureOptionsForm {
 			}
 		});
 		cancelButton.addActionListener(e -> closeWindow());
+		setDefaultValuesBt.addActionListener(e -> {
+			feature.setParamsDefaultValues();
+			refresh();
+		});
 	}
 	public  JPanel getMainPanel() {
 		return  mainPanel;

@@ -18,8 +18,6 @@ import java.util.stream.Collectors;
 /**  */
 public class PatcherEngine {
 
-	private BackupEngine backupEngine;
-
 	private void restoreCleanBackup() throws IOException {
 		consoleLogger.writeLine("PatcherEngine: Restore & clean Backup started ...");
 		backupEngine.restoreBackup();
@@ -35,7 +33,7 @@ public class PatcherEngine {
 
 		for (Feature baseFeature : featureList) {
 			// # perform backup for override tasks
-			if(baseFeature.getOverrideTasks() != null&& baseFeature.getOverrideTasks().size() > 0) {
+			if (baseFeature.getOverrideTasks() != null && baseFeature.getOverrideTasks().size() > 0) {
 				for (OverrideTask overrideTask : baseFeature.getOverrideTasks()) {
 					overrideTask.RootPath = OverrideRootPath;
 					overrideTasks.add(overrideTask);
@@ -45,10 +43,10 @@ public class PatcherEngine {
 
 			}
 		}
-		consoleLogger.writeLine("PatcherEngine: Found "+overrideTasks.size()+" override tasks");
+		consoleLogger.writeLine("PatcherEngine: Found " + overrideTasks.size() + " override tasks");
 
 		// ## Backup & Execute Overrides ##
-		if(overrideTasks.size() > 0) {
+		if (overrideTasks.size() > 0) {
 			consoleLogger.writeLine("PatcherEngine: Backup files to override started ... ");
 
 			backupEngine.BackupPaths(overrideRelativePaths);
@@ -72,41 +70,40 @@ public class PatcherEngine {
 		Set<FileEntity> filesToUpdate = new HashSet<>();
 		for (Feature feature : featureList) {
 
-			consoleLogger.writeLine("PatcherEngine: Feature ["+feature.Name+"] execution started ...");
+			consoleLogger.writeLine("PatcherEngine: Feature [" + feature.Name + "] execution started ...");
 
 			try {
 				feature.preExecuteUpdates();
 				feature.executeUpdates();
-			}
-			catch (Exception ex) {
+			} catch (Exception ex) {
 				val ftName = feature.getName();
 				throw new FeatureEx(ex.getMessage(), ex, ftName);
 			}
 
 			val filesUpdated = feature.getFilesUpdated();
 			filesToUpdate.addAll(filesUpdated);
-			consoleLogger.writeLine("PatcherEngine: Feature ["+feature.Name+"] execution done, updated ("+filesUpdated.size()+") files");
+			consoleLogger.writeLine("PatcherEngine: Feature [" + feature.Name + "] execution done, updated (" + filesUpdated.size() + ") files");
 		}
 		consoleLogger.writeLine("PatcherEngine: Apply Features done");
 
 		// ## Backup only changed but NOT Overrided Files !! ##
 		consoleLogger.writeLine("PatcherEngine: Backup updated files starting ...");
 		val filesToBackup = new ArrayList<FileEntity>();
-		for(val fileToUpd : filesToUpdate) {
+		for (val fileToUpd : filesToUpdate) {
 
-			if( ! overrideTasks.contains(fileToUpd.filePath))
+			if (!overrideTasks.contains(fileToUpd.filePath))
 				filesToBackup.add(fileToUpd);
 		}
 
 		// ## Backup files to be updated ##
-		backupEngine.BackupPaths( filesToUpdate );
+		backupEngine.BackupPaths(filesToUpdate);
 		consoleLogger.writeLine("PatcherEngine: Backup updated files done");
 
 		// ## Save Features changes to disk ##
 		consoleLogger.writeLine("PatcherEngine: Save updated files starting ...");
 		for (FileEntity file : filesToUpdate) {
 			file.saveChanges();
-			consoleLogger.writeLine("PatcherEngine: Saved updated file ["+file.getFullPath()+"]");
+			consoleLogger.writeLine("PatcherEngine: Saved updated file [" + file.getFullPath() + "]");
 		}
 		consoleLogger.writeLine("PatcherEngine: Save updated files done");
 	}
@@ -122,7 +119,7 @@ public class PatcherEngine {
 		List<Feature> featureList = new ArrayList<>();
 		// ### Only Enabled Features ###
 		featureList.addAll(featureFullList.stream().filter(feature -> feature.isEnabled()).collect(Collectors.toList()));
-		consoleLogger.writeLine("PatcherEngine: Found "+featureList.size()+" features to apply");
+		consoleLogger.writeLine("PatcherEngine: Found " + featureList.size() + " features to apply");
 
 		try {
 			// ## Execute Overrides ##
@@ -131,8 +128,7 @@ public class PatcherEngine {
 			executeFeatures(featureList, overrideTasks);
 
 			consoleLogger.writeLine("PatcherEngine: Patching process finished. Selected Features applied.");
-		}
-		catch (Exception ex) {
+		} catch (Exception ex) {
 			consoleLogger.writeLine("PatcherEngine: Error in overrides or features encountered!");
 			consoleLogger.writeLine("PatcherEngine: Trying to clean up after error - reverting any changes");
 			restoreCleanBackup();
@@ -156,9 +152,9 @@ public class PatcherEngine {
 		consoleLogger.writeLine("PatcherEngine initialization done");
 	}
 
-	protected ConsoleLogger consoleLogger;
-
-	protected FileEntityFactory fileEntityFactory;
+	private BackupEngine backupEngine;
+	private ConsoleLogger consoleLogger;
+	private FileEntityFactory fileEntityFactory;
 
 	public String OverrideRootPath;
 	public String BackupRootPath;
