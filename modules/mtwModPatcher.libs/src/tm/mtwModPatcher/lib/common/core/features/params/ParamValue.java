@@ -20,11 +20,14 @@ public abstract class ParamValue<T> {
 		return value;
 	}
 	public abstract String getValueAsString();
+	public Integer getValueAsInteger() {
+		return (Integer)value;
+	}
 	public Double getValueAsDouble() {
-		throw new NotImplementedException();
+		return (Double)value;
 	}
 	public Boolean getValueAsBoolean() {
-		throw new NotImplementedException();
+		return  (Boolean)value;
 	}
 
 	public abstract void setValueStr(String strValue);

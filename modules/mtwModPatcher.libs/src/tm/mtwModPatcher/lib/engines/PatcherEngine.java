@@ -6,6 +6,7 @@ import tm.common.collections.ListUnique;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.FileEntity;
 import tm.mtwModPatcher.lib.common.core.features.OverrideTask;
+import tm.mtwModPatcher.lib.engines.userSettings.SettingsEngine;
 
 import javax.xml.transform.TransformerException;
 import java.io.IOException;
@@ -70,7 +71,7 @@ public class PatcherEngine {
 		Set<FileEntity> filesToUpdate = new HashSet<>();
 		for (Feature feature : featureList) {
 
-			consoleLogger.writeLine("PatcherEngine: Feature [" + feature.Name + "] execution started ...");
+			consoleLogger.writeLine("PatcherEngine: Feature [" + feature.name + "] execution started ...");
 
 			try {
 				feature.preExecuteUpdates();
@@ -82,7 +83,7 @@ public class PatcherEngine {
 
 			val filesUpdated = feature.getFilesUpdated();
 			filesToUpdate.addAll(filesUpdated);
-			consoleLogger.writeLine("PatcherEngine: Feature [" + feature.Name + "] execution done, updated (" + filesUpdated.size() + ") files");
+			consoleLogger.writeLine("PatcherEngine: Feature [" + feature.name + "] execution done, updated (" + filesUpdated.size() + ") files");
 		}
 		consoleLogger.writeLine("PatcherEngine: Apply Features done");
 
@@ -108,7 +109,8 @@ public class PatcherEngine {
 		consoleLogger.writeLine("PatcherEngine: Save updated files done");
 	}
 
-	public void Patch(List<Feature> featureFullList) throws Exception {
+	/** Main-Root patching method */
+	public void Patch(List<Feature> featureFullList, String appVersion) throws Exception {
 		consoleLogger.writeLine("PatcherEngine: Patching process has started ... ");
 		InitializeFeatures(featureFullList);
 		fileEntityFactory.reset();
@@ -120,6 +122,9 @@ public class PatcherEngine {
 		// ### Only Enabled Features ###
 		featureList.addAll(featureFullList.stream().filter(feature -> feature.isEnabled()).collect(Collectors.toList()));
 		consoleLogger.writeLine("PatcherEngine: Found " + featureList.size() + " features to apply");
+
+		// ## Save user settings ##
+		settingsEngine.saveSettings("userSettings", appVersion, featureList);
 
 		try {
 			// ## Execute Overrides ##
@@ -155,13 +160,15 @@ public class PatcherEngine {
 	private BackupEngine backupEngine;
 	private ConsoleLogger consoleLogger;
 	private FileEntityFactory fileEntityFactory;
+	private SettingsEngine settingsEngine;
 
 	public String OverrideRootPath;
 	public String BackupRootPath;
 	public String DestinationRootPath;
 
-	public PatcherEngine(ConsoleLogger consoleLogger, FileEntityFactory fileEntityFactory) {
+	public PatcherEngine(ConsoleLogger consoleLogger, FileEntityFactory fileEntityFactory, SettingsEngine settingsEngine) {
 		this.consoleLogger = consoleLogger;
 		this.fileEntityFactory = fileEntityFactory;
+		this.settingsEngine = settingsEngine;
 	}
 }

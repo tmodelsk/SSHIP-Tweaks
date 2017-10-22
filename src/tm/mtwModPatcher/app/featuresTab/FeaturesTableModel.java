@@ -73,7 +73,7 @@ public class FeaturesTableModel extends AbstractTableModel {
 				res = new Boolean(  ft.isEnabled() );
 				break;
 			case 1:
-				res = ft.Name;
+				res = ft.name;
 				break;
 			case 2:
 

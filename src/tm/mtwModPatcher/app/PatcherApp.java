@@ -9,6 +9,8 @@ import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.FeatureList;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.FileInputStreamProvider;
 import tm.mtwModPatcher.lib.engines.*;
+import tm.mtwModPatcher.lib.engines.userSettings.SettingsEngine;
+import tm.mtwModPatcher.lib.engines.userSettings.SettingsRepository;
 import tm.mtwModPatcher.lib.managers.UnitsManager;
 import tm.mtwModPatcher.lib.managers.garrisons.GarrisonManager;
 import tm.mtwModPatcher.lib.managers.garrisons.GarrisonMetaManager;
@@ -217,7 +219,7 @@ public class PatcherApp {
 				//optionsFrame.repaint();
 			}
 			else{
-				val optionsFrame = new JFrame( feature.Name + " Options");
+				val optionsFrame = new JFrame( feature.name + " Options");
 
 				optionsFrame.addWindowListener(new WindowAdapter() {
 					@Override
@@ -295,7 +297,9 @@ public class PatcherApp {
 		featuresList = ssHipFeatures.configureFeatures();
 		ssHipFeatures.enableDefaults();
 
-		patcherEngine = new PatcherEngine(consoleLogger, fileEntityFactory);
+		val settingsEngine = new SettingsEngine(new SettingsRepository());
+
+		patcherEngine = new PatcherEngine(consoleLogger, fileEntityFactory, settingsEngine);
 		patcherEngine.OverrideRootPath = ConfigurationSettings.OverrideRootPath();			// OverrideRootPath;
 		patcherEngine.DestinationRootPath = ConfigurationSettings.DestinationRootPath();	// DestinationRootPath;
 		patcherEngine.BackupRootPath = ConfigurationSettings.BackupRootPath();				// BackupRootPath;

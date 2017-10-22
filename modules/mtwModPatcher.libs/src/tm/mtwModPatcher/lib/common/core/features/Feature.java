@@ -20,7 +20,7 @@ import java.util.*;
 public abstract class Feature {
 
 	@Getter @Setter
-	public String Name;
+	public String name;
 
 	@Getter
 	private List<String> categories;
@@ -34,7 +34,10 @@ public abstract class Feature {
 	protected String bugReportingUrl;
 
 	@Getter @Setter
-	protected boolean Enabled = true;
+	protected boolean enabled = true;
+
+	@Getter @Setter
+	protected String version = "1.0";
 
 	@Getter
 	private ListUnique<OverrideTask> overrideTasks;
@@ -207,24 +210,24 @@ public abstract class Feature {
 
 	@Override
 	public String toString() {
-		return Name;
+		return name;
 	}
 
 	public Feature(String name) {
 		this();
-		Name = name;
+		this.name = name;
 	}
 
 	public Feature(String name , boolean enabled) {
 		this();
-		Name = name;
+		this.name = name;
 		setEnabled(enabled);
 	}
 
 	public Feature(String name, OverrideTask overrideTask) {
 		this();
 
-		Name = name;
+		this.name = name;
 
         if(overrideTask != null)
             addOverrideTask(overrideTask);
@@ -233,7 +236,7 @@ public abstract class Feature {
 	public Feature(String name, boolean enabled, OverrideTask overrideTask) {
 		this();
 
-		Name = name;
+		this.name = name;
 		setEnabled(enabled);
 
 		if(overrideTask != null)

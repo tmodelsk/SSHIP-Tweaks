@@ -19,7 +19,7 @@ public class ApplyFeaturesWorker extends SwingWorker<Integer, String> {
 		int result = 0;
 
 		try {
-			patcherEngine.Patch(featureList);
+			patcherEngine.Patch(featureList, PatcherAppVersion.Version);
 			result=1;
 		}
 		catch (Exception ex) {

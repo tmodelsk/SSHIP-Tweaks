@@ -9,8 +9,6 @@ import tm.mtwModPatcher.lib.common.core.features.Feature;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowEvent;
 import java.io.IOException;
 import java.net.URI;
@@ -41,7 +39,7 @@ public class FeatureOptionsForm {
 	public void refresh() {
 		assert SwingUtilities.isEventDispatchThread();
 		featureIdLb.setText(feature.getId().toString());
-		headerLabel.setText("Options for "+feature.Name);
+		headerLabel.setText("Options for "+feature.name);
 		descriptionShortLabel.setText(feature.getDescriptionShort());
 
 		descriptionUrlBtn.setText(feature.getDescriptionUrl());
