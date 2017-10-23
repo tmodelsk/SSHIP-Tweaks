@@ -50,7 +50,7 @@ public class BuildingTweaks extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("0063ca7b-77d7-4e0a-bfc5-9eae4670adab");
 
 	public BuildingTweaks() {
 		super("Buildings Tweaks");

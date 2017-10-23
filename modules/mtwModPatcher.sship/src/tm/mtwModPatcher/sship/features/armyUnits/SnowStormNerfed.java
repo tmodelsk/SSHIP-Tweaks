@@ -48,7 +48,7 @@ public class SnowStormNerfed extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("a4406c12-0f41-427d-9d07-6ae4969266c4");
 
 	public SnowStormNerfed() {
 		setName("Snow Storm Nerfed");

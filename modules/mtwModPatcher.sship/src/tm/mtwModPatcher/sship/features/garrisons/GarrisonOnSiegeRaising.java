@@ -501,7 +501,7 @@ public class GarrisonOnSiegeRaising extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("05fe3b39-0b7a-4c57-bf27-7382a4f582d0");
 
 	public GarrisonOnSiegeRaising(GarrisonManager garrisonManager) throws UnknownHostException {
 		super("Garrison script : raise unit on siege");

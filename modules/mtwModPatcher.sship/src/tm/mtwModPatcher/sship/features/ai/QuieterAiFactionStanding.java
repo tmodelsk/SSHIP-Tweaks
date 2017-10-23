@@ -26,5 +26,5 @@ public class QuieterAiFactionStanding extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("a2c3b9f0-28ee-4f64-9b9e-65e13a339495");
 }

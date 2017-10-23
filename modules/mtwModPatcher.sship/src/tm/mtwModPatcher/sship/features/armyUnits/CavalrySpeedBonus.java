@@ -66,5 +66,5 @@ public class CavalrySpeedBonus extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("046ffa20-534e-4418-ab08-27c3bdc3d618");
 }

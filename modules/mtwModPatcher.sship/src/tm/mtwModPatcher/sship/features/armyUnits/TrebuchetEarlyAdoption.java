@@ -71,5 +71,5 @@ public class TrebuchetEarlyAdoption extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("e4f3a21b-3977-48a5-8ff1-460e5b770a37");
 }

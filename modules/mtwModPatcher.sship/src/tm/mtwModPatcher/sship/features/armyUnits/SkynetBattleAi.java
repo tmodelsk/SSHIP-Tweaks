@@ -68,5 +68,5 @@ public class SkynetBattleAi extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("9b04c959-19ea-4690-9bf5-79368afb6e71");
 }

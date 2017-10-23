@@ -145,5 +145,5 @@ public class LongerBattles extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("dd90a87e-80b0-4cb7-a67f-4701d2a5b13e");
 }

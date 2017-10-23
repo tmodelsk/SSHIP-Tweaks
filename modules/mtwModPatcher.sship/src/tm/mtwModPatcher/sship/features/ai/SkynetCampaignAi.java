@@ -52,5 +52,5 @@ public class SkynetCampaignAi extends CampaignAiConfigurator {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("e2a3bced-4525-4360-afd9-b7b6e78e41d8");
 }

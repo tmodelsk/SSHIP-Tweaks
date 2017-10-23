@@ -99,7 +99,7 @@ public class CatholicFactionsBoost extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("621c8ac2-3772-40b0-8ed0-b4a341220431");
 
 	public CatholicFactionsBoost() {
 		super("Catholic factions boost");

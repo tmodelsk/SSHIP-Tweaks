@@ -26,7 +26,7 @@ public class PeasantsRecruitmentRemoved extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("69dbb261-6d1f-44b6-b423-e019d35da5ae");
 
 	public PeasantsRecruitmentRemoved() {
 		setName("Peasants Recruitment Removed");

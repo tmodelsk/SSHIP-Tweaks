@@ -40,7 +40,7 @@ public class UnitsBugFixes extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("6eedc772-e16a-4ec2-8de4-833dcabda13d");
 
 	public UnitsBugFixes() {
 		super("Units Bug Fixes");

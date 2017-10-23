@@ -31,7 +31,7 @@ public class AragonChapterHousesBoost extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("2f0ff2db-1982-45d4-a891-0d44fc20ec31");
 
 	private DescrRegions descrRegions;
 

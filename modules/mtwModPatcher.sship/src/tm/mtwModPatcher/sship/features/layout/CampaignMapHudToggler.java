@@ -36,7 +36,7 @@ public class CampaignMapHudToggler extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("1924b3df-1253-492d-95c1-78c314e02731");
 
 	public CampaignMapHudToggler(InputStreamProvider inputStreamProvider) {
 		super("Campaign Map Hud Toggler [Userpro]");

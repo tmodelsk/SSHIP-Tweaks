@@ -82,7 +82,7 @@ public class BetterLogging extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("cc26254e-bf76-4953-94f8-1848d40dea61");
 
 	public BetterLogging() {
 		super("Better campaign logging");

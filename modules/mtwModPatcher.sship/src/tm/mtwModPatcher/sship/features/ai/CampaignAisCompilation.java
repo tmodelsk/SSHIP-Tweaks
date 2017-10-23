@@ -88,5 +88,5 @@ public class CampaignAisCompilation extends CampaignAiConfigurator {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("df63ab89-2f9e-4475-9441-fe27d931ff08");
 }

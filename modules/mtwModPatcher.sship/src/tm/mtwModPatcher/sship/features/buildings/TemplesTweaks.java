@@ -57,7 +57,7 @@ public class TemplesTweaks extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("cb98b8a2-4476-49c7-adf2-5b67e9c64781");
 
 	public TemplesTweaks() {
 		super("Temples Tweaks");

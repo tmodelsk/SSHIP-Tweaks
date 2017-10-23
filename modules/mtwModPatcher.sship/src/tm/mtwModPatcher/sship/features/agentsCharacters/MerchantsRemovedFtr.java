@@ -179,7 +179,7 @@ public class MerchantsRemovedFtr extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("a0aa32d2-f475-4207-a0b5-cee3f5649994");
 
 	public MerchantsRemovedFtr() {
 

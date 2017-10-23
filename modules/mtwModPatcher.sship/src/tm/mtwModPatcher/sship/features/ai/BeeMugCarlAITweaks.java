@@ -199,7 +199,7 @@ public class BeeMugCarlAITweaks extends Feature {
 		return Id;
 	}
 
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("c21c6bd6-a2b2-41b5-b0f2-8d19f6d5dcd0");
 
 	public BeeMugCarlAITweaks() {
 		super("BeeMugCarl AI tweaks");

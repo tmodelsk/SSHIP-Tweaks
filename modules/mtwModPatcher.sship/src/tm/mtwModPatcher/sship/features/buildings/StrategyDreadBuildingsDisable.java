@@ -28,7 +28,7 @@ public class StrategyDreadBuildingsDisable extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public final static UUID Id = UUID.fromString("");
+	public final static UUID Id = UUID.fromString("d9a19a18-197b-497b-8a7a-12d1b29676c3");
 
 
 	public StrategyDreadBuildingsDisable() {

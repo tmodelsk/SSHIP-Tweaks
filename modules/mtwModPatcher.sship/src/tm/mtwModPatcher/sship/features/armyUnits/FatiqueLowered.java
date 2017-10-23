@@ -46,7 +46,7 @@ public class FatiqueLowered extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("c92f2141-b547-441d-953b-4fbe4b76972c");
 
 	public FatiqueLowered() {
 		setName("Fatique Lowered");

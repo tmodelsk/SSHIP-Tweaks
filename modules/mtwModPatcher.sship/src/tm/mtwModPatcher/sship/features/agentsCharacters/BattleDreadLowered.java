@@ -37,7 +37,7 @@ public class BattleDreadLowered extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public final static UUID Id = UUID.fromString("");
+	public final static UUID Id = UUID.fromString("ec755155-e6d9-4633-bba7-75a0fd229d84");
 
 	public BattleDreadLowered() {
 		setName("Battle Dread Lowered");

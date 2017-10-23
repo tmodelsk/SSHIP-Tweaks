@@ -44,7 +44,7 @@ public class ArchersLevyBoost extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("289fcdd6-f8f3-4160-a19f-175ab8a0d688");
 
 	public ArchersLevyBoost() {
 		setName("Archers - Levy/Peasant archers boost");

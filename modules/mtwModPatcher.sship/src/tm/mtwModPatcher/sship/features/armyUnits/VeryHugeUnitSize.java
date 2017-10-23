@@ -127,5 +127,5 @@ public class VeryHugeUnitSize extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("96d355ec-838e-4b7d-8791-63a3d8b9f856");
 }

@@ -189,7 +189,7 @@ public class NobilityManyGeneralsGovernors extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("c6207dbd-5b38-4bad-8211-d69583fbeee8");
 
 	public NobilityManyGeneralsGovernors() {
 

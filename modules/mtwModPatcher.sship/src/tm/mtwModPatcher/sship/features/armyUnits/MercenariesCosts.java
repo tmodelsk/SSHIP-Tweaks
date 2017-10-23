@@ -113,7 +113,7 @@ public class MercenariesCosts extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("1342c215-2f82-4bc6-b2a3-52f2517a14a9");
 
 	public MercenariesCosts() {
 		super("Mercenaries costs");

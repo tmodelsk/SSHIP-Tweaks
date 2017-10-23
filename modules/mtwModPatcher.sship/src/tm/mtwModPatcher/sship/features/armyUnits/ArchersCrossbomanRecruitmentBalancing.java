@@ -136,7 +136,7 @@ public class ArchersCrossbomanRecruitmentBalancing extends Feature {
 		return Id;
 	}
 
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("dbb8a719-22cc-4257-b4be-46dbbab6803b");
 
 	public ArchersCrossbomanRecruitmentBalancing() {
 		super("Archers & Crossbowmen availability");

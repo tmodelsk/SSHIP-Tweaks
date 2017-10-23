@@ -43,7 +43,7 @@ public class CrusadeJihadMoreSettl extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("283d512a-d38f-467c-b948-0ae8b731a842");
 
 	private DescrRegions descrRegions;
 

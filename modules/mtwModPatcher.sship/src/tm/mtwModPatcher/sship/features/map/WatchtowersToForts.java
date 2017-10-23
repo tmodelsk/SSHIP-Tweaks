@@ -99,7 +99,7 @@ public class WatchtowersToForts extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("c358ea41-d06a-4405-8c39-b5a0cd39fecb");
 
 	private DescrStratSectioned descrStrat;
 	private DescrRegions descrRegions;

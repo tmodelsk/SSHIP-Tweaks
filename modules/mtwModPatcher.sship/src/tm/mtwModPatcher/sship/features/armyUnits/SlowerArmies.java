@@ -93,7 +93,7 @@ public class SlowerArmies extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("fbda82a8-f249-4dcf-a628-4e1503532515");
 
 	public SlowerArmies() {
 		super("Slower Armies");

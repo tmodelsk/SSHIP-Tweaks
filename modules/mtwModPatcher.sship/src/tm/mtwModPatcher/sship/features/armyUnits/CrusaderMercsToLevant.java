@@ -67,7 +67,7 @@ public class CrusaderMercsToLevant extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("665b9e24-7692-42db-ba5a-a62409ad2e53");
 
 	public CrusaderMercsToLevant() {
 		super("Crusader Jihad Mercenariess To Levant ");

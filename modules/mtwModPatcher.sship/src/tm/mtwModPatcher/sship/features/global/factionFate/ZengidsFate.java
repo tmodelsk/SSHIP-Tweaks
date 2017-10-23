@@ -45,7 +45,7 @@ public class ZengidsFate extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("17b98fcf-7f2d-45c8-9af8-4dbc837e3bb4");
 
 	public ZengidsFate() {
 		super("Zengids Fate");

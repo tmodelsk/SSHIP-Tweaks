@@ -30,7 +30,7 @@ public class AssasinsHomeProtectors extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("155e45e9-7c25-471f-9822-6cc06ef3d1fa");
 
 	public AssasinsHomeProtectors() {
 		super("Assasins Home Protectors");

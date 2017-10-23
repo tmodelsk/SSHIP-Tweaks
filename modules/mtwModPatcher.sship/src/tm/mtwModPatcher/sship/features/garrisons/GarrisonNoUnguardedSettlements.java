@@ -159,7 +159,7 @@ public class GarrisonNoUnguardedSettlements extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("8a79f7df-6590-458c-b352-1e45fa576e89");
 
 	public GarrisonNoUnguardedSettlements(GarrisonManager garrisonManager) throws PatcherLibBaseEx {
 		super("Garrison Script : No Unguarded Settlements");

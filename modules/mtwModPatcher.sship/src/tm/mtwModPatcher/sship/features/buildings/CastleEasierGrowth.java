@@ -31,7 +31,7 @@ public class CastleEasierGrowth extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("853c217e-5203-4648-960f-eb3050b1686c");
 
 	public CastleEasierGrowth() {
 		super("Castle easier growth");

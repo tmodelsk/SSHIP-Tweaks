@@ -19,7 +19,7 @@ public class ProvincialTitlesFixJoC extends Feature {
 	@Override
 	public void executeUpdates() throws Exception {	}
 
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("b0c297a4-d08d-4b1e-98c2-fc8e2864aa33");
 
 	public ProvincialTitlesFixJoC() {
 

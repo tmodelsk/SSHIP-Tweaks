@@ -28,5 +28,5 @@ public class AuthenticFactionNamesCharacterTitles extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("9dc55f50-f18c-4f12-8805-1e7887aef7a0");
 }

@@ -54,7 +54,7 @@ public class RealFogAndAgents extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("8d40c9f0-afcd-486f-b61a-ef624a9aeca6");
 
 	public RealFogAndAgents() {
 		super("Realistic - larger - Fog of War for spies");

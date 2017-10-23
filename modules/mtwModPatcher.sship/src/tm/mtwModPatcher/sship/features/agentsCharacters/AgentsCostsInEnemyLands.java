@@ -104,7 +104,7 @@ public class AgentsCostsInEnemyLands extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("");
+	public static UUID Id = UUID.fromString("c2555ac6-d71f-4cf5-89f8-c1a01c6ea949");
 
 	public AgentsCostsInEnemyLands() {
 		super("Diplomand, Spies , Assasins in enemy lands has additional upkeep costs");
