@@ -56,7 +56,7 @@ public class PeasantGarrisonsFix extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("35cdca81-55bb-4376-bce5-24abc9c01be5");
 
 	public PeasantGarrisonsFix() {
 		setName("Peasant Garrisons Attribute Fix");

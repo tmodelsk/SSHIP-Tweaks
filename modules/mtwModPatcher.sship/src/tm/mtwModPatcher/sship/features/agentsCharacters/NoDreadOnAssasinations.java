@@ -170,7 +170,7 @@ Class: CHARACTER_TYPE_TEST
 	public UUID getId() {
 		return Id;
 	}
-	public final static UUID Id = UUID.randomUUID();
+	public final static UUID Id = UUID.fromString("");
 
 	public NoDreadOnAssasinations() {
 		super("No Dread on assasinations");

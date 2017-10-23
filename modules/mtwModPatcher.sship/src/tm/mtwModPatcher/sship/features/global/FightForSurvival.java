@@ -253,7 +253,7 @@ public class FightForSurvival extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("b04bef94-a561-4848-a79c-1be37c0955f5");
 
 	public FightForSurvival(UnitsManager unitsManager) {
 		super("Fight for survival");

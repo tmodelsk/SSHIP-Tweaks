@@ -18,7 +18,7 @@ public class SplashLoadingScreen extends Feature {
 	@Override
 	public void executeUpdates() throws Exception {	}
 
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("53b90a0e-e919-4bfd-8c7e-a3a85766689c");
 
 	public SplashLoadingScreen() {
 		super("New splash loading screen");

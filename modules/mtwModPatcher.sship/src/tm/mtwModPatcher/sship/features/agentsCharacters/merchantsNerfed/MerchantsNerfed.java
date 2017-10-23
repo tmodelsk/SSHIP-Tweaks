@@ -1,4 +1,4 @@
-package tm.mtwModPatcher.sship.features.agentsCharacters;
+package tm.mtwModPatcher.sship.features.agentsCharacters.merchantsNerfed;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -17,8 +17,7 @@ import tm.mtwModPatcher.lib.data._root.ExportDescrGuilds;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingLevel;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.SettlType;
-import tm.mtwModPatcher.sship.features.agentsCharacters.merchantsNerfed.BuildingLimit;
-import tm.mtwModPatcher.sship.features.agentsCharacters.merchantsNerfed.BuildingLimits;
+import tm.mtwModPatcher.sship.features.agentsCharacters.MerchantsRemovedFtr;
 import tm.mtwModPatcher.sship.lib.Buildings;
 
 import javax.xml.xpath.XPathExpressionException;
@@ -185,7 +184,7 @@ public class MerchantsNerfed extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("b7021c52-e7ba-4fb3-8e03-7d0b694ecd63");
 
 	public MerchantsNerfed() {
 		super("Merchants Nerfed");

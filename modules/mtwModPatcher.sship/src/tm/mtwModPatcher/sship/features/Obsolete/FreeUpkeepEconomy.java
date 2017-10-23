@@ -155,7 +155,7 @@ import java.util.UUID;
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("7341fad2-8e41-4211-a605-2aab01c6d28d");
 
 	public FreeUpkeepEconomy() {
 		super("Large free upkeeps to boost economy for defending nations (small ones)");

@@ -18,7 +18,7 @@ public class MenuScreenSS extends Feature {
 	@Override
 	public void executeUpdates() throws Exception {	}
 
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("043634b6-cdd0-4bff-b7c9-b81d57199110");
 
 	public MenuScreenSS() {
 		super("Stainless Steel menu picture");

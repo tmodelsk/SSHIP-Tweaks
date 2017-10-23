@@ -66,8 +66,11 @@ public class SettingsEngine {
 		return fs;
 	}
 
-	public void loadSettings(String profileName, UserSettings userSettings) {
+	public UserSettings loadSettings(String profileName) throws Exception {
+		settingsRepository.setRootPath(Ctm.getWorkingDirectory());
+		val userSettings =  settingsRepository.loadSettings(profileName);
 
+		return userSettings;
 	}
 
 	private SettingsRepository settingsRepository;

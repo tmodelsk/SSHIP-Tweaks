@@ -11,6 +11,7 @@ import tm.mtwModPatcher.lib.engines.FileEntityFactory;
 import tm.mtwModPatcher.lib.managers.UnitsManager;
 import tm.mtwModPatcher.lib.managers.garrisons.GarrisonManager;
 import tm.mtwModPatcher.sship.features.agentsCharacters.*;
+import tm.mtwModPatcher.sship.features.agentsCharacters.merchantsNerfed.MerchantsNerfed;
 import tm.mtwModPatcher.sship.features.ai.*;
 import tm.mtwModPatcher.sship.features.armyUnits.*;
 import tm.mtwModPatcher.sship.features.buildings.*;

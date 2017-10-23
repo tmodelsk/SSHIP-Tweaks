@@ -88,7 +88,7 @@ public class SelectHeirScript extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("");
 
 	public SelectHeirScript(InputStreamProvider inputStreamProvider) {
 		setName("Select Heir Script [Miguel_80]");

@@ -18,7 +18,7 @@ public class NoRegionBordersOnMiniMap extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("63bf1fe8-00bb-4c0a-b94f-1af9f4ffc3da");
 
 	public NoRegionBordersOnMiniMap() {
 

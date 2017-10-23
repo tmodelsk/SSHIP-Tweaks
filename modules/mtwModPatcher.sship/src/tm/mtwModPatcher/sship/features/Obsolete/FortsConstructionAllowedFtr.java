@@ -42,7 +42,7 @@ public class FortsConstructionAllowedFtr extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("6b76d04c-4e6f-4c33-9977-94854146debe");
 
 	public FortsConstructionAllowedFtr() {
 

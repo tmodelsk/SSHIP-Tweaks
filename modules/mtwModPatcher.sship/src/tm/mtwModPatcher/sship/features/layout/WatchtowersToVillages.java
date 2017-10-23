@@ -36,7 +36,7 @@ public class WatchtowersToVillages extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("94ed7b0e-d2eb-4f2b-93e5-cfee8f14858e");
 
 	public WatchtowersToVillages() {
 		setName("Watchtowers To Villages [+Marius+]");

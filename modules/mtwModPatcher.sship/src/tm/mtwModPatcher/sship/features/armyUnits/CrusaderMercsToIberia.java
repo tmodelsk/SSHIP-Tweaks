@@ -69,7 +69,7 @@ public class CrusaderMercsToIberia extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("4e5c0ae2-0778-496e-a57f-c31b1d3b3dd9");
 
 	public CrusaderMercsToIberia() {
 		super("Crusader Jihad Mercenaries To Iberia ");

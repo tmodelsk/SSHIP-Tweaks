@@ -49,7 +49,7 @@ public class SaragossaFortifiedFtr extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("7ba1a89b-3260-4b42-adbf-dc181a56946f");
 
 	public SaragossaFortifiedFtr() {
 

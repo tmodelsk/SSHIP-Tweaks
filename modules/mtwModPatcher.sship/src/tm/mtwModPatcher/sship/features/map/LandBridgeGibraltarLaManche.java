@@ -19,7 +19,7 @@ public class LandBridgeGibraltarLaManche extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("6747cd88-4593-434d-afe2-866632b05336");
 
 	@Override
 	public void executeUpdates() {	}

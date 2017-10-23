@@ -23,7 +23,7 @@ public class LandBridgeGibraltar extends Feature {
 	@Override
 	public void executeUpdates() throws Exception {	}
 
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("1448773b-9a51-419d-8733-6f4364653580");
 
 	@Override
 	public Set<UUID> getConflictingFeatures() {

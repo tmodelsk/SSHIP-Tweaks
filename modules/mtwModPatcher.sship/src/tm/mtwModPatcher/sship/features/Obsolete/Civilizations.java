@@ -784,7 +784,7 @@ public class Civilizations extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("aa4a6c42-5354-4164-b08a-16de87d49035");
 
 	public Civilizations( boolean isEnabled , FactionsSpecifics factionsSpecifics) {
 		super("Civilizations: Latin-Catholic, Byzantie, Islam, Turman");

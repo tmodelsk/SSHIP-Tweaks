@@ -37,7 +37,7 @@ public class CrusaderStatesFate extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("d4bc6999-ccf6-41b9-81dd-f11029a0714b");
 
 	public CrusaderStatesFate() {
 		setName("Crusader States Fate");

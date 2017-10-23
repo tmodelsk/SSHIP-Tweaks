@@ -13,6 +13,7 @@ import tm.mtwModPatcher.lib.data._root.DescrSettlementMechanics;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data._root.ExportDescrGuilds;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrStratSectioned;
+import tm.mtwModPatcher.sship.features.agentsCharacters.merchantsNerfed.MerchantsNerfed;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -178,7 +179,7 @@ public class MerchantsRemovedFtr extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("");
 
 	public MerchantsRemovedFtr() {
 

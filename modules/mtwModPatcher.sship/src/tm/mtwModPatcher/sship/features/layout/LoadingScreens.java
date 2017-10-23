@@ -18,7 +18,7 @@ public class LoadingScreens extends Feature {
 	@Override
 	public void executeUpdates() throws Exception {	}
 
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("f6556ff8-5ac6-48e1-bece-974a639d4001");
 
 	public LoadingScreens() {
 		super("A few loading screens for replace");

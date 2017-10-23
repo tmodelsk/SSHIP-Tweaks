@@ -55,7 +55,7 @@ public class PamplonaToCastle extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("cdb810c1-30f0-4335-b01b-3e1ad85db90f");
 
 	public PamplonaToCastle() {
 		super("Pamplona upgrade to Stone Castle");

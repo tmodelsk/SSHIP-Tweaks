@@ -49,7 +49,7 @@ public class EgyptFate extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("2a86a9b0-450c-4a8e-a405-4e26927ae942");
 
 	public EgyptFate() {
 		super("Egypt Fate");

@@ -53,7 +53,7 @@ public class WorldEconomyScaling extends Feature {
 		return Id;
 	}
 
-	public final static UUID Id = UUID.randomUUID();
+	public final static UUID Id = UUID.fromString("22e5a288-548f-4217-8ab5-45d288e2b0b9");
 
 	public WorldEconomyScaling() {
 		setName("World Economy Scaling");

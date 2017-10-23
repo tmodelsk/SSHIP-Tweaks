@@ -356,7 +356,7 @@ public class CatholicIberiaUnitsRecruitmentIncreased extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("2fd8d122-5922-4dd8-956b-dee21ba106ee");
 
 	public CatholicIberiaUnitsRecruitmentIncreased() {
 

@@ -25,7 +25,7 @@ public class LowerMorale extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("");
 
 	public LowerMorale() {
 		setName("Lower Morale");

@@ -58,7 +58,7 @@ public class BeeMugOldCampaignAI extends Feature {
 		return Id;
 	}
 
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("");
 
 	public BeeMugOldCampaignAI() {
 		super("BeeMugCarl campaign AI");

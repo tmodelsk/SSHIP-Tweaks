@@ -19,7 +19,7 @@ public class GeneralsEducationTraitsFixes extends Feature {
 	@Override
 	public void executeUpdates() throws Exception {	}
 
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("");
 
 	public GeneralsEducationTraitsFixes() {
 		super("Generals' Traits' Common Sense fix [JoC][XXZit]");

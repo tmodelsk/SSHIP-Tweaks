@@ -53,7 +53,7 @@ public class NonSpearInfantryAttackBoost extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("");
 
 	public NonSpearInfantryAttackBoost() {
 		super("Non Spear Infantry Attack Boost");

@@ -40,7 +40,7 @@ public class MoorsFate extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("3e68aab7-9235-47c9-a7e2-56aca55df7e1");
 
 	public MoorsFate() {
 		super("Moors Fate");

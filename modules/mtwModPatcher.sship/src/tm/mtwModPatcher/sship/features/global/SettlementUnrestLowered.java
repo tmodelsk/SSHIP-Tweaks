@@ -55,7 +55,7 @@ public class SettlementUnrestLowered extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("aef3b392-e7e0-41d2-9baf-94becd4257bf");
 
 	private DescrSettlementMechanics descrSettlementMechanics;
 

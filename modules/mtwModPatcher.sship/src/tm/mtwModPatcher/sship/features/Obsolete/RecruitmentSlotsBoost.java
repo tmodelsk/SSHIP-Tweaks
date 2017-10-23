@@ -42,7 +42,7 @@ public class RecruitmentSlotsBoost extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("787fbb93-84d6-4e83-9d37-7441a9966596");
 
 	public RecruitmentSlotsBoost() {
 		super("Boost up recruitment slots number");

@@ -28,7 +28,7 @@ public class SpainFate extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("07df22c9-a3e8-4178-8a03-37fc3b27ea5c");
 
 	public SpainFate() {
 		super("Spain Fate");

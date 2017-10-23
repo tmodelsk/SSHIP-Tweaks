@@ -99,7 +99,7 @@ public class PopulationResourcesLimited extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("f8423399-3683-4a7e-8bad-dfe5dba9bd5b");
 
 	public PopulationResourcesLimited() {
 		setName("Population Resources Limited");

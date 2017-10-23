@@ -57,5 +57,5 @@ public class BeeMugCarlCampaignAi extends CampaignAiConfigurator {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("344b4716-6264-4a37-a029-10c6ac463280");
 }

@@ -703,5 +703,5 @@ public class RimlandHeartland extends Feature {
 		return Id;
 	}
 
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("");
 }

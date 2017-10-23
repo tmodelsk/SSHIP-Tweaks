@@ -111,7 +111,7 @@ public class MuslimFactionsBoost extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("a0c884ca-2151-4a33-ae07-86c09c57b213");
 
 	public MuslimFactionsBoost() {
 		setName("Muslim Factions Boost");

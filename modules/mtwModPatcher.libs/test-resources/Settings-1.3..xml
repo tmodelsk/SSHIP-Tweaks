@@ -1,0 +1,885 @@
+<userSettings>
+   <name>userSettings</name>
+   <version>1.3</version>
+   <createdDate>
+      <date>
+         <year>2017</year>
+         <month>10</month>
+         <day>22</day>
+      </date>
+      <time>
+         <hour>12</hour>
+         <minute>23</minute>
+         <second>48</second>
+         <nano>592000000</nano>
+      </time>
+   </createdDate>
+   <features class="java.util.ArrayList">
+      <featureSettings>
+         <Id>c85794f1-7921-4a95-8e5a-f37211f54a8c</Id>
+         <Name>Select Heir Script [Miguel_80]</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>f78a2eb4-3402-4a83-8c17-b59aebc5375e</Id>
+         <Name>Muslim Factions Boost</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList">
+            <featureParam>
+               <Symbol>AhdathMilitiaBoost</Symbol>
+               <ValueBoolean>false</ValueBoolean>
+            </featureParam>
+            <featureParam>
+               <Symbol>MuslimReplenishMultiplier</Symbol>
+               <ValueDouble>1.2</ValueDouble>
+            </featureParam>
+         </Parameters>
+      </featureSettings>
+      <featureSettings>
+         <Id>b11d7eae-3aae-4a3b-97c6-7106450e5eb0</Id>
+         <Name>Catholic factions boost</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>75e54ffb-52e9-4e78-bddd-107cffacb9f6</Id>
+         <Name>Longer Battles</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList">
+            <featureParam>
+               <Symbol>HitRatio</Symbol>
+               <ValueDouble>1.0</ValueDouble>
+            </featureParam>
+            <featureParam>
+               <Symbol>MissileCavalryAccuracy</Symbol>
+               <ValueDouble>1.75</ValueDouble>
+            </featureParam>
+            <featureParam>
+               <Symbol>ChargeMulti</Symbol>
+               <ValueDouble>1.1</ValueDouble>
+            </featureParam>
+            <featureParam>
+               <Symbol>PowerfulChargeForHeavyInfantry</Symbol>
+               <ValueBoolean>false</ValueBoolean>
+            </featureParam>
+            <featureParam>
+               <Symbol>PowerfulChargeForCavalry</Symbol>
+               <ValueBoolean>false</ValueBoolean>
+            </featureParam>
+         </Parameters>
+      </featureSettings>
+      <featureSettings>
+         <Id>4d7ae14c-2d94-4cd1-9e8e-fa45ef50e845</Id>
+         <Name>Cavalry Speed Bonus</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList">
+            <featureParam>
+               <Symbol>CavalrySpeedMulti</Symbol>
+               <ValueDouble>1.1</ValueDouble>
+            </featureParam>
+         </Parameters>
+      </featureSettings>
+      <featureSettings>
+         <Id>8c79e4e4-1767-40b7-9a2e-8dcb074af745</Id>
+         <Name>Snow Storm Nerfed</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>249b2d91-5ecb-4be8-a801-d13334f32d4e</Id>
+         <Name>Mercenaries costs</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList">
+            <featureParam>
+               <Symbol>RecruitCostMulti</Symbol>
+               <ValueDouble>0.3</ValueDouble>
+            </featureParam>
+            <featureParam>
+               <Symbol>UpkeepCostMulti</Symbol>
+               <ValueDouble>2.0</ValueDouble>
+            </featureParam>
+         </Parameters>
+      </featureSettings>
+      <featureSettings>
+         <Id>5641ca90-bdee-4cb0-998a-f04d5ffbc6c7</Id>
+         <Name>Archers - Levy/Peasant archers boost</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>beb04f6c-86db-4910-ba99-3476d9478301</Id>
+         <Name>Archers &amp; Crossbowmen availability</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList">
+            <featureParam>
+               <Symbol>ReplenishTurnsAddition</Symbol>
+               <ValueInteger>4</ValueInteger>
+            </featureParam>
+         </Parameters>
+      </featureSettings>
+      <featureSettings>
+         <Id>9a40da21-a035-47e0-8b13-3c8766ce3540</Id>
+         <Name>Fatique Lowered</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>6567e0e5-3adf-44fe-95ac-cdfeee36b1c8</Id>
+         <Name>Order Knights Available</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>d60ce48a-b96e-460c-9b5c-bd67cff347ed</Id>
+         <Name>Peasants Recruitment Removed</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>42e91da4-ced6-4947-a7cc-342612682878</Id>
+         <Name>Trebuchet Early Adoption</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>5e856d19-c520-49ad-bb10-5ba687768080</Id>
+         <Name>Very Huge Unit Size</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList">
+            <featureParam>
+               <Symbol>BaseCostMulti</Symbol>
+               <ValueDouble>0.8</ValueDouble>
+            </featureParam>
+            <featureParam>
+               <Symbol>SizeMulti</Symbol>
+               <ValueDouble>0.85</ValueDouble>
+            </featureParam>
+            <featureParam>
+               <Symbol>UpdateCosts</Symbol>
+               <ValueBoolean>true</ValueBoolean>
+            </featureParam>
+            <featureParam>
+               <Symbol>UpdateReplenish</Symbol>
+               <ValueBoolean>true</ValueBoolean>
+            </featureParam>
+         </Parameters>
+      </featureSettings>
+      <featureSettings>
+         <Id>82cf9f3b-20cc-4490-b3d3-8e1d555f86d3</Id>
+         <Name>Peasant Garrisons Attribute Fix</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>c78f5499-89f8-4a25-a836-f3b252172f1f</Id>
+         <Name>Units Bug Fixes</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>70af699f-1e2c-4bd2-bf49-e4c039a3dcfd</Id>
+         <Name>Merchants Nerfed</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList">
+            <featureParam>
+               <Symbol>TradeMulti</Symbol>
+               <ValueDouble>1.4</ValueDouble>
+            </featureParam>
+            <featureParam>
+               <Symbol>MiningMulti</Symbol>
+               <ValueDouble>2.0</ValueDouble>
+            </featureParam>
+            <featureParam>
+               <Symbol>MerchantGuildLevels</Symbol>
+               <ValueString>30 60 120</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>capital</Symbol>
+               <ValueInteger>1</ValueInteger>
+            </featureParam>
+            <featureParam>
+               <Symbol>capitalTradeRepublics</Symbol>
+               <ValueInteger>1</ValueInteger>
+            </featureParam>
+            <featureParam>
+               <Symbol>merchantGuildSmall</Symbol>
+               <ValueInteger>1</ValueInteger>
+            </featureParam>
+            <featureParam>
+               <Symbol>merchantGuildMedium</Symbol>
+               <ValueInteger>1</ValueInteger>
+            </featureParam>
+            <featureParam>
+               <Symbol>merchantGuildGrand</Symbol>
+               <ValueInteger>1</ValueInteger>
+            </featureParam>
+            <featureParam>
+               <Symbol>explorersGuildSmall</Symbol>
+               <ValueInteger>0</ValueInteger>
+            </featureParam>
+            <featureParam>
+               <Symbol>explorersGuildMedium</Symbol>
+               <ValueInteger>0</ValueInteger>
+            </featureParam>
+            <featureParam>
+               <Symbol>explorersGuildGrand</Symbol>
+               <ValueInteger>0</ValueInteger>
+            </featureParam>
+            <featureParam>
+               <Symbol>slaveTradingCenter</Symbol>
+               <ValueInteger>0</ValueInteger>
+            </featureParam>
+            <featureParam>
+               <Symbol>merchantVault</Symbol>
+               <ValueInteger>1</ValueInteger>
+            </featureParam>
+         </Parameters>
+      </featureSettings>
+      <featureSettings>
+         <Id>c7dc1a21-4c84-4182-a232-df6564712ae3</Id>
+         <Name>World Economy Scaling</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList">
+            <featureParam>
+               <Symbol>EconomyMultiplier</Symbol>
+               <ValueDouble>1.025</ValueDouble>
+            </featureParam>
+         </Parameters>
+      </featureSettings>
+      <featureSettings>
+         <Id>87676e71-3907-40af-9941-6fa09589b4de</Id>
+         <Name>Settlement Unrest Lowered</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList">
+            <featureParam>
+               <Symbol>OrderSqualorValue</Symbol>
+               <ValueDouble>0.225</ValueDouble>
+            </featureParam>
+            <featureParam>
+               <Symbol>OrderReligiousUnrestValue</Symbol>
+               <ValueDouble>1.5</ValueDouble>
+            </featureParam>
+            <featureParam>
+               <Symbol>OrderGarrisonValue</Symbol>
+               <ValueDouble>5.0</ValueDouble>
+            </featureParam>
+         </Parameters>
+      </featureSettings>
+      <featureSettings>
+         <Id>4af7b9bf-af68-448c-84ea-ea422aace27b</Id>
+         <Name>Recruitment Slots Boost</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList">
+            <featureParam>
+               <Symbol>RecruitmentSlotsBonus</Symbol>
+               <ValueInteger>1</ValueInteger>
+            </featureParam>
+         </Parameters>
+      </featureSettings>
+      <featureSettings>
+         <Id>65d766f7-c2c6-445a-b1d6-3a7a744431cf</Id>
+         <Name>Army Supplies Costs</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList">
+            <featureParam>
+               <Symbol>FullSizeFullCost</Symbol>
+               <ValueInteger>3000</ValueInteger>
+            </featureParam>
+            <featureParam>
+               <Symbol>AICostsMultiplier</Symbol>
+               <ValueDouble>0.75</ValueDouble>
+            </featureParam>
+            <featureParam>
+               <Symbol>IsCumansExcluded</Symbol>
+               <ValueBoolean>true</ValueBoolean>
+            </featureParam>
+            <featureParam>
+               <Symbol>IsLoggingEnabled</Symbol>
+               <ValueBoolean>true</ValueBoolean>
+            </featureParam>
+            <featureParam>
+               <Symbol>IsSiegeCostDisabled</Symbol>
+               <ValueBoolean>true</ValueBoolean>
+            </featureParam>
+         </Parameters>
+      </featureSettings>
+      <featureSettings>
+         <Id>9abca331-30a9-4c0e-b65d-5d16fd60e0f0</Id>
+         <Name>Max Treasury is limited</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList">
+            <featureParam>
+               <Symbol>MaxTreasuryLimit</Symbol>
+               <ValueInteger>150000</ValueInteger>
+            </featureParam>
+         </Parameters>
+      </featureSettings>
+      <featureSettings>
+         <Id>94e16ad0-4bb1-4901-9502-0004e8eb671b</Id>
+         <Name>BeeMugCarl AI tweaks</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>21edf7c4-e0de-40f7-bff6-42e8b87b261b</Id>
+         <Name>Campaign AI&apos;s compilation</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList">
+            <featureParam>
+               <Symbol>GlobalParametersAi</Symbol>
+               <ValueString>QUIETER_DEFAULT</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>aragon</Symbol>
+               <ValueString>BEEMUGCARL_DEFAULT</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>byzantium</Symbol>
+               <ValueString>SSHIP_ORTHODOX</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>cumans</Symbol>
+               <ValueString>BEEMUGCARL_DEFAULT</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>default</Symbol>
+               <ValueString>BEEMUGCARL_DEFAULT</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>denmark</Symbol>
+               <ValueString>SKYNET</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>egypt</Symbol>
+               <ValueString>BEEMUGCARL_DEFAULT</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>england</Symbol>
+               <ValueString>BEEMUGCARL_DEFAULT</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>france</Symbol>
+               <ValueString>BEEMUGCARL_DEFAULT</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>hre</Symbol>
+               <ValueString>SSHIP_CATHOLIC</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>hungary</Symbol>
+               <ValueString>QUIETER_CATHOLIC</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>jerusalem</Symbol>
+               <ValueString>BEEMUGCARL_DEFAULT</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>kievan_rus</Symbol>
+               <ValueString>BEEMUGCARL_DEFAULT</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>kwarezm</Symbol>
+               <ValueString>BEEMUGCARL_DEFAULT</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>lithuania</Symbol>
+               <ValueString>SKYNET</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>milan</Symbol>
+               <ValueString>SSHIP_ISLAM</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>mongols</Symbol>
+               <ValueString>BEEMUGCARL_DEFAULT</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>moors</Symbol>
+               <ValueString>BEEMUGCARL_DEFAULT</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>norway</Symbol>
+               <ValueString>BEEMUGCARL_DEFAULT</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>papal_states</Symbol>
+               <ValueString>SSHIP_PAPAL</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>pisa</Symbol>
+               <ValueString>SKYNET</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>poland</Symbol>
+               <ValueString>QUIETER_CATHOLIC</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>portugal</Symbol>
+               <ValueString>SSHIP_CATHOLIC</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>rum</Symbol>
+               <ValueString>BEEMUGCARL_DEFAULT</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>russia</Symbol>
+               <ValueString>BEEMUGCARL_DEFAULT</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>scotland</Symbol>
+               <ValueString>SKYNET</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>sicily</Symbol>
+               <ValueString>BEEMUGCARL_DEFAULT</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>slave</Symbol>
+               <ValueString>BEEMUGCARL_DEFAULT</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>spain</Symbol>
+               <ValueString>QUIETER_CATHOLIC</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>teutonic_order</Symbol>
+               <ValueString>SKYNET</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>timurids</Symbol>
+               <ValueString>SKYNET</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>turks</Symbol>
+               <ValueString>BEEMUGCARL_DEFAULT</ValueString>
+            </featureParam>
+            <featureParam>
+               <Symbol>venice</Symbol>
+               <ValueString>BEEMUGCARL_DEFAULT</ValueString>
+            </featureParam>
+         </Parameters>
+      </featureSettings>
+      <featureSettings>
+         <Id>3093f51e-a422-4c6d-aef2-29f0bf24308b</Id>
+         <Name>Quieter AI Faction Standing [kaiser29]</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>0a89acd2-d5af-43ce-96ac-503ededb0217</Id>
+         <Name>Better campaign logging</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>4e5a6ae9-4ecf-430f-bd6d-f13f810942e2</Id>
+         <Name>Castle easier growth</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>60def5da-9a2a-4725-8cba-459febd22637</Id>
+         <Name>Catholic Iberia unit recruitment increased</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>b47be099-af6f-484d-86db-43a8c523b0a7</Id>
+         <Name>Stainless Steel menu picture</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>d8a90a18-1ef9-48cb-a3fc-1e83b712f95f</Id>
+         <Name>New splash loading screen</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>68818706-ea3b-4caa-8a11-9ed2c5261719</Id>
+         <Name>Watchtowers To Villages [+Marius+]</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>34b33be4-4e9e-4cd3-a10f-e4c659f605b3</Id>
+         <Name>Campaign Map Hud Toggler [Userpro]</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>2672efd6-db93-4b4d-b050-8b8bd1151c37</Id>
+         <Name>Land Bridges: Gibraltar &amp; La Manche</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>62558173-5e7b-4681-aa17-6d78c0e4fa13</Id>
+         <Name>Aragon Chapter Houses Boost </Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>8d0df941-0780-426f-a668-94c26a51b1ed</Id>
+         <Name>Crusade &amp; Jihad Additional Settlements</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>02ad6e3b-6831-4f7d-80a5-1b01baf787e0</Id>
+         <Name>Rimland &amp; Heartland</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList">
+            <featureParam>
+               <Symbol>IslandHiddenResource</Symbol>
+               <ValueBoolean>true</ValueBoolean>
+            </featureParam>
+         </Parameters>
+      </featureSettings>
+      <featureSettings>
+         <Id>b9a27d65-aded-4542-9188-3ea9b33d707a</Id>
+         <Name>Authentic Faction Names &amp; Character Titles [Eldgrimr]</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>d9283c19-7275-489e-ade4-7919a7452b68</Id>
+         <Name>Crusader Jihad Mercenariess To Levant </Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>c91db777-14b2-4b3e-bad3-d3ffbd9bd91f</Id>
+         <Name>Crusader Jihad Mercenaries To Iberia </Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>5b580340-85ac-4db9-9a0f-63c42874b543</Id>
+         <Name>Lower Morale</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>f62e7325-8e11-40ab-bd64-6deb2245ef3b</Id>
+         <Name>Slower Armies</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList">
+            <featureParam>
+               <Symbol>ArmyPoints</Symbol>
+               <ValueInteger>140</ValueInteger>
+            </featureParam>
+            <featureParam>
+               <Symbol>CavalryModifier</Symbol>
+               <ValueDouble>1.75</ValueDouble>
+            </featureParam>
+            <featureParam>
+               <Symbol>SiegeModifier</Symbol>
+               <ValueDouble>0.8</ValueDouble>
+            </featureParam>
+         </Parameters>
+      </featureSettings>
+      <featureSettings>
+         <Id>42dc295c-baa9-4641-b626-2496c1e1a643</Id>
+         <Name>Buildings Tweaks</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>76532fe4-9bda-4cce-8b67-7593cd3acf36</Id>
+         <Name>Temples Tweaks</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>21713024-6139-4c7b-85c9-cd28f19ce10b</Id>
+         <Name>Faction Balancing</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>8205edf5-3406-4ec1-a5d9-efc860b2b7f4</Id>
+         <Name>Agents Numbers Limited</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>0bce782d-4bfc-415e-b2ae-ea0dbe3fb05f</Id>
+         <Name>Provincial Titles v2 [JoC]</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>70ae23c9-36a1-4ea9-86d4-17f74b59a8c3</Id>
+         <Name>Generals&apos; Traits&apos; Common Sense fix [JoC][XXZit]</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>5a870308-361f-4ca8-8bc2-b6092bf43687</Id>
+         <Name>Assasins Home Protectors</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>d26b1339-edc4-4ccc-9c87-baef515a6ebe</Id>
+         <Name>No Dread on assasinations</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>13bbb336-e075-4cc2-9248-3fbabc0705ba</Id>
+         <Name>Dread on Buildings Disable</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>19a76bfa-bbeb-483f-8af2-8a31827f89ae</Id>
+         <Name>Battle Dread Lowered</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>d5403445-7349-4f80-86ef-db9c17d7dcdf</Id>
+         <Name>Factions specifics Pros &amp; Cons</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList">
+            <featureParam>
+               <Symbol>ByzantiumPopulationPenaltyMilitaryBuildings</Symbol>
+               <ValueInteger>2</ValueInteger>
+            </featureParam>
+            <featureParam>
+               <Symbol>ByzantiumPopulationPenaltyPlayer</Symbol>
+               <ValueInteger>9</ValueInteger>
+            </featureParam>
+            <featureParam>
+               <Symbol>ByzantiumPopulationPenaltyAI</Symbol>
+               <ValueInteger>11</ValueInteger>
+            </featureParam>
+            <featureParam>
+               <Symbol>ByzantiumReplenishMult</Symbol>
+               <ValueDouble>0.5</ValueDouble>
+            </featureParam>
+            <featureParam>
+               <Symbol>SeljuksRumReplenishMult</Symbol>
+               <ValueDouble>1.5</ValueDouble>
+            </featureParam>
+         </Parameters>
+      </featureSettings>
+      <featureSettings>
+         <Id>d347ef72-43d3-4759-9b26-3dda353052ad</Id>
+         <Name>Moors Fate</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>2841e48c-03fe-41ab-9229-3745b9ec1277</Id>
+         <Name>Egypt Fate</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>14e1b1c3-9ab6-4fd7-b2bd-d7f85b66ebdf</Id>
+         <Name>Turks Fate</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>e109b768-a528-47af-a448-24d147b6abf3</Id>
+         <Name>Zengids Fate</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>7ee11ccf-b465-48e6-b69f-de05e67f9816</Id>
+         <Name>Spain Fate</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>1c3ab1ca-10da-45ae-88a6-e2a7c2d3958f</Id>
+         <Name>Crusader States Fate</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList"/>
+      </featureSettings>
+      <featureSettings>
+         <Id>a0a16275-ad0c-411a-827b-68a59ce5a124</Id>
+         <Name>Garrison Script : No Unguarded Settlements</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList">
+            <featureParam>
+               <Symbol>LoggingEnabled</Symbol>
+               <ValueBoolean>false</ValueBoolean>
+            </featureParam>
+         </Parameters>
+      </featureSettings>
+      <featureSettings>
+         <Id>43e967ce-2c19-4edb-b2c2-cecf4384d8a5</Id>
+         <Name>Garrison script : raise unit on siege</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList">
+            <featureParam>
+               <Symbol>PopulationRecoveryTurns</Symbol>
+               <ValueInteger>15</ValueInteger>
+            </featureParam>
+            <featureParam>
+               <Symbol>MinimumLoyaltyLevel</Symbol>
+               <ValueInteger>1</ValueInteger>
+            </featureParam>
+            <featureParam>
+               <Symbol>CreateUnitsLogging</Symbol>
+               <ValueBoolean>true</ValueBoolean>
+            </featureParam>
+            <featureParam>
+               <Symbol>GarrisonSize</Symbol>
+               <ValueString>SMALL</ValueString>
+            </featureParam>
+         </Parameters>
+      </featureSettings>
+      <featureSettings>
+         <Id>ba1ee9fd-ba56-47c4-8414-9d020726b131</Id>
+         <Name>Nobility Many Generals &amp; Governors</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList">
+            <featureParam>
+               <Symbol>CityReplenishTurns</Symbol>
+               <ValueInteger>44</ValueInteger>
+            </featureParam>
+            <featureParam>
+               <Symbol>CityReplenishBonus</Symbol>
+               <ValueInteger>2</ValueInteger>
+            </featureParam>
+            <featureParam>
+               <Symbol>CastleReplenishTurns</Symbol>
+               <ValueInteger>40</ValueInteger>
+            </featureParam>
+            <featureParam>
+               <Symbol>CastleReplenishBonus</Symbol>
+               <ValueInteger>2</ValueInteger>
+            </featureParam>
+            <featureParam>
+               <Symbol>AiReplenishTurnsMulti</Symbol>
+               <ValueDouble>1.5</ValueDouble>
+            </featureParam>
+         </Parameters>
+      </featureSettings>
+      <featureSettings>
+         <Id>df3155d7-1f35-44a7-86be-cc8ed6f83adf</Id>
+         <Name>Fight for survival</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList">
+            <featureParam>
+               <Symbol>WarningReplenishMult</Symbol>
+               <ValueDouble>1.0</ValueDouble>
+            </featureParam>
+            <featureParam>
+               <Symbol>DangerReplenishMult</Symbol>
+               <ValueDouble>1.0</ValueDouble>
+            </featureParam>
+            <featureParam>
+               <Symbol>CriticalReplenishMult</Symbol>
+               <ValueDouble>1.33</ValueDouble>
+            </featureParam>
+            <featureParam>
+               <Symbol>SwitchOffMoneyLevel</Symbol>
+               <ValueInteger>20000</ValueInteger>
+            </featureParam>
+            <featureParam>
+               <Symbol>WarningSettlementsCount</Symbol>
+               <ValueInteger>6</ValueInteger>
+            </featureParam>
+            <featureParam>
+               <Symbol>DangerSettlementsCount</Symbol>
+               <ValueInteger>4</ValueInteger>
+            </featureParam>
+            <featureParam>
+               <Symbol>CriticalSettlementsCount</Symbol>
+               <ValueInteger>2</ValueInteger>
+            </featureParam>
+         </Parameters>
+      </featureSettings>
+      <featureSettings>
+         <Id>5e08fd40-7cb4-4e17-a8e4-efd0eeeb7e6a</Id>
+         <Name>Population Resources Limited</Name>
+         <Version>1.0</Version>
+         <Enabled>true</Enabled>
+         <Parameters class="java.util.ArrayList">
+            <featureParam>
+               <Symbol>ReplenishRateMult</Symbol>
+               <ValueDouble>0.3334</ValueDouble>
+            </featureParam>
+            <featureParam>
+               <Symbol>MaxStackMult</Symbol>
+               <ValueDouble>1.5</ValueDouble>
+            </featureParam>
+            <featureParam>
+               <Symbol>MaxStackMinimumTwo</Symbol>
+               <ValueBoolean>true</ValueBoolean>
+            </featureParam>
+         </Parameters>
+      </featureSettings>
+   </features>
+</userSettings>

@@ -259,7 +259,7 @@ public class MultiGeneralsGonvernors extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("19f6ca00-ebeb-40af-b213-387cd37195c5");
 
 	public MultiGeneralsGonvernors() {
 		super("Multiple generals & governors spawning, mroe thet settlements count");

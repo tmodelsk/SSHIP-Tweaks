@@ -496,7 +496,7 @@ public class ArmySuppliesCosts extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("f10312bd-99a3-424e-800c-9ebc83930cf5");
 
 	/** Additional amry supplies costs when in enemy lands */
 	public ArmySuppliesCosts() {

@@ -62,7 +62,7 @@ public class QuieterAi extends CampaignAiConfigurator {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("");
 }
 
 // kaiser29 Quieter AI change log

@@ -86,5 +86,5 @@ public class ArchersCrossbowsFirepowerBalancing extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("33d25519-ef47-4059-89ff-a21cc16c7752");
 }

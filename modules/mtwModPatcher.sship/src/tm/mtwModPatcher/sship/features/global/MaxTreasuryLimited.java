@@ -165,7 +165,7 @@ public class MaxTreasuryLimited extends Feature {
 		return Id;
 	}
 
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("02e021ab-6f2c-4797-b6e4-73454d27597c");
 
 	public MaxTreasuryLimited() {
 		super("Max Treasury is limited");

@@ -46,7 +46,7 @@ public class PopulationGrowthPenaltiesLower  extends Feature{
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("bce8f5d4-b03d-4317-8607-d7f0dcee32b1");
 
 	public PopulationGrowthPenaltiesLower() {
 		super("Lower penalties of growth");

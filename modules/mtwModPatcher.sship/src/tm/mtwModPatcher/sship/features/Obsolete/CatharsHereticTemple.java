@@ -44,5 +44,5 @@ public class CatharsHereticTemple extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("c76b6fda-aa49-4fdd-9d8b-1017bfedfbf9");
 }

@@ -30,7 +30,7 @@ public class OrderKnightsAvailable extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("0d14cddc-874a-42d9-a0ff-bcae0522ae70");
 
 	public OrderKnightsAvailable() {
 

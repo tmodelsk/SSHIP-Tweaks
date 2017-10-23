@@ -62,7 +62,7 @@ public class FactionBalancingFtr extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("28848843-7f55-40fc-8bd8-379ff5ac336e");
 
 	public FactionBalancingFtr() {
 		super("Faction Balancing");

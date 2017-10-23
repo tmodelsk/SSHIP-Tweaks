@@ -278,7 +278,7 @@ public class FactionsSpecifics extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("");
 
 	public FactionsSpecifics(boolean isEnabled) {
 		super("Factions specifics Pros & Cons");

@@ -34,7 +34,7 @@ public class TurksFate extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.randomUUID();
+	public static UUID Id = UUID.fromString("681b47ce-367f-4df0-b2f1-1190da766652");
 
 	public TurksFate() {
 		super("Turks Fate");
