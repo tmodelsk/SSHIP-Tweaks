@@ -7,6 +7,7 @@ import org.simpleframework.xml.core.Persister;
 
 import java.beans.XMLEncoder;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -30,9 +31,12 @@ public class SettingsRepository {
 		val serializer = new Persister();
 		val file = new File(filePath);
 
-		val us = serializer.read(UserSettings.class, file);
-
-		return us;
+		try {
+			val us = serializer.read(UserSettings.class, file);
+			return us;
+		} catch (FileNotFoundException fileEx) {
+			return null;
+		}
 	}
 
 

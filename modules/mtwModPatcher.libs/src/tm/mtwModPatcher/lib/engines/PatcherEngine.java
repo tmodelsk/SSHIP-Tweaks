@@ -4,6 +4,7 @@ import lombok.val;
 import tm.common.collections.ArrayUniqueList;
 import tm.common.collections.ListUnique;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.core.features.FeatureList;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.FileEntity;
 import tm.mtwModPatcher.lib.common.core.features.OverrideTask;
 import tm.mtwModPatcher.lib.engines.userSettings.SettingsEngine;
@@ -124,7 +125,7 @@ public class PatcherEngine {
 		consoleLogger.writeLine("PatcherEngine: Found " + featureList.size() + " features to apply");
 
 		// ## Save user settings ##
-		settingsEngine.saveSettings("userSettings", appVersion, featureList);
+		settingsEngine.saveSettings("mySettings", appVersion, featureList);
 
 		try {
 			// ## Execute Overrides ##
@@ -145,7 +146,7 @@ public class PatcherEngine {
 
 	}
 
-	public void Initialize() {
+	public void initialize(FeatureList featureList) throws Exception {
 		consoleLogger.writeLine("PatcherEngine initialization started ...");
 
 		fileEntityFactory.rootPath = DestinationRootPath;
@@ -153,6 +154,8 @@ public class PatcherEngine {
 		backupEngine = new BackupEngine(consoleLogger);
 		backupEngine.BackupRootPath = BackupRootPath;
 		backupEngine.DestinationRootPath = DestinationRootPath;
+
+		settingsEngine.loadSettings("mySettings", featureList);
 
 		consoleLogger.writeLine("PatcherEngine initialization done");
 	}

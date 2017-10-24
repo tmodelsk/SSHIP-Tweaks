@@ -303,7 +303,7 @@ public class PatcherApp {
 		patcherEngine.OverrideRootPath = ConfigurationSettings.OverrideRootPath();			// OverrideRootPath;
 		patcherEngine.DestinationRootPath = ConfigurationSettings.DestinationRootPath();	// DestinationRootPath;
 		patcherEngine.BackupRootPath = ConfigurationSettings.BackupRootPath();				// BackupRootPath;
-		patcherEngine.Initialize();
+		patcherEngine.initialize(featuresList);
 
 		optionsOpenedMap = new HashMap<>();
 

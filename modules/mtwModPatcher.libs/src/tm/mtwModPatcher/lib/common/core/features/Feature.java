@@ -12,6 +12,7 @@ import tm.mtwModPatcher.lib.engines.ConsoleLogger;
 import tm.mtwModPatcher.lib.engines.FileEntityFactory;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Feature - base abstract class for all Features (Tweaks)
@@ -133,21 +134,21 @@ public abstract class Feature {
 			parValue.reloadValueFromFeature(this);
 		}
 	}
+	public void setParValue(String parSymbol, Object value) {
+		val params = getPars();
+
+		if(params == null) throw new PatcherLibBaseEx(Ctm.msgFormat("No parameters is feature {0}", getName()));
+
+		val pars = params.stream().filter( p -> p.getParamId().getSymbol().equals(parSymbol) ).collect(Collectors.toList());
+		if(pars.size() != 1) throw new PatcherLibBaseEx( Ctm.msgFormat("Expected unique param '{0}' in feature {1}, not {2}", parSymbol, getName(), pars.size()));
+
+		val par = pars.get(0);
+
+		par.setValue(value);
+		setParValue(par);
+	}
 	public void setParValue(ParamValue parValue) {
-
 		parValue.saveValueToFeature(this);
-
-//		ParamId paramId = null;
-//
-//		for (val paramTmpId : parameterIds) {
-//			if(paramTmpId.equalsByDefinition(parValue.getParamId())) {
-//				paramId = paramTmpId;
-//				break;
-//			}
-//		}
-//		if(paramId == null) throw new PatcherLibBaseEx("Parameter ["+ parValue.getParamId().getSymbol() +"] not supported!");
-//
-//		paramId.getValueSetterFromParam().setValueFromParam(this, parValue.getValue());
 	}
 	public void setParValues(List<ParamValue> parValues) {
 		for (val parValue : parValues) {

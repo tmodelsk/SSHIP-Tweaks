@@ -34,9 +34,11 @@ public class FeatureSettings {
 	private boolean Enabled;
 
 	@Getter
-	private List<FeatureParam> Parameters = new ArrayList<>();
+	private List<FeatureParam> Parameters = null;
 
 	public void add(FeatureParam featureParam) {
+		if(Parameters == null) Parameters = new ArrayList<>();
+
 		Parameters.add(featureParam);
 	}
 

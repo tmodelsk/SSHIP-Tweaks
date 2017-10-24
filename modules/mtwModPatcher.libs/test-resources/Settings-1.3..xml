@@ -1,29 +1,16 @@
 <userSettings>
-   <name>userSettings</name>
-   <version>1.3</version>
-   <createdDate>
-      <date>
-         <year>2017</year>
-         <month>10</month>
-         <day>22</day>
-      </date>
-      <time>
-         <hour>12</hour>
-         <minute>23</minute>
-         <second>48</second>
-         <nano>592000000</nano>
-      </time>
-   </createdDate>
+   <name>mySettings</name>
+   <version>1.2</version>
+   <createdDate>2017-10-23T22:31:44.690</createdDate>
    <features class="java.util.ArrayList">
       <featureSettings>
-         <Id>c85794f1-7921-4a95-8e5a-f37211f54a8c</Id>
+         <Id>2a366589-e2ce-46d8-ae6d-168df5583eb2</Id>
          <Name>Select Heir Script [Miguel_80]</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>f78a2eb4-3402-4a83-8c17-b59aebc5375e</Id>
+         <Id>a0c884ca-2151-4a33-ae07-86c09c57b213</Id>
          <Name>Muslim Factions Boost</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
@@ -39,14 +26,13 @@
          </Parameters>
       </featureSettings>
       <featureSettings>
-         <Id>b11d7eae-3aae-4a3b-97c6-7106450e5eb0</Id>
+         <Id>621c8ac2-3772-40b0-8ed0-b4a341220431</Id>
          <Name>Catholic factions boost</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>75e54ffb-52e9-4e78-bddd-107cffacb9f6</Id>
+         <Id>dd90a87e-80b0-4cb7-a67f-4701d2a5b13e</Id>
          <Name>Longer Battles</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
@@ -74,7 +60,7 @@
          </Parameters>
       </featureSettings>
       <featureSettings>
-         <Id>4d7ae14c-2d94-4cd1-9e8e-fa45ef50e845</Id>
+         <Id>046ffa20-534e-4418-ab08-27c3bdc3d618</Id>
          <Name>Cavalry Speed Bonus</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
@@ -86,14 +72,13 @@
          </Parameters>
       </featureSettings>
       <featureSettings>
-         <Id>8c79e4e4-1767-40b7-9a2e-8dcb074af745</Id>
+         <Id>a4406c12-0f41-427d-9d07-6ae4969266c4</Id>
          <Name>Snow Storm Nerfed</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>249b2d91-5ecb-4be8-a801-d13334f32d4e</Id>
+         <Id>1342c215-2f82-4bc6-b2a3-52f2517a14a9</Id>
          <Name>Mercenaries costs</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
@@ -109,14 +94,13 @@
          </Parameters>
       </featureSettings>
       <featureSettings>
-         <Id>5641ca90-bdee-4cb0-998a-f04d5ffbc6c7</Id>
+         <Id>289fcdd6-f8f3-4160-a19f-175ab8a0d688</Id>
          <Name>Archers - Levy/Peasant archers boost</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>beb04f6c-86db-4910-ba99-3476d9478301</Id>
+         <Id>dbb8a719-22cc-4257-b4be-46dbbab6803b</Id>
          <Name>Archers &amp; Crossbowmen availability</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
@@ -128,35 +112,31 @@
          </Parameters>
       </featureSettings>
       <featureSettings>
-         <Id>9a40da21-a035-47e0-8b13-3c8766ce3540</Id>
+         <Id>c92f2141-b547-441d-953b-4fbe4b76972c</Id>
          <Name>Fatique Lowered</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>6567e0e5-3adf-44fe-95ac-cdfeee36b1c8</Id>
+         <Id>0d14cddc-874a-42d9-a0ff-bcae0522ae70</Id>
          <Name>Order Knights Available</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>d60ce48a-b96e-460c-9b5c-bd67cff347ed</Id>
+         <Id>69dbb261-6d1f-44b6-b423-e019d35da5ae</Id>
          <Name>Peasants Recruitment Removed</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>42e91da4-ced6-4947-a7cc-342612682878</Id>
+         <Id>e4f3a21b-3977-48a5-8ff1-460e5b770a37</Id>
          <Name>Trebuchet Early Adoption</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>5e856d19-c520-49ad-bb10-5ba687768080</Id>
+         <Id>96d355ec-838e-4b7d-8791-63a3d8b9f856</Id>
          <Name>Very Huge Unit Size</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
@@ -180,21 +160,19 @@
          </Parameters>
       </featureSettings>
       <featureSettings>
-         <Id>82cf9f3b-20cc-4490-b3d3-8e1d555f86d3</Id>
+         <Id>35cdca81-55bb-4376-bce5-24abc9c01be5</Id>
          <Name>Peasant Garrisons Attribute Fix</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>c78f5499-89f8-4a25-a836-f3b252172f1f</Id>
+         <Id>6eedc772-e16a-4ec2-8de4-833dcabda13d</Id>
          <Name>Units Bug Fixes</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>70af699f-1e2c-4bd2-bf49-e4c039a3dcfd</Id>
+         <Id>b7021c52-e7ba-4fb3-8e03-7d0b694ecd63</Id>
          <Name>Merchants Nerfed</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
@@ -254,7 +232,7 @@
          </Parameters>
       </featureSettings>
       <featureSettings>
-         <Id>c7dc1a21-4c84-4182-a232-df6564712ae3</Id>
+         <Id>22e5a288-548f-4217-8ab5-45d288e2b0b9</Id>
          <Name>World Economy Scaling</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
@@ -266,7 +244,7 @@
          </Parameters>
       </featureSettings>
       <featureSettings>
-         <Id>87676e71-3907-40af-9941-6fa09589b4de</Id>
+         <Id>aef3b392-e7e0-41d2-9baf-94becd4257bf</Id>
          <Name>Settlement Unrest Lowered</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
@@ -286,7 +264,7 @@
          </Parameters>
       </featureSettings>
       <featureSettings>
-         <Id>4af7b9bf-af68-448c-84ea-ea422aace27b</Id>
+         <Id>218d0b25-f84e-40cb-845e-0a5ac7053017</Id>
          <Name>Recruitment Slots Boost</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
@@ -298,7 +276,7 @@
          </Parameters>
       </featureSettings>
       <featureSettings>
-         <Id>65d766f7-c2c6-445a-b1d6-3a7a744431cf</Id>
+         <Id>f10312bd-99a3-424e-800c-9ebc83930cf5</Id>
          <Name>Army Supplies Costs</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
@@ -326,7 +304,7 @@
          </Parameters>
       </featureSettings>
       <featureSettings>
-         <Id>9abca331-30a9-4c0e-b65d-5d16fd60e0f0</Id>
+         <Id>02e021ab-6f2c-4797-b6e4-73454d27597c</Id>
          <Name>Max Treasury is limited</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
@@ -338,14 +316,13 @@
          </Parameters>
       </featureSettings>
       <featureSettings>
-         <Id>94e16ad0-4bb1-4901-9502-0004e8eb671b</Id>
+         <Id>c21c6bd6-a2b2-41b5-b0f2-8d19f6d5dcd0</Id>
          <Name>BeeMugCarl AI tweaks</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>21edf7c4-e0de-40f7-bff6-42e8b87b261b</Id>
+         <Id>df63ab89-2f9e-4475-9441-fe27d931ff08</Id>
          <Name>Campaign AI&apos;s compilation</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
@@ -485,84 +462,73 @@
          </Parameters>
       </featureSettings>
       <featureSettings>
-         <Id>3093f51e-a422-4c6d-aef2-29f0bf24308b</Id>
+         <Id>a2c3b9f0-28ee-4f64-9b9e-65e13a339495</Id>
          <Name>Quieter AI Faction Standing [kaiser29]</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>0a89acd2-d5af-43ce-96ac-503ededb0217</Id>
+         <Id>cc26254e-bf76-4953-94f8-1848d40dea61</Id>
          <Name>Better campaign logging</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>4e5a6ae9-4ecf-430f-bd6d-f13f810942e2</Id>
+         <Id>853c217e-5203-4648-960f-eb3050b1686c</Id>
          <Name>Castle easier growth</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>60def5da-9a2a-4725-8cba-459febd22637</Id>
+         <Id>2fd8d122-5922-4dd8-956b-dee21ba106ee</Id>
          <Name>Catholic Iberia unit recruitment increased</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>b47be099-af6f-484d-86db-43a8c523b0a7</Id>
+         <Id>043634b6-cdd0-4bff-b7c9-b81d57199110</Id>
          <Name>Stainless Steel menu picture</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>d8a90a18-1ef9-48cb-a3fc-1e83b712f95f</Id>
+         <Id>53b90a0e-e919-4bfd-8c7e-a3a85766689c</Id>
          <Name>New splash loading screen</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>68818706-ea3b-4caa-8a11-9ed2c5261719</Id>
+         <Id>94ed7b0e-d2eb-4f2b-93e5-cfee8f14858e</Id>
          <Name>Watchtowers To Villages [+Marius+]</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>34b33be4-4e9e-4cd3-a10f-e4c659f605b3</Id>
+         <Id>1924b3df-1253-492d-95c1-78c314e02731</Id>
          <Name>Campaign Map Hud Toggler [Userpro]</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>2672efd6-db93-4b4d-b050-8b8bd1151c37</Id>
+         <Id>6747cd88-4593-434d-afe2-866632b05336</Id>
          <Name>Land Bridges: Gibraltar &amp; La Manche</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>62558173-5e7b-4681-aa17-6d78c0e4fa13</Id>
+         <Id>2f0ff2db-1982-45d4-a891-0d44fc20ec31</Id>
          <Name>Aragon Chapter Houses Boost </Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>8d0df941-0780-426f-a668-94c26a51b1ed</Id>
+         <Id>283d512a-d38f-467c-b948-0ae8b731a842</Id>
          <Name>Crusade &amp; Jihad Additional Settlements</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>02ad6e3b-6831-4f7d-80a5-1b01baf787e0</Id>
+         <Id>868d5667-390b-4963-a586-540d351c95ae</Id>
          <Name>Rimland &amp; Heartland</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
@@ -574,35 +540,31 @@
          </Parameters>
       </featureSettings>
       <featureSettings>
-         <Id>b9a27d65-aded-4542-9188-3ea9b33d707a</Id>
+         <Id>9dc55f50-f18c-4f12-8805-1e7887aef7a0</Id>
          <Name>Authentic Faction Names &amp; Character Titles [Eldgrimr]</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>d9283c19-7275-489e-ade4-7919a7452b68</Id>
+         <Id>665b9e24-7692-42db-ba5a-a62409ad2e53</Id>
          <Name>Crusader Jihad Mercenariess To Levant </Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>c91db777-14b2-4b3e-bad3-d3ffbd9bd91f</Id>
+         <Id>4e5c0ae2-0778-496e-a57f-c31b1d3b3dd9</Id>
          <Name>Crusader Jihad Mercenaries To Iberia </Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>5b580340-85ac-4db9-9a0f-63c42874b543</Id>
+         <Id>1ef0bad9-58c7-409f-b815-1f0eb8b0832f</Id>
          <Name>Lower Morale</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>f62e7325-8e11-40ab-bd64-6deb2245ef3b</Id>
+         <Id>fbda82a8-f249-4dcf-a628-4e1503532515</Id>
          <Name>Slower Armies</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
@@ -622,77 +584,67 @@
          </Parameters>
       </featureSettings>
       <featureSettings>
-         <Id>42dc295c-baa9-4641-b626-2496c1e1a643</Id>
+         <Id>0063ca7b-77d7-4e0a-bfc5-9eae4670adab</Id>
          <Name>Buildings Tweaks</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>76532fe4-9bda-4cce-8b67-7593cd3acf36</Id>
+         <Id>cb98b8a2-4476-49c7-adf2-5b67e9c64781</Id>
          <Name>Temples Tweaks</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>21713024-6139-4c7b-85c9-cd28f19ce10b</Id>
+         <Id>28848843-7f55-40fc-8bd8-379ff5ac336e</Id>
          <Name>Faction Balancing</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>8205edf5-3406-4ec1-a5d9-efc860b2b7f4</Id>
+         <Id>c4b32ef2-3b8d-4738-9ea9-fce1267568c1</Id>
          <Name>Agents Numbers Limited</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>0bce782d-4bfc-415e-b2ae-ea0dbe3fb05f</Id>
+         <Id>b0c297a4-d08d-4b1e-98c2-fc8e2864aa33</Id>
          <Name>Provincial Titles v2 [JoC]</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>70ae23c9-36a1-4ea9-86d4-17f74b59a8c3</Id>
+         <Id>b1567f5d-5eb3-4699-82c5-58e77998f739</Id>
          <Name>Generals&apos; Traits&apos; Common Sense fix [JoC][XXZit]</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>5a870308-361f-4ca8-8bc2-b6092bf43687</Id>
+         <Id>155e45e9-7c25-471f-9822-6cc06ef3d1fa</Id>
          <Name>Assasins Home Protectors</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>d26b1339-edc4-4ccc-9c87-baef515a6ebe</Id>
+         <Id>b06e41ea-cf85-40a7-b40b-fe9ff4782af5</Id>
          <Name>No Dread on assasinations</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>13bbb336-e075-4cc2-9248-3fbabc0705ba</Id>
+         <Id>d9a19a18-197b-497b-8a7a-12d1b29676c3</Id>
          <Name>Dread on Buildings Disable</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>19a76bfa-bbeb-483f-8af2-8a31827f89ae</Id>
+         <Id>ec755155-e6d9-4633-bba7-75a0fd229d84</Id>
          <Name>Battle Dread Lowered</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>d5403445-7349-4f80-86ef-db9c17d7dcdf</Id>
+         <Id>c856c808-119c-4d43-b6cd-d7680c68e04b</Id>
          <Name>Factions specifics Pros &amp; Cons</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
@@ -720,49 +672,43 @@
          </Parameters>
       </featureSettings>
       <featureSettings>
-         <Id>d347ef72-43d3-4759-9b26-3dda353052ad</Id>
+         <Id>3e68aab7-9235-47c9-a7e2-56aca55df7e1</Id>
          <Name>Moors Fate</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>2841e48c-03fe-41ab-9229-3745b9ec1277</Id>
+         <Id>2a86a9b0-450c-4a8e-a405-4e26927ae942</Id>
          <Name>Egypt Fate</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>14e1b1c3-9ab6-4fd7-b2bd-d7f85b66ebdf</Id>
+         <Id>681b47ce-367f-4df0-b2f1-1190da766652</Id>
          <Name>Turks Fate</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>e109b768-a528-47af-a448-24d147b6abf3</Id>
+         <Id>17b98fcf-7f2d-45c8-9af8-4dbc837e3bb4</Id>
          <Name>Zengids Fate</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>7ee11ccf-b465-48e6-b69f-de05e67f9816</Id>
+         <Id>07df22c9-a3e8-4178-8a03-37fc3b27ea5c</Id>
          <Name>Spain Fate</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>1c3ab1ca-10da-45ae-88a6-e2a7c2d3958f</Id>
+         <Id>d4bc6999-ccf6-41b9-81dd-f11029a0714b</Id>
          <Name>Crusader States Fate</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
-         <Parameters class="java.util.ArrayList"/>
       </featureSettings>
       <featureSettings>
-         <Id>a0a16275-ad0c-411a-827b-68a59ce5a124</Id>
+         <Id>8a79f7df-6590-458c-b352-1e45fa576e89</Id>
          <Name>Garrison Script : No Unguarded Settlements</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
@@ -774,7 +720,7 @@
          </Parameters>
       </featureSettings>
       <featureSettings>
-         <Id>43e967ce-2c19-4edb-b2c2-cecf4384d8a5</Id>
+         <Id>05fe3b39-0b7a-4c57-bf27-7382a4f582d0</Id>
          <Name>Garrison script : raise unit on siege</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
@@ -798,7 +744,7 @@
          </Parameters>
       </featureSettings>
       <featureSettings>
-         <Id>ba1ee9fd-ba56-47c4-8414-9d020726b131</Id>
+         <Id>c6207dbd-5b38-4bad-8211-d69583fbeee8</Id>
          <Name>Nobility Many Generals &amp; Governors</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
@@ -826,7 +772,7 @@
          </Parameters>
       </featureSettings>
       <featureSettings>
-         <Id>df3155d7-1f35-44a7-86be-cc8ed6f83adf</Id>
+         <Id>b04bef94-a561-4848-a79c-1be37c0955f5</Id>
          <Name>Fight for survival</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>
@@ -862,7 +808,7 @@
          </Parameters>
       </featureSettings>
       <featureSettings>
-         <Id>5e08fd40-7cb4-4e17-a8e4-efd0eeeb7e6a</Id>
+         <Id>f8423399-3683-4a7e-8bad-dfe5dba9bd5b</Id>
          <Name>Population Resources Limited</Name>
          <Version>1.0</Version>
          <Enabled>true</Enabled>

@@ -12,9 +12,13 @@ public class FeatureParam {
 	private String Symbol;
 
 
+	@Getter
 	private String ValueString;
+	@Getter
 	private Boolean ValueBoolean;
+	@Getter
 	private Integer ValueInteger;
+	@Getter
 	private Double ValueDouble;
 
 

@@ -21,14 +21,20 @@ public class UserSettings {
 	private String version;
 
 	@Getter @Setter
-	private LocalDateTime createdDate;
+	private String createdDate;
 
 	@Getter
-	private List<FeatureSettings> features = new ArrayList<>();
+	private List<FeatureSettings> features = null;
 
 
 	public void add(FeatureSettings featureSettings) {
+
+		if(features == null) features = new ArrayList<>();
+
 		features.add(featureSettings);
 	}
 
+
+	public UserSettings() {
+	}
 }
