@@ -30,13 +30,11 @@ import java.util.regex.Pattern;
 public class MerchantsNerfed extends Feature {
 
 	@Override
-	public void setParamsDefaultValues() {
+	public void setParamsCustomValues() {
 		tradeMulti = 1.4;	// 1.85
 		miningMulti = 2.0;
 		merchantGuildLevelsStr = "30 60 120";
 		buildings = new BuildingLimits();
-
-		super.setParamsDefaultValues();
 	}
 
 	public int getLimitValue(String parName) {

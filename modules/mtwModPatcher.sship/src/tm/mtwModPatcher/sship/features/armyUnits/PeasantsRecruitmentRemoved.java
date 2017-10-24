@@ -12,6 +12,11 @@ import java.util.UUID;
  */
 public class PeasantsRecruitmentRemoved extends Feature {
 	@Override
+	public void setParamsCustomValues() {
+
+	}
+
+	@Override
 	public void executeUpdates() throws Exception {
 		exportDescrBuilding = getFileRegisterForUpdated(ExportDescrBuilding.class);
 

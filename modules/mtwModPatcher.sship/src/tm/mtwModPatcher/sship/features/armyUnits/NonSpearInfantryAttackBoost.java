@@ -13,6 +13,11 @@ import java.util.stream.Collectors;
  */
 public class NonSpearInfantryAttackBoost extends Feature {
 	@Override
+	public void setParamsCustomValues() {
+
+	}
+
+	@Override
 	public void executeUpdates() throws Exception {
 		edu = getFileRegisterForUpdated(ExportDescrUnitTyped.class);
 

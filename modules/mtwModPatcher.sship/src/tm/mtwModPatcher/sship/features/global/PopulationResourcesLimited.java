@@ -17,13 +17,12 @@ import java.util.regex.Pattern;
 /**  */
 public class PopulationResourcesLimited extends Feature {
 
-	@Getter @Setter
-	private double replenishRateMult = 0.3334;	// 0.4
-	@Getter @Setter
-	private double maxStackMult = 1.5;	// 2.0
-
-	@Getter @Setter
-	private boolean maxStackMinimumTwo = true;
+	@Override
+	public void setParamsCustomValues() {
+		replenishRateMult = 0.3334;    // 0.4
+		maxStackMult = 1.5;    // 2.0
+		maxStackMinimumTwo = true;
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -34,42 +33,41 @@ public class PopulationResourcesLimited extends Feature {
 		// Loop throught whole file & "        recruit_pool  "Polish Knights"  0.5   0.035   1  0  requires " string
 		val patt = Pattern.compile("^\\s+recruit_pool\\s+");
 		int index = 1;
-		while ( index > 0) {
+		while (index > 0) {
 			index = lines.findFirstByRegexLine(patt, index);
-			if(index > 0) {
+			if (index > 0) {
 				// found recuit_pool line !
 				val orgLine = lines.getLine(index);
 				val unitRecruitInfo = exportDescrBuilding.parseUnitRecruitmentInfo(orgLine);
 
 				// unitRecruitInfo.MaxStack > 0 &&
-				if(unitRecruitInfo.ReplenishRate > 0.01) {	// less than 100 turns ? leave as it is
+				if (unitRecruitInfo.ReplenishRate > 0.01) {    // less than 100 turns ? leave as it is
 
 					double replMultiTemp = replenishRateMult;
-					if(unitRecruitInfo.ReplenishRate <= 0.034 && unitRecruitInfo.MaxStack > 0)	// more than 30 turns for true entries - bonus *2
+					if (unitRecruitInfo.ReplenishRate <= 0.034 && unitRecruitInfo.MaxStack > 0)    // more than 30 turns for true entries - bonus *2
 						replMultiTemp *= 1.5;
 
 					unitRecruitInfo.ReplenishRate *= replMultiTemp;
 
 					unitRecruitInfo.MaxStack *= maxStackMult;
-					if( maxStackMinimumTwo && unitRecruitInfo.MaxStack < 2.0 && unitRecruitInfo.MaxStack > 1.0)
+					if (maxStackMinimumTwo && unitRecruitInfo.MaxStack < 2.0 && unitRecruitInfo.MaxStack > 1.0)
 						unitRecruitInfo.MaxStack = 2.0;
 
 					double newInitial;
-					if(unitRecruitInfo.InitialReplenishCounter < 1) {
+					if (unitRecruitInfo.InitialReplenishCounter < 1) {
 						newInitial = 1.0;
-					}
-					else {
-						newInitial = unitRecruitInfo.InitialReplenishCounter * (1.0+replMultiTemp);
+					} else {
+						newInitial = unitRecruitInfo.InitialReplenishCounter * (1.0 + replMultiTemp);
 					}
 
-					newInitial = Math.min(unitRecruitInfo.MaxStack , newInitial);	// no more that MaxStack
+					newInitial = Math.min(unitRecruitInfo.MaxStack, newInitial);    // no more that MaxStack
 
 					unitRecruitInfo.InitialReplenishCounter = newInitial;
 
 					val newRecruitLine = unitRecruitInfo.toRecruitmentPoolLine();
 					lines.replaceLine(index, newRecruitLine);
 				}
-				index++;	// go to next line
+				index++;    // go to next line
 			}
 		}
 	}
@@ -92,6 +90,10 @@ public class PopulationResourcesLimited extends Feature {
 
 		return params;
 	}
+
+	@Getter @Setter private double replenishRateMult;
+	@Getter @Setter private double maxStackMult;
+	@Getter @Setter private boolean maxStackMinimumTwo;
 
 	private ExportDescrBuilding exportDescrBuilding;
 

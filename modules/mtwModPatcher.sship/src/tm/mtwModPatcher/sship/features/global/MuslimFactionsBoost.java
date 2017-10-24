@@ -29,10 +29,11 @@ import java.util.regex.Pattern;
  */
 public class MuslimFactionsBoost extends Feature {
 
-	@Getter @Setter
-	private boolean ahdathMilitiaBoost = false;
-	@Getter @Setter
-	private double muslimReplenishMult = 1.2;
+	@Override
+	public void setParamsCustomValues() {
+		ahdathMilitiaBoost = false;
+		muslimReplenishMult = 1.2;
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -102,6 +103,9 @@ public class MuslimFactionsBoost extends Feature {
 
 		return pars;
 	}
+
+	@Getter @Setter private boolean ahdathMilitiaBoost = false;
+	@Getter @Setter private double muslimReplenishMult = 1.2;
 
 	protected ExportDescrBuilding exportDescrBuilding;
 	protected ExportDescrUnitTyped exportDescrUnit;

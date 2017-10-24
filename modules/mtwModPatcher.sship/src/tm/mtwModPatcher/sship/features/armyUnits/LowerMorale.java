@@ -11,6 +11,11 @@ import java.util.stream.Collectors;
 public class LowerMorale extends Feature {
 
 	@Override
+	public void setParamsCustomValues() {
+
+	}
+
+	@Override
 	public void executeUpdates() throws Exception {
 		exportDescrUnit=getFileRegisterForUpdated(ExportDescrUnitTyped.class);
 

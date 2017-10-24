@@ -12,13 +12,17 @@ import java.util.UUID;
 public class ProvincialTitlesFixJoC extends Feature {
 
 	@Override
-	public UUID getId() {
-		return Id;
+	public void setParamsCustomValues() {
+
 	}
 
 	@Override
 	public void executeUpdates() throws Exception {	}
 
+	@Override
+	public UUID getId() {
+		return Id;
+	}
 	public static UUID Id = UUID.fromString("b0c297a4-d08d-4b1e-98c2-fc8e2864aa33");
 
 	public ProvincialTitlesFixJoC() {

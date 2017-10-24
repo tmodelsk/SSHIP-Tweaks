@@ -15,6 +15,11 @@ import java.util.UUID;
 public class ZengidsFate extends Feature {
 
 	@Override
+	public void setParamsCustomValues() {
+
+	}
+
+	@Override
 	public void executeUpdates() throws Exception {
 		_CampaignScript = getFileRegisterForUpdated(CampaignScript.class);
 

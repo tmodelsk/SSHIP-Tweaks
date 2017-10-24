@@ -20,14 +20,11 @@ import java.util.*;
 /** Mercenaries costs : low initial recruitment cost, high upkeep cost */
 public class MercenariesCosts extends Feature {
 
-	private DescrMercenaries descrMercenaries;
-	private ExportDescrUnitTyped edu;
-	private ExportDescrBuilding edb;
-
-	@Getter @Setter
-	private Double recruitCostMulti = 0.30;	// 0.33
-	@Getter @Setter
-	private Double upkeepCostsMulti = 2.0;	// 1.9 1.8
+	@Override
+	public void setParamsCustomValues() {
+		recruitCostMulti = 0.30;	// 0.33
+		upkeepCostsMulti = 2.0;	// 1.9 1.8
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -108,6 +105,13 @@ public class MercenariesCosts extends Feature {
 
 		return parIds;
 	}
+
+	@Getter @Setter private Double recruitCostMulti;
+	@Getter @Setter private Double upkeepCostsMulti;
+
+	private DescrMercenaries descrMercenaries;
+	private ExportDescrUnitTyped edu;
+	private ExportDescrBuilding edb;
 
 	@Override
 	public UUID getId() {

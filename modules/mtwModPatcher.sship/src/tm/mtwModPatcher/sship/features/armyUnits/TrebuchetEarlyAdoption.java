@@ -15,6 +15,11 @@ import java.util.UUID;
  */
 public class TrebuchetEarlyAdoption extends Feature {
 	@Override
+	public void setParamsCustomValues() {
+
+	}
+
+	@Override
 	public void executeUpdates() throws Exception {
 		exportDescrBuilding = getFileRegisterForUpdated(ExportDescrBuilding.class);
 		exportDescrUnit = getFileRegisterForUpdated(ExportDescrUnitTyped.class);

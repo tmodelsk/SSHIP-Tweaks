@@ -13,7 +13,10 @@ import java.util.UUID;
  */
 public class BuildingTweaks extends Feature {
 
-	protected ExportDescrBuilding edb;
+	@Override
+	public void setParamsCustomValues() {
+
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -45,6 +48,8 @@ public class BuildingTweaks extends Feature {
 		//exportDescrBuilding.insertIntoBuildingCapabilities("city_hall", "city_hall" , "city", "       recruitment_slots bonus 1  requires not event_counter freeze_recr_pool 1");
 		//exportDescrBuilding.insertIntoBuildingCapabilities("city_hall", "mayors_palace" , "city", "       recruitment_slots bonus 1  requires not event_counter freeze_recr_pool 1");
 	}
+
+	private ExportDescrBuilding edb;
 
 	@Override
 	public UUID getId() {

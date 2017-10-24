@@ -20,7 +20,7 @@ public class FightForSurvivalTests extends FeatureBaseTest {
 
 		ft.executeUpdates();
 
-		val nullLine = ft.exportDescrBuilding.getLines().findFirstRegexLine("null");
+		val nullLine = ft.getEdb().getLines().findFirstRegexLine("null");
 		assertThat(nullLine).isLessThanOrEqualTo(0);
 	}
 }

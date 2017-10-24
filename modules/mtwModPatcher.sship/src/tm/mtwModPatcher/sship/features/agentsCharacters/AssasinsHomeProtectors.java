@@ -10,19 +10,24 @@ import java.util.UUID;
  */
 public class AssasinsHomeProtectors extends Feature {
 
-	protected DescrCampaignDb _DescrCampaignDb;
+	protected DescrCampaignDb descrCampaignDb;
+
+	@Override
+	public void setParamsCustomValues() {
+
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {
 
-		_DescrCampaignDb = fileEntityFactory.getFile(DescrCampaignDb.class);
-		registerUpdatedFile(_DescrCampaignDb);
+		descrCampaignDb = fileEntityFactory.getFile(DescrCampaignDb.class);
+		registerUpdatedFile(descrCampaignDb);
 
 		// para assassinate_attack_modifier = 2.0 i  assassinate_own_region_modifier = 0.15 dziala OK
 
-		_DescrCampaignDb.setAttribute("/root/agents/assassinate_attack_modifier", 1.2);			// Org : 0.8
-		_DescrCampaignDb.setAttribute("/root/agents/assassinate_defence_modifier", 0.8);		// Org : 0.8
-		_DescrCampaignDb.setAttribute("/root/agents/assassinate_own_region_modifier", 0.5);	// Org : 0.8
+		descrCampaignDb.setAttribute("/root/agents/assassinate_attack_modifier", 1.2);			// Org : 0.8
+		descrCampaignDb.setAttribute("/root/agents/assassinate_defence_modifier", 0.8);		// Org : 0.8
+		descrCampaignDb.setAttribute("/root/agents/assassinate_own_region_modifier", 0.5);	// Org : 0.8
 
 	}
 

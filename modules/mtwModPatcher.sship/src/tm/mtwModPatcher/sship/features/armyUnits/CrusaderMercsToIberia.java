@@ -14,8 +14,13 @@ import java.util.UUID;
 public class CrusaderMercsToIberia extends Feature {
 
 	@Override
+	public void setParamsCustomValues() {
+
+	}
+
+	@Override
 	public void executeUpdates() throws Exception {
-		_DescrMercenaries = getFileRegisterForUpdated(DescrMercenaries.class);
+		descrMercenaries = getFileRegisterForUpdated(DescrMercenaries.class);
 
 		// ## Christian Crusaders ##
 
@@ -34,9 +39,9 @@ public class CrusaderMercsToIberia extends Feature {
 		crusadersList.add(sergntsStr);
 		//crusadersList.add(knightsFootStr);
 
-		_DescrMercenaries.addUnitRecruitmentLine("Pyrenaes" , crusadersList);
-		_DescrMercenaries.addUnitRecruitmentLine("Andalusia" , crusadersList);
-		_DescrMercenaries.addUnitRecruitmentLine("Spain" , crusadersList);
+		descrMercenaries.addUnitRecruitmentLine("Pyrenaes" , crusadersList);
+		descrMercenaries.addUnitRecruitmentLine("Andalusia" , crusadersList);
+		descrMercenaries.addUnitRecruitmentLine("Spain" , crusadersList);
 
 		// ## Muslim Jihadists ##
 		String ghazisHigh = "\tunit Ghazis\t\t\t\texp 3 cost 245 replenish 0.084 - 0.14 max 2 initial 1 religions { islam }";
@@ -53,17 +58,17 @@ public class CrusaderMercsToIberia extends Feature {
 		jihadsLowList.add(ghazisLow);
 		jihadsLowList.add(mutatawwiWariorsLow);
 
-		_DescrMercenaries.addUnitRecruitmentLine("Spain" , jihadsLowList);
-		_DescrMercenaries.addUnitRecruitmentLine("Pyrenaes" , jihadsLowList);
+		descrMercenaries.addUnitRecruitmentLine("Spain" , jihadsLowList);
+		descrMercenaries.addUnitRecruitmentLine("Pyrenaes" , jihadsLowList);
 
-		_DescrMercenaries.addUnitRecruitmentLine("Andalusia" , jihadsHightList);
-		_DescrMercenaries.addUnitRecruitmentLine("North_East_Africa" , jihadsHightList);
-		_DescrMercenaries.addUnitRecruitmentLine("Ghana_Africa" , jihadsHightList);	// northern-west Africa
+		descrMercenaries.addUnitRecruitmentLine("Andalusia" , jihadsHightList);
+		descrMercenaries.addUnitRecruitmentLine("North_East_Africa" , jihadsHightList);
+		descrMercenaries.addUnitRecruitmentLine("Ghana_Africa" , jihadsHightList);	// northern-west Africa
 
-		_DescrMercenaries.addUnitRecruitmentLine("Berber_Africa" , jihadsLowList);
+		descrMercenaries.addUnitRecruitmentLine("Berber_Africa" , jihadsLowList);
 	}
 
-	protected DescrMercenaries _DescrMercenaries;
+	protected DescrMercenaries descrMercenaries;
 
 	@Override
 	public UUID getId() {

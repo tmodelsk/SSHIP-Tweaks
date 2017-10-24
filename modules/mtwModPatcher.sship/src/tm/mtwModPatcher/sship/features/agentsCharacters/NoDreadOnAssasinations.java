@@ -127,20 +127,25 @@ Class: CHARACTER_TYPE_TEST
 
 */
 
-	protected ExportDescrCharacterTraits _ExportDescrCharacterTraits;
+	protected ExportDescrCharacterTraits exportDescrCharacterTraits;
+
+	@Override
+	public void setParamsCustomValues() {
+
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {
-		_ExportDescrCharacterTraits = fileEntityFactory.getFile(ExportDescrCharacterTraits.class);
-		registerUpdatedFile(_ExportDescrCharacterTraits);
+		exportDescrCharacterTraits = fileEntityFactory.getFile(ExportDescrCharacterTraits.class);
+		registerUpdatedFile(exportDescrCharacterTraits);
 
-		val edct = _ExportDescrCharacterTraits;
+		val edct = exportDescrCharacterTraits;
 
 		// ## Disable Dread from Trait effects ##
-		_ExportDescrCharacterTraits.commentNegativeChivalryFromTraitEffect("SpyMaster", "Master_of_Espionage");
-		_ExportDescrCharacterTraits.commentNegativeChivalryFromTraitEffect("AssassinMaster", "Open_to_Murder");
-		_ExportDescrCharacterTraits.commentNegativeChivalryFromTraitEffect("AssassinMaster", "Mixes_with_Killers");
-		_ExportDescrCharacterTraits.commentNegativeChivalryFromTraitEffect("AssassinMaster", "Master_of_Assassins");
+		exportDescrCharacterTraits.commentNegativeChivalryFromTraitEffect("SpyMaster", "Master_of_Espionage");
+		exportDescrCharacterTraits.commentNegativeChivalryFromTraitEffect("AssassinMaster", "Open_to_Murder");
+		exportDescrCharacterTraits.commentNegativeChivalryFromTraitEffect("AssassinMaster", "Mixes_with_Killers");
+		exportDescrCharacterTraits.commentNegativeChivalryFromTraitEffect("AssassinMaster", "Master_of_Assassins");
 
 		// ## Disable Strategy Dread chance from Triggetsd
 		edct.commentAffectTraitInTrigger("King_Employs_Spies_Success", "StrategyDread");
@@ -152,18 +157,18 @@ Class: CHARACTER_TYPE_TEST
 	}
 
 	private void BattleStrategyDread() {
-		_ExportDescrCharacterTraits.commentNegativeChivalryFromTraitEffect("StrategyDread", "Mean_Leader");
-		_ExportDescrCharacterTraits.commentNegativeChivalryFromTraitEffect("StrategyDread", "Cruel_Leader");
-		_ExportDescrCharacterTraits.commentNegativeChivalryFromTraitEffect("StrategyDread", "Merciless_Leader");
-		_ExportDescrCharacterTraits.commentNegativeChivalryFromTraitEffect("StrategyDread", "Malevolent_Leader");
-		_ExportDescrCharacterTraits.commentNegativeChivalryFromTraitEffect("StrategyDread", "Tyranical_Leader");
+		exportDescrCharacterTraits.commentNegativeChivalryFromTraitEffect("StrategyDread", "Mean_Leader");
+		exportDescrCharacterTraits.commentNegativeChivalryFromTraitEffect("StrategyDread", "Cruel_Leader");
+		exportDescrCharacterTraits.commentNegativeChivalryFromTraitEffect("StrategyDread", "Merciless_Leader");
+		exportDescrCharacterTraits.commentNegativeChivalryFromTraitEffect("StrategyDread", "Malevolent_Leader");
+		exportDescrCharacterTraits.commentNegativeChivalryFromTraitEffect("StrategyDread", "Tyranical_Leader");
 
 
-		_ExportDescrCharacterTraits.commentNegativeChivalryFromTraitEffect("BattleDread", "Winning_First");
-		_ExportDescrCharacterTraits.commentNegativeChivalryFromTraitEffect("BattleDread", "Cruel_and_Cunning");
-		_ExportDescrCharacterTraits.commentNegativeChivalryFromTraitEffect("BattleDread", "Merciless_Mauler");
-		_ExportDescrCharacterTraits.commentNegativeChivalryFromTraitEffect("BattleDread", "Field_Tyrant");
-		_ExportDescrCharacterTraits.commentNegativeChivalryFromTraitEffect("BattleDread", "Warlord_of_Terror");
+		exportDescrCharacterTraits.commentNegativeChivalryFromTraitEffect("BattleDread", "Winning_First");
+		exportDescrCharacterTraits.commentNegativeChivalryFromTraitEffect("BattleDread", "Cruel_and_Cunning");
+		exportDescrCharacterTraits.commentNegativeChivalryFromTraitEffect("BattleDread", "Merciless_Mauler");
+		exportDescrCharacterTraits.commentNegativeChivalryFromTraitEffect("BattleDread", "Field_Tyrant");
+		exportDescrCharacterTraits.commentNegativeChivalryFromTraitEffect("BattleDread", "Warlord_of_Terror");
 	}
 
 	@Override

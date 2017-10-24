@@ -23,6 +23,11 @@ public class RealFogAndAgents extends Feature {
 	protected DescrCultures _DescrCultures;
 
 	@Override
+	public void setParamsCustomValues() {
+
+	}
+
+	@Override
 	public void executeUpdates() throws Exception {
 
 		_ExportDescrCharacterTraits = fileEntityFactory.getFile(ExportDescrCharacterTraits.class);

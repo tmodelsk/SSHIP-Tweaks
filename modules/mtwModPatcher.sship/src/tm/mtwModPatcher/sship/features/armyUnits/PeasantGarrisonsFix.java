@@ -14,6 +14,10 @@ import java.util.stream.Collectors;
  */
 public class PeasantGarrisonsFix extends Feature {
 
+	@Override
+	public void setParamsCustomValues() {
+
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {

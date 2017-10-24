@@ -13,14 +13,8 @@ import java.util.UUID;
 public class CampaignAisCompilation extends CampaignAiConfigurator {
 
 	@Override
-	public void executeUpdates() throws Exception {
-		super.executeUpdates();
-
-		descrSMFactions.updateFactionAtttribute("egypt", "prefers_naval_invasions", "no");
-
-		descrSMFactions.updateFactionAtttribute("poland", "prefers_naval_invasions", "yes");
-		descrSMFactions.updateFactionAtttribute("hungary", "prefers_naval_invasions", "yes");
-		descrSMFactions.updateFactionAtttribute("teutonic_order", "prefers_naval_invasions", "yes");
+	public void setParamsCustomValues() {
+		initializeDefaults();
 	}
 
 	@Override
@@ -63,6 +57,17 @@ public class CampaignAisCompilation extends CampaignAiConfigurator {
 		// Moors , Fatamids , Seljuks Easter,
 		// Crusaders , England, Novogrod , Kiev , Pisa , Venetia, Norvegians
 		// Slaves
+	}
+
+	@Override
+	public void executeUpdates() throws Exception {
+		super.executeUpdates();
+
+		descrSMFactions.updateFactionAtttribute("egypt", "prefers_naval_invasions", "no");
+
+		descrSMFactions.updateFactionAtttribute("poland", "prefers_naval_invasions", "yes");
+		descrSMFactions.updateFactionAtttribute("hungary", "prefers_naval_invasions", "yes");
+		descrSMFactions.updateFactionAtttribute("teutonic_order", "prefers_naval_invasions", "yes");
 	}
 
 	@Override

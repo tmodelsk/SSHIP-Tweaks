@@ -61,6 +61,8 @@ public abstract class Feature {
 	private ListUnique<ParamId> parameterIds;
 	private ListUnique<ParamValue> parameterValues;
 
+	public abstract void setParamsCustomValues();
+
 	public void initialize(FileEntityFactory fileEntityFactory, ConsoleLogger logger) {
 		this.fileEntityFactory = fileEntityFactory;
 		consoleLogger = logger;
@@ -155,7 +157,8 @@ public abstract class Feature {
 			setParValue(parValue);
 		}
 	}
-	public void setParamsDefaultValues() {
+	public final void setParamsDefaultValues() {
+		setParamsCustomValues();
 		reloadParametersFromFeature();
 	}
 	// ### Parameters Section End ###

@@ -13,6 +13,11 @@ import java.util.UUID;
 public class SkynetCampaignAi extends CampaignAiConfigurator {
 
 	@Override
+	public void setParamsCustomValues() {
+		initializeDefaults();
+	}
+
+	@Override
 	public void executeUpdates() throws Exception {
 		super.executeUpdates();
 

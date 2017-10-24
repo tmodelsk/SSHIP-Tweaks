@@ -10,7 +10,10 @@ import java.util.UUID;
  */
 public class FactionBalancingFtr extends Feature {
 
-	protected DescrStratSectioned descrStrat;
+	@Override
+	public void setParamsCustomValues() {
+
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -57,6 +60,8 @@ public class FactionBalancingFtr extends Feature {
 		descrStrat.addKingsPurse("CUMANS",2000);					// Ok Cumans się rozwijaja
 
 	}
+
+	protected DescrStratSectioned descrStrat;
 
 	@Override
 	public UUID getId() {

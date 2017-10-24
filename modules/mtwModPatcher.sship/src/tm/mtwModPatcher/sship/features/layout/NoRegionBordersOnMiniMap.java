@@ -4,10 +4,13 @@ import tm.mtwModPatcher.lib.common.core.features.Feature;
 
 import java.util.UUID;
 
-/**
- * Created by tomek on 21.04.2017.
- */
+/** Not finished */
 public class NoRegionBordersOnMiniMap extends Feature {
+
+	@Override
+	public void setParamsCustomValues() {
+
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {

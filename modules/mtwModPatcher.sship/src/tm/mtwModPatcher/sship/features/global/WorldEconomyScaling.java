@@ -17,9 +17,10 @@ import java.util.UUID;
  */
 public class WorldEconomyScaling extends Feature {
 
-	@Getter @Setter
-	private double economyMulti = 1.025;	// 1.075  1.1
-
+	@Override
+	public void setParamsCustomValues() {
+		economyMulti = 1.025;	// 1.075  1.1
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -46,13 +47,14 @@ public class WorldEconomyScaling extends Feature {
 		return params;
 	}
 
+	@Getter @Setter private double economyMulti;
+
 	private DescrSettlementMechanics descrSettlementMechanics;
 
 	@Override
 	public UUID getId() {
 		return Id;
 	}
-
 	public final static UUID Id = UUID.fromString("22e5a288-548f-4217-8ab5-45d288e2b0b9");
 
 	public WorldEconomyScaling() {

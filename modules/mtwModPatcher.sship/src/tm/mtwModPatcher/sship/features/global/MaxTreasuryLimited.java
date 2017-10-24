@@ -21,20 +21,19 @@ import tm.mtwModPatcher.lib.data.world.maps.campaign.CampaignScript;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * Max Treasury Limited - there's higher and higher inflation if faction treasury is closer to limit
- */
+/** Max Treasury Limited - there's higher and higher inflation if faction treasury is closer to limit */
 public class MaxTreasuryLimited extends Feature {
 
-	@Getter
-	@Setter
-	private int MaxTreasuryLimit = 150000;
+	@Override
+	public void setParamsCustomValues() {
+		MaxTreasuryLimit = 150000;
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {
-		_CampaignScript = getFileRegisterForUpdated(CampaignScript.class);
+		campaignScript = getFileRegisterForUpdated(CampaignScript.class);
 
-		LinesProcessor lines = _CampaignScript.getLines();
+		LinesProcessor lines = campaignScript.getLines();
 
 		int insertIndex = lines.findExpFirstRegexLine("^\\s*;============= G5 FACTION ECONOMY SCRIPT");
 		insertIndex = lines.findExpFirstRegexLine("\\s*;Part 7", insertIndex + 1);
@@ -157,7 +156,9 @@ public class MaxTreasuryLimited extends Feature {
 		return pars;
 	}
 
-	protected CampaignScript _CampaignScript;
+	@Getter @Setter private int MaxTreasuryLimit;
+
+	protected CampaignScript campaignScript;
 	protected String nl = System.lineSeparator();
 
 	@Override

@@ -15,12 +15,12 @@ import java.util.UUID;
 /**  */
 public class SettlementUnrestLowered extends Feature {
 
-	@Getter @Setter
-	private double orderSqualorValue = 0.225;	// 0.225	// 0.20  0.18 0.29		 org 0.45
-	@Getter @Setter
-	private double orderReligiousUnrestValue = 1.5;	// 2.3 , 1.5	org 0.7
-	@Getter @Setter
-	private double orderGarrisonValue = 5.0;		// 4.0	org 2.0
+	@Override
+	public void setParamsCustomValues() {
+		orderSqualorValue = 0.225;    // 0.225	// 0.20  0.18 0.29		 org 0.45
+		orderReligiousUnrestValue = 1.5;    // 2.3 , 1.5	org 0.7
+		orderGarrisonValue = 5.0;        // 4.0	org 2.0
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -50,6 +50,10 @@ public class SettlementUnrestLowered extends Feature {
 
 		return params;
 	}
+
+	@Getter @Setter private double orderSqualorValue;
+	@Getter @Setter private double orderReligiousUnrestValue;
+	@Getter @Setter private double orderGarrisonValue;
 
 	@Override
 	public UUID getId() {

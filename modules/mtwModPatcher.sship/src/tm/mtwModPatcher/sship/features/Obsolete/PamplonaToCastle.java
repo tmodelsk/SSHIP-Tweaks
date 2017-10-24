@@ -13,7 +13,10 @@ import java.util.UUID;
  */
 public class PamplonaToCastle extends Feature {
 
-	protected DescrStratSectioned _DescrStrat;
+	@Override
+	public void setParamsCustomValues() {
+
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -50,6 +53,8 @@ public class PamplonaToCastle extends Feature {
 		registerUpdatedFile(_DescrStrat);
 
 	}
+
+	protected DescrStratSectioned _DescrStrat;
 
 	@Override
 	public UUID getId() {

@@ -22,7 +22,12 @@ import java.util.UUID;
 /**   */
 public class AgentsCostsInEnemyLands extends Feature {
 
-	public double AiMultiplier = 0.50;
+	public double AiMultiplier;
+
+	@Override
+	public void setParamsCustomValues() {
+		AiMultiplier = 0.50;
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {

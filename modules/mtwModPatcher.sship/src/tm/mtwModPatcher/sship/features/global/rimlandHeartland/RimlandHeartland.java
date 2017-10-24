@@ -37,22 +37,21 @@ import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-/**
- * Created by tomek on 24.06.2017.
- */
+/** Created by tomek on 24.06.2017. */
 public class RimlandHeartland extends Feature {
 
-	@Getter @Setter
-	private boolean islandHiddenResource = true;
+	@Override
+	public void setParamsCustomValues() {
+		islandHiddenResource = true;
+		seaTradeNothing = 0;
+		seaTradeSmall = 4;
+		seaTradeMedium = 8;
+		seaTradeLarge = 12;
+		noSeaTradePenalty = -3;
 
-	private int seaTradeNothing = 0;
-	private int seaTradeSmall = 4;
-	private int seaTradeMedium = 8;
-	private int seaTradeLarge = 12;
-	private int noSeaTradePenalty = -3;
-
-	private int logLevel = 2;
-	private boolean debugMode = false;
+		logLevel = 2;
+		debugMode = false;
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -167,7 +166,7 @@ public class RimlandHeartland extends Feature {
 		val portCondition = "building_present_min_level " + (settlType.equals(SettlType.City) ? "port port" : "castle_port c_port");
 		val seaTradeEvent = getSeaTradeBonusEventName(0);
 
-		String bonusBaseTemplate="";
+		String bonusBaseTemplate = "";
 		bonusBaseTemplate += debugMode ? ExportDescrBuilding.IncomeBonus : ExportDescrBuilding.TradeBonus;
 		bonusBaseTemplate += "{0}";
 		bonusBaseTemplate += " requires {1} event_counter " + seaTradeEvent + " {2}";
@@ -183,38 +182,38 @@ public class RimlandHeartland extends Feature {
 			buildingName = "market_castle";
 			marketLevels = Buildings.MarketCastleLevels;
 		} else throw new PatcherLibBaseEx("Unexpected!: " + settlType);
-		val marketLevelName = marketLevels.get(marketLevel-1);
+		val marketLevelName = marketLevels.get(marketLevel - 1);
 
 		// ## Find original bonus
 		val lines = edb.getLines();
-		val capabilitiesIndexes = edb.getBuildingCapabilitiesStartEnd(buildingName, marketLevels.get(marketLevel-1), settlType.toLabelString());
+		val capabilitiesIndexes = edb.getBuildingCapabilitiesStartEnd(buildingName, marketLevels.get(marketLevel - 1), settlType.toLabelString());
 		//         trade_base_income_bonus bonus 4
 		val pattern = Pattern.compile("^\\s*trade_base_income_bonus\\s+bonus\\s+(\\d+)\\s*$");
 		val lineIndex = lines.findExpFirstRegexLine(pattern, capabilitiesIndexes);
 		val orgLine = lines.getLine(lineIndex);
 		val matcher = pattern.matcher(orgLine);
-		if(matcher.find()) {
+		if (matcher.find()) {
 			val bonusOrg = Integer.parseInt(matcher.group(1));
 
 			int bonusNerfed = bonusOrg + bonusNerfOffset;
-			if(bonusNerfed <= 0) bonusNerfed = 1;
+			if (bonusNerfed <= 0) bonusNerfed = 1;
 			int bonusValue;
 
 			// Original bonus when SeaTradeEvent0 = 0
 			bonusLine = bonusBaseTemplate;
-			bonusLine = Ctm.msgFormat(bonusLine, bonusOrg, "not" , 1);
+			bonusLine = Ctm.msgFormat(bonusLine, bonusOrg, "not", 1);
 			edb.insertIntoBuildingCapabilities(buildingName, marketLevelName, settlType, bonusLine);
 
 			// Original bonus when SeaTradeEvent0 = 1 and island or port
 			bonusLine = bonusBaseTemplate + " and " + islandCondition + " or " + portCondition;
 			bonusValue = debugMode ? bonusOrg * 10 : bonusOrg;
-			bonusLine = Ctm.msgFormat(bonusLine,bonusValue , "" , 1);
+			bonusLine = Ctm.msgFormat(bonusLine, bonusValue, "", 1);
 			edb.insertIntoBuildingCapabilities(buildingName, marketLevelName, settlType, bonusLine);
 
 			// Nerfed bonus when SeaTradeEvent0 = 1 and not island and not port
 			bonusLine = bonusBaseTemplate + " and not " + islandCondition + " and not " + portCondition;
 			bonusValue = debugMode ? bonusNerfed * 100 : bonusNerfed;
-			bonusLine = Ctm.msgFormat(bonusLine, bonusValue, "" , 1);
+			bonusLine = Ctm.msgFormat(bonusLine, bonusValue, "", 1);
 			edb.insertIntoBuildingCapabilities(buildingName, marketLevelName, settlType, bonusLine);
 
 			lines.remove(lineIndex);
@@ -301,27 +300,27 @@ public class RimlandHeartland extends Feature {
 
 		ifBlock = new IfBlock(new CompareCounter(factionVar, "=", seaTradeNothing));
 		ifBlock.add(new SetEventCounter(getSeaTradeBonusEventName(0), 1));
-		if(logLevel >= 1)
+		if (logLevel >= 1)
 			ifBlock.add(new WriteToLog(Ctm.msgFormat("SeaTrade Bonus: {0} Setting event counter to {1}", factionName, 0)));
 		body.add(ifBlock);
 
 		ifBlock = new IfBlock(new CompareCounter(factionVar, ">=", seaTradeSmall));
 		ifBlock.andCondition(new CompareCounter(factionVar, "<", seaTradeMedium));
 		ifBlock.add(new SetEventCounter(getSeaTradeBonusEventName(1), 1));
-		if(logLevel >= 1)
+		if (logLevel >= 1)
 			ifBlock.add(new WriteToLog(Ctm.msgFormat("SeaTrade Bonus: {0} Setting event counter to {1}", factionName, 1)));
 		body.add(ifBlock);
 
 		ifBlock = new IfBlock(new CompareCounter(factionVar, ">=", seaTradeMedium));
 		ifBlock.andCondition(new CompareCounter(factionVar, "<", seaTradeLarge));
 		ifBlock.add(new SetEventCounter(getSeaTradeBonusEventName(2), 1));
-		if(logLevel >= 1)
+		if (logLevel >= 1)
 			ifBlock.add(new WriteToLog(Ctm.msgFormat("SeaTrade Bonus: {0} Setting event counter to {1}", factionName, 2)));
 		body.add(ifBlock);
 
 		ifBlock = new IfBlock(new CompareCounter(factionVar, ">=", seaTradeLarge));
 		ifBlock.add(new SetEventCounter(getSeaTradeBonusEventName(3), 1));
-		if(logLevel >= 1)
+		if (logLevel >= 1)
 			ifBlock.add(new WriteToLog(Ctm.msgFormat("SeaTrade Bonus: {0} Setting event counter to {1}", factionName, 3)));
 		body.add(ifBlock);
 
@@ -358,24 +357,24 @@ public class RimlandHeartland extends Feature {
 		portCastle.add(new Tuple3<>(3, 1, 3));
 		portCastle.add(new Tuple3<>(4, 2, 3));
 
-		portCity.forEach( p -> insertRimlandPortBonus(SettlType.City, p.getItem1(), p.getItem2(), p.getItem3()));
-		portCastle.forEach( p -> insertRimlandPortBonus(SettlType.Castle, p.getItem1(), p.getItem2(), p.getItem3()));
+		portCity.forEach(p -> insertRimlandPortBonus(SettlType.City, p.getItem1(), p.getItem2(), p.getItem3()));
+		portCastle.forEach(p -> insertRimlandPortBonus(SettlType.Castle, p.getItem1(), p.getItem2(), p.getItem3()));
 	}
 
 	private void insertRimlandPortBonus(SettlType settlType, int portLevel, int lowBonus, int mediumBonus) {
 		val bonusStr = debugMode ? ExportDescrBuilding.IncomeBonus : ExportDescrBuilding.TradeBonus;
 		val template = "{0}{1} requires hidden_resource {2}";
-		val portRimlandLow = Ctm.msgFormat(template,bonusStr, lowBonus, HR_RIMLAND_LOW);
-		val portRimlandHigh = Ctm.msgFormat(template,bonusStr, mediumBonus, HR_RIMLAND_MEDIUM);
+		val portRimlandLow = Ctm.msgFormat(template, bonusStr, lowBonus, HR_RIMLAND_LOW);
+		val portRimlandHigh = Ctm.msgFormat(template, bonusStr, mediumBonus, HR_RIMLAND_MEDIUM);
 
-		String building="", levelStr="";
-		if(settlType == SettlType.City) {
+		String building = "", levelStr = "";
+		if (settlType == SettlType.City) {
 			building = Buildings.PortCity;
-			levelStr = Buildings.PortCityLevels.get(portLevel-1);
-		} else if(settlType == SettlType.Castle) {
+			levelStr = Buildings.PortCityLevels.get(portLevel - 1);
+		} else if (settlType == SettlType.Castle) {
 			building = Buildings.PortCastle;
-			levelStr = Buildings.PortCastleLevels.get(portLevel-1);
-		} else throw new PatcherNotSupportedEx("SettlementType: "+settlType);
+			levelStr = Buildings.PortCastleLevels.get(portLevel - 1);
+		} else throw new PatcherNotSupportedEx("SettlementType: " + settlType);
 
 		edb.insertIntoBuildingCapabilities(building, levelStr, settlType, portRimlandLow);
 		edb.insertIntoBuildingCapabilities(building, levelStr, settlType, portRimlandHigh);
@@ -660,6 +659,16 @@ public class RimlandHeartland extends Feature {
 
 		return pars;
 	}
+
+	@Getter @Setter private boolean islandHiddenResource;
+	@Getter @Setter private int seaTradeNothing;
+	@Getter @Setter private int seaTradeSmall;
+	@Getter @Setter private int seaTradeMedium;
+	@Getter @Setter private int seaTradeLarge;
+	@Getter @Setter private int noSeaTradePenalty;
+
+	@Getter @Setter private int logLevel;
+	@Getter @Setter private boolean debugMode;
 
 	private static final int High = 3;
 	private static final int Medium = 2;

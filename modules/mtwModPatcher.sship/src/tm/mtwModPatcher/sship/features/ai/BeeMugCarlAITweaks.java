@@ -20,13 +20,10 @@ import java.util.UUID;
  */
 public class BeeMugCarlAITweaks extends Feature {
 
-	protected DescrCampaignDb descrCampaignDb;
-	protected ExportDescrBuilding exportDescrBuilding;
-	protected ExportDescrCharacterTraits exportDescrCharacterTraits;
-	protected DescrStratSectioned descrStratSectioned;
-	protected DescrSMFactions descrSMFactions;
-	protected DescrCharacter descrCharacter;
-	protected ExportVnvs exportVnvs;
+	@Override
+	public void setParamsCustomValues() {
+
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -194,11 +191,18 @@ public class BeeMugCarlAITweaks extends Feature {
 		//recrBonus++;
 	}
 
+	protected DescrCampaignDb descrCampaignDb;
+	protected ExportDescrBuilding exportDescrBuilding;
+	protected ExportDescrCharacterTraits exportDescrCharacterTraits;
+	protected DescrStratSectioned descrStratSectioned;
+	protected DescrSMFactions descrSMFactions;
+	protected DescrCharacter descrCharacter;
+	protected ExportVnvs exportVnvs;
+
 	@Override
 	public UUID getId() {
 		return Id;
 	}
-
 	public static UUID Id = UUID.fromString("c21c6bd6-a2b2-41b5-b0f2-8d19f6d5dcd0");
 
 	public BeeMugCarlAITweaks() {

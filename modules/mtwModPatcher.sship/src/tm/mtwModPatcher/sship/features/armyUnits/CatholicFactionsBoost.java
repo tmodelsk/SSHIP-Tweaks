@@ -17,6 +17,11 @@ import java.util.stream.Collectors;
 public class CatholicFactionsBoost extends Feature {
 
 	@Override
+	public void setParamsCustomValues() {
+
+	}
+
+	@Override
 	public void executeUpdates() throws Exception {
 		exportDescrUnit = getFileRegisterForUpdated(ExportDescrUnitTyped.class);
 		exportDescrBuilding = getFileRegisterForUpdated(ExportDescrBuilding.class);

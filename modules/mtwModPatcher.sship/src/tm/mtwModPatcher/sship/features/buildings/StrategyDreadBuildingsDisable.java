@@ -11,7 +11,10 @@ import java.util.UUID;
  */
 public class StrategyDreadBuildingsDisable extends Feature {
 
-	private ExportDescrCharacterTraits exportDescrCharacterTraits;
+	@Override
+	public void setParamsCustomValues() {
+
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -23,6 +26,8 @@ public class StrategyDreadBuildingsDisable extends Feature {
 		edct.setAffectTraitChanceInTrigger("building_mines$", "StrategyDread", 1);
 		edct.setAffectTraitChanceInTrigger("building_c_mines$", "StrategyDread", 1);
 	}
+
+	private ExportDescrCharacterTraits exportDescrCharacterTraits;
 
 	@Override
 	public UUID getId() {

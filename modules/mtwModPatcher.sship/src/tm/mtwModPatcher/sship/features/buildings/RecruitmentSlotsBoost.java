@@ -14,8 +14,10 @@ import java.util.UUID;
 
 public class RecruitmentSlotsBoost extends Feature {
 
-	@Getter @Setter
-	private int recruitmentSlotsBonus=1;
+	@Override
+	public void setParamsCustomValues() {
+		recruitmentSlotsBonus = 1;
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -34,6 +36,10 @@ public class RecruitmentSlotsBoost extends Feature {
 
 		return parIds;
 	}
+
+	@Getter @Setter
+	private int recruitmentSlotsBonus;
+
 
 	private ExportDescrBuilding exportDescrBuilding;
 

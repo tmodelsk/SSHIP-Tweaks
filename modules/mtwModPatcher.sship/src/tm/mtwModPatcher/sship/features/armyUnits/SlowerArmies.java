@@ -21,29 +21,26 @@ import java.util.UUID;
  */
 public class SlowerArmies extends Feature {
 
-	protected DescrCampaignDb _DescrSettlementMechanics;
-	protected DescrCharacter _DescrCharacter;
-
-	@Getter	@Setter
-	private int armyPoints = 140;
-	@Getter	@Setter
-	private double cavalryModifier = 1.75;
-	@Getter	@Setter
-	private double siegeModifier = 0.80;
+	@Override
+	public void setParamsCustomValues() {
+		armyPoints = 140;
+		cavalryModifier = 1.75;
+		siegeModifier = 0.80;
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {
 
-		_DescrSettlementMechanics = fileEntityFactory.getFile(DescrCampaignDb.class);
-		registerUpdatedFile(_DescrSettlementMechanics);
-		_DescrCharacter = fileEntityFactory.getFile(DescrCharacter.class);
-		registerUpdatedFile(_DescrCharacter);
+		descrCampaignDb = fileEntityFactory.getFile(DescrCampaignDb.class);
+		registerUpdatedFile(descrCampaignDb);
+		descrCharacter = fileEntityFactory.getFile(DescrCharacter.class);
+		registerUpdatedFile(descrCharacter);
 
 		String startingActionPointsRegexStr = "^\\s*starting_action_points\\s+\\d+";
 		String startingActionPointsPrefix = "starting_action_points\t";
 		String startingActionPoints = startingActionPointsPrefix + Integer.toString(armyPoints);
 
-		LinesProcessor charactersLines = _DescrCharacter.getLines();
+		LinesProcessor charactersLines = descrCharacter.getLines();
 		// starting_action_points	170	; default value for all characters and pathfinding calculations
 //		index = charactersLines.findFirstRegexLine(startingActionPointsRegexStr);
 //		charactersLines.replaceLine(index, "starting_action_points\t"+maxPoints+"\t; default value for all characters and pathfinding calculations");
@@ -66,8 +63,8 @@ public class SlowerArmies extends Feature {
 
 		// #### Set Cavalry modifier ####
 		//<cavalry_movement_points_modifier float="1.4"/>
-		_DescrSettlementMechanics.setAttribute("/root/misc/cavalry_movement_points_modifier", "float", cavalryModifier);
-		_DescrSettlementMechanics.setAttribute("/root/misc/siege_movement_points_modifier", "float", siegeModifier);
+		descrCampaignDb.setAttribute("/root/misc/cavalry_movement_points_modifier", "float", cavalryModifier);
+		descrCampaignDb.setAttribute("/root/misc/siege_movement_points_modifier", "float", siegeModifier);
 	}
 
 	@Override
@@ -88,6 +85,13 @@ public class SlowerArmies extends Feature {
 
 		return params;
 	}
+
+	@Getter @Setter private int armyPoints;
+	@Getter @Setter private double cavalryModifier;
+	@Getter @Setter private double siegeModifier;
+
+	protected DescrCampaignDb descrCampaignDb;
+	protected DescrCharacter descrCharacter;
 
 	@Override
 	public UUID getId() {

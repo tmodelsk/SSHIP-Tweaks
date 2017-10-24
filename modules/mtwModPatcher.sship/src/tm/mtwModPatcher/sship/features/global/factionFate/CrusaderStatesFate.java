@@ -15,6 +15,11 @@ import java.util.UUID;
  */
 public class CrusaderStatesFate extends Feature {
 	@Override
+	public void setParamsCustomValues() {
+
+	}
+
+	@Override
 	public void executeUpdates() throws Exception {
 		_CampaignScript = getFileRegisterForUpdated(CampaignScript.class);
 		FateScriptManager fateScriptManager = new FateScriptManager(_CampaignScript);

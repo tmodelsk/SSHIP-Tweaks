@@ -36,6 +36,11 @@ public class AgentsNumbersLimited extends Feature {
 
 
 	@Override
+	public void setParamsCustomValues() {
+
+	}
+
+	@Override
 	public void executeUpdates() throws Exception {
 		_CampaignScript = getFileRegisterForUpdated(CampaignScript.class);
 		_ExportDescrBuilding = getFileRegisterForUpdated(ExportDescrBuilding.class);

@@ -26,6 +26,11 @@ public class CatholicIberiaUnitsRecruitmentIncreased extends Feature {
 	protected BattleModels _BattleModels;
 
 	@Override
+	public void setParamsCustomValues() {
+
+	}
+
+	@Override
 	public void executeUpdates() throws Exception {
 		_ExportDescrBuilding = fileEntityFactory.getFile(ExportDescrBuilding.class);
 		registerUpdatedFile(_ExportDescrBuilding);

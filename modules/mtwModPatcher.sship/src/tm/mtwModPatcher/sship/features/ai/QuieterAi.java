@@ -13,6 +13,12 @@ import java.util.stream.Collectors;
  * Created by tomek on 24.05.2017.
  */
 public class QuieterAi extends CampaignAiConfigurator {
+
+	@Override
+	public void setParamsCustomValues() {
+		initializeDefaults();
+	}
+
 	@Override
 	protected void initializeDefaults() {
 
@@ -40,7 +46,6 @@ public class QuieterAi extends CampaignAiConfigurator {
 
 		factionAiLabelsMap.put("default", CampaignAiType.QUIETER_DEFAULT);
 	}
-
 
 	@Override
 	public Set<UUID> getConflictingFeatures() {

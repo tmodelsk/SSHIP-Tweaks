@@ -11,8 +11,10 @@ import java.util.UUID;
  */
 public class FortsConstructionAllowedFtr extends Feature {
 
-	protected DescrCampaignDb _DescrCampaignDb;
-	protected DescrCultures _DescrCultures;
+	@Override
+	public void setParamsCustomValues() {
+
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -37,6 +39,9 @@ public class FortsConstructionAllowedFtr extends Feature {
 		_DescrCultures.getLines().updateAllRegexLines("^\\s*fort_cost\\s+\\d+", "fort_cost\t\t\t6000");
 		registerUpdatedFile(_DescrCultures);
 	}
+
+	protected DescrCampaignDb _DescrCampaignDb;
+	protected DescrCultures _DescrCultures;
 
 	@Override
 	public UUID getId() {

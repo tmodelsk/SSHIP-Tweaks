@@ -12,6 +12,11 @@ import java.util.UUID;
 public class SnowStormNerfed extends Feature {
 
 	@Override
+	public void setParamsCustomValues() {
+
+	}
+
+	@Override
 	public void executeUpdates() throws Exception {
 		weatherDb = getFileRegisterForUpdated(WeatherDb.class);
 

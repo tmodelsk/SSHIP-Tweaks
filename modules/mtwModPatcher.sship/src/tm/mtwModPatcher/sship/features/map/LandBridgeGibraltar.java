@@ -10,19 +10,21 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-/**
- * Created by Tomek on 2016-11-11.
- */
+/** Created by Tomek on 2016-11-11. */
 public class LandBridgeGibraltar extends Feature {
 
 	@Override
-	public UUID getId() {
-		return Id;
+	public void setParamsCustomValues() {
+
 	}
 
 	@Override
 	public void executeUpdates() throws Exception {	}
 
+	@Override
+	public UUID getId() {
+		return Id;
+	}
 	public static UUID Id = UUID.fromString("1448773b-9a51-419d-8733-6f4364653580");
 
 	@Override

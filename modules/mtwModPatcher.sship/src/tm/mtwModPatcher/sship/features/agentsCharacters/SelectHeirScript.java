@@ -21,6 +21,11 @@ public class SelectHeirScript extends Feature {
 
 
 	@Override
+	public void setParamsCustomValues() {
+
+	}
+
+	@Override
 	public void executeUpdates() throws Exception {
 		exportDescrCharacterTraits = getFileRegisterForUpdated(ExportDescrCharacterTraits.class);
 		historicEvents = getFileRegisterForUpdated(HistoricEvents.class);

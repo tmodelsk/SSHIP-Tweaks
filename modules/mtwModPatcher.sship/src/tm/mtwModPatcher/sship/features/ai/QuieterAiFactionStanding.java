@@ -8,6 +8,11 @@ import java.util.UUID;
 /** Faction Standings from Quieter AI */
 public class QuieterAiFactionStanding extends Feature {
 	@Override
+	public void setParamsCustomValues() {
+
+	}
+
+	@Override
 	public void executeUpdates() throws Exception { }
 
 	public QuieterAiFactionStanding() {

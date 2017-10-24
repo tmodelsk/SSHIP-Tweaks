@@ -6,10 +6,13 @@ import tm.mtwModPatcher.lib.data.world.maps.campaign.CampaignScript;
 
 import java.util.UUID;
 
-/**
- * Created by Tomek on 2016-07-21.
- */
+/** Created by Tomek on 2016-07-21. */
 public class SpainFate extends Feature {
+
+	@Override
+	public void setParamsCustomValues() {
+
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {

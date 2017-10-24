@@ -12,6 +12,11 @@ import java.util.UUID;
  */
 public class OrderKnightsAvailable extends Feature {
 
+	@Override
+	public void setParamsCustomValues() {
+
+	}
+
 	@SuppressWarnings("UnusedAssignment")
 	@Override
 	public void executeUpdates() throws Exception {

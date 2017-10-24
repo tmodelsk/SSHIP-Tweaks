@@ -10,6 +10,11 @@ import java.util.UUID;
  */
 public class AuthenticFactionNamesCharacterTitles extends Feature {
 	@Override
+	public void setParamsCustomValues() {
+
+	}
+
+	@Override
 	public void executeUpdates() throws Exception { }
 
 

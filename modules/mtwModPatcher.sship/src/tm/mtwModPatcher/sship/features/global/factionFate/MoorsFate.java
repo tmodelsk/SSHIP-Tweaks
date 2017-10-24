@@ -14,6 +14,9 @@ import java.util.UUID;
 public class MoorsFate extends Feature {
 
 	@Override
+	public void setParamsCustomValues() {}
+
+	@Override
 	public void executeUpdates() throws Exception {
 		_CampaignScript = getFileRegisterForUpdated(CampaignScript.class);
 

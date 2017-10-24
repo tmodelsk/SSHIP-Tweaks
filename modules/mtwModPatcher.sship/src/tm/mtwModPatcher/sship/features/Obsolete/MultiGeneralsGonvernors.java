@@ -13,18 +13,20 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-/** Adds more Generals & Governors
- */
+/** Adds more Generals & Governors by auto-creating them when needed
+ * This featureis Deprecated - use Many Generals & Governors instead !! */
+@Deprecated
 public class MultiGeneralsGonvernors extends Feature {
-	private CampaignScript _CampaignScript;
-
-	public int SettlementsHostedMaxCount = 30;
+	@Override
+	public void setParamsCustomValues() {
+		SettlementsHostedMaxCount = 30;
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {
-		_CampaignScript = getFileRegisterForUpdated(CampaignScript.class);
+		campaignScript = getFileRegisterForUpdated(CampaignScript.class);
 
-		int insertIndex = _CampaignScript.getLastInsertLineForMonitors();
+		int insertIndex = campaignScript.getLastInsertLineForMonitors();
 		List<String> factions = FactionsDefs.allFactionsExceptRebelsList();
 
 		factions.remove("mongols");
@@ -54,7 +56,7 @@ public class MultiGeneralsGonvernors extends Feature {
 		rl.add("");
 
 		// ## Insert all generated monitors ##
-		_CampaignScript.getLines().insertAt(insertIndex, rl);
+		campaignScript.getLines().insertAt(insertIndex, rl);
 	}
 
 	private List<String> createDeclareFactionCounters(List<String> factions) {
@@ -254,6 +256,10 @@ public class MultiGeneralsGonvernors extends Feature {
 	private static String _commentPrefix = ";---- Generals&Governors Spawn Script: ";
 
 	private FactionsDropZones _FactionDropZone;
+
+	private CampaignScript campaignScript;
+
+	public int SettlementsHostedMaxCount;
 
 	@Override
 	public UUID getId() {

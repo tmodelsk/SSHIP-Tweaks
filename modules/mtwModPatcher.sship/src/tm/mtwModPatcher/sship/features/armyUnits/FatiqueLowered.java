@@ -12,6 +12,11 @@ import java.util.UUID;
 public class FatiqueLowered extends Feature {
 
 	@Override
+	public void setParamsCustomValues() {
+
+	}
+
+	@Override
 	public void executeUpdates() throws Exception {
 		exportDescrUnit=getFileRegisterForUpdated(ExportDescrUnitTyped.class);
 

@@ -16,26 +16,26 @@ import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
 import javax.xml.xpath.XPathExpressionException;
 import java.util.UUID;
 
-/** Longer Battles - killing hit ration is reduced */
+/**
+ * Longer Battles - killing hit ratio is reduced
+ */
 public class LongerBattles extends Feature {
-
-	@Getter @Setter
-	private double meleeHitRate = 1.0; 						// 0.5
-	@Getter @Setter
-	private double missileCavalryAccuracy = 1.75;			// org 1.5
-	@Getter @Setter
-	private double chargeMultiplier = 1.1;					// 2.0
-	@Getter @Setter
-	private boolean powerfulChargeForHeavyInfantry = false;	// true
-	@Getter @Setter
-	private boolean powerfulChargeForCavalry = false;		// true
 
 	// zmiany : power_charge attribute dla Cavalry heavy ? / Knights / Westers Knights ???
 	// 			move_speed_mod    1.5 (wszystkie cav 1.5 ???)
 
 	@Override
+	public void setParamsCustomValues() {
+		meleeHitRate = 1.0;                        // 0.5
+		missileCavalryAccuracy = 1.75;            // org 1.5
+		chargeMultiplier = 1.1;                    // 2.0
+		powerfulChargeForHeavyInfantry = false;    // true
+		powerfulChargeForCavalry = false;        // true
+	}
+
+	@Override
 	public void executeUpdates() throws Exception {
-		_ExportDescrUnit = getFileRegisterForUpdated(ExportDescrUnitTyped.class);
+		edu = getFileRegisterForUpdated(ExportDescrUnitTyped.class);
 		battleConfig = getFileRegisterForUpdated(BattleConfig.class);
 		battleConfigSet1 = getFileRegisterForUpdated(BattleConfigSet1.class);
 		battleConfigSet2 = getFileRegisterForUpdated(BattleConfigSet2.class);
@@ -51,25 +51,25 @@ public class LongerBattles extends Feature {
 		updateBattleConfig(battleConfigSet4, 4);
 		updateBattleConfig(battleConfigSet5, 5);
 
-		val allUnits = _ExportDescrUnit.getUnits(); //_ExportDescrUnit.getUnits().stream().filter(u -> u.isCategoryCavalry()).collect(Collectors.toList());
+		val allUnits = edu.getUnits(); //_ExportDescrUnit.getUnits().stream().filter(u -> u.isCategoryCavalry()).collect(Collectors.toList());
 
 		for (val unit : allUnits) {
 
 			// ### Updating Charge ###
-			unit.StatPri.ChargeBonus = (int)(unit.StatPri.ChargeBonus * chargeMultiplier);
+			unit.StatPri.ChargeBonus = (int) (unit.StatPri.ChargeBonus * chargeMultiplier);
 
-			if(powerfulChargeForHeavyInfantry) {
+			if (powerfulChargeForHeavyInfantry) {
 				// ### All Heavy Infantry gets powerful_charge attribute
-				if(unit.isCategoryInfantry() && unit.isClassHeavy())
+				if (unit.isCategoryInfantry() && unit.isClassHeavy())
 					unit.addAttribute("powerful_charge");
 			}
 
-			if(powerfulChargeForCavalry) {
+			if (powerfulChargeForCavalry) {
 				// ### Cavalry : ###
-				int heavyCharge = (int)(8 * chargeMultiplier);
-				if(unit.isCategoryCavalry()) {
+				int heavyCharge = (int) (8 * chargeMultiplier);
+				if (unit.isCategoryCavalry()) {
 					// # Add powerful_charge for heavy chargers OR heavy units #
-					if(unit.isClassHeavy() || unit.StatPri.ChargeBonus >= heavyCharge)
+					if (unit.isClassHeavy() || unit.StatPri.ChargeBonus >= heavyCharge)
 						unit.addAttribute("powerful_charge");
 				}
 			}
@@ -81,7 +81,7 @@ public class LongerBattles extends Feature {
 
 		double meleeHitRate = this.meleeHitRate;
 
-		if(setNumber != null) {
+		if (setNumber != null) {
 			double shift = 3 - setNumber;
 			meleeHitRate += shift * 0.1;
 		}
@@ -91,38 +91,44 @@ public class LongerBattles extends Feature {
 	}
 
 	@Override
-	public ListUnique<ParamId> defineParamsIds()  {
+	public ListUnique<ParamId> defineParamsIds() {
 		val parIds = new ArrayUniqueList<ParamId>();
 
 		ParamIdDouble parDbl;
-		parDbl= new ParamIdDouble("HitRatio", "Hit Ration",
-				feature -> ((LongerBattles)feature).getMeleeHitRate(),
-				(feature, value) -> ((LongerBattles)feature).setMeleeHitRate(value));
+		parDbl = new ParamIdDouble("HitRatio", "Hit Ration",
+				feature -> ((LongerBattles) feature).getMeleeHitRate(),
+				(feature, value) -> ((LongerBattles) feature).setMeleeHitRate(value));
 		parIds.add(parDbl);
 
-		parDbl= new ParamIdDouble("MissileCavalryAccuracy", "Missile Cavalry Accuracy",
-				feature -> ((LongerBattles)feature).getMissileCavalryAccuracy(),
-				(feature, value) -> ((LongerBattles)feature).setMissileCavalryAccuracy(value));
+		parDbl = new ParamIdDouble("MissileCavalryAccuracy", "Missile Cavalry Accuracy",
+				feature -> ((LongerBattles) feature).getMissileCavalryAccuracy(),
+				(feature, value) -> ((LongerBattles) feature).setMissileCavalryAccuracy(value));
 		parIds.add(parDbl);
 
-		parDbl= new ParamIdDouble("ChargeMulti" , "Charge Multiplier",
-				feature -> ((LongerBattles)feature).getChargeMultiplier(),
-				(feature, value) -> ((LongerBattles)feature).setChargeMultiplier(value));
+		parDbl = new ParamIdDouble("ChargeMulti", "Charge Multiplier",
+				feature -> ((LongerBattles) feature).getChargeMultiplier(),
+				(feature, value) -> ((LongerBattles) feature).setChargeMultiplier(value));
 		parIds.add(parDbl);
 
 
-		parIds.add(new ParamIdBoolean("PowerfulChargeForHeavyInfantry" , "PowerfulCharge For Heavy Infantry",
-				feature -> ((LongerBattles)feature).isPowerfulChargeForHeavyInfantry(),
-				(feature, value) -> ((LongerBattles)feature).setPowerfulChargeForHeavyInfantry(value) ));
+		parIds.add(new ParamIdBoolean("PowerfulChargeForHeavyInfantry", "PowerfulCharge For Heavy Infantry",
+				feature -> ((LongerBattles) feature).isPowerfulChargeForHeavyInfantry(),
+				(feature, value) -> ((LongerBattles) feature).setPowerfulChargeForHeavyInfantry(value)));
 
-		parIds.add(new ParamIdBoolean("PowerfulChargeForCavalry" , "PowerfulCharge For Cavalry",
-				feature -> ((LongerBattles)feature).isPowerfulChargeForCavalry(),
-				(feature, value) -> ((LongerBattles)feature).setPowerfulChargeForCavalry(value) ));
+		parIds.add(new ParamIdBoolean("PowerfulChargeForCavalry", "PowerfulCharge For Cavalry",
+				feature -> ((LongerBattles) feature).isPowerfulChargeForCavalry(),
+				(feature, value) -> ((LongerBattles) feature).setPowerfulChargeForCavalry(value)));
 
 		return parIds;
 	}
 
-	private ExportDescrUnitTyped _ExportDescrUnit;
+	@Getter @Setter private double meleeHitRate;
+	@Getter @Setter private double missileCavalryAccuracy;
+	@Getter @Setter private double chargeMultiplier;
+	@Getter @Setter private boolean powerfulChargeForHeavyInfantry;
+	@Getter @Setter private boolean powerfulChargeForCavalry;
+
+	private ExportDescrUnitTyped edu;
 	private BattleConfig battleConfig;
 	private BattleConfigSet1 battleConfigSet1;
 	private BattleConfigSet2 battleConfigSet2;
@@ -145,5 +151,6 @@ public class LongerBattles extends Feature {
 	public UUID getId() {
 		return Id;
 	}
+
 	public static UUID Id = UUID.fromString("dd90a87e-80b0-4cb7-a67f-4701d2a5b13e");
 }

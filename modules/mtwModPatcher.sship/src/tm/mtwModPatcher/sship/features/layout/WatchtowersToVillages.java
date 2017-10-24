@@ -15,11 +15,15 @@ import java.util.UUID;
 public class WatchtowersToVillages extends Feature {
 
 	@Override
+	public void setParamsCustomValues() {
+	}
+
+	@Override
 	// Empty
 	public void executeUpdates() throws Exception {
 		descrCultures = getFileRegisterForUpdated(DescrCultures.class);
 
-		val lines =  descrCultures.getLines();
+		val lines = descrCultures.getLines();
 
 		val replaceList = new ArrayList<Tuple2<String, String>>();
 		replaceList.add(new Tuple2<>("SE_watchtower.CAS", "southern_european_village.CAS"));
@@ -36,6 +40,7 @@ public class WatchtowersToVillages extends Feature {
 	public UUID getId() {
 		return Id;
 	}
+
 	public static UUID Id = UUID.fromString("94ed7b0e-d2eb-4f2b-93e5-cfee8f14858e");
 
 	public WatchtowersToVillages() {

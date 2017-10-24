@@ -10,6 +10,11 @@ import java.util.UUID;
  * Created by Tomek on 2016-07-08. rum
  */
 public class TurksFate extends Feature {
+	@Override
+	public void setParamsCustomValues() {
+
+	}
+
 	// rum
 	@Override
 	public void executeUpdates() throws Exception {

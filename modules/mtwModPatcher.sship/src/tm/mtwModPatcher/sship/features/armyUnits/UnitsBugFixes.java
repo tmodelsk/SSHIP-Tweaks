@@ -12,6 +12,11 @@ import java.util.UUID;
 public class UnitsBugFixes extends Feature {
 
 	@Override
+	public void setParamsCustomValues() {
+
+	}
+
+	@Override
 	public void executeUpdates() throws Exception {
 		edu = getFileRegisterForUpdated(ExportDescrUnitTyped.class);
 

@@ -11,6 +11,11 @@ import java.util.UUID;
 public class BeeMugCarlCampaignAi extends CampaignAiConfigurator {
 
 	@Override
+	public void setParamsCustomValues() {
+		initializeDefaults();
+	}
+
+	@Override
 	public void executeUpdates() throws Exception {
 		super.executeUpdates();
 

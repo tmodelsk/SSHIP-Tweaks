@@ -8,6 +8,11 @@ import tm.mtwModPatcher.lib.common.core.features.ResourcesProvider;
 public class TestingCampaignAiFt extends CampaignAiConfigurator {
 
 	@Override
+	public void setParamsCustomValues() {
+		initializeDefaults();
+	}
+
+	@Override
 	protected void initializeDefaults() {
 
 	}

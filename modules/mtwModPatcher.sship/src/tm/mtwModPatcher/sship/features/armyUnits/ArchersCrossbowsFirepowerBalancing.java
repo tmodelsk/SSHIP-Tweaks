@@ -16,6 +16,11 @@ import java.util.stream.Collectors;
 public class ArchersCrossbowsFirepowerBalancing extends Feature {
 
 	@Override
+	public void setParamsCustomValues() {
+
+	}
+
+	@Override
 	public void executeUpdates() throws Exception {
 		_ExportDescrUnit = getFileRegisterForUpdated(ExportDescrUnitTyped.class);
 		_DescrProjectiles = getFileRegisterForUpdated(DescrProjectiles.class);

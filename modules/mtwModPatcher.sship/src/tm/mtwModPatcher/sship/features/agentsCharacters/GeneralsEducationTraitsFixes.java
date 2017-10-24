@@ -12,13 +12,17 @@ import java.util.UUID;
 public class GeneralsEducationTraitsFixes extends Feature {
 
 	@Override
-	public UUID getId() {
-		return Id;
+	public void setParamsCustomValues() {
+
 	}
 
 	@Override
 	public void executeUpdates() throws Exception {	}
 
+	@Override
+	public UUID getId() {
+		return Id;
+	}
 	public static UUID Id = UUID.fromString("b1567f5d-5eb3-4699-82c5-58e77998f739");
 
 	public GeneralsEducationTraitsFixes() {

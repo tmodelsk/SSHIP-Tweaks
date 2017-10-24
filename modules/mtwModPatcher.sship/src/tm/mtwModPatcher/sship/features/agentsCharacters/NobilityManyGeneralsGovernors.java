@@ -16,31 +16,21 @@ import tm.mtwModPatcher.sship.features.global.PopulationResourcesLimited;
 
 import java.util.UUID;
 
-/**
- * Created by tomek on 20.04.2017.
- */
+/** Created by tomek on 20.04.2017. */
 public class NobilityManyGeneralsGovernors extends Feature {
 
-	private ExportDescrBuilding exportDescrBuilding;
-
-	@Getter
-	@Setter
-	private int cityReplenishTurnsStarting = 44;
-	@Getter
-	@Setter
-	private int cityReplenishTurnsBonus = 2;
-	@Getter
-	@Setter
-	private int castleReplenishTurnsStarting = 40;
-	@Getter
-	@Setter
-	private int castleReplenishTurnsBonus = 2;
-	@Getter @Setter
-	private double aiReplenishTurnsMulti = 1.5;
+	@Override
+	public void setParamsCustomValues() {
+		cityReplenishTurnsStarting = 44;
+		cityReplenishTurnsBonus = 2;
+		castleReplenishTurnsStarting = 40;
+		castleReplenishTurnsBonus = 2;
+		aiReplenishTurnsMulti = 1.5;
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {
-		exportDescrBuilding = getFileRegisterForUpdated(ExportDescrBuilding.class);
+		edb = getFileRegisterForUpdated(ExportDescrBuilding.class);
 
 		insertUnit("NE Bodyguard", "factions { england, scotland, france, hre, denmark, poland, hungary, slave, jerusalem,  } and not event_counter GOTHIC_ARMOR 1");
 		insertUnit("NE Late Bodyguard", "factions { england, scotland, france, hre, denmark, poland, hungary, slave, jerusalem,  } and event_counter GOTHIC_ARMOR 1");
@@ -76,6 +66,7 @@ public class NobilityManyGeneralsGovernors extends Feature {
 		insertUnitCore(unitName, requiresStr + " and not event_counter is_the_player 1", aiReplenishTurnsMulti);
 
 	}
+
 	private void insertUnitCore(String unitName, String requiresStr, double replenishTurnsMultiPar) {
 
 		// ### CITY ###
@@ -86,7 +77,7 @@ public class NobilityManyGeneralsGovernors extends Feature {
 		int starting = 1, max = 1, bonus = 0, replenishTurns, replBonus;
 
 		double replenishTmpMulti = 1.0;
-		if(featuresContainer.isFeatureEnabled(PopulationResourcesLimited.Id)) {
+		if (featuresContainer.isFeatureEnabled(PopulationResourcesLimited.Id)) {
 			val populationResourcesLimited = (PopulationResourcesLimited) featuresContainer.getEnabled(PopulationResourcesLimited.Id);
 
 			replenishTmpMulti = 1.0 / populationResourcesLimited.getReplenishRateMult();
@@ -97,28 +88,28 @@ public class NobilityManyGeneralsGovernors extends Feature {
 		replenishTurns = cityReplenishTurnsStarting;
 		replBonus = cityReplenishTurnsBonus;
 
-		exportDescrBuilding.insertRecruitmentBuildingCapabilities(buildingName, wallsCity.L1_WoodenPalisade, type,
+		edb.insertRecruitmentBuildingCapabilities(buildingName, wallsCity.L1_WoodenPalisade, type,
 				unitName, starting, UnitReplenishRate.getRate(replenishTurns) * replenishTmpMulti, max, bonus, requiresStr);
 
 		replenishTurns -= replBonus;
-		exportDescrBuilding.insertRecruitmentBuildingCapabilities(buildingName, wallsCity.L2_WoodenWall, type,
+		edb.insertRecruitmentBuildingCapabilities(buildingName, wallsCity.L2_WoodenWall, type,
 				unitName, starting, UnitReplenishRate.getRate(replenishTurns) * replenishTmpMulti, max, bonus, requiresStr);
 
 		replenishTurns -= replBonus;
 		max++;
-		exportDescrBuilding.insertRecruitmentBuildingCapabilities(buildingName, wallsCity.L3_StoneWall, type,
+		edb.insertRecruitmentBuildingCapabilities(buildingName, wallsCity.L3_StoneWall, type,
 				unitName, starting, UnitReplenishRate.getRate(replenishTurns) * replenishTmpMulti, max, bonus, requiresStr);
 
 		replenishTurns -= replBonus;
 		max++;
 		//starting++;
-		exportDescrBuilding.insertRecruitmentBuildingCapabilities(buildingName, wallsCity.L4_LargeStoneWall, type,
+		edb.insertRecruitmentBuildingCapabilities(buildingName, wallsCity.L4_LargeStoneWall, type,
 				unitName, starting, UnitReplenishRate.getRate(replenishTurns) * replenishTmpMulti, max, bonus, requiresStr);
 
-		replenishTurns -= (2*replBonus);
+		replenishTurns -= (2 * replBonus);
 		max++;
 		starting++;
-		exportDescrBuilding.insertRecruitmentBuildingCapabilities(buildingName, wallsCity.L5_HugeStoneWall, type,
+		edb.insertRecruitmentBuildingCapabilities(buildingName, wallsCity.L5_HugeStoneWall, type,
 				unitName, starting, UnitReplenishRate.getRate(replenishTurns) * replenishTmpMulti, max, bonus, requiresStr);
 
 		// ##### CASTLE #####
@@ -126,35 +117,35 @@ public class NobilityManyGeneralsGovernors extends Feature {
 		type = Buildings.CastleType;
 		val wallsCastle = Buildings.WallsCastle;
 
-		if(featuresContainer.isFeatureEnabled(PopulationResourcesLimited.Id)) starting = 0;
+		if (featuresContainer.isFeatureEnabled(PopulationResourcesLimited.Id)) starting = 0;
 		else starting = 1;
 		max = 1;
 		bonus = 0;
 		replenishTurns = castleReplenishTurnsStarting;
 		replBonus = castleReplenishTurnsBonus;
 
-		exportDescrBuilding.insertRecruitmentBuildingCapabilities(buildingName, wallsCastle.L1_MotteAndBailey, type,
+		edb.insertRecruitmentBuildingCapabilities(buildingName, wallsCastle.L1_MotteAndBailey, type,
 				unitName, starting, UnitReplenishRate.getRate(replenishTurns) * replenishTmpMulti, max, bonus, requiresStr);
 
 		replenishTurns -= replBonus;
-		exportDescrBuilding.insertRecruitmentBuildingCapabilities(buildingName, wallsCastle.L2_WoodenCastle, type,
+		edb.insertRecruitmentBuildingCapabilities(buildingName, wallsCastle.L2_WoodenCastle, type,
 				unitName, starting, UnitReplenishRate.getRate(replenishTurns) * replenishTmpMulti, max, bonus, requiresStr);
 
 		replenishTurns -= replBonus;
 		max++;
-		exportDescrBuilding.insertRecruitmentBuildingCapabilities(buildingName, wallsCastle.L3_Castle, type,
+		edb.insertRecruitmentBuildingCapabilities(buildingName, wallsCastle.L3_Castle, type,
 				unitName, starting, UnitReplenishRate.getRate(replenishTurns) * replenishTmpMulti, max, bonus, requiresStr);
 
 		replenishTurns -= replBonus;
 		max++;
 		starting++;
-		exportDescrBuilding.insertRecruitmentBuildingCapabilities(buildingName, wallsCastle.L4_Fortress, type,
+		edb.insertRecruitmentBuildingCapabilities(buildingName, wallsCastle.L4_Fortress, type,
 				unitName, starting, UnitReplenishRate.getRate(replenishTurns) * replenishTmpMulti, max, bonus, requiresStr);
 
-		replenishTurns -= (2*replBonus);
+		replenishTurns -= (2 * replBonus);
 		max++;
 		//starting++;
-		exportDescrBuilding.insertRecruitmentBuildingCapabilities(buildingName, wallsCastle.L5_Citadel, type,
+		edb.insertRecruitmentBuildingCapabilities(buildingName, wallsCastle.L5_Citadel, type,
 				unitName, starting, UnitReplenishRate.getRate(replenishTurns) * replenishTmpMulti, max, bonus, requiresStr);
 	}
 
@@ -184,6 +175,14 @@ public class NobilityManyGeneralsGovernors extends Feature {
 
 		return params;
 	}
+
+	@Getter @Setter private int cityReplenishTurnsStarting;
+	@Getter @Setter private int cityReplenishTurnsBonus;
+	@Getter @Setter private int castleReplenishTurnsStarting;
+	@Getter @Setter private int castleReplenishTurnsBonus;
+	@Getter @Setter private double aiReplenishTurnsMulti;
+
+	private ExportDescrBuilding edb;
 
 	@Override
 	public UUID getId() {

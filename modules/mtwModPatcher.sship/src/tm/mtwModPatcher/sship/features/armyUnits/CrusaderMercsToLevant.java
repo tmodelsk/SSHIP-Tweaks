@@ -13,8 +13,13 @@ import java.util.UUID;
 public class CrusaderMercsToLevant extends Feature {
 
 	@Override
+	public void setParamsCustomValues() {
+
+	}
+
+	@Override
 	public void executeUpdates() throws Exception {
-		_DescrMercenaries = getFileRegisterForUpdated(DescrMercenaries.class);
+		descrMercenaries = getFileRegisterForUpdated(DescrMercenaries.class);
 
 		String sergentsStr = "\tunit Crusader Sergeants\t\t\texp 1 cost 800 replenish 0.067 - 0.10 max 1 initial 1 religions { catholic }";
 		//String knightsFootStr = "\tunit Dismounted Crusader Knights\texp 1 cost 1584 replenish 0.07 - 0.17 max 1 initial 1 religions { catholic }";
@@ -25,8 +30,8 @@ public class CrusaderMercsToLevant extends Feature {
 		crusadersList.add(sergentsStr);
 		//crusadersList.add(knightsFootStr);
 
-		_DescrMercenaries.addUnitRecruitmentLine("Crusaders_Path" , crusadersList);
-		_DescrMercenaries.addUnitRecruitmentLine("Levant" , crusadersList);
+		descrMercenaries.addUnitRecruitmentLine("Crusaders_Path" , crusadersList);
+		descrMercenaries.addUnitRecruitmentLine("Levant" , crusadersList);
 
 
 		// ## Muslim Jihadists ##
@@ -44,24 +49,24 @@ public class CrusaderMercsToLevant extends Feature {
 		jihadsLowList.add(ghazisLow);
 		jihadsLowList.add(mutatawwiWariorsLow);
 
-		_DescrMercenaries.addUnitRecruitmentLine("Crusaders_Path" , jihadsLowList);
-		_DescrMercenaries.addUnitRecruitmentLine("Levant" , jihadsLowList);
+		descrMercenaries.addUnitRecruitmentLine("Crusaders_Path" , jihadsLowList);
+		descrMercenaries.addUnitRecruitmentLine("Levant" , jihadsLowList);
 
-		_DescrMercenaries.addUnitRecruitmentLine("Armenia" , jihadsLowList);
+		descrMercenaries.addUnitRecruitmentLine("Armenia" , jihadsLowList);
 
-		_DescrMercenaries.addUnitRecruitmentLine("Egypt" , jihadsHightList);
-		_DescrMercenaries.addUnitRecruitmentLine("Arabia" , jihadsHightList);
-		_DescrMercenaries.addUnitRecruitmentLine("Mesopotamia" , jihadsHightList);
+		descrMercenaries.addUnitRecruitmentLine("Egypt" , jihadsHightList);
+		descrMercenaries.addUnitRecruitmentLine("Arabia" , jihadsHightList);
+		descrMercenaries.addUnitRecruitmentLine("Mesopotamia" , jihadsHightList);
 
-		_DescrMercenaries.addUnitRecruitmentLine("Central_Anatolia" , jihadsLowList);
-		_DescrMercenaries.addUnitRecruitmentLine("Eastern_Anatolia" , jihadsLowList);
-		_DescrMercenaries.addUnitRecruitmentLine("Kurdish" , jihadsLowList);
+		descrMercenaries.addUnitRecruitmentLine("Central_Anatolia" , jihadsLowList);
+		descrMercenaries.addUnitRecruitmentLine("Eastern_Anatolia" , jihadsLowList);
+		descrMercenaries.addUnitRecruitmentLine("Kurdish" , jihadsLowList);
 
 
 
 	}
 
-	protected DescrMercenaries _DescrMercenaries;
+	protected DescrMercenaries descrMercenaries;
 
 	@Override
 	public UUID getId() {

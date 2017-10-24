@@ -13,10 +13,12 @@ import tm.mtwModPatcher.lib.data.world.maps.campaign.CampaignScript;
 
 import java.util.UUID;
 
-/**
- * Created by Tomek on 2016-11-22.
- */
+/** Created by Tomek on 2016-11-22. */
 public class BetterLogging extends Feature {
+
+	@Override
+	public void setParamsCustomValues() {
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -27,7 +29,7 @@ public class BetterLogging extends Feature {
 
 		//endTurnPressed.add(new WriteToLog(LogLevel.Always, "##########!!  E N D   T U R N  BUTTON Pressed !!##########"));
 
-		endTurnPressed.add(getBlockForRange(1,1000));
+		endTurnPressed.add(getBlockForRange(1, 1000));
 
 		rootRegion.add(endTurnPressed);
 		_CampaignScript.insertAtEndOfFile(rootRegion.getScriptBlock().getLines());
@@ -40,9 +42,9 @@ public class BetterLogging extends Feature {
 //			c.add(getWriteHistory(min));
 //		}
 //		else
-			if(min + 8 >= max) {
+		if (min + 8 >= max) {
 
-			for(int i=min; i<= max; i++) {
+			for (int i = min; i <= max; i++) {
 				val if1 = new IfBlock(new TurnNumber("=", i));
 				if1.add(getWriteHistory(i));
 				c.add(if1);
@@ -57,14 +59,14 @@ public class BetterLogging extends Feature {
 //			c.add(if1);
 //			c.add(if2);
 		} else {
-			int mediana = (min + max)/2;
+			int mediana = (min + max) / 2;
 
-			val ifLower = new IfBlock(new TurnNumber("<=" , mediana));
+			val ifLower = new IfBlock(new TurnNumber("<=", mediana));
 			ifLower.add(getBlockForRange(min, mediana));
 			c.add(ifLower);
 
-			val ifUpper = new IfBlock(new TurnNumber(">" , mediana));
-			ifUpper.add(getBlockForRange(mediana+1, max));
+			val ifUpper = new IfBlock(new TurnNumber(">", mediana));
+			ifUpper.add(getBlockForRange(mediana + 1, max));
 			c.add(ifUpper);
 		}
 
@@ -72,7 +74,7 @@ public class BetterLogging extends Feature {
 	}
 
 	private ScriptElement getWriteHistory(int turnNumber) {
-		return new WriteToLog(LogLevel.Always, "##########!!  E N D   T U R N  BUTTON Pressed (EndTurn "+turnNumber+")!!##########");
+		return new WriteToLog(LogLevel.Always, "##########!!  E N D   T U R N  BUTTON Pressed (EndTurn " + turnNumber + ")!!##########");
 	}
 
 	protected CampaignScript _CampaignScript;
@@ -82,6 +84,7 @@ public class BetterLogging extends Feature {
 	public UUID getId() {
 		return Id;
 	}
+
 	public static UUID Id = UUID.fromString("cc26254e-bf76-4953-94f8-1848d40dea61");
 
 	public BetterLogging() {

@@ -16,14 +16,16 @@ import java.util.stream.Collectors;
 /** Boosts cavalry movement speed  */
 public class CavalrySpeedBonus extends Feature {
 
-	@Getter @Setter
-	private double cavalrySpeedMulti = 1.10;
+	@Override
+	public void setParamsCustomValues() {
+		cavalrySpeedMulti = 1.10;
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {
-		_ExportDescrUnit = getFileRegisterForUpdated(ExportDescrUnitTyped.class);
+		edu = getFileRegisterForUpdated(ExportDescrUnitTyped.class);
 
-		val cavUnits = _ExportDescrUnit.getUnits().stream().filter(u -> u.isCategoryCavalry()).collect(Collectors.toList());
+		val cavUnits = edu.getUnits().stream().filter(u -> u.isCategoryCavalry()).collect(Collectors.toList());
 
 		for (val unit : cavUnits) {
 			// # Speed Up cavalry unit a bit
@@ -48,8 +50,10 @@ public class CavalrySpeedBonus extends Feature {
 		return parIds;
 	}
 
+	@Getter @Setter
+	private double cavalrySpeedMulti;
 
-	private ExportDescrUnitTyped _ExportDescrUnit;
+	private ExportDescrUnitTyped edu;
 
 	public CavalrySpeedBonus() {
 		super("Cavalry Speed Bonus");

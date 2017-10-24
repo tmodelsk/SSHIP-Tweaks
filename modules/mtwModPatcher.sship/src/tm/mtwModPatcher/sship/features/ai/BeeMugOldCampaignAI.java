@@ -16,6 +16,11 @@ import java.util.UUID;
 public class BeeMugOldCampaignAI extends Feature {
 
 	@Override
+	public void setParamsCustomValues() {
+
+	}
+
+	@Override
 	public void executeUpdates() throws Exception {
 		descrSMFactions = getFileRegisterForUpdated(DescrSMFactions.class);
 
@@ -57,7 +62,6 @@ public class BeeMugOldCampaignAI extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-
 	public static UUID Id = UUID.fromString("21a8b2f7-0306-4e83-9a78-27063ae35c35");
 
 	public BeeMugOldCampaignAI() {

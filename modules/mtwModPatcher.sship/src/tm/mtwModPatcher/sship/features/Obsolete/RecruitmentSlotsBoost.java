@@ -5,10 +5,13 @@ import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 
 import java.util.UUID;
 
-/**
- * Created by Tomek on 2016-04-22.
- */
+/** Created by Tomek on 2016-04-22. */
 public class RecruitmentSlotsBoost extends Feature {
+
+	@Override
+	public void setParamsCustomValues() {
+
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {

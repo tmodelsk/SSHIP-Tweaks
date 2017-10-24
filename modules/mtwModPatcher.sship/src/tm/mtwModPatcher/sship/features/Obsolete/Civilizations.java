@@ -23,7 +23,10 @@ import java.util.regex.Pattern;
 @Deprecated
 public class Civilizations extends Feature {
 
-	protected double WorldMultiplier = 1;
+	@Override
+	public void setParamsCustomValues() {
+		WorldMultiplier = 1;
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -773,6 +776,8 @@ public class Civilizations extends Feature {
 		_ExportDescrBuilding.insertIntoBuildingCapabilities("castle_mines", "c_mines" , "castle", attributeStr + requires );
 		_ExportDescrBuilding.insertIntoBuildingCapabilities("castle_mines", "c_mines\\+1" , "castle", attributeStr + requires );
 	}
+
+	protected double WorldMultiplier;
 
 	protected ExportDescrBuilding _ExportDescrBuilding;
 	protected ExportDescrUnitTyped _ExportDescrUnit;

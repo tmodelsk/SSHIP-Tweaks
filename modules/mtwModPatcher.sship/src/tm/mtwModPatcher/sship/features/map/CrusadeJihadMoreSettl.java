@@ -12,6 +12,11 @@ import java.util.UUID;
 public class CrusadeJihadMoreSettl extends Feature {
 
 	@Override
+	public void setParamsCustomValues() {
+
+	}
+
+	@Override
 	public void executeUpdates() throws Exception {
 		descrRegions = getFileRegisterForUpdated(DescrRegions.class);
 

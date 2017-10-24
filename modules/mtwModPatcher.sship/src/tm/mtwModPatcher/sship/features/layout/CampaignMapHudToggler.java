@@ -14,6 +14,11 @@ import java.util.UUID;
  */
 public class CampaignMapHudToggler extends Feature {
 	@Override
+	public void setParamsCustomValues() {
+
+	}
+
+	@Override
 	public void executeUpdates() throws Exception {
 		campaignScript = getFileRegisterForUpdated(CampaignScript.class);
 

@@ -125,7 +125,7 @@ public class PatcherEngine {
 		consoleLogger.writeLine("PatcherEngine: Found " + featureList.size() + " features to apply");
 
 		// ## Save user settings ##
-		settingsEngine.saveSettings("mySettings", appVersion, featureList);
+		settingsEngine.saveSettings("mySettings", appVersion, featureFullList);
 
 		try {
 			// ## Execute Overrides ##

@@ -23,8 +23,10 @@ import java.util.stream.Collectors;
  */
 public class WatchtowersToForts extends Feature {
 
-	@Getter @Setter
-	private double minimumDistance = 7.0;
+	@Override
+	public void setParamsCustomValues() {
+		minimumDistance = 7.0;
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -94,6 +96,9 @@ public class WatchtowersToForts extends Feature {
 
 		return  result;
 	}
+
+	@Getter @Setter
+	private double minimumDistance;
 
 	@Override
 	public UUID getId() {

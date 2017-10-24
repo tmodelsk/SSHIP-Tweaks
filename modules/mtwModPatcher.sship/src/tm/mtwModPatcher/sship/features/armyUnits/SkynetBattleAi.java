@@ -14,6 +14,11 @@ import java.util.UUID;
 /**  */
 public class SkynetBattleAi extends Feature {
 	@Override
+	public void setParamsCustomValues() {
+
+	}
+
+	@Override
 	public void executeUpdates() throws Exception {
 		campaignScript = getFileRegisterForUpdated(CampaignScript.class);
 		val lines = campaignScript.getLines();

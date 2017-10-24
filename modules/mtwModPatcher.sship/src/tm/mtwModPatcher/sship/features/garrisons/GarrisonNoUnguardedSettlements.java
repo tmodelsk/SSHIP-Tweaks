@@ -29,25 +29,22 @@ import java.util.UUID;
  * Created by Tomek on 2016-11-11.
  */
 public class GarrisonNoUnguardedSettlements extends Feature {
-	private CampaignScript _CampaignScript;
-	private DescrStratSectioned _DescrStrat;
-	private ExportDescrUnitTyped _ExportDescrUnit;
-	private DescrRegions _DescrRegions;
-
-	@Getter @Setter
-	private boolean loggingEnabled = false;
+	@Override
+	public void setParamsCustomValues() {
+		loggingEnabled = false;
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {
-		_CampaignScript = getFileRegisterForUpdated(CampaignScript.class);
-		_DescrStrat = getFileRegisterForUpdated(DescrStratSectioned.class);
-		_ExportDescrUnit = getFileRegisterForUpdated(ExportDescrUnitTyped.class);
-		_DescrRegions = getFileRegisterForUpdated(DescrRegions.class);
+		campaignScript = getFileRegisterForUpdated(CampaignScript.class);
+		descrStrat = getFileRegisterForUpdated(DescrStratSectioned.class);
+		edu = getFileRegisterForUpdated(ExportDescrUnitTyped.class);
+		descrRegions = getFileRegisterForUpdated(DescrRegions.class);
 
 		// ## Find Insert Index
-		int insertIndex = _CampaignScript.getLastInsertLineForMonitors();
+		int insertIndex = campaignScript.getLastInsertLineForMonitors();
 
-		SettlementManager settlementManager = new SettlementManager(_DescrStrat, _DescrRegions);
+		SettlementManager settlementManager = new SettlementManager(descrStrat, descrRegions);
 
 		List<SettlementInfo> settlementInfos = settlementManager.getAllSettlements();
 
@@ -62,7 +59,7 @@ public class GarrisonNoUnguardedSettlements extends Feature {
 		rl.add("");
 
 		// ## Insert all generated monitors ##
-		_CampaignScript.getLines().insertAt(insertIndex, rl);
+		campaignScript.getLines().insertAt(insertIndex, rl);
 	}
 
 	private List<String> createSettlementTroopRisingMonitors(List<SettlementInfo> settlementInfos) throws Exception {
@@ -129,11 +126,11 @@ public class GarrisonNoUnguardedSettlements extends Feature {
 	}
 
 	private int calculateUnitCost(String unitName) throws PatcherLibBaseEx {
-		return  (int)(_ExportDescrUnit.loadUnit(unitName).StatCost.Cost * 0.5);
+		return  (int)(edu.loadUnit(unitName).StatCost.Cost * 0.5);
 	}
 
 	private void validateUnitInFaction(String unitName, String factionName, SettlementInfo settlement) throws PatcherLibBaseEx {
-		String ownershipCsv = _ExportDescrUnit.loadUnit(unitName).Ownership;
+		String ownershipCsv = edu.loadUnit(unitName).Ownership;
 
 		if( !ownershipCsv.contains("all") && !ownershipCsv.contains(factionName) )
 			throw new PatcherLibBaseEx("Unit "+unitName + " don't belongs to "+factionName + " Settl: "+settlement.Name+" .Level="+settlement.Level + " .Creator="+settlement.CreatedByFaction);
@@ -150,6 +147,13 @@ public class GarrisonNoUnguardedSettlements extends Feature {
 
 		return parIds;
 	}
+
+	@Getter @Setter private boolean loggingEnabled;
+
+	private CampaignScript campaignScript;
+	private DescrStratSectioned descrStrat;
+	private ExportDescrUnitTyped edu;
+	private DescrRegions descrRegions;
 
 	private GarrisonManager _GarrisonMnager;
 

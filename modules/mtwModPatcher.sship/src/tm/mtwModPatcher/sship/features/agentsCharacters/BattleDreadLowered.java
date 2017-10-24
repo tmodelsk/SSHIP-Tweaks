@@ -12,6 +12,11 @@ import java.util.UUID;
 public class BattleDreadLowered extends Feature {
 
 	@Override
+	public void setParamsCustomValues() {
+
+	}
+
+	@Override
 	public void executeUpdates() throws Exception {
 		exportDescrCharacterTraits = getFileRegisterForUpdated(ExportDescrCharacterTraits.class);
 		val edct = exportDescrCharacterTraits;

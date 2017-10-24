@@ -11,13 +11,16 @@ import java.util.UUID;
  */
 public class PopulationGrowthPenaltiesLower  extends Feature{
 
-	protected ExportDescrBuilding _ExportDescrBuilding;
+	@Override
+	public void setParamsCustomValues() {
+
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {
 
-		_ExportDescrBuilding = fileEntityFactory.getFile(ExportDescrBuilding.class);
-		registerUpdatedFile(_ExportDescrBuilding);
+		edb = fileEntityFactory.getFile(ExportDescrBuilding.class);
+		registerUpdatedFile(edb);
 
 		// ### City Barracks ###
 //		exportDescrBuilding.addPopulationGrowthBonus("barracks", "town_guard", "city", 1);				// -1
@@ -41,6 +44,8 @@ public class PopulationGrowthPenaltiesLower  extends Feature{
 		// ## Gallows ##
 		//exportDescrBuilding.addPopulationGrowthBonus("castle_gallows", "c_gallows", null, 1);		// -5 player, -3 AI
 	}
+
+	private ExportDescrBuilding edb;
 
 	@Override
 	public UUID getId() {

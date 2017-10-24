@@ -14,18 +14,20 @@ import java.util.UUID;
  */
 public class CatharsHereticTemple extends Feature {
 
-	private ExportDescrBuilding _ExportDescrBuilding;
-	private DescrStratSectioned _DescrStrat;
+	@Override
+	public void setParamsCustomValues() {
+
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {
-		_ExportDescrBuilding = getFileRegisterForUpdated(ExportDescrBuilding.class);
+		edb = getFileRegisterForUpdated(ExportDescrBuilding.class);
 		_DescrStrat = getFileRegisterForUpdated(DescrStratSectioned.class);
 
 		val templeFilePath = ConfigurationSettings.VariousDataPath() + "\\HereticTemple-EDB.txt";
 		val templeLines = LinesProcessor.load(templeFilePath);
 
-		_ExportDescrBuilding.getLines().insertAtEnd(templeLines.getLines());
+		edb.getLines().insertAtEnd(templeLines.getLines());
 
 
 		//_DescrStrat.insertSettlementBuilding("Toulouse_Province", "temple_heretic", "abbey");
@@ -39,6 +41,9 @@ public class CatharsHereticTemple extends Feature {
 	public CatharsHereticTemple() {
 		super("Cathars in Toulouse got Heretic Temple");
 	}
+
+	private ExportDescrBuilding edb;
+	private DescrStratSectioned _DescrStrat;
 
 	@Override
 	public UUID getId() {

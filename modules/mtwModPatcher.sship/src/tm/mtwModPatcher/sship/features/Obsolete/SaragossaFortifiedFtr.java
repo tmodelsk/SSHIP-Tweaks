@@ -7,10 +7,7 @@ import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrStratSectioned;
 
 import java.util.UUID;
 
-/**
- * Created by Tomek on 2016-04-16.
- * Created forts securing from Moors incvasions
- */
+/** Created by Tomek on 2016-04-16. Created forts securing from Moors incvasions  */
 public class SaragossaFortifiedFtr extends Feature {
 //	region Zaragoza_Province
 //	fort 69, 138 stone_fort_a culture southern_european
@@ -19,7 +16,10 @@ public class SaragossaFortifiedFtr extends Feature {
 //	fort 73, 143 stone_fort_b culture southern_european
 //	watchtower 81, 138
 
-	protected DescrStratSectioned _DescrStrat;
+	@Override
+	public void setParamsCustomValues() {
+
+	}
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -44,6 +44,8 @@ public class SaragossaFortifiedFtr extends Feature {
 		registerUpdatedFile(_DescrStrat);
 
 	}
+
+	protected DescrStratSectioned _DescrStrat;
 
 	@Override
 	public UUID getId() {

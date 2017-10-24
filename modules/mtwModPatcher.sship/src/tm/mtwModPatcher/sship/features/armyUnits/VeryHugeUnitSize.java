@@ -24,28 +24,13 @@ import java.util.stream.Collectors;
  */
 public class VeryHugeUnitSize extends Feature {
 
-	@Getter
-	private double sizeMulti = 0.75; //0.75; //1.25;
-	public void setSizeMulti(double value) {
-		if(value > 1.25) throw new PatcherLibBaseEx("Size Multiplier max value is 1.25");
-
-		sizeMulti = value;
+	@Override
+	public void setParamsCustomValues() {
+		sizeMulti = 0.75; //0.75; //1.25;
+		baseCostMulti = 0.80; //1.25;
+		updateCosts = ConfigurationSettings.isDevEnvironment();
+		updateReplenish = ConfigurationSettings.isDevEnvironment();
 	}
-
-	@Getter
-	private double baseCostMulti = 0.80; //1.25;
-	public void setBaseCostMulti(double value) {
-		if(value > 1.25) throw new PatcherLibBaseEx("Size Multiplier max value is 1.25");
-
-		baseCostMulti = value;
-	}
-
-	@Getter @Setter
-	private boolean updateCosts = ConfigurationSettings.isDevEnvironment();
-	@Getter @Setter
-	private boolean updateReplenish = ConfigurationSettings.isDevEnvironment();
-
-	private static final int SIZE_MAX = 100;
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -106,6 +91,25 @@ public class VeryHugeUnitSize extends Feature {
 
 		return pars;
 	}
+
+	@Getter private double sizeMulti;
+	public void setSizeMulti(double value) {
+		if(value > 1.25) throw new PatcherLibBaseEx("Size Multiplier max value is 1.25");
+
+		sizeMulti = value;
+	}
+
+	@Getter private double baseCostMulti;
+	public void setBaseCostMulti(double value) {
+		if(value > 1.25) throw new PatcherLibBaseEx("Size Multiplier max value is 1.25");
+
+		baseCostMulti = value;
+	}
+
+	@Getter @Setter private boolean updateCosts;
+	@Getter @Setter private boolean updateReplenish;
+
+	private static final int SIZE_MAX = 100;
 
 	public VeryHugeUnitSize() {
 		super("Very Huge Unit Size");

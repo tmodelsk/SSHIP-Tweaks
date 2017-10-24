@@ -15,6 +15,11 @@ import java.util.UUID;
 	protected ExportDescrUnitTyped _ExportDescrUnit;
 
 	@Override
+	public void setParamsCustomValues() {
+
+	}
+
+	@Override
 	public void executeUpdates() throws Exception {
 
 		_ExportDescrBuilding = fileEntityFactory.getFile(ExportDescrBuilding.class);
