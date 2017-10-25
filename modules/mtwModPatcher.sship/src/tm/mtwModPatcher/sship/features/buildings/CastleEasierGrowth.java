@@ -27,7 +27,7 @@ public class CastleEasierGrowth extends Feature {
 		descrSettlementMechanics.SetCityPopulationCastleData(3, 	500, 	1000, 	9000, 	25000);	// castle 			-> upgrade org 12000
 
 
-		registerUpdatedFile(descrSettlementMechanics);
+		registerForUpdate(descrSettlementMechanics);
 	}
 
 	protected DescrSettlementMechanics descrSettlementMechanics;

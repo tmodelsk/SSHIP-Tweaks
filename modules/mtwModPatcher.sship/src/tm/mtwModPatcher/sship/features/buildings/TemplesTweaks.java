@@ -17,7 +17,7 @@ public class TemplesTweaks extends Feature {
 	@Override
 	public void executeUpdates() throws Exception {
 		_ExportDescrBuilding = fileEntityFactory.getFile(ExportDescrBuilding.class);
-		registerUpdatedFile(_ExportDescrBuilding);
+		registerForUpdate(_ExportDescrBuilding);
 
 		// ### Muslims Mosques ###
 		// # City #

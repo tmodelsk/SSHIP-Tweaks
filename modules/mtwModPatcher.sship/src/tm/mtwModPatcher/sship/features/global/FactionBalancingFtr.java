@@ -19,7 +19,7 @@ public class FactionBalancingFtr extends Feature {
 	public void executeUpdates() throws Exception {
 
 		descrStrat = fileEntityFactory.getFile(DescrStratSectioned.class);
-		registerUpdatedFile(descrStrat);
+		registerForUpdate(descrStrat);
 
 		//_DescrStrat.addKingsPurse("KIEVAN RUS",2000);
 		descrStrat.addKingsPurse("NOVGOROD",2000);

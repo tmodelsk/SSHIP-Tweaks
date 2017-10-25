@@ -29,9 +29,9 @@ public class MercenariesCosts extends Feature {
 	@Override
 	public void executeUpdates() throws Exception {
 		descrMercenaries = fileEntityFactory.getFile(DescrMercenaries.class);
-		registerUpdatedFile(descrMercenaries);
+		registerForUpdate(descrMercenaries);
 		edu = fileEntityFactory.getFile(ExportDescrUnitTyped.class);
-		registerUpdatedFile(edu);
+		registerForUpdate(edu);
 		edb = getFileRegisterForUpdated(ExportDescrBuilding.class);
 
 		LinesProcessor lines = edb.getLines();

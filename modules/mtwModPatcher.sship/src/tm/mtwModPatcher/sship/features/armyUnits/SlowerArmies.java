@@ -32,9 +32,9 @@ public class SlowerArmies extends Feature {
 	public void executeUpdates() throws Exception {
 
 		descrCampaignDb = fileEntityFactory.getFile(DescrCampaignDb.class);
-		registerUpdatedFile(descrCampaignDb);
+		registerForUpdate(descrCampaignDb);
 		descrCharacter = fileEntityFactory.getFile(DescrCharacter.class);
-		registerUpdatedFile(descrCharacter);
+		registerForUpdate(descrCharacter);
 
 		String startingActionPointsRegexStr = "^\\s*starting_action_points\\s+\\d+";
 		String startingActionPointsPrefix = "starting_action_points\t";

@@ -137,7 +137,7 @@ Class: CHARACTER_TYPE_TEST
 	@Override
 	public void executeUpdates() throws Exception {
 		exportDescrCharacterTraits = fileEntityFactory.getFile(ExportDescrCharacterTraits.class);
-		registerUpdatedFile(exportDescrCharacterTraits);
+		registerForUpdate(exportDescrCharacterTraits);
 
 		val edct = exportDescrCharacterTraits;
 

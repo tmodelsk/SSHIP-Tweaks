@@ -50,7 +50,7 @@ public class PamplonaToCastle extends Feature {
 		//lines.replaceLine(castleIndex, "\t\ttype core_castle_building castle");
 
 
-		registerUpdatedFile(_DescrStrat);
+		registerForUpdate(_DescrStrat);
 
 	}
 

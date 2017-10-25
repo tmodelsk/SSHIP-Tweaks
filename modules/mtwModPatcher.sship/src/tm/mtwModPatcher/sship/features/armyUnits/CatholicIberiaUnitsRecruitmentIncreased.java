@@ -33,9 +33,9 @@ public class CatholicIberiaUnitsRecruitmentIncreased extends Feature {
 	@Override
 	public void executeUpdates() throws Exception {
 		_ExportDescrBuilding = fileEntityFactory.getFile(ExportDescrBuilding.class);
-		registerUpdatedFile(_ExportDescrBuilding);
+		registerForUpdate(_ExportDescrBuilding);
 		_ExportDescrUnit = fileEntityFactory.getFile(ExportDescrUnitTyped.class);
-		registerUpdatedFile(_ExportDescrUnit);
+		registerForUpdate(_ExportDescrUnit);
 		_DescrMercenaries = getFileRegisterForUpdated(DescrMercenaries.class);
 		_DescrStrat = getFileRegisterForUpdated(DescrStratSectioned.class);
 		_BattleModels = getFileRegisterForUpdated(BattleModels.class);

@@ -181,16 +181,18 @@ public abstract class Feature {
 	}
 
 	protected  <T extends FileEntity> T getFileRegisterForUpdated(Class<T> fileEntityClz) throws Exception {
-
 		T file = fileEntityFactory.getFile(fileEntityClz);
+		registerForUpdate(file);
 
-		if(!filesUpdated.contains(file))
-			filesUpdated.add(file);
+		return file;
+	}
+	protected <T extends FileEntity> T getFile(Class<T> fileEntityClz) throws Exception {
+		T file = fileEntityFactory.getFile(fileEntityClz);
 
 		return file;
 	}
 
-	protected void registerUpdatedFile(FileEntity file) {
+	protected void registerForUpdate(FileEntity file) {
 
 		if(!filesUpdated.contains(file))
 			filesUpdated.add(file);

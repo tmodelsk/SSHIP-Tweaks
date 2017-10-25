@@ -41,7 +41,7 @@ public class SaragossaFortifiedFtr extends Feature {
 		//regionLines.insertAt(lineNumber+1, "fort 73, 143 stone_fort_b culture southern_european");
 
 
-		registerUpdatedFile(_DescrStrat);
+		registerForUpdate(_DescrStrat);
 
 	}
 

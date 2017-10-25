@@ -22,7 +22,7 @@ public class BuildingTweaks extends Feature {
 	public void executeUpdates() throws Exception {
 
 		edb = fileEntityFactory.getFile(ExportDescrBuilding.class);
-		registerUpdatedFile(edb);
+		registerForUpdate(edb);
 
 		// MINES
 		edb.setBuildingSettlementRequirement("mines", "mines", "city", "town");

@@ -17,7 +17,7 @@ public class RecruitmentSlotsBoost extends Feature {
 	public void executeUpdates() throws Exception {
 
 		_ExportDescrBuilding = fileEntityFactory.getFile(ExportDescrBuilding.class);
-		registerUpdatedFile(_ExportDescrBuilding);
+		registerForUpdate(_ExportDescrBuilding);
 
 		// ### City Barracks ###
 

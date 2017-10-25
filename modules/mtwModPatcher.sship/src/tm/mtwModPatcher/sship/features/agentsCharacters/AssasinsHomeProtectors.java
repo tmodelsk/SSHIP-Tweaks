@@ -21,7 +21,7 @@ public class AssasinsHomeProtectors extends Feature {
 	public void executeUpdates() throws Exception {
 
 		descrCampaignDb = fileEntityFactory.getFile(DescrCampaignDb.class);
-		registerUpdatedFile(descrCampaignDb);
+		registerForUpdate(descrCampaignDb);
 
 		// para assassinate_attack_modifier = 2.0 i  assassinate_own_region_modifier = 0.15 dziala OK
 

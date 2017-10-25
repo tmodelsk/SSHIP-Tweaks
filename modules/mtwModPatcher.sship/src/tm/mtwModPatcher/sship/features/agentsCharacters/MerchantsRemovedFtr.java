@@ -35,15 +35,15 @@ public class MerchantsRemovedFtr extends Feature {
 	public void executeUpdates() throws Exception {
 
 		descrStrat = fileEntityFactory.getFile(DescrStratSectioned.class);
-		registerUpdatedFile(descrStrat);
+		registerForUpdate(descrStrat);
 
 		edb = fileEntityFactory.getFile(ExportDescrBuilding.class);
-		registerUpdatedFile(edb);
+		registerForUpdate(edb);
 
 		descrSettlementMechanics = getFileRegisterForUpdated(DescrSettlementMechanics.class);
 
 		exportDescrGuilds = fileEntityFactory.getFile(ExportDescrGuilds.class);
-		registerUpdatedFile(exportDescrGuilds);
+		registerForUpdate(exportDescrGuilds);
 
 		// ### Disable ALL MERCHANTS ###
 		DisableAllMerchants_LowerGuildReqs();
@@ -97,15 +97,15 @@ public class MerchantsRemovedFtr extends Feature {
 
 		// ## Building Definitions - remove all merchants production capabilities ##
 		//         agent merchant  0  requires factions { northern_european, }
-		edb.getLines().removeAllRegexLines("^\\s*agent\\s+merchant\\s");
+		//edb.getLines().removeAllRegexLines("^\\s*agent\\s+merchant\\s");
 		//         agent_limit merchant 1
-		edb.getLines().removeAllRegexLines("^\\s*agent_limit\\s+merchant\\s+");
+		//edb.getLines().removeAllRegexLines("^\\s*agent_limit\\s+merchant\\s+");
 
 		// ## Lower requirement for Merchant Guild by 4 times (no bonuses from merchants on resources) ##
-		int merchantGuildLine = exportDescrGuilds.FindFirstExactLine("Guild merchants_guild");
-		if(merchantGuildLine < 0) throw new PatcherLibBaseEx("No Guild merchants_guild marker");
+		//int merchantGuildLine = exportDescrGuilds.FindFirstExactLine("Guild merchants_guild");
+		//if(merchantGuildLine < 0) throw new PatcherLibBaseEx("No Guild merchants_guild marker");
 		// ORG : levels 100 250 400
-		exportDescrGuilds.ReplaceLine(merchantGuildLine+2, " levels " + merchantGuildLevelsStr);
+		//exportDescrGuilds.ReplaceLine(merchantGuildLine+2, " levels " + merchantGuildLevelsStr);
 	}
 
 	@Deprecated()

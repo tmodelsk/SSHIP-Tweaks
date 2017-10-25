@@ -31,13 +31,13 @@ public class RealFogAndAgents extends Feature {
 	public void executeUpdates() throws Exception {
 
 		_ExportDescrCharacterTraits = fileEntityFactory.getFile(ExportDescrCharacterTraits.class);
-		registerUpdatedFile(_ExportDescrCharacterTraits);
+		registerForUpdate(_ExportDescrCharacterTraits);
 
 		_DescrCharacter = fileEntityFactory.getFile(DescrCharacter.class);
-		registerUpdatedFile(_DescrCharacter);
+		registerForUpdate(_DescrCharacter);
 
 		_DescrCultures = fileEntityFactory.getFile(DescrCultures.class);
-		registerUpdatedFile(_DescrCultures);
+		registerForUpdate(_DescrCultures);
 
 		_ExportDescrCharacterTraits.insertNewAttribute("NaturalSpySkill","Quietly_Observant","   Effect LineOfSight -3");	// -5 " optimal : big fog
 		_ExportDescrCharacterTraits.insertNewAttribute("NaturalSpySkill","Spying_Talent","   Effect LineOfSight -3");

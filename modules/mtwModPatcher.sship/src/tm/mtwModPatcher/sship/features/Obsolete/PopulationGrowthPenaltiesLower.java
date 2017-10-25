@@ -20,7 +20,7 @@ public class PopulationGrowthPenaltiesLower  extends Feature{
 	public void executeUpdates() throws Exception {
 
 		edb = fileEntityFactory.getFile(ExportDescrBuilding.class);
-		registerUpdatedFile(edb);
+		registerForUpdate(edb);
 
 		// ### City Barracks ###
 //		exportDescrBuilding.addPopulationGrowthBonus("barracks", "town_guard", "city", 1);				// -1

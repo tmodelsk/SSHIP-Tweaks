@@ -23,9 +23,9 @@ import java.util.UUID;
 	public void executeUpdates() throws Exception {
 
 		_ExportDescrBuilding = fileEntityFactory.getFile(ExportDescrBuilding.class);
-		registerUpdatedFile(_ExportDescrBuilding);
+		registerForUpdate(_ExportDescrBuilding);
 		_ExportDescrUnit = fileEntityFactory.getFile(ExportDescrUnitTyped.class);
-		registerUpdatedFile(_ExportDescrUnit);
+		registerForUpdate(_ExportDescrUnit);
 
 		_ExportDescrUnit.setAttributeForAllUnits("free_upkeep_unit");
 

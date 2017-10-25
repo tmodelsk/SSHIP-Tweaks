@@ -31,13 +31,13 @@ public class FortsConstructionAllowedFtr extends Feature {
 		_DescrCampaignDb.setAttribute("/root/misc/fort_devastation_distance", "uint", 0);
 		_DescrCampaignDb.setAttribute("/root/misc/fort_devastation_modifier", "float", 0.0);
 
-		registerUpdatedFile(_DescrCampaignDb);
+		registerForUpdate(_DescrCampaignDb);
 
 
 		// ## Boost fort cost ##
 		_DescrCultures = fileEntityFactory.getFile(DescrCultures.class);
 		_DescrCultures.getLines().updateAllRegexLines("^\\s*fort_cost\\s+\\d+", "fort_cost\t\t\t6000");
-		registerUpdatedFile(_DescrCultures);
+		registerForUpdate(_DescrCultures);
 	}
 
 	protected DescrCampaignDb _DescrCampaignDb;
