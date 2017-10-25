@@ -8,15 +8,15 @@ import tm.common.collections.ListUnique;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.PatcherNotSupportedEx;
-import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
-import tm.mtwModPatcher.lib.common.core.features.params.ParamIdDouble;
-import tm.mtwModPatcher.lib.common.core.features.params.ParamIdInteger;
-import tm.mtwModPatcher.lib.common.core.features.params.ParamIdString;
+import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
+import tm.mtwModPatcher.lib.common.core.features.params.*;
 import tm.mtwModPatcher.lib.data._root.DescrSettlementMechanics;
 import tm.mtwModPatcher.lib.data._root.ExportDescrGuilds;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingLevel;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.SettlType;
+import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrStratSectioned;
+import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
 import tm.mtwModPatcher.sship.features.agentsCharacters.MerchantsRemovedFtr;
 import tm.mtwModPatcher.sship.lib.Buildings;
 
@@ -24,24 +24,20 @@ import javax.xml.xpath.XPathExpressionException;
 import java.util.*;
 import java.util.regex.Pattern;
 
-/**
- * Created by tomek on 15.10.2017.
- */
+/** Created by tomek on 15.10.2017. */
 public class MerchantsNerfed extends Feature {
 
 	@Override
 	public void setParamsCustomValues() {
-		tradeMulti = 1.4;	// 1.85
+		tradeMulti = 1.3;	// 1.85
 		miningMulti = 2.0;
-		merchantGuildLevelsStr = "30 60 120";
+		merchantGuildLevelsStr = "35 60 120";
+		removeStartingMerchants = false;
 		buildings = new BuildingLimits();
-	}
 
-	public int getLimitValue(String parName) {
-		return buildings.getLimitValue(parName);
-	}
-	public void setLimitValue(String parName, int limit) {
-		buildings.setLimitValue(parName, limit);
+		if(ConfigurationSettings.isDevEnvironment()) {
+			removeStartingMerchants = true;
+		}
 	}
 
 	@Override
@@ -49,15 +45,26 @@ public class MerchantsNerfed extends Feature {
 		edb = getFileRegisterForUpdated(ExportDescrBuilding.class);
 		exportDescrGuilds = getFileRegisterForUpdated(ExportDescrGuilds.class);
 		descrSettlementMechanics = getFileRegisterForUpdated(DescrSettlementMechanics.class);
+		descrStrat = getFile(DescrStratSectioned.class);
 
-		removeLimitUpdates();
+		removeBuildingMerchantCapabilities();
 
 		addMerchantLimits();
 		updateSettlementEconomyParams();
 		updateGuildRequirements();
+
+		if(removeStartingMerchants) removeStartingMerchants();
 	}
 
 	private void addMerchantLimits() {
+		// ## Merchants can be produced only on city/castle walls buildings
+		val walls = new ArrayList<BuildingLevel>();
+		Buildings.WallsCityLevels.forEach( l -> walls.add(new BuildingLevel(Buildings.WallsCity.Name, l, SettlType.City)));
+		Buildings.WallsCastleLevels.forEach( l -> walls.add(new BuildingLevel(Buildings.WallsCastle.Name, l, SettlType.Castle)));
+		for (val wallLevel: walls)
+			ensureAgentReruitmentExists(wallLevel, null);
+
+
 		val limitParams = buildings.getBuildingsParams();
 
 		for (val paramDef : limitParams) {
@@ -66,7 +73,7 @@ public class MerchantsNerfed extends Feature {
 			if(bl.Limit > 0) {
 				val buildingLevels = resolveBuidlingNameLevels(bl);
 				for (val bLevel: buildingLevels) {
-					ensureAgentReruitmentExists(bLevel, bl.Requires);
+					//ensureAgentReruitmentExists(bLevel, bl.Requires);
 
 					String limitLine = "agent_limit merchant " + bl.Limit;
 					if(bl.Requires != null && !bl.Requires.isEmpty()) limitLine += " requires " + bl.Requires;
@@ -133,18 +140,49 @@ public class MerchantsNerfed extends Feature {
 		exportDescrGuilds.ReplaceLine(merchantGuildLine+2, " levels " + merchantGuildLevelsStr);
 	}
 
-	private void removeLimitUpdates() {
+	private void removeBuildingMerchantCapabilities() {
+		//         agent_limit merchant 1
 		edb.getLines().removeAllRegexLines("^\\s*agent_limit\\s+merchant\\s+");
+
+		// ## Remove all merchants production capabilities: agent merchant  0  requires ....
+		edb.getLines().removeAllRegexLines("^\\s*agent\\s+merchant\\s");
+	}
+
+	private void removeStartingMerchants() {
+
+		registerForUpdate(descrStrat);
+
+		LinesProcessor descrStratChars = descrStrat.Factions.getContent().getLines();
+		int index = 0, lastLine=0;
+
+		// ## Disable all starting merchant agentsCharacters - Campaing starting data
+		while(index >= 0) {
+			// Merchant add ex :
+			// character	Panelo Zorzi, merchant, male, age 30, x 239, y 113
+			index = descrStratChars.findFirstRegexLine("^character\\s.+,\\s*merchant\\s*,.+age\\s+", lastLine);
+
+			if(index >= 0) {
+				lastLine = index+2;
+
+				descrStratChars.commentLine(index);
+				descrStratChars.commentLine(index+1);
+			}
+		}
 	}
 
 	// ## Parameters ##
-	@Getter @Setter
-	private double tradeMulti;
-	@Getter @Setter
-	private double miningMulti;
-	@Getter @Setter
-	private String merchantGuildLevelsStr;
+	@Getter @Setter private double tradeMulti;
+	@Getter @Setter private double miningMulti;
+	@Getter @Setter private String merchantGuildLevelsStr;
+	@Getter @Setter private boolean removeStartingMerchants;
 	private BuildingLimits buildings;
+
+	public int getLimitValue(String parName) {
+		return buildings.getLimitValue(parName);
+	}
+	public void setLimitValue(String parName, int limit) {
+		buildings.setLimitValue(parName, limit);
+	}
 
 	@Override
 	public ListUnique<ParamId> defineParamsIds() {
@@ -159,6 +197,9 @@ public class MerchantsNerfed extends Feature {
 		parIds.add(new ParamIdString("MerchantGuildLevels", "Merchant Guild Levels",
 				f -> ((MerchantsNerfed)f).getMerchantGuildLevelsStr(),
 				(f, value) -> ((MerchantsNerfed)f).setMerchantGuildLevelsStr(value) ));
+
+		parIds.add(new ParamIdBoolean("RemoveStartingMerchants", "Remove Starting Merchants",
+				f -> ((MerchantsNerfed)f).isRemoveStartingMerchants(), (f, value) -> ((MerchantsNerfed)f).setRemoveStartingMerchants(value) ));
 
 		// ## Define buildings params
 		val buildingsPars = buildings.getBuildingsParams();
@@ -176,7 +217,7 @@ public class MerchantsNerfed extends Feature {
 	private ExportDescrBuilding edb;
 	private DescrSettlementMechanics descrSettlementMechanics;
 	private ExportDescrGuilds exportDescrGuilds;
-
+	private DescrStratSectioned descrStrat;
 
 	@Override
 	public UUID getId() {

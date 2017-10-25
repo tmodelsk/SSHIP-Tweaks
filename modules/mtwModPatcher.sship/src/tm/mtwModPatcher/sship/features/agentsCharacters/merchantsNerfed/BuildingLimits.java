@@ -5,6 +5,7 @@ import tm.common.Ctm;
 import tm.common.Tuple2;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.SettlType;
+import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
 import tm.mtwModPatcher.sship.lib.Buildings;
 
 import java.util.ArrayList;
@@ -22,20 +23,32 @@ public class BuildingLimits {
 	private void initlizeBuildingsLimits() {
 		buildingsLimits = new LinkedHashMap<>();
 
-		val b = buildingsLimits;
+		int limit;
+		val tradeFactionsReq = "factions { pisa, venice, russia, }";
+		val capitalHrReq = "hidden_resource capital";
+		String requirments;
 
-		add("capital", "Capital", BuildingType.Walls, "hidden_resource capital", 1);
-		add("capitalTradeRepublics", "Capital & Trade Republics", BuildingType.Walls, "factions { pisa, venice, russia,  } and hidden_resource capital", 1);
+		add("capital", "Capital", BuildingType.Walls, Ctm.msgFormat("not {0} and {1}", tradeFactionsReq , capitalHrReq), 1);
+		add("capitalTradeRepublics", "Capital & Trade Republics", BuildingType.Walls, Ctm.msgFormat("{0} and {1}", tradeFactionsReq, capitalHrReq), 2);
 
-		add("merchantGuildSmall", "Merchant Guild Small", Buildings.MerchantsGuild, Buildings.MerchantsGuildLevels.get(0), SettlType.City, 1);
-		add("merchantGuildMedium", "Merchant Guild Medium", Buildings.MerchantsGuild, Buildings.MerchantsGuildLevels.get(1), SettlType.City, 1);
-		add("merchantGuildGrand", "Merchant Guild Grand", Buildings.MerchantsGuild, Buildings.MerchantsGuildLevels.get(2), SettlType.City, 1);
+		limit = ConfigurationSettings.isDevEnvironment() ? 1 : 1;
+		requirments = Ctm.msgFormat("not "+capitalHrReq);
+		add("merchantGuildSmall", "Merchant Guild Small", Buildings.MerchantsGuild, Buildings.MerchantsGuildLevels.get(0), SettlType.City, requirments, limit);
+		add("merchantGuildMedium", "Merchant Guild Medium", Buildings.MerchantsGuild, Buildings.MerchantsGuildLevels.get(1), SettlType.City, requirments, 1 + limit);
+		add("merchantGuildGrand", "Merchant Guild Grand", Buildings.MerchantsGuild, Buildings.MerchantsGuildLevels.get(2), SettlType.City, requirments,1 + limit);
 
-		add("explorersGuildSmall", "Explorers Guild Small", Buildings.ExplorersGuild, Buildings.MerchantsGuildLevels.get(0), SettlType.City, 0);
-		add("explorersGuildMedium", "Explorers Guild Medium", Buildings.ExplorersGuild, Buildings.MerchantsGuildLevels.get(1), SettlType.City, 0);
-		add("explorersGuildGrand", "Explorers Guild Grand", Buildings.ExplorersGuild, Buildings.MerchantsGuildLevels.get(2), SettlType.City, 0);
+		requirments = Ctm.msgFormat(capitalHrReq);
+		add("merchantGuildSmallCapital", "Merchant Guild Small & Capital", Buildings.MerchantsGuild, Buildings.MerchantsGuildLevels.get(0), SettlType.City, requirments, limit+1);
+		add("merchantGuildMediumCapital", "Merchant Guild Medium & Capital", Buildings.MerchantsGuild, Buildings.MerchantsGuildLevels.get(1), SettlType.City, requirments, 1+limit+1);
+		add("merchantGuildGrandCapital", "Merchant Guild Grand 7 Capital", Buildings.MerchantsGuild, Buildings.MerchantsGuildLevels.get(2), SettlType.City, requirments, 1+limit+1);
 
-		add("slaveTradingCenter", "Slave Trading Center", "slavemarket", "slave_trading_center", SettlType.City, 0);
+		add("explorersGuildSmall", "Explorers Guild Small", Buildings.ExplorersGuild, Buildings.ExplorersLevels.get(0), SettlType.City, 0);
+		limit = ConfigurationSettings.isDevEnvironment() ? 0 : 1;
+		add("explorersGuildMedium", "Explorers Guild Medium", Buildings.ExplorersGuild, Buildings.ExplorersLevels.get(1), SettlType.City, limit);
+		add("explorersGuildGrand", "Explorers Guild Grand", Buildings.ExplorersGuild, Buildings.ExplorersLevels.get(2), SettlType.City, limit);
+
+		limit = ConfigurationSettings.isDevEnvironment() ? 0 : 1;
+		add("slaveTradingCenter", "Slave Trading Center", "slavemarket", "slave_trading_center", SettlType.City, limit);
 		add("merchantVault", "Merchant Vault", "bank", "merchant_vault", SettlType.City, 1);
 	}
 
@@ -66,6 +79,11 @@ public class BuildingLimits {
 		return result;
 	}
 
+	private void add(String parName, String displayName, String building, String level, SettlType settlType, String requires, int limit) {
+		val bl = new BuildingLimit(displayName, building, level, settlType, requires, limit);
+
+		add(parName, bl);
+	}
 	private void add(String parName, String displayName, String building, String level, SettlType settlType, int limit) {
 		val bl = new BuildingLimit(displayName, building, level, settlType, limit);
 

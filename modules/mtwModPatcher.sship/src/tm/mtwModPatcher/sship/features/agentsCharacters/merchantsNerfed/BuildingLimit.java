@@ -49,4 +49,12 @@ public class BuildingLimit {
 		SettlType = settlType;
 		Limit = limit;
 	}
+	public BuildingLimit(String displayName, String building, String level, SettlType settlType, String requires, int limit) {
+		DisplayName = displayName;
+		Building = building;
+		Level = level;
+		SettlType = settlType;
+		Requires = requires;
+		Limit = limit;
+	}
 }
