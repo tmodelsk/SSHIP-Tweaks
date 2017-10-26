@@ -19,6 +19,7 @@ import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrStratSectioned;
 import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
 import tm.mtwModPatcher.sship.features.agentsCharacters.MerchantsRemovedFtr;
 import tm.mtwModPatcher.sship.lib.Buildings;
+import tm.mtwModPatcher.sship.lib.HiddenResources;
 
 import javax.xml.xpath.XPathExpressionException;
 import java.util.*;
@@ -57,13 +58,18 @@ public class MerchantsNerfed extends Feature {
 	}
 
 	private void addMerchantLimits() {
-		// ## Merchants can be produced only on city/castle walls buildings
+		// ## Merchants can be produced only on city/castle walls / markets buildings
 		val walls = new ArrayList<BuildingLevel>();
 		Buildings.WallsCityLevels.forEach( l -> walls.add(new BuildingLevel(Buildings.WallsCity.Name, l, SettlType.City)));
 		Buildings.WallsCastleLevels.forEach( l -> walls.add(new BuildingLevel(Buildings.WallsCastle.Name, l, SettlType.Castle)));
 		for (val wallLevel: walls)
-			ensureAgentReruitmentExists(wallLevel, null);
+			ensureAgentReruitmentExists(wallLevel, HiddenResources.HiddenResource + HiddenResources.Capital);
 
+		val markets = new ArrayList<BuildingLevel>();
+		Buildings.MarketCityLevels.forEach( m -> markets.add(new BuildingLevel(Buildings.MarketCity, m , SettlType.City)));
+		Buildings.MarketCastleLevels.forEach( m -> markets.add(new BuildingLevel(Buildings.MarketCastle, m , SettlType.Castle)));
+		for (val marketLevel: markets)
+			ensureAgentReruitmentExists(marketLevel, null);
 
 		val limitParams = buildings.getBuildingsParams();
 
@@ -89,11 +95,7 @@ public class MerchantsNerfed extends Feature {
 		val index = edb.getLines().findFirstRegexLine(regex, range);
 		if(index < 0) {
 			// we need to insert
-			val lines = Arrays.asList("agent merchant  0  requires factions { northern_european, }",
-					"agent merchant  0  requires factions { middle_eastern, }",
-					"agent merchant  0  requires factions { eastern_european, }",
-					"agent merchant  0  requires factions { greek, }",
-					"        agent merchant  0  requires factions { southern_european, }");
+			val lines = Arrays.asList("agent merchant  0  requires factions { northern_european, middle_eastern, eastern_european, greek, southern_european, }");
 
 			if(require == null) require = "";
 			else require = " and " + require;

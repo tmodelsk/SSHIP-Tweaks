@@ -6,5 +6,8 @@ package tm.mtwModPatcher.sship.lib;
 public class HiddenResources {
 
 	public static final String River = "river";
+	public static final String Capital = "capital";
+
+	public final static String HiddenResource = "hidden_resource ";
 
 }

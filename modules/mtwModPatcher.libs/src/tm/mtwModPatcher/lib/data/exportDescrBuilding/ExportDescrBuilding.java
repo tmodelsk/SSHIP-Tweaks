@@ -499,4 +499,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 	public final static String TradeBonus = "trade_base_income_bonus bonus ";
 	public final static String IncomeBonus = "income_bonus bonus ";
 	public final static String LawBonus = "law_bonus bonus ";
+
+	public final static String HiddenResource = "hidden_resource ";
+
 }
