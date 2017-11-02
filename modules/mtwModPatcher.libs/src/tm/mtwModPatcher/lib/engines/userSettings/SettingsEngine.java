@@ -70,10 +70,14 @@ public class SettingsEngine {
 	}
 
 	public UserSettings loadSettings(String profileName, FeatureList featureList) throws Exception {
+
+		consoleLogger.writeLine("SettingsEngine: Load settings started ...");
+
 		settingsRepository.setRootPath(Ctm.getWorkingDirectory());
 		val userSettings =  settingsRepository.loadSettings(profileName);
 
 		if(userSettings != null) {
+			consoleLogger.writeLine("SettingsEngine: Loading stored settings from version " + userSettings.getVersion());
 			if(userSettings.getFeatures() != null) {
 				for (val fs : userSettings.getFeatures()) {
 					val feature = featureList.get(fs.getId());
@@ -104,7 +108,7 @@ public class SettingsEngine {
 			}
 		}
 
-
+		consoleLogger.writeLine("SettingsEngine: Load settings done.");
 		return userSettings;
 	}
 
