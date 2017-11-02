@@ -53,7 +53,7 @@ public class GarrisonOnSiegeRaising extends Feature {
 		minimumLoyaltyLevel = 1;
 		createUnitsLogging = true;
 		garrisonSize = GarrisonSize.SMALL;
-		version = "1.20";
+		version = "1.03";
 	}
 
 	@Override

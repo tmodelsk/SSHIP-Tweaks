@@ -3,18 +3,22 @@ package tm.mtwModPatcher.sship.features.armyUnits;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.val;
+import tm.common.Ctm;
 import tm.common.collections.ArrayUniqueList;
 import tm.common.collections.ListUnique;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdBoolean;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdDouble;
 import tm.mtwModPatcher.lib.data._root.BattleConfig;
 import tm.mtwModPatcher.lib.data.aiSets.*;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
+import tm.mtwModPatcher.lib.data.exportDescrUnit.MountEffect;
 
 import javax.xml.xpath.XPathExpressionException;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 /**
  * Longer Battles - killing hit ratio is reduced
@@ -22,15 +26,13 @@ import java.util.UUID;
 public class LongerBattles extends Feature {
 
 	// zmiany : power_charge attribute dla Cavalry heavy ? / Knights / Westers Knights ???
-	// 			move_speed_mod    1.5 (wszystkie cav 1.5 ???)
-
 	@Override
 	public void setParamsCustomValues() {
 		meleeHitRate = 1.0;                        // 0.5
 		missileCavalryAccuracy = 1.75;            // org 1.5
-		chargeMultiplier = 1.1;                    // 2.0
+		chargeMultiplier = 1.5;	// 1.1;                    // 2.0
 		powerfulChargeForHeavyInfantry = false;    // true
-		powerfulChargeForCavalry = false;        // true
+		powerfulChargeForCavalry = true; //false;        // true
 	}
 
 	@Override
@@ -51,18 +53,33 @@ public class LongerBattles extends Feature {
 		updateBattleConfig(battleConfigSet4, 4);
 		updateBattleConfig(battleConfigSet5, 5);
 
-		val allUnits = edu.getUnits(); //_ExportDescrUnit.getUnits().stream().filter(u -> u.isCategoryCavalry()).collect(Collectors.toList());
+		val allUnits = edu.getUnits().stream()
+				.filter( u -> !u.isCategorySiege()).collect(Collectors.toList());
 
 		for (val unit : allUnits) {
 
+
 			// ### Updating Charge ###
 			unit.StatPri.ChargeBonus = (int) (unit.StatPri.ChargeBonus * chargeMultiplier);
+			unit.StatSec.ChargeBonus = (int) (unit.StatSec.ChargeBonus * chargeMultiplier);
+
+			int chargeDamageNew = unit.StatPri.Damage + unit.StatPri.ChargeBonus;
+			if( chargeDamageNew >= 61)
+				throw new PatcherLibBaseEx(Ctm.msgFormat("Unit '{0}' pri damage + charge = {1} exceeds cap 61!", unit.Name, chargeDamageNew));
+
+			chargeDamageNew = unit.StatSec.Damage + unit.StatSec.ChargeBonus;
+			if( chargeDamageNew >= 61)
+				throw new PatcherLibBaseEx(Ctm.msgFormat("Unit '{0}' sec damage + charge = {1} exceeds cap 61!", unit.Name, chargeDamageNew));
 
 			if (powerfulChargeForHeavyInfantry) {
 				// ### All Heavy Infantry gets powerful_charge attribute
 				if (unit.isCategoryInfantry() && unit.isClassHeavy())
 					unit.addAttribute("powerful_charge");
 			}
+
+//			val antiCavBonus = unit.StatPri.Damage / 4;
+//			if (unit.isCategoryInfantry() && unit.isClassHeavy())
+//				unit.MountEffect.addEffectOffset(MountEffect.HORSE, antiCavBonus);
 
 			if (powerfulChargeForCavalry) {
 				// ### Cavalry : ###

@@ -104,6 +104,15 @@ public abstract class Feature {
 
 		return parameterValues;
 	}
+	public ParamValue getParam(String symbol) {
+		val params = getPars();
+
+		if(params == null) return null;
+		val param = params.stream().filter( p -> p.getParamId().getSymbol().equals(symbol) ).findFirst();
+
+		if(param.isPresent()) return param.get();
+		return null;
+	}
 	private final void initializeParamValues() {
 		val pars = new ArrayUniqueList<ParamValue>();
 		for (val parId : parameterIds) {
@@ -137,14 +146,8 @@ public abstract class Feature {
 		}
 	}
 	public void setParValue(String parSymbol, Object value) {
-		val params = getPars();
-
-		if(params == null) throw new PatcherLibBaseEx(Ctm.msgFormat("No parameters is feature {0}", getName()));
-
-		val pars = params.stream().filter( p -> p.getParamId().getSymbol().equals(parSymbol) ).collect(Collectors.toList());
-		if(pars.size() != 1) throw new PatcherLibBaseEx( Ctm.msgFormat("Expected unique param '{0}' in feature {1}, not {2}", parSymbol, getName(), pars.size()));
-
-		val par = pars.get(0);
+		val par = getParam(parSymbol);
+		if(par == null) throw new PatcherLibBaseEx( Ctm.msgFormat("Expected unique param '{0}' in feature {1} not found", parSymbol, getName()));
 
 		par.setValue(value);
 		setParValue(par);

@@ -36,12 +36,14 @@ public class SsHipFeatures {
 		features = new FeatureList();
 
 		features.add(new SelectHeirScript(inputStreamProvider));
+		features.add(new UnitsBugFixes());
 
 		features.add(new MuslimFactionsBoost());
 		features.add(new CatholicFactionsBoost());
 
 		features.add(new LongerBattles());
 		features.add(new CavalrySpeedBonus());
+		features.add(new CavalryNerfed());
 		features.add(new SnowStormNerfed());
 		features.add(new MercenariesCosts());
 		features.add(new ArchersLevyBoost());
@@ -53,7 +55,6 @@ public class SsHipFeatures {
 		features.add(new VeryHugeUnitSize());
 		features.add(new PeasantGarrisonsFix());
 		features.add(new NonSpearInfantryAttackBoost());
-		features.add(new UnitsBugFixes());
 
 		features.add(new MerchantsNerfed());
 		features.add(new MerchantsRemovedFtr());
@@ -162,11 +163,13 @@ public class SsHipFeatures {
 			features.getEnabled( CrusadeJihadMoreSettl.Id).disable();
 			features.getEnabled( AragonChapterHousesBoost.Id).disable();
 			features.getEnabled( BetterLogging.Id).disable();
+
 		}
 
-		//disableAll();
-		//features.enableFeatureIfExists(RimlandHeartland.Id);
-
+		disableAll();
+		features.enableFeatureIfExists(UnitsBugFixes.Id);
+		features.enableFeatureIfExists(CavalryNerfed.Id);
+		features.enableFeatureIfExists(LongerBattles.Id);
 	}
 	public void disableAll() {
 		for (val ft : features.getFeaturesList()) {

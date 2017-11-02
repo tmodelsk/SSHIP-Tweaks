@@ -21,6 +21,7 @@ public class SoldierTests {
 		assertThat(s.NumberOfMen).isEqualTo(60);
 		assertThat(s.SpecialNumber).isEqualTo(0);
 		assertThat(s.Mass).isEqualTo(1.0);
+		assertThat(s.Unknown).isNull();
 	}
 
 	@Test
@@ -34,6 +35,7 @@ public class SoldierTests {
 		assertThat(s.NumberOfMen).isEqualTo(16);
 		assertThat(s.SpecialNumber).isEqualTo(2);
 		assertThat(s.Mass).isEqualTo(1.0);
+		assertThat(s.Unknown).isNull();
 	}
 
 	@Test
@@ -47,6 +49,35 @@ public class SoldierTests {
 		assertThat(s.NumberOfMen).isEqualTo(40);
 		assertThat(s.SpecialNumber).isEqualTo(0);
 		assertThat(s.Mass).isEqualTo(1.2);
+		assertThat(s.Unknown).isNull();
+	}
+
+	@Test
+	public void parseEduEntry_Advanced3() {
+		val str = "georgian_dismounted_heavy_horse_archers, 50, 0, 1.1";
+
+		val s = Soldier.parseEduEntry(str);
+
+		assertThat(s).isNotNull();
+		assertThat(s.Model).isEqualTo("georgian_dismounted_heavy_horse_archers");
+		assertThat(s.NumberOfMen).isEqualTo(50);
+		assertThat(s.SpecialNumber).isEqualTo(0);
+		assertThat(s.Mass).isEqualTo(1.1);
+		assertThat(s.Unknown).isNull();
+	}
+
+	@Test
+	public void parseEduEntry_Advanced_WithUnknownParam() {
+		val str = "Cossack_Musketeers, 60, 0, 0.75, 0.35";
+
+		val s = Soldier.parseEduEntry(str);
+
+		assertThat(s).isNotNull();
+		assertThat(s.Model).isEqualTo("Cossack_Musketeers");
+		assertThat(s.NumberOfMen).isEqualTo(60);
+		assertThat(s.SpecialNumber).isEqualTo(0);
+		assertThat(s.Mass).isEqualTo(0.75);
+		assertThat(s.Unknown).isEqualTo(", 0.35");
 	}
 
 	@Test

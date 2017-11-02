@@ -8,9 +8,7 @@ import tm.mtwModPatcher.lib.data.exportDescrUnit.UnitDef;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-/**
- * Created by tomek on 24.08.2017.
- */
+/** Created by tomek on 24.08.2017. */
 public class NonSpearInfantryAttackBoost extends Feature {
 	@Override
 	public void setParamsCustomValues() {

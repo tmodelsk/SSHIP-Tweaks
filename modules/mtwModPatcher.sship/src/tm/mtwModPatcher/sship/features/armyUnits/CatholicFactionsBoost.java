@@ -7,7 +7,7 @@ import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.UnitDef;
-import tm.mtwModPatcher.lib.data.exportDescrUnit.UnitStatPriArmor;
+import tm.mtwModPatcher.lib.data.exportDescrUnit.StatPriArmor;
 
 import java.util.List;
 import java.util.UUID;
@@ -46,7 +46,7 @@ public class CatholicFactionsBoost extends Feature {
 				.collect(Collectors.toList());
 		//String orgKnightscsvStr = "", modifiedKnightsCsvStr = "";
 		for(UnitDef unit : knights) {
-			UnitStatPriArmor armors = unit.StatPriArmour;
+			StatPriArmor armors = unit.StatPriArmour;
 			//orgKnightscsvStr += unit.Name+";"+ (armors.Armour + armors.DefenceSkill + armors.Shield)+";"+ armors.Armour + ";"+armors.DefenceSkill+";"+armors.Shield+";"+nl;
 
 			int armor = unit.StatPriArmour.Armour;

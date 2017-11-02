@@ -18,6 +18,8 @@ public class Soldier {
 
 	public double Mass;
 
+	public String Unknown;
+
 	public String toEduString() {
 		String str = "";
 
@@ -25,6 +27,9 @@ public class Soldier {
 		str += NumberOfMen + ", ";
 		str += SpecialNumber + ", ";
 		str += Format.toString(Mass);
+
+		if(Unknown != null)
+			str += Unknown;
 
 		return str;
 	}
@@ -41,9 +46,13 @@ public class Soldier {
 			s.NumberOfMen = Integer.parseInt(m.group(2));
 			s.SpecialNumber = Integer.parseInt(m.group(3));
 			s.Mass = Double.parseDouble(m.group(4));//.replace("." , ","));
+
+			// m.group(5) is inside group(4) !!
+
+			s.Unknown = m.group(6);
 		}
 		else {
-			// sship bugfix, wrong entry soldier          Scots_Pike_Militia, 80, 1.2
+			// ## SSHIP bugfix, wrong entry soldier          Scots_Pike_Militia, 80, 1.2
 			m = eduWrongPattern.matcher(str);
 			if(m.find()) {
 				s = new Soldier();
@@ -62,6 +71,6 @@ public class Soldier {
 		return s;
 	}
 
-	private static final Pattern eduPattern = Pattern.compile("\\s*(\\w+),\\s*(\\d+),\\s*(\\d+),\\s*([+-]?([0-9]*[.])?[0-9]+)");
+	private static final Pattern eduPattern = Pattern.compile("\\s*(\\w+),\\s*(\\d+),\\s*(\\d+),\\s*([+-]?([0-9]*[.])?[0-9]+)(\\s*,.*)*");
 	private static final Pattern eduWrongPattern = Pattern.compile("\\s*(\\w+),\\s*(\\d+),\\s*([+-]?([0-9]*[.])?[0-9]+)");
 }

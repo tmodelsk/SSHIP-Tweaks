@@ -297,7 +297,7 @@ public class PatcherApp {
 		featuresList = ssHipFeatures.configureFeatures();
 		ssHipFeatures.enableDefaults();
 
-		val settingsEngine = new SettingsEngine(new SettingsRepository());
+		val settingsEngine = new SettingsEngine(new SettingsRepository(), consoleLogger);
 
 		patcherEngine = new PatcherEngine(consoleLogger, fileEntityFactory, settingsEngine);
 		patcherEngine.OverrideRootPath = ConfigurationSettings.OverrideRootPath();			// OverrideRootPath;

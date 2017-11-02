@@ -1,15 +1,13 @@
 package tm.mtwModPatcher.lib.managers;
 
 import lombok.val;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import tm.common.Tuple2;
-import tm.common.collections.ArrayUniqueList;
 import tm.common.collections.CollectionUtils;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.PatcherNotSupportedEx;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
-import tm.mtwModPatcher.lib.data.exportDescrUnit.UnitStatPriArmor;
+import tm.mtwModPatcher.lib.data.exportDescrUnit.StatPriArmor;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.UnitRecuitmentInfo;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.UnitDef;
@@ -71,7 +69,7 @@ public class UnitsManager {
 					//unit.StatPriArmour.Armour += armorModifier;
 					modifiedNames.add(unit.Name);
 
-					UnitStatPriArmor armor = unit.StatPriArmour;
+					StatPriArmor armor = unit.StatPriArmour;
 					csvStr += unit.Name + ";" + (armor.Armour + armor.DefenceSkill + armor.Shield) + ";" + armor.Armour + ";" + armor.DefenceSkill + ";" + armor.Shield + ";" + nl;
 
 				}

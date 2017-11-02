@@ -3,7 +3,7 @@ package tm.mtwModPatcher.lib.data.exportDescrUnit;
 /**
  * Created by Tomek on 2016-07-16.
  */
-public class UnitStatPri {
+public class WeaponStat {
 
 	// stat_pri         18, 0, no, 0, 0, melee, melee_simple, slashing, none, 0, 1
 
@@ -18,9 +18,12 @@ public class UnitStatPri {
 	public String TechType;
 	public String DamageType;
 	public String SoundType;
+	public String SoundFireType;
 
 	public int AttacksDelay;
 	public double WeaponPreference;
+
+	public String Comments = null;
 
 	public boolean IsParsed = false;
 	public String SourceStr;

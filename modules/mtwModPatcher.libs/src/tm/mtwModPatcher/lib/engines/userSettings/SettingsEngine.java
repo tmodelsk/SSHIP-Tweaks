@@ -6,6 +6,7 @@ import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.FeatureList;
 import tm.mtwModPatcher.lib.common.core.features.PatcherNotSupportedEx;
 import tm.mtwModPatcher.lib.common.core.features.PatcherUnexpectedEx;
+import tm.mtwModPatcher.lib.engines.ConsoleLogger;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -89,9 +90,13 @@ public class SettingsEngine {
 								else if(fp.getValueDouble() != null)	value = fp.getValueDouble();
 								else if(fp.getValueInteger() != null)	value = fp.getValueInteger();
 								else if(fp.getValueString() != null)	value = fp.getValueString();
-								else throw new PatcherUnexpectedEx("Persisted param value not found!");
+								else throw new PatcherUnexpectedEx("Persisted param value type not found!");
 
-								feature.setParValue(symbol, value);
+								if( feature.getParam(symbol) != null)
+									feature.setParValue(symbol, value);
+								else {
+									consoleLogger.writeLine(Ctm.msgFormat("WARNING: Loading settings: Feature {0} param {1} from stored settings not found", feature.getName(), symbol));
+								}
 							}
 						}
 					}
@@ -104,9 +109,11 @@ public class SettingsEngine {
 	}
 
 	private SettingsRepository settingsRepository;
+	private ConsoleLogger consoleLogger;
 
 
-	public SettingsEngine(SettingsRepository settingsRepository) {
+	public SettingsEngine(SettingsRepository settingsRepository, ConsoleLogger consoleLogger) {
 		this.settingsRepository = settingsRepository;
+		this.consoleLogger = consoleLogger;
 	}
 }

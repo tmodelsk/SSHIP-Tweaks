@@ -1,7 +1,16 @@
 package tm.mtwModPatcher.lib.data.common;
 
+import lombok.val;
+
 /**  */
 public class Format {
+
+	public static String toString(Double d, int minPrecision) {
+		val minimumPrecStr = String.format("%."+minPrecision+"f", d).replace(',', '.');
+		val minimumStr = toString(d);
+
+		return minimumPrecStr.length() > minimumStr.length() ? minimumPrecStr : minimumStr;
+	}
 
 	public static String toString(Double d) {
 

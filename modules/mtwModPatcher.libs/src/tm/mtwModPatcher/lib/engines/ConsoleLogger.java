@@ -2,9 +2,7 @@ package tm.mtwModPatcher.lib.engines;
 
 import lombok.Getter;
 
-/**
- * Created by tomek on 10.04.2017.
- */
+/** Created by tomek on 10.04.2017.  */
 public class ConsoleLogger {
 
 	public void writeLine(String line) {

@@ -1,5 +1,6 @@
 package tm.mtwModPatcher.lib.data.exportDescrUnit;
 
+import tm.common.Ctm;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 
 /**
@@ -23,7 +24,7 @@ public class UnitDef {
 	public String Officer2;
 	public String Officer3;
 	public String Mount;
-	public String MoutEffect;
+	public MountsEffects MountEffect;
 
 	public String Ship;
 
@@ -34,19 +35,19 @@ public class UnitDef {
 	public String Formation;
 
 	public String StatHealth;
-	public UnitStatPri StatPri;
-	public String StatPriAttr;
-	public UnitStatPri StatSec;
+	public WeaponStat StatPri;
+	public WeaponAttributes StatPriAttr;
+	public WeaponStat StatSec;
 	public String StatSecAttr;
 	public String StatTer;
 	public String StatTerAttr;
 
-	public UnitStatPriArmor StatPriArmour;
+	public StatPriArmor StatPriArmour;
 	public String StatSecArmour;
 
 	public Integer StatHeat;
 	public String StatGround;
-	public UnitStatMental StatMental; //public String StatMental;
+	public tm.mtwModPatcher.lib.data.exportDescrUnit.StatMental StatMental; //public String StatMental;
 
 
 	public String StatChargeDist;
@@ -99,12 +100,7 @@ public class UnitDef {
 	}
 
 	public void addStatPriAttribute(String newAttribute) {
-		if( StatPriAttr != null ) {
-			if(!StatPriAttr.isEmpty()) {
-				StatPriAttr += ", " + newAttribute;
-			} else StatPriAttr = newAttribute;
-		}
-		else StatPriAttr = newAttribute;
+		StatPriAttr.add(newAttribute);
 	}
 
 	public void addOwnership(String factionName) throws PatcherLibBaseEx {
@@ -143,16 +139,33 @@ public class UnitDef {
 	public boolean isCategoryCavalry() {
 		return Category.equals("cavalry");
 	}
+	public boolean isCategorySiege() {
+		return Category.equals("siege");
+	}
 
 	public boolean isClassHeavy() {
 		return Class.equals("heavy");
+	}
+	public boolean isClassLight() {
+		return Class.equals("light");
+	}
+	public boolean isClassSpearmen() {
+		return Class.equals("spearmen");
+	}
+	public boolean isClassSkirmish() {
+		return Class.equals("skirmish");
+	}
+	public boolean isClassMissile() {
+		return Class.equals("missile");
 	}
 
 	@Override
 	public String toString() {
 
-		return Name + " (" + StatPri.Damage + ")";
-
+		if(StatSec != null && StatSec.Damage != 0)
+			return Ctm.msgFormat("{0} (PA:{1} SA:{2} D:{3})",Name , StatPri.Damage, StatSec.Damage, StatPriArmour.defence());
+		else
+			return Ctm.msgFormat("{0} (PA:{1} D:{2})",Name , StatPri.Damage, StatPriArmour.defence());
 	}
 
 	public static final String ATTRIB_FREE_UPKEEP = "free_upkeep_unit";
