@@ -127,7 +127,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 
 		insertIntoBuildingCapabilities(buildingName, levelName, castleOrCity, populationGrowthBonusStr);
 	}
-	// requirementsStr - without requirenemts label
+	/**  requirementsStr - without requirements label */
 	public void addPopulationGrowthBonus(String buildingName, String levelName, String castleOrCity, int populationGrowthBonus, String requirementsStr) throws PatcherLibBaseEx {
 
 		String populationGrowthBonusStr = "\t\t\tpopulation_growth_bonus bonus "+Integer.toString(populationGrowthBonus);
@@ -488,6 +488,16 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		while(index > 0);
 
 		return res;
+	}
+
+	public int countBuildings() {
+		val pattern = Pattern.compile("^\\s*levels\\s+(.*)");
+		int index = 0;
+		int counter = 0;
+
+
+
+		return counter;
 	}
 
 	protected static Pattern unitRecruitmentLinePatters = Pattern.compile("^\\s*recruit_pool\\s+\"([\\w\\s']+)\"\\s+([\\d\\.]+)\\s+([\\d\\.]+)\\s+([\\d\\.]+)\\s+(\\d+)\\s+requires(.+)");

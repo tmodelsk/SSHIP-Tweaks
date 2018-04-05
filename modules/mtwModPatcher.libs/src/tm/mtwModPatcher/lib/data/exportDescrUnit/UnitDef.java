@@ -159,6 +159,9 @@ public class UnitDef {
 		return Class.equals("missile");
 	}
 
+	public static final UnitClass CLASS_HEAVY = new UnitClass("heavy");
+	public static final UnitClass CLASS_LIGHT = new UnitClass("light");
+
 	@Override
 	public String toString() {
 

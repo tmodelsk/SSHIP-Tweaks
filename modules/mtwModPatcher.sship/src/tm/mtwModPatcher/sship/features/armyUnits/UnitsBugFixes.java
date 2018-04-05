@@ -54,6 +54,9 @@ public class UnitsBugFixes extends Feature {
 		christianGuardInf.StatMental = christianGuardCav.StatMental;
 		christianGuardInf.StatMental.Comments = comments;
 
+		// ## Abna Heavy Axemen should be heavy not spearmen ##
+		val abnaAxe = edu.loadUnit("Abna Heavy Axemen").Class = "heavy";
+
 		// ## Spear units that are Light classed
 		val spearsStrange = edu.getUnits().stream()
 				.filter(u -> u.isCategoryInfantry() &&
