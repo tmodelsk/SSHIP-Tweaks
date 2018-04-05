@@ -43,6 +43,9 @@ public abstract class Feature {
 	@Getter
 	private ListUnique<OverrideTask> overrideTasks;
 
+	@Getter
+	private boolean mapRemovalRequirement;
+
 	protected FileEntityFactory fileEntityFactory;
 
 	protected Set<FileEntity> filesUpdated;
@@ -181,6 +184,10 @@ public abstract class Feature {
 	}
 	public void enable() {
 		setEnabled(true);
+	}
+
+	protected void requestForMapRemoval() {
+		mapRemovalRequirement = true;
 	}
 
 	protected  <T extends FileEntity> T getFileRegisterForUpdated(Class<T> fileEntityClz) throws Exception {

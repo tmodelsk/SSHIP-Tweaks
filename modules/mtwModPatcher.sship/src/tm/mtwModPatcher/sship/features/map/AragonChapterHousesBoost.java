@@ -48,12 +48,7 @@ public class AragonChapterHousesBoost extends Feature {
 		setDescriptionShort("Aragon faction has more Chapter Houses available to build it homeland settlements");
 		setDescriptionUrl("http://tmsship.wikidot.com/aragon-chapter-houses-boost");
 
-		boolean isDevMachine=false;
-		if (ConfigurationSettings.isDevEnvironment()) isDevMachine = true;
-		else isDevMachine = false;
-
-		if(!isDevMachine)
-			addOverrideTask(new OverrideDeleteFilesTask("data\\world\\maps\\base\\map.rwm"));
+		requestForMapRemoval();
 	}
 
 	//	Zaragoza :

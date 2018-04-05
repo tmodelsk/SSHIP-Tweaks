@@ -166,10 +166,10 @@ public class SsHipFeatures {
 
 		}
 
-		disableAll();
-		features.enableFeatureIfExists(UnitsBugFixes.Id);
-		features.enableFeatureIfExists(CavalryNerfed.Id);
-		features.enableFeatureIfExists(LongerBattles.Id);
+//		disableAll();
+//		features.enableFeatureIfExists(UnitsBugFixes.Id);
+//		features.enableFeatureIfExists(CavalryNerfed.Id);
+//		features.enableFeatureIfExists(LongerBattles.Id);
 	}
 	public void disableAll() {
 		for (val ft : features.getFeaturesList()) {

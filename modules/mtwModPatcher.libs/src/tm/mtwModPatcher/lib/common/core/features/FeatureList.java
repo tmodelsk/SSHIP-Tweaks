@@ -5,6 +5,7 @@ import tm.common.Tuple2;
 
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /** Container for Features */
 public class FeatureList {
@@ -54,17 +55,25 @@ public class FeatureList {
 
 		if(ft != null) ft.setEnabled(false);
 	}
+	@SuppressWarnings("unused")
 	public void enableFeatureIfExists(UUID id) {
 		val ft = get(id);
 
 		if(ft != null) ft.setEnabled(true);
 	}
 
+	private Stream<Feature> whereEnabled() {
+		return features.stream().filter(f -> f.isEnabled());
+	}
+
 	public List<Feature> getFeaturesList() {
 		return Collections.unmodifiableList(features);
 	}
 	public List<Feature> getFeaturesEnabledList() {
-		return Collections.unmodifiableList(features.stream().filter(f -> f.isEnabled()).collect(Collectors.toList()));
+		return Collections.unmodifiableList(whereEnabled().collect(Collectors.toList()));
+	}
+	public Set<UUID> getIdsSetByEnabledAndMapRemoval() {
+		return whereEnabled().filter( f -> f.isMapRemovalRequirement() ).map(f -> f.getId() ).collect(Collectors.toSet());
 	}
 
 	public Feature get(int index) {
@@ -74,19 +83,15 @@ public class FeatureList {
 	public Feature getEnabled(UUID id) {
 		Optional<Feature> feature = features.stream().filter(f -> f.getId().equals(id) && f.isEnabled()).findFirst();
 
-		if(feature.isPresent()) return feature.get();
-
-		return null;
+		return feature.orElse(null);
 	}
 	public Feature get(UUID id) {
 		Optional<Feature> feature = features.stream().filter(f -> f.getId().equals(id) ).findFirst();
 
-		if(feature.isPresent()) return feature.get();
-
-		return null;
+		return feature.orElse(null);
 	}
 
-	public int Count() {
+	public int count() {
 		if(features != null) return features.size();
 
 		return 0;

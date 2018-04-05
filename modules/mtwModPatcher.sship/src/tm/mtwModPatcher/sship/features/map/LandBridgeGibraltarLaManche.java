@@ -10,9 +10,6 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.UUID;
 
-/**
- * Created by Tomek on 2016-11-11.
- */
 public class LandBridgeGibraltarLaManche extends Feature {
 
 	@Override
@@ -47,8 +44,6 @@ public class LandBridgeGibraltarLaManche extends Feature {
 
 		addOverrideTask(new OverrideCopyTask("GiblartarLaMancheLandBridge"));
 
-		boolean isDevMachine = ConfigurationSettings.isDevEnvironment();
-		if(!isDevMachine)
-			addOverrideTask(new OverrideDeleteFilesTask("data\\world\\maps\\base\\map.rwm"));
+		requestForMapRemoval();
 	}
 }

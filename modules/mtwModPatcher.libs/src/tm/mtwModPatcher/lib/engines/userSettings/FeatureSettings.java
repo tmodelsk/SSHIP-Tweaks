@@ -9,9 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
-/**
- * Created by tomek on 17.10.2017.
- */
 public class FeatureSettings {
 
 	//@Attribute
@@ -32,6 +29,9 @@ public class FeatureSettings {
 
 	@Getter @Setter
 	private boolean Enabled;
+
+	@Getter @Setter
+	private boolean mapRemovalRequirement;
 
 	@Getter
 	private List<FeatureParam> Parameters = null;

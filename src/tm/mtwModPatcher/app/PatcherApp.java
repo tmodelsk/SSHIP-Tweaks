@@ -92,84 +92,86 @@ public class PatcherApp {
 
 			consoleLogger.writeLine("++++++++++++++++++++++++++++++++");
 
-			val conflicts = featuresList.getConflictingFeatures();
-			if(conflicts == null) consoleLogger.writeLine("Features enabled: no conflicts detected.");
-			else {
-				consoleLogger.writeLine(Ctm.msgFormat("Features enabled: found {0} features in conflict! ", conflicts.size()));
-				for(val conflict : conflicts)
-					consoleLogger.writeLine( Ctm.msgFormat("Conflicting features: #1: {0} , #2: {1}",
-							conflict.getItem1().getName(), conflict.getItem2().getName()));
-				consoleLogger.writeLine("Please disable some of the above features to resolve conflict!");
-				consoleLogger.writeLine("Stopped.");
-
-				val conflict = conflicts.get(0);
-				String msg="", nl = System.lineSeparator();
-
-				msg += "Problem: Conflicting features are enabled !" + nl;
-				msg += Ctm.msgFormat("#1: {0}", conflict.getItem1().getName()) +nl;
-				msg += Ctm.msgFormat("#2: {0}", conflict.getItem2().getName()) +nl;
-				msg += "Please disable some of the above features to resolve conflict!";
-				JOptionPane.showMessageDialog(null, msg);
-				return;
-			}
+			if (validateConflictsWithMsgBox()) return;
 
 			buttonsAllSetEnabled(false);
 			mainTabPane.setSelectedIndex(1);	// GoTo console log tab
 
-			val applyWorker = new ApplyFeaturesWorker(patcherEngine, featuresList.getFeaturesList(), consoleLogger);
+			val applyWorker = new ApplyFeaturesWorker(patcherEngine, featuresList, consoleLogger);
 
 			applyWorker.addPropertyChangeListener(evt -> {
 				switch (evt.getPropertyName()) {
 					case "state":
-
 						switch((SwingWorker.StateValue)evt.getNewValue()) {
 							case DONE:
-
-								if(applyWorker.getException() != null) {
-									buttonsAllSetEnabled(true);
-
-									Exception ex = applyWorker.getException();
-									writeExceptionToConsole(ex);
-
-									val featureEx = Ctm.as(FeatureEx.class, ex);
-									if(featureEx != null) {
-										String msg="";
-										msg += "Feature ["+featureEx.getFeatureName()+"] Error !" +nl;
-										msg += featureEx.getMessage() +nl+nl;
-										msg += "You can exclude this feature & try again" +nl;
-										msg += "If you want to report bug, please attach output log";
-
-										JOptionPane.showMessageDialog(mainPanel, msg);
-									}
-									else {
-										JOptionPane.showMessageDialog(mainPanel, "Error : Unhandled exception " + ex.getMessage());
-									}
-
-									consoleLogger.getWriter().scrollToEnd();
-								}
-								else {
-									// ok
-									buttonsAllSetEnabled(true);
-									mainTabPane.setSelectedIndex(0);	// Go back
-
-								}
-
+								onDoneEvent(applyWorker);
 								break;
 						}
-
 						break;
 				}
 			});
 
 			applyWorker.execute();
 
-			//patcherEngine.Patch(featuresList.getFeaturesList());
-
 		} catch (Exception e1) {
 			e1.printStackTrace();
 			consoleLogger.writeLine("Unhandled Error : \n " + e1.toString());
 			JOptionPane.showMessageDialog(null, "Unhandled Error : \n " + e1.toString());
 		}
+	}
+
+	private void onDoneEvent(ApplyFeaturesWorker applyWorker) {
+		if(applyWorker.getException() != null) {
+			buttonsAllSetEnabled(true);
+
+			Exception ex = applyWorker.getException();
+			writeExceptionToConsole(ex);
+
+			val featureEx = Ctm.as(FeatureEx.class, ex);
+			if(featureEx != null) {
+				String msg="";
+				msg += "Feature ["+featureEx.getFeatureName()+"] Error !" +nl;
+				msg += featureEx.getMessage() +nl+nl;
+				msg += "You can exclude this feature & try again" +nl;
+				msg += "If you want to report bug, please attach output log";
+
+				JOptionPane.showMessageDialog(mainPanel, msg);
+			}
+			else {
+				JOptionPane.showMessageDialog(mainPanel, "Error : Unhandled exception " + ex.getMessage());
+			}
+
+			consoleLogger.getWriter().scrollToEnd();
+		}
+		else {
+			// ok
+			buttonsAllSetEnabled(true);
+			mainTabPane.setSelectedIndex(0);	// Go back
+		}
+	}
+
+	private boolean validateConflictsWithMsgBox() {
+		val conflicts = featuresList.getConflictingFeatures();
+		if(conflicts == null) consoleLogger.writeLine("Features enabled: no conflicts detected.");
+		else {
+			consoleLogger.writeLine(Ctm.msgFormat("Features enabled: found {0} features in conflict! ", conflicts.size()));
+			for(val conflict : conflicts)
+				consoleLogger.writeLine( Ctm.msgFormat("Conflicting features: #1: {0} , #2: {1}",
+						conflict.getItem1().getName(), conflict.getItem2().getName()));
+			consoleLogger.writeLine("Please disable some of the above features to resolve conflict!");
+			consoleLogger.writeLine("Stopped.");
+
+			val conflict = conflicts.get(0);
+			String msg="", nl = System.lineSeparator();
+
+			msg += "Problem: Conflicting features are enabled !" + nl;
+			msg += Ctm.msgFormat("#1: {0}", conflict.getItem1().getName()) +nl;
+			msg += Ctm.msgFormat("#2: {0}", conflict.getItem2().getName()) +nl;
+			msg += "Please disable some of the above features to resolve conflict!";
+			JOptionPane.showMessageDialog(null, msg);
+			return true;
+		}
+		return false;
 	}
 
 	private void writeExceptionToConsole(Exception ex) {

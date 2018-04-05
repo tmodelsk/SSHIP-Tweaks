@@ -10,9 +10,6 @@ import tm.mtwModPatcher.sship.features.SsHipFeatures;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-/**
- * Created by tomek on 28.04.2017.
- */
 public class AllFeaturesTest extends FeatureBaseTest {
 
 	@Test

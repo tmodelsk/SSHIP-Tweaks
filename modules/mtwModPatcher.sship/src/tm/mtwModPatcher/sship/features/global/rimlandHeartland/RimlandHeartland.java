@@ -700,9 +700,7 @@ public class RimlandHeartland extends Feature {
 		addCategory("Map");
 		addCategory("Economy");
 
-		if (!ConfigurationSettings.isDevEnvironment())
-			addOverrideTask(new OverrideDeleteFilesTask("data\\world\\maps\\base\\map.rwm"));
-
+		requestForMapRemoval();
 		initializeSeashoreProvinceList();
 		initializeIslandProvinceList();
 	}

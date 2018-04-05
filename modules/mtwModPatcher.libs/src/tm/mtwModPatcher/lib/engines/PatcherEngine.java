@@ -5,20 +5,55 @@ import tm.common.collections.ArrayUniqueList;
 import tm.common.collections.ListUnique;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.FeatureList;
+import tm.mtwModPatcher.lib.common.core.features.OverrideDeleteFilesTask;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.FileEntity;
 import tm.mtwModPatcher.lib.common.core.features.OverrideTask;
 import tm.mtwModPatcher.lib.engines.userSettings.SettingsEngine;
 
 import javax.xml.transform.TransformerException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**  */
 public class PatcherEngine {
+
+	/** Main-Root patching method */
+	public void patch(FeatureList featureFullList, String appVersion) throws Exception {
+		consoleLogger.writeLine("PatcherEngine: Patching process has started ... ");
+		fileEntityFactory.reset();
+
+		restoreCleanBackup();
+
+		// ### Determine Enabled Features to apply ###
+		val featureList = featureFullList.getFeaturesEnabledList();
+		consoleLogger.writeLine("PatcherEngine: Found " + featureList.size() + " features to apply");
+
+		val userSettings = settingsEngine.loadSettings("mySettings");
+		Set<UUID> previousMapRemovalIds = userSettings != null ? userSettings.featureIdsSetByMapRemoval() : null;
+		val actualMapRemovalIds = featureFullList.getIdsSetByEnabledAndMapRemoval();
+
+		List<OverrideTask> additionalOverrideTasks = new ArrayList<>();
+		if( actualMapRemovalIds != null && !actualMapRemovalIds.equals(previousMapRemovalIds))
+			additionalOverrideTasks.add(OverrideDeleteFilesTask.DELETE_MAP_RWM);
+
+		// ## Save user settings ##
+		settingsEngine.saveSettings("mySettings", appVersion, featureFullList);
+
+		try {
+			// ## Execute Overrides ##
+			val overrideTasks = executeOverrides(featureList, additionalOverrideTasks);
+			// ## Execute Features ##
+			executeFeatures(featureList, overrideTasks);
+
+			consoleLogger.writeLine("PatcherEngine: Patching process finished. Selected Features applied.");
+		} catch (Exception ex) {
+			consoleLogger.writeLine("PatcherEngine: Error in overrides or features encountered!");
+			consoleLogger.writeLine("PatcherEngine: Trying to clean up after error - reverting any changes");
+			restoreCleanBackup();
+			throw ex;
+		}
+	}
 
 	private void restoreCleanBackup() throws IOException {
 		consoleLogger.writeLine("PatcherEngine: Restore & clean Backup started ...");
@@ -27,24 +62,27 @@ public class PatcherEngine {
 		consoleLogger.writeLine("PatcherEngine: Restore & clean Backup done");
 	}
 
-	private ListUnique<OverrideTask> executeOverrides(List<Feature> featureList) throws IOException {
+	private Set<OverrideTask> executeOverrides(List<Feature> featureList, List<OverrideTask> additionalTasks) throws IOException {
 		// ## Do Overrides Tasks ##
 		consoleLogger.writeLine("PatcherEngine: Override tasks execution started ...");
 		List<String> overrideRelativePaths = new ArrayList<>();
-		val overrideTasks = new ArrayUniqueList<OverrideTask>();
+		val overrideTasks = new HashSet<OverrideTask>();
 
+		// # Determine all override tasks #
 		for (Feature baseFeature : featureList) {
-			// # perform backup for override tasks
-			if (baseFeature.getOverrideTasks() != null && baseFeature.getOverrideTasks().size() > 0) {
-				for (OverrideTask overrideTask : baseFeature.getOverrideTasks()) {
-					overrideTask.RootPath = OverrideRootPath;
-					overrideTasks.add(overrideTask);
-
-					overrideRelativePaths.addAll(overrideTask.getAffectedFilesRelativePaths());
-				}
-
-			}
+			if (baseFeature.getOverrideTasks() != null)
+				overrideTasks.addAll(baseFeature.getOverrideTasks());
 		}
+		if(additionalTasks != null)
+			overrideTasks.addAll(additionalTasks);
+
+		// ## Initialize them ...
+		for (OverrideTask overrideTask : overrideTasks) {
+			overrideTask.RootPath = OverrideRootPath;
+			overrideTasks.add(overrideTask);
+			overrideRelativePaths.addAll(overrideTask.getAffectedFilesRelativePaths());
+		}
+
 		consoleLogger.writeLine("PatcherEngine: Found " + overrideTasks.size() + " override tasks");
 
 		// ## Backup & Execute Overrides ##
@@ -58,7 +96,7 @@ public class PatcherEngine {
 			OverrideEngine overrideEngine = new OverrideEngine(consoleLogger);
 			overrideEngine.DestinationRootPath = DestinationRootPath;
 			overrideEngine.OverrideRootPath = OverrideRootPath;
-			overrideEngine.overridePaths(overrideTasks);
+			overrideEngine.overridePaths( new ArrayList<>(overrideTasks));
 			consoleLogger.writeLine("PatcherEngine: Override files done");
 		}
 		consoleLogger.writeLine("PatcherEngine: Override tasks execution done");
@@ -66,7 +104,7 @@ public class PatcherEngine {
 		return overrideTasks;
 	}
 
-	private void executeFeatures(List<Feature> featureList, ListUnique<OverrideTask> overrideTasks) throws IOException, TransformerException {
+	private void executeFeatures(List<Feature> featureList, Set<OverrideTask> overrideTasks) throws IOException, TransformerException {
 		// ## Execute Features ##
 		consoleLogger.writeLine("PatcherEngine: Apply Features started ... ");
 		Set<FileEntity> filesToUpdate = new HashSet<>();
@@ -108,42 +146,6 @@ public class PatcherEngine {
 			consoleLogger.writeLine("PatcherEngine: Saved updated file [" + file.getFullPath() + "]");
 		}
 		consoleLogger.writeLine("PatcherEngine: Save updated files done");
-	}
-
-	/** Main-Root patching method */
-	public void Patch(List<Feature> featureFullList, String appVersion) throws Exception {
-		consoleLogger.writeLine("PatcherEngine: Patching process has started ... ");
-		InitializeFeatures(featureFullList);
-		fileEntityFactory.reset();
-
-		restoreCleanBackup();
-
-		// Determine Features to apply
-		List<Feature> featureList = new ArrayList<>();
-		// ### Only Enabled Features ###
-		featureList.addAll(featureFullList.stream().filter(feature -> feature.isEnabled()).collect(Collectors.toList()));
-		consoleLogger.writeLine("PatcherEngine: Found " + featureList.size() + " features to apply");
-
-		// ## Save user settings ##
-		settingsEngine.saveSettings("mySettings", appVersion, featureFullList);
-
-		try {
-			// ## Execute Overrides ##
-			val overrideTasks = executeOverrides(featureList);
-			// ## Execute Features ##
-			executeFeatures(featureList, overrideTasks);
-
-			consoleLogger.writeLine("PatcherEngine: Patching process finished. Selected Features applied.");
-		} catch (Exception ex) {
-			consoleLogger.writeLine("PatcherEngine: Error in overrides or features encountered!");
-			consoleLogger.writeLine("PatcherEngine: Trying to clean up after error - reverting any changes");
-			restoreCleanBackup();
-			throw ex;
-		}
-	}
-
-	protected void InitializeFeatures(List<Feature> featureList) {
-
 	}
 
 	public void initialize(FeatureList featureList) throws Exception {

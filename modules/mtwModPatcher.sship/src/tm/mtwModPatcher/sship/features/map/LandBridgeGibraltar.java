@@ -48,7 +48,6 @@ public class LandBridgeGibraltar extends Feature {
 		boolean isDevMachine=false;
 		isDevMachine = ConfigurationSettings.isDevEnvironment();
 
-		if(!isDevMachine)
-			addOverrideTask(new OverrideDeleteFilesTask("data\\world\\maps\\base\\map.rwm"));
+		requestForMapRemoval();
 	}
 }

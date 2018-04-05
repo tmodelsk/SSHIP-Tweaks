@@ -8,16 +8,14 @@ import tm.mtwModPatcher.lib.common.core.features.PatcherNotSupportedEx;
 import tm.mtwModPatcher.lib.common.core.features.PatcherUnexpectedEx;
 import tm.mtwModPatcher.lib.engines.ConsoleLogger;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * Created by tomek on 17.10.2017.
  */
 public class SettingsEngine {
 
-	public void saveSettings(String profileName, String versionStr, List<Feature> featureList) throws Exception {
+	public void saveSettings(String profileName, String versionStr, FeatureList featureList) throws Exception {
 
 		val us = new UserSettings();
 
@@ -25,7 +23,7 @@ public class SettingsEngine {
 		us.setVersion(versionStr);
 		us.setCreatedDate(LocalDateTime.now().toString());
 
-		for (val feature : featureList) {
+		for (val feature : featureList.getFeaturesList()) {
 			val fs = createFeatureSettings(feature);
 			us.add(fs);
 		}
@@ -41,7 +39,7 @@ public class SettingsEngine {
 		fs.setName(f.getName());
 		fs.setVersion(f.getVersion());
 		fs.setEnabled(f.isEnabled());
-
+		fs.setMapRemovalRequirement(f.isMapRemovalRequirement());
 
 		val pars = f.getPars();
 		for (val par : pars) {
@@ -74,7 +72,7 @@ public class SettingsEngine {
 		consoleLogger.writeLine("SettingsEngine: Load settings started ...");
 
 		settingsRepository.setRootPath(Ctm.getWorkingDirectory());
-		val userSettings =  settingsRepository.loadSettings(profileName);
+		val userSettings = loadSettings(profileName);
 
 		if(userSettings != null) {
 			consoleLogger.writeLine("SettingsEngine: Loading stored settings from version " + userSettings.getVersion());
@@ -104,12 +102,19 @@ public class SettingsEngine {
 							}
 						}
 					}
+					else {
+						consoleLogger.writeLine(Ctm.msgFormat("WARNING: Load settings: Feature.id='{0}' not found on feature list", fs.getId()));
+					}
 				}
 			}
 		}
 
 		consoleLogger.writeLine("SettingsEngine: Load settings done.");
 		return userSettings;
+	}
+
+	public UserSettings loadSettings(String profileName) throws Exception {
+		return settingsRepository.loadSettings(profileName);
 	}
 
 	private SettingsRepository settingsRepository;

@@ -60,9 +60,6 @@ public class CrusadeJihadMoreSettl extends Feature {
 		setDescriptionShort("More settlements available for Crusade and/or Jihad");
 		setDescriptionUrl("http://tmsship.wikidot.com/crusade-jihad-more-settlements");
 
-		boolean isDevMachine = ConfigurationSettings.isDevEnvironment();
-
-		if(!isDevMachine)
-			addOverrideTask(new OverrideDeleteFilesTask("data\\world\\maps\\base\\map.rwm"));
+		requestForMapRemoval();
 	}
 }
