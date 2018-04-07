@@ -10,9 +10,6 @@ import tm.mtwModPatcher.lib.engines.ConsoleLogger;
 
 import java.time.LocalDateTime;
 
-/**
- * Created by tomek on 17.10.2017.
- */
 public class SettingsEngine {
 
 	public void saveSettings(String profileName, String versionStr, FeatureList featureList) throws Exception {

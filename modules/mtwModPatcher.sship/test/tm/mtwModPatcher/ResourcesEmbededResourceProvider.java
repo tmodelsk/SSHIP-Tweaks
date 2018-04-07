@@ -7,7 +7,7 @@ import tm.mtwModPatcher.lib.common.core.features.fileEntities.InputStreamProvide
 import java.io.InputStream;
 
 /** Resources provider from testing embedded resources */
-public class ResourcesResourceProvider implements ResourcesProvider {
+public class ResourcesEmbededResourceProvider implements ResourcesProvider {
 	@Override
 	public String getOverridesPath() {
 		return "test-resources/overrides";
@@ -21,7 +21,7 @@ public class ResourcesResourceProvider implements ResourcesProvider {
 	@Getter
 	private InputStreamProvider inputStreamProvider;
 
-	public ResourcesResourceProvider(InputStreamProvider inputStreamProvider) {
+	public ResourcesEmbededResourceProvider(InputStreamProvider inputStreamProvider) {
 		this.inputStreamProvider = inputStreamProvider;
 	}
 }

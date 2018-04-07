@@ -47,7 +47,7 @@ public class FeatureBaseTest {
 	}
 
 	protected ResourcesProvider createResourcesProvider() {
-		val resourcesProvider = new ResourcesResourceProvider(createInputStreamProvider());
+		val resourcesProvider = new ResourcesEmbededResourceProvider(createInputStreamProvider());
 
 		return resourcesProvider;
 	}

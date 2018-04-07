@@ -41,12 +41,14 @@ import tm.mtwModPatcher.lib.managers.SettlementManager;
 import tm.mtwModPatcher.lib.managers.garrisons.GarrisonManager;
 import tm.mtwModPatcher.lib.managers.garrisons.UnitGarrisonInfo;
 
-import java.net.UnknownHostException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 /** Creates garrison when settlement walls are stormed  */
-public class GarrisonOnSiegeRaising extends Feature {
+public class GarrisonOnAssaultRaising extends Feature {
 	@Override
 	public void setParamsCustomValues() {
 		populationRecoveryTurns = 15;
@@ -77,7 +79,7 @@ public class GarrisonOnSiegeRaising extends Feature {
 
 		// ### Create Monitors for each individual Settlement ###
 		rootRegion.add(createSettlementConditions(settlementInfos));
-		rootRegion.add(createSettlementTroopRisingMonitors(settlementInfos));
+		rootRegion.add(createSettlementsTroopRisingMonitors(settlementInfos));
 
 		// ## Insert all generated monitors ##
 		campaignScript.insertAtEndOfFile(rootRegion.getScriptBlock().getLines());
@@ -118,8 +120,8 @@ public class GarrisonOnSiegeRaising extends Feature {
 				collect(Collectors.toList());
 
 		val crusadeMonitors = createConditionMonitorsForCrusadeJihad(crusadeSettlements, Religion.Catholic,
-				Arrays.asList("Zaragoza"),
-				Arrays.asList("Jerusalem"), new IsCrusadeTarget());
+				Collections.singletonList("Zaragoza"),
+				Collections.singletonList("Jerusalem"), new IsCrusadeTarget());
 		region.add(crusadeMonitors);
 
 		val jihadMonitors = createConditionMonitorsForCrusadeJihad(jihadSettlements, Religion.Islam,
@@ -161,18 +163,18 @@ public class GarrisonOnSiegeRaising extends Feature {
 		return sb;
 	}
 
-	private ScriptBlock createSettlementTroopRisingMonitors(List<SettlementInfo> settlementInfos) throws Exception {
+	private ScriptBlock createSettlementsTroopRisingMonitors(List<SettlementInfo> settlementInfos) throws Exception {
 		RegionBlock region = new RegionBlock(garrisonScriptCommentPrefix + ": Settlements individual monitors");
 
 		for (SettlementInfo settlement : settlementInfos) {
-			val settMonitor = createSettlementMonitor(settlement);
+			val settMonitor = createSettlementTroopRisingMonitor(settlement);
 			if (settMonitor != null) region.add(settMonitor);
 		}
 
 		return region;
 	}
 
-	private ScriptBlock createSettlementMonitor(SettlementInfo settlement) throws Exception {
+	private ScriptBlock createSettlementTroopRisingMonitor(SettlementInfo settlement) throws Exception {
 		String settlRecoveryVar = getSettlementRecoveryVariableName(settlement);
 		val settlConditionVar = getSettlementConditionVariableName(settlement);
 
@@ -207,7 +209,7 @@ public class GarrisonOnSiegeRaising extends Feature {
 
 		UnitGarrisonInfo unit1 = units.get(0);
 
-		val isMedium = garrisonSize == GarrisonSize.MEDIUM ? true : settlement.Resources.contains("capital");
+		val isMedium = garrisonSize == GarrisonSize.MEDIUM || settlement.Resources.contains("capital");
 
 		if (settlement.Level == SettlementLevel.L1_Village) {    // SMALL = 0 , MEDIUM = 1
 
@@ -446,20 +448,20 @@ public class GarrisonOnSiegeRaising extends Feature {
 		val parIds = new ArrayUniqueList<ParamId>();
 
 		parIds.add(new ParamIdInteger("PopulationRecoveryTurns", "Population Recovery Turns",
-				feature -> ((GarrisonOnSiegeRaising) feature).getPopulationRecoveryTurns(),
-				(feature, value) -> ((GarrisonOnSiegeRaising) feature).setPopulationRecoveryTurns(value)));
+				feature -> ((GarrisonOnAssaultRaising) feature).getPopulationRecoveryTurns(),
+				(feature, value) -> ((GarrisonOnAssaultRaising) feature).setPopulationRecoveryTurns(value)));
 
 		parIds.add(new ParamIdInteger("MinimumLoyaltyLevel", "Minimum Loyalty Level",
-				feature -> ((GarrisonOnSiegeRaising) feature).getMinimumLoyaltyLevel(),
-				(feature, value) -> ((GarrisonOnSiegeRaising) feature).setMinimumLoyaltyLevel(value)));
+				feature -> ((GarrisonOnAssaultRaising) feature).getMinimumLoyaltyLevel(),
+				(feature, value) -> ((GarrisonOnAssaultRaising) feature).setMinimumLoyaltyLevel(value)));
 
 		parIds.add(new ParamIdBoolean("CreateUnitsLogging", "Create Units Logging",
-				feature -> ((GarrisonOnSiegeRaising) feature).isCreateUnitsLogging(),
-				(feature, value) -> ((GarrisonOnSiegeRaising) feature).setCreateUnitsLogging(value)));
+				feature -> ((GarrisonOnAssaultRaising) feature).isCreateUnitsLogging(),
+				(feature, value) -> ((GarrisonOnAssaultRaising) feature).setCreateUnitsLogging(value)));
 
 		parIds.add(new ParamIdString("GarrisonSize", "Garrison Size",
-				feature -> ((GarrisonOnSiegeRaising) feature).getGarrisonSize().toString(),
-				(feature, value) -> ((GarrisonOnSiegeRaising) feature).setGarrisonSize(value)));
+				feature -> ((GarrisonOnAssaultRaising) feature).getGarrisonSize().toString(),
+				(feature, value) -> ((GarrisonOnAssaultRaising) feature).setGarrisonSize(value)));
 
 		return parIds;
 	}
@@ -475,7 +477,7 @@ public class GarrisonOnSiegeRaising extends Feature {
 
 	@Getter @Setter private int populationRecoveryTurns = 15;
 	@Getter @Setter private int minimumLoyaltyLevel = 1;
-	@Getter @Setter private boolean createUnitsLogging = true;
+	@Getter @Setter private boolean createUnitsLogging;
 	@Getter private GarrisonSize garrisonSize = GarrisonSize.SMALL;
 	private void setGarrisonSize(String strSize) {
 		strSize = strSize.toUpperCase();
@@ -502,11 +504,11 @@ public class GarrisonOnSiegeRaising extends Feature {
 	}
 	public static UUID Id = UUID.fromString("05fe3b39-0b7a-4c57-bf27-7382a4f582d0");
 
-	public GarrisonOnSiegeRaising(GarrisonManager garrisonManager) throws UnknownHostException {
-		super("Garrison script : raise unit on siege");
+	public GarrisonOnAssaultRaising(GarrisonManager garrisonManager) {
+		super("Garrison script : raise unit on siege assault");
 
 		addCategory("Campaign");
-		setDescriptionShort(Ctm.msgFormat("Garrison script : raise unit on settlement siege v.{0}", version));
+		setDescriptionShort(Ctm.msgFormat("Garrison script : raise unit on settlement siege assault v.{0}", version));
 		setDescriptionUrl("http://tmsship.wikidot.com/garrison-script");
 
 		this.garrisonManager = garrisonManager;

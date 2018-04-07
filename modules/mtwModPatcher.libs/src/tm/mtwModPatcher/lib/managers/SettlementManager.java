@@ -7,17 +7,14 @@ import tm.mtwModPatcher.lib.common.entities.SettlementInfo;
 import tm.mtwModPatcher.lib.data.world.maps.base.DescrRegions;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrStratSectioned;
 
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 /**
  * Combines Settlement Logic from various files
  * */
 public class SettlementManager {
-
-
 	public List<SettlementInfo> getAllSettlements() throws PatcherLibBaseEx {
 
 		List<SettlementInfo> settlements = DescrStrat.getSettlementInfoList();
@@ -68,6 +65,21 @@ public class SettlementManager {
 				res.setY(Integer.parseInt(m.group(2)));
 			} else throw new PatcherLibBaseEx("Should find, unexpected");
 		}
+		return res;
+	}
+
+	public Map<String, List<SettlementInfo>> groupByHiddenResources() {
+		val siList = getAllSettlements();
+
+		Set<String> hiddenResources = new HashSet<>();
+		siList.forEach( si -> hiddenResources.addAll(si.Resources));
+
+		Map<String, List<SettlementInfo>> res = new HashMap<>();
+		for(val hr : hiddenResources) {
+			val grouped = siList.stream().filter( f -> f.Resources.contains(hr) ).collect(Collectors.toList());
+			res.put(hr, grouped);
+		}
+
 		return res;
 	}
 

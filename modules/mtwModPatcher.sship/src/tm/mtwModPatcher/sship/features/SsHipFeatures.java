@@ -16,7 +16,7 @@ import tm.mtwModPatcher.sship.features.ai.*;
 import tm.mtwModPatcher.sship.features.armyUnits.*;
 import tm.mtwModPatcher.sship.features.buildings.*;
 import tm.mtwModPatcher.sship.features.garrisons.GarrisonNoUnguardedSettlements;
-import tm.mtwModPatcher.sship.features.garrisons.GarrisonOnSiegeRaising;
+import tm.mtwModPatcher.sship.features.garrisons.GarrisonOnAssaultRaising;
 import tm.mtwModPatcher.sship.features.global.*;
 import tm.mtwModPatcher.sship.features.global.factionFate.*;
 import tm.mtwModPatcher.sship.features.global.rimlandHeartland.RimlandHeartland;
@@ -127,7 +127,7 @@ public class SsHipFeatures {
 		features.add(new CrusaderStatesFate());
 
 		features.add(new GarrisonNoUnguardedSettlements(garrisonManager));
-		features.add(new GarrisonOnSiegeRaising(garrisonManager));
+		features.add(new GarrisonOnAssaultRaising(garrisonManager));
 
 		features.add(new NobilityManyGeneralsGovernors());
 		features.add(new FightForSurvival(unitsManager));	// adds replenish rates entries for existing stuff, should be almost last

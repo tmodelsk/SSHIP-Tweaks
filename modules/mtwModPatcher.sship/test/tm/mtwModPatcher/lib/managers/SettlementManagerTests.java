@@ -26,15 +26,16 @@ public class SettlementManagerTests extends FeatureBaseTest {
 		Assertions.assertThat(settlements).isNotEmpty();
 
 		for(val settl : settlements) {
-
 			try {
 				Assertions.assertThat(settl.Position).isNotNull();
 			}
 			catch (AssertionError e) {
 				throw new Exception(e.getMessage() + " in Settlement.Name " + settl.Name);
 			}
-
 		}
+
+		val byResource = settlementManager.groupByHiddenResources();
+		byResource.size();
 	}
 
 	@Test
