@@ -104,7 +104,8 @@ public class SsHipFeatures {
 		features.add(new TemplesTweaks());
 		features.add(new FactionBalancingFtr());
 
-		features.add(new AgentsNumbersLimited());
+		features.add(new AssasinsRemoved());
+		features.add(new AssasinsNumbersLimited());
 
 		features.add(new ProvincialTitlesFixJoC());
 		features.add(new GeneralsEducationTraitsFixes());
@@ -154,6 +155,9 @@ public class SsHipFeatures {
 		features.disableFeatureIfExists( WatchtowersToForts.Id);
 		features.disableFeatureIfExists( NonSpearInfantryAttackBoost.Id);
 		features.disableFeatureIfExists( MerchantsRemovedFtr.Id);
+		features.disableFeatureIfExists( AssasinsNumbersLimited.Id );
+		features.disableFeatureIfExists( AssasinsHomeProtectors.Id );
+		features.disableFeatureIfExists( NoDreadOnAssasinations.Id );
 
 		if(!ConfigurationSettings.isDevEnvironment()) {
 

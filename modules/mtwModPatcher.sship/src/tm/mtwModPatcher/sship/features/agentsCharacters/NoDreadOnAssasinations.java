@@ -4,6 +4,8 @@ import lombok.val;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.data._root.ExportDescrCharacterTraits;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -176,6 +178,15 @@ Class: CHARACTER_TYPE_TEST
 		return Id;
 	}
 	public final static UUID Id = UUID.fromString("b06e41ea-cf85-40a7-b40b-fe9ff4782af5");
+
+	@Override
+	public Set<UUID> getConflictingFeatures() {
+		val conflicts = new HashSet<UUID>();
+
+		conflicts.add(AssasinsRemoved.Id);
+
+		return conflicts;
+	}
 
 	public NoDreadOnAssasinations() {
 		super("No Dread on assasinations");

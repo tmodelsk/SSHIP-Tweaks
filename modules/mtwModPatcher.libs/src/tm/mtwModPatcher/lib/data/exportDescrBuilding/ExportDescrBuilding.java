@@ -11,7 +11,6 @@ import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessorFile
 import tm.mtwModPatcher.lib.common.entities.SettlementLevel;
 import tm.mtwModPatcher.lib.common.entities.SettlementLevelConverter;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingLevel;
-import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.Buildings;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.SettlType;
 
 import java.util.ArrayList;
@@ -20,9 +19,6 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by Tomek on 2016-04-16.
- */
 public class ExportDescrBuilding extends LinesProcessorFileEntity {
 
 	public void addHiddenResourceDef(String hiddenResourceName) {
@@ -494,9 +490,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		val pattern = Pattern.compile("^\\s*levels\\s+(.*)");
 		int index = 0;
 		int counter = 0;
-
-
-
+		
 		return counter;
 	}
 

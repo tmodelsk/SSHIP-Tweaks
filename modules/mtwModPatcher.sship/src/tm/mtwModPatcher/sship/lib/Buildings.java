@@ -1,8 +1,5 @@
 package tm.mtwModPatcher.sship.lib;
 
-import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.WallsCastle;
-import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.WallsCity;
-
 import java.util.Arrays;
 import java.util.List;
 
@@ -38,6 +35,11 @@ public class Buildings {
 	public  static final String SeaTradeCastle = "castle_sea_trade";
 	public static final List<String> SeaTradeCityLevels = Arrays.asList("merchants_wharf", "warehouse", "docklands");
 	public static final List<String> SeaTradeCastleLevels = Arrays.asList("merchants_wharf");
+
+	public static final String TavernCity = "taverns";
+	public static final String TavernCastle = "castle_taverns";
+	public static final List<String> TavernCityLevels = Arrays.asList("brothel", "inn", "tavern", "coaching_house", "pleasure_palace");
+	public static final List<String> TavernCastleLevels = Arrays.asList("c_brothel");
 
 	public final static tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.WallsCity WallsCity =
 			tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.Buildings.WallsCity;

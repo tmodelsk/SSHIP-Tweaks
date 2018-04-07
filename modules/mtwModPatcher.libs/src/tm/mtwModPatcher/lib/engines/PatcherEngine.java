@@ -1,19 +1,19 @@
 package tm.mtwModPatcher.lib.engines;
 
 import lombok.val;
-import tm.common.collections.ArrayUniqueList;
-import tm.common.collections.ListUnique;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.FeatureList;
 import tm.mtwModPatcher.lib.common.core.features.OverrideDeleteFilesTask;
-import tm.mtwModPatcher.lib.common.core.features.fileEntities.FileEntity;
 import tm.mtwModPatcher.lib.common.core.features.OverrideTask;
+import tm.mtwModPatcher.lib.common.core.features.fileEntities.FileEntity;
 import tm.mtwModPatcher.lib.engines.userSettings.SettingsEngine;
 
 import javax.xml.transform.TransformerException;
 import java.io.IOException;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**  */
 public class PatcherEngine {
@@ -29,16 +29,12 @@ public class PatcherEngine {
 		val featureList = featureFullList.getFeaturesEnabledList();
 		consoleLogger.writeLine("PatcherEngine: Found " + featureList.size() + " features to apply");
 
-		val userSettings = settingsEngine.loadSettings("mySettings");
-		Set<UUID> previousMapRemovalIds = userSettings != null ? userSettings.featureIdsSetByMapRemoval() : null;
-		val actualMapRemovalIds = featureFullList.getIdsSetByEnabledAndMapRemoval();
-
 		List<OverrideTask> additionalOverrideTasks = new ArrayList<>();
-		if( actualMapRemovalIds != null && !actualMapRemovalIds.equals(previousMapRemovalIds))
+		if( featureFullList.isMapRemovalRequested() && !ConfigurationSettings.isDevEnvironment())
 			additionalOverrideTasks.add(OverrideDeleteFilesTask.DELETE_MAP_RWM);
 
 		// ## Save user settings ##
-		settingsEngine.saveSettings("mySettings", appVersion, featureFullList);
+		settingsEngine.saveSettings(SETTINGS_DEFAULT_NAME, appVersion, featureFullList);
 
 		try {
 			// ## Execute Overrides ##
@@ -130,7 +126,6 @@ public class PatcherEngine {
 		consoleLogger.writeLine("PatcherEngine: Backup updated files starting ...");
 		val filesToBackup = new ArrayList<FileEntity>();
 		for (val fileToUpd : filesToUpdate) {
-
 			if (!overrideTasks.contains(fileToUpd.filePath))
 				filesToBackup.add(fileToUpd);
 		}
@@ -176,4 +171,6 @@ public class PatcherEngine {
 		this.fileEntityFactory = fileEntityFactory;
 		this.settingsEngine = settingsEngine;
 	}
+
+	public static final String SETTINGS_DEFAULT_NAME = "mySettings";
 }

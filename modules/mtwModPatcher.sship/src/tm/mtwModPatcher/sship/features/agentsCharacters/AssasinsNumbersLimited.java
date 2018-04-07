@@ -2,10 +2,9 @@ package tm.mtwModPatcher.sship.features.agentsCharacters;
 
 import lombok.val;
 import tm.common.Ctm;
-import tm.mtwModPatcher.lib.common.entities.AgentType;
-import tm.mtwModPatcher.lib.managers.FactionsDefs;
-import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
+import tm.mtwModPatcher.lib.common.entities.AgentType;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.blocks.*;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.commands.LogLevel;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.commands.WriteToLog;
@@ -22,17 +21,16 @@ import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.CampaignScript;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.FactionAiEcId;
 import tm.mtwModPatcher.lib.managers.CampaignScriptManager;
+import tm.mtwModPatcher.lib.managers.FactionsDefs;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 /** Agents total numbers are Limited  aaas */
-public class AgentsNumbersLimited extends Feature {
-	private CampaignScript _CampaignScript;
-	private ExportDescrBuilding _ExportDescrBuilding;
+public class AssasinsNumbersLimited extends Feature {
+	private CampaignScript campaignScript;
+	private ExportDescrBuilding exportDescrBuilding;
 
-	private List<String> _FactionsList;
+	private List<String> factionsList;
 
 
 	@Override
@@ -42,10 +40,10 @@ public class AgentsNumbersLimited extends Feature {
 
 	@Override
 	public void executeUpdates() throws Exception {
-		_CampaignScript = getFileRegisterForUpdated(CampaignScript.class);
-		_ExportDescrBuilding = getFileRegisterForUpdated(ExportDescrBuilding.class);
+		campaignScript = getFileRegisterForUpdated(CampaignScript.class);
+		exportDescrBuilding = getFileRegisterForUpdated(ExportDescrBuilding.class);
 
-		_FactionsList = FactionsDefs.allFactionsExceptRebelsList();
+		factionsList = FactionsDefs.allFactionsExceptRebelsList();
 
 		val rootRegion = new RegionBlock(_CommentPrefix);
 
@@ -54,13 +52,13 @@ public class AgentsNumbersLimited extends Feature {
 		rootRegion.add(createAgentCountingMonitors());
 
 		// ## write Faction Agents limiting monitors via CS Framework ##
-		val csManager = new CampaignScriptManager(_CampaignScript);
-		for (val factionName : _FactionsList) {
+		val csManager = new CampaignScriptManager(campaignScript);
+		for (val factionName : factionsList) {
 
 			val factionLimitingBlock = createFactionLimitingBody(factionName, AgentType.Assassin);
 			csManager.insertAtEndOfPreFactionTurnStart(factionName, factionLimitingBlock);
 		}
-		_CampaignScript.insertAtEndOfFile(rootRegion);
+		campaignScript.insertAtEndOfFile(rootRegion);
 
 		// ## Update Export Descr Buldings with AND event counter ... for agent
 		updateAgentRecruitments();
@@ -68,14 +66,13 @@ public class AgentsNumbersLimited extends Feature {
 
 	private void updateAgentRecruitments() throws PatcherLibBaseEx {
 		// Clear all assassins recruitments
-
 		val agentAssassinRegex = "^\\s*agent\\s+assassin\\s+.*";
 
-		_ExportDescrBuilding.removeBuildingCapabilitiesByRegex("taverns" , "tavern" , "city" , agentAssassinRegex);
-		_ExportDescrBuilding.removeBuildingCapabilitiesByRegex("taverns" , "coaching_house" , "city" , agentAssassinRegex);
-		_ExportDescrBuilding.removeBuildingCapabilitiesByRegex("taverns" , "pleasure_palace" , "city" , agentAssassinRegex);
+		exportDescrBuilding.removeBuildingCapabilitiesByRegex("taverns" , "tavern" , "city" , agentAssassinRegex);
+		exportDescrBuilding.removeBuildingCapabilitiesByRegex("taverns" , "coaching_house" , "city" , agentAssassinRegex);
+		exportDescrBuilding.removeBuildingCapabilitiesByRegex("taverns" , "pleasure_palace" , "city" , agentAssassinRegex);
 
-		_ExportDescrBuilding.removeBuildingCapabilitiesByRegex("castle_academic" , "academy" , "castle" , agentAssassinRegex);
+		exportDescrBuilding.removeBuildingCapabilitiesByRegex("castle_academic" , "academy" , "castle" , agentAssassinRegex);
 
 
 		val factions = FactionsDefs.allFactionsExceptRebelsList();
@@ -87,9 +84,9 @@ public class AgentsNumbersLimited extends Feature {
 		for(val factionName : factions) {
 			val agentLine = agentPrefix + factionName + agentSuffix + getAgentEventCounterFlag(factionName, AgentType.Assassin) + " 1";
 
-			_ExportDescrBuilding.insertIntoBuildingCapabilities("taverns" , "tavern" , "city" , agentLine);
-			_ExportDescrBuilding.insertIntoBuildingCapabilities("taverns" , "coaching_house" , "city" , agentLine);
-			_ExportDescrBuilding.insertIntoBuildingCapabilities("taverns" , "pleasure_palace" , "city" , agentLine);
+			exportDescrBuilding.insertIntoBuildingCapabilities("taverns" , "tavern" , "city" , agentLine);
+			exportDescrBuilding.insertIntoBuildingCapabilities("taverns" , "coaching_house" , "city" , agentLine);
+			exportDescrBuilding.insertIntoBuildingCapabilities("taverns" , "pleasure_palace" , "city" , agentLine);
 		}
 
 		// Academy :
@@ -103,7 +100,7 @@ public class AgentsNumbersLimited extends Feature {
 		for(val factionName : factionsAcademy) {
 			val agentLine = agentPrefix + factionName + agentSuffix + getAgentEventCounterFlag(factionName, AgentType.Assassin) + " 1";
 
-			_ExportDescrBuilding.insertIntoBuildingCapabilities("castle_academic" , "academy" , "castle" , agentLine);
+			exportDescrBuilding.insertIntoBuildingCapabilities("castle_academic" , "academy" , "castle" , agentLine);
 		}
 
 	}
@@ -178,7 +175,7 @@ public class AgentsNumbersLimited extends Feature {
 	}
 
 	private ScriptBlock createAgentCountingMonitors() {
-		val factionsAiIds = _CampaignScript.FactionsAiEcIds;
+		val factionsAiIds = campaignScript.FactionsAiEcIds;
 
 		val monitorsRegion = new RegionBlock(_CommentPrefix + ": Agents Counting Monitors");
 
@@ -214,7 +211,7 @@ public class AgentsNumbersLimited extends Feature {
 	private ScriptBlock createVariablesBlock() {
 		val variablesRegion = new RegionBlock(_CommentPrefix + ": Variables", true);
 
-		for (val factionName : _FactionsList) {
+		for (val factionName : factionsList) {
 
 			val varName = getAgentCountVariable(factionName , AgentType.Assassin);
 
@@ -234,14 +231,25 @@ public class AgentsNumbersLimited extends Feature {
 		return "AC_IsAllowed_" + factionName +"_" + agentType +"_Count";
 	}
 
-	public AgentsNumbersLimited() {
+	public AssasinsNumbersLimited() {
 		super("Agents Numbers Limited");
+
+		addCategory(CATEGORY_AGENTS);
 
 		setDescriptionShort("Agents total numbers are Limited - crrently Assasins only");
 		setDescriptionUrl("http://tmsship.wikidot.com/agents-numbers-limited");
 	}
 
-	private static String _CommentPrefix = "Agents Numbers Limited";
+	@Override
+	public Set<UUID> getConflictingFeatures() {
+		val conflicts = new HashSet<UUID>();
+
+		conflicts.add(AssasinsRemoved.Id);
+
+		return conflicts;
+	}
+
+	private static String _CommentPrefix = "Assasins Numbers Limited";
 
 	@Override
 	public UUID getId() {

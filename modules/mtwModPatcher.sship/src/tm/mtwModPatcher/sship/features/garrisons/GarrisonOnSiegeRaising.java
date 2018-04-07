@@ -6,16 +6,15 @@ import lombok.val;
 import tm.common.Ctm;
 import tm.common.collections.ArrayUniqueList;
 import tm.common.collections.ListUnique;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
+import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdBoolean;
+import tm.mtwModPatcher.lib.common.core.features.params.ParamIdInteger;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdString;
-import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.lib.common.entities.Religion;
 import tm.mtwModPatcher.lib.common.entities.SettlementInfo;
 import tm.mtwModPatcher.lib.common.entities.SettlementLevel;
-import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
-import tm.mtwModPatcher.lib.common.core.features.Feature;
-import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
-import tm.mtwModPatcher.lib.common.core.features.params.ParamIdInteger;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.blocks.*;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.commands.AddMoney;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.commands.LogLevel;
@@ -32,11 +31,12 @@ import tm.mtwModPatcher.lib.common.scripting.campaignScript.core.EventType;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.keywords.DeclareVariable;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.keywords.IncrementVariable;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.keywords.SetVariable;
-import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
 import tm.mtwModPatcher.lib.data.world.maps.base.DescrRegions;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.CampaignScript;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrStratSectioned;
+import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
+import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.lib.managers.SettlementManager;
 import tm.mtwModPatcher.lib.managers.garrisons.GarrisonManager;
 import tm.mtwModPatcher.lib.managers.garrisons.UnitGarrisonInfo;
@@ -58,12 +58,7 @@ public class GarrisonOnSiegeRaising extends Feature {
 
 	@Override
 	public void executeUpdates() throws Exception {
-		campaignScript = getFileRegisterForUpdated(CampaignScript.class);
-		descrStrat = getFileRegisterForUpdated(DescrStratSectioned.class);
-		descrRegions = getFileRegisterForUpdated(DescrRegions.class);
-		edu = getFileRegisterForUpdated(ExportDescrUnitTyped.class);
-
-		settlementManager = new SettlementManager(descrStrat, descrRegions);
+		initFileEntities();
 
 		List<SettlementInfo> settlementInfos = settlementManager.getAllSettlements();
 		if (garrisonSize == GarrisonSize.SMALL)
@@ -467,6 +462,15 @@ public class GarrisonOnSiegeRaising extends Feature {
 				(feature, value) -> ((GarrisonOnSiegeRaising) feature).setGarrisonSize(value)));
 
 		return parIds;
+	}
+
+	private void initFileEntities() throws Exception {
+		campaignScript = getFileRegisterForUpdated(CampaignScript.class);
+		descrStrat = getFileRegisterForUpdated(DescrStratSectioned.class);
+		descrRegions = getFileRegisterForUpdated(DescrRegions.class);
+		edu = getFileRegisterForUpdated(ExportDescrUnitTyped.class);
+
+		settlementManager = new SettlementManager(descrStrat, descrRegions);
 	}
 
 	@Getter @Setter private int populationRecoveryTurns = 15;

@@ -1,8 +1,11 @@
 package tm.mtwModPatcher.sship.features.agentsCharacters;
 
+import lombok.val;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.data._root.DescrCampaignDb;
 
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
 
 /**
@@ -44,5 +47,14 @@ public class AssasinsHomeProtectors extends Feature {
 
 		setDescriptionShort("Assasins kill easier in homeland territory and more difficult in enemy territory");
 		setDescriptionUrl("http://tmsship.wikidot.com/assasins-home-protectors");
+	}
+
+	@Override
+	public Set<UUID> getConflictingFeatures() {
+		val conflicts = new HashSet<UUID>();
+
+		conflicts.add(AssasinsRemoved.Id);
+
+		return conflicts;
 	}
 }

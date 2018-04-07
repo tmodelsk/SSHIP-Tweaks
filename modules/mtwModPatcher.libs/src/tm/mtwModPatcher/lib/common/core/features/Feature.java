@@ -12,7 +12,6 @@ import tm.mtwModPatcher.lib.engines.ConsoleLogger;
 import tm.mtwModPatcher.lib.engines.FileEntityFactory;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 /**
  * Feature - base abstract class for all Features (Tweaks)
@@ -267,4 +266,6 @@ public abstract class Feature {
 
 		categories = new ArrayList<>();
 	}
+
+	public static final String CATEGORY_AGENTS = "Agents";
 }

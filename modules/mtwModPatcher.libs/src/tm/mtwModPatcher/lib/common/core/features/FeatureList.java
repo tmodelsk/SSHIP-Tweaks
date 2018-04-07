@@ -75,6 +75,9 @@ public class FeatureList {
 	public Set<UUID> getIdsSetByEnabledAndMapRemoval() {
 		return whereEnabled().filter( f -> f.isMapRemovalRequirement() ).map(f -> f.getId() ).collect(Collectors.toSet());
 	}
+	public boolean isMapRemovalRequested() {
+		return whereEnabled().filter(f -> f.isMapRemovalRequirement()).findAny().isPresent();
+	}
 
 	public Feature get(int index) {
 		val ft = features.get(index);
