@@ -30,7 +30,7 @@ public class PatcherEngine {
 		consoleLogger.writeLine("PatcherEngine: Found " + featureList.size() + " features to apply");
 
 		List<OverrideTask> additionalOverrideTasks = new ArrayList<>();
-		if( featureFullList.isMapRemovalRequested() && !ConfigurationSettings.isDevEnvironment())
+		if( featureFullList.isMapRemovalRequested() )	// && !ConfigurationSettings.isDevEnvironment()
 			additionalOverrideTasks.add(OverrideDeleteFilesTask.DELETE_MAP_RWM);
 
 		// ## Save user settings ##
@@ -38,9 +38,9 @@ public class PatcherEngine {
 
 		try {
 			// ## Execute Overrides ##
-			val overrideTasks = executeOverrides(featureList, additionalOverrideTasks);
+			val overridedRelativePaths = executeOverrides(featureList, additionalOverrideTasks);
 			// ## Execute Features ##
-			executeFeatures(featureList, overrideTasks);
+			executeFeatures(featureList, overridedRelativePaths);
 
 			consoleLogger.writeLine("PatcherEngine: Patching process finished. Selected Features applied.");
 		} catch (Exception ex) {
@@ -58,10 +58,10 @@ public class PatcherEngine {
 		consoleLogger.writeLine("PatcherEngine: Restore & clean Backup done");
 	}
 
-	private Set<OverrideTask> executeOverrides(List<Feature> featureList, List<OverrideTask> additionalTasks) throws IOException {
+	private Set<String> executeOverrides(List<Feature> featureList, List<OverrideTask> additionalTasks) throws IOException {
 		// ## Do Overrides Tasks ##
 		consoleLogger.writeLine("PatcherEngine: Override tasks execution started ...");
-		List<String> overrideRelativePaths = new ArrayList<>();
+		Set<String> overrideRelativePaths = new HashSet<>();
 		val overrideTasks = new HashSet<OverrideTask>();
 
 		// # Determine all override tasks #
@@ -85,7 +85,7 @@ public class PatcherEngine {
 		if (overrideTasks.size() > 0) {
 			consoleLogger.writeLine("PatcherEngine: Backup files to override started ... ");
 
-			backupEngine.BackupPaths(overrideRelativePaths);
+			backupEngine.backupPaths(overrideRelativePaths);
 			consoleLogger.writeLine("PatcherEngine: Backup files to override done");
 
 			consoleLogger.writeLine("PatcherEngine: Override files started ... ");
@@ -97,10 +97,10 @@ public class PatcherEngine {
 		}
 		consoleLogger.writeLine("PatcherEngine: Override tasks execution done");
 
-		return overrideTasks;
+		return overrideRelativePaths;
 	}
 
-	private void executeFeatures(List<Feature> featureList, Set<OverrideTask> overrideTasks) throws IOException, TransformerException {
+	private void executeFeatures(List<Feature> featureList, Set<String> overridedRelativePaths) throws IOException, TransformerException {
 		// ## Execute Features ##
 		consoleLogger.writeLine("PatcherEngine: Apply Features started ... ");
 		Set<FileEntity> filesToUpdate = new HashSet<>();
@@ -122,16 +122,9 @@ public class PatcherEngine {
 		}
 		consoleLogger.writeLine("PatcherEngine: Apply Features done");
 
-		// ## Backup only changed but NOT Overrided Files !! ##
 		consoleLogger.writeLine("PatcherEngine: Backup updated files starting ...");
-		val filesToBackup = new ArrayList<FileEntity>();
-		for (val fileToUpd : filesToUpdate) {
-			if (!overrideTasks.contains(fileToUpd.filePath))
-				filesToBackup.add(fileToUpd);
-		}
-
-		// ## Backup files to be updated ##
-		backupEngine.BackupPaths(filesToUpdate);
+		// ## Backup files to be updated BUT NOT Overrided Files ##
+		backupEngine.backup(filesToUpdate, overridedRelativePaths);
 		consoleLogger.writeLine("PatcherEngine: Backup updated files done");
 
 		// ## Save Features changes to disk ##

@@ -5,16 +5,16 @@ import tm.mtwModPatcher.lib.common.core.features.fileEntities.FileEntity;
 
 import java.io.File;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 /**
  * Created by Tomek on 2016-04-13.
  */
 public class BackupEngine {
 
-	public void BackupPaths(List<String> relativePaths) throws IOException {
+	public void backupPaths(Set<String> relativePaths) throws IOException {
 
 		for (String relativePath : relativePaths) {
 
@@ -31,14 +31,23 @@ public class BackupEngine {
 		}
 	}
 
-	public void BackupPaths(Set<FileEntity> files) throws IOException {
-		List<String> paths = new ArrayList<>();
+	@SuppressWarnings("unused")
+	public void backup(Set<FileEntity> files) throws IOException {
+		backup(files, null);
+	}
+
+	public void backup(Set<FileEntity> files, Set<String> relativePathsToOmmit) throws IOException {
+		Set<String> paths = new HashSet<>();
+
+		Set<String> relativePathsToOmmitLowered = relativePathsToOmmit.stream().map( p -> p.toLowerCase()).collect(Collectors.toSet());
 
 		for( FileEntity file : files) {
-			paths.add(file.filePath);
+
+			if(relativePathsToOmmit == null || !relativePathsToOmmitLowered.contains(file.filePath.toLowerCase()))
+				paths.add(file.filePath);
 		}
 
-		BackupPaths(paths);
+		backupPaths(paths);
 	}
 
 	public void restoreBackup() throws IOException {

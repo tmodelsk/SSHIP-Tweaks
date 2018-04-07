@@ -24,11 +24,11 @@ public abstract class FileEntity {
 		return rootPath + "\\" + filePath;
 	}
 
-	public List<String> loadAsTextLines() throws ParserConfigurationException, IOException, SAXException {
+	public List<String> loadAsTextLines() throws IOException {
 
 		String fullPath = getFullPath();
 
-		Reader reader = null;
+		Reader reader;
 
 		if(inputStreamProvider == null) {
 			if(FileEncoding != null)
@@ -76,7 +76,7 @@ public abstract class FileEntity {
 	@Override
 	public int hashCode() {
 		int hash = 3;
-		hash = 53 * hash + (this.filePath != null ? this.filePath.hashCode() : 0);
+		hash = (53 * hash) + ((this.filePath != null) ? this.filePath.hashCode() : 0);
 
 		return hash;
 	}
