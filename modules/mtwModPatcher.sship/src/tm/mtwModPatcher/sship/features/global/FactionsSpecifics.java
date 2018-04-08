@@ -5,28 +5,26 @@ import lombok.Setter;
 import lombok.val;
 import tm.common.collections.ArrayUniqueList;
 import tm.common.collections.ListUnique;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdDouble;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdInteger;
-import tm.mtwModPatcher.lib.managers.FactionsDefs;
-import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
-import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
+import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.lib.managers.UnitsManager;
-import tm.mtwModPatcher.sship.lib.UnitRecruitmentSshipQueries;
 
 import java.util.Arrays;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 /**  */
 public class FactionsSpecifics extends Feature {
 
 	@Override
 	public void setParamsCustomValues() {
-		byzantiumPopulationPenaltyPlayer = 9;    // 7
-		byzantiumPopulationPenaltyAi = 11;        // 9
+		byzantiumPopulationPenaltyPlayer = 11;    // 7
+		byzantiumPopulationPenaltyAi = 13;        // 9
 		byzantiumPopulationPenaltyMilitaryBuildings = 2;
 		byzantiumReplenishMult = 0.5;
 		seljuksRumReplenishMult = 1.5;
@@ -67,7 +65,8 @@ public class FactionsSpecifics extends Feature {
 
 	protected void CumansBoostReplenishRates() throws PatcherLibBaseEx {
 		val unitsManager = new UnitsManager();
-		unitsManager.updateOrAddReplenishBonusEntry("cumans", null, 2.0, null, edb);
+		unitsManager.updateOrAddReplenishBonusEntry("cumans", null, 3.0, null, edb);
+		unitsManager.multiplyUpkeepRecruitCosts("cumans", 1.0, 0.8, null, exportDescrUnit);
 	}
 
 	protected void RomanCatholicTradersBonuses() throws PatcherLibBaseEx {
