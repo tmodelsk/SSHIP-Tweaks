@@ -19,16 +19,11 @@ import tm.mtwModPatcher.lib.common.scripting.campaignScript.core.EventType;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.keywords.DeclareVariable;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.keywords.IncrementVariable;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.keywords.SetVariable;
-import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.CampaignScript;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.FactionAiEcId;
 import tm.mtwModPatcher.lib.managers.SettlementManager;
 import tm.mtwModPatcher.sship.lib.Buildings;
-import tm.mtwModPatcher.sship.lib.HiddenResources;
-import tm.mtwModPatcher.sship.lib.Provinces;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -77,7 +72,7 @@ public class PortMonitorCounterBuilder {
 		val variable = factionVariables.get(factionName);
 		bl.add(new IncrementVariable(variable, increment));
 		if(logLevel >= 2)
-			bl.add(new WriteToLog(Ctm.msgFormat("SeaTrade Bonus: {0} increment {1} {2}", factionName, increment, logSuffix)));
+			bl.add(new WriteToLog(Ctm.format("SeaTrade Bonus: {0} increment {1} {2}", factionName, increment, logSuffix)));
 
 		return bl;
 	}

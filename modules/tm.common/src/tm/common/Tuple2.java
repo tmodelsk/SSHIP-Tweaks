@@ -10,7 +10,7 @@ public class Tuple2<T1, T2> {
 
 	@Override
 	public String toString() {
-		return Ctm.msgFormat("{0}, {1}", Item1, Item2);
+		return Ctm.format("{0}, {1}", Item1, Item2);
 	}
 
 	public Tuple2(T1 item1, T2 item2) {

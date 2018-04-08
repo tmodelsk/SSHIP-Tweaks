@@ -20,7 +20,7 @@ public class Ctm {
 	}
 
 	/** Message Format like 'Some String {0} / {1}' with arguments */
-	public static String msgFormat(String s, Object... args) {
+	public static String format(String s, Object... args) {
 		val strReplaces = s.replace("'" , "''");
 		try {
 			return new MessageFormat(strReplaces).format(args);
@@ -28,7 +28,7 @@ public class Ctm {
 			throw new IllegalArgumentException("Unmatched braces, pattern: "+s, illegalArgEx);
 		}
 	}
-	public static String msgFormat(String s) {
+	public static String format(String s) {
 		return s;
 	}
 

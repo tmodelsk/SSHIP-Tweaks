@@ -2,13 +2,11 @@ package tm.mtwModPatcher.app;
 
 import lombok.Getter;
 import tm.common.Ctm;
-import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.FeatureList;
 import tm.mtwModPatcher.lib.engines.ConsoleLogger;
 import tm.mtwModPatcher.lib.engines.PatcherEngine;
 
 import javax.swing.*;
-import java.util.List;
 
 public class ApplyFeaturesWorker extends SwingWorker<Integer, String> {
 
@@ -21,7 +19,7 @@ public class ApplyFeaturesWorker extends SwingWorker<Integer, String> {
 			result=1;
 		}
 		catch (Exception ex) {
-			consoleLogger.writeLine(Ctm.msgFormat("Unhandled Error: {0}, stopped", ex.getMessage()));
+			consoleLogger.writeLine(Ctm.format("Unhandled Error: {0}, stopped", ex.getMessage()));
 			exception = ex;
 		}
 

@@ -1,15 +1,13 @@
 package tm.mtwModPatcher.sship.features.ai;
 
-import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
-import tm.mtwModPatcher.lib.common.core.features.OverrideDeleteFilesTask;
+import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
-import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
 import tm.mtwModPatcher.lib.data._root.DescrCampaignDb;
 import tm.mtwModPatcher.lib.data._root.DescrCharacter;
-import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
-import tm.mtwModPatcher.lib.data._root.ExportDescrCharacterTraits;
 import tm.mtwModPatcher.lib.data._root.DescrSMFactions;
+import tm.mtwModPatcher.lib.data._root.ExportDescrCharacterTraits;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.text.ExportVnvs;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrStratSectioned;
 
@@ -89,7 +87,7 @@ public class BeeMugCarlAITweaks extends Feature {
 		str += "   Effect SiegeEngineering 50" + nl;
 		str += "   Effect Attack 1" + nl;
 		//str+="   Effect Loyalty 2"+nl;
-		str += "   Effect Chivalry 1" + nl;
+		//str += "   Effect Chivalry 1" + nl;
 		str += "   Effect BattleSurgery 15" + nl;	// 30
 		//str+="   Effect HitPoints 1"+nl;
 		str+="   Effect TaxCollection 10"+nl;

@@ -28,16 +28,16 @@ public class BuildingLimits {
 		val capitalHrReq = "hidden_resource capital";
 		String requirments;
 
-		add("capital", "Capital", BuildingType.Walls, Ctm.msgFormat("not {0} and {1}", tradeFactionsReq , capitalHrReq), 1);
-		add("capitalTradeRepublics", "Capital & Trade Republics", BuildingType.Walls, Ctm.msgFormat("{0} and {1}", tradeFactionsReq, capitalHrReq), 2);
+		add("capital", "Capital", BuildingType.Walls, Ctm.format("not {0} and {1}", tradeFactionsReq , capitalHrReq), 1);
+		add("capitalTradeRepublics", "Capital & Trade Republics", BuildingType.Walls, Ctm.format("{0} and {1}", tradeFactionsReq, capitalHrReq), 2);
 
 		limit = ConfigurationSettings.isDevEnvironment() ? 1 : 1;
-		requirments = Ctm.msgFormat("not "+capitalHrReq);
+		requirments = Ctm.format("not "+capitalHrReq);
 		add("merchantGuildSmall", "Merchant Guild Small", Buildings.MerchantsGuild, Buildings.MerchantsGuildLevels.get(0), SettlType.City, requirments, limit);
 		add("merchantGuildMedium", "Merchant Guild Medium", Buildings.MerchantsGuild, Buildings.MerchantsGuildLevels.get(1), SettlType.City, requirments, 1 + limit);
 		add("merchantGuildGrand", "Merchant Guild Grand", Buildings.MerchantsGuild, Buildings.MerchantsGuildLevels.get(2), SettlType.City, requirments,1 + limit);
 
-		requirments = Ctm.msgFormat(capitalHrReq);
+		requirments = Ctm.format(capitalHrReq);
 		add("merchantGuildSmallCapital", "Merchant Guild Small & Capital", Buildings.MerchantsGuild, Buildings.MerchantsGuildLevels.get(0), SettlType.City, requirments, limit+1);
 		add("merchantGuildMediumCapital", "Merchant Guild Medium & Capital", Buildings.MerchantsGuild, Buildings.MerchantsGuildLevels.get(1), SettlType.City, requirments, 1+limit+1);
 		add("merchantGuildGrandCapital", "Merchant Guild Grand 7 Capital", Buildings.MerchantsGuild, Buildings.MerchantsGuildLevels.get(2), SettlType.City, requirments, 1+limit+1);
@@ -56,14 +56,14 @@ public class BuildingLimits {
 		return buildingsLimits.get(parName);
 	}
 	public int getLimitValue(String parName) {
-		if(!buildingsLimits.containsKey(parName)) throw new PatcherLibBaseEx(Ctm.msgFormat("Building parameter {0} not defined!", parName));
+		if(!buildingsLimits.containsKey(parName)) throw new PatcherLibBaseEx(Ctm.format("Building parameter {0} not defined!", parName));
 
 		val bl = buildingsLimits.get(parName);
 
 		return bl.Limit;
 	}
 	public void setLimitValue(String parName, int limit) {
-		if(!buildingsLimits.containsKey(parName)) throw new PatcherLibBaseEx(Ctm.msgFormat("Building parameter {0} not defined!", parName));
+		if(!buildingsLimits.containsKey(parName)) throw new PatcherLibBaseEx(Ctm.format("Building parameter {0} not defined!", parName));
 
 		val bl = buildingsLimits.get(parName);
 

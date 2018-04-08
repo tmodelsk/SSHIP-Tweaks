@@ -29,7 +29,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 
 		val splitted = newLine.split(" ");
 		val hiddenResCount = splitted.length-1;	// hidden_resources tag is first
-		if(hiddenResCount > 64)	throw new PatcherLibBaseEx(Ctm.msgFormat("Too many ({0}) hidden resources!", hiddenResCount));
+		if(hiddenResCount > 64)	throw new PatcherLibBaseEx(Ctm.format("Too many ({0}) hidden resources!", hiddenResCount));
 
 		lines.replaceLine(index, newLine );
 	}
@@ -299,7 +299,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 	}
 	public void addBuildingRequirement(String buildingName, String levelName, String castleOrCity, String additionalRequirement) {
 		val index = findBuidlingRequiresLine(buildingName, levelName, castleOrCity);
-		if(index <=0 ) throw new PatcherLibBaseEx(Ctm.msgFormat("Builidng ({0},{1},{2}) not found", buildingName, levelName, castleOrCity));
+		if(index <=0 ) throw new PatcherLibBaseEx(Ctm.format("Builidng ({0},{1},{2}) not found", buildingName, levelName, castleOrCity));
 
 		val orgLine = getLines().getLine(index);
 

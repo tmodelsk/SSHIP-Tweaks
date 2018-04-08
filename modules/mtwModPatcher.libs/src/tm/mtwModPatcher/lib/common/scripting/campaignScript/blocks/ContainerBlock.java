@@ -3,7 +3,7 @@ package tm.mtwModPatcher.lib.common.scripting.campaignScript.blocks;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.core.ScriptElement;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.core.ScriptLines;
 
-/** Container block for code, not addin any start/end code  */
+/** Container block for code, empy place holder not adding any start/end code  */
 public class ContainerBlock extends ScriptBlock {
 	private ScriptLines _Body = new ScriptLines();
 

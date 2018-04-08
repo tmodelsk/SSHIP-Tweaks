@@ -2,8 +2,8 @@ package tm.mtwModPatcher.lib.managers;
 
 import tm.common.Ctm;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
-import tm.mtwModPatcher.lib.common.entities.RegionOwnershipInfo;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
+import tm.mtwModPatcher.lib.common.entities.RegionOwnershipInfo;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.commands.WriteToLog;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.CampaignScript;
 
@@ -32,7 +32,7 @@ public class FateScriptManager {
 		s += "    console_command add_money " + factionName +", " + florinBonus + nl;
 
 		if(logComment == null) logComment="?";
-		s += "    " + new WriteToLog(Ctm.msgFormat("Fate {0} BONUS {1}fl {2} for RegionRange, years [{3},{4}], regions [{5},{6}]",
+		s += "    " + new WriteToLog(Ctm.format("Fate {0} BONUS {1}fl {2} for RegionRange, years [{3},{4}], regions [{5},{6}]",
 							factionName, new Integer(florinBonus).toString(), logComment, new Integer(yearStart).toString(), new Integer(yearEnd).toString(), regionMin, regionMax)).getString() + nl;
 
 		s += "  end_if" +nl;
@@ -66,7 +66,7 @@ public class FateScriptManager {
 		s += "    console_command add_money " + factionName +", " + florinBonus + nl;
 
 		if(logComment == null) logComment="?";
-		s += "    " + new WriteToLog(Ctm.msgFormat("Fate {0} BONUS {1}fl {2} for RegionNegativeOwnership, years [{3},{4}]",
+		s += "    " + new WriteToLog(Ctm.format("Fate {0} BONUS {1}fl {2} for RegionNegativeOwnership, years [{3},{4}]",
 				factionName, new Integer(florinBonus).toString(), logComment, new Integer(yearStart).toString(), new Integer(yearEnd).toString())).getString() + nl;
 
 		s += "  end_if" +nl;

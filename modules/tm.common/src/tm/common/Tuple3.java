@@ -10,7 +10,7 @@ public class Tuple3<T1, T2, T3> extends Tuple2<T1, T2> {
 
 	@Override
 	public String toString() {
-		return Ctm.msgFormat("{0}, {1}", super.toString(), Item3);
+		return Ctm.format("{0}, {1}", super.toString(), Item3);
 	}
 
 	public Tuple3(T1 item1, T2 item2, T3 item3) {

@@ -1,6 +1,5 @@
 package tm.mtwModPatcher.lib.managers;
 
-import com.sun.deploy.util.OrderedHashSet;
 import lombok.val;
 import tm.common.collections.ArrayUniqueList;
 import tm.common.collections.ListUnique;
@@ -10,7 +9,9 @@ import tm.mtwModPatcher.lib.common.entities.EducationStyle;
 import tm.mtwModPatcher.lib.common.entities.FactionInfo;
 import tm.mtwModPatcher.lib.common.entities.Religion;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 public class FactionsDefs {
@@ -165,7 +166,7 @@ public class FactionsDefs {
 		return id;
 	}
 
-	protected static List<String> _ChristianFactions = Arrays.asList(
+	protected static final List<String> _ChristianFactions = Arrays.asList(
 			"denmark",
 			"jerusalem",
 			"norway",
@@ -183,7 +184,7 @@ public class FactionsDefs {
 			"sicily",
 			"pisa");	// 16
 
-	private static List<FactionInfo> _FactionInfos = Arrays.asList(
+	private static final List<FactionInfo> _FactionInfos = Arrays.asList(
 			new FactionInfo("denmark","Denmark", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
 			new FactionInfo("jerusalem","Crusader States", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
 			new FactionInfo("norway","Norway", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "Royal Hirdsmen" ),
@@ -259,7 +260,7 @@ public class FactionsDefs {
 		return res;
 	}
 
-	protected static List<String> _IslamFactions = Arrays.asList(
+	protected static final List<String> _IslamFactions = Arrays.asList(
 			"egypt",
 			"milan",
 			"moors",
@@ -267,22 +268,22 @@ public class FactionsDefs {
 			"rum",
 			"kwarezm");		// 6
 
-	protected static List<String> _OrthodoxFactions = Arrays.asList(
+	protected static final List<String> _OrthodoxFactions = Arrays.asList(
 			"russia",
 			"kievan_rus",
 			"byzantium",
 			"timurids",
 			"teutonic_order");	// 5
 
-	protected static List<String> _TuranianFactions = Arrays.asList(
+	protected static final List<String> _TuranianFactions = Arrays.asList(
 			"cumans",
 			"lithuania");		// 2
 
-	protected static List<String> _OtherFactions = Arrays.asList(
+	protected static final List<String> _OtherFactions = Arrays.asList(
 			"mongols",
 			"slave");			// 2
 
-	public static String Rebels = "slave";
+	public static final String Rebels = "slave";
 
 	public static List<String> allFactionsList() {
 

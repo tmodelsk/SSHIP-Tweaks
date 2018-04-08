@@ -3,15 +3,15 @@ package tm.mtwModPatcher.sship.features.map;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.val;
-import tm.common.Point;
 import tm.common.Ctm;
-import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
+import tm.common.Point;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
-import tm.mtwModPatcher.lib.managers.FactionsDefs;
+import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.entities.SettlementInfo;
 import tm.mtwModPatcher.lib.data._root.DescrCampaignDb;
 import tm.mtwModPatcher.lib.data.world.maps.base.DescrRegions;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrStratSectioned;
+import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.lib.managers.SettlementManager;
 
 import java.util.UUID;
@@ -73,7 +73,7 @@ public class WatchtowersToForts extends Feature {
 					if(minDist > minimumDistance) {
 						// OK, replace with fort
 						val cultureTypeStr = determineCultureTypeStrBySettlement(settlementNearest);
-						val lineNewStr = Ctm.msgFormat("fort {0}, {1} stone_fort_a culture {2}",
+						val lineNewStr = Ctm.format("fort {0}, {1} stone_fort_a culture {2}",
 								watchTowerPos.getX(), watchTowerPos.getY(), cultureTypeStr);
 
 						lines.replaceLine(index, lineNewStr);
@@ -84,7 +84,7 @@ public class WatchtowersToForts extends Feature {
 				} else throw new PatcherLibBaseEx("Unexpected!");
 			}
 		}
-		consoleLogger.writeLine(Ctm.msgFormat("WatchtowersToForts Feature: replaced {0} Watchtowers with Forts",replacedCount));
+		consoleLogger.writeLine(Ctm.format("WatchtowersToForts Feature: replaced {0} Watchtowers with Forts",replacedCount));
 	}
 
 	private String determineCultureTypeStrBySettlement(SettlementInfo settl) {

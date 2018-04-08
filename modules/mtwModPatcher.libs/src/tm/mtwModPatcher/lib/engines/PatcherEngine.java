@@ -30,7 +30,7 @@ public class PatcherEngine {
 		consoleLogger.writeLine("PatcherEngine: Found " + featureList.size() + " features to apply");
 
 		List<OverrideTask> additionalOverrideTasks = new ArrayList<>();
-		if( featureFullList.isMapRemovalRequested() )	// && !ConfigurationSettings.isDevEnvironment()
+		if( featureFullList.isMapRemovalRequested() && !ConfigurationSettings.isDevEnvironment() )	// && !ConfigurationSettings.isDevEnvironment()
 			additionalOverrideTasks.add(OverrideDeleteFilesTask.DELETE_MAP_RWM);
 
 		// ## Save user settings ##

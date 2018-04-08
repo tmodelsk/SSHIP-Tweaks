@@ -134,12 +134,12 @@ public class ExportDescrUnitTyped extends FileEntity {
 		u.StatHealth = getValue("stat_health" , unitLines);
 
 		u.StatPri =  parseWeaponStat( getValue("stat_pri" , unitLines) , u.Name );
-		if(!u.StatPri.IsParsed) throw new PatcherNotSupportedEx(Ctm.msgFormat("Unable to parse EDU '{0}' StatPri: {1}", u.Name, u.StatPri.SourceStr));
+		if(!u.StatPri.IsParsed) throw new PatcherNotSupportedEx(Ctm.format("Unable to parse EDU '{0}' StatPri: {1}", u.Name, u.StatPri.SourceStr));
 
 		u.StatPriAttr = WeaponAttributes.parseStr( getValue("stat_pri_attr" , unitLines) );
 
 		u.StatSec = parseWeaponStat( getValue("stat_sec" , unitLines) , u.Name );
-		if(!u.StatSec.IsParsed) throw new PatcherNotSupportedEx(Ctm.msgFormat("Unable to parse EDU '{0}' StatSec: {1}", u.Name, u.StatSec.SourceStr));
+		if(!u.StatSec.IsParsed) throw new PatcherNotSupportedEx(Ctm.format("Unable to parse EDU '{0}' StatSec: {1}", u.Name, u.StatSec.SourceStr));
 
 		u.StatSecAttr = getValue("stat_sec_attr" , unitLines);
 		u.StatTer = getValue("stat_ter" , unitLines);

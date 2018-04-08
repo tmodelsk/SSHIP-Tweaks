@@ -133,7 +133,7 @@ public abstract class XmlFileEntity extends FileEntity {
 
 		Node node = (Node) xPath.compile(nodeXpath).evaluate(xDoc, XPathConstants.NODE);
 		if(node == null) {
-			throw new PatcherLibBaseEx(Ctm.msgFormat("Node {0} not found!", nodeXpath));
+			throw new PatcherLibBaseEx(Ctm.format("Node {0} not found!", nodeXpath));
 		}
 
 		NamedNodeMap nodeMap = node.getAttributes();

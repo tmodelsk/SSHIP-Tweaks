@@ -94,13 +94,13 @@ public class SettingsEngine {
 								if( feature.getParam(symbol) != null)
 									feature.setParValue(symbol, value);
 								else {
-									consoleLogger.writeLine(Ctm.msgFormat("WARNING: Loading settings: Feature {0} param {1} from stored settings not found", feature.getName(), symbol));
+									consoleLogger.writeLine(Ctm.format("WARNING: Loading settings: Feature {0} param {1} from stored settings not found", feature.getName(), symbol));
 								}
 							}
 						}
 					}
 					else {
-						consoleLogger.writeLine(Ctm.msgFormat("WARNING: Load settings: Feature.id='{0}' not found on feature list", fs.getId()));
+						consoleLogger.writeLine(Ctm.format("WARNING: Load settings: Feature.id='{0}' not found on feature list", fs.getId()));
 					}
 				}
 			}

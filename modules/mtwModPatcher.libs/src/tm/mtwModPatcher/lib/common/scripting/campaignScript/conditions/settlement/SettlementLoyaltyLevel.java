@@ -19,7 +19,7 @@ public class SettlementLoyaltyLevel extends Condition {
 
 	@Override
 	public String getString() {
-		return Ctm.msgFormat("SettlementLoyaltyLevel {0} {1}", operator, loyaltyLevel);
+		return Ctm.format("SettlementLoyaltyLevel {0} {1}", operator, loyaltyLevel);
 	}
 
 	public SettlementLoyaltyLevel(String operator , String loyaltyLevel) {

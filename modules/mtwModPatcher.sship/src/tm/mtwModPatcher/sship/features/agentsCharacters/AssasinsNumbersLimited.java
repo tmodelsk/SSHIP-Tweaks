@@ -156,7 +156,7 @@ public class AssasinsNumbersLimited extends Feature {
 	private ScriptElement getLimitEnabledWriteHistory(AgentType agentType, String factionName, int settlementMin, int settlementMax, int agentLimit) {
 
 		return new WriteToLog(LogLevel.Always,
-				Ctm.msgFormat("Agents {0} LIMIT ENABLED for {1}: settlements ({2},{3}] agents max={4}",
+				Ctm.format("Agents {0} LIMIT ENABLED for {1}: settlements ({2},{3}] agents max={4}",
 										agentType, factionName, settlementMin, settlementMax, agentLimit));
 	}
 

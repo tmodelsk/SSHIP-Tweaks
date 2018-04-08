@@ -268,7 +268,7 @@ public class LinesProcessor {
 	public int findExpFirstRegexLine(Pattern regex, Range<Integer, Integer> rangeInclusive) {
 		val index = findFirstRegexLine(regex, rangeInclusive);
 
-		if(index < 0) throw new LineNotFoundEx(Ctm.msgFormat("EDB: Not found in [{0},{1}] reg: {2}",
+		if(index < 0) throw new LineNotFoundEx(Ctm.format("EDB: Not found in [{0},{1}] reg: {2}",
 				rangeInclusive.getStart(), rangeInclusive.getEnd(), regex.toString()));
 
 		return index;

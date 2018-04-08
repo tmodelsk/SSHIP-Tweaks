@@ -10,7 +10,6 @@ import tm.common.collections.ListUnique;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.PatcherNotSupportedEx;
-import tm.mtwModPatcher.lib.common.core.features.PatcherUnexpectedEx;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdDouble;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdInteger;
@@ -22,9 +21,7 @@ import tm.mtwModPatcher.lib.data.exportDescrUnit.WeaponStat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
-import java.util.function.Supplier;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 /** Created by tomek on 29.10.2017 */
 public class CavalryNerfed extends Feature {
@@ -65,13 +62,13 @@ public class CavalryNerfed extends Feature {
 		// ### Safety Checks ###
 		val restInfantry = infantry.stream().filter(u -> !infantryProcessed.contains(u)).collect(Collectors.toList());
 		if (restInfantry.size() > 0)
-			throw new PatcherLibBaseEx(Ctm.msgFormat("Problem with dividing infantry into categories, {0} are left!", restInfantry.size()));
+			throw new PatcherLibBaseEx(Ctm.format("Problem with dividing infantry into categories, {0} are left!", restInfantry.size()));
 
 		val categoriesSum = heavyInf.size() + lightInf.size() + spears.size() + skimirhes.size() + missiles.size() + restInfantry.size();
 		val infantrySize = infantry.size();
 
 		if( categoriesSum != infantrySize)
-			consoleLogger.writeLine(Ctm.msgFormat("WARNING: Problem with dividing infantry into categories, {0} in categories, {1} total", categoriesSum, infantrySize));
+			consoleLogger.writeLine(Ctm.format("WARNING: Problem with dividing infantry into categories, {0} in categories, {1} total", categoriesSum, infantrySize));
 
 		addCavalryBonusMult(spears, spearmenBonusMult);
 		addCavalryBonusMult(heavyInf, heavyInfBonusMult);

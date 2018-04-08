@@ -11,9 +11,6 @@ import tm.mtwModPatcher.lib.common.scripting.campaignScript.conditions.faction.F
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.core.EventType;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.CampaignScript;
 
-/**
- * Created by Tomek on 2016-11-27.
- */
 public class CampaignScriptManager {
 
 	// not tested

@@ -7,15 +7,15 @@ import tm.common.Ctm;
 import tm.common.Tuple2;
 import tm.common.collections.ArrayUniqueList;
 import tm.common.collections.ListUnique;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdDouble;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdInteger;
-import tm.mtwModPatcher.lib.managers.FactionsDefs;
-import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
-import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.CampaignScript;
+import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.lib.managers.UnitsManager;
 
 import java.util.ArrayList;
@@ -117,7 +117,7 @@ public class FightForSurvival extends Feature {
 
 	private void addFlatMoneyBonus(double factor, String eventName, String requires) {
 		val moneyBonuses = edb.addFlatCityCastleIncome(requires, factor);    // Bonuses : [250 , 375 , 562 , 843 , 1264] with factor 1.0
-		consoleLogger.writeLine(Ctm.msgFormat("[{0}]: {1} Flat money bonus: {2}[{3}], {4}[{5}]",
+		consoleLogger.writeLine(Ctm.format("[{0}]: {1} Flat money bonus: {2}[{3}], {4}[{5}]",
 				FEATURE_NAME, eventName,
 				moneyBonuses.get(0).getItem1(), Ctm.toCsv(moneyBonuses.get(0).getItem2()),
 				moneyBonuses.get(1).getItem1(), Ctm.toCsv(moneyBonuses.get(1).getItem2())));

@@ -12,7 +12,7 @@ public class SettlementBuildingExists extends Condition {
 
 	@Override
 	public String getString() {
-		return Ctm.msgFormat("SettlementBuildingExists {0} {1} ", operator, buildingName);
+		return Ctm.format("SettlementBuildingExists {0} {1} ", operator, buildingName);
 	}
 
 	@Getter @Setter

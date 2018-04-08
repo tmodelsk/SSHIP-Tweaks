@@ -14,7 +14,6 @@ import tm.mtwModPatcher.lib.common.core.features.params.ParamIdDouble;
 import tm.mtwModPatcher.lib.data._root.BattleConfig;
 import tm.mtwModPatcher.lib.data.aiSets.*;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
-import tm.mtwModPatcher.lib.data.exportDescrUnit.MountEffect;
 
 import javax.xml.xpath.XPathExpressionException;
 import java.util.UUID;
@@ -65,11 +64,11 @@ public class LongerBattles extends Feature {
 
 			int chargeDamageNew = unit.StatPri.Damage + unit.StatPri.ChargeBonus;
 			if( chargeDamageNew >= 61)
-				throw new PatcherLibBaseEx(Ctm.msgFormat("Unit '{0}' pri damage + charge = {1} exceeds cap 61!", unit.Name, chargeDamageNew));
+				throw new PatcherLibBaseEx(Ctm.format("Unit '{0}' pri damage + charge = {1} exceeds cap 61!", unit.Name, chargeDamageNew));
 
 			chargeDamageNew = unit.StatSec.Damage + unit.StatSec.ChargeBonus;
 			if( chargeDamageNew >= 61)
-				throw new PatcherLibBaseEx(Ctm.msgFormat("Unit '{0}' sec damage + charge = {1} exceeds cap 61!", unit.Name, chargeDamageNew));
+				throw new PatcherLibBaseEx(Ctm.format("Unit '{0}' sec damage + charge = {1} exceeds cap 61!", unit.Name, chargeDamageNew));
 
 			if (powerfulChargeForHeavyInfantry) {
 				// ### All Heavy Infantry gets powerful_charge attribute

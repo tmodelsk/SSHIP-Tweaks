@@ -4,11 +4,13 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.val;
 import tm.common.Ctm;
-import tm.common.Tuple2;
 import tm.common.Tuple3;
 import tm.common.collections.ArrayUniqueList;
 import tm.common.collections.ListUnique;
-import tm.mtwModPatcher.lib.common.core.features.*;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
+import tm.mtwModPatcher.lib.common.core.features.PatcherNotSupportedEx;
+import tm.mtwModPatcher.lib.common.core.features.PatcherUnexpectedEx;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdBoolean;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.blocks.ContainerBlock;
@@ -21,7 +23,9 @@ import tm.mtwModPatcher.lib.common.scripting.campaignScript.keywords.SetEventCou
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.keywords.SetVariable;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.SettlType;
+import tm.mtwModPatcher.lib.data.world.maps.base.DescrRegions;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.CampaignScript;
+import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrStratSectioned;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.FactionAiEcId;
 import tm.mtwModPatcher.lib.managers.CampaignScriptManager;
 import tm.mtwModPatcher.lib.managers.FactionsDefs;
@@ -29,9 +33,6 @@ import tm.mtwModPatcher.lib.managers.SettlementManager;
 import tm.mtwModPatcher.sship.lib.Buildings;
 import tm.mtwModPatcher.sship.lib.HiddenResources;
 import tm.mtwModPatcher.sship.lib.Provinces;
-import tm.mtwModPatcher.lib.data.world.maps.base.DescrRegions;
-import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrStratSectioned;
-import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
 
 import java.util.*;
 import java.util.regex.Pattern;
@@ -131,7 +132,7 @@ public class RimlandHeartland extends Feature {
 	}
 
 	private void addSingleSeaTradeBonus(SettlType settlType, int marketLevel, int seaTradeLevel, int bonusValue, String bonusTypeStr) {
-		val islandCondition = islandHiddenResource ? Ctm.msgFormat(" and not hidden_resource {0}", HR_ISLAND) : "";
+		val islandCondition = islandHiddenResource ? Ctm.format(" and not hidden_resource {0}", HR_ISLAND) : "";
 
 		String bonusBaseTemplate = bonusTypeStr + "{0}";
 		bonusBaseTemplate += " requires event_counter {1} 1" + islandCondition;
@@ -139,8 +140,8 @@ public class RimlandHeartland extends Feature {
 		bonusBaseTemplate += " and hidden_resource " + HiddenResources.River;    // building_present_min_level river_access river_port
 		bonusBaseTemplate += " or building_present_min_level {4} {5}";    // or roads
 
-		val bonusCityTemplate = Ctm.msgFormat(bonusBaseTemplate, "{0}", "{1}", "port", "port", "hinterland_roads", "roads");
-		val bonusCastleTemplate = Ctm.msgFormat(bonusBaseTemplate, "{0}", "{1}", "castle_port", "c_port", "hinterland_castle_roads", "c_roads");
+		val bonusCityTemplate = Ctm.format(bonusBaseTemplate, "{0}", "{1}", "port", "port", "hinterland_roads", "roads");
+		val bonusCastleTemplate = Ctm.format(bonusBaseTemplate, "{0}", "{1}", "castle_port", "c_port", "hinterland_castle_roads", "c_roads");
 
 		String bonusTemplate;
 		String buildingName;
@@ -156,13 +157,13 @@ public class RimlandHeartland extends Feature {
 			marketLevels = Buildings.MarketCastleLevels;
 		} else throw new PatcherLibBaseEx("Unexpected!: " + settlType);
 
-		val bonusLine = Ctm.msgFormat(bonusTemplate, bonusValue, getSeaTradeBonusEventName(seaTradeLevel));
+		val bonusLine = Ctm.format(bonusTemplate, bonusValue, getSeaTradeBonusEventName(seaTradeLevel));
 
 		edb.insertIntoBuildingCapabilities(buildingName, marketLevels.get(marketLevel - 1), settlType, bonusLine);
 	}
 
 	private void addSingleSeaTradeMinus(SettlType settlType, int marketLevel, int bonusNerfOffset) {
-		val islandCondition = islandHiddenResource ? Ctm.msgFormat("hidden_resource {0}", HR_ISLAND) : "";
+		val islandCondition = islandHiddenResource ? Ctm.format("hidden_resource {0}", HR_ISLAND) : "";
 		val portCondition = "building_present_min_level " + (settlType.equals(SettlType.City) ? "port port" : "castle_port c_port");
 		val seaTradeEvent = getSeaTradeBonusEventName(0);
 
@@ -201,19 +202,19 @@ public class RimlandHeartland extends Feature {
 
 			// Original bonus when SeaTradeEvent0 = 0
 			bonusLine = bonusBaseTemplate;
-			bonusLine = Ctm.msgFormat(bonusLine, bonusOrg, "not", 1);
+			bonusLine = Ctm.format(bonusLine, bonusOrg, "not", 1);
 			edb.insertIntoBuildingCapabilities(buildingName, marketLevelName, settlType, bonusLine);
 
 			// Original bonus when SeaTradeEvent0 = 1 and island or port
 			bonusLine = bonusBaseTemplate + " and " + islandCondition + " or " + portCondition;
 			bonusValue = debugMode ? bonusOrg * 10 : bonusOrg;
-			bonusLine = Ctm.msgFormat(bonusLine, bonusValue, "", 1);
+			bonusLine = Ctm.format(bonusLine, bonusValue, "", 1);
 			edb.insertIntoBuildingCapabilities(buildingName, marketLevelName, settlType, bonusLine);
 
 			// Nerfed bonus when SeaTradeEvent0 = 1 and not island and not port
 			bonusLine = bonusBaseTemplate + " and not " + islandCondition + " and not " + portCondition;
 			bonusValue = debugMode ? bonusNerfed * 100 : bonusNerfed;
-			bonusLine = Ctm.msgFormat(bonusLine, bonusValue, "", 1);
+			bonusLine = Ctm.format(bonusLine, bonusValue, "", 1);
 			edb.insertIntoBuildingCapabilities(buildingName, marketLevelName, settlType, bonusLine);
 
 			lines.remove(lineIndex);
@@ -301,27 +302,27 @@ public class RimlandHeartland extends Feature {
 		ifBlock = new IfBlock(new CompareCounter(factionVar, "=", seaTradeNothing));
 		ifBlock.add(new SetEventCounter(getSeaTradeBonusEventName(0), 1));
 		if (logLevel >= 1)
-			ifBlock.add(new WriteToLog(Ctm.msgFormat("SeaTrade Bonus: {0} Setting event counter to {1}", factionName, 0)));
+			ifBlock.add(new WriteToLog(Ctm.format("SeaTrade Bonus: {0} Setting event counter to {1}", factionName, 0)));
 		body.add(ifBlock);
 
 		ifBlock = new IfBlock(new CompareCounter(factionVar, ">=", seaTradeSmall));
 		ifBlock.andCondition(new CompareCounter(factionVar, "<", seaTradeMedium));
 		ifBlock.add(new SetEventCounter(getSeaTradeBonusEventName(1), 1));
 		if (logLevel >= 1)
-			ifBlock.add(new WriteToLog(Ctm.msgFormat("SeaTrade Bonus: {0} Setting event counter to {1}", factionName, 1)));
+			ifBlock.add(new WriteToLog(Ctm.format("SeaTrade Bonus: {0} Setting event counter to {1}", factionName, 1)));
 		body.add(ifBlock);
 
 		ifBlock = new IfBlock(new CompareCounter(factionVar, ">=", seaTradeMedium));
 		ifBlock.andCondition(new CompareCounter(factionVar, "<", seaTradeLarge));
 		ifBlock.add(new SetEventCounter(getSeaTradeBonusEventName(2), 1));
 		if (logLevel >= 1)
-			ifBlock.add(new WriteToLog(Ctm.msgFormat("SeaTrade Bonus: {0} Setting event counter to {1}", factionName, 2)));
+			ifBlock.add(new WriteToLog(Ctm.format("SeaTrade Bonus: {0} Setting event counter to {1}", factionName, 2)));
 		body.add(ifBlock);
 
 		ifBlock = new IfBlock(new CompareCounter(factionVar, ">=", seaTradeLarge));
 		ifBlock.add(new SetEventCounter(getSeaTradeBonusEventName(3), 1));
 		if (logLevel >= 1)
-			ifBlock.add(new WriteToLog(Ctm.msgFormat("SeaTrade Bonus: {0} Setting event counter to {1}", factionName, 3)));
+			ifBlock.add(new WriteToLog(Ctm.format("SeaTrade Bonus: {0} Setting event counter to {1}", factionName, 3)));
 		body.add(ifBlock);
 
 		body.add(new SetVariable(factionVar, 0));
@@ -364,8 +365,8 @@ public class RimlandHeartland extends Feature {
 	private void insertRimlandPortBonus(SettlType settlType, int portLevel, int lowBonus, int mediumBonus) {
 		val bonusStr = debugMode ? ExportDescrBuilding.IncomeBonus : ExportDescrBuilding.TradeBonus;
 		val template = "{0}{1} requires hidden_resource {2}";
-		val portRimlandLow = Ctm.msgFormat(template, bonusStr, lowBonus, HR_RIMLAND_LOW);
-		val portRimlandHigh = Ctm.msgFormat(template, bonusStr, mediumBonus, HR_RIMLAND_MEDIUM);
+		val portRimlandLow = Ctm.format(template, bonusStr, lowBonus, HR_RIMLAND_LOW);
+		val portRimlandHigh = Ctm.format(template, bonusStr, mediumBonus, HR_RIMLAND_MEDIUM);
 
 		String building = "", levelStr = "";
 		if (settlType == SettlType.City) {
@@ -418,7 +419,7 @@ public class RimlandHeartland extends Feature {
 
 	private void atlanticHarderToTrade() {
 		// ## Add requirements to ports
-		val reqAdditional = Ctm.msgFormat("and not hidden_resource {0} or event_counter {1} 1", HR_ATLANTIC, EVENT_ATLANTIC_TRADE);
+		val reqAdditional = Ctm.format("and not hidden_resource {0} or event_counter {1} 1", HR_ATLANTIC, EVENT_ATLANTIC_TRADE);
 
 		Buildings.PortCityLevels.forEach(cp -> edb.addBuildingRequirement("port", cp, "city", reqAdditional));
 		Buildings.PortCastleLevels.forEach(cp -> edb.addBuildingRequirement("castle_port", cp, "castle", reqAdditional));
@@ -473,24 +474,24 @@ public class RimlandHeartland extends Feature {
 
 		// #### Trade Bonuses : Levels 1 & 2 - City & Castle = BONUS 1
 		for (int i = 1; i <= 2; i++) {
-			tradeBonus = Ctm.msgFormat(tradeBonusLandGateTemplate, 1);
+			tradeBonus = Ctm.format(tradeBonusLandGateTemplate, 1);
 			edb.insertIntoBuildingCapabilities(Buildings.MarketCity, Buildings.MarketCityLevels.get(i - 1), SettlType.City, tradeBonus);
 			edb.insertIntoBuildingCapabilities(Buildings.MarketCastle, Buildings.MarketCastleLevels.get(i - 1), SettlType.Castle, tradeBonus);
 		}
 
 		// Level 3  - City & Castle = BONUS 2
-		tradeBonus = Ctm.msgFormat(tradeBonusLandGateTemplate, 2);
+		tradeBonus = Ctm.format(tradeBonusLandGateTemplate, 2);
 		edb.insertIntoBuildingCapabilities(Buildings.MarketCity, Buildings.MarketCityLevels.get(2), SettlType.City, tradeBonus);
 		edb.insertIntoBuildingCapabilities(Buildings.MarketCastle, Buildings.MarketCastleLevels.get(2), SettlType.Castle, tradeBonus);
 
 		// Level 4 & 5  - City BONUS 3
 		for (int i = 4; i <= 5; i++) {
-			tradeBonus = Ctm.msgFormat(tradeBonusLandGateTemplate, 3);
+			tradeBonus = Ctm.format(tradeBonusLandGateTemplate, 3);
 			edb.insertIntoBuildingCapabilities(Buildings.MarketCity, Buildings.MarketCityLevels.get(i - 1), SettlType.City, tradeBonus);
 		}
 
 		// ### Law Minuses - always - addded into Walls
-		lawMinus = Ctm.msgFormat(orderLawMinusTemplate, -1);
+		lawMinus = Ctm.format(orderLawMinusTemplate, -1);
 		edb.insertIntoCityCastleWallsCapabilities(lawMinus);
 
 	}

@@ -4,9 +4,9 @@ import lombok.val;
 import tm.common.Ctm;
 import tm.mtwModPatcher.app.featuresTab.FeaturesTableModel;
 import tm.mtwModPatcher.app.featuresTab.NameColRenderer;
+import tm.mtwModPatcher.lib.common.core.features.FeatureList;
 import tm.mtwModPatcher.lib.common.core.features.FileSystemResourcesProvider;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
-import tm.mtwModPatcher.lib.common.core.features.FeatureList;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.FileInputStreamProvider;
 import tm.mtwModPatcher.lib.engines.*;
 import tm.mtwModPatcher.lib.engines.userSettings.SettingsEngine;
@@ -154,9 +154,9 @@ public class PatcherApp {
 		val conflicts = featuresList.getConflictingFeatures();
 		if(conflicts == null) consoleLogger.writeLine("Features enabled: no conflicts detected.");
 		else {
-			consoleLogger.writeLine(Ctm.msgFormat("Features enabled: found {0} features in conflict! ", conflicts.size()));
+			consoleLogger.writeLine(Ctm.format("Features enabled: found {0} features in conflict! ", conflicts.size()));
 			for(val conflict : conflicts)
-				consoleLogger.writeLine( Ctm.msgFormat("Conflicting features: #1: {0} , #2: {1}",
+				consoleLogger.writeLine( Ctm.format("Conflicting features: #1: {0} , #2: {1}",
 						conflict.getItem1().getName(), conflict.getItem2().getName()));
 			consoleLogger.writeLine("Please disable some of the above features to resolve conflict!");
 			consoleLogger.writeLine("Stopped.");
@@ -165,8 +165,8 @@ public class PatcherApp {
 			String msg="", nl = System.lineSeparator();
 
 			msg += "Problem: Conflicting features are enabled !" + nl;
-			msg += Ctm.msgFormat("#1: {0}", conflict.getItem1().getName()) +nl;
-			msg += Ctm.msgFormat("#2: {0}", conflict.getItem2().getName()) +nl;
+			msg += Ctm.format("#1: {0}", conflict.getItem1().getName()) +nl;
+			msg += Ctm.format("#2: {0}", conflict.getItem2().getName()) +nl;
 			msg += "Please disable some of the above features to resolve conflict!";
 			JOptionPane.showMessageDialog(null, msg);
 			return true;

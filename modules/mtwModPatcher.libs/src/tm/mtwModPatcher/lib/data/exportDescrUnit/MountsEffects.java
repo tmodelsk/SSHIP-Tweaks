@@ -83,7 +83,7 @@ public class MountsEffects {
 
 		String str="";
 		for (val eff:effects.values())
-			str += Ctm.msgFormat("{0}{1} ", eff.getType(), eff.Value);
+			str += Ctm.format("{0}{1} ", eff.getType(), eff.Value);
 
 		return str;
 	}

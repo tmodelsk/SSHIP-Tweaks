@@ -17,7 +17,7 @@ public class FactionBuildingExists extends Condition {
 
 	@Override
 	public String getString() {
-		return Ctm.msgFormat("FactionBuildingExists {0} {1} ", operator, buildingName);
+		return Ctm.format("FactionBuildingExists {0} {1} ", operator, buildingName);
 	}
 
 	public FactionBuildingExists(String buildingName) {

@@ -5,10 +5,10 @@ import org.apache.commons.io.FileUtils;
 import tm.common.Ctm;
 import tm.common.collections.ArrayUniqueList;
 import tm.common.collections.NotUniqueEx;
-import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.OverrideCopyTask;
 import tm.mtwModPatcher.lib.common.core.features.OverrideDeleteFilesTask;
 import tm.mtwModPatcher.lib.common.core.features.OverrideTask;
+import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 
 import java.io.File;
 import java.io.IOException;
@@ -45,7 +45,7 @@ public class OverrideEngine {
 					try {
 						copyPathsGlobal.add(path);    // throw when not unique
 					} catch (NotUniqueEx notUniqueEx) {
-						throw new PatcherLibBaseEx(Ctm.msgFormat("Override copy path {0} already exists, override dir {1} !", path, copyTask.DirectoryName), notUniqueEx);
+						throw new PatcherLibBaseEx(Ctm.format("Override copy path {0} already exists, override dir {1} !", path, copyTask.DirectoryName), notUniqueEx);
 					}
 			} else if (overrideTask instanceof OverrideDeleteFilesTask) {
 			} else throw new PatcherLibBaseEx("OverrideTask Type is not supported!");

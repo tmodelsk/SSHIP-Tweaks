@@ -20,7 +20,7 @@ public class ResourceInputStreamProvider implements InputStreamProvider {
 
 		InputStream is = classloader.getResourceAsStream(resourcePath);
 
-		if(is == null) throw new PatcherLibBaseEx(Ctm.msgFormat("File {0} not found in resources!", resourcePath));
+		if(is == null) throw new PatcherLibBaseEx(Ctm.format("File {0} not found in resources!", resourcePath));
 
 		return is;
 	}

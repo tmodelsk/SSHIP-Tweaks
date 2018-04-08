@@ -7,9 +7,9 @@ import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.PatcherNotSupportedEx;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
-import tm.mtwModPatcher.lib.data.exportDescrUnit.StatPriArmor;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.UnitRecuitmentInfo;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
+import tm.mtwModPatcher.lib.data.exportDescrUnit.StatPriArmor;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.UnitDef;
 
 import java.util.ArrayList;
@@ -84,16 +84,6 @@ public class UnitsManager {
 		for (UnitDef unit : exportDescrUnit.getUnits()) {
 			String unitOwnersCsv = "";
 			unitOwnersCsv += unit.Ownership;
-
-			// ### Check if needs to be excluded - ommitted ###
-//			boolean isShouldBeExcluded = false;
-//			for (Pattern excludeNameRegex : unitsToExclude) {
-//				if (excludeNameRegex.matcher(unit.Name).find()) {
-//					isShouldBeExcluded = true;
-//					break;
-//				}
-//			}
-//			if (isShouldBeExcluded) continue;
 
 			if(isUnitShouldBeExcluded(unit, unitsToExclude)) continue;
 

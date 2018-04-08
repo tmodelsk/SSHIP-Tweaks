@@ -30,11 +30,13 @@ public abstract class BlockWithConditions extends ScriptBlock {
 	}
 	public Conditions andCondition(Condition condition) {
 		_Conditions.and(condition);
+		validate();
 
 		return _Conditions;
 	}
 	public Conditions andCondition(Conditions conditions) {
 		_Conditions.and(conditions);
+		validate();
 
 		return _Conditions;
 	}
@@ -42,6 +44,8 @@ public abstract class BlockWithConditions extends ScriptBlock {
 
 		for (Condition condition : conditions)
 			andCondition(condition);
+
+		validate();
 
 		return _Conditions;
 	}
@@ -61,4 +65,6 @@ public abstract class BlockWithConditions extends ScriptBlock {
 	public boolean isBodyEmpty() {
 		return _Body.isEmpty();
 	}
+
+	protected void validate() { }
 }

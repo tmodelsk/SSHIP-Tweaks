@@ -33,7 +33,7 @@ public class DescrCampaignAiDb extends XmlFileEntity {
 	}
 
 	public void replaceGlobalParameter(String paramName, Document replaceWithDoc) throws XPathExpressionException {
-		val nodeXpath = Ctm.msgFormat("/root/{0}",paramName);
+		val nodeXpath = Ctm.format("/root/{0}",paramName);
 
 		XPath xPath =  XPathFactory.newInstance().newXPath();
 		val xPathCpl = xPath.compile(nodeXpath);
@@ -87,7 +87,7 @@ public class DescrCampaignAiDb extends XmlFileEntity {
 	public void removeFactionAiSet(String aiLabelName) throws XPathExpressionException {
 		// ### FIND NODE ###
 		val node = getFactionAiNode(aiLabelName, xDoc);
-		if(node == null) throw new PatcherLibBaseEx(Ctm.msgFormat("Faction AI Label {0} not found",aiLabelName));
+		if(node == null) throw new PatcherLibBaseEx(Ctm.format("Faction AI Label {0} not found",aiLabelName));
 
 		val root = loadNode("/root");
 
@@ -96,7 +96,7 @@ public class DescrCampaignAiDb extends XmlFileEntity {
 
 	public static Node getFactionAiNode(String aiLabelName, Document descrCampaignAiDbDoc) throws XPathExpressionException {
 		// "/root/factor_modifiers/factor[@name='SIF_MINING']/pip_modifier"
-		val nodeXpath = Ctm.msgFormat("/root/faction_ai_label[@name='{0}']",aiLabelName);
+		val nodeXpath = Ctm.format("/root/faction_ai_label[@name='{0}']",aiLabelName);
 
 		XPath xPath =  XPathFactory.newInstance().newXPath();
 

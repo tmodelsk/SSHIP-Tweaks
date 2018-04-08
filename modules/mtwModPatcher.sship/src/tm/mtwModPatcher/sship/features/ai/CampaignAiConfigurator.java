@@ -11,16 +11,19 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 import tm.common.Ctm;
 import tm.common.collections.ArrayUniqueList;
 import tm.common.collections.ListUnique;
-import tm.mtwModPatcher.lib.common.core.features.*;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
+import tm.mtwModPatcher.lib.common.core.features.PatcherNotSupportedEx;
+import tm.mtwModPatcher.lib.common.core.features.ResourcesProvider;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdString;
 import tm.mtwModPatcher.lib.common.entities.FactionInfo;
-import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.lib.data._root.DescrCampaignAiDb;
 import tm.mtwModPatcher.lib.data._root.DescrSMFactions;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrStratSectioned;
 import tm.mtwModPatcher.lib.engines.ConsoleLogger;
 import tm.mtwModPatcher.lib.engines.FileEntityFactory;
+import tm.mtwModPatcher.lib.managers.FactionsDefs;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -227,7 +230,7 @@ public abstract class CampaignAiConfigurator extends Feature {
 		}
 
 		val xDoc = getAiDoc(path);
-		if(xDoc == null) throw new PatcherLibBaseEx(Ctm.msgFormat("descr_campaign_ai_db.xml AI for {0} not found in {1}", campaignAiType, path));
+		if(xDoc == null) throw new PatcherLibBaseEx(Ctm.format("descr_campaign_ai_db.xml AI for {0} not found in {1}", campaignAiType, path));
 
 		return xDoc;
 	}

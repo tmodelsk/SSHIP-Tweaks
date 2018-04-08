@@ -69,7 +69,7 @@ public class UnitsBugFixes extends Feature {
 				.filter(u -> u.isCategoryInfantry() &&
 						(!u.isClassSpearmen() && !u.isClassHeavy() && u.StatPriAttr.containsSpearOrPike()))
 				.collect(Collectors.toList());
-		if(spearsVeryStrange.size() > 0) throw new PatcherLibBaseEx(Ctm.msgFormat("There're spear infantry ({0}) with class not spear", spearsStrange.size()));
+		if(spearsVeryStrange.size() > 0) throw new PatcherLibBaseEx(Ctm.format("There're spear infantry ({0}) with class not spear", spearsStrange.size()));
 
 	}
 

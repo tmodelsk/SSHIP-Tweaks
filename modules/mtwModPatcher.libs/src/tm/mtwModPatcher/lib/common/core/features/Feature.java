@@ -149,7 +149,7 @@ public abstract class Feature {
 	}
 	public void setParValue(String parSymbol, Object value) {
 		val par = getParam(parSymbol);
-		if(par == null) throw new PatcherLibBaseEx( Ctm.msgFormat("Expected unique param '{0}' in feature {1} not found", parSymbol, getName()));
+		if(par == null) throw new PatcherLibBaseEx( Ctm.format("Expected unique param '{0}' in feature {1} not found", parSymbol, getName()));
 
 		par.setValue(value);
 		setParValue(par);

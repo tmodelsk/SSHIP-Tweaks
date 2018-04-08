@@ -11,7 +11,7 @@ public class BattleConfig extends XmlFileEntity {
 	}
 
 	public BattleConfig(int aiSet) {
-		super(Ctm.msgFormat("data\\AiSet{0}\\battle_config.xml",aiSet));
+		super(Ctm.format("data\\AiSet{0}\\battle_config.xml",aiSet));
 	}
 
 	public BattleConfig(String filePath) {

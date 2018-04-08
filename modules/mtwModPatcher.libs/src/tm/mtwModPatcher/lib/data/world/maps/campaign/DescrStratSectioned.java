@@ -35,11 +35,11 @@ public class DescrStratSectioned extends SectionsFileEntity {
 
 		int index = lines.findFirstLineByLinePath(
 				Arrays.asList(
-						Ctm.msgFormat("^\\s*faction\\s+{0}", factionSymbol),
+						Ctm.format("^\\s*faction\\s+{0}", factionSymbol),
 						"^ai_label\\s+\\s+"), 0);
 		if (index < 0) throw new PatcherLibBaseEx("ai_label not found for faction " + factionSymbol);
 
-		lines.replaceLine(index, Ctm.msgFormat("ai_label\t\t{0}", aiLabel));
+		lines.replaceLine(index, Ctm.format("ai_label\t\t{0}", aiLabel));
 	}
 
 	// !! NOT TESTED !!
@@ -111,7 +111,7 @@ public class DescrStratSectioned extends SectionsFileEntity {
 
 		val lines = Factions.getContent().getLines();
 
-		val regex = Ctm.msgFormat("^\\s*type {0} {1}", buildingType, buildingLevel);
+		val regex = Ctm.format("^\\s*type {0} {1}", buildingType, buildingLevel);
 		val index = lines.findFirstRegexLine(regex, start, end);
 		return index;
 	}

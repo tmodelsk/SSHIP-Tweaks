@@ -27,11 +27,11 @@ public class SnowStormNerfed extends Feature {
 	private void nerfSnowStormProbability() throws XPathExpressionException {
 		val basePath = "/weather/seasons/season[@id='winter']/climates/climate[@id='{0}']/patterns/pattern[@id='snow']";
 
-		weatherDb.updateAttributeByMultiplier(Ctm.msgFormat(basePath, "steppe"), "chance" , 0.5);
-		weatherDb.updateAttributeByMultiplier(Ctm.msgFormat(basePath, "highland"), "chance" , 0.5);
-		weatherDb.updateAttributeByMultiplier(Ctm.msgFormat(basePath, "alpine"), "chance" , 0.5);
-		weatherDb.updateAttributeByMultiplier(Ctm.msgFormat(basePath, "temperate_deciduous_forest"), "chance" , 0.5);
-		weatherDb.updateAttributeByMultiplier(Ctm.msgFormat(basePath, "temperate_coniferous_forest"), "chance" , 0.5);
+		weatherDb.updateAttributeByMultiplier(Ctm.format(basePath, "steppe"), "chance" , 0.5);
+		weatherDb.updateAttributeByMultiplier(Ctm.format(basePath, "highland"), "chance" , 0.5);
+		weatherDb.updateAttributeByMultiplier(Ctm.format(basePath, "alpine"), "chance" , 0.5);
+		weatherDb.updateAttributeByMultiplier(Ctm.format(basePath, "temperate_deciduous_forest"), "chance" , 0.5);
+		weatherDb.updateAttributeByMultiplier(Ctm.format(basePath, "temperate_coniferous_forest"), "chance" , 0.5);
 	}
 
 	private void nerfFogInSnowPattern() throws XPathExpressionException {
@@ -39,7 +39,7 @@ public class SnowStormNerfed extends Feature {
 
 		for (int periodNo = 1; periodNo <= 6; periodNo++) {
 			for (int eventNo = 1; eventNo <= 3; eventNo++) {
-				val path = Ctm.msgFormat("/weather/patterns/pattern[@id='snow']/periods/period[{0}]/events/event[{1}]/fog" ,
+				val path = Ctm.format("/weather/patterns/pattern[@id='snow']/periods/period[{0}]/events/event[{1}]/fog" ,
 						periodNo, eventNo);
 
 				weatherDb.updateAttributeByMultiplier(path,"max", 0.5);

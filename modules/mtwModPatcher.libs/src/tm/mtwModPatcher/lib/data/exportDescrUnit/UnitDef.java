@@ -166,9 +166,9 @@ public class UnitDef {
 	public String toString() {
 
 		if(StatSec != null && StatSec.Damage != 0)
-			return Ctm.msgFormat("{0} (PA:{1} SA:{2} D:{3})",Name , StatPri.Damage, StatSec.Damage, StatPriArmour.defence());
+			return Ctm.format("{0} (PA:{1} SA:{2} D:{3})",Name , StatPri.Damage, StatSec.Damage, StatPriArmour.defence());
 		else
-			return Ctm.msgFormat("{0} (PA:{1} D:{2})",Name , StatPri.Damage, StatPriArmour.defence());
+			return Ctm.format("{0} (PA:{1} D:{2})",Name , StatPri.Damage, StatPriArmour.defence());
 	}
 
 	public static final String ATTRIB_FREE_UPKEEP = "free_upkeep_unit";
