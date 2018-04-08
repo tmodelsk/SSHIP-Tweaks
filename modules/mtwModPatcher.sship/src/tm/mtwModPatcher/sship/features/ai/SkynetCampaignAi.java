@@ -27,7 +27,7 @@ public class SkynetCampaignAi extends CampaignAiConfigurator {
 	@Override
 	protected void initializeDefaults() {
 		for(val factionInfo : factionInfos) {
-			factionAiLabelsMap.put(factionInfo.Symbol , CampaignAiType.SKYNET);
+			factionAiLabelsMap.put(factionInfo.symbol, CampaignAiType.SKYNET);
 		}
 
 		factionAiLabelsMap.put("default", CampaignAiType.SKYNET);

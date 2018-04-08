@@ -20,7 +20,7 @@ public class CampaignAisCompilation extends CampaignAiConfigurator {
 	@Override
 	protected void initializeDefaults() {
 		// ## Bee Mug Carl AI as base, for everyone
-		for (val fi : factionInfos) factionAiLabelsMap.put(fi.Symbol, CampaignAiType.BEEMUGCARL_DEFAULT);
+		for (val fi : factionInfos) factionAiLabelsMap.put(fi.symbol, CampaignAiType.BEEMUGCARL_DEFAULT);
 		factionAiLabelsMap.put("default", CampaignAiType.BEEMUGCARL_DEFAULT);
 
 		// ## Papacy - Quieter AI papacy : 1

@@ -1,10 +1,10 @@
 package tm.mtwModPatcher.sship.features.Obsolete;
 
-import tm.mtwModPatcher.lib.common.entities.FactionInfo;
-import tm.mtwModPatcher.lib.managers.FactionsDefs;
-import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
+import tm.mtwModPatcher.lib.common.entities.FactionInfo;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.CampaignScript;
+import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.sship.features.agentsCharacters.FactionsDropZones;
 import tm.mtwModPatcher.sship.features.agentsCharacters.GeneralDropZone;
 import tm.mtwModPatcher.sship.features.armyUnits.ArmySuppliesCosts;
@@ -166,7 +166,7 @@ public class MultiGeneralsGonvernors extends Feature {
 		rl.add("					faction "+fationName);
 		rl.add("					character	random_name, named character, age 22, x "+ dz.X +", y "+ dz.Y);
 		rl.add("					traits MilitaryInclination 1,Military_Edu 1,NaturalMilitarySkill 1,GoodCommander 1,Loyal 3,ReligionStarter 1" + armySizeStr);
-		rl.add("					unit	"+ fi.BodyguardUnitName +"		exp 0 armour 0 weapon_lvl 0");
+		rl.add("					unit	"+ fi.bodyguardUnitName +"		exp 0 armour 0 weapon_lvl 0");
 		rl.add("				end");
 		rl.add("				log always Creating GENERAL for "+ fationName);
 		rl.add("			end_if");
@@ -174,8 +174,8 @@ public class MultiGeneralsGonvernors extends Feature {
 		rl.add("				spawn_army");
 		rl.add("					faction "+fationName);
 		rl.add("					character	random_name, named character, age 22, x "+ dz.X +", y "+ dz.Y);
-		rl.add("					traits GovernorInclination 1,GoodAdministrator 1,Loyal 3 ,ReligionStarter 1 ,"+fi.Education+"_Edu 1" + armySizeStr);	//
-		rl.add("					unit	"+ fi.BodyguardUnitName +"		exp 0 armour 0 weapon_lvl 0");
+		rl.add("					traits GovernorInclination 1,GoodAdministrator 1,Loyal 3 ,ReligionStarter 1 ,"+fi.education +"_Edu 1" + armySizeStr);	//
+		rl.add("					unit	"+ fi.bodyguardUnitName +"		exp 0 armour 0 weapon_lvl 0");
 		rl.add("				end");
 		rl.add("				log always Creating GOVERNOR for "+ fationName);
 		rl.add("			end_if");

@@ -22,25 +22,25 @@ public class QuieterAi extends CampaignAiConfigurator {
 	@Override
 	protected void initializeDefaults() {
 
-		val catholics = factionInfos.stream().filter( f -> f.Religion == Religion.Catholic && !f.IsPapacy()).collect(Collectors.toList());
+		val catholics = factionInfos.stream().filter( f -> f.religion == Religion.Catholic && !f.isPapacy()).collect(Collectors.toList());
 		for(val cathF : catholics)
-			factionAiLabelsMap.put(cathF.Symbol, CampaignAiType.QUIETER_CATHOLIC);
+			factionAiLabelsMap.put(cathF.symbol, CampaignAiType.QUIETER_CATHOLIC);
 
 		factionAiLabelsMap.put("papal_states", CampaignAiType.QUIETER_PAPAL);
 
-		val muslims = factionInfos.stream().filter( f -> f.Religion == Religion.Islam).collect(Collectors.toList());
+		val muslims = factionInfos.stream().filter( f -> f.religion == Religion.Islam).collect(Collectors.toList());
 		for(val islamF : muslims)
-			factionAiLabelsMap.put(islamF.Symbol, CampaignAiType.QUIETER_ISLAM);
+			factionAiLabelsMap.put(islamF.symbol, CampaignAiType.QUIETER_ISLAM);
 
-		val orthodoxs = factionInfos.stream().filter( f -> f.Religion == Religion.Orthodox).collect(Collectors.toList());
+		val orthodoxs = factionInfos.stream().filter( f -> f.religion == Religion.Orthodox).collect(Collectors.toList());
 		for(val islamF : orthodoxs)
-			factionAiLabelsMap.put(islamF.Symbol, CampaignAiType.QUIETER_DEFAULT);
+			factionAiLabelsMap.put(islamF.symbol, CampaignAiType.QUIETER_DEFAULT);
 
 		factionAiLabelsMap.put("mongols", CampaignAiType.QUIETER_MONGOL);
 
-		val pagans = factionInfos.stream().filter( f -> f.Religion == Religion.Pagan && !f.IsMongols()).collect(Collectors.toList());
+		val pagans = factionInfos.stream().filter( f -> f.religion == Religion.Pagan && !f.isMongols()).collect(Collectors.toList());
 		for(val paganF : pagans)
-			factionAiLabelsMap.put(paganF.Symbol, CampaignAiType.QUIETER_PAGAN);
+			factionAiLabelsMap.put(paganF.symbol, CampaignAiType.QUIETER_PAGAN);
 
 		factionAiLabelsMap.put("slave", CampaignAiType.QUIETER_SLAVE);
 

@@ -1,4 +1,4 @@
-package tm.mtwModPatcher.sship.features.ai;
+package tm.mtwModPatcher.sship.features.tools;
 
 import lombok.val;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
@@ -84,13 +84,13 @@ public class BetterLogging extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-
 	public static UUID Id = UUID.fromString("cc26254e-bf76-4953-94f8-1848d40dea61");
 
 	public BetterLogging() {
 		super("Better campaign logging");
 
 		addCategory("Various");
+		addCategory("Tools");
 
 		setDescriptionShort("Better campaign logging - creates some additional helper system.log.txt entries -> End of Turn, etc. ");
 		setDescriptionUrl("http://tmsship.wikidot.com/better-campaign-logging");

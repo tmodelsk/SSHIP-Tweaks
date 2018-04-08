@@ -96,7 +96,7 @@ public abstract class CampaignAiConfigurator extends Feature {
 			if(factionAiLabelsMap.containsKey(aiLabel)) {
 				val campaignAiType = (CampaignAiType) factionAiLabelsMap.get(aiLabel);
 
-				val factionInfoList = factionInfos.stream().filter(f -> f.Symbol.equals(aiLabel)).collect(Collectors.toList());
+				val factionInfoList = factionInfos.stream().filter(f -> f.symbol.equals(aiLabel)).collect(Collectors.toList());
 				Node aiNode;
 
 				if(factionInfoList.size() > 0) {
@@ -250,7 +250,7 @@ public abstract class CampaignAiConfigurator extends Feature {
 
 	protected void setFactionAiLabels() {
 		for (val factionInfo : factionInfos) {
-			descrStrat.setFactionAiLabel(factionInfo.Symbol, factionInfo.Symbol);
+			descrStrat.setFactionAiLabel(factionInfo.symbol, factionInfo.symbol);
 		}
 	}
 
@@ -269,7 +269,7 @@ public abstract class CampaignAiConfigurator extends Feature {
 
 	void updateNavalInvasionForAll(boolean isNavalInvasion) {
 		for (val factionInfo : factionInfos) {
-			updateNavalInvasion(factionInfo.Symbol, isNavalInvasion);
+			updateNavalInvasion(factionInfo.symbol, isNavalInvasion);
 		}
 	}
 

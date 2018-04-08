@@ -137,7 +137,7 @@ public class GarrisonOnAssaultRaising extends Feature {
 			val faction = FactionsDefs.loadFactionInfo(sInfo.CreatedByFaction);
 
 			boolean isCreate;
-			if (faction.Religion == notReligion) {
+			if (faction.religion == notReligion) {
 				if (notReligionSettlementsExcluded != null && notReligionSettlementsExcluded.contains(sInfo.Name))
 					isCreate = true;
 				else isCreate = false;

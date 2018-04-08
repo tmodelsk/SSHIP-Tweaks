@@ -7,48 +7,48 @@ import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
  */
 public class FactionInfo {
 
-	public String Symbol;
+	public String symbol;
 
-	public String Description;
+	public String description;
 
-	public CultureType Culture;
+	public CultureType culture;
 
-	public Religion Religion;
+	public Religion religion;
 
 	// Now just used for xxx_Edu - Education traits
-	public EducationStyle Education;
+	public EducationStyle education;
 
-	public String BodyguardUnitName;
+	public String bodyguardUnitName;
 
-	public boolean IsSlave;
-	public boolean IsPapacy() {
-		return Symbol.equals("papal_states");
+	public boolean isSlave;
+	public boolean isPapacy() {
+		return symbol.equals("papal_states");
 	}
-	public boolean IsMongols() {
-		return Symbol.equals("mongols");
+	public boolean isMongols() {
+		return symbol.equals("mongols");
 	}
 
 	public String getCultureTypeStr() {
-		return convertCulture(this.Culture);
+		return convertCulture(this.culture);
 	}
 
 	public FactionInfo(String symbol, String description, Religion religion, EducationStyle education, String bodyguardUnitName) {
-		Symbol = symbol;
-		Description = description;
-		Religion = religion;
-		Education = education;
-		BodyguardUnitName = bodyguardUnitName;
+		this.symbol = symbol;
+		this.description = description;
+		this.religion = religion;
+		this.education = education;
+		this.bodyguardUnitName = bodyguardUnitName;
 
-		IsSlave = false;
+		isSlave = false;
 	}
 
 	public FactionInfo(String symbol, String description, CultureType culture, Religion religion, EducationStyle education, String bodyguardUnitName) {
 		this(symbol, description, religion, education, bodyguardUnitName);
-		Culture = culture;
+		this.culture = culture;
 	}
 
 	public FactionInfo() {
-		IsSlave = false;
+		isSlave = false;
 	}
 
 

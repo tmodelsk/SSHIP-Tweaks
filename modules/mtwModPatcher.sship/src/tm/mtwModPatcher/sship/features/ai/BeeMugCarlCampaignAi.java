@@ -29,10 +29,10 @@ public class BeeMugCarlCampaignAi extends CampaignAiConfigurator {
 	@Override
 	protected void initializeDefaults() {
 		for (val fi : factionInfos) {
-			if(fi.IsPapacy())
-				factionAiLabelsMap.put(fi.Symbol, CampaignAiType.BEEMUGCARL_PAPACY);
+			if(fi.isPapacy())
+				factionAiLabelsMap.put(fi.symbol, CampaignAiType.BEEMUGCARL_PAPACY);
 			else
-				factionAiLabelsMap.put(fi.Symbol, CampaignAiType.BEEMUGCARL_DEFAULT);
+				factionAiLabelsMap.put(fi.symbol, CampaignAiType.BEEMUGCARL_DEFAULT);
 		}
 
 		factionAiLabelsMap.put("default", CampaignAiType.BEEMUGCARL_DEFAULT);

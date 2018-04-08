@@ -43,6 +43,10 @@ public class MonitorEventBlock extends BlockWithConditions {
 		return "end_monitor";
 	}
 
+	public void terminateMonitor() {
+		add(TERMINATE_MONITOR);
+	}
+
 	public MonitorEventBlock(EventType eventType, String conditionsStr) {
 		super(conditionsStr);
 		_EventType = eventType;
@@ -95,12 +99,5 @@ public class MonitorEventBlock extends BlockWithConditions {
 
 	private static Map<EventType, Set<Class>> wrongCondition = initWrongContitions();
 
-
-//	public MonitorEventBlock(EventType eventType, List<CharacterCondition> conditions) {
-//		this(eventType, conditions.getFirst(0).getString());
-//
-//		for (int i = 1; i <  conditions.size(); i++) {
-//			_Conditions.and(conditions.getFirst(i));
-//		}
-//	}
+	public static final TerminateMonitor TERMINATE_MONITOR = TerminateMonitor.I;
 }

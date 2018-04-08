@@ -18,6 +18,9 @@ import tm.mtwModPatcher.lib.managers.UnitsManager;
 import java.util.Arrays;
 import java.util.UUID;
 
+import static tm.mtwModPatcher.lib.managers.FactionsDefs.CUMANS;
+import static tm.mtwModPatcher.lib.managers.FactionsDefs.NOVOGROD;
+
 /**  */
 public class FactionsSpecifics extends Feature {
 
@@ -35,12 +38,13 @@ public class FactionsSpecifics extends Feature {
 		edb = getFileRegisterForUpdated(ExportDescrBuilding.class);
 		exportDescrUnit = getFileRegisterForUpdated(ExportDescrUnitTyped.class);
 
-		Byzantium();
+		byzantium();
 
-		//RomanCatholicTradersBonuses();
-		NorwegianDanesBoostReplenishRates();
-		CumansBoostReplenishRates();
-		HolyRomanEmpireLawMinus();
+		//romanCatholicTradersBonuses();
+		norwegianDanesBoostReplenishRates();
+		cumansBoostReplenishRates();
+		lithuaniaBoostReplenishRates();
+		holyRomanEmpireLawMinus();
 		turksRumBoost();
 
 		// ### DeBuff Crusade States - minus LAW
@@ -53,23 +57,28 @@ public class FactionsSpecifics extends Feature {
 		edb.insertIntoCityCastleWallsCapabilities("		law_bonus bonus -1 requires factions { moors, }");
 	}
 
-	protected void HolyRomanEmpireLawMinus() throws PatcherLibBaseEx {
+	protected void holyRomanEmpireLawMinus() throws PatcherLibBaseEx {
 
 		edb.insertIntoCityCastleWallsCapabilities("		law_bonus bonus -3 requires factions { hre, }");
 	}
 
-	protected void NorwegianDanesBoostReplenishRates() throws PatcherLibBaseEx {
+	protected void norwegianDanesBoostReplenishRates() throws PatcherLibBaseEx {
 		UnitsManager unitsManager = new UnitsManager();
 		unitsManager.updateOrAddReplenishBonusEntry(Arrays.asList("norway", "denmark"), null, 1.5, null, edb);
 	}
 
-	protected void CumansBoostReplenishRates() throws PatcherLibBaseEx {
+	protected void cumansBoostReplenishRates() throws PatcherLibBaseEx {
 		val unitsManager = new UnitsManager();
-		unitsManager.updateOrAddReplenishBonusEntry("cumans", null, 3.0, null, edb);
-		unitsManager.multiplyUpkeepRecruitCosts("cumans", 1.0, 0.8, null, exportDescrUnit);
+		unitsManager.updateOrAddReplenishBonusEntry(CUMANS.symbol, null, 2.0, null, edb);
+		unitsManager.multiplyUpkeepRecruitCosts(CUMANS.symbol, 1.0, 0.8, null, exportDescrUnit);
 	}
 
-	protected void RomanCatholicTradersBonuses() throws PatcherLibBaseEx {
+	protected void lithuaniaBoostReplenishRates() {
+		val unitsManager = new UnitsManager();
+		unitsManager.updateOrAddReplenishBonusEntry(NOVOGROD.symbol, null, 2.0, null, edb);
+	}
+
+	protected void romanCatholicTradersBonuses() throws PatcherLibBaseEx {
 		String requires = " requires factions { aragon,  portugal, pisa, venice, england, jerusalem, }";
 		String attributeStr;
 
@@ -103,12 +112,12 @@ public class FactionsSpecifics extends Feature {
 		edb.insertIntoBuildingCapabilities("castle_sea_trade", "merchants_wharf", "castle", attributeStr + requires);
 	}
 
-	protected void Byzantium() throws PatcherLibBaseEx {
+	protected void byzantium() throws PatcherLibBaseEx {
 
-		ByzantiumMilitaryBuildingsPenalties();
+		byzantiumMilitaryBuildingsPenalties();
 
 		// ##### Additional PRODUCTIVITY MINUS BIZANTIUM ONLY - on trade goods low based level #####
-		ByzantiumTradeMinus();
+		byzantiumTradeMinus();
 
 		// ##### POPULATION GROWTH MINUS - BIZANTIUM ONLY !! #####
 		if (byzantiumPopulationPenaltyPlayer > 0)
@@ -121,7 +130,7 @@ public class FactionsSpecifics extends Feature {
 		unitsManager.updateOrAddReplenishBonusEntry("byzantium", null, byzantiumReplenishMult, null, edb);
 	}
 
-	protected void ByzantiumMilitaryBuildingsPenalties() throws PatcherLibBaseEx {
+	protected void byzantiumMilitaryBuildingsPenalties() throws PatcherLibBaseEx {
 		String requirements = "factions { " + FactionsDefs.byzantiumCsv() + " } ";
 		int bonus = -byzantiumPopulationPenaltyMilitaryBuildings;
 
@@ -158,7 +167,7 @@ public class FactionsSpecifics extends Feature {
 		}
 	}
 
-	protected void ByzantiumTradeMinus() throws PatcherLibBaseEx {
+	protected void byzantiumTradeMinus() throws PatcherLibBaseEx {
 		// ##### Additional PRODUCTIVITY MINUS BIZANTIUM ONLY - on trade goods low based level #####
 		String requiresByz = " requires factions { byzantium, }", newLine;
 		// # WALLS - low based trade minus

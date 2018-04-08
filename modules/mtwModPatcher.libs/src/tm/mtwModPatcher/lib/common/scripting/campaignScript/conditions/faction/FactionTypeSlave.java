@@ -7,4 +7,6 @@ public class FactionTypeSlave extends FactionType {
 	public FactionTypeSlave() {
 		super("slave");
 	}
+
+	public static final FactionTypeSlave I = new FactionTypeSlave();
 }

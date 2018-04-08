@@ -26,6 +26,8 @@ import tm.mtwModPatcher.sship.features.layout.MenuScreenSS;
 import tm.mtwModPatcher.sship.features.layout.SplashLoadingScreen;
 import tm.mtwModPatcher.sship.features.layout.WatchtowersToVillages;
 import tm.mtwModPatcher.sship.features.map.*;
+import tm.mtwModPatcher.sship.features.tools.AutoRunHotseat;
+import tm.mtwModPatcher.sship.features.tools.BetterLogging;
 
 /** Christianitas Mod SSHIP Feature */
 public class SsHipFeatures {
@@ -135,6 +137,8 @@ public class SsHipFeatures {
 		features.add(new FightForSurvival(unitsManager));	// adds replenish rates entries for existing stuff, should be almost last
 		features.add(new PopulationResourcesLimited());	// Should be one of the last, globally modifies replenish & max stack rates
 
+		features.add(new AutoRunHotseat());
+
 		initializeFeatures(features);
 
 		return features;
@@ -163,6 +167,8 @@ public class SsHipFeatures {
 		features.disableFeatureIfExists( GarrisonOnAssaultRaising.Id);
 		features.disableFeatureIfExists( StrategyDreadBuildingsDisable.Id);
 		features.disableFeatureIfExists( BattleDreadLowered.Id);
+
+		features.disableFeatureIfExists( AutoRunHotseat.Id);
 
 		if(!ConfigurationSettings.isDevEnvironment()) {
 

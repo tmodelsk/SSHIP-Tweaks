@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class FactionsDefs {
 
 	public static FactionInfo loadFactionInfo(String factionName) throws PatcherLibBaseEx {
-		List<FactionInfo> factions = _FactionInfos.stream().filter( fi -> fi.Symbol.equals(factionName)).collect(Collectors.toList());
+		List<FactionInfo> factions = _FactionInfos.stream().filter( fi -> fi.symbol.equals(factionName)).collect(Collectors.toList());
 
 		if(factions.size() > 1) throw new PatcherLibBaseEx("Faction Symbol not unique");
 
@@ -184,12 +184,17 @@ public class FactionsDefs {
 			"sicily",
 			"pisa");	// 16
 
+	public static final FactionInfo NORWAY = new FactionInfo("norway","Norway", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "Royal Hirdsmen" );
+	public static final FactionInfo SCOTLAND = new FactionInfo("scotland","Scotland", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" );
+	public static final FactionInfo NOVOGROD = new FactionInfo("russia","NOVGOROD", CultureType.EASTERN_EUROPEAN, Religion.Orthodox , EducationStyle.Western , "EE Bodyguard" ); // ???? Culture = Western ???
+	public static final FactionInfo CUMANS = new FactionInfo("cumans","CUMANS", CultureType.EASTERN_EUROPEAN, Religion.Pagan, EducationStyle.Pagan , "Cuman Bodyguard" );
+
 	private static final List<FactionInfo> _FactionInfos = Arrays.asList(
 			new FactionInfo("denmark","Denmark", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
 			new FactionInfo("jerusalem","Crusader States", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
-			new FactionInfo("norway","Norway", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "Royal Hirdsmen" ),
+			NORWAY,
 			new FactionInfo("hre","Holy Roman Emprire - Germans", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
-			new FactionInfo("scotland","Scotland", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
+			SCOTLAND,
 			new FactionInfo("france","France", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
 			new FactionInfo("england","England", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
 			new FactionInfo("hungary","Hungary",CultureType.EASTERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
@@ -209,13 +214,13 @@ public class FactionsDefs {
 			new FactionInfo("rum","SULTANATE OF RUM - Seljuq Turks - Asia Minor", CultureType.MIDDLE_EASTERN, Religion.Islam , EducationStyle.Eastern , "ME Bodyguard" ),
 			new FactionInfo("kwarezm","ZENGIDS", CultureType.MIDDLE_EASTERN, Religion.Islam , EducationStyle.Eastern , "ME Bodyguard" ),
 
-			new FactionInfo("russia","NOVGOROD", CultureType.EASTERN_EUROPEAN, Religion.Orthodox , EducationStyle.Western , "EE Bodyguard" ), // ???? Culture = Western ???
+			NOVOGROD,
 			new FactionInfo("kievan_rus","KIEVAN RUS", CultureType.EASTERN_EUROPEAN, Religion.Orthodox , EducationStyle.Western , "EE Bodyguard" ),  // ???? Culture = Western ???
 			new FactionInfo("byzantium","BYZANTINE EMPIRE", CultureType.GREEK, Religion.Orthodox , EducationStyle.Greek , "Greek Bodyguard" ),
 			new FactionInfo("timurids","GEORGIA", CultureType.GREEK, Religion.Orthodox , EducationStyle.Greek , "bodyguard georgia" ),
 			new FactionInfo("teutonic_order","SERBIA", CultureType.GREEK, Religion.Orthodox , EducationStyle.Western , "EE Bodyguard" ),  // ???? Culture = Western ???
 
-			new FactionInfo("cumans","CUMANS", CultureType.EASTERN_EUROPEAN, Religion.Pagan, EducationStyle.Pagan , "Cuman Bodyguard" ),
+			CUMANS,
 			new FactionInfo("lithuania","LITHUANIA", CultureType.EASTERN_EUROPEAN, Religion.Pagan, EducationStyle.Pagan , "Lith Bodyguard" ),
 			new FactionInfo("mongols","Mongols", CultureType.MIDDLE_EASTERN, Religion.Pagan, EducationStyle.Pagan , "Keshikten Bodyguard" ),
 			new FactionInfo("slave", "Rebels", CultureType.SOUTHERN_EUROPEAN, Religion.Pagan , EducationStyle.None , null )
@@ -251,9 +256,9 @@ public class FactionsDefs {
 			if(cultureType == null) res.add(symbol);
 			else {
 				CultureType finalCultureType = cultureType;
-				val factions = _FactionInfos.stream().filter(fi -> fi.Culture.equals(finalCultureType) ).collect(Collectors.toList());
+				val factions = _FactionInfos.stream().filter(fi -> fi.culture.equals(finalCultureType) ).collect(Collectors.toList());
 
-				factions.forEach( f -> res.add(f.Symbol) );
+				factions.forEach( f -> res.add(f.symbol) );
 			}
 		}
 
