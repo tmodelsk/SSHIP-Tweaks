@@ -1,4 +1,4 @@
-package tm.mtwModPatcher.sship.features.armyUnits;
+package tm.mtwModPatcher.sship.features.global;
 
 import lombok.Getter;
 import lombok.Setter;
