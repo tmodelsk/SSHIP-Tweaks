@@ -5,11 +5,11 @@ import lombok.Setter;
 import lombok.val;
 import tm.common.collections.ArrayUniqueList;
 import tm.common.collections.ListUnique;
-import tm.mtwModPatcher.lib.common.entities.UnitReplenishRate;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdDouble;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdInteger;
+import tm.mtwModPatcher.lib.common.entities.UnitReplenishRate;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.Buildings;
 import tm.mtwModPatcher.sship.features.global.PopulationResourcesLimited;
@@ -21,9 +21,9 @@ public class NobilityManyGeneralsGovernors extends Feature {
 
 	@Override
 	public void setParamsCustomValues() {
-		cityReplenishTurnsStarting = 44;
+		cityReplenishTurnsStarting = 48; //44;
 		cityReplenishTurnsBonus = 2;
-		castleReplenishTurnsStarting = 40;
+		castleReplenishTurnsStarting = 44; //40;
 		castleReplenishTurnsBonus = 2;
 		aiReplenishTurnsMulti = 1.5;
 	}
