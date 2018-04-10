@@ -1,33 +1,43 @@
 package tm.mtwModPatcher.sship.features.armyUnits;
 
+import lombok.Getter;
+import lombok.Setter;
 import lombok.val;
-import tm.mtwModPatcher.lib.managers.FactionsDefs;
-import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
+import tm.common.collections.ArrayUniqueList;
+import tm.common.collections.ListUnique;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
+import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
+import tm.mtwModPatcher.lib.common.core.features.params.ParamIdInteger;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
-import tm.mtwModPatcher.lib.data.exportDescrUnit.UnitDef;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.StatPriArmor;
+import tm.mtwModPatcher.lib.data.exportDescrUnit.UnitDef;
+import tm.mtwModPatcher.lib.managers.FactionsDefs;
 
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
+import static tm.mtwModPatcher.sship.lib.Buildings.*;
 
 /** Wetern Knight +1 Armor etc */
 public class CatholicFactionsBoost extends Feature {
 
 	@Override
 	public void setParamsCustomValues() {
-
+		templeConversionRateBonus = 0;
 	}
 
 	@Override
 	public void executeUpdates() throws Exception {
-		exportDescrUnit = getFileRegisterForUpdated(ExportDescrUnitTyped.class);
-		exportDescrBuilding = getFileRegisterForUpdated(ExportDescrBuilding.class);
+		edu = getFileRegisterForUpdated(ExportDescrUnitTyped.class);
+		edb = getFileRegisterForUpdated(ExportDescrBuilding.class);
 
 		knightsWesternArmorUp();
-		religiousConversionTempleBonus();
+
+		if(templeConversionRateBonus > 0)
+			religiousConversionTempleBonus();
 	}
 
 	private void knightsWesternArmorUp() {
@@ -36,7 +46,7 @@ public class CatholicFactionsBoost extends Feature {
 		val turanianCsv = FactionsDefs.turanianFactionsCsv();
 
 		// ## Find All not muslim & not pagan Knights ##
-		List<UnitDef> knights = exportDescrUnit.getUnits().stream()
+		List<UnitDef> knights = edu.getUnits().stream()
 				.filter(
 						u -> u.Attributes.contains("knight")
 								&& FactionsDefs.isNotAnyFirstCsvFactorsInSecondCsv(islamFactionsCsv , u.Ownership)
@@ -84,19 +94,32 @@ public class CatholicFactionsBoost extends Feature {
 		String attribStr = "        religion_level bonus ";
 
 		// # City # : temple_catholic : levels small_church church abbey cathedral huge_cathedral
-		//exportDescrBuilding.insertIntoBuildingCapabilities("temple_catholic", "small_church", "city", attribStr + 0);
-		exportDescrBuilding.insertIntoBuildingCapabilities("temple_catholic", "church", "city", attribStr + 1);
-		exportDescrBuilding.insertIntoBuildingCapabilities("temple_catholic", "abbey", "city", attribStr + 1);
-		exportDescrBuilding.insertIntoBuildingCapabilities("temple_catholic", "cathedral", "city", attribStr + 2);
-		exportDescrBuilding.insertIntoBuildingCapabilities("temple_catholic", "huge_cathedral", "city", attribStr + 2);
+		//edb.insertIntoBuildingCapabilities("temple_catholic", "small_church", "city", attribStr + 0);
+		edb.insertIntoBuildingCapabilities(TempleCatholicCity, "church", CityType, attribStr + templeConversionRateBonus);
+		edb.insertIntoBuildingCapabilities(TempleCatholicCity, "abbey", CityType, attribStr + templeConversionRateBonus);
+		edb.insertIntoBuildingCapabilities(TempleCatholicCity, "cathedral", CityType, attribStr + templeConversionRateBonus +1);
+		edb.insertIntoBuildingCapabilities(TempleCatholicCity, "huge_cathedral", CityType, attribStr + templeConversionRateBonus +1);
 
 		// # Castle # : temple_catholic_castle : levels small_chapel chapel
-		exportDescrBuilding.insertIntoBuildingCapabilities("temple_catholic_castle", "small_chapel", "castle", attribStr + 1);
-		exportDescrBuilding.insertIntoBuildingCapabilities("temple_catholic_castle", "chapel", "castle", attribStr + 2);
+		edb.insertIntoBuildingCapabilities(TempleCatholicCastle, "small_chapel", CastleType, attribStr + templeConversionRateBonus);
+		edb.insertIntoBuildingCapabilities(TempleCatholicCastle, "chapel", CastleType, attribStr + templeConversionRateBonus +1);
 	}
 
-	private ExportDescrUnitTyped exportDescrUnit;
-	private ExportDescrBuilding exportDescrBuilding;
+	@Override
+	public ListUnique<ParamId> defineParamsIds() {
+		val pars = new ArrayUniqueList<ParamId>();
+
+		pars.add(new ParamIdInteger("TempleConversionRateBonus", "Temple Conversion Rate Bonus",
+				feature -> ((CatholicFactionsBoost) feature).getTempleConversionRateBonus(),
+				(feature, value) -> ((CatholicFactionsBoost) feature).setTempleConversionRateBonus(value)));
+
+		return pars;
+	}
+
+	private ExportDescrUnitTyped edu;
+	private ExportDescrBuilding edb;
+
+	@Getter @Setter private int templeConversionRateBonus;
 
 	private static String nl = System.lineSeparator();
 

@@ -5,21 +5,21 @@ import lombok.Setter;
 import lombok.val;
 import tm.common.collections.ArrayUniqueList;
 import tm.common.collections.ListUnique;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdBoolean;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdDouble;
-import tm.mtwModPatcher.lib.data.exportDescrBuilding.UnitRecruitmentQueries;
-import tm.mtwModPatcher.lib.managers.FactionsDefs;
-import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
-import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.core.features.params.ParamIdInteger;
 import tm.mtwModPatcher.lib.data._root.DescrCampaignDb;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.UnitRecruitmentQueries;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
+import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.lib.managers.UnitsManager;
 import tm.mtwModPatcher.sship.lib.UnitRecruitmentSshipQueries;
 
 import javax.xml.xpath.XPathExpressionException;
-import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 import java.util.regex.Pattern;
@@ -33,6 +33,7 @@ public class MuslimFactionsBoost extends Feature {
 	public void setParamsCustomValues() {
 		ahdathMilitiaBoost = false;
 		muslimReplenishMult = 1.2;
+		templeConversionRateBonus = 0;
 	}
 
 	@Override
@@ -42,7 +43,10 @@ public class MuslimFactionsBoost extends Feature {
 		descrCampaignDb = getFileRegisterForUpdated(DescrCampaignDb.class);
 
 		unitsReplenishRatesBoost();
-		religiousConversionTempleBonus();
+
+		if(templeConversionRateBonus > 0)
+			religiousConversionTempleBonus();
+
 		jihadRequirement();
 	}
 
@@ -72,17 +76,17 @@ public class MuslimFactionsBoost extends Feature {
 
 		// ### Religion Conversion bonus Muslims Mosques  ###
 
-		String attribStr = "        religion_level bonus ";
+		String attribStr = "        religion_level bonus "+templeConversionRateBonus;
 
 		// # City #
-		exportDescrBuilding.insertIntoBuildingCapabilities("temple_muslim", "small_masjid", "city", attribStr + 1);
-		exportDescrBuilding.insertIntoBuildingCapabilities("temple_muslim", "masjid", "city", attribStr + 1);
-		exportDescrBuilding.insertIntoBuildingCapabilities("temple_muslim", "minareted_masjid", "city", attribStr + 1);
-		exportDescrBuilding.insertIntoBuildingCapabilities("temple_muslim", "jama", "city", attribStr + 1);
-		exportDescrBuilding.insertIntoBuildingCapabilities("temple_muslim", "great_jama", "city", attribStr + 1);
+		exportDescrBuilding.insertIntoBuildingCapabilities("temple_muslim", "small_masjid", "city", attribStr);
+		exportDescrBuilding.insertIntoBuildingCapabilities("temple_muslim", "masjid", "city", attribStr);
+		exportDescrBuilding.insertIntoBuildingCapabilities("temple_muslim", "minareted_masjid", "city", attribStr);
+		exportDescrBuilding.insertIntoBuildingCapabilities("temple_muslim", "jama", "city", attribStr);
+		exportDescrBuilding.insertIntoBuildingCapabilities("temple_muslim", "great_jama", "city", attribStr);
 		// # Castle #
-		exportDescrBuilding.insertIntoBuildingCapabilities("temple_muslim_castle", "c_small_masjid", "castle", attribStr + 1);
-		exportDescrBuilding.insertIntoBuildingCapabilities("temple_muslim_castle", "c_masjid", "castle", attribStr + 1);
+		exportDescrBuilding.insertIntoBuildingCapabilities("temple_muslim_castle", "c_small_masjid", "castle", attribStr);
+		exportDescrBuilding.insertIntoBuildingCapabilities("temple_muslim_castle", "c_masjid", "castle", attribStr);
 	}
 
 	private void jihadRequirement() throws XPathExpressionException {
@@ -101,11 +105,16 @@ public class MuslimFactionsBoost extends Feature {
 				feature -> ((MuslimFactionsBoost) feature).getMuslimReplenishMult(),
 				(feature, value) -> ((MuslimFactionsBoost) feature).setMuslimReplenishMult(value)));
 
+		pars.add(new ParamIdInteger("TempleConversionRateBonus", "Muslim Temple Conversion Rate Bonus",
+				feature -> ((MuslimFactionsBoost) feature).getTempleConversionRateBonus(),
+				(feature, value) -> ((MuslimFactionsBoost) feature).setTempleConversionRateBonus(value)));
+
 		return pars;
 	}
 
-	@Getter @Setter private boolean ahdathMilitiaBoost = false;
-	@Getter @Setter private double muslimReplenishMult = 1.2;
+	@Getter @Setter private boolean ahdathMilitiaBoost;
+	@Getter @Setter private double muslimReplenishMult;
+	@Getter @Setter private int templeConversionRateBonus;
 
 	protected ExportDescrBuilding exportDescrBuilding;
 	protected ExportDescrUnitTyped exportDescrUnit;
