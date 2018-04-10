@@ -41,6 +41,15 @@ public class Buildings {
 	public static final List<String> TavernCityLevels = Arrays.asList("brothel", "inn", "tavern", "coaching_house", "pleasure_palace");
 	public static final List<String> TavernCastleLevels = Arrays.asList("c_brothel");
 
+	public static final String TempleMuslimCity = "temple_muslim";
+	public static final String TempleMuslimCastle = "temple_muslim_castle";
+
+	public static final String TempleCatholicCity = "temple_catholic";
+	public static final String TempleCatholicCastle = "temple_catholic_castle";
+
+	public static final String MonasteryCatholicCity = "friar";
+	public static final String MonasteryCatholicCastle = "monastery_castle";
+
 	public final static tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.WallsCity WallsCity =
 			tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.Buildings.WallsCity;
 

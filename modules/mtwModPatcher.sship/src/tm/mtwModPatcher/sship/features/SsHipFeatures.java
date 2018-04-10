@@ -76,8 +76,6 @@ public class SsHipFeatures {
 		features.add(new SkynetCampaignAi(resourcesProvider));
 		features.add(new QuieterAiFactionStanding());
 
-		features.add(new BetterLogging());
-
 		features.add(new CastleEasierGrowth());
 
 		features.add(new CatholicIberiaUnitsRecruitmentIncreased());
@@ -137,6 +135,7 @@ public class SsHipFeatures {
 		features.add(new FightForSurvival(unitsManager));	// adds replenish rates entries for existing stuff, should be almost last
 		features.add(new PopulationResourcesLimited());	// Should be one of the last, globally modifies replenish & max stack rates
 
+		features.add(new BetterLogging());
 		features.add(new AutoRunHotseat());
 
 		initializeFeatures(features);
