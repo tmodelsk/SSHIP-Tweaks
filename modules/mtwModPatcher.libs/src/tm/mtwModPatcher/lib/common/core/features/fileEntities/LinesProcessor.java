@@ -402,7 +402,12 @@ public class LinesProcessor {
 		return findFirstRegexLine(regex, start);    // search to the end
 	}
 
-	// expects to find, if not - throws
+	/**  expects to find, if not - throws */
+	public int findExpFirstRegexLine(String firstRegex, String secondRegex) {
+		int index = findExpFirstRegexLine(firstRegex);
+		return findExpFirstRegexLine(secondRegex, index+1);
+	}
+	/**  expects to find, if not - throws */
 	public int findExpFirstRegexLine(String regex) {
 		int index = findFirstRegexLine(regex);
 		if (index < 0) throw new LineNotFoundEx("Line with Regex '" + regex + "' not found in" + uri);

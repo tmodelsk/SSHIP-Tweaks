@@ -30,8 +30,8 @@ public class Buildings {
 	public static final String RiverAccessLevel = "river_port";
 
 	public  static final String PortCity = "port";
-	public  static final String PortCastle = "castle_port";
 	public static final List<String> PortCityLevels = Arrays.asList("port", "shipwright" ,"dockyard" ,"naval_drydock");
+	public  static final String PortCastle = "castle_port";
 	public static final List<String> PortCastleLevels = Arrays.asList("c_port", "c_shipwright", "c_dockyard", "c_naval_drydock");
 
 	public  static final String SeaTradeCity = "sea_trade";
@@ -43,6 +43,22 @@ public class Buildings {
 	public static final String TavernCastle = "castle_taverns";
 	public static final List<String> TavernCityLevels = Arrays.asList("brothel", "inn", "tavern", "coaching_house", "pleasure_palace");
 	public static final List<String> TavernCastleLevels = Arrays.asList("c_brothel");
+
+	public static final String StoneMason = "stonemason";
+	public static final List<String> StoneMasonLevels = Arrays.asList("sitehut", "stonemason");
+
+	public static final String LoggingCamp = "logging_camp";
+	public static final List<String> LoggingCampLevels = Arrays.asList("logging_camp", "carpenter");
+
+	public static final String SmithCity = "smith";
+	public static final List<String> SmithCityLevels = Arrays.asList("leather_tanner", "blacksmith", "armourer", "heavy_armourer", "plate_armourer", "gothic_armourer");
+	public static final String SmithCastle = "castle_smith";
+	public static final List<String> SmithCastleLevels = Arrays.asList("c_leather_tanner", "c_blacksmith", "c_armourer", "c_heavy_armourer", "c_plate_armourer", "c_gothic_armourer");
+
+	public static final String BakeryCity = "bakery";
+	public static final List<String> BakeryCityLevels = Arrays.asList("bakery", "pastry_shop");
+	public static final String BakeryCastle = "castle_bakery";
+	public static final String BakeryCastleLevel = "c_bakery";
 
 	public static final String TempleMuslimCity = "temple_muslim";
 	public static final String TempleMuslimCastle = "temple_muslim_castle";
@@ -70,9 +86,13 @@ public class Buildings {
 	public static final String MinesCastle = "castle_mines";
 	public static final List<String> MinesCastleLevels = Arrays.asList("c_mines", "c_mines+1");
 
-
 	public static final String BarracksCastle = "castle_barracks";
 	public static final List<String> BarracksCastleLevels = Arrays.asList("mustering_hall", "garrison_quarters", "drill_square", "barracks", "armoury");
+
+	public static final String MerchantGuild = "guild_merchants_guild";
+	public static final List<String> MerchantGuildLevels = Arrays.asList("merchants_guild", "m_merchants_guild", "gm_merchants_guild");
+
+
 
 
 

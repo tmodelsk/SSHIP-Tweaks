@@ -10,6 +10,7 @@ import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
 import tm.mtwModPatcher.lib.data.unitModels.BattleModels;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrMercenaries;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.descrStrat.DescrStratSectioned;
+import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.sship.lib.Provinces;
 
 import java.util.Arrays;
@@ -39,6 +40,9 @@ public class CatholicIberiaReworked extends Feature {
 
 		zaragozaMineResource();
 		zaragozaToFortress();
+
+		barcelonaUpgrade();
+		pamplonaUpgrade();
 	}
 
 	private void zaragozaToFortress() {
@@ -46,7 +50,7 @@ public class CatholicIberiaReworked extends Feature {
 		descrStrat.removeAllBuildings(prov);
 
 		descrStrat.setToCastle(prov);
-		// ToDO :  	faction_creator aragon - ladne mury
+		descrStrat.setFactionCreator(prov, FactionsDefs.ARAGON.symbol);
 		descrStrat.insertSettlementBuilding(prov, WallsCastle.Name, WallsCastle.L4_Fortress);
 		descrStrat.insertSettlementBuilding(prov, BarracksCastle, BarracksCastleLevels.get(1));
 
@@ -59,12 +63,10 @@ public class CatholicIberiaReworked extends Feature {
 		descrStrat.insertSettlementBuilding(prov, TavernCastle, TavernCastleLevels.get(0));
 		descrStrat.insertSettlementBuilding(prov, WaterSupply, WaterSupplyLevels.get(0));
 		descrStrat.insertSettlementBuilding(prov, Health, HealthLevels.get(0));
-
-		// ToDO: dodac budynki
-		// type stonemason sitehut
-		// type logging_camp carpenter
-		// type smith blacksmith
-		// type bakery bakery
+		descrStrat.insertSettlementBuilding(prov, StoneMason, StoneMasonLevels.get(0));
+		descrStrat.insertSettlementBuilding(prov, LoggingCamp, LoggingCampLevels.get(0));
+		descrStrat.insertSettlementBuilding(prov, SmithCastle, SmithCastleLevels.get(1));
+		descrStrat.insertSettlementBuilding(prov, BakeryCastle, BakeryCastleLevel);
 
 		descrStrat.insertSettlementBuilding(prov, RoadCastle, RoadCastleLevels.get(0));
 		descrStrat.insertSettlementBuilding(prov, Farms, FarmsLevels.get(2));
@@ -79,6 +81,20 @@ public class CatholicIberiaReworked extends Feature {
 		lines.insertAt(zaragozaProvIndex+1, "resource\tiron,\t73, 152");
 		requestForMapRemoval();
 		//resource	iron,	73, 152
+	}
+
+	private void barcelonaUpgrade() {
+		val prov = Provinces.Barcelona;
+
+		descrStrat.insertSettlementBuilding(prov, SeaTradeCity, SeaTradeCityLevels.get(0));
+		descrStrat.insertSettlementBuilding(prov, MerchantGuild, MerchantGuildLevels.get(0));
+		descrStrat.insertSettlementBuilding(prov, TavernCity, TavernCityLevels.get(0));
+	}
+
+	private void pamplonaUpgrade() {
+		val prov = Provinces.Pamplona;
+
+		descrStrat.insertSettlementBuilding(prov, RoadCastle, RoadCastleLevels.get(0));
 	}
 
 	private void replaceInitialTroops() throws PatcherLibBaseEx {

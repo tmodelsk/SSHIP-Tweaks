@@ -44,6 +44,9 @@ public class DescrStratSectioned extends SectionsFileEntity {
 	public void setToCastle(String provinceName) {
 		Factions.setToCastle(provinceName);
 	}
+	public void setFactionCreator(String provinceName, String factionSymbol) {
+		Factions.setFactionCreator(provinceName, factionSymbol);
+	}
 	public void insertSettlementBuilding(String provinceName, String name, String level) throws PatcherLibBaseEx {
 		Factions.insertSettlementBuilding(provinceName, name, level);
 	}

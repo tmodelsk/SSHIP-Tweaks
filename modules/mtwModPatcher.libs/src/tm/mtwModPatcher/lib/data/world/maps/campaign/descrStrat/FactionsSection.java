@@ -75,6 +75,14 @@ public class FactionsSection extends SectionDocTextLines {
 		val settlementIndex = regionIndex - 3;
 		lines.replaceLine(settlementIndex, "settlement castle");
 	}
+	public void setFactionCreator(String provinceName, String factionSymbol) {
+		val lines = getContent().getLines();
+
+		int factionCreatorIndex = lines.findExpFirstRegexLine(
+				"^\\s*region\\s+" + provinceName,"^\\s*faction_creator");
+
+		lines.replaceLine(factionCreatorIndex, "\tfaction_creator "+factionSymbol);
+	}
 
 	public int loadSettlementFirstBuildingIndex(String provinceName) {
 		val lines = getContent().getLines();
