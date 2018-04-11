@@ -3,9 +3,9 @@ package tm.mtwModPatcher.sship.features.Obsolete;
 import lombok.val;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
-import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
-import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrStratSectioned;
+import tm.mtwModPatcher.lib.data.world.maps.campaign.descrStrat.DescrStratSectioned;
+import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
 
 import java.util.UUID;
 
@@ -31,7 +31,7 @@ public class CatharsHereticTemple extends Feature {
 
 
 		//_DescrStrat.insertSettlementBuilding("Toulouse_Province", "temple_heretic", "abbey");
-		_DescrStrat.insertSettlementBuilding("Toulouse_Province", "temple_heretic", "small_church");
+		_DescrStrat.Factions.insertSettlementBuilding("Toulouse_Province", "temple_heretic", "small_church");
 
 		//_DescrStrat.insertSettlementBuilding("Bordeaux_Province", "temple_heretic", "small_church");
 		//_DescrStrat.insertSettlementBuilding("Clermont_Province", "temple_heretic", "small_church");

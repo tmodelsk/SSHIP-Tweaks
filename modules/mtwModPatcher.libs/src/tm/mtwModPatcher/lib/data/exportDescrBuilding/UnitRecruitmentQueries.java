@@ -11,7 +11,7 @@ import java.util.regex.Pattern;
  */
 public class UnitRecruitmentQueries {
 
-	public List<UnitRecuitmentInfo> getByFactionsHiddenResourcesPositive(List<String> factions, List<String> hiddenResources) {
+	public List<UnitRecuitmentLineInfo> getByFactionsHiddenResourcesPositive(List<String> factions, List<String> hiddenResources) {
 		String regex = "^\\s*recruit_pool\\s+\"([\\w\\s']+)\"\\s+([\\d\\.]+)\\s+([\\d\\.]+)\\s+([\\d\\.]+)\\s+(\\d+)\\s+";
 		regex += "requires\\s+";
 		regex += "factions\\s+\\{.*(";
@@ -42,7 +42,7 @@ public class UnitRecruitmentQueries {
 		return unitRecrList;
 	}
 
-	public List<UnitRecuitmentInfo> getByFactionsNoHiddenResources(List<String> factions) {
+	public List<UnitRecuitmentLineInfo> getByFactionsNoHiddenResources(List<String> factions) {
 		String regex = "^\\s*recruit_pool\\s+\"([\\w\\s']+)\"\\s+([\\d\\.]+)\\s+([\\d\\.]+)\\s+([\\d\\.]+)\\s+(\\d+)\\s+";
 		regex += "requires\\s+";
 		regex += "factions\\s+\\{.*(";

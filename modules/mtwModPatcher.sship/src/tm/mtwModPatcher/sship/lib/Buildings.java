@@ -26,6 +26,9 @@ public class Buildings {
 	public static final List<String> RoadCityLevels = Arrays.asList("roads", "paved_roads", "highways");
 	public static final List<String> RoadCastleLevels = Arrays.asList("c_roads", "c_paved_roads", "c_highways");
 
+	public static final String RiverAccess = "river_access";
+	public static final String RiverAccessLevel = "river_port";
+
 	public  static final String PortCity = "port";
 	public  static final String PortCastle = "castle_port";
 	public static final List<String> PortCityLevels = Arrays.asList("port", "shipwright" ,"dockyard" ,"naval_drydock");
@@ -45,10 +48,33 @@ public class Buildings {
 	public static final String TempleMuslimCastle = "temple_muslim_castle";
 
 	public static final String TempleCatholicCity = "temple_catholic";
+	public static final List<String> TempleCatholicCityLevels = Arrays.asList("small_church", "church", "abbey", "cathedral", "huge_cathedral");
 	public static final String TempleCatholicCastle = "temple_catholic_castle";
+	public static final List<String> TempleCatholicCastleLevels = Arrays.asList("small_chapel", "chapel");
+
 
 	public static final String MonasteryCatholicCity = "friar";
+	public static final List<String> MonasteryCatholicCityLevels = Arrays.asList("monastery", "medical_care", "hospital");
 	public static final String MonasteryCatholicCastle = "monastery_castle";
+	public static final List<String> MonasteryCatholicCastleLevels = Arrays.asList("castle_monastery");
+
+	public static final String Farms = "farms";
+	public static final List<String> FarmsLevels = Arrays.asList("farms","farms+1","farms+2","farms+3","farms+4");
+
+	public static final String WaterSupply = "water_supply";
+	public static final List<String> WaterSupplyLevels = Arrays.asList("well", "water_conductor", "aqueduct");
+
+	public static final String Health = "health";
+	public static final List<String> HealthLevels = Arrays.asList("bath_house", "public_baths");
+
+	public static final String MinesCastle = "castle_mines";
+	public static final List<String> MinesCastleLevels = Arrays.asList("c_mines", "c_mines+1");
+
+
+	public static final String BarracksCastle = "castle_barracks";
+	public static final List<String> BarracksCastleLevels = Arrays.asList("mustering_hall", "garrison_quarters", "drill_square", "barracks", "armoury");
+
+
 
 	public final static tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.WallsCity WallsCity =
 			tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.Buildings.WallsCity;

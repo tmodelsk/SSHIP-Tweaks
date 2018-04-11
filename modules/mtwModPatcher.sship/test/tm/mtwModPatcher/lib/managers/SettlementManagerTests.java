@@ -5,7 +5,7 @@ import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import tm.mtwModPatcher.FeatureBaseTest;
 import tm.mtwModPatcher.lib.data.world.maps.base.DescrRegions;
-import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrStratSectioned;
+import tm.mtwModPatcher.lib.data.world.maps.campaign.descrStrat.DescrStratSectioned;
 
 import java.util.HashSet;
 

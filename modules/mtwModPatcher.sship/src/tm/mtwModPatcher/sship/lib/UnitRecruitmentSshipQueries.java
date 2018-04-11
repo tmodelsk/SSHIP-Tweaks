@@ -3,6 +3,7 @@ package tm.mtwModPatcher.sship.lib;
 import lombok.val;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.UnitRecuitmentInfo;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.UnitRecuitmentLineInfo;
 import tm.mtwModPatcher.lib.managers.FactionsDefs;
 
 import java.util.ArrayList;
@@ -26,7 +27,7 @@ public class UnitRecruitmentSshipQueries extends tm.mtwModPatcher.lib.data.expor
 	}
 
 
-	public List<UnitRecuitmentInfo> findMuslimAndMuslimRegions() {
+	public List<UnitRecuitmentLineInfo> findMuslimAndMuslimRegions() {
 		val factions = FactionsDefs.islamFactionsList();
 		val hiddenResources = FactionsDefs.islamFactionsList();
 		hiddenResources.add("andalusia");
@@ -37,7 +38,7 @@ public class UnitRecruitmentSshipQueries extends tm.mtwModPatcher.lib.data.expor
 		return res;
 	}
 
-	public List<UnitRecuitmentInfo> findMuslimNoHiddenResources() {
+	public List<UnitRecuitmentLineInfo> findMuslimNoHiddenResources() {
 		val factions = FactionsDefs.islamFactionsList();
 
 		val res = getByFactionsNoHiddenResources(factions);

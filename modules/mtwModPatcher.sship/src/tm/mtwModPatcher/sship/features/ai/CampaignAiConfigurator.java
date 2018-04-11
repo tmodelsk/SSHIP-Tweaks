@@ -20,7 +20,7 @@ import tm.mtwModPatcher.lib.common.core.features.params.ParamIdString;
 import tm.mtwModPatcher.lib.common.entities.FactionInfo;
 import tm.mtwModPatcher.lib.data._root.DescrCampaignAiDb;
 import tm.mtwModPatcher.lib.data._root.DescrSMFactions;
-import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrStratSectioned;
+import tm.mtwModPatcher.lib.data.world.maps.campaign.descrStrat.DescrStratSectioned;
 import tm.mtwModPatcher.lib.engines.ConsoleLogger;
 import tm.mtwModPatcher.lib.engines.FileEntityFactory;
 import tm.mtwModPatcher.lib.managers.FactionsDefs;

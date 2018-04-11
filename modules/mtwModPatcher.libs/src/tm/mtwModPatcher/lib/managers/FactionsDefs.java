@@ -186,6 +186,9 @@ public class FactionsDefs {
 
 	public static final FactionInfo NORWAY = new FactionInfo("norway","Norway", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "Royal Hirdsmen" );
 	public static final FactionInfo SCOTLAND = new FactionInfo("scotland","Scotland", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" );
+	public static final FactionInfo VENICE = new FactionInfo("venice","Venice", CultureType.SOUTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "SE Bodyguard" );
+	public static final FactionInfo ARAGON = new FactionInfo("aragon","Aragon", CultureType.SOUTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "SE Bodyguard" );
+	public static final FactionInfo PISA = new FactionInfo("pisa","Pisa", CultureType.SOUTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "SE Bodyguard" );
 	public static final FactionInfo NOVOGROD = new FactionInfo("russia","NOVGOROD", CultureType.EASTERN_EUROPEAN, Religion.Orthodox , EducationStyle.Western , "EE Bodyguard" ); // ???? Culture = Western ???
 	public static final FactionInfo CUMANS = new FactionInfo("cumans","CUMANS", CultureType.EASTERN_EUROPEAN, Religion.Pagan, EducationStyle.Pagan , "Cuman Bodyguard" );
 
@@ -199,13 +202,13 @@ public class FactionsDefs {
 			new FactionInfo("england","England", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
 			new FactionInfo("hungary","Hungary",CultureType.EASTERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
 			new FactionInfo("poland","Poland", CultureType.EASTERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
-			new FactionInfo("venice","Venice", CultureType.SOUTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "SE Bodyguard" ),
+			VENICE,
 			new FactionInfo("papal_states","Papal States - Pontifex Maximus", CultureType.SOUTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "SE Bodyguard" ),
 			new FactionInfo("portugal","Portugal", CultureType.SOUTHERN_EUROPEAN, Religion.Catholic, EducationStyle.Western , "SE Bodyguard" ),
 			new FactionInfo("spain","Spain", CultureType.SOUTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "SE Bodyguard" ),
-			new FactionInfo("aragon","Aragon", CultureType.SOUTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "SE Bodyguard" ),
+			ARAGON,
 			new FactionInfo("sicily","Sicily", CultureType.SOUTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "SE Bodyguard" ),
-			new FactionInfo("pisa","Pisa", CultureType.SOUTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "SE Bodyguard" ),
+			PISA,
 
 			new FactionInfo("egypt","Egypt", CultureType.MIDDLE_EASTERN, Religion.Islam , EducationStyle.Eastern , "ME Bodyguard" ),
 			new FactionInfo("milan","ABBASSIDS", CultureType.MIDDLE_EASTERN, Religion.Islam , EducationStyle.Eastern , "ME Bodyguard" ),

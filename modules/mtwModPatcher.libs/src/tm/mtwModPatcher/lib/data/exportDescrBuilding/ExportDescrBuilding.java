@@ -5,9 +5,11 @@ import tm.common.Ctm;
 import tm.common.Range;
 import tm.common.Tuple2;
 import tm.common.Tuple3;
+import tm.common.collections.CollectionUtils;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessorFileEntity;
+import tm.mtwModPatcher.lib.common.entities.FactionInfo;
 import tm.mtwModPatcher.lib.common.entities.SettlementLevel;
 import tm.mtwModPatcher.lib.common.entities.SettlementLevelConverter;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingLevel;
@@ -16,8 +18,8 @@ import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.SettlType;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 public class ExportDescrBuilding extends LinesProcessorFileEntity {
 
@@ -109,6 +111,48 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		 //        recruit_pool  "EE Peasants"  2   0.077   2  0  requires factions { russia, kievan_rus, hungary, lithuania, }
 		val patt = Pattern.compile("^\\s*recruit_pool\\s+\"" +unitName+ "\"\\s+");
 		_Lines.removeAllRegexLines(patt);
+	}
+	public void removeUnitRecruitment(String unitName, FactionInfo faction) {
+		removeUnitRecruitment(unitName, faction.symbol);
+	}
+	public void removeUnitRecruitment(String unitName, String faction) {
+		val patt = Pattern.compile("^\\s*recruit_pool\\s+\"" +unitName+ "\"\\s+");
+
+		val unitReqruitments = findRecruitmentsByRegex(patt);
+		for (val unitRecr : unitReqruitments) {
+			val require = unitRecr.getUnitRequireSimple();
+
+			if(require != null && require.Factions.contains(faction)) {
+
+				val unitRecrNew = unitRecr.clone();
+				val requireNew = unitRecrNew.getUnitRequireSimple();
+				requireNew.Factions.remove(faction);
+				unitRecrNew.setRequirementStr(requireNew);
+
+				getLines().replaceLine(unitRecrNew.lineNumber , unitRecrNew.toRecruitmentPoolLine());
+			}
+		}
+	}
+
+	public void addToUnitRecruitment(String unitName, FactionInfo faction, List<FactionInfo> requiredFactions) {
+		val patt = Pattern.compile("^\\s*recruit_pool\\s+\"" +unitName+ "\"\\s+");
+		val requiredFactionsStr = requiredFactions.stream().map(fi -> fi.symbol).collect(Collectors.toList());
+
+		val unitReqruitments = findRecruitmentsByRegex(patt);
+		for (val unitRecr : unitReqruitments) {
+			val require = unitRecr.getUnitRequireSimple();
+
+			if(require != null && !require.Factions.contains(faction)
+					&& CollectionUtils.isAllFirstElementsAreInSecond(requiredFactionsStr, require.Factions)) {
+
+				val unitRecrNew = unitRecr.clone();
+				val requireNew = unitRecrNew.getUnitRequireSimple();
+				requireNew.Factions.add(faction.symbol);
+				unitRecrNew.setRequirementStr(requireNew);
+
+				getLines().replaceLine(unitRecrNew.lineNumber , unitRecrNew.toRecruitmentPoolLine());
+			}
+		}
 	}
 
 	public void addRecruitemntSlotBonus(String buildingName, String levelName, String castleOrCity, int recruitmentSlotBonus) throws PatcherLibBaseEx {
@@ -399,31 +443,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 	}
 
 	public UnitRecuitmentInfo parseUnitRecruitmentInfo(String recruitPoolStringLine) throws PatcherLibBaseEx {
-
-		//         recruit_pool  "Urban Spear Militia"  1   0.25   2  0  requires factions { pisa, venice, papal_states, sicily, }
-
-		// ^\s*recruit_pool\s+"([\w\s]+)"\s+([\d\.]+)\s+([\d\.]+)\s+(\d+)\s+(\d+)\s+requires(.+)
-
-		Matcher matcher = unitRecruitmentLinePatters.matcher(recruitPoolStringLine);
-
-		UnitRecuitmentInfo result = new UnitRecuitmentInfo();
-
-		if (matcher.find()) {
-
-			try {
-				result.Name = matcher.group(1);
-				result.InitialReplenishCounter = Double.parseDouble(matcher.group(2));
-				result.ReplenishRate = Double.parseDouble(matcher.group(3));
-				result.MaxStack = Double.parseDouble(matcher.group(4));
-				result.ExperienceBonus = Integer.parseInt(matcher.group(5));
-				result.RequirementStr = matcher.group(6);
-			}
-			catch (Exception ex) {	throw new PatcherLibBaseEx("Error parsing unit recr info: " + recruitPoolStringLine, ex);	}
-		}
-		else
-			throw new PatcherLibBaseEx("Unable to parse Building - Capabilities - Unit Recruitment Line - no match for regex !");
-
-		return result;
+		return UnitRecuitmentInfo.parseUnitRecruitmentInfo(recruitPoolStringLine);
 	}
 
 	public void updateUnitReplenishRates(String unitName , double relpenishRateMin , double replenishRateAddition) throws PatcherLibBaseEx {
@@ -468,8 +488,8 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 
 	}
 
-	public List<UnitRecuitmentInfo> findRecruitmentsByRegex(Pattern regexPattern) {
-		List<UnitRecuitmentInfo> res = new ArrayList<>();
+	public List<UnitRecuitmentLineInfo> findRecruitmentsByRegex(Pattern regexPattern) {
+		List<UnitRecuitmentLineInfo> res = new ArrayList<>();
 
 		val lines = getLines();
 		int index = 0;
@@ -479,7 +499,8 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 
 			val lineStr = lines.getLine(index);
 			val unitRecr = parseUnitRecruitmentInfo(lineStr);
-			res.add(unitRecr);
+			val unitRecrLine = new UnitRecuitmentLineInfo(unitRecr, index);
+			res.add(unitRecrLine);
 		}
 		while(index > 0);
 
@@ -494,7 +515,11 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		return counter;
 	}
 
-	protected static Pattern unitRecruitmentLinePatters = Pattern.compile("^\\s*recruit_pool\\s+\"([\\w\\s']+)\"\\s+([\\d\\.]+)\\s+([\\d\\.]+)\\s+([\\d\\.]+)\\s+(\\d+)\\s+requires(.+)");
+	public static List<UnitRecuitmentInfo> toUnitRecuitmentInfo(List<UnitRecuitmentLineInfo> recruitments) {
+		return recruitments.stream().map( urli -> (UnitRecuitmentInfo)urli).collect(Collectors.toList());
+	}
+
+
 
 	public ExportDescrBuilding() {
 		super("data\\export_descr_buildings.txt");

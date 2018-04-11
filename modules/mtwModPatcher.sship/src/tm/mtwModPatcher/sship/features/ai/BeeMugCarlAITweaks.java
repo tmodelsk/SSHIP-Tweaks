@@ -9,7 +9,7 @@ import tm.mtwModPatcher.lib.data._root.DescrSMFactions;
 import tm.mtwModPatcher.lib.data._root.ExportDescrCharacterTraits;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.text.ExportVnvs;
-import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrStratSectioned;
+import tm.mtwModPatcher.lib.data.world.maps.campaign.descrStrat.DescrStratSectioned;
 
 import java.util.UUID;
 

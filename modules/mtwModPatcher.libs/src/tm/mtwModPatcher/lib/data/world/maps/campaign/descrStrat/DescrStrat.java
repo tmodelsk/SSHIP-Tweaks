@@ -1,4 +1,4 @@
-package tm.mtwModPatcher.lib.data.world.maps.campaign;
+package tm.mtwModPatcher.lib.data.world.maps.campaign.descrStrat;
 
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.TextLinesFileEntity;
 

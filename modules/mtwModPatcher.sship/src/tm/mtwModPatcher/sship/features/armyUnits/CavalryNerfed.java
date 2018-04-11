@@ -27,7 +27,7 @@ import java.util.stream.Collectors;
 public class CavalryNerfed extends Feature {
 	@Override
 	public void setParamsCustomValues() {
-		cavalryDamageMult = 0.75;    // 0.5 ?
+		cavalryDamageMult = 0.80;    // 0.75, 0.5 ?
 		spearmenBonusMult = 1.0;
 		heavyInfBonusMult = 0.5;
 		lightInfBonusMult = 0.0;

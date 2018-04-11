@@ -25,7 +25,7 @@ public class UnitRecruitmentQueriesTests extends FeatureBaseTest {
 
 		assertThat(res).isNotEmpty();
 
-		val unitNames = UnitRecruitmentQueries.toUnitNames(res);
+		val unitNames = UnitRecruitmentQueries.toUnitNames( ExportDescrBuilding.toUnitRecuitmentInfo(res));
 		assertThat(unitNames).isNotEmpty();
 	}
 

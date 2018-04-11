@@ -43,6 +43,7 @@ public class SsHipFeatures {
 
 		features.add(new MuslimFactionsBoost());
 		features.add(new CatholicFactionsBoost());
+		features.add(new CatholicIberiaReworked());
 
 		features.add(new LongerBattles());
 		features.add(new CavalrySpeedBonus());
@@ -166,6 +167,7 @@ public class SsHipFeatures {
 		features.disableFeatureIfExists( GarrisonOnAssaultRaising.Id);
 		features.disableFeatureIfExists( StrategyDreadBuildingsDisable.Id);
 		features.disableFeatureIfExists( BattleDreadLowered.Id);
+		features.disableFeatureIfExists( CatholicIberiaUnitsRecruitmentIncreased.Id);
 
 		features.disableFeatureIfExists( AutoRunHotseat.Id);
 

@@ -5,7 +5,7 @@ import tm.common.Point;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.entities.SettlementInfo;
 import tm.mtwModPatcher.lib.data.world.maps.base.DescrRegions;
-import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrStratSectioned;
+import tm.mtwModPatcher.lib.data.world.maps.campaign.descrStrat.DescrStratSectioned;
 
 import java.util.*;
 import java.util.regex.Pattern;

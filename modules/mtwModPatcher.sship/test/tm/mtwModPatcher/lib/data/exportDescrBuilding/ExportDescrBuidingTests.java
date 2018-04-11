@@ -2,7 +2,6 @@ package tm.mtwModPatcher.lib.data.exportDescrBuilding;
 
 import lombok.val;
 import org.junit.Test;
-import tm.common.Ctm;
 import tm.mtwModPatcher.FeatureBaseTest;
 
 import java.util.regex.Pattern;
@@ -21,7 +20,7 @@ public class ExportDescrBuidingTests extends FeatureBaseTest {
 
 		val edb = fileEntityFactory.getFile(ExportDescrBuilding.class);
 
-		val unitRecrList = edb.findRecruitmentsByRegex(ExportDescrBuilding.unitRecruitmentLinePatters);
+		val unitRecrList = edb.findRecruitmentsByRegex(UnitRecuitmentInfo.UNIT_RECRUITMENT_LINE_REGEX);
 
 		assertThat(unitRecrList).isNotEmpty();
 	}
