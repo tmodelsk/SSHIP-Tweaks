@@ -31,4 +31,26 @@ public class UnitRecuitmentInfoTests {
 		assertThat(unitReq.Factions).contains("turks" , "rum" , "kwarezm");
 		assertThat(unitReq.RestConditions).isNull();
 	}
+
+	@Test
+	public void parseSimpleLine_toRequirementLIne_ShoudBeSame() {
+		val reqSrcLine = "        recruit_pool  \"Vlastela\"  0.5   0.07   1  0  requires factions { teutonic_order, } and event_counter battle_hattin 1 and not event_counter MOUNTED_CROSSBOWS 1 and hidden_resource serbia";
+
+		val unitReq = UnitRecuitmentInfo.parseUnitRecruitmentInfo(reqSrcLine);
+		assertThat(unitReq).isNotNull();
+
+		val resReqLine = unitReq.toRecruitmentPoolLine();
+		assertThat(resReqLine).isEqualTo(reqSrcLine);
+	}
+
+	@Test
+	public void parseLineUltrSmallReplenish_toRequirementLIne_ShoudBeSame() {
+		val reqSrcLine = "        recruit_pool  \"Spear Militia\"  0   0.000001   0.1  0  requires factions { england, scotland, france, hre, denmark, spain, aragon, portugal, norway, teutonic_order, }";
+
+		val unitReq = UnitRecuitmentInfo.parseUnitRecruitmentInfo(reqSrcLine);
+		assertThat(unitReq).isNotNull();
+
+		val resReqLine = unitReq.toRecruitmentPoolLine();
+		assertThat(resReqLine).isEqualTo(reqSrcLine);
+	}
 }

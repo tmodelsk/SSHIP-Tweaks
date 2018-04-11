@@ -1,11 +1,9 @@
 package tm.mtwModPatcher.lib.data.common;
 
-import lombok.val;
 import org.junit.Test;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-/** Created by tomek on 02.11.2017 */
 public class FormatTests {
 
 	@Test
@@ -31,5 +29,15 @@ public class FormatTests {
 	@Test
 	public void double1MinimumPrecision3(){
 		assertThat(Format.toString(1.1 , 3)).isEqualTo("1.100");
+	}
+
+	@Test
+	public void doubleUltraMinimum_ShouldBeEqual() {
+		assertThat(Format.toString(0.000001)).isEqualTo("0.000001");
+	}
+
+	@Test
+	public void doubleUltraMinimum_ForcedPrecision_ShouldBeEqual() {
+		assertThat(Format.toString(0.000001, 6)).isEqualTo("0.000001");
 	}
 }

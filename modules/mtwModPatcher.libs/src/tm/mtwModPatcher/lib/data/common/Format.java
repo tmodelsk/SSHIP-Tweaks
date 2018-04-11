@@ -13,30 +13,54 @@ public class Format {
 	}
 
 	public static String toString(Double d) {
-
-		if(d.isInfinite()) {
+		if(d.isInfinite())
 			throw new IllegalArgumentException("Input number is infinite!");
-		}
 
 		if(d == d.intValue())
 			return ""+d.intValue();
 		else {
-			String temp = String.format("%.4f", d).replaceAll("(\\.\\d+?)0*$", "$1").replace(',','.');
+			String resultStr = toStringForcePrecision(d, 4);
 
-			String[] tab= temp.split("\\.");
+			if(!checkStrValue(d, resultStr)) {
+				int precision = 4;
+				do{
+					precision++;
+					resultStr = toStringForcePrecision(d, precision);
+				}
+				while( !checkStrValue(d, resultStr) && precision <= 6 );
 
-			String digitsStr = tab[1];
-
-			while ( digitsStr.length() > 1 && digitsStr.lastIndexOf("0") == digitsStr.length()-1 )
-			{
-				temp = removeLast(temp, '0');
-
-				digitsStr = temp.split("\\.")[1];
+				if(!checkStrValue(d, resultStr)) {
+					//throw new RuntimeException("Unable to format "+d);
+					String x="breakpoint low precision";
+					String y=x;
+				}
 			}
 
-			return temp;
+			return resultStr;
 		}
+	}
 
+	private static String toStringForcePrecision(Double d, int precision) {
+		if(d == d.intValue())
+			return ""+d.intValue();
+		else {
+			String resultStr = String.format("%."+precision+"f", d).replaceAll("(\\.\\d+?)0*$", "$1").replace(',','.');
+			String[] tab= resultStr.split("\\.");
+			String digitsStr = tab[1];
+
+			while ( digitsStr.length() > 1 && digitsStr.lastIndexOf("0") == digitsStr.length()-1 ) {
+				resultStr = removeLast(resultStr, '0');
+				digitsStr = resultStr.split("\\.")[1];
+			}
+
+			return resultStr;
+		}
+	}
+
+	private static boolean checkStrValue(Double d, String strValue) {
+		val doubleParsed = Double.parseDouble(strValue);
+
+		return d.equals(doubleParsed);
 	}
 
 	public static double round(double src, int precision) {
