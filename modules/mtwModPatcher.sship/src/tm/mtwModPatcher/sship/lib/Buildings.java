@@ -40,8 +40,8 @@ public class Buildings {
 	public static final List<String> SeaTradeCastleLevels = Arrays.asList("merchants_wharf");
 
 	public static final String TavernCity = "taverns";
-	public static final String TavernCastle = "castle_taverns";
 	public static final List<String> TavernCityLevels = Arrays.asList("brothel", "inn", "tavern", "coaching_house", "pleasure_palace");
+	public static final String TavernCastle = "castle_taverns";
 	public static final List<String> TavernCastleLevels = Arrays.asList("c_brothel");
 
 	public static final String StoneMason = "stonemason";
@@ -89,8 +89,23 @@ public class Buildings {
 	public static final String BarracksCastle = "castle_barracks";
 	public static final List<String> BarracksCastleLevels = Arrays.asList("mustering_hall", "garrison_quarters", "drill_square", "barracks", "armoury");
 
+	public static final String MissileCastle = "missiles";
+	public static final List<String> MissileCastleLevels = Arrays.asList("bowyer", "practice_range", "archery_range", "marksmans_range");
+
+
+	public static final String ItalianTraders = "Italian_Traders";
+	public static final List<String> ItalianTradersLevels = Arrays.asList("italian_trader_quarters", "italian_trader_headquarters");
+
 	public static final String MerchantGuild = "guild_merchants_guild";
 	public static final List<String> MerchantGuildLevels = Arrays.asList("merchants_guild", "m_merchants_guild", "gm_merchants_guild");
+
+
+	public static final String HospitallersCity = "st_johns_chapter_house";
+	public static final List<String> HospitallersCityLevels = Arrays.asList("st_johns_minor_ch", "st_johns_major_ch");
+	public static final String HospitallersCastle = "st_johns_chapter_house_castle";
+	public static final List<String> HospitallersCastleLevels = Arrays.asList("st_johns_minor_ch", "st_johns_major_ch");
+
+
 
 
 

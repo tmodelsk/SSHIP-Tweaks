@@ -1,13 +1,13 @@
 package tm.mtwModPatcher.sship.features.Obsolete;
 
 import org.xml.sax.SAXException;
-import tm.mtwModPatcher.lib.managers.FactionsDefs;
-import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.data._root.DescrSettlementMechanics;
-import tm.mtwModPatcher.lib.managers.UnitsManager;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
+import tm.mtwModPatcher.lib.managers.FactionsDefs;
+import tm.mtwModPatcher.lib.managers.UnitsManager;
 import tm.mtwModPatcher.sship.features.global.FactionsSpecifics;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -524,7 +524,7 @@ public class Civilizations extends Feature {
 		unitsManager.updateReplenishRates("Tawashi Light Cavalry" , factionsFilterCsv , 2.0 , -1.0 , _ExportDescrBuilding);
 		unitsManager.updateReplenishRates("Arab Cavalry" , factionsFilterCsv , 2.0 , -1.0 , _ExportDescrBuilding);
 
-//		LinesProcessor lines = exportDescrBuilding.getLines();
+//		LinesProcessor lines = exportDescrBuilding.lines();
 //
 //		// ###### Loop throught all "recruit_pool ... " lines of building capabilities ######
 //		Pattern regex = Pattern.compile("^^\\s*recruit_pool\\s+.+");

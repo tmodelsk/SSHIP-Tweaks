@@ -1,9 +1,9 @@
 package tm.mtwModPatcher.sship.features.ai;
 
 import lombok.val;
-import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.OverrideCopyTask;
+import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.data._root.DescrSMFactions;
 
 import java.util.HashSet;
@@ -30,7 +30,7 @@ public class BeeMugOldCampaignAI extends Feature {
 	protected void setFactionsAttributes() throws PatcherLibBaseEx {
 
 		// ### Set all ai_label to default (exept papal states)
-		//LinesProcessor factionLines = _DescrStrat.Factions.getContent().getLines();
+		//LinesProcessor factionLines = _DescrStrat.Factions.content().lines();
 
 //		factionLines.updateAllRegexLines("^ai_label\\s+catholic","ai_label\t\tdefault");
 //		factionLines.updateAllRegexLines("^ai_label\\s+islam","ai_label\t\tdefault");

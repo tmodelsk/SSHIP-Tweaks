@@ -51,7 +51,7 @@ public class CatholicIberiaUnitsRecruitmentIncreased extends Feature {
 	}
 
 	protected void giveInitialCrusaderTroops() throws PatcherLibBaseEx {
-		LinesProcessor lines = descrStrat.Factions.getContent().getLines();
+		LinesProcessor lines = descrStrat.Factions.content().lines();
 
 		int aragonIndex = lines.findExpFirstRegexLine("^;## ARAGON ##\\s*");
 		replaceInitialUnit("Peasant Archers","Prussian Archers" , aragonIndex);
@@ -78,7 +78,7 @@ public class CatholicIberiaUnitsRecruitmentIncreased extends Feature {
 	}
 	protected void replaceInitialUnit(String oldUnitName , String newUnitName, int factionStartIndex , int experienceLevel) throws PatcherLibBaseEx {
 
-		LinesProcessor lines = descrStrat.Factions.getContent().getLines();
+		LinesProcessor lines = descrStrat.Factions.content().lines();
 
 		factionStartIndex = lines.findExpFirstRegexLine("^unit\\s+"+ oldUnitName + ".+" , factionStartIndex+1);
 		lines.replaceLine(factionStartIndex , "unit\t\t" + newUnitName + "\t\t\t\texp " + experienceLevel + " armour 0 weapon_lvl 0");
@@ -292,7 +292,7 @@ public class CatholicIberiaUnitsRecruitmentIncreased extends Feature {
 		edu.addOwnership(caballerosVillanos, "aragon", 0);
 		edu.addOwnership(caballerosVillanos, "aragon", 1);
 
-		LinesProcessor lines = descrStrat.Factions.getContent().getLines();
+		LinesProcessor lines = descrStrat.Factions.content().lines();
 		int aragonIndex = lines.findExpFirstRegexLine("^;## ARAGON ##\\s*");
 		replaceInitialUnit("Alforrats","Caballeros Villanos" , aragonIndex);
 

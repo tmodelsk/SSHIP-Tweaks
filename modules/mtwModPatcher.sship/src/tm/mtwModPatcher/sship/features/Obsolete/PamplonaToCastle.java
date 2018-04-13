@@ -23,7 +23,7 @@ public class PamplonaToCastle extends Feature {
 
 		_DescrStrat = fileEntityFactory.getFile(DescrStratSectioned.class);
 
-		LinesProcessor lines = _DescrStrat.Factions.getContent().getLines();
+		LinesProcessor lines = _DescrStrat.Factions.content().lines();
 
 		int pamplonaSettlementIndex = lines.findFirstLineByLinePath(
 				Arrays.asList(	//"^; >>>> start of resources section <<<<",

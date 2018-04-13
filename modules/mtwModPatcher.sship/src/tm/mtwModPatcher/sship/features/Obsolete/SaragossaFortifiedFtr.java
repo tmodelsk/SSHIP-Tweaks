@@ -30,7 +30,7 @@ public class SaragossaFortifiedFtr extends Feature {
 //		int lineNumber = _DescrStrat.FindFirstExactLine("; >>>> start of regions section <<<<");
 //		if(lineNumber < 0) throw new PatcherLibBaseEx("Start of regions sections not found !!");
 
-		LinesProcessor regionLines = _DescrStrat.Regions.getContent().getLines();
+		LinesProcessor regionLines = _DescrStrat.Regions.content().lines();
 
 		int lineNumber = regionLines.findFirstExactLine("region Zaragoza_Province");
 		if(lineNumber < 0) throw new PatcherLibBaseEx("no zaragoza region, not implemented");

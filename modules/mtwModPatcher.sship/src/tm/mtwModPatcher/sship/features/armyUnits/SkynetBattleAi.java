@@ -49,7 +49,7 @@ public class SkynetBattleAi extends Feature {
 		val rootPath = getResourcesPath();
 		//val scriptLines = LinesProcessor.load(rootPath+"\\general-campaign-script-snippet.txt", inputStreamProvider);
 		//val scriptLines = LinesProcessor.load(rootPath+"\\campaign-campaign-script-snippet.txt", inputStreamProvider);
-		//lines.insertAt(aiStartIndex, scriptLines.getLines());
+		//lines.insertAt(aiStartIndex, scriptLines.lines());
 
 	}
 

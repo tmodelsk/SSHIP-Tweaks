@@ -48,7 +48,7 @@ public class WatchtowersToForts extends Feature {
 		val rp = Pattern.compile("^\\s*watchtower\\s+(\\d+),\\s*(\\d+)");
 
 		int index = 1, replacedCount = 0;
-		val lines = descrStrat.Regions.getContent().getLines();
+		val lines = descrStrat.Regions.content().lines();
 
 		while (index > 0) {
 			index = lines.findFirstByRegexLine(rp, index + 1);

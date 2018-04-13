@@ -24,13 +24,13 @@ import java.util.regex.Pattern;
 public class DescrStratSectioned extends SectionsFileEntity {
 
 	public SectionTextLines Header;
-	public SectionDocTextLines Resources;
+	public ResourcesSection Resources;
 	public FactionsSection Factions;
 	public SectionDocTextLines Diplomacy;
 	public SectionDocTextLines Regions;
 
 	public void setFactionAiLabel(String factionSymbol, String aiLabel) {
-		val lines = Factions.getContent().getLines();
+		val lines = Factions.content().lines();
 
 		int index = lines.findFirstLineByLinePath(
 				Arrays.asList(
@@ -60,7 +60,7 @@ public class DescrStratSectioned extends SectionsFileEntity {
 	// !! NOT TESTED !!
 	protected void replaceInitialUnit(String factionName, String oldUnitName, String newUnitName, int experienceLevel) throws PatcherLibBaseEx {
 
-		LinesProcessor lines = Factions.getContent().getLines();
+		LinesProcessor lines = Factions.content().lines();
 
 		int factionStartIndex = lines.findExpFirstRegexLine("^faction " + factionName);
 
@@ -77,7 +77,7 @@ public class DescrStratSectioned extends SectionsFileEntity {
 
 			_SettlementNames = new HashSet<>();
 
-			LinesProcessor lines = Factions.getContent().getLines();
+			LinesProcessor lines = Factions.content().lines();
 			// 	region Angora_Province ;#132
 
 			Pattern p = Pattern.compile("^\\s*region\\s+(\\S+)_Province.*");
@@ -108,7 +108,7 @@ public class DescrStratSectioned extends SectionsFileEntity {
 			// lazyloading
 			_SettlementInfoList = new ArrayList<>();
 
-			LinesProcessor lines = Factions.getContent().getLines();
+			LinesProcessor lines = Factions.content().lines();
 			// 	region Angora_Province ;#132
 
 			Pattern p = Pattern.compile("^\\s*region\\s+(\\S+).*");
@@ -184,34 +184,28 @@ public class DescrStratSectioned extends SectionsFileEntity {
 
 		Header = new SectionTextLines("Header");
 		Header.setLines(lines.subsetCopy(0, resourcesIndex - 1));
-		_Sections.add(Header);
+		sections.add(Header);
 
-		Resources = new SectionDocTextLines();
-		Resources.setHeader(new SectionTextLines("ResourcesHeader", lines.subsetCopy(resourcesIndex, resourcesIndex + 1)));
-		Resources.setContent(new SectionTextLines("ResourcesContent", lines.subsetCopy(resourcesIndex + 2, factionsIndex - 1)));
-		_Sections.add(Resources);
+		Resources = new ResourcesSection(lines.subsetCopy(resourcesIndex, resourcesIndex + 1) , lines.subsetCopy(resourcesIndex + 2, factionsIndex - 1));
+		sections.add(Resources);
 
 		Factions = new FactionsSection(lines.subsetCopy(factionsIndex, factionsIndex + 1) , lines.subsetCopy(factionsIndex + 2, diplomacyIndex - 1));
-
-//		Factions = new SectionDocTextLines();
-//		Factions.setHeader(new SectionTextLines("FactionsHeader", lines.subsetCopy(factionsIndex, factionsIndex + 1)));
-//		Factions.setContent(new SectionTextLines("FactionContent", lines.subsetCopy(factionsIndex + 2, diplomacyIndex - 1)));
-		_Sections.add(Factions);
+		sections.add(Factions);
 
 		Diplomacy = new SectionDocTextLines();
 		Diplomacy.setHeader(new SectionTextLines("DiplomacyHeader", lines.subsetCopy(diplomacyIndex, diplomacyIndex + 1)));
 		Diplomacy.setContent(new SectionTextLines("DiplomacyContent", lines.subsetCopy(diplomacyIndex + 2, regionIndex - 1)));
-		_Sections.add(Diplomacy);
+		sections.add(Diplomacy);
 
 		Regions = new SectionDocTextLines();
 		Regions.setHeader(new SectionTextLines("RegionsHeader", lines.subsetCopy(regionIndex, regionIndex + 1)));
 		Regions.setContent(new SectionTextLines("RegionsContent", lines.subsetCopy(regionIndex + 2)));
-		_Sections.add(Regions);
+		sections.add(Regions);
 	}
 
 	public DescrStratSectioned() {
 
 		super("data\\world\\maps\\campaign\\imperial_campaign\\Descr_strat.txt");
-		_Sections = new ArrayList<>();
+		sections = new ArrayList<>();
 	}
 }

@@ -187,6 +187,8 @@ public class FactionsDefs {
 	public static final FactionInfo NORWAY = new FactionInfo("norway","Norway", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "Royal Hirdsmen" );
 	public static final FactionInfo SCOTLAND = new FactionInfo("scotland","Scotland", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" );
 	public static final FactionInfo VENICE = new FactionInfo("venice","Venice", CultureType.SOUTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "SE Bodyguard" );
+	public static final FactionInfo PORTUGAL = new FactionInfo("portugal","Portugal", CultureType.SOUTHERN_EUROPEAN, Religion.Catholic, EducationStyle.Western , "SE Bodyguard" );
+	public static final FactionInfo SPAIN = new FactionInfo("spain","Spain", CultureType.SOUTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "SE Bodyguard" );
 	public static final FactionInfo ARAGON = new FactionInfo("aragon","Aragon", CultureType.SOUTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "SE Bodyguard" );
 	public static final FactionInfo PISA = new FactionInfo("pisa","Pisa", CultureType.SOUTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "SE Bodyguard" );
 	public static final FactionInfo NOVOGROD = new FactionInfo("russia","NOVGOROD", CultureType.EASTERN_EUROPEAN, Religion.Orthodox , EducationStyle.Western , "EE Bodyguard" ); // ???? Culture = Western ???
@@ -204,8 +206,8 @@ public class FactionsDefs {
 			new FactionInfo("poland","Poland", CultureType.EASTERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
 			VENICE,
 			new FactionInfo("papal_states","Papal States - Pontifex Maximus", CultureType.SOUTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "SE Bodyguard" ),
-			new FactionInfo("portugal","Portugal", CultureType.SOUTHERN_EUROPEAN, Religion.Catholic, EducationStyle.Western , "SE Bodyguard" ),
-			new FactionInfo("spain","Spain", CultureType.SOUTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "SE Bodyguard" ),
+			PORTUGAL,
+			SPAIN,
 			ARAGON,
 			new FactionInfo("sicily","Sicily", CultureType.SOUTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "SE Bodyguard" ),
 			PISA,

@@ -79,7 +79,7 @@ public class MerchantsRemovedFtr extends Feature {
 	private void DisableAllMerchants_LowerGuildReqs() throws PatcherLibBaseEx {
 		int lastLine = 0, index=0;
 
-		LinesProcessor descrStratChars = descrStrat.Factions.getContent().getLines();
+		LinesProcessor descrStratChars = descrStrat.Factions.content().lines();
 
 		// ## Disable all starting merchant agentsCharacters - Campaing starting data
 		while(index >= 0) {
@@ -97,9 +97,9 @@ public class MerchantsRemovedFtr extends Feature {
 
 		// ## Building Definitions - remove all merchants production capabilities ##
 		//         agent merchant  0  requires factions { northern_european, }
-		//edb.getLines().removeAllRegexLines("^\\s*agent\\s+merchant\\s");
+		//edb.lines().removeAllRegexLines("^\\s*agent\\s+merchant\\s");
 		//         agent_limit merchant 1
-		//edb.getLines().removeAllRegexLines("^\\s*agent_limit\\s+merchant\\s+");
+		//edb.lines().removeAllRegexLines("^\\s*agent_limit\\s+merchant\\s+");
 
 		// ## Lower requirement for Merchant Guild by 4 times (no bonuses from merchants on resources) ##
 		//int merchantGuildLine = exportDescrGuilds.FindFirstExactLine("Guild merchants_guild");

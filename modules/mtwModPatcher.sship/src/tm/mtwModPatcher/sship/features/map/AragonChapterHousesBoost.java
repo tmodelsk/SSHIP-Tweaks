@@ -1,11 +1,9 @@
 package tm.mtwModPatcher.sship.features.map;
 
 import tm.mtwModPatcher.lib.common.core.features.Feature;
-import tm.mtwModPatcher.lib.common.core.features.OverrideDeleteFilesTask;
-import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
 import tm.mtwModPatcher.lib.data.world.maps.base.DescrRegions;
+import tm.mtwModPatcher.sship.lib.Provinces;
 
-import java.util.Arrays;
 import java.util.UUID;
 
 /** Chapter Houses added to Aragon, more Crusadadable & Jihadable cities */
@@ -20,16 +18,13 @@ public class AragonChapterHousesBoost extends Feature {
 	public void executeUpdates() throws Exception {
 		descrRegions = getFileRegisterForUpdated(DescrRegions.class);
 
-		descrRegions.addResources("Zaragoza_Province", Arrays.asList(
-				DescrRegions.KnightsOfSantiago,
-				DescrRegions.StJohnKnights) );
+		descrRegions.addResource(Provinces.Zaragoza, DescrRegions.KnightsOfSantiago, DescrRegions.StJohnKnights);
 
-		descrRegions.addResource("Pamplona_Province",
-				DescrRegions.KnightsOfSantiago );
-
-		descrRegions.addResources("Barcelona_Province", Arrays.asList(
-				DescrRegions.KnightsOfSantiago,
-				DescrRegions.TemplarKnights) );
+		descrRegions.addResource(Provinces.Pamplona, DescrRegions.KnightsOfSantiago );
+// Barcelona did not have any Militant Orders of note on it, so remove the Hospitaller chapter houses from Barcelona altogether.
+//		descrRegions.addResources("Barcelona_Province", Arrays.asList(
+//				DescrRegions.KnightsOfSantiago,
+//				DescrRegions.TemplarKnights) );
 	}
 
 	@Override

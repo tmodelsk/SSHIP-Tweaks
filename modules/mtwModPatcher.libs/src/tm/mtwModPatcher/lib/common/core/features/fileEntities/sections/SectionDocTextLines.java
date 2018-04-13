@@ -16,7 +16,7 @@ public class SectionDocTextLines extends Section {
 		this._Header = _Header;
 	}
 
-	public SectionTextLines getContent() {
+	public SectionTextLines content() {
 		return _Content;
 	}
 	public void setContent(SectionTextLines _Content) {

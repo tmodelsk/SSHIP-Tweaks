@@ -11,7 +11,7 @@ import java.util.List;
  */
 public abstract class SectionsFileEntity extends FileEntity {
 
-	protected List<Section> _Sections;
+	protected List<Section> sections;
 
 	@Override
 	public void saveChanges() throws TransformerException, IOException {
@@ -21,7 +21,7 @@ public abstract class SectionsFileEntity extends FileEntity {
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
 
 		boolean isNewLineNeeded = false;
-		for (Section section : _Sections) {
+		for (Section section : sections) {
 
 			if(isNewLineNeeded)
 				bw.newLine();

@@ -154,7 +154,7 @@ public class MerchantsNerfed extends Feature {
 
 		registerForUpdate(descrStrat);
 
-		LinesProcessor descrStratChars = descrStrat.Factions.getContent().getLines();
+		LinesProcessor descrStratChars = descrStrat.Factions.content().lines();
 		int index = 0, lastLine=0;
 
 		// ## Disable all starting merchant agentsCharacters - Campaing starting data

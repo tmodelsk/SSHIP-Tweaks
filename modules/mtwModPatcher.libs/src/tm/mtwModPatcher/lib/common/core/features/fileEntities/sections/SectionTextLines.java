@@ -12,7 +12,7 @@ public class SectionTextLines extends Section {
 
 	protected LinesProcessor _Lines;
 
-	public LinesProcessor getLines() {
+	public LinesProcessor lines() {
 		return _Lines;
 	}
 	public void setLines(LinesProcessor lines) {

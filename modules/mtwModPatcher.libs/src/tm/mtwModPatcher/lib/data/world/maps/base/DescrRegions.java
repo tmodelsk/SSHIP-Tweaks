@@ -1,5 +1,6 @@
 package tm.mtwModPatcher.lib.data.world.maps.base;
 
+import lombok.val;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessorFileEntity;
@@ -67,6 +68,13 @@ public class DescrRegions extends LinesProcessorFileEntity {
 			lines.replaceLine(resourceLineIndex, resourcesLine);
 	}
 
+	public void addResource(String provinceName, String resourceName1, String resourceName2) throws PatcherLibBaseEx {
+		val list = new ArrayList<String>();
+		list.add(resourceName1);
+		list.add(resourceName2);
+
+		addResources(provinceName, list);
+	}
 	public void addResource(String provinceName, String resourceName) throws PatcherLibBaseEx {
 		List<String> list = new ArrayList<>();
 		list.add(resourceName);

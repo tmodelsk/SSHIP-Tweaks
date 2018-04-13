@@ -53,7 +53,7 @@ public class SettlementManager {
 
 		val patt = Pattern.compile("^character\\s+.+x\\s+(\\d+).+y\\s+(\\d+).+;\\s*"+settlementName+"\\s*$");
 
-		val lines = DescrStrat.Factions.getContent().getLines();
+		val lines = DescrStrat.Factions.content().lines();
 		val index = lines.findFirstRegexLine(patt);
 		if(index > 0) {
 			// found

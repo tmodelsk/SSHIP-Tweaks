@@ -25,7 +25,7 @@ public class FactionsSection extends SectionDocTextLines {
 		rl.add("		type " + name + " " + level);
 		rl.add("	}");
 
-		val lines = getContent().getLines();
+		val lines = content().lines();
 		lines.insertAt(endIndex, rl);
 	}
 
@@ -34,7 +34,7 @@ public class FactionsSection extends SectionDocTextLines {
 
 		val index = getSettlementBuildingLine(provinceName, buildingType, buildingLevel);
 		if(index > 0) {
-			val lines = getContent().getLines();
+			val lines = content().lines();
 
 			lines.removeRange(index-2, index+1);
 		}
@@ -42,8 +42,17 @@ public class FactionsSection extends SectionDocTextLines {
 		return removed;
 	}
 
+	public void removeSettlement(String provinceName) {
+		val lines = content().lines();
+		val regionIndex = lines.findExpFirstRegexLine("^\\s*region\\s+" + provinceName);
+
+		val settlementIndex = regionIndex - 3;
+
+		val endIndex = loadSettlemenBlockEndIndex(provinceName);
+		lines.removeRange(settlementIndex, endIndex);
+	}
 	public void removeAllBuildings(String provinceName) {
-		val lines = getContent().getLines();
+		val lines = content().lines();
 
 		val firstBuildingIndex = loadSettlementFirstBuildingIndex(provinceName);
 		val endBuildingIndex = loadSettlemenBlockEndIndex(provinceName);
@@ -69,14 +78,14 @@ public class FactionsSection extends SectionDocTextLines {
 		//val lines =
 	}
 	public void setToCastle(String provinceName) {
-		val lines = getContent().getLines();
+		val lines = content().lines();
 		val regionIndex = lines.findExpFirstRegexLine("^\\s*region\\s+" + provinceName);
 
 		val settlementIndex = regionIndex - 3;
 		lines.replaceLine(settlementIndex, "settlement castle");
 	}
 	public void setFactionCreator(String provinceName, String factionSymbol) {
-		val lines = getContent().getLines();
+		val lines = content().lines();
 
 		int factionCreatorIndex = lines.findExpFirstRegexLine(
 				"^\\s*region\\s+" + provinceName,"^\\s*faction_creator");
@@ -84,8 +93,32 @@ public class FactionsSection extends SectionDocTextLines {
 		lines.replaceLine(factionCreatorIndex, "\tfaction_creator "+factionSymbol);
 	}
 
+	public int loadSettlementStartIndex(String provinceName) {
+		val lines = content().lines();
+		val regionIndex = lines.findExpFirstRegexLine("^\\s*region\\s+" + provinceName);
+
+		val settlementIndex = regionIndex - 3;
+		return settlementIndex;
+	}
+
+	public void moveSettlementBeforeSettl(String provinceName, String moveBeforeThisProvinceName) {
+		val lines = content().lines();
+
+		val settlementIndex = loadSettlementStartIndex(provinceName);
+		int endIndex = loadSettlemenBlockEndIndex(provinceName);
+
+		if(lines.getLine(endIndex+1).isEmpty()) endIndex++;
+
+
+		val settLines = lines.subsetCopy(settlementIndex, endIndex);
+		lines.removeRange(settlementIndex, endIndex);
+
+		val insertBeforeIndex = loadSettlementStartIndex(moveBeforeThisProvinceName);
+		lines.insertAt(insertBeforeIndex , settLines.getLines());
+	}
+
 	public int loadSettlementFirstBuildingIndex(String provinceName) {
-		val lines = getContent().getLines();
+		val lines = content().lines();
 
 		int firstBuildingTag = lines.findFirstLineByLinePath(
 				Arrays.asList("^\\s*region\\s+" + provinceName,
@@ -97,7 +130,7 @@ public class FactionsSection extends SectionDocTextLines {
 	}
 
 	public int loadSettlemenBlockEndIndex(String provinceName) throws PatcherLibBaseEx {
-		val lines = getContent().getLines();
+		val lines = content().lines();
 
 		val provinceHeaderEndIndex = lines.findFirstLineByLinePath(
 				Arrays.asList("^\\s*region\\s+" + provinceName,
@@ -130,7 +163,7 @@ public class FactionsSection extends SectionDocTextLines {
 		val start = loadSettlementFirstBuildingIndex(provinceName);
 		val end = loadSettlemenBlockEndIndex(provinceName);
 
-		val lines = getContent().getLines();
+		val lines = content().lines();
 
 		val regex = Ctm.format("^\\s*type {0} {1}", buildingType, buildingLevel);
 		val index = lines.findFirstRegexLine(regex, start, end);
@@ -139,7 +172,7 @@ public class FactionsSection extends SectionDocTextLines {
 
 	public void setKingsPurse(String factionSymbol, int kingsPurse) throws PatcherLibBaseEx {
 
-		LinesProcessor lines = getContent().getLines();
+		LinesProcessor lines = content().lines();
 
 		int factionKingPurse = lines.findFirstLineByLinePath(
 				Arrays.asList(
@@ -152,7 +185,7 @@ public class FactionsSection extends SectionDocTextLines {
 
 	public void addKingsPurse(String factionSymbol, int kingsPurseAdd) throws PatcherLibBaseEx {
 
-		LinesProcessor lines = getContent().getLines();
+		LinesProcessor lines = content().lines();
 
 		int factionKingPurse = lines.findFirstLineByLinePath(
 				Arrays.asList(
@@ -174,7 +207,7 @@ public class FactionsSection extends SectionDocTextLines {
 
 	public void addStartingTreasury(String factionSymbol, int treasuryBonus) throws PatcherLibBaseEx {
 
-		LinesProcessor lines = getContent().getLines();
+		LinesProcessor lines = content().lines();
 
 		int factionKingPurse = lines.findFirstLineByLinePath(
 				Arrays.asList(
@@ -196,7 +229,7 @@ public class FactionsSection extends SectionDocTextLines {
 
 	public void addKingsPursesAll(int kingsPurseAdd) throws PatcherLibBaseEx {
 
-		LinesProcessor lines = getContent().getLines();
+		LinesProcessor lines = content().lines();
 		Pattern regex = Pattern.compile("(^denari_kings_purse\\s+)(\\d+)\\s*");
 
 		int factionKingPurse = 0;
