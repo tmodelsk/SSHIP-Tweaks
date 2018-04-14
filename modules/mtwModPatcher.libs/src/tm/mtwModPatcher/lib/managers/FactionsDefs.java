@@ -186,6 +186,8 @@ public class FactionsDefs {
 
 	public static final FactionInfo NORWAY = new FactionInfo("norway","Norway", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "Royal Hirdsmen" );
 	public static final FactionInfo SCOTLAND = new FactionInfo("scotland","Scotland", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" );
+	public static final FactionInfo FRANCE = new FactionInfo("france","France", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" );
+	public static final FactionInfo ENGLAND = new FactionInfo("england","England", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" );
 	public static final FactionInfo VENICE = new FactionInfo("venice","Venice", CultureType.SOUTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "SE Bodyguard" );
 	public static final FactionInfo PORTUGAL = new FactionInfo("portugal","Portugal", CultureType.SOUTHERN_EUROPEAN, Religion.Catholic, EducationStyle.Western , "SE Bodyguard" );
 	public static final FactionInfo SPAIN = new FactionInfo("spain","Spain", CultureType.SOUTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "SE Bodyguard" );
@@ -200,8 +202,8 @@ public class FactionsDefs {
 			NORWAY,
 			new FactionInfo("hre","Holy Roman Emprire - Germans", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
 			SCOTLAND,
-			new FactionInfo("france","France", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
-			new FactionInfo("england","England", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
+			FRANCE,
+			ENGLAND,
 			new FactionInfo("hungary","Hungary",CultureType.EASTERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
 			new FactionInfo("poland","Poland", CultureType.EASTERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
 			VENICE,

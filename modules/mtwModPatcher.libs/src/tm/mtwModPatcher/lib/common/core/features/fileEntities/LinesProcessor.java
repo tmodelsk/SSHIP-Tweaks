@@ -63,6 +63,29 @@ public class LinesProcessor {
 		return linesProcessor;
 	}
 
+	public int findCurrentBlockEndBracket(int inBlockLineIndex) {
+		int openBracketsCount = 0, endIndex = -1, i = inBlockLineIndex;
+		String actLine;
+
+		while (endIndex < 0) {
+			actLine = getLine(i).trim();
+
+			if (actLine.equals("{")) openBracketsCount++;
+			else {
+				if (actLine.equals("}")) {
+					if (openBracketsCount > 0) openBracketsCount--;
+					else {
+						// ## FOUND END BRACKER !! ##
+						endIndex = i;
+					}
+				}
+			}
+			i++;
+		}
+
+		return endIndex;
+	}
+
 	// Returns subsetCopy COPY of source Lines
 	public LinesProcessor subsetCopy(int start, int endInclusive) {
 		LinesProcessor subLines = new LinesProcessor();
@@ -146,7 +169,7 @@ public class LinesProcessor {
 
 	public String getLine(Pattern pattern) throws PatcherLibBaseEx {
 
-		return getLine(findExpFirstByRegexLine(pattern));
+		return getLine(findExpFirstRegexLine(pattern));
 	}
 
 	public void updateAllRegexLines(String regex, String newLine) throws PatcherLibBaseEx {
@@ -262,7 +285,7 @@ public class LinesProcessor {
 
 		Pattern pattern = Pattern.compile(regex);
 
-		return findExpFirstByRegexLine(pattern, startFromIndex);
+		return findExpFirstRegexLine(pattern, startFromIndex);
 	}
 
 	public int findExpFirstRegexLine(Pattern regex, Range<Integer, Integer> rangeInclusive) {
@@ -283,7 +306,7 @@ public class LinesProcessor {
 	}
 
 	public String loadLineByFirstRegexLine(Pattern regexPattern, int startFromIndex) throws PatcherLibBaseEx {
-		int index = findExpFirstByRegexLine(regexPattern, startFromIndex);
+		int index = findExpFirstRegexLine(regexPattern, startFromIndex);
 		return getLine(index);
 	}
 
@@ -354,12 +377,12 @@ public class LinesProcessor {
 	}
 
 	// finds expected -> throws if not found
-	public int findExpFirstByRegexLine(Pattern pattern) {
+	public int findExpFirstRegexLine(Pattern pattern) {
 		return findFirstByRegexLine(pattern, 0);
 	}
 
 	// finds expected -> throws if not found
-	public int findExpFirstByRegexLine(Pattern pattern, int startFromIndex) {
+	public int findExpFirstRegexLine(Pattern pattern, int startFromIndex) {
 
 		int indexFound = -1;
 		for (int i = startFromIndex; indexFound < 0 && i < _Lines.size(); i++) {
@@ -434,7 +457,8 @@ public class LinesProcessor {
 	}
 
 	public void insertAt(int indexToInsert, String line) {
-		List<String> splittedLines = new ArrayList<>(Arrays.asList(line.split(nl)));
+		List<String> splittedLines = new ArrayList<>();
+		Arrays.asList(line.split(nl)).forEach( l -> splittedLines.addAll( Arrays.asList(l.split("\n")) ) );
 
 		try {
 			_Lines.addAll(indexToInsert, splittedLines);
@@ -443,7 +467,6 @@ public class LinesProcessor {
 			throw new PatcherLibBaseEx("InsertAt line "+indexToInsert+" failed!", ex);
 		}
 	}
-
 	public void insertAt(int indexToInsert, List<String> lines) {
 		List<String> linesAfterSplit = new ArrayList<>();
 
@@ -455,7 +478,6 @@ public class LinesProcessor {
 		_Lines.addAll(indexToInsert, linesAfterSplit);
 
 	}
-
 	public void insertAtEnd(List<String> lines) {
 		insertAt(count(), lines);
 	}
@@ -477,19 +499,15 @@ public class LinesProcessor {
 	public int count() {
 		return _Lines.size();
 	}
-
 	public void setLines(List<String> lines) {
 		_Lines = lines;
 	}
-
 	public List<String> getLines() {
 		return _Lines;
 	}
 
 	protected List<String> _Lines = new ArrayList<>();
-
 	protected String nl = System.lineSeparator();
-
 	protected String uri = null;
 
 	public LinesProcessor(String uri) {

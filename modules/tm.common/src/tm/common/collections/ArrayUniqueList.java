@@ -25,7 +25,7 @@ public class ArrayUniqueList<T> extends ArrayList<T> implements ListUnique<T> {
 	@Override
 	public boolean add(T t) {
 		if(set.contains(t))
-			throw new NotUniqueEx();
+			throw new NotUniqueEx("Duplicate: "+t);
 
 		set.add(t);
 		return super.add(t);

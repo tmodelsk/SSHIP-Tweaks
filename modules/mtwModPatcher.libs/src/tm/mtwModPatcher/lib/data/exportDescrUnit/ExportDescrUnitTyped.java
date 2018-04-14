@@ -80,7 +80,7 @@ public class ExportDescrUnitTyped extends FileEntity {
 
 
 		int index = 0;
-		index = lines.findExpFirstByRegexLine(typePattern , index);
+		index = lines.findExpFirstRegexLine(typePattern , index);
 
 		headerComments = lines.subsetCopy(0 , index-1);
 
@@ -102,7 +102,7 @@ public class ExportDescrUnitTyped extends FileEntity {
 		// # Determine end of Unit block #
 
 		Pattern typePtr = Pattern.compile("^type\\s+\\w+");
-		int startIndex = lines.findExpFirstByRegexLine(typePtr, index);
+		int startIndex = lines.findExpFirstRegexLine(typePtr, index);
 		int endIndex = lines.findFirstByRegexLine(typePtr, startIndex+1);
 		if(endIndex < 0) endIndex = lines.count();
 

@@ -53,6 +53,9 @@ public class DescrStratSectioned extends SectionsFileEntity {
 	public void removeSettlementBuilding(String provinceName, String buildingType, String buildingLevel) {
 		Factions.removeSettlementBuilding(provinceName, buildingType, buildingLevel);
 	}
+	public void removeSettlementBuilding(String provinceName, String buildingType) {
+		Factions.removeSettlementBuilding(provinceName, buildingType);
+	}
 	public void removeAllBuildings(String provinceName) {
 		Factions.removeAllBuildings(provinceName);
 	}

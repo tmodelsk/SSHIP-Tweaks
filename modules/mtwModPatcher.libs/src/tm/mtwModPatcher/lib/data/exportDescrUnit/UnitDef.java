@@ -110,22 +110,24 @@ public class UnitDef {
 
 	public void addOwnership(String factionName, int eraNumber) throws PatcherLibBaseEx {
 
-		String addStr = ", "+factionName;
-
 		switch (eraNumber) {
 			case 0:
-				OwnershipEra0 += addStr;
+				OwnershipEra0 = resolveAddOwnership(OwnershipEra0, factionName);
 				break;
 			case 1:
-				OwnershipEra1 += addStr;
+				OwnershipEra1 = resolveAddOwnership(OwnershipEra1, factionName);
 				break;
 			case 2:
-				OwnershipEra2 += addStr;
+				OwnershipEra2 = resolveAddOwnership(OwnershipEra2, factionName);
 				break;
 			case 3:
-				OwnershipEra3 += addStr;
+				OwnershipEra3 = resolveAddOwnership(OwnershipEra3, factionName);
 				break;
 		}
+	}
+	private String resolveAddOwnership(String actualOwnership, String factionName) {
+		if(actualOwnership == null || actualOwnership.isEmpty()) return factionName;
+		else return ", "+factionName;
 	}
 
 	public void multiplyMoveSpeedMod(double value) {

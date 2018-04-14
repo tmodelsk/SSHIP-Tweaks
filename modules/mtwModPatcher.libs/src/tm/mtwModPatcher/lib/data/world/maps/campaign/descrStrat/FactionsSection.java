@@ -41,6 +41,18 @@ public class FactionsSection extends SectionDocTextLines {
 
 		return removed;
 	}
+	public boolean removeSettlementBuilding(String provinceName, String buildingType) {
+		boolean removed = false;
+
+		val index = getSettlementBuildingLine(provinceName, buildingType);
+		if(index > 0) {
+			val lines = content().lines();
+
+			lines.removeRange(index-2, index+1);
+		}
+
+		return removed;
+	}
 
 	public void removeSettlement(String provinceName) {
 		val lines = content().lines();
@@ -166,6 +178,16 @@ public class FactionsSection extends SectionDocTextLines {
 		val lines = content().lines();
 
 		val regex = Ctm.format("^\\s*type {0} {1}", buildingType, buildingLevel);
+		val index = lines.findFirstRegexLine(regex, start, end);
+		return index;
+	}
+	public int getSettlementBuildingLine(String provinceName, String buildingType) {
+		val start = loadSettlementFirstBuildingIndex(provinceName);
+		val end = loadSettlemenBlockEndIndex(provinceName);
+
+		val lines = content().lines();
+
+		val regex = Ctm.format("^\\s*type {0} ", buildingType);
 		val index = lines.findFirstRegexLine(regex, start, end);
 		return index;
 	}

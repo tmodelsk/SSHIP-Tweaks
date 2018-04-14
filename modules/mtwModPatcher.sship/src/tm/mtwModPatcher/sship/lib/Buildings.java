@@ -86,11 +86,17 @@ public class Buildings {
 	public static final String MinesCastle = "castle_mines";
 	public static final List<String> MinesCastleLevels = Arrays.asList("c_mines", "c_mines+1");
 
+	public static final String BarracksCity = "barracks";
+	public static final List<String> BarracksCityLevels = Arrays.asList("town_watch", "town_guard", "city_watch", "militia_drill_square", "militia_barracks", "army_barracks", "royal_armoury");
+
 	public static final String BarracksCastle = "castle_barracks";
 	public static final List<String> BarracksCastleLevels = Arrays.asList("mustering_hall", "garrison_quarters", "drill_square", "barracks", "armoury");
 
 	public static final String MissileCastle = "missiles";
 	public static final List<String> MissileCastleLevels = Arrays.asList("bowyer", "practice_range", "archery_range", "marksmans_range");
+
+	public static final String StablesCastle = "equestrian";
+	public static final List<String> StablesCastleLevels = Arrays.asList("stables", "knights_stables", "barons_stables", "earls_stables", "kings_stables");
 
 
 	public static final String ItalianTraders = "Italian_Traders";
