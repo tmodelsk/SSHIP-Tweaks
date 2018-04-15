@@ -12,21 +12,19 @@ import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdBoolean;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdInteger;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdString;
-import tm.mtwModPatcher.lib.common.entities.Religion;
 import tm.mtwModPatcher.lib.common.entities.SettlementInfo;
 import tm.mtwModPatcher.lib.common.entities.SettlementLevel;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.blocks.*;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.commands.AddMoney;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.commands.LogLevel;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.commands.WriteToLog;
-import tm.mtwModPatcher.lib.common.scripting.campaignScript.conditions.character.GovernorInResidence;
-import tm.mtwModPatcher.lib.common.scripting.campaignScript.conditions.character.IsTargetRegionOneOf;
-import tm.mtwModPatcher.lib.common.scripting.campaignScript.conditions.faction.FactionExcommunicated;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.conditions.faction.FactionType;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.conditions.faction.IsNotLocalFaction;
-import tm.mtwModPatcher.lib.common.scripting.campaignScript.conditions.settlement.*;
+import tm.mtwModPatcher.lib.common.scripting.campaignScript.conditions.settlement.ISettlementUnderSiege;
+import tm.mtwModPatcher.lib.common.scripting.campaignScript.conditions.settlement.SettlementLoyaltyLevel;
+import tm.mtwModPatcher.lib.common.scripting.campaignScript.conditions.settlement.SettlementOwner;
+import tm.mtwModPatcher.lib.common.scripting.campaignScript.conditions.various.ButtonPressed;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.conditions.various.CompareCounter;
-import tm.mtwModPatcher.lib.common.scripting.campaignScript.core.Condition;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.core.EventType;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.keywords.DeclareVariable;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.keywords.IncrementVariable;
@@ -35,7 +33,6 @@ import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
 import tm.mtwModPatcher.lib.data.world.maps.base.DescrRegions;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.CampaignScript;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.descrStrat.DescrStratSectioned;
-import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
 import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.lib.managers.SettlementManager;
 import tm.mtwModPatcher.lib.managers.garrisons.GarrisonManager;
@@ -44,15 +41,15 @@ import tm.mtwModPatcher.lib.managers.garrisons.UnitGarrisonInfo;
 import java.util.*;
 import java.util.stream.Collectors;
 
-/** Creates garrison when settlement walls are stormed  */
-public class GarrisonOnAssaultRaising extends Feature {
+public class GarrisonOnButton extends Feature {
+
 	@Override
 	public void setParamsCustomValues() {
 		populationRecoveryTurns = 15;
 		minimumLoyaltyLevel = 1;
 		createUnitsLogging = true;
 		garrisonSize = GarrisonSize.SMALL;
-		version = "1.03";
+		version = "0.1";
 	}
 
 	@Override
@@ -74,122 +71,43 @@ public class GarrisonOnAssaultRaising extends Feature {
 		// ### Create Global Monitor : Increment Settlement Variables - once per turn
 		rootRegion.add(createIncrementSettlVariablesMonitor(settlementInfos));
 
-		// ### Create Monitors for each individual Settlement ###
-		rootRegion.add(createSettlementConditions(settlementInfos));
-		rootRegion.add(createSettlementsTroopRisingMonitors(settlementInfos));
+		rootRegion.add(createSettlementTroopRisingMonitor(settlementInfos));
 
 		// ## Insert all generated monitors ##
 		campaignScript.insertAtEndOfFile(rootRegion.getScriptBlock().getLines());
 	}
 
-	private RegionBlock createSettlementConditions(List<SettlementInfo> settlementInfos) {
-		val region = new RegionBlock(garrisonScriptCommentPrefix + ": Settlements Conditions Monitors for garrison rising");
+	private MonitorEventBlock createSettlementTroopRisingMonitor(List<SettlementInfo> settlementInfos) throws Exception {
 
-		for (SettlementInfo sInfo : settlementInfos) {
-			val conditionVar = getSettlementConditionVariableName(sInfo);
-
-			val monitorResetSettlVar = new MonitorEventBlock(EventType.SettlementTurnStart, new SettlementName(sInfo.Name));
-			monitorResetSettlVar.add(new SetVariable(conditionVar, 0));
-
-
-			val monitorStandardActivate = new MonitorEventBlock(EventType.SettlementTurnEnd, new SettlementName(sInfo.Name));
-			monitorStandardActivate.andCondition(new GovernorInResidence());
-			monitorStandardActivate.andCondition(new SettlementLoyaltyLevel(">=", getMinimumLoyaltyLevelLiteral(minimumLoyaltyLevel)));
-			monitorStandardActivate.andCondition(new FactionExcommunicated().not());
-			monitorStandardActivate.andCondition(new SettlementHasPlague().not());
-
-			monitorStandardActivate.add(new SetVariable(conditionVar, 1));
-
-			region.add(monitorResetSettlVar);
-			region.add(monitorStandardActivate);
-		}
-
-		val settlementManager = new SettlementManager(descrStrat, descrRegions);
-
-		// ### Settlement Crusade Target -> Always Garrison
-		val crusadeSettlements = settlementManager.getAllSettlements().stream().
-				filter(si -> si.Resources.contains(DescrRegions.Crusade)).
-				collect(Collectors.toList());
-
-		val jihadSettlements = settlementManager.getAllSettlements().stream().
-				filter(si -> si.Resources.contains(DescrRegions.Jihad)).
-				collect(Collectors.toList());
-
-		val crusadeMonitors = createConditionMonitorsForCrusadeJihad(crusadeSettlements, Religion.Catholic,
-				Collections.singletonList("Zaragoza"),
-				Collections.singletonList("Jerusalem"), new IsCrusadeTarget());
-		region.add(crusadeMonitors);
-
-		val jihadMonitors = createConditionMonitorsForCrusadeJihad(jihadSettlements, Religion.Islam,
-				null, null, new IsJihadTarget());
-		region.add(jihadMonitors);
-
-		return region;
-	}
-
-	private ContainerBlock createConditionMonitorsForCrusadeJihad(
-			List<SettlementInfo> settlements, Religion notReligion,
-			List<String> goodReligionSettlementsExcluded,
-			List<String> notReligionSettlementsExcluded, Condition crusadeJihadCondition) {
-		val sb = new ContainerBlock();
-
-		for (val sInfo : settlements) {
-			val faction = FactionsDefs.loadFactionInfo(sInfo.CreatedByFaction);
-
-			boolean isCreate;
-			if (faction.religion == notReligion) {
-				if (notReligionSettlementsExcluded != null && notReligionSettlementsExcluded.contains(sInfo.Name))
-					isCreate = true;
-				else isCreate = false;
-			} else {
-				if (goodReligionSettlementsExcluded != null && goodReligionSettlementsExcluded.contains(sInfo.Name))
-					isCreate = false;
-				else isCreate = true;
-			}
-
-			if (isCreate) {
-				val conditionVar = getSettlementConditionVariableName(sInfo);
-				val monitorCrusaded = new MonitorEventBlock(EventType.SettlementTurnEnd, new SettlementName(sInfo.Name));
-				monitorCrusaded.andCondition(crusadeJihadCondition);
-				monitorCrusaded.add(new SetVariable(conditionVar, 1));
-				sb.add(monitorCrusaded);
-			}
-		}
-
-		return sb;
-	}
-
-	private RegionBlock createSettlementsTroopRisingMonitors(List<SettlementInfo> settlementInfos) throws Exception {
-		RegionBlock region = new RegionBlock(garrisonScriptCommentPrefix + ": Settlements individual monitors");
+		val monitor = new MonitorEventBlock(EventType.ButtonPressed, ButtonPressed.SiegeAssault());
 
 		for (SettlementInfo settlement : settlementInfos) {
-			val settMonitor = createSettlementTroopRisingMonitor(settlement);
-			if (settMonitor != null) region.add(settMonitor);
+			val settBlock = createSettlementBlock(settlement);
+
+			if(settBlock.isBodyNotEmpty())
+				monitor.add(settBlock);
 		}
-
-		return region;
-	}
-
-	private MonitorEventBlock createSettlementTroopRisingMonitor(SettlementInfo settlement) throws Exception {
-		String settlRecoveryVar = getSettlementRecoveryVariableName(settlement);
-		val settlConditionVar = getSettlementConditionVariableName(settlement);
-
-		MonitorEventBlock monitor = new MonitorEventBlock(EventType.GeneralAssaultsResidence, new IsTargetRegionOneOf(settlement.ProvinceName));
-		monitor.andCondition(new ISettlementUnderSiege(settlement.Name));
-		monitor.andCondition(new CompareCounter(settlConditionVar, "=", 1));
-		monitor.andCondition(new CompareCounter(settlRecoveryVar, ">", populationRecoveryTurns));
-
-		for (String factionName : FactionsDefs.allFactionsList()) {
-			val ifBLock = createFactionIfBlock(factionName, settlement);
-			if (ifBLock != null) monitor.add(ifBLock);
-		}
-
-		if (monitor.isBodyEmpty())
-			return null;
-
-		monitor.add(new SetVariable(settlRecoveryVar, 0)); // reset siege mobilization counter
 
 		return monitor;
+	}
+
+	private IfBlock createSettlementBlock(SettlementInfo settlement) throws Exception {
+		val settlRecoveryVar = getSettlementRecoveryVariableName(settlement);
+
+		val iff = new IfBlock(new ISettlementUnderSiege(settlement.Name));
+		iff.andCondition(new CompareCounter(settlRecoveryVar, ">", populationRecoveryTurns));
+
+		for (String factionName : FactionsDefs.allFactionsList()) {
+			val factionIf = createFactionIfBlock(factionName, settlement);
+
+			if(factionIf.isBodyNotEmpty())
+				iff.add(factionIf);
+		}
+
+		if(iff.isBodyEmpty()) return null;
+
+		iff.add(new SetVariable(settlRecoveryVar, 0)); // reset siege mobilization counter
+		return iff;
 	}
 
 	private IfBlock createFactionIfBlock(String factionName, SettlementInfo settlement) throws Exception {
@@ -214,15 +132,8 @@ public class GarrisonOnAssaultRaising extends Feature {
 		} else if (settlement.Level == SettlementLevel.L2_Town) {    // SMALL = 0 , MEDIUM = 2
 
 			if (isMedium) {    // medium only
-				iff.add(createRaiseUnits(factionName, settlement, unit1));
-
-				// ### Player vs AI ####
-				IfBlock playerVsAi = new IfBlock(new CompareCounter("ai_ec_id", "=", 0));
-
 				UnitGarrisonInfo unit2 = units.get(1);
-				playerVsAi.add(createRaiseUnits(factionName, settlement, unit2));
-
-				iff.add(playerVsAi);
+				iff.add(createRaiseUnits(factionName, settlement, unit1, unit2));
 			}
 		} else if (settlement.Level == SettlementLevel.L3_LargeTown) {    // SMALL = 1 , MEDIUM = 3
 			UnitGarrisonInfo unit2 = units.get(1);
@@ -234,13 +145,7 @@ public class GarrisonOnAssaultRaising extends Feature {
 			if (isMedium) {    // medium only
 				// Czy defender to AI ??
 				IfBlock ifDefenderAI = new IfBlock(new IsNotLocalFaction(factionName));
-				ifDefenderAI.add(createRaiseUnits(factionName, settlement, unit2));    // ## Unit 2
-
-				// ## Czy Attacker to Player ?
-				IfBlock isAttackerPlayer = new IfBlock(new CompareCounter("ai_ec_id", "=", 0));
-				isAttackerPlayer.add(createRaiseUnits(factionName, settlement, unit3)); // ## Unit 3
-
-				ifDefenderAI.add(isAttackerPlayer);
+				ifDefenderAI.add(createRaiseUnits(factionName, settlement, unit2, unit3));    // ## Unit 2 & 3
 
 				iff.add(ifDefenderAI);
 			}
@@ -255,13 +160,7 @@ public class GarrisonOnAssaultRaising extends Feature {
 
 			// Czy defender to AI ??
 			IfBlock ifDefenderAI = new IfBlock(new IsNotLocalFaction(factionName));
-			ifDefenderAI.add(createRaiseUnits(factionName, settlement, unit3));    // ## Unit 3
-
-			// ## Czy Attacker to Player ?
-			IfBlock isAttackerPlayer = new IfBlock(new CompareCounter("ai_ec_id", "=", 0));
-			isAttackerPlayer.add(createRaiseUnits(factionName, settlement, unit4)); // ## Unit 4
-
-			ifDefenderAI.add(isAttackerPlayer);
+			ifDefenderAI.add(createRaiseUnits(factionName, settlement, unit3, unit4));    // ## Unit 3
 
 			iff.add(ifDefenderAI);
 		} else if (settlement.Level == SettlementLevel.L5_LargeCity) {        // SMALL = 3 , MEDIUM = 5
@@ -272,19 +171,13 @@ public class GarrisonOnAssaultRaising extends Feature {
 
 			// ## Unit 1 i 2 i 3
 			if (isMedium)        // Medium only
-				iff.add(createRaiseUnits(factionName, settlement, unit1, unit2));
-
-			iff.add(createRaiseUnits(factionName, settlement, unit3));
+				iff.add(createRaiseUnits(factionName, settlement, unit1, unit2, unit3));
+			else
+				iff.add(createRaiseUnits(factionName, settlement, unit3));
 
 			// Czy defender to AI ??
 			IfBlock ifDefenderAI = new IfBlock(new IsNotLocalFaction(factionName));
-			ifDefenderAI.add(createRaiseUnits(factionName, settlement, unit4));    // ## Unit 4
-
-			// ## Czy Attacker to Player ?
-			IfBlock isAttackerPlayer = new IfBlock(new CompareCounter("ai_ec_id", "=", 0));
-			isAttackerPlayer.add(createRaiseUnits(factionName, settlement, unit5)); // ## Unit 5
-
-			ifDefenderAI.add(isAttackerPlayer);
+			ifDefenderAI.add(createRaiseUnits(factionName, settlement, unit4, unit5));    // ## Unit 4
 
 			iff.add(ifDefenderAI);
 		} else if (settlement.Level == SettlementLevel.L6_HugeCity) {    // SMALL = 4 , MEDIUM = 6
@@ -296,19 +189,13 @@ public class GarrisonOnAssaultRaising extends Feature {
 
 			// ## Unit 1 i 2 i 3 i 4
 			if (isMedium)
-				iff.add(createRaiseUnits(factionName, settlement, unit1, unit2));
-
-			iff.add(createRaiseUnits(factionName, settlement, unit3, unit4));
+				iff.add(createRaiseUnits(factionName, settlement, Arrays.asList(unit1, unit2, unit3, unit4)));
+			else
+				iff.add(createRaiseUnits(factionName, settlement, unit3, unit4));
 
 			// Czy defender to AI ??
 			IfBlock ifDefenderAI = new IfBlock(new IsNotLocalFaction(factionName));
-			ifDefenderAI.add(createRaiseUnits(factionName, settlement, unit5));    // ## Unit 5
-
-			// ## Czy Attacker to Player ?
-			IfBlock isAttackerPlayer = new IfBlock(new CompareCounter("ai_ec_id", "=", 0));
-			isAttackerPlayer.add(createRaiseUnits(factionName, settlement, unit6)); // ## Unit 6
-
-			ifDefenderAI.add(isAttackerPlayer);
+			ifDefenderAI.add(createRaiseUnits(factionName, settlement, unit5, unit6));    // ## Unit 5 & 6
 
 			iff.add(ifDefenderAI);
 		} else throw new PatcherLibBaseEx(Ctm.format("Settlement level {0} not supported", settlement.Level));
@@ -318,27 +205,34 @@ public class GarrisonOnAssaultRaising extends Feature {
 		return iff;
 	}
 
-	private ScriptBlock createRaiseUnits(String factionName, SettlementInfo settlement, UnitGarrisonInfo unit) throws PatcherLibBaseEx {
+	private ContainerBlock createRaiseUnits(String factionName, SettlementInfo settlement, UnitGarrisonInfo unit) throws PatcherLibBaseEx {
 		return createRaiseUnits(factionName, settlement, Collections.singletonList(unit));
 	}
-
-	private ScriptBlock createRaiseUnits(String factionName, SettlementInfo settlement, UnitGarrisonInfo unit1, UnitGarrisonInfo unit2) throws PatcherLibBaseEx {
+	private ContainerBlock createRaiseUnits(String factionName, SettlementInfo settlement, UnitGarrisonInfo unit1, UnitGarrisonInfo unit2)
+			throws PatcherLibBaseEx {
 		val list = new ArrayList<UnitGarrisonInfo>();
 		list.add(unit1);
 		list.add(unit2);
 
 		return createRaiseUnits(factionName, settlement, list);
 	}
+	private ContainerBlock createRaiseUnits(String factionName, SettlementInfo settlement, UnitGarrisonInfo unit1, UnitGarrisonInfo unit2, UnitGarrisonInfo unit3)
+			throws PatcherLibBaseEx {
+		val list = new ArrayList<UnitGarrisonInfo>();
+		list.add(unit1);
+		list.add(unit2);
+		list.add(unit3);
 
+		return createRaiseUnits(factionName, settlement, list);
+	}
 	@SuppressWarnings("StringConcatenationInLoop")
-	private ScriptBlock createRaiseUnits(String factionName, SettlementInfo settlement, List<UnitGarrisonInfo> units) throws PatcherLibBaseEx {
+	private ContainerBlock createRaiseUnits(String factionName, SettlementInfo settlement, List<UnitGarrisonInfo> units) throws PatcherLibBaseEx {
 		ContainerBlock block = new ContainerBlock();
 
 		String unitsNamesCsv = "";
 		int unitsCostSum = 0;
 
 		UnitGarrisonInfo unitLast = units.get(0);
-
 		for (int i = 1; i < units.size(); i++) {
 			UnitGarrisonInfo unit = units.get(i);
 
@@ -351,7 +245,6 @@ public class GarrisonOnAssaultRaising extends Feature {
 						unitLast.Quantity + ", exp " + unitLast.Experience + ", arm " + unitLast.Armor + ", wep " + unitLast.Weapon);
 
 				val experienceTag = unitLast.Experience > 0 ? "+" + unitLast.Experience : "";
-
 				unitsNamesCsv += unitLast.Name + experienceTag + ",";
 
 				if (!factionName.equals("slave"))
@@ -371,8 +264,11 @@ public class GarrisonOnAssaultRaising extends Feature {
 		if (unitsCostSum > 0)
 			block.add(new AddMoney(factionName, -unitsCostSum));
 
-		if (createUnitsLogging)
-			block.add(new WriteToLog(LogLevel.Always, "### "+ garrisonScriptCommentPrefix +": " + settlement.Name + "[" + settlement.Level + "] : " + factionName + " : Creating (" + unitsCostSum + " fl) [" + units.size() + "]:" + unitsNamesCsv));
+		if (createUnitsLogging) {
+			val debugEntry = Ctm.format("### {0}: {1} [{2}]: {3}: Creating ({4}fl),[{5}]:{6}",
+					garrisonScriptCommentPrefix, settlement.Name, settlement.Level, factionName, unitsCostSum, units.size(), unitsNamesCsv);
+			block.add(new WriteToLog(LogLevel.Always, debugEntry));
+		}
 
 		return block;
 	}
@@ -388,7 +284,6 @@ public class GarrisonOnAssaultRaising extends Feature {
 
 		return region;
 	}
-
 	private ScriptBlock createSettlementsVariablesInitializations(List<SettlementInfo> settlementInfos) {
 		String recoveryTurnsVar, conditionVar;
 
@@ -396,13 +291,9 @@ public class GarrisonOnAssaultRaising extends Feature {
 
 		for (SettlementInfo settl : settlementInfos) {
 			recoveryTurnsVar = getSettlementRecoveryVariableName(settl);
-			conditionVar = getSettlementConditionVariableName(settl);
 
 			region.add(new DeclareVariable(recoveryTurnsVar));
 			region.add(new SetVariable(recoveryTurnsVar, populationRecoveryTurns * 2));
-
-			region.add(new DeclareVariable(conditionVar));
-			region.add(new SetVariable(conditionVar, 0));
 		}
 		return region;
 	}
@@ -410,11 +301,6 @@ public class GarrisonOnAssaultRaising extends Feature {
 	private String getSettlementRecoveryVariableName(SettlementInfo settlementInfo) {
 		return settlementInfo.Name + "_LastSiegeMobilizationTurnsCount";
 	}
-
-	private String getSettlementConditionVariableName(SettlementInfo settlementInfo) {
-		return settlementInfo.Name + "_IsRisingGarrison";
-	}
-
 	private int calculateUnitCost(String unitName) throws PatcherLibBaseEx {
 		return (int) (edu.loadUnit(unitName).StatCost.Cost * 0.5);
 	}
@@ -444,20 +330,20 @@ public class GarrisonOnAssaultRaising extends Feature {
 		val parIds = new ArrayUniqueList<ParamId>();
 
 		parIds.add(new ParamIdInteger("PopulationRecoveryTurns", "Population Recovery Turns",
-				feature -> ((GarrisonOnAssaultRaising) feature).getPopulationRecoveryTurns(),
-				(feature, value) -> ((GarrisonOnAssaultRaising) feature).setPopulationRecoveryTurns(value)));
+				feature -> ((GarrisonOnButton) feature).getPopulationRecoveryTurns(),
+				(feature, value) -> ((GarrisonOnButton) feature).setPopulationRecoveryTurns(value)));
 
 		parIds.add(new ParamIdInteger("MinimumLoyaltyLevel", "Minimum Loyalty Level",
-				feature -> ((GarrisonOnAssaultRaising) feature).getMinimumLoyaltyLevel(),
-				(feature, value) -> ((GarrisonOnAssaultRaising) feature).setMinimumLoyaltyLevel(value)));
+				feature -> ((GarrisonOnButton) feature).getMinimumLoyaltyLevel(),
+				(feature, value) -> ((GarrisonOnButton) feature).setMinimumLoyaltyLevel(value)));
 
 		parIds.add(new ParamIdBoolean("CreateUnitsLogging", "Create Units Logging",
-				feature -> ((GarrisonOnAssaultRaising) feature).isCreateUnitsLogging(),
-				(feature, value) -> ((GarrisonOnAssaultRaising) feature).setCreateUnitsLogging(value)));
+				feature -> ((GarrisonOnButton) feature).isCreateUnitsLogging(),
+				(feature, value) -> ((GarrisonOnButton) feature).setCreateUnitsLogging(value)));
 
 		parIds.add(new ParamIdString("GarrisonSize", "Garrison Size",
-				feature -> ((GarrisonOnAssaultRaising) feature).getGarrisonSize().toString(),
-				(feature, value) -> ((GarrisonOnAssaultRaising) feature).setGarrisonSize(value)));
+				feature -> ((GarrisonOnButton) feature).getGarrisonSize().toString(),
+				(feature, value) -> ((GarrisonOnButton) feature).setGarrisonSize(value)));
 
 		return parIds;
 	}
@@ -483,10 +369,9 @@ public class GarrisonOnAssaultRaising extends Feature {
 		else throw new PatcherLibBaseEx(Ctm.format("Garrison Size param value {0} not supported", strSize));
 	}
 
-	private static String garrisonScriptCommentPrefix = "Garrison Script on Assault";
+	private static String garrisonScriptCommentPrefix = "Garrison Script on Siege";
 	@SuppressWarnings("unused")
 	private static String nl = System.lineSeparator();
-
 	private CampaignScript campaignScript;
 	private DescrStratSectioned descrStrat;
 	private DescrRegions descrRegions;
@@ -498,27 +383,27 @@ public class GarrisonOnAssaultRaising extends Feature {
 	public UUID getId() {
 		return Id;
 	}
-	public static UUID Id = UUID.fromString("05fe3b39-0b7a-4c57-bf27-7382a4f582d0");
+	public static UUID Id = UUID.fromString("434aa005-df6c-4b4e-bc04-5f087ea2a555");
 
 	@Override
 	public Set<UUID> getConflictingFeatures() {
 		val conflicts = new HashSet<UUID>();
 
 		conflicts.add(GarrisonOnSiegeRaising.Id);
-		conflicts.add(GarrisonOnButton.Id);
+		conflicts.add(GarrisonOnAssaultRaising.Id);
 		conflicts.add(GarrisonOnAssaultRaisingPlayerVsAi.Id);
 
 		return conflicts;
 	}
-	public GarrisonOnAssaultRaising(GarrisonManager garrisonManager) {
-		super("Garrison script : raise unit on assault");
+
+	public GarrisonOnButton(GarrisonManager garrisonManager) {
+		super("Garrison script : raise units on assault button");
 
 		addCategory("Campaign");
-		setDescriptionShort(Ctm.format("Garrison script : raise unit on assault v.{0}", version));
+		setDescriptionShort(Ctm.format("Garrison script : Player vs AI, troops rised on Assaoult button v.{0}", version));
 		setDescriptionUrl("http://tmsship.wikidot.com/garrison-script");
 
 		this.garrisonManager = garrisonManager;
 
-		createUnitsLogging = ConfigurationSettings.isDevEnvironment();
 	}
 }

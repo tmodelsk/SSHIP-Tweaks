@@ -65,6 +65,9 @@ public abstract class BlockWithConditions extends ScriptBlock {
 	public boolean isBodyEmpty() {
 		return _Body.isEmpty();
 	}
+	public boolean isBodyNotEmpty() {
+		return ! isBodyEmpty();
+	}
 
 	protected void validate() { }
 }

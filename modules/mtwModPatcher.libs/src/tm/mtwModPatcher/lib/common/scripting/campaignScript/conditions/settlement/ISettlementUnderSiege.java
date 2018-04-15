@@ -5,7 +5,7 @@ import tm.mtwModPatcher.lib.common.scripting.campaignScript.core.Condition;
 /**
  * Created by Tomek on 2016-11-24.
  */
-public class SettlementUnderSiege extends Condition {
+public class ISettlementUnderSiege extends Condition {
 
 	private String _SettlementName;
 
@@ -15,7 +15,7 @@ public class SettlementUnderSiege extends Condition {
 		return "I_SettlementUnderSiege " + _SettlementName;
 	}
 
-	public SettlementUnderSiege(String settlementName) {
+	public ISettlementUnderSiege(String settlementName) {
 		this._SettlementName = settlementName;
 	}
 }

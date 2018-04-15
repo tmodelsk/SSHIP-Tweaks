@@ -93,7 +93,7 @@ public class GarrisonOnSiegeRaising  extends Feature {
 		String settlRecoveryVar = getSettlementRecoveryVariableName(settlement);
 
 		MonitorEventBlock monitor = new MonitorEventBlock(EventType.SettlementTurnEnd, new SettlementName(settlement.Name));
-		monitor.andCondition(new SettlementUnderSiege(settlement.Name));
+		monitor.andCondition(new ISettlementUnderSiege(settlement.Name));
 		monitor.andCondition(new GovernorInResidence());
 		monitor.andCondition(new SettlementLoyaltyLevel(">=", getMinimumLoyaltyLevelLiteral(minimumLoyaltyLevel)));
 		monitor.andCondition(new FactionExcommunicated().not());
@@ -391,7 +391,11 @@ public class GarrisonOnSiegeRaising  extends Feature {
 	@Override
 	public Set<UUID> getConflictingFeatures() {
 		val conflicts = new HashSet<UUID>();
+
 		conflicts.add(GarrisonOnAssaultRaising.Id);
+		conflicts.add(GarrisonOnButton.Id);
+		conflicts.add(GarrisonOnAssaultRaisingPlayerVsAi.Id);
+
 		return conflicts;
 	}
 

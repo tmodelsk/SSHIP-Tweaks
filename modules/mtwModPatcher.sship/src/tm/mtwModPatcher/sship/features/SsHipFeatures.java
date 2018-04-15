@@ -15,9 +15,7 @@ import tm.mtwModPatcher.sship.features.agentsCharacters.merchantsNerfed.Merchant
 import tm.mtwModPatcher.sship.features.ai.*;
 import tm.mtwModPatcher.sship.features.armyUnits.*;
 import tm.mtwModPatcher.sship.features.buildings.*;
-import tm.mtwModPatcher.sship.features.garrisons.GarrisonNoUnguardedSettlements;
-import tm.mtwModPatcher.sship.features.garrisons.GarrisonOnAssaultRaising;
-import tm.mtwModPatcher.sship.features.garrisons.GarrisonOnSiegeRaising;
+import tm.mtwModPatcher.sship.features.garrisons.*;
 import tm.mtwModPatcher.sship.features.global.*;
 import tm.mtwModPatcher.sship.features.global.catholicIberiaReworked.CatholicIberiaReworked;
 import tm.mtwModPatcher.sship.features.global.factionFate.*;
@@ -132,6 +130,8 @@ public class SsHipFeatures {
 		features.add(new GarrisonNoUnguardedSettlements(garrisonManager));
 		features.add(new GarrisonOnSiegeRaising(garrisonManager));
 		features.add(new GarrisonOnAssaultRaising(garrisonManager));
+		features.add(new GarrisonOnAssaultRaisingPlayerVsAi(garrisonManager));
+		features.add(new GarrisonOnButton(garrisonManager));
 
 		features.add(new NobilityManyGeneralsGovernors());
 		features.add(new FightForSurvival(unitsManager));	// adds replenish rates entries for existing stuff, should be almost last
@@ -165,7 +165,11 @@ public class SsHipFeatures {
 		features.disableFeatureIfExists( AssasinsNumbersLimited.Id );
 		features.disableFeatureIfExists( AssasinsHomeProtectors.Id );
 		features.disableFeatureIfExists( NoDreadOnAssasinations.Id );
+
 		features.disableFeatureIfExists( GarrisonOnAssaultRaising.Id);
+		features.disableFeatureIfExists( GarrisonOnSiegeRaising.Id);
+		features.disableFeatureIfExists( GarrisonOnButton.Id);
+
 		features.disableFeatureIfExists( StrategyDreadBuildingsDisable.Id);
 		features.disableFeatureIfExists( BattleDreadLowered.Id);
 		features.disableFeatureIfExists( CatholicIberiaUnitsRecruitmentIncreased.Id);
