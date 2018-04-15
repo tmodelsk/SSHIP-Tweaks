@@ -3,9 +3,7 @@ package tm.mtwModPatcher.lib.data.exportDescrUnit;
 import tm.common.Ctm;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 
-/**
- * Created by Tomek on 2016-07-12.
- */
+/** Unit Definition dto - EDU record */
 public class UnitDef {
 
 	public String Name;		// type
@@ -47,7 +45,7 @@ public class UnitDef {
 
 	public Integer StatHeat;
 	public String StatGround;
-	public tm.mtwModPatcher.lib.data.exportDescrUnit.StatMental StatMental; //public String StatMental;
+	public tm.mtwModPatcher.lib.data.exportDescrUnit.StatMental StatMental;
 
 
 	public String StatChargeDist;
@@ -164,6 +162,10 @@ public class UnitDef {
 	public static final UnitClass CLASS_HEAVY = new UnitClass("heavy");
 	public static final UnitClass CLASS_LIGHT = new UnitClass("light");
 
+	public static final String ATTRIB_FREE_UPKEEP = "free_upkeep_unit";
+	public static final String ATTRIB_IS_PEASANT = "is_peasant";
+	public static final String FORMATION_PHALANX = "phalanx";
+
 	@Override
 	public String toString() {
 
@@ -172,8 +174,4 @@ public class UnitDef {
 		else
 			return Ctm.format("{0} (PA:{1} D:{2})",Name , StatPri.Damage, StatPriArmour.defence());
 	}
-
-	public static final String ATTRIB_FREE_UPKEEP = "free_upkeep_unit";
-	public static final String ATTRIB_IS_PEASANT = "is_peasant";
-	public static final String FORMATION_PHALANX = "phalanx";
 }

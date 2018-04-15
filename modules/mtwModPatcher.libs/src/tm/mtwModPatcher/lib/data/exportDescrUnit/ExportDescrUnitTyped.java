@@ -35,12 +35,10 @@ public class ExportDescrUnitTyped extends FileEntity {
 		addOwnership(unitName, factionName, 0);
 		addOwnership(unitName, factionName, 1);
 	}
-
 	public void addOwnership(String unitName, String factionName) throws PatcherLibBaseEx {
 		UnitDef unit = loadUnit(unitName);
 		unit.addOwnership(factionName);
 	}
-
 	public void addOwnership(String unitName, String factionName, int eraNumber) throws PatcherLibBaseEx {
 		UnitDef unit = loadUnit(unitName);
 		unit.addOwnership(factionName, eraNumber);
@@ -331,8 +329,6 @@ public class ExportDescrUnitTyped extends FileEntity {
 		return Format.toString(doubleValue, minPrecision);
 	}
 
-	protected Pattern _LastCommentPtr = Pattern.compile("^;\\d+\\s+");
-
 	protected String getValue(String name, boolean ommitComment, LinesProcessor lines) {
 		val tmp = getValue(name, lines);
 
@@ -341,11 +337,9 @@ public class ExportDescrUnitTyped extends FileEntity {
 		val splitted = tmp.split(";");
 		return splitted[0];
 	}
-
 	protected String getValue(String name , LinesProcessor lines) throws PatcherLibBaseEx {
 		return getValue(name , 1 , lines);
 	}
-
 	protected String getValue(String name , int occurrenceNumber, LinesProcessor lines) throws PatcherLibBaseEx {
 
 		Pattern p =  Pattern.compile("^"+name+"\\s+(\\S.*)");
@@ -502,4 +496,6 @@ public class ExportDescrUnitTyped extends FileEntity {
 	protected LinesProcessor headerComments = new LinesProcessor();
 
 	public ExportDescrUnitTyped() { super("data\\export_descr_unit.txt"); }
+
+	protected Pattern _LastCommentPtr = Pattern.compile("^;\\d+\\s+");
 }

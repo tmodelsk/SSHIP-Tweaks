@@ -1,5 +1,6 @@
 package tm.mtwModPatcher.lib.common.entities;
 
+import lombok.val;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 
 /**
@@ -108,6 +109,20 @@ public class FactionInfo {
 		}
 
 		return res;
+	}
+
+	@Override
+	public int hashCode() {
+		return symbol.hashCode();
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if(obj == null) return false;
+		if(! (obj instanceof  FactionInfo)) return  false;
+
+		val objTyped = (FactionInfo)obj;
+		return  symbol.equals(objTyped.symbol);
 	}
 
 	public static  final String NOTHERN_EUROPEAN = "northern_european";

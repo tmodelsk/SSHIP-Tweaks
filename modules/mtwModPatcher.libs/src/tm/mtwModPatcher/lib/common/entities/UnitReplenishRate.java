@@ -2,9 +2,6 @@ package tm.mtwModPatcher.lib.common.entities;
 
 import tm.mtwModPatcher.lib.data.common.Format;
 
-/**
- * Created by Tomek on 2016-05-12.
- */
 public class UnitReplenishRate {
 
 	public static final double R1 = 1.0;
@@ -23,7 +20,7 @@ public class UnitReplenishRate {
 
 	public static final double R9 = 0.12;
 	public static final double R10 = 0.101;
-	//public static double R11 = 1.0;
+	public static final double R11 = 0.0909;
 	public static final double R12 = 0.085;
 
 	public static final double R13 = 0.08;

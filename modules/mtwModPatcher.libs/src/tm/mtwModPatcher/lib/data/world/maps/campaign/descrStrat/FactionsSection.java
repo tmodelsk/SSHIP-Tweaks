@@ -192,6 +192,20 @@ public class FactionsSection extends SectionDocTextLines {
 		return index;
 	}
 
+	public void replaceInitialUnit(String oldUnitName , String newUnitName, int factionStartIndex) throws PatcherLibBaseEx {
+		replaceInitialUnit(oldUnitName, newUnitName, factionStartIndex, 0);
+	}
+	public void replaceInitialUnit(String oldUnitName , String newUnitName, int factionStartIndex , int experienceLevel) throws PatcherLibBaseEx {
+		val lines = content().lines();
+
+		int unitIndex = lines.findExpFirstRegexLine("^unit\\s+"+ oldUnitName + ".+" , factionStartIndex+1);
+
+		if(newUnitName != null)
+			lines.replaceLine(unitIndex , "unit\t\t" + newUnitName + "\t\t\t\texp " + experienceLevel + " armour 0 weapon_lvl 0");
+		else
+			lines.remove(unitIndex);
+	}
+
 	public void setKingsPurse(String factionSymbol, int kingsPurse) throws PatcherLibBaseEx {
 
 		LinesProcessor lines = content().lines();

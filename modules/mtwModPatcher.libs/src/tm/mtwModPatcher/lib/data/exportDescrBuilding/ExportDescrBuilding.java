@@ -253,6 +253,12 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 	}
 
 
+	public void insertRecruitmentBuildingCapabilities(BuildingLevel buidlingLevel, String unitName, int starting, double replenish, int max, int bonus,
+													  String requirements) throws PatcherLibBaseEx {
+		insertRecruitmentBuildingCapabilities(buidlingLevel.Name, buidlingLevel.LevelName, buidlingLevel.SettlType.toLabelString(),
+				unitName, starting, replenish, max, bonus, requirements);
+	}
+
 	public void insertRecruitmentBuildingCapabilities(String buildingName, String levelName, String castleOrCity,
 													  String unitName, int starting, double replenish, int max, int bonus,
 													  String requirements) throws PatcherLibBaseEx {

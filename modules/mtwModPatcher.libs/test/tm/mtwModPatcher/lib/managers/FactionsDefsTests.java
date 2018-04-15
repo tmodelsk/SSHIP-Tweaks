@@ -4,7 +4,6 @@ import lombok.val;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import tm.common.collections.ArrayUniqueList;
-import tm.mtwModPatcher.lib.managers.FactionsDefs;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -41,7 +40,7 @@ public class FactionsDefsTests {
 
 	@Test
 	public void getFactionInfos_ShouldReturnAllList() {
-		val factions = FactionsDefs.getFactionInfos();
+		val factions = FactionsDefs.factionInfos();
 
 		Assertions.assertThat(factions).isNotEmpty();
 	}

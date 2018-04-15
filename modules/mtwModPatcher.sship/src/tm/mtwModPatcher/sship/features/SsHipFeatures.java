@@ -19,6 +19,7 @@ import tm.mtwModPatcher.sship.features.garrisons.GarrisonNoUnguardedSettlements;
 import tm.mtwModPatcher.sship.features.garrisons.GarrisonOnAssaultRaising;
 import tm.mtwModPatcher.sship.features.garrisons.GarrisonOnSiegeRaising;
 import tm.mtwModPatcher.sship.features.global.*;
+import tm.mtwModPatcher.sship.features.global.catholicIberiaReworked.CatholicIberiaReworked;
 import tm.mtwModPatcher.sship.features.global.factionFate.*;
 import tm.mtwModPatcher.sship.features.global.rimlandHeartland.RimlandHeartland;
 import tm.mtwModPatcher.sship.features.layout.CampaignMapHudToggler;

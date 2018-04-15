@@ -292,7 +292,7 @@ public abstract class CampaignAiConfigurator extends Feature {
 
 	@Override
 	public void initialize(FileEntityFactory fileEntityFactory, ConsoleLogger logger) {
-		factionInfos = FactionsDefs.getFactionInfos();
+		factionInfos = FactionsDefs.factionInfos();
 		initializeDefaults();
 
 		super.initialize(fileEntityFactory, logger);

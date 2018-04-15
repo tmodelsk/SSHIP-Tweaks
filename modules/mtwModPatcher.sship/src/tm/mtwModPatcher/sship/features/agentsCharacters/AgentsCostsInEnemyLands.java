@@ -1,20 +1,20 @@
 package tm.mtwModPatcher.sship.features.agentsCharacters;
 
-import tm.mtwModPatcher.lib.common.entities.FactionInfo;
-import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.entities.FactionInfo;
+import tm.mtwModPatcher.lib.common.scripting.campaignScript.blocks.IfBlock;
+import tm.mtwModPatcher.lib.common.scripting.campaignScript.blocks.MonitorEventBlock;
+import tm.mtwModPatcher.lib.common.scripting.campaignScript.blocks.RegionBlock;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.commands.AddMoney;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.commands.IncrementKingsPurse;
-import tm.mtwModPatcher.lib.common.scripting.campaignScript.core.EventType;
-import tm.mtwModPatcher.lib.common.scripting.campaignScript.blocks.MonitorEventBlock;
-import tm.mtwModPatcher.lib.common.scripting.campaignScript.blocks.IfBlock;
-import tm.mtwModPatcher.lib.common.scripting.campaignScript.conditions.various.CompareCounter;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.conditions.character.IsInEnemyLands;
-import tm.mtwModPatcher.lib.common.scripting.campaignScript.blocks.RegionBlock;
+import tm.mtwModPatcher.lib.common.scripting.campaignScript.conditions.various.CompareCounter;
+import tm.mtwModPatcher.lib.common.scripting.campaignScript.core.EventType;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.engines.FactionExpensesAdditional;
 import tm.mtwModPatcher.lib.common.scripting.campaignScript.keywords.IncrementVariable;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.CampaignScript;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.FactionAiEcId;
+import tm.mtwModPatcher.lib.managers.FactionsDefs;
 
 import java.util.List;
 import java.util.UUID;
@@ -38,7 +38,7 @@ public class AgentsCostsInEnemyLands extends Feature {
 		factionExpenses.ensureLocalKingsPurseCompensateExists();
 		//factionExpenses.ensureFactionChargingExpensesExist();
 
-		List<FactionInfo> factions = FactionsDefs.getFactionInfos();
+		List<FactionInfo> factions = FactionsDefs.factionInfos();
 		factions.remove(FactionsDefs.Rebels);
 
 

@@ -11,6 +11,7 @@ import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
 import tm.mtwModPatcher.lib.data.unitModels.BattleModels;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrMercenaries;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.descrStrat.DescrStratSectioned;
+import tm.mtwModPatcher.sship.features.global.catholicIberiaReworked.CatholicIberiaReworked;
 
 import java.util.*;
 
