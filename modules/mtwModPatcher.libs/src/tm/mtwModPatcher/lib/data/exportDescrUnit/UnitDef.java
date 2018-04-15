@@ -4,6 +4,8 @@ import tm.common.Ctm;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.entities.FactionInfo;
 
+import java.util.Collection;
+
 /** Unit Definition dto - EDU record */
 public class UnitDef {
 
@@ -102,6 +104,9 @@ public class UnitDef {
 		StatPriAttr.add(newAttribute);
 	}
 
+	public void addOwnershipAll(Collection<FactionInfo> factions) throws PatcherLibBaseEx {
+		factions.forEach( f -> addOwnershipAll(f) );
+	}
 	public void addOwnershipAll(FactionInfo faction) throws PatcherLibBaseEx {
 		addOwnershipAll(faction.symbol);
 	}

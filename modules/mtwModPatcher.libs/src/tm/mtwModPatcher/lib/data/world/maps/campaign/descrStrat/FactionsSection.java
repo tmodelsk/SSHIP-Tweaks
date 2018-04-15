@@ -7,6 +7,8 @@ import tm.mtwModPatcher.lib.common.core.features.fileEntities.LineNotFoundEx;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.sections.SectionDocTextLines;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.sections.SectionTextLines;
+import tm.mtwModPatcher.lib.common.entities.SettlementLevel;
+import tm.mtwModPatcher.lib.common.entities.SettlementLevelConverter;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,6 +19,19 @@ public class FactionsSection extends SectionDocTextLines {
 
 	public void insertSettlementBuilding(String provinceName, String name, String level) throws PatcherLibBaseEx {
 		val endIndex = loadSettlemenBlockEndIndex(provinceName);
+
+		val rl = new ArrayList<String>();
+
+		rl.add("	building");
+		rl.add("	{");
+		rl.add("		type " + name + " " + level);
+		rl.add("	}");
+
+		val lines = content().lines();
+		lines.insertAt(endIndex, rl);
+	}
+	public void insertSettlementBuildingOnStart(String provinceName, String name, String level) throws PatcherLibBaseEx {
+		val endIndex = loadSettlementFirstBuildingIndex(provinceName);
 
 		val rl = new ArrayList<String>();
 
@@ -95,6 +110,14 @@ public class FactionsSection extends SectionDocTextLines {
 
 		val settlementIndex = regionIndex - 3;
 		lines.replaceLine(settlementIndex, "settlement castle");
+	}
+	public void setSetlementLevel(String provinceName, SettlementLevel level) {
+		val lines = content().lines();
+
+		val settlIndex = loadSettlementStartIndex(provinceName);
+		val levelIndex = lines.findExpFirstRegexLine("^\\s*level\\s+\\w+", settlIndex);
+
+		lines.replaceLine(levelIndex, "\tlevel " + SettlementLevelConverter.toSettlementLevelStr(level));
 	}
 	public void setFactionCreator(String provinceName, String factionSymbol) {
 		val lines = content().lines();

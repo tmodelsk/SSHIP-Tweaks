@@ -5,6 +5,7 @@ import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
 import tm.mtwModPatcher.lib.common.entities.FactionInfo;
+import tm.mtwModPatcher.lib.common.entities.SettlementLevel;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingLevel;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.SettlType;
@@ -145,10 +146,11 @@ public class CatholicIberiaReworked extends Feature {
 	}
 	private void caballerosVillanosReworked() throws PatcherLibBaseEx {
 		String cabVillanos = CABALLEROS_VILLANOS;
+		val unit = edu.loadUnit(cabVillanos);
 
 		edb.removeUnitRecruitment(cabVillanos);
-		edu.addOwnershipAll(cabVillanos, ARAGON.symbol);
-		edu.addOwnershipAll(cabVillanos, SLAVE.symbol);
+		unit.addOwnershipAll(iberiaChristianFactions);
+		unit.addOwnershipAll(otherChristianAndSlaveFactions);
 
 		val requireSuffix = " and hidden_resource aragon";
 
@@ -252,8 +254,13 @@ public class CatholicIberiaReworked extends Feature {
 
 		factionsSect.moveSettlementBeforeSettl(prov, Provinces.Bordeaux);
 
+		// TODO : ERROR : !! Pamlona !!
+		// 14:48:51.259 [script.err] [error] Script Error in mods/SSHIP-TM/data/world/maps/campaign/imperial_campaign/descr_strat.txt, at line 11325, column 5
+		//The castle core building level should be EQUAL the settlement level!
+
+		factionsSect.setSetlementLevel(prov, SettlementLevel.L3_LargeTown);
 		factionsSect.removeSettlementBuilding(prov, WallsCastle.Name);
-		factionsSect.insertSettlementBuilding(prov, WallsCastle.Name, WallsCastle.L3_Castle);
+		factionsSect.insertSettlementBuildingOnStart(prov, WallsCastle.Name, WallsCastle.L3_Castle);
 
 		factionsSect.removeSettlementBuilding(prov, MissileCastle);
 		factionsSect.insertSettlementBuilding(prov, MissileCastle, MissileCastleLevels.get(1));
