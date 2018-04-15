@@ -19,6 +19,9 @@ public class StatMental {
 
 	public String Comments = null;
 
+	public static final String DISCIPLINE_NORMAL = "normal";
+	public static final String DISCIPLINE_DISCIPLINED = "disciplined";
+
 	public static StatMental parseStr(String statMentalStr) {
 		val sm = new StatMental();
 
@@ -72,4 +75,6 @@ public class StatMental {
 
 		return s;
 	}
+
+
 }

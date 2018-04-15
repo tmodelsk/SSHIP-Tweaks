@@ -39,6 +39,8 @@ public class WeaponAttributes {
 
 		if(attributes == null) attributes = new LinkedHashSet<>();
 
+		if(attributes.contains("no")) attributes.remove("no");
+
 		attributes.add(attr);
 	}
 

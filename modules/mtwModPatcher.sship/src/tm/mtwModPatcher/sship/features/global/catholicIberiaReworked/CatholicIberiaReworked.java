@@ -40,17 +40,10 @@ public class CatholicIberiaReworked extends Feature {
 	public void executeUpdates() throws Exception {
 		initFileEntities();
 
-		/*
-		 TODO: dodac battleModels : Spearmen i Armored Spearmen skopiowac z CatholicIberiaUnitsRecruitmentIncreased,
-		 			dodac dla Mounted Seargent .
-		*/
-
-		aragonRemoveSpearMilitiaAddUrbanMilitia();
-		spearmenForIberians();
-		armoredSpearmen();
+		spearUnitsReworked.execute();
 		archersIberiaReworked();
 		lightCavalryReworked();
-		almughavarsReworked();
+		almughavarsReworked.execute();
 
 		replaceInitialTroops();
 
@@ -60,99 +53,6 @@ public class CatholicIberiaReworked extends Feature {
 		rebelPamplona();
 
 		descrStrat.Factions.insertSettlementBuilding(Provinces.Bordeaux, RoadCity, RoadCityLevels.get(0));
-	}
-
-	private void aragonRemoveSpearMilitiaAddUrbanMilitia() {
-		edb.removeUnitRecruitment(JAVELINMEN , ARAGON);
-		edb.removeUnitRecruitment(LUSITANIAN_JAVELINMEN , ARAGON);
-		edb.removeUnitRecruitment(PEASANTS , ARAGON);
-		edb.removeUnitRecruitment(SPEAR_MILITIA , ARAGON);
-
-		edb.removeUnitRecruitment(URBAN_SPEAR_MILITIA , ARAGON);
-		edb.addToUnitRecruitment(URBAN_SPEAR_MILITIA, ARAGON, BarracksCity, PISA);
-
-		edu.addOwnershipAll(NE_URBAN_MILITIA, ARAGON.symbol);
-		edb.removeUnitRecruitment(NE_URBAN_MILITIA , ARAGON);
-		edb.addToUnitRecruitment(NE_URBAN_MILITIA, ARAGON, BarracksCity, PISA);
-
-		edu.addOwnershipAll(PAVISE_SPEAR_MILITIA, ARAGON.symbol);
-		edb.removeUnitRecruitment(PAVISE_SPEAR_MILITIA , ARAGON);
-		edb.addToUnitRecruitment(PAVISE_SPEAR_MILITIA, ARAGON, BarracksCity, PISA);
-	}
-	private void almughavarsReworked() {
-		edu.addOwnershipAll(ALMUGHAVARS, SLAVE.symbol);
-
-		// # Adjust recuit cost
-		val footKnights = edu.loadUnit(DISMOUNTED_SWORD_MAILED_KNIGHTS);
-		//val spearMilitia = edu.loadUnit(SPEAR_MILITIA);
-		val almughavars = edu.loadUnit(ALMUGHAVARS);
-
-		almughavars.StatCost.Cost = footKnights.StatCost.Cost;
-		almughavars.StatCost.Upkeep = almughavars.Soldier.NumberOfMen * 5;
-
-		// ## Add Almughavars recuitment ##
-		edb.removeUnitRecruitment(ALMUGHAVARS);
-		val requireSuffix = " and hidden_resource aragon";
-
-		val reqHigh = "factions { "+ FactionsDefs.toCsv(iberiaChristianFactions) +" }" + requireSuffix;
-		val reqLow = "factions { "+ FactionsDefs.toCsv(otherChristianAndSlaveFactions) +" }" + requireSuffix;
-
-		val building = new BuildingLevel(BarracksCastle, BarracksCastleLevels, SettlType.Castle);
-		edb.insertRecruitmentBuildingCapabilities(building, ALMUGHAVARS, 1, R8,1, 0 , reqHigh);
-		edb.insertRecruitmentBuildingCapabilities(building, ALMUGHAVARS, 0, R10,1, 0 , reqLow);
-
-		building.nextLevel();
-		edb.insertRecruitmentBuildingCapabilities(building, ALMUGHAVARS, 1, R7,2, 0 , reqHigh);
-		edb.insertRecruitmentBuildingCapabilities(building, ALMUGHAVARS, 0, R9,1, 0 , reqLow);
-
-		building.nextLevel();
-		edb.insertRecruitmentBuildingCapabilities(building, ALMUGHAVARS, 2, R6,3, 1 , reqHigh);
-		edb.insertRecruitmentBuildingCapabilities(building, ALMUGHAVARS, 1, R8,2, 0 , reqLow);
-
-		building.nextLevel();
-		edb.insertRecruitmentBuildingCapabilities(building, ALMUGHAVARS, 2, R5,4, 2 , reqHigh);
-		edb.insertRecruitmentBuildingCapabilities(building, ALMUGHAVARS, 1, R7,3, 1 , reqLow);
-
-		building.nextLevel();
-		edb.insertRecruitmentBuildingCapabilities(building, ALMUGHAVARS, 3, R4,5, 2 , reqHigh);
-		edb.insertRecruitmentBuildingCapabilities(building, ALMUGHAVARS, 1, R6,3, 1 , reqLow);
-	}
-	private void spearmenForIberians() {
-		// ## SERGEANT_SPEARMEN recuitment ##
-		edu.addOwnershipAll(SERGEANT_SPEARMEN, ARAGON.symbol);
-		edu.addOwnershipAll(SERGEANT_SPEARMEN, SPAIN.symbol);
-		edu.addOwnershipAll(SERGEANT_SPEARMEN, PORTUGAL.symbol);
-
-		edb.removeUnitRecruitment(SERGEANT_SPEARMEN , ARAGON);
-		edb.removeUnitRecruitment(SERGEANT_SPEARMEN , SPAIN);
-		edb.removeUnitRecruitment(SERGEANT_SPEARMEN , PORTUGAL);
-
-		edb.addToUnitRecruitment(SERGEANT_SPEARMEN, ARAGON, BarracksCastle, allSpainHiddenResList, FRANCE);
-		edb.addToUnitRecruitment(SERGEANT_SPEARMEN, SPAIN, BarracksCastle, FRANCE);
-		edb.addToUnitRecruitment(SERGEANT_SPEARMEN, PORTUGAL, BarracksCastle, FRANCE);
-
-		// add Spearmen recruitment for 1st level barracks only for Aragon and in aragon, replenish 50% as in 2nd level.
-		edb.insertRecruitmentBuildingCapabilities(BarracksCastle, BarracksCastleLevels.get(0), CastleType, SERGEANT_SPEARMEN,
-				1, 0.08,1, 0 , "factions { aragon, } and not event_counter FULL_PLATE_ARMOR 1 and hidden_resource aragon");
-	}
-	private void armoredSpearmen() {
-		/* Armored Sergeants
-			(Castle) Castille: Armoured Serjeants
-			At 1245, make Armoured Serjeants available for Aragón and Portugal,
-
-			a wiec : dla Spain : Armoured Serjeants jak pisa / sicily . /  - dostepne od poczatku
-
-			Aragon i Portugal, np: Armoured Serjeants jak england -> od HEAVY_MAIL_ARMOR
-		 */
-
-		edu.addOwnershipAll(ARMORED_SERGEANTS, ARAGON.symbol);
-		edu.addOwnershipAll(ARMORED_SERGEANTS, SPAIN.symbol);
-		edu.addOwnershipAll(ARMORED_SERGEANTS, PORTUGAL.symbol);
-
-		edb.addToUnitRecruitment(ARMORED_SERGEANTS, SPAIN, BarracksCastle, allSpainHiddenResList, PISA);
-
-		edb.addToUnitRecruitment(ARMORED_SERGEANTS, ARAGON, BarracksCastle, allSpainHiddenResList, ENGLAND);
-		edb.addToUnitRecruitment(ARMORED_SERGEANTS, PORTUGAL, BarracksCastle, ENGLAND);
 	}
 
 	private void archersIberiaReworked() {
@@ -235,6 +135,11 @@ public class CatholicIberiaReworked extends Feature {
 		edb.addToUnitRecruitment(MOUNTED_SERGEANTS, ARAGON, allSpainHiddenResList, PISA);
 		edb.addToUnitRecruitment(MOUNTED_SERGEANTS, SPAIN, PISA);
 		edb.addToUnitRecruitment(MOUNTED_SERGEANTS, PORTUGAL, PISA);
+
+		/*
+		 TODO: dodac battleModels : dodac dla Mounted Seargent .
+		*/
+
 
 		caballerosVillanosReworked();
 		removeAlforrats();
@@ -453,10 +358,26 @@ public class CatholicIberiaReworked extends Feature {
 		factionsSection = descrStrat.Factions;
 		battleModels = getFileRegisterForUpdated(BattleModels.class);
 		descrRegions = getFileRegisterForUpdated(DescrRegions.class);
+
+		val sharedCtx = new SharedContext();
+		sharedCtx.edb = edb;
+		sharedCtx.edu = edu;
+		sharedCtx.descrMercenaries = descrMercenaries;
+		sharedCtx.descrStrat = descrStrat;
+		sharedCtx.factionsSection = factionsSection;
+		sharedCtx.battleModels = battleModels;
+
+		sharedCtx.iberiaChristianFactions = iberiaChristianFactions;
+		sharedCtx.otherChristianAndSlaveFactions = iberiaChristianFactions;
+		sharedCtx.allSpainHiddenResList = allSpainHiddenResList;
+
+		almughavarsReworked = new AlmughavarsReworked(sharedCtx);
+		spearUnitsReworked = new SpearUnitsReworked(sharedCtx);
+
 	}
 	@Override
 	public Set<UUID> getConflictingFeatures() {
-		return new HashSet<>(Arrays.asList(CatholicIberiaUnitsRecruitmentIncreased.Id));
+		return new HashSet<>(Collections.singletonList(CatholicIberiaUnitsRecruitmentIncreased.Id));
 	}
 	public CatholicIberiaReworked() {
 		super("Catholic Iberia reworked");
@@ -468,8 +389,9 @@ public class CatholicIberiaReworked extends Feature {
 		addOverrideTask(new OverrideCopyTask("UnitInfos"));
 
 		iberiaChristianFactions = FactionsDefs.toFactionInfos(Arrays.asList("aragon", "spain" , "portugal"));
+
 		otherChristianAndSlaveFactions = FactionsDefs.christianFactionInfos();
-		otherChristianAndSlaveFactions.removeAll(otherChristianAndSlaveFactions);
+		otherChristianAndSlaveFactions.removeAll(iberiaChristianFactions);
 		otherChristianAndSlaveFactions.add(SLAVE);
 	}
 
@@ -485,8 +407,10 @@ public class CatholicIberiaReworked extends Feature {
 	private BattleModels battleModels;
 	private DescrRegions descrRegions;
 
+	private AlmughavarsReworked almughavarsReworked;
+	private SpearUnitsReworked spearUnitsReworked;
+
 	private final String nl = System.lineSeparator();
-	private final String nullStr = null;
 
 	@Override
 	public UUID getId() {

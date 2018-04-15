@@ -46,4 +46,6 @@ public class WeaponStat {
 	public String toString() {
 		return "" + Damage + ", " + ChargeBonus + ", ...";
 	}
+
+	public static final String SOUND_TYPE_SPEAR = "spear";
 }

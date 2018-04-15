@@ -1,19 +1,26 @@
 package tm.mtwModPatcher.lib.data.unitModels;
 
+import lombok.val;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessorFileEntity;
+import tm.mtwModPatcher.lib.common.entities.FactionInfo;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Created by Tomek on 2016-11-09.
- */
+/** Units apperance on battle field, unit <- -> models composition */
 public class BattleModels extends LinesProcessorFileEntity {
 
+	public void copyModelBlocksData(List<String> modelNames, List<FactionInfo> factions, FactionInfo sourceFaction) throws PatcherLibBaseEx {
+		for(val faction : factions) {
+			for(val modelName : modelNames) {
+				copyModelBlocksData(modelName, faction.symbol , sourceFaction.symbol );
+			}
+		}
+	}
 	public void copyModelBlocksData(String modelName, String newFactionName, String sourceFactionName) throws PatcherLibBaseEx {
 		copyModelBlockData(modelName, newFactionName, sourceFactionName, 1);
 		copyModelBlockData(modelName, newFactionName, sourceFactionName, 2);

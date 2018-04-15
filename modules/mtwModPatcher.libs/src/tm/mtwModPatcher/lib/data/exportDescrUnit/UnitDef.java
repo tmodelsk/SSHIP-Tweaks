@@ -2,6 +2,7 @@ package tm.mtwModPatcher.lib.data.exportDescrUnit;
 
 import tm.common.Ctm;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
+import tm.mtwModPatcher.lib.common.entities.FactionInfo;
 
 /** Unit Definition dto - EDU record */
 public class UnitDef {
@@ -36,7 +37,7 @@ public class UnitDef {
 	public WeaponStat StatPri;
 	public WeaponAttributes StatPriAttr;
 	public WeaponStat StatSec;
-	public String StatSecAttr;
+	public WeaponAttributes StatSecAttr;
 	public String StatTer;
 	public String StatTerAttr;
 
@@ -101,11 +102,27 @@ public class UnitDef {
 		StatPriAttr.add(newAttribute);
 	}
 
-	public void addOwnership(String factionName) throws PatcherLibBaseEx {
-
-		Ownership += ", "+factionName;
+	public void addOwnershipAll(FactionInfo faction) throws PatcherLibBaseEx {
+		addOwnershipAll(faction.symbol);
 	}
+	public void addOwnershipAll(String factionName) throws PatcherLibBaseEx {
+		addOwnership(factionName);
+		addOwnership(factionName, 0);
+		addOwnership(factionName, 1);
+		addOwnership(factionName, 2);
+		addOwnership(factionName, 3);
+	}
+	public void addOwnership(String factionName) throws PatcherLibBaseEx {
+		if(Ownership == null) Ownership = factionName;
+		else {
+			if(Ownership.trim().startsWith(",")) {
+				Ownership = Ownership.substring(1);
+				Ownership = Ownership.trim();
+			}
+			if(!Ownership.contains(factionName)) Ownership += ", "+factionName;
+		}
 
+	}
 	public void addOwnership(String factionName, int eraNumber) throws PatcherLibBaseEx {
 
 		switch (eraNumber) {
@@ -121,11 +138,21 @@ public class UnitDef {
 			case 3:
 				OwnershipEra3 = resolveAddOwnership(OwnershipEra3, factionName);
 				break;
+			default:
+				throw new PatcherLibBaseEx("Not supported: "+eraNumber);
 		}
 	}
 	private String resolveAddOwnership(String actualOwnership, String factionName) {
 		if(actualOwnership == null || actualOwnership.isEmpty()) return factionName;
-		else return ", "+factionName;
+
+		String res = actualOwnership;
+		if(actualOwnership.trim().startsWith(",")) {
+			res = actualOwnership.substring(1);
+			res = res.trim();
+		}
+		if(!res.contains(factionName)) res += ", "+factionName;
+
+		return res;
 	}
 
 	public void multiplyMoveSpeedMod(double value) {

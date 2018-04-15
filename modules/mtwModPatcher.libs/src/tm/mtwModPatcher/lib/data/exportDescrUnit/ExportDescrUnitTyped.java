@@ -145,7 +145,7 @@ public class ExportDescrUnitTyped extends FileEntity {
 		u.StatSec = parseWeaponStat( getValue("stat_sec" , unitLines) , u.Name );
 		if(!u.StatSec.IsParsed) throw new PatcherNotSupportedEx(Ctm.format("Unable to parse EDU '{0}' StatSec: {1}", u.Name, u.StatSec.SourceStr));
 
-		u.StatSecAttr = getValue("stat_sec_attr" , unitLines);
+		u.StatSecAttr = WeaponAttributes.parseStr( getValue("stat_sec_attr" , unitLines));
 		u.StatTer = getValue("stat_ter" , unitLines);
 		u.StatTerAttr = getValue("stat_ter_attr" , unitLines);
 
@@ -426,7 +426,7 @@ public class ExportDescrUnitTyped extends FileEntity {
 		writeUnitAttrib("stat_pri" , serializeWeaponStat( unit.StatPri ) , bw);
 		writeUnitAttrib("stat_pri_attr" , unit.StatPriAttr.serialize() , bw);
 		writeUnitAttrib("stat_sec" , serializeWeaponStat( unit.StatSec ), bw);
-		writeUnitAttrib("stat_sec_attr" , unit.StatSecAttr , bw);
+		writeUnitAttrib("stat_sec_attr" , unit.StatSecAttr.serialize() , bw);
 		writeUnitAttrib("stat_ter" , unit.StatTer , bw);
 		writeUnitAttrib("stat_ter_attr" , unit.StatTerAttr , bw);
 
