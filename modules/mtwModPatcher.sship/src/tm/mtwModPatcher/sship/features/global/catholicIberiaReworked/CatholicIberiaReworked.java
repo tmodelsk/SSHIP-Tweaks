@@ -2,7 +2,6 @@ package tm.mtwModPatcher.sship.features.global.catholicIberiaReworked;
 
 import lombok.val;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
-import tm.mtwModPatcher.lib.common.core.features.OverrideCopyTask;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
 import tm.mtwModPatcher.lib.common.entities.FactionInfo;
@@ -17,6 +16,7 @@ import tm.mtwModPatcher.lib.data.world.maps.campaign.descrStrat.DescrStratSectio
 import tm.mtwModPatcher.lib.data.world.maps.campaign.descrStrat.FactionsSection;
 import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.sship.features.global.CatholicIberiaUnitsRecruitmentIncreased;
+import tm.mtwModPatcher.sship.features.overrideTasks.OverrideUnitInfosTask;
 import tm.mtwModPatcher.sship.lib.HiddenResources;
 import tm.mtwModPatcher.sship.lib.Provinces;
 
@@ -28,17 +28,16 @@ import static tm.mtwModPatcher.lib.managers.FactionsDefs.*;
 import static tm.mtwModPatcher.sship.lib.Buildings.*;
 import static tm.mtwModPatcher.sship.lib.Units.*;
 
-
 public class CatholicIberiaReworked extends Feature {
 
 	@Override
 	public void setParamsCustomValues() {
-
+		version = "0.5";
 	}
 
 	@Override
 	public void executeUpdates() throws Exception {
-		initFileEntities();
+		initFileEntitiesAndSubModules();
 
 		spearUnitsReworked.execute();
 		archersIberiaReworked();
@@ -350,7 +349,7 @@ public class CatholicIberiaReworked extends Feature {
 		fs.replaceInitialUnit(SPEAR_MILITIA, CRUSADER_SERGEANTS , portugalIndex , 1);
 	}
 
-	private void initFileEntities() throws Exception {
+	private void initFileEntitiesAndSubModules() throws Exception {
 		edb = getFileRegisterForUpdated(ExportDescrBuilding.class);
 		edu = getFileRegisterForUpdated(ExportDescrUnitTyped.class);
 		descrMercenaries = getFileRegisterForUpdated(DescrMercenaries.class);
@@ -386,7 +385,7 @@ public class CatholicIberiaReworked extends Feature {
 		addCategory("Global");
 		addCategory("Units");
 
-		addOverrideTask(new OverrideCopyTask("UnitInfos"));
+		addOverrideTask(new OverrideUnitInfosTask());
 
 		iberiaChristianFactions = FactionsDefs.toFactionInfos(Arrays.asList("aragon", "spain" , "portugal"));
 
