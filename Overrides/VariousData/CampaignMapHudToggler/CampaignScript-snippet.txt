@@ -1,6 +1,7 @@
 declare_counter ui_showing
 monitor_event ShortcutTriggered ShortcutTriggered object_manager hide_gui
         wait 0.1
+        console_command toggle_perfect_spy
             if I_CompareCounter ui_showing = 0
                 hide_ui
                 disable_movie_view
