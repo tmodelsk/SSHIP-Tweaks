@@ -115,6 +115,9 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 	public void removeUnitRecruitment(String unitName, FactionInfo faction) {
 		removeUnitRecruitment(unitName, faction.symbol);
 	}
+	public void removeUnitRecruitment(String unitName, List<FactionInfo> factions) {
+		factions.forEach( f  -> removeUnitRecruitment(unitName, f));
+	}
 	public void removeUnitRecruitment(String unitName, String faction) {
 		val patt = Pattern.compile("^\\s*recruit_pool\\s+\"" +unitName+ "\"\\s+");
 

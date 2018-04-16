@@ -12,8 +12,12 @@ import tm.mtwModPatcher.lib.data.unitModels.BattleModels;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrMercenaries;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.descrStrat.DescrStratSectioned;
 import tm.mtwModPatcher.sship.features.global.catholicIberiaReworked.CatholicIberiaReworked;
+import tm.mtwModPatcher.sship.lib.Units;
 
 import java.util.*;
+
+import static tm.mtwModPatcher.lib.managers.FactionsDefs.*;
+import static tm.mtwModPatcher.sship.lib.Buildings.CastleType;
 
 /**   */
 public class CatholicIberiaUnitsRecruitmentIncreased extends Feature {
@@ -99,18 +103,18 @@ public class CatholicIberiaUnitsRecruitmentIncreased extends Feature {
 
 
 		// ### Light Swordsmen & Light Men at Arms ###
-		edb.insertIntoBuildingCapabilities("castle_barracks", "drill_square", "castle",
+		edb.insertIntoBuildingCapabilities("castle_barracks", "drill_square", CastleType,
 				"recruit_pool    \"Light Swordsmen\"  1   0.13   1  0  requires factions { hre, spain, hungary, teutonic_order, portugal, } and not event_counter first_watch 1 and hidden_resource poland or hidden_resource hre or hidden_resource spain or hidden_resource pisa or hidden_resource venice or hidden_resource papal_states or hidden_resource hungary or hidden_resource portugal");
-		edb.insertIntoBuildingCapabilities("castle_barracks", "drill_square", "castle",
+		edb.insertIntoBuildingCapabilities("castle_barracks", "drill_square", CastleType,
 				"recruit_pool    \"Light Swordsmen\"  0   0.085   1  0  requires factions { hre, spain, hungary, teutonic_order, portugal, } and not event_counter first_watch 1 and not hidden_resource poland and not hidden_resource hre and not hidden_resource spain and not hidden_resource pisa and not hidden_resource venice and not hidden_resource papal_states and not hidden_resource hungary and not hidden_resource portugal");
-		edb.insertIntoBuildingCapabilities("castle_barracks", "drill_square", "castle",
+		edb.insertIntoBuildingCapabilities("castle_barracks", "drill_square", CastleType,
 				"recruit_pool    \"Light Swordsmen\"  1   0.085   1  0  requires factions { poland, pisa, venice, papal_states, } and not event_counter first_watch 1 and hidden_resource poland or hidden_resource hre or hidden_resource spain or hidden_resource pisa or hidden_resource venice or hidden_resource papal_states or hidden_resource hungary or hidden_resource portugal");
-		edb.insertIntoBuildingCapabilities("castle_barracks", "drill_square", "castle",
+		edb.insertIntoBuildingCapabilities("castle_barracks", "drill_square", CastleType,
 				"recruit_pool    \"Light Swordsmen\"  0   0.065   1  0  requires factions { poland, pisa, venice, papal_states, } and not event_counter first_watch 1 and not hidden_resource poland and not hidden_resource hre and not hidden_resource spain and not hidden_resource pisa and not hidden_resource venice and not hidden_resource papal_states and not hidden_resource hungary and not hidden_resource portugal");
 
-		edb.insertIntoBuildingCapabilities("castle_barracks", "drill_square", "castle",
+		edb.insertIntoBuildingCapabilities("castle_barracks", "drill_square", CastleType,
 				"recruit_pool    \"Light Men at Arms\"  1   0.13   1  0  requires factions { england, france, aragon, } and not event_counter first_watch 1 and hidden_resource england or hidden_resource france or hidden_resource aragon");
-		edb.insertIntoBuildingCapabilities("castle_barracks", "drill_square", "castle",
+		edb.insertIntoBuildingCapabilities("castle_barracks", "drill_square", CastleType,
 				"recruit_pool    \"Light Men at Arms\"  0   0.085   1  0  requires factions { england, france, aragon, } and not event_counter first_watch 1 and not hidden_resource england and not hidden_resource france and not hidden_resource aragon");
 	}
 
@@ -137,10 +141,10 @@ public class CatholicIberiaUnitsRecruitmentIncreased extends Feature {
 		String sergSpear = "Sergeant Spearmen";
 		String factionsRequirement = "factions { spain, aragon, portugal, }";
 
-		edb.insertRecruitmentBuildingCapabilities( "castle_barracks", "garrison_quarters", "castle", sergSpear,
+		edb.insertRecruitmentBuildingCapabilities( "castle_barracks", "garrison_quarters", CastleType, sergSpear,
 				1, UnitReplenishRate.R13, 1, 0, factionsRequirement); //and " + orderHousesRequirement
 
-		edb.insertRecruitmentBuildingCapabilities("castle_barracks", "drill_square", "castle", sergSpear,
+		edb.insertRecruitmentBuildingCapabilities("castle_barracks", "drill_square", CastleType, sergSpear,
 				1, UnitReplenishRate.R9, 2, 0, factionsRequirement); //and " + orderHousesRequirement
 
 		// #####  C I T Y  Order Houses #####
@@ -163,46 +167,46 @@ public class CatholicIberiaUnitsRecruitmentIncreased extends Feature {
 //
 //
 //		// #####  C A S T L E   Order Houses #####
-//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("templars_chapter_house_castle", "templars_minor_ch", "castle", sergSpear,
+//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("templars_chapter_house_castle", "templars_minor_ch", CastleType, sergSpear,
 //				1, UnitReplenishRate.R10, 1, 0, factionsRequirement + " and " + orderHousesRequirement);
-//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("templars_chapter_house_castle", "templars_major_ch", "castle", sergSpear,
+//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("templars_chapter_house_castle", "templars_major_ch", CastleType, sergSpear,
 //				1, UnitReplenishRate.R8, 2, 0, factionsRequirement + " and " + orderHousesRequirement);
 //
-//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("st_johns_chapter_house_castle", "st_johns_minor_ch", "castle", sergSpear,
+//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("st_johns_chapter_house_castle", "st_johns_minor_ch", CastleType, sergSpear,
 //				1, UnitReplenishRate.R10, 1, 0, factionsRequirement + " and " + orderHousesRequirement);
-//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("st_johns_chapter_house_castle", "st_johns_major_ch", "castle", sergSpear,
+//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("st_johns_chapter_house_castle", "st_johns_major_ch", CastleType, sergSpear,
 //				1, UnitReplenishRate.R8, 2, 0, factionsRequirement + " and " + orderHousesRequirement);
 
 
 //		// ## Castle Barracks #2 : org : R6 , R8 , R12 , MAX : 1
-//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("castle_barracks", "garrison_quarters", "castle", sergSpear,
+//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("castle_barracks", "garrison_quarters", CastleType, sergSpear,
 //				0, UnitReplenishRate.R13, 1, 0, factionsRequirement + " and not event_counter FULL_PLATE_ARMOR 1 and " + orderHousesRequirement); //and " + orderHousesRequirement
 //
 //		// ## City Barracks #3 : org Replenish : R4 , R6 , R8  , MAX : 2,1
-//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("castle_barracks", "drill_square", "castle", sergSpear,
+//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("castle_barracks", "drill_square", CastleType, sergSpear,
 //				1, UnitReplenishRate.R10, 1, 0, factionsRequirement + " and not event_counter FULL_PLATE_ARMOR 1 and " + orderHousesRequirement);
 //
-//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("castle_barracks", "drill_square", "castle", sergSpear,
+//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("castle_barracks", "drill_square", CastleType, sergSpear,
 //				1, UnitReplenishRate.R8, 1, 0, factionsRequirement + " and event_counter FULL_PLATE_ARMOR 1 and not event_counter first_watch 1 and " + orderHousesRequirement);
 //
 ////		// ## Castle Barracks #4 : org : Replenish : R3, R4, R6 , R8   , Max : 3,2,1
-//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("castle_barracks", "barracks", "castle", sergSpear,
+//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("castle_barracks", "barracks", CastleType, sergSpear,
 //				1, UnitReplenishRate.R9, 1, 0, factionsRequirement + " and not event_counter FULL_PLATE_ARMOR 1 and " + orderHousesRequirement);
 //
-//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("castle_barracks", "barracks", "castle", sergSpear,
+//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("castle_barracks", "barracks", CastleType, sergSpear,
 //				1, UnitReplenishRate.R7, 2, 0, factionsRequirement + " and event_counter FULL_PLATE_ARMOR 1 and not event_counter first_watch 1 and " + orderHousesRequirement);
 //
-//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("castle_barracks", "barracks", "castle", sergSpear,
+//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("castle_barracks", "barracks", CastleType, sergSpear,
 //				1, UnitReplenishRate.R5, 2, 0, factionsRequirement + " and event_counter first_watch 1 and " + orderHousesRequirement);
 //
 ////		// ## Castle Barracks #5 : org Replenish : R2 , R3 , R4 , R6 , MAX : 4,3,2,1
-//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("castle_barracks", "armoury", "castle", sergSpear,
+//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("castle_barracks", "armoury", CastleType, sergSpear,
 //				1, UnitReplenishRate.R8, 1, 0, factionsRequirement + " and not event_counter FULL_PLATE_ARMOR 1 and " + orderHousesRequirement);
 //
-//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("castle_barracks", "armoury", "castle", sergSpear,
+//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("castle_barracks", "armoury", CastleType, sergSpear,
 //				1, UnitReplenishRate.R6, 2, 0, factionsRequirement + " and event_counter FULL_PLATE_ARMOR 1 and not event_counter first_watch 1 and " + orderHousesRequirement);
 //
-//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("castle_barracks", "armoury", "castle", sergSpear,
+//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("castle_barracks", "armoury", CastleType, sergSpear,
 //				1, UnitReplenishRate.R4, 2, 0, factionsRequirement + " and event_counter first_watch 1 and " + orderHousesRequirement);
 
 
@@ -237,26 +241,15 @@ public class CatholicIberiaUnitsRecruitmentIncreased extends Feature {
 	}
 
 	protected void addArmoredSpearmen() throws PatcherLibBaseEx {
+		/* ### Add Sergeant Spearmen - with minus -2 replenish rates  ###
+		   ## Castle ## levels mustering_hall garrison_quarters drill_square barracks armoury */
 
-		// ### Add Sergeant Spearmen - with minus -2 replenish rates  ###
-		// ## Castle ## levels mustering_hall garrison_quarters drill_square barracks armoury
+		String sergSpearSymbol = Units.ARMORED_SERGEANTS;
+		val unit = edu.loadUnit(sergSpearSymbol);
 
-		String sergSpear = "Armored Sergeants";
-
-		edu.addOwnership(sergSpear, "aragon");
-		edu.addOwnership(sergSpear, "aragon", 0);
-		edu.addOwnership(sergSpear, "aragon", 1);
-		edu.addOwnership(sergSpear, "aragon", 2);
-
-		edu.addOwnership(sergSpear, "spain");
-		edu.addOwnership(sergSpear, "spain", 0);
-		edu.addOwnership(sergSpear, "spain", 1);
-		edu.addOwnership(sergSpear, "spain", 2);
-
-		edu.addOwnership(sergSpear, "portugal");
-		edu.addOwnership(sergSpear, "portugal", 0);
-		edu.addOwnership(sergSpear, "portugal", 1);
-		edu.addOwnership(sergSpear, "portugal", 2);
+		unit.addOwnershipAll(ARAGON);
+		unit.addOwnershipAll(SPAIN);
+		unit.addOwnershipAll(PORTUGAL);
 
 		String orderHousesRequirement = "";
 		orderHousesRequirement += "hidden_resource aragon or hidden_resource spain or hidden_resource portugal or hidden_resource france";
@@ -268,21 +261,21 @@ public class CatholicIberiaUnitsRecruitmentIncreased extends Feature {
 
 
 		// # Santiago - one for City & Castle
-		edb.insertRecruitmentBuildingCapabilities("knights_of_santiago_chapter_house", "knights_of_santiago_minor_ch", null, sergSpear,
+		edb.insertRecruitmentBuildingCapabilities("knights_of_santiago_chapter_house", "knights_of_santiago_minor_ch", null, sergSpearSymbol,
 				1, UnitReplenishRate.R15, 1, 0, factionsRequirement + " and " + orderHousesRequirement);
-		edb.insertRecruitmentBuildingCapabilities("knights_of_santiago_chapter_house", "knights_of_santiago_major_ch", null, sergSpear,
+		edb.insertRecruitmentBuildingCapabilities("knights_of_santiago_chapter_house", "knights_of_santiago_major_ch", null, sergSpearSymbol,
 				1, UnitReplenishRate.R13, 2, 0, factionsRequirement + " and " + orderHousesRequirement);
 
 
 		// #####  C A S T L E   Order Houses #####
-		edb.insertRecruitmentBuildingCapabilities("templars_chapter_house_castle", "templars_minor_ch", "castle", sergSpear,
+		edb.insertRecruitmentBuildingCapabilities("templars_chapter_house_castle", "templars_minor_ch", CastleType, sergSpearSymbol,
 				1, UnitReplenishRate.R12, 1, 0, factionsRequirement + " and " + orderHousesRequirement);
-		edb.insertRecruitmentBuildingCapabilities("templars_chapter_house_castle", "templars_major_ch", "castle", sergSpear,
+		edb.insertRecruitmentBuildingCapabilities("templars_chapter_house_castle", "templars_major_ch", CastleType, sergSpearSymbol,
 				1, UnitReplenishRate.R10, 2, 0, factionsRequirement + " and " + orderHousesRequirement);
 
-		edb.insertRecruitmentBuildingCapabilities("st_johns_chapter_house_castle", "st_johns_minor_ch", "castle", sergSpear,
+		edb.insertRecruitmentBuildingCapabilities("st_johns_chapter_house_castle", "st_johns_minor_ch", CastleType, sergSpearSymbol,
 				1, UnitReplenishRate.R12, 1, 0, factionsRequirement + " and " + orderHousesRequirement);
-		edb.insertRecruitmentBuildingCapabilities("st_johns_chapter_house_castle", "st_johns_major_ch", "castle", sergSpear,
+		edb.insertRecruitmentBuildingCapabilities("st_johns_chapter_house_castle", "st_johns_major_ch", CastleType, sergSpearSymbol,
 				1, UnitReplenishRate.R10, 2, 0, factionsRequirement + " and " + orderHousesRequirement);
 	}
 
@@ -301,25 +294,12 @@ public class CatholicIberiaUnitsRecruitmentIncreased extends Feature {
 		// levels stables knights_stables barons_stables earls_stables kings_stables
 		String reqs = "factions { aragon, } and not event_counter ENGLISH_ARCHERS 1";
 
-		edb.insertRecruitmentBuildingCapabilities("equestrian" , "stables" , "castle" , caballerosVillanos , 0, UnitReplenishRate.R10, 1, 0, reqs);
-		edb.insertRecruitmentBuildingCapabilities("equestrian" , "knights_stables" , "castle" , caballerosVillanos , 0, UnitReplenishRate.R9, 1, 0, reqs);
-		edb.insertRecruitmentBuildingCapabilities("equestrian" , "barons_stables" , "castle" , caballerosVillanos , 0, UnitReplenishRate.R8, 1, 0, reqs);
-		edb.insertRecruitmentBuildingCapabilities("equestrian" , "earls_stables" , "castle" , caballerosVillanos , 0, UnitReplenishRate.R7, 1, 0, reqs);
-		edb.insertRecruitmentBuildingCapabilities("equestrian" , "kings_stables" , "castle" , caballerosVillanos , 0, UnitReplenishRate.R6, 1, 0, reqs);
+		edb.insertRecruitmentBuildingCapabilities("equestrian" , "stables" , CastleType , caballerosVillanos , 0, UnitReplenishRate.R10, 1, 0, reqs);
+		edb.insertRecruitmentBuildingCapabilities("equestrian" , "knights_stables" , CastleType , caballerosVillanos , 0, UnitReplenishRate.R9, 1, 0, reqs);
+		edb.insertRecruitmentBuildingCapabilities("equestrian" , "barons_stables" , CastleType , caballerosVillanos , 0, UnitReplenishRate.R8, 1, 0, reqs);
+		edb.insertRecruitmentBuildingCapabilities("equestrian" , "earls_stables" , CastleType , caballerosVillanos , 0, UnitReplenishRate.R7, 1, 0, reqs);
+		edb.insertRecruitmentBuildingCapabilities("equestrian" , "kings_stables" , CastleType , caballerosVillanos , 0, UnitReplenishRate.R6, 1, 0, reqs);
 	}
-
-//	protected void addCaballerosVillanosToAragon() throws PatcherLibBaseEx {
-//
-//		String requirements = "factions { aragon, } and not event_counter ENGLISH_ARCHERS 1";
-//
-//		// stables knights_stables barons_stables earls_stables kings_stables
-//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("equestrian" , "stables" , "castle", "Caballeros Villanos", 0 , UnitReplenishRate.R10, 1, 0, requirements);
-//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("equestrian" , "knights_stables" , "castle", "Caballeros Villanos", 0 , UnitReplenishRate.R9, 1, 0, requirements);
-//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("equestrian" , "barons_stables" , "castle", "Caballeros Villanos", 0 , UnitReplenishRate.R8, 1, 0, requirements);
-//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("equestrian" , "earls_stables" , "castle", "Caballeros Villanos", 0 , UnitReplenishRate.R7, 1, 0, requirements);
-//		exportDescrBuilding.insertRecruitmentBuildingCapabilities("equestrian" , "kings_stables" , "castle", "Caballeros Villanos", 0 , UnitReplenishRate.R6, 1, 0, requirements);
-//
-//	}
 
 	protected void addUrbanMilitia() throws PatcherLibBaseEx {
 		// #### Add Urban Spear Militia - with -2 replenish rate ####
@@ -333,16 +313,16 @@ public class CatholicIberiaUnitsRecruitmentIncreased extends Feature {
 
 		// ## Castle ## levels mustering_hall garrison_quarters drill_square barracks armoury
 
-//		exportDescrBuilding.insertIntoBuildingCapabilities("castle_barracks", "garrison_quarters", "castle",
+//		exportDescrBuilding.insertIntoBuildingCapabilities("castle_barracks", "garrison_quarters", CastleType,
 //				"\t\t\trecruit_pool  \"Urban Spear Militia\"  1   0.13   1  1  requires factions { spain, aragon, portugal, } ; Patcher Added");
 
-		edb.insertIntoBuildingCapabilities("castle_barracks", "drill_square", "castle",
+		edb.insertIntoBuildingCapabilities("castle_barracks", "drill_square", CastleType,
 				"\t\t\trecruit_pool  \"Urban Spear Militia\"  1   0.13   1  1  requires factions { spain, aragon, portugal, } ; Patcher Added");
 
-		edb.insertIntoBuildingCapabilities("castle_barracks", "barracks", "castle",
+		edb.insertIntoBuildingCapabilities("castle_barracks", "barracks", CastleType,
 				"\t\t\trecruit_pool  \"Urban Spear Militia\"  1   0.13   1  1  requires factions { spain, aragon, portugal, } ; Patcher Added");
 
-		edb.insertIntoBuildingCapabilities("castle_barracks", "armoury", "castle",
+		edb.insertIntoBuildingCapabilities("castle_barracks", "armoury", CastleType,
 				"\t\t\trecruit_pool  \"Urban Spear Militia\"  1   0.13   1  1  requires factions { spain, aragon, portugal, } ; Patcher Added");
 	}
 

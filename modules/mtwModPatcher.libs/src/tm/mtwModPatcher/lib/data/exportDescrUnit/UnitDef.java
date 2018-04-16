@@ -197,6 +197,7 @@ public class UnitDef {
 	public static final String ATTRIB_FREE_UPKEEP = "free_upkeep_unit";
 	public static final String ATTRIB_IS_PEASANT = "is_peasant";
 	public static final String FORMATION_PHALANX = "phalanx";
+	public static final String MERCENARY_UNIT = "mercenary_unit";
 
 	@Override
 	public String toString() {

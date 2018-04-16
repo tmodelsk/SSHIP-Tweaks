@@ -1,11 +1,12 @@
 package tm.mtwModPatcher.sship.features.global.catholicIberiaReworked;
 
 import lombok.val;
-import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.entities.FactionInfo;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
 import tm.mtwModPatcher.lib.data.unitModels.BattleModels;
+import tm.mtwModPatcher.sship.lib.Buildings;
+import tm.mtwModPatcher.sship.lib.Units;
 
 import java.util.Arrays;
 import java.util.List;
@@ -14,13 +15,15 @@ import static tm.mtwModPatcher.lib.managers.FactionsDefs.*;
 import static tm.mtwModPatcher.sship.lib.Buildings.*;
 import static tm.mtwModPatcher.sship.lib.Units.*;
 
-public class SpearUnitsReworked {
+public class InfantryReworked {
 
 	public void execute() {
 		aragonAddUrbanAndPaviseMilitiaAsPisa();
 		spearmenForIberians();
 		armoredSpearmen();
-		aragonRemoveSpearJavelinRecruitment();
+		removeSpearJavelinPeasantRecruitment();
+
+		lightSwordsmen();
 	}
 
 	private void aragonAddUrbanAndPaviseMilitiaAsPisa() {
@@ -86,32 +89,40 @@ public class SpearUnitsReworked {
 
 		// dodac battleModels : Armored Spearmen
 		val models = Arrays.asList("armored_sergeants" , "armored_sergeants_ug1");
-		battleModels.copyModelBlocksData(models, iberiaChristianFactions, FRANCE);
+		battleModels.copyModelBlocksData(models, iberiaChristianFactions, JERUSALEM);
+	}
+	private void lightSwordsmen() {
+		val barracks = Buildings.BarracksCastle_3;
+
+		val condEventRegions = "and not event_counter first_watch 1 and hidden_resource aragon or hidden_resource spain or hidden_resource portugal";
+		val condEventNotRegions = "and not event_counter first_watch 1 and not hidden_resource aragon and not hidden_resource spain and not hidden_resource portugal";
+
+		val fAragon = "factions { aragon, } ";
+		val condAragonEventRegions = fAragon + condEventRegions;
+		val condAragonEventNotRegions = fAragon + condEventNotRegions;
+
+		val fSpainPortugal = "factions { spain, portugal, } ";
+		val condSpainPortugalEventRegions = fSpainPortugal + condEventRegions;
+		val condSpainPortugalEventNotRegions = fSpainPortugal + condEventNotRegions;
+
+		val lightMen = Units.LIGHT_MEN_AT_ARMS;
+		edb.insertRecruitmentBuildingCapabilities(barracks, lightMen, 1,0.13,1, 0, condAragonEventRegions);
+		edb.insertRecruitmentBuildingCapabilities(barracks, lightMen, 1,0.085,1, 0, condAragonEventNotRegions);
+
+		val lightSword = Units.LIGHT_SWORDSMEN;
+		edb.insertRecruitmentBuildingCapabilities(barracks, lightSword, 1,0.13,1, 0, condSpainPortugalEventRegions);
+		edb.insertRecruitmentBuildingCapabilities(barracks, lightSword, 1,0.085,1, 0, condSpainPortugalEventNotRegions);
 	}
 
-	private void aragonRemoveSpearJavelinRecruitment() {
-		edb.removeUnitRecruitment(JAVELINMEN , ARAGON);
-		edb.removeUnitRecruitment(LUSITANIAN_JAVELINMEN , ARAGON);
-		edb.removeUnitRecruitment(PEASANTS , ARAGON);
+	private void removeSpearJavelinPeasantRecruitment() {
+		edb.removeUnitRecruitment(JAVELINMEN , iberiaChristianFactions);
+		edb.removeUnitRecruitment(LUSITANIAN_JAVELINMEN , iberiaChristianFactions);
+		edb.removeUnitRecruitment(PEASANTS , iberiaChristianFactions);
 		edb.removeUnitRecruitment(SPEAR_MILITIA , ARAGON);
 	}
 
-	private void addSergeantSpearmanModels(List<FactionInfo> factions, String copyFromFaction) throws PatcherLibBaseEx {
 
-		for(val faction : factions) {
-			battleModels.copyModelBlocksData("sergeant_spearmen", faction.symbol , copyFromFaction );
-			battleModels.copyModelBlocksData("sergeant_spearmen_ug1", faction.symbol , copyFromFaction );
-		}
-	}
-	private void addArmoredSpearmanModels(List<FactionInfo> factions, String copyFromFaction) throws PatcherLibBaseEx {
-
-		for(val faction : factions) {
-			battleModels.copyModelBlocksData("armored_sergeants", faction.symbol , copyFromFaction );
-			battleModels.copyModelBlocksData("armored_sergeants_ug1", faction.symbol , copyFromFaction );
-		}
-	}
-
-	public SpearUnitsReworked(SharedContext sharedContext) {
+	public InfantryReworked(SharedContext sharedContext) {
 		this.sharedContext = sharedContext;
 
 		val ctx = sharedContext;

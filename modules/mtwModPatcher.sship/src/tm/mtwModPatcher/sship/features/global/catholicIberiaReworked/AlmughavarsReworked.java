@@ -8,11 +8,13 @@ import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.SettlType;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.StatMental;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.WeaponAttributes;
+import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrMercenaries;
 import tm.mtwModPatcher.lib.managers.FactionsDefs;
 
 import java.util.List;
 
 import static tm.mtwModPatcher.lib.common.entities.UnitReplenishRate.*;
+import static tm.mtwModPatcher.lib.data.exportDescrUnit.UnitDef.MERCENARY_UNIT;
 import static tm.mtwModPatcher.lib.data.exportDescrUnit.WeaponStat.SOUND_TYPE_SPEAR;
 import static tm.mtwModPatcher.lib.managers.FactionsDefs.*;
 import static tm.mtwModPatcher.sship.lib.Buildings.BarracksCastle;
@@ -28,6 +30,8 @@ public class AlmughavarsReworked {
 
 		// ## Add Almughavars recuitment ##
 		barracksRecruitment();
+
+		mercenaryPools();
 	}
 
 	private void unitStatFixes() {
@@ -50,6 +54,9 @@ public class AlmughavarsReworked {
 
 		// Some better discipline
 		unit.StatMental.Discipline = StatMental.DISCIPLINE_DISCIPLINED;
+
+		// Mercenaries
+		unit.addAttribute(MERCENARY_UNIT);
 	}
 
 	private void barracksRecruitment() {
@@ -80,6 +87,15 @@ public class AlmughavarsReworked {
 		edb.insertRecruitmentBuildingCapabilities(building, ALMUGHAVARS, 1, R6,3, 1 , reqLow);
 	}
 
+	private void mercenaryPools() {
+		val unitName = ALMUGHAVARS;
+		val highReplenish = "	unit "+ unitName +"			exp 2 cost 550 replenish 0.067 - 0.10 max 1 initial 1 religions { catholic }";	// replenish 0.07 - 0.17
+		val lowwReplenish = "	unit "+ unitName +"			exp 1 cost 550 replenish 0.05 - 0.067 max 1 initial 1 religions { catholic }";	// replenish 0.07 - 0.17
+
+		descrMercenaries.addUnitRecruitmentLine("Pyrenaes" , highReplenish);
+		descrMercenaries.addUnitRecruitmentLine("Spain" , lowwReplenish);
+	}
+
 
 	public AlmughavarsReworked(SharedContext sharedContext) {
 		this.sharedContext = sharedContext;
@@ -88,6 +104,7 @@ public class AlmughavarsReworked {
 
 		edb = ctx.edb;
 		edu = ctx.edu;
+		descrMercenaries = ctx.descrMercenaries;
 
 		iberiaChristianFactions = ctx.iberiaChristianFactions;
 		otherChristianAndSlaveFactions = ctx.otherChristianAndSlaveFactions;
@@ -95,6 +112,7 @@ public class AlmughavarsReworked {
 
 	private final ExportDescrBuilding edb;
 	private final ExportDescrUnitTyped edu;
+	private final DescrMercenaries descrMercenaries;
 
 	private final List<FactionInfo> iberiaChristianFactions;
 	private final List<FactionInfo> otherChristianAndSlaveFactions;

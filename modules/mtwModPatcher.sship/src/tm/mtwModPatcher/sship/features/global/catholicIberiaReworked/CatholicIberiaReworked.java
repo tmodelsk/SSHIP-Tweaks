@@ -40,7 +40,7 @@ public class CatholicIberiaReworked extends Feature {
 	public void executeUpdates() throws Exception {
 		initFileEntitiesAndSubModules();
 
-		spearUnitsReworked.execute();
+		infantryReworked.execute();
 		archersIberiaReworked();
 		lightCavalryReworked();
 		almughavarsReworked.execute();
@@ -56,15 +56,18 @@ public class CatholicIberiaReworked extends Feature {
 	}
 
 	private void archersIberiaReworked() {
-		edb.removeUnitRecruitment(PEASANT_ARCHERS , ARAGON);
-		edb.removeUnitRecruitment(PEASANT_ARCHERS , SPAIN);
-		edb.removeUnitRecruitment(PEASANT_ARCHERS , PORTUGAL);
+		edb.removeUnitRecruitment(PEASANT_ARCHERS , iberiaChristianFactions);
 
 		// ## Prussian Archers are removed from recuitment from all Iberia
 		proffArcherRemoveAllFromIberia();
 		// Now: add them into Aragon only !!
 		proffArchersAddToAragonRegion();
 		edu.addOwnershipAll(PRUSSIAN_ARCHERS, SLAVE.symbol);
+
+		edb.removeUnitRecruitment(CROSSBOW_MILITIA, ARAGON);
+
+		edb.addToUnitRecruitment(CROSSBOW_MILITIA, ARAGON, MissileCastle, SPAIN);
+		edb.addToUnitRecruitment(URBAN_CROSSBOW_MILITIA, ARAGON, VENICE);
 
 		/*
 		TODO: Archers :
@@ -288,26 +291,26 @@ public class CatholicIberiaReworked extends Feature {
 				"character	sub_faction aragon, Garcia Ramirez, named character, male, age 29, x 66, y 153 ;Pamplona\n" +
 				"traits NaturalMilitarySkill 1 , GoodCommander 1 , ReligiousActivity 4\n" +
 				"army	\n" +
-				"unit		SE Bodyguard				exp 1 armour 0 weapon_lvl 0\n" +
-				"unit		Mailed Knights				exp 0 armour 0 weapon_lvl 0  \n" +
-				"unit		Mailed Knights				exp 0 armour 0 weapon_lvl 0  \n" +
-				"unit		"+ CABALLEROS_VILLANOS +"				exp 1 armour 0 weapon_lvl 0  \n" +
-				"unit		"+ CABALLEROS_VILLANOS +"				exp 1 armour 0 weapon_lvl 0  \n" +
-				"unit		"+ CABALLEROS_VILLANOS +"				exp 1 armour 0 weapon_lvl 0  \n" +
-				"unit		Dismounted Sword Mailed Knights				exp 0 armour 0 weapon_lvl 0\n" +
-				"unit		Dismounted Sword Mailed Knights				exp 0 armour 0 weapon_lvl 0\n" +
-				"unit		"+ URBAN_SPEAR_MILITIA +"				exp 1 armour 0 weapon_lvl 0\n" +
+				"unit		SE Bodyguard					exp 2 armour 0 weapon_lvl 0\n" +
+				"unit		Mailed Knights					exp 2 armour 0 weapon_lvl 0  \n" +
+				"unit		Mailed Knights					exp 1 armour 0 weapon_lvl 0  \n" +
+				"unit		"+ CABALLEROS_VILLANOS +"		exp 2 armour 0 weapon_lvl 0  \n" +
+				"unit		"+ CABALLEROS_VILLANOS +"		exp 1 armour 0 weapon_lvl 0  \n" +
+				"unit		"+ CABALLEROS_VILLANOS +"		exp 1 armour 0 weapon_lvl 0  \n" +
+				"unit		Dismounted Sword Mailed Knights	exp 2 armour 0 weapon_lvl 0\n" +
+				"unit		Dismounted Sword Mailed Knights	exp 1 armour 0 weapon_lvl 0\n" +
+				"unit		"+ MERCENARY_SPEARMEN +"		exp 2 armour 0 weapon_lvl 0\n" +
+				"unit		"+ MERCENARY_SPEARMEN +"		exp 1 armour 0 weapon_lvl 0\n" +
+				"unit		Sergeant Spearmen				exp 2 armour 0 weapon_lvl 0\n" +
 				"unit		Sergeant Spearmen				exp 1 armour 0 weapon_lvl 0\n" +
-				"unit		Sergeant Spearmen				exp 0 armour 0 weapon_lvl 0\n" +
-				"unit		Sergeant Spearmen				exp 0 armour 0 weapon_lvl 0\n" +
+				"unit		Sergeant Spearmen				exp 1 armour 0 weapon_lvl 0\n" +
+				"unit		"+ ALMUGHAVARS +"				exp 3 armour 0 weapon_lvl 0\n" +
+				"unit		"+ ALMUGHAVARS +"				exp 2 armour 0 weapon_lvl 0\n" +
 				"unit		"+ ALMUGHAVARS +"				exp 1 armour 0 weapon_lvl 0\n" +
 				"unit		"+ ALMUGHAVARS +"				exp 1 armour 0 weapon_lvl 0\n" +
-				"unit		"+ ALMUGHAVARS +"				exp 1 armour 0 weapon_lvl 0\n" +
-				"unit		"+ ALMUGHAVARS +"				exp 1 armour 0 weapon_lvl 0\n" +
-				"unit		"+ PRUSSIAN_ARCHERS +"				exp 1 armour 0 weapon_lvl 0\n" +
-				"unit		"+ PRUSSIAN_ARCHERS +"				exp 0 armour 0 weapon_lvl 0\n" +
-				"unit		"+ CROSSBOW_MILITIA +"				exp 1 armour 0 weapon_lvl 0    \n" +
-				"unit		"+ CROSSBOW_MILITIA +"				exp 0 armour 0 weapon_lvl 0";
+				"unit		"+ PRUSSIAN_ARCHERS +"			exp 2 armour 0 weapon_lvl 0\n" +
+				"unit		"+ PRUSSIAN_ARCHERS +"			exp 1 armour 0 weapon_lvl 0\n" +
+				"unit		"+ CROSSBOW_MILITIA +"			exp 1 armour 0 weapon_lvl 0";
 
 		val rebelSettlementsEndIndex = factionsSect.loadSettlemenBlockEndIndex("Tabriz_Province");
 		lines.insertAt(rebelSettlementsEndIndex+1, garrison);
@@ -319,12 +322,12 @@ public class CatholicIberiaReworked extends Feature {
 
 		int aragonIndex = lines.findExpFirstRegexLine("^;## ARAGON ##\\s*");
 		// Zaragoza
-		fs.replaceInitialUnit(PEASANT_ARCHERS,PRUSSIAN_ARCHERS , aragonIndex);
-		fs.replaceInitialUnit(PEASANT_ARCHERS,CROSSBOW_MILITIA , aragonIndex);
+		fs.replaceInitialUnit(PEASANT_ARCHERS, PRUSSIAN_ARCHERS , aragonIndex);
+		fs.replaceInitialUnit(PEASANT_ARCHERS, CROSSBOW_MILITIA , aragonIndex);
 		fs.replaceInitialUnit(PEASANT_ARCHERS,null , aragonIndex);
 
-		fs.replaceInitialUnit(JAVELINMEN,null , aragonIndex);
-		fs.replaceInitialUnit(JAVELINMEN,null , aragonIndex);
+		fs.replaceInitialUnit(JAVELINMEN, null , aragonIndex);
+		fs.replaceInitialUnit(JAVELINMEN, null , aragonIndex);
 
 		fs.replaceInitialUnit(SPEAR_MILITIA, CRUSADER_SERGEANTS , aragonIndex);
 		fs.replaceInitialUnit(SPEAR_MILITIA, SERGEANT_SPEARMEN , aragonIndex);
@@ -336,8 +339,8 @@ public class CatholicIberiaReworked extends Feature {
 
 		// Barcelona
 		fs.replaceInitialUnit(SPEAR_MILITIA, URBAN_SPEAR_MILITIA , aragonIndex);
-		fs.replaceInitialUnit(SPEAR_MILITIA, CROSSBOW_MILITIA , aragonIndex);
-		fs.replaceInitialUnit(PEASANT_ARCHERS, ALMUGHAVARS , aragonIndex);
+		fs.replaceInitialUnit(SPEAR_MILITIA, URBAN_CROSSBOW_MILITIA , aragonIndex);
+		fs.replaceInitialUnit(PEASANT_ARCHERS, null , aragonIndex);
 
 		// Pamlpona
 		fs.replaceInitialUnit(ALFORRATS, CABALLEROS_VILLANOS , aragonIndex);
@@ -374,11 +377,11 @@ public class CatholicIberiaReworked extends Feature {
 		sharedCtx.battleModels = battleModels;
 
 		sharedCtx.iberiaChristianFactions = iberiaChristianFactions;
-		sharedCtx.otherChristianAndSlaveFactions = iberiaChristianFactions;
+		sharedCtx.otherChristianAndSlaveFactions = otherChristianAndSlaveFactions;
 		sharedCtx.allSpainHiddenResList = allSpainHiddenResList;
 
 		almughavarsReworked = new AlmughavarsReworked(sharedCtx);
-		spearUnitsReworked = new SpearUnitsReworked(sharedCtx);
+		infantryReworked = new InfantryReworked(sharedCtx);
 
 	}
 	@Override
@@ -414,7 +417,7 @@ public class CatholicIberiaReworked extends Feature {
 	private DescrRegions descrRegions;
 
 	private AlmughavarsReworked almughavarsReworked;
-	private SpearUnitsReworked spearUnitsReworked;
+	private InfantryReworked infantryReworked;
 
 	private final String nl = System.lineSeparator();
 

@@ -1,5 +1,6 @@
 package tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings;
 
+import lombok.val;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 
 import java.util.List;
@@ -18,6 +19,19 @@ public class BuildingLevel {
 		if(levels == null) throw new PatcherLibBaseEx("Levels not set!");
 
 		levelIndex++;
+		LevelName = levels.get(levelIndex);
+	}
+	public BuildingLevel createNextLevel() {
+		if(levels == null) throw new PatcherLibBaseEx("Levels not set!");
+
+		val next = new BuildingLevel(Name, levels, this.SettlType);
+		next.setLevel(levelIndex+1);
+
+		return next;
+	}
+
+	public void setLevel(int level) {
+		levelIndex = level;
 		LevelName = levels.get(levelIndex);
 	}
 

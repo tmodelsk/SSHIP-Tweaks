@@ -1,5 +1,8 @@
 package tm.mtwModPatcher.sship.lib;
 
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingLevel;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.SettlType;
+
 import java.util.Arrays;
 import java.util.List;
 
@@ -91,6 +94,11 @@ public class Buildings {
 
 	public static final String BarracksCastle = "castle_barracks";
 	public static final List<String> BarracksCastleLevels = Arrays.asList("mustering_hall", "garrison_quarters", "drill_square", "barracks", "armoury");
+	public static final BuildingLevel BarracksCastle_1 = new BuildingLevel(BarracksCastle, BarracksCastleLevels, SettlType.Castle);
+	public static final BuildingLevel BarracksCastle_2 = BarracksCastle_1.createNextLevel();
+	public static final BuildingLevel BarracksCastle_3 = BarracksCastle_2.createNextLevel();
+	public static final BuildingLevel BarracksCastle_4 = BarracksCastle_3.createNextLevel();
+	public static final BuildingLevel BarracksCastle_5 = BarracksCastle_4.createNextLevel();
 
 	public static final String MissileCastle = "missiles";
 	public static final List<String> MissileCastleLevels = Arrays.asList("bowyer", "practice_range", "archery_range", "marksmans_range");

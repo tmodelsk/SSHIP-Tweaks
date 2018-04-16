@@ -207,6 +207,7 @@ public class FactionsDefs {
 			"sicily",
 			"pisa");	// 16
 
+	public static final FactionInfo JERUSALEM = new FactionInfo("jerusalem","Crusader States", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" );
 	public static final FactionInfo NORWAY = new FactionInfo("norway","Norway", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "Royal Hirdsmen" );
 	public static final FactionInfo SCOTLAND = new FactionInfo("scotland","Scotland", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" );
 	public static final FactionInfo FRANCE = new FactionInfo("france","France", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" );
@@ -223,7 +224,7 @@ public class FactionsDefs {
 
 	private static final List<FactionInfo> factionInfos = Arrays.asList(
 			new FactionInfo("denmark","Denmark", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
-			new FactionInfo("jerusalem","Crusader States", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
+			JERUSALEM,
 			NORWAY,
 			new FactionInfo("hre","Holy Roman Emprire - Germans", CultureType.NORTHERN_EUROPEAN, Religion.Catholic , EducationStyle.Western , "NE Bodyguard" ),
 			SCOTLAND,
