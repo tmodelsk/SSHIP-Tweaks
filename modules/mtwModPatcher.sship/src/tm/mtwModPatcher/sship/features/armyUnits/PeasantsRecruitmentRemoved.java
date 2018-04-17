@@ -4,12 +4,13 @@ import lombok.val;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.UUID;
 
-/**
- * PeasantsRecruitmentRemoved
- */
+import static tm.mtwModPatcher.sship.lib.Units.PEASANT_ARCHERS;
+
+/** PeasantsRecruitmentRemoved  */
 public class PeasantsRecruitmentRemoved extends Feature {
 	@Override
 	public void setParamsCustomValues() {
@@ -19,10 +20,15 @@ public class PeasantsRecruitmentRemoved extends Feature {
 	@Override
 	public void executeUpdates() throws Exception {
 		exportDescrBuilding = getFileRegisterForUpdated(ExportDescrBuilding.class);
+		val units = new ArrayList<String>();
 
-		val unitNames = Arrays.asList("Peasants" , "Southern Peasants", "EE Peasants");
+		val peasantInfantry = Arrays.asList("Peasants" , "Southern Peasants", "EE Peasants");
+		val peasantArchers = Arrays.asList(PEASANT_ARCHERS);
 
-		unitNames.forEach(unitName -> exportDescrBuilding.removeUnitRecruitment(unitName));
+		units.addAll(peasantInfantry);
+		units.addAll(peasantArchers);
+
+		units.forEach(unitName -> exportDescrBuilding.removeUnitRecruitment(unitName));
 	}
 
 	private ExportDescrBuilding exportDescrBuilding;
@@ -38,7 +44,7 @@ public class PeasantsRecruitmentRemoved extends Feature {
 
 		addCategory("Units");
 
-		setDescriptionShort("Peasants Recruitment Removed, \"Peasants\" , \"Southern Peasants\", \"EE Peasants\" ");
+		setDescriptionShort("Peasants Recruitment Removed, \"Peasants\" , \"Southern Peasants\", \"EE Peasants\" ,  "+PEASANT_ARCHERS);
 		setDescriptionUrl("http://tmsship.wikidot.com/peasants-recruitment-removed");
 	}
 }
