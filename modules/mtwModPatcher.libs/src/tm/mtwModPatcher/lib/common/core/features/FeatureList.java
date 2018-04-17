@@ -49,6 +49,9 @@ public class FeatureList {
 
 		return feature.isPresent();
 	}
+	public boolean isNotFeatureEnabled(UUID id) {
+		return ! isFeatureEnabled(id);
+	}
 
 	public void disableFeatureIfExists(UUID id) {
 		val ft = get(id);

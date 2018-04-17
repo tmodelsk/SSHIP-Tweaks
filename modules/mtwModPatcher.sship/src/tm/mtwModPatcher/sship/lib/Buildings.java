@@ -11,9 +11,11 @@ import java.util.List;
  */
 public class Buildings {
 
+	public static final BuildingLevel CouncilCity = new BuildingLevel("city_hall", SettlType.City, "town_hall council_chambers city_hall mayors_palace");
+
 	// ### Guilds ###
-	public static final String MerchantsGuild = "guild_merchants_guild";
-	public static final List<String> MerchantsGuildLevels = Arrays.asList("merchants_guild", "m_merchants_guild", "gm_merchants_guild");
+	public static final String MerchantGuild = "guild_merchants_guild";
+	public static final List<String> MerchantGuildLevels = Arrays.asList("merchants_guild", "m_merchants_guild", "gm_merchants_guild");
 
 	public static final String ExplorersGuild = "guild_explorers_guild";
 	public static final List<String> ExplorersLevels = Arrays.asList("explorers_guild", "m_explorers_guild", "gm_explorers_guild");
@@ -42,8 +44,11 @@ public class Buildings {
 	public static final List<String> SeaTradeCityLevels = Arrays.asList("merchants_wharf", "warehouse", "docklands");
 	public static final List<String> SeaTradeCastleLevels = Arrays.asList("merchants_wharf");
 
-	public static final String TavernCity = "taverns";
-	public static final List<String> TavernCityLevels = Arrays.asList("brothel", "inn", "tavern", "coaching_house", "pleasure_palace");
+	private static final String TavernCity1 = "taverns";
+	private static final List<String> TavernCityLevels1 = Arrays.asList("brothel", "inn", "tavern", "coaching_house", "pleasure_palace");
+	public static final BuildingLevel TavernCity = new BuildingLevel(TavernCity1, TavernCityLevels1, SettlType.City);
+
+
 	public static final String TavernCastle = "castle_taverns";
 	public static final List<String> TavernCastleLevels = Arrays.asList("c_brothel");
 
@@ -109,9 +114,6 @@ public class Buildings {
 
 	public static final String ItalianTraders = "Italian_Traders";
 	public static final List<String> ItalianTradersLevels = Arrays.asList("italian_trader_quarters", "italian_trader_headquarters");
-
-	public static final String MerchantGuild = "guild_merchants_guild";
-	public static final List<String> MerchantGuildLevels = Arrays.asList("merchants_guild", "m_merchants_guild", "gm_merchants_guild");
 
 
 	public static final String HospitallersCity = "st_johns_chapter_house";

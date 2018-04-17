@@ -3,6 +3,7 @@ package tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings;
 import lombok.val;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 
+import java.util.Arrays;
 import java.util.List;
 
 /** Buidling Level 'coordinations' */
@@ -25,17 +26,29 @@ public class BuildingLevel {
 		if(levels == null) throw new PatcherLibBaseEx("Levels not set!");
 
 		val next = new BuildingLevel(Name, levels, this.SettlType);
-		next.setLevel(levelIndex+1);
+		next.setLevelIndex(levelIndex+1);
 
 		return next;
 	}
 
-	public void setLevel(int level) {
+	public BuildingLevel level(int level) {
+		if(levels == null) throw new PatcherLibBaseEx("Levels not set!");
+
+		val next = new BuildingLevel(Name, levels, this.SettlType);
+		next.setLevelIndex(level-1);
+
+		return next;
+	}
+
+	public void setLevelIndex(int level) {
 		levelIndex = level;
 		LevelName = levels.get(levelIndex);
 	}
 
-	public BuildingLevel(String name, List<String> levels, tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.SettlType settlType) {
+	public BuildingLevel(String name, SettlType settlType, String levelsStr) {
+		this(name, Arrays.asList(levelsStr.split(" ")), settlType);
+	}
+	public BuildingLevel(String name, List<String> levels, SettlType settlType) {
 		Name = name;
 		SettlType = settlType;
 		this.levels = levels;
@@ -44,7 +57,7 @@ public class BuildingLevel {
 		this.LevelName = levels.get(this.levelIndex);
 	}
 
-	public BuildingLevel(String name, String levelName, tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.SettlType settlType) {
+	public BuildingLevel(String name, String levelName, SettlType settlType) {
 		Name = name;
 		LevelName = levelName;
 		SettlType = settlType;

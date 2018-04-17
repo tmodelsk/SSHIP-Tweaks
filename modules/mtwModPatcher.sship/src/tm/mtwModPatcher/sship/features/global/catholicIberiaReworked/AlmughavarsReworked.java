@@ -16,7 +16,7 @@ import java.util.List;
 import static tm.mtwModPatcher.lib.common.entities.UnitReplenishRate.*;
 import static tm.mtwModPatcher.lib.data.exportDescrUnit.UnitDef.MERCENARY_UNIT;
 import static tm.mtwModPatcher.lib.data.exportDescrUnit.WeaponStat.SOUND_TYPE_SPEAR;
-import static tm.mtwModPatcher.lib.managers.FactionsDefs.*;
+import static tm.mtwModPatcher.lib.managers.FactionsDefs.SLAVE;
 import static tm.mtwModPatcher.sship.lib.Buildings.BarracksCastle;
 import static tm.mtwModPatcher.sship.lib.Buildings.BarracksCastleLevels;
 import static tm.mtwModPatcher.sship.lib.Units.ALMUGHAVARS;
@@ -37,9 +37,7 @@ public class AlmughavarsReworked {
 	private void unitStatFixes() {
 		val unit = edu.loadUnit(ALMUGHAVARS);
 
-		unit.addOwnershipAll(ARAGON);
-		unit.addOwnershipAll(SPAIN);
-		unit.addOwnershipAll(PORTUGAL);
+		unit.addOwnershipAll(FactionsDefs.christianFactionInfos());
 		unit.addOwnershipAll(SLAVE);
 
 		// # Adjust recuit cost

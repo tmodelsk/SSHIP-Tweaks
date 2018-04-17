@@ -13,9 +13,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-/**
- * Created by tomek on 15.10.2017.
- */
 public class BuildingLimits {
 
 	private Map<String, BuildingLimit> buildingsLimits;
@@ -33,14 +30,14 @@ public class BuildingLimits {
 
 		limit = ConfigurationSettings.isDevEnvironment() ? 1 : 1;
 		requirments = Ctm.format("not "+capitalHrReq);
-		add("merchantGuildSmall", "Merchant Guild Small", Buildings.MerchantsGuild, Buildings.MerchantsGuildLevels.get(0), SettlType.City, requirments, limit);
-		add("merchantGuildMedium", "Merchant Guild Medium", Buildings.MerchantsGuild, Buildings.MerchantsGuildLevels.get(1), SettlType.City, requirments, 1 + limit);
-		add("merchantGuildGrand", "Merchant Guild Grand", Buildings.MerchantsGuild, Buildings.MerchantsGuildLevels.get(2), SettlType.City, requirments,1 + limit);
+		add("merchantGuildSmall", "Merchant Guild Small", Buildings.MerchantGuild, Buildings.MerchantGuildLevels.get(0), SettlType.City, requirments, limit);
+		add("merchantGuildMedium", "Merchant Guild Medium", Buildings.MerchantGuild, Buildings.MerchantGuildLevels.get(1), SettlType.City, requirments, 1 + limit);
+		add("merchantGuildGrand", "Merchant Guild Grand", Buildings.MerchantGuild, Buildings.MerchantGuildLevels.get(2), SettlType.City, requirments,1 + limit);
 
 		requirments = Ctm.format(capitalHrReq);
-		add("merchantGuildSmallCapital", "Merchant Guild Small & Capital", Buildings.MerchantsGuild, Buildings.MerchantsGuildLevels.get(0), SettlType.City, requirments, limit+1);
-		add("merchantGuildMediumCapital", "Merchant Guild Medium & Capital", Buildings.MerchantsGuild, Buildings.MerchantsGuildLevels.get(1), SettlType.City, requirments, 1+limit+1);
-		add("merchantGuildGrandCapital", "Merchant Guild Grand 7 Capital", Buildings.MerchantsGuild, Buildings.MerchantsGuildLevels.get(2), SettlType.City, requirments, 1+limit+1);
+		add("merchantGuildSmallCapital", "Merchant Guild Small & Capital", Buildings.MerchantGuild, Buildings.MerchantGuildLevels.get(0), SettlType.City, requirments, limit+1);
+		add("merchantGuildMediumCapital", "Merchant Guild Medium & Capital", Buildings.MerchantGuild, Buildings.MerchantGuildLevels.get(1), SettlType.City, requirments, 1+limit+1);
+		add("merchantGuildGrandCapital", "Merchant Guild Grand 7 Capital", Buildings.MerchantGuild, Buildings.MerchantGuildLevels.get(2), SettlType.City, requirments, 1+limit+1);
 
 		add("explorersGuildSmall", "Explorers Guild Small", Buildings.ExplorersGuild, Buildings.ExplorersLevels.get(0), SettlType.City, 0);
 		limit = ConfigurationSettings.isDevEnvironment() ? 0 : 1;

@@ -5,19 +5,23 @@ import lombok.Setter;
 import lombok.val;
 import tm.common.collections.ArrayUniqueList;
 import tm.common.collections.ListUnique;
+import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdInteger;
-import tm.mtwModPatcher.lib.managers.FactionsDefs;
-import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
-import tm.mtwModPatcher.lib.common.core.features.Feature;
-import tm.mtwModPatcher.lib.common.entities.UnitReplenishRate;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.UnitDef;
+import tm.mtwModPatcher.lib.managers.FactionsDefs;
+import tm.mtwModPatcher.sship.features.global.catholicIberiaReworked.CatholicIberiaReworked;
 
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
+
+import static tm.mtwModPatcher.lib.common.entities.UnitReplenishRate.*;
+import static tm.mtwModPatcher.sship.lib.Buildings.*;
+import static tm.mtwModPatcher.sship.lib.Units.*;
 
 /**  */
 public class ArchersCrossbomanRecruitmentBalancing extends Feature {
@@ -38,47 +42,51 @@ public class ArchersCrossbomanRecruitmentBalancing extends Feature {
 	}
 
 	private void CrossbowmenBalancing() throws PatcherLibBaseEx {
+
 		// ## Lower Recruitment Turns For Basic Crossbowmen ## : Crossbow Militia EE Crossbow Militia  ME Crossbowmen
-		updateRecuitTurnsAndReplenishRates("Crossbow Militia", 2, 1, 2.0, -2.0);
-		updateRecuitTurnsAndReplenishRates("EE Crossbow Militia", 2, 1, 2.0, -2.0);
-		updateRecuitTurnsAndReplenishRates("ME Crossbowmen", 2, 1, 2.0, -2.0);
+		updateRecuitTurnsAndReplenishRates(CROSSBOW_MILITIA, 2, 1, 2.0, -2.0);
+		updateRecuitTurnsAndReplenishRates(EE_CROSSBOW_MILITIA, 2, 1, 2.0, -2.0);
+		updateRecuitTurnsAndReplenishRates(ME_CROSSBOWMEN, 2, 1, 2.0, -2.0);
 
 		// ## Add Crossbow Militia to City Barracks ## - from city_watch - as Urban Crossbow Militia is
-		// town_watch town_guard city_watch militia_drill_square militia_barracks army_barracks royal_armoury
-		String crossbowReguires = "factions { france, hre, denmark, spain, aragon, portugal, norway, jerusalem, } and not event_counter lateran_council3 1";
-		edb.insertRecruitmentBuildingCapabilities("barracks", "town_guard", "city", "Crossbow Militia", 1, UnitReplenishRate.R15, 1, 0, crossbowReguires);
-		edb.insertRecruitmentBuildingCapabilities("barracks", "city_watch", "city", "Crossbow Militia", 1, UnitReplenishRate.R8, 1, 0, crossbowReguires);
-		edb.insertRecruitmentBuildingCapabilities("barracks", "militia_drill_square", "city", "Crossbow Militia", 1, UnitReplenishRate.R7, 2, 0, crossbowReguires);
-		edb.insertRecruitmentBuildingCapabilities("barracks", "militia_barracks", "city", "Crossbow Militia", 1, UnitReplenishRate.R6, 2, 0, crossbowReguires);
-		edb.insertRecruitmentBuildingCapabilities("barracks", "army_barracks", "city", "Crossbow Militia", 1, UnitReplenishRate.R5, 2, 0, crossbowReguires);
-		edb.insertRecruitmentBuildingCapabilities("barracks", "royal_armoury", "city", "Crossbow Militia", 1, UnitReplenishRate.R4, 3, 0, crossbowReguires);
+		String crossbowMilitiaFactionsCsv = "france, hre, denmark, spain, portugal, norway, jerusalem,";
+		if(featuresContainer.isNotFeatureEnabled(CatholicIberiaReworked.Id))
+			crossbowMilitiaFactionsCsv += "aragon,";
 
-		edb.insertRecruitmentBuildingCapabilities("guild_merchants_guild", "merchants_guild", "city", "Crossbow Militia", 1, UnitReplenishRate.R15, 1, 0, crossbowReguires);
-		edb.insertRecruitmentBuildingCapabilities("guild_merchants_guild", "m_merchants_guild", "city", "Crossbow Militia", 1, UnitReplenishRate.R13, 1, 0, crossbowReguires);
-		edb.insertRecruitmentBuildingCapabilities("guild_merchants_guild", "gm_merchants_guild", "city", "Crossbow Militia", 1, UnitReplenishRate.R12, 1, 0, crossbowReguires);
+		String crossbowReguires = "factions { "+ crossbowMilitiaFactionsCsv +" } and not event_counter lateran_council3 1";
+		edb.insertRecruitmentBuildingCapabilities(BarracksCity, "town_guard", CityType, CROSSBOW_MILITIA, 1, R15, 1, 0, crossbowReguires);
+		edb.insertRecruitmentBuildingCapabilities(BarracksCity, "city_watch", CityType, CROSSBOW_MILITIA, 1, R8, 1, 0, crossbowReguires);
+		edb.insertRecruitmentBuildingCapabilities(BarracksCity, "militia_drill_square", CityType, CROSSBOW_MILITIA, 1, R7, 2, 0, crossbowReguires);
+		edb.insertRecruitmentBuildingCapabilities(BarracksCity, "militia_barracks", CityType, CROSSBOW_MILITIA, 1, R6, 2, 0, crossbowReguires);
+		edb.insertRecruitmentBuildingCapabilities(BarracksCity, "army_barracks", CityType, CROSSBOW_MILITIA, 1, R5, 2, 0, crossbowReguires);
+		edb.insertRecruitmentBuildingCapabilities(BarracksCity, "royal_armoury", CityType, CROSSBOW_MILITIA, 1, R4, 3, 0, crossbowReguires);
+
+		edb.insertRecruitmentBuildingCapabilities(MerchantGuild, "merchants_guild", CityType, CROSSBOW_MILITIA, 1, R15, 1, 0, crossbowReguires);
+		edb.insertRecruitmentBuildingCapabilities(MerchantGuild, "m_merchants_guild", CityType, CROSSBOW_MILITIA, 1, R13, 1, 0, crossbowReguires);
+		edb.insertRecruitmentBuildingCapabilities(MerchantGuild, "gm_merchants_guild", CityType, CROSSBOW_MILITIA, 1, R12, 1, 0, crossbowReguires);
 
 		// ## Crossbow Militia & EE Crossbow Militia - bigger recruit_priority_offset
-		edu.loadUnit("Crossbow Militia").RecruitPriorityOffset += 10;		// 5
-		edu.loadUnit("EE Crossbow Militia").RecruitPriorityOffset += 10;	// 5
+		edu.loadUnit(CROSSBOW_MILITIA).RecruitPriorityOffset += 10;		// 5
+		edu.loadUnit(EE_CROSSBOW_MILITIA).RecruitPriorityOffset += 10;	// 5
 
 		// ## ME Crossbowmen to Castle missiles practice_range % City barracks militia_drill_square
 		String requiresCrossbowIslamHomelands = "factions { egypt, milan, moors, kwarezm, } and hidden_resource moors or hidden_resource kwarezm or hidden_resource egypt or hidden_resource milan";
 		String requiresCrossbowIslamNotHomelands = "factions { egypt, milan, moors, kwarezm, } and not hidden_resource moors and not hidden_resource kwarezm and not hidden_resource egypt and not hidden_resource milan";
 
 		// ## ME Crossbowmen to Castle missiles practice_range
-		edb.insertRecruitmentBuildingCapabilities("missiles", "practice_range", "castle", "ME Crossbowmen", 1, UnitReplenishRate.R6, 1, 0, requiresCrossbowIslamHomelands);
-		edb.insertRecruitmentBuildingCapabilities("missiles", "practice_range", "castle", "ME Crossbowmen", 1, UnitReplenishRate.R8, 1, 0, requiresCrossbowIslamNotHomelands);
+		edb.insertRecruitmentBuildingCapabilities(MissileCastle, "practice_range", CastleType, ME_CROSSBOWMEN, 1, R6, 1, 0, requiresCrossbowIslamHomelands);
+		edb.insertRecruitmentBuildingCapabilities(MissileCastle, "practice_range", CastleType, ME_CROSSBOWMEN, 1, R8, 1, 0, requiresCrossbowIslamNotHomelands);
 
 		// ## ME Crossbowmen to City barracks militia_drill_square militia_barracks army_barracks royal_armoury
-		edb.insertRecruitmentBuildingCapabilities("barracks", "city_watch", "city", "ME Crossbowmen", 1, UnitReplenishRate.R15, 1, 0, requiresCrossbowIslamHomelands);
-		edb.insertRecruitmentBuildingCapabilities("barracks", "militia_drill_square", "city", "ME Crossbowmen", 1, UnitReplenishRate.R13, 1, 0, requiresCrossbowIslamHomelands);
-		edb.insertRecruitmentBuildingCapabilities("barracks", "militia_barracks", "city", "ME Crossbowmen", 1, UnitReplenishRate.R12, 1, 0, requiresCrossbowIslamHomelands);
-		edb.insertRecruitmentBuildingCapabilities("barracks", "army_barracks", "city", "ME Crossbowmen", 1, UnitReplenishRate.R10, 1, 0, requiresCrossbowIslamHomelands);
-		edb.insertRecruitmentBuildingCapabilities("barracks", "royal_armoury", "city", "ME Crossbowmen", 1, UnitReplenishRate.R9, 1, 0, requiresCrossbowIslamHomelands);
+		edb.insertRecruitmentBuildingCapabilities(BarracksCity, "city_watch", CityType, ME_CROSSBOWMEN, 1, R15, 1, 0, requiresCrossbowIslamHomelands);
+		edb.insertRecruitmentBuildingCapabilities(BarracksCity, "militia_drill_square", CityType, ME_CROSSBOWMEN, 1, R13, 1, 0, requiresCrossbowIslamHomelands);
+		edb.insertRecruitmentBuildingCapabilities(BarracksCity, "militia_barracks", CityType, ME_CROSSBOWMEN, 1, R12, 1, 0, requiresCrossbowIslamHomelands);
+		edb.insertRecruitmentBuildingCapabilities(BarracksCity, "army_barracks", CityType, ME_CROSSBOWMEN, 1, R10, 1, 0, requiresCrossbowIslamHomelands);
+		edb.insertRecruitmentBuildingCapabilities(BarracksCity, "royal_armoury", CityType, ME_CROSSBOWMEN, 1, R9, 1, 0, requiresCrossbowIslamHomelands);
 
-		edb.insertRecruitmentBuildingCapabilities("guild_merchants_guild", "merchants_guild", "city", "ME Crossbowmen", 1, UnitReplenishRate.R15, 1, 0, requiresCrossbowIslamHomelands);
-		edb.insertRecruitmentBuildingCapabilities("guild_merchants_guild", "m_merchants_guild", "city", "ME Crossbowmen", 1, UnitReplenishRate.R14, 1, 0, requiresCrossbowIslamHomelands);
-		edb.insertRecruitmentBuildingCapabilities("guild_merchants_guild", "gm_merchants_guild", "city", "ME Crossbowmen", 1, UnitReplenishRate.R13, 1, 0, requiresCrossbowIslamHomelands);
+		edb.insertRecruitmentBuildingCapabilities(MerchantGuild, "merchants_guild", CityType, ME_CROSSBOWMEN, 1, R15, 1, 0, requiresCrossbowIslamHomelands);
+		edb.insertRecruitmentBuildingCapabilities(MerchantGuild, "m_merchants_guild", CityType, ME_CROSSBOWMEN, 1, R14, 1, 0, requiresCrossbowIslamHomelands);
+		edb.insertRecruitmentBuildingCapabilities(MerchantGuild, "gm_merchants_guild", CityType, ME_CROSSBOWMEN, 1, R13, 1, 0, requiresCrossbowIslamHomelands);
 
 		// region  // Crossbows by RecruitTurns - Debug Mode
 		//		List<UnitDef> crossbow1 = crossbowmens.stream().filter( c -> c.StatCost.RecruitTurns == 1).collect(Collectors.toList());
@@ -104,7 +112,7 @@ public class ArchersCrossbomanRecruitmentBalancing extends Feature {
 		val archers = edu.getUnits().stream().filter(u -> u.StatPri.IsParsed && u.StatPri.IsMissleUnit() && u.StatPri.IsArcherUnit()).collect(Collectors.toList());
 
 		// ## Some Archers - bigger recruit_priority_offset
-		edu.loadUnit("Prussian Archers").RecruitPriorityOffset += 15;			// 10
+		edu.loadUnit(PRUSSIAN_ARCHERS).RecruitPriorityOffset += 20;			// 10
 		edu.loadUnit("Berber Archers").RecruitPriorityOffset += 10;			// 5
 		edu.loadUnit("Andalusian Archers").RecruitPriorityOffset += 15;		// 10
 		edu.loadUnit("Dismounted Fari Archers").RecruitPriorityOffset += 10;	// 5

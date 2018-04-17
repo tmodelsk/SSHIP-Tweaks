@@ -30,6 +30,8 @@ public class Units {
 
 	public final static String CROSSBOW_MILITIA = "Crossbow Militia";
 	public final static String URBAN_CROSSBOW_MILITIA = "Urban Crossbow Militia";
+	public final static String EE_CROSSBOW_MILITIA = "EE Crossbow Militia";
+	public final static String ME_CROSSBOWMEN = "ME Crossbowmen";
 
 
 	public final static String ALFORRATS = "Alforrats";

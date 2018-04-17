@@ -235,8 +235,11 @@ public class CatholicIberiaReworked extends Feature {
 		descrStrat.insertSettlementBuilding(prov, SeaTradeCity, SeaTradeCityLevels.get(0));
 		descrStrat.insertSettlementBuilding(prov, MerchantGuild, MerchantGuildLevels.get(0));
 		descrStrat.insertSettlementBuilding(prov, ItalianTraders, ItalianTradersLevels.get(0));
+
 		descrStrat.removeSettlementBuilding(prov, PortCity);
 		descrStrat.insertSettlementBuilding(prov, PortCity, PortCityLevels.get(1));
+
+		descrStrat.setSettlementBuilding(prov, CouncilCity.level(2));
 
 	}
 	private void pamplonaUpgrade() {
@@ -256,10 +259,6 @@ public class CatholicIberiaReworked extends Feature {
 		lines.removeRange(startIndex, endIndex);
 
 		factionsSect.moveSettlementBeforeSettl(prov, Provinces.Bordeaux);
-
-		// TODO : ERROR : !! Pamlona !!
-		// 14:48:51.259 [script.err] [error] Script Error in mods/SSHIP-TM/data/world/maps/campaign/imperial_campaign/descr_strat.txt, at line 11325, column 5
-		//The castle core building level should be EQUAL the settlement level!
 
 		factionsSect.setSetlementLevel(prov, SettlementLevel.L3_LargeTown);
 		factionsSect.removeSettlementBuilding(prov, WallsCastle.Name);

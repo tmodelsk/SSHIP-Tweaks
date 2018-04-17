@@ -11,6 +11,7 @@ import tm.mtwModPatcher.lib.common.core.features.fileEntities.sections.SectionTe
 import tm.mtwModPatcher.lib.common.entities.SettlementInfo;
 import tm.mtwModPatcher.lib.common.entities.SettlementLevel;
 import tm.mtwModPatcher.lib.common.entities.SettlementLevelConverter;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingLevel;
 
 import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
@@ -50,11 +51,27 @@ public class DescrStratSectioned extends SectionsFileEntity {
 	public void insertSettlementBuilding(String provinceName, String name, String level) throws PatcherLibBaseEx {
 		Factions.insertSettlementBuilding(provinceName, name, level);
 	}
+	public void insertSettlementBuilding(String provinceName, BuildingLevel buildingLevel) throws PatcherLibBaseEx {
+		insertSettlementBuilding(provinceName, buildingLevel.Name, buildingLevel.LevelName);
+	}
+
+	public void setSettlementBuilding(String provinceName, BuildingLevel buildingLevel) throws PatcherLibBaseEx {
+		removeSettlementBuildingAnyLevel(provinceName, buildingLevel);
+		insertSettlementBuilding(provinceName, buildingLevel.Name, buildingLevel.LevelName);
+	}
+
+
 	public void removeSettlementBuilding(String provinceName, String buildingType, String buildingLevel) {
 		Factions.removeSettlementBuilding(provinceName, buildingType, buildingLevel);
 	}
 	public void removeSettlementBuilding(String provinceName, String buildingType) {
 		Factions.removeSettlementBuilding(provinceName, buildingType);
+	}
+	public void removeSettlementBuilding(String provinceName, BuildingLevel buildingLevel) {
+		removeSettlementBuilding(provinceName, buildingLevel.Name, buildingLevel.LevelName);
+	}
+	public void removeSettlementBuildingAnyLevel(String provinceName, BuildingLevel buildingLevel) {
+		removeSettlementBuilding(provinceName, buildingLevel.Name);
 	}
 	public void removeAllBuildings(String provinceName) {
 		Factions.removeAllBuildings(provinceName);
