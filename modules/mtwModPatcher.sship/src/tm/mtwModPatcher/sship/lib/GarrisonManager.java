@@ -1,8 +1,12 @@
-package tm.mtwModPatcher.lib.managers.garrisons;
+package tm.mtwModPatcher.sship.lib;
 
+import tm.mtwModPatcher.lib.common.core.features.FeatureList;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.entities.SettlementInfo;
 import tm.mtwModPatcher.lib.common.entities.SettlementLevel;
+import tm.mtwModPatcher.lib.managers.garrisons.UnitGarrisonInfo;
+import tm.mtwModPatcher.lib.managers.garrisons.UnitMetaDef;
+import tm.mtwModPatcher.lib.managers.garrisons.UnitType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -13,7 +17,7 @@ import java.util.List;
 public class GarrisonManager {
 
 	public GarrisonManager(GarrisonMetaManager garrisonMetaManager) throws PatcherLibBaseEx {
-		_GarrisonMetaManager = garrisonMetaManager;
+		this.garrisonMetaManager = garrisonMetaManager;
 	}
 
 	public List<UnitGarrisonInfo> getUnits(SettlementInfo settlement, String factionName) throws Exception {
@@ -21,7 +25,7 @@ public class GarrisonManager {
 
 		List<UnitMetaDef> metaList = getMetaListBySettlementLevel(settlement.Level);
 
-		units = _GarrisonMetaManager.getFactionImplementations(metaList, factionName, settlement);
+		units = garrisonMetaManager.getFactionImplementations(metaList, factionName, settlement);
 
 		return units;
 	}
@@ -73,5 +77,11 @@ public class GarrisonManager {
 		return metaList;
 	}
 
-	private GarrisonMetaManager _GarrisonMetaManager;
+	private GarrisonMetaManager garrisonMetaManager;
+
+	private FeatureList featureContainer;
+	public void setFeatureContsiner(FeatureList featureContainer) {
+		this.featureContainer = featureContainer;
+		garrisonMetaManager.setFeatureContainer(featureContainer);
+	}
 }

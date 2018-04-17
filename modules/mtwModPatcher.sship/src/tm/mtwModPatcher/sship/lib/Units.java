@@ -22,11 +22,16 @@ public class Units {
 
 
 	public final static String PEASANT_ARCHERS = "Peasant Archers";
+	public final static String HUNTERS = "Hunters";
+	public final static String ARCHER_MILITIA = "Archer Militia";
 	public final static String PRUSSIAN_ARCHERS = "Prussian Archers";
 	public final static String BASQUE_ARCHERS = "Basque Archers";
 
+
 	public final static String JAVELINMEN = "Javelinmen";
 	public final static String LUSITANIAN_JAVELINMEN = "Lusitanian Javelinmen";
+	public final static String SCOTS_SKIRMISHER = "Scots Skirmisher";
+	public final static String BONDIR = "Bondir";
 
 	public final static String CROSSBOW_MILITIA = "Crossbow Militia";
 	public final static String URBAN_CROSSBOW_MILITIA = "Urban Crossbow Militia";

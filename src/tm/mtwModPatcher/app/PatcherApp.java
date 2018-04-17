@@ -12,9 +12,9 @@ import tm.mtwModPatcher.lib.engines.*;
 import tm.mtwModPatcher.lib.engines.userSettings.SettingsEngine;
 import tm.mtwModPatcher.lib.engines.userSettings.SettingsRepository;
 import tm.mtwModPatcher.lib.managers.UnitsManager;
-import tm.mtwModPatcher.lib.managers.garrisons.GarrisonManager;
-import tm.mtwModPatcher.lib.managers.garrisons.GarrisonMetaManager;
 import tm.mtwModPatcher.sship.features.SsHipFeatures;
+import tm.mtwModPatcher.sship.lib.GarrisonManager;
+import tm.mtwModPatcher.sship.lib.GarrisonMetaManager;
 
 import javax.swing.*;
 import java.awt.*;

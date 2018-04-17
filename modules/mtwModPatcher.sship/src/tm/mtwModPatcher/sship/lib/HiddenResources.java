@@ -15,6 +15,12 @@ public class HiddenResources {
 	public static final String Andalusia = "andalusia";
 
 
+	public static final String IRELAND = "ireland";
+	public static final String SCOTLAND = "scotland";
+	public static final String ENGLAND = "england";
+	public static final String NORWAY = "norway";
+
+
 	public final static String HiddenResource = "hidden_resource ";
 
 }

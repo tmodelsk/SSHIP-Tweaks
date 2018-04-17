@@ -9,7 +9,6 @@ import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
 import tm.mtwModPatcher.lib.engines.ConsoleLogger;
 import tm.mtwModPatcher.lib.engines.FileEntityFactory;
 import tm.mtwModPatcher.lib.managers.UnitsManager;
-import tm.mtwModPatcher.lib.managers.garrisons.GarrisonManager;
 import tm.mtwModPatcher.sship.features.agentsCharacters.*;
 import tm.mtwModPatcher.sship.features.agentsCharacters.merchantsNerfed.MerchantsNerfed;
 import tm.mtwModPatcher.sship.features.ai.*;
@@ -27,6 +26,7 @@ import tm.mtwModPatcher.sship.features.layout.WatchtowersToVillages;
 import tm.mtwModPatcher.sship.features.map.*;
 import tm.mtwModPatcher.sship.features.tools.AutoRunHotseat;
 import tm.mtwModPatcher.sship.features.tools.BetterLogging;
+import tm.mtwModPatcher.sship.lib.GarrisonManager;
 
 /** Christianitas Mod SSHIP Feature */
 public class SsHipFeatures {
@@ -141,6 +141,7 @@ public class SsHipFeatures {
 		features.add(new AutoRunHotseat());
 
 		initializeFeatures(features);
+		garrisonManager.setFeatureContsiner(features);
 
 		return features;
 	}

@@ -1,6 +1,7 @@
 package tm.mtwModPatcher.lib.managers.garrisons;
 
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
+import tm.mtwModPatcher.lib.common.entities.FactionInfo;
 
 import java.util.ArrayList;
 import java.util.Dictionary;
@@ -33,7 +34,15 @@ public class UnitTypeFactionDictionary {
 	public void add(UnitType type, String factionName, String unitName) throws PatcherLibBaseEx {
 		add(type, factionName, new UnitGarrisonInfo(unitName));
 	}
-
+	public void add(UnitType type, FactionInfo faction, String unitName) throws PatcherLibBaseEx {
+		add(type, faction.symbol, new UnitGarrisonInfo(unitName));
+	}
+	public void add(UnitType type, FactionInfo faction, String unitName, String hiddenRes) throws PatcherLibBaseEx {
+		add(type, faction.symbol, new UnitGarrisonInfo(unitName, hiddenRes));
+	}
+	public void add(UnitType type, FactionInfo faction, UnitGarrisonInfo unitInfo) throws PatcherLibBaseEx {
+		add(type, faction.symbol, unitInfo);
+	}
 	public void add(UnitType type, String factionName, UnitGarrisonInfo unitInfo) throws PatcherLibBaseEx {
 
 		UnitTypeFactionKey key = new UnitTypeFactionKey(type, factionName);

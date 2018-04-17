@@ -5,10 +5,13 @@ import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.entities.SettlementInfo;
 import tm.mtwModPatcher.lib.common.entities.SettlementLevel;
 import tm.mtwModPatcher.lib.engines.FileEntityFactory;
+import tm.mtwModPatcher.sship.lib.GarrisonManager;
+import tm.mtwModPatcher.sship.lib.GarrisonMetaManager;
 
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * Created by Tomek on 2016-11-13.

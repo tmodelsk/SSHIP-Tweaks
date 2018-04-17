@@ -4,9 +4,9 @@ import lombok.val;
 import org.junit.Test;
 import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
 import tm.mtwModPatcher.lib.managers.UnitsManager;
-import tm.mtwModPatcher.lib.managers.garrisons.GarrisonManager;
-import tm.mtwModPatcher.lib.managers.garrisons.GarrisonMetaManager;
 import tm.mtwModPatcher.sship.features.SsHipFeatures;
+import tm.mtwModPatcher.sship.lib.GarrisonManager;
+import tm.mtwModPatcher.sship.lib.GarrisonMetaManager;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

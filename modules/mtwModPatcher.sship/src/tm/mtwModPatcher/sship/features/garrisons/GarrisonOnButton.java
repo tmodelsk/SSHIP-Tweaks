@@ -35,8 +35,8 @@ import tm.mtwModPatcher.lib.data.world.maps.campaign.CampaignScript;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.descrStrat.DescrStratSectioned;
 import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.lib.managers.SettlementManager;
-import tm.mtwModPatcher.lib.managers.garrisons.GarrisonManager;
 import tm.mtwModPatcher.lib.managers.garrisons.UnitGarrisonInfo;
+import tm.mtwModPatcher.sship.lib.GarrisonManager;
 
 import java.util.*;
 import java.util.stream.Collectors;
