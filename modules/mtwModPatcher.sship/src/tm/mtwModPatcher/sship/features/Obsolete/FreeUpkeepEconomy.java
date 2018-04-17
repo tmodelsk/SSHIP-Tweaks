@@ -35,52 +35,52 @@ import java.util.UUID;
 		int wallsBonus = 2;
 
 		// # Walls #
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_pallisade" , "city", "       free_upkeep bonus "+wallsBonus );
+		_ExportDescrBuilding.addCapabilities("core_building", "wooden_pallisade" , "city", "       free_upkeep bonus "+wallsBonus );
 		wallsBonus++;
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_wall" , "city", "       free_upkeep bonus "+wallsBonus );
+		_ExportDescrBuilding.addCapabilities("core_building", "wooden_wall" , "city", "       free_upkeep bonus "+wallsBonus );
 		wallsBonus++;
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "stone_wall" , "city", "       free_upkeep bonus "+wallsBonus );
+		_ExportDescrBuilding.addCapabilities("core_building", "stone_wall" , "city", "       free_upkeep bonus "+wallsBonus );
 		wallsBonus++;
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "large_stone_wall" , "city", "       free_upkeep bonus "+wallsBonus );
+		_ExportDescrBuilding.addCapabilities("core_building", "large_stone_wall" , "city", "       free_upkeep bonus "+wallsBonus );
 		wallsBonus++;
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "huge_stone_wall" , "city", "       free_upkeep bonus "+wallsBonus );
+		_ExportDescrBuilding.addCapabilities("core_building", "huge_stone_wall" , "city", "       free_upkeep bonus "+wallsBonus );
 		wallsBonus++;
 
 		// # Barracks #
 		// town_watch town_guard city_watch militia_drill_square militia_barracks army_barracks royal_armoury
 		int barracksBonus=1;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("barracks", "town_watch" , "city", "       free_upkeep bonus "+barracksBonus );
+		_ExportDescrBuilding.addCapabilities("barracks", "town_watch" , "city", "       free_upkeep bonus "+barracksBonus );
 		barracksBonus++;
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("barracks", "town_guard" , "city", "       free_upkeep bonus "+barracksBonus );
+		_ExportDescrBuilding.addCapabilities("barracks", "town_guard" , "city", "       free_upkeep bonus "+barracksBonus );
 		barracksBonus++;
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("barracks", "city_watch" , "city", "       free_upkeep bonus "+barracksBonus );
+		_ExportDescrBuilding.addCapabilities("barracks", "city_watch" , "city", "       free_upkeep bonus "+barracksBonus );
 		barracksBonus++;
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("barracks", "militia_drill_square" , "city", "       free_upkeep bonus "+barracksBonus );
+		_ExportDescrBuilding.addCapabilities("barracks", "militia_drill_square" , "city", "       free_upkeep bonus "+barracksBonus );
 		barracksBonus++;
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("barracks", "militia_barracks" , "city", "       free_upkeep bonus "+barracksBonus );
+		_ExportDescrBuilding.addCapabilities("barracks", "militia_barracks" , "city", "       free_upkeep bonus "+barracksBonus );
 		barracksBonus++;
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("barracks", "army_barracks" , "city", "       free_upkeep bonus "+barracksBonus );
+		_ExportDescrBuilding.addCapabilities("barracks", "army_barracks" , "city", "       free_upkeep bonus "+barracksBonus );
 		barracksBonus++;
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("barracks", "royal_armoury" , "city", "       free_upkeep bonus "+barracksBonus );
+		_ExportDescrBuilding.addCapabilities("barracks", "royal_armoury" , "city", "       free_upkeep bonus "+barracksBonus );
 		barracksBonus++;
 
 		// # Local Reqruitment # - building professional_city
 		// levels p_large_town p_city
 		int localRecrBonus = 1;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("professional_city", "p_large_town" , "city", "       free_upkeep bonus "+localRecrBonus );
+		_ExportDescrBuilding.addCapabilities("professional_city", "p_large_town" , "city", "       free_upkeep bonus "+localRecrBonus );
 		localRecrBonus++;
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("professional_city", "p_city" , "city", "       free_upkeep bonus "+localRecrBonus );
+		_ExportDescrBuilding.addCapabilities("professional_city", "p_city" , "city", "       free_upkeep bonus "+localRecrBonus );
 		localRecrBonus++;
 
 
@@ -88,70 +88,70 @@ import java.util.UUID;
 		// # Walls # - building core_castle_building
 		// levels motte_and_bailey wooden_castle castle fortress citadel
 		wallsBonus=1;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "motte_and_bailey" , "castle", "       free_upkeep bonus "+wallsBonus );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "motte_and_bailey" , "castle", "       free_upkeep bonus "+wallsBonus );
 		wallsBonus++;
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "wooden_castle" , "castle", "       free_upkeep bonus "+wallsBonus );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "wooden_castle" , "castle", "       free_upkeep bonus "+wallsBonus );
 		wallsBonus++;
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "castle" , "castle", "       free_upkeep bonus "+wallsBonus );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "castle" , "castle", "       free_upkeep bonus "+wallsBonus );
 		wallsBonus++;
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "fortress" , "castle", "       free_upkeep bonus "+wallsBonus );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "fortress" , "castle", "       free_upkeep bonus "+wallsBonus );
 		wallsBonus++;
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "citadel" , "castle", "       free_upkeep bonus "+wallsBonus );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "citadel" , "castle", "       free_upkeep bonus "+wallsBonus );
 		wallsBonus++;
 
 		// # Barracks # : building castle_barracks
 		// levels mustering_hall garrison_quarters drill_square barracks armoury
 		barracksBonus=1;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("castle_barracks", "mustering_hall" , "castle", "       free_upkeep bonus "+barracksBonus );
+		_ExportDescrBuilding.addCapabilities("castle_barracks", "mustering_hall" , "castle", "       free_upkeep bonus "+barracksBonus );
 		barracksBonus++;
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("castle_barracks", "garrison_quarters" , "castle", "       free_upkeep bonus "+barracksBonus );
+		_ExportDescrBuilding.addCapabilities("castle_barracks", "garrison_quarters" , "castle", "       free_upkeep bonus "+barracksBonus );
 //		barracksBonus++;
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("castle_barracks", "drill_square" , "castle", "       free_upkeep bonus "+barracksBonus );
+		_ExportDescrBuilding.addCapabilities("castle_barracks", "drill_square" , "castle", "       free_upkeep bonus "+barracksBonus );
 		barracksBonus++;
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("castle_barracks", "barracks" , "castle", "       free_upkeep bonus "+barracksBonus );
+		_ExportDescrBuilding.addCapabilities("castle_barracks", "barracks" , "castle", "       free_upkeep bonus "+barracksBonus );
 		barracksBonus++;
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("castle_barracks", "armoury" , "castle", "       free_upkeep bonus "+barracksBonus );
+		_ExportDescrBuilding.addCapabilities("castle_barracks", "armoury" , "castle", "       free_upkeep bonus "+barracksBonus );
 		barracksBonus++;
 
 		// # Stables # : building equestrian
 		// levels stables knights_stables barons_stables earls_stables kings_stables
 		int stablesBonus=1;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("equestrian", "stables" , "castle", "       free_upkeep bonus "+stablesBonus );
+		_ExportDescrBuilding.addCapabilities("equestrian", "stables" , "castle", "       free_upkeep bonus "+stablesBonus );
 		stablesBonus++;
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("equestrian", "knights_stables" , "castle", "       free_upkeep bonus "+stablesBonus );
+		_ExportDescrBuilding.addCapabilities("equestrian", "knights_stables" , "castle", "       free_upkeep bonus "+stablesBonus );
 		stablesBonus++;
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("equestrian", "barons_stables" , "castle", "       free_upkeep bonus "+stablesBonus );
+		_ExportDescrBuilding.addCapabilities("equestrian", "barons_stables" , "castle", "       free_upkeep bonus "+stablesBonus );
 		stablesBonus++;
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("equestrian", "earls_stables" , "castle", "       free_upkeep bonus "+stablesBonus );
+		_ExportDescrBuilding.addCapabilities("equestrian", "earls_stables" , "castle", "       free_upkeep bonus "+stablesBonus );
 		stablesBonus++;
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("equestrian", "kings_stables" , "castle", "       free_upkeep bonus "+stablesBonus );
+		_ExportDescrBuilding.addCapabilities("equestrian", "kings_stables" , "castle", "       free_upkeep bonus "+stablesBonus );
 		stablesBonus++;
 
 		// # Ranges # : building missiles
 		// levels bowyer practice_range archery_range marksmans_range
 		int rangesBonus=1;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("missiles", "bowyer" , "castle", "       free_upkeep bonus "+rangesBonus );
+		_ExportDescrBuilding.addCapabilities("missiles", "bowyer" , "castle", "       free_upkeep bonus "+rangesBonus );
 		rangesBonus++;
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("missiles", "practice_range" , "castle", "       free_upkeep bonus "+rangesBonus );
+		_ExportDescrBuilding.addCapabilities("missiles", "practice_range" , "castle", "       free_upkeep bonus "+rangesBonus );
 		rangesBonus++;
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("missiles", "archery_range" , "castle", "       free_upkeep bonus "+rangesBonus );
+		_ExportDescrBuilding.addCapabilities("missiles", "archery_range" , "castle", "       free_upkeep bonus "+rangesBonus );
 		rangesBonus++;
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("missiles", "marksmans_range" , "castle", "       free_upkeep bonus "+rangesBonus );
+		_ExportDescrBuilding.addCapabilities("missiles", "marksmans_range" , "castle", "       free_upkeep bonus "+rangesBonus );
 		rangesBonus++;
 
 	}

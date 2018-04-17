@@ -88,28 +88,28 @@ public class NobilityManyGeneralsGovernors extends Feature {
 		replenishTurns = cityReplenishTurnsStarting;
 		replBonus = cityReplenishTurnsBonus;
 
-		edb.insertRecruitmentBuildingCapabilities(buildingName, wallsCity.L1_WoodenPalisade, type,
+		edb.addRecuitment(buildingName, wallsCity.L1_WoodenPalisade, type,
 				unitName, starting, UnitReplenishRate.getRate(replenishTurns) * replenishTmpMulti, max, bonus, requiresStr);
 
 		replenishTurns -= replBonus;
-		edb.insertRecruitmentBuildingCapabilities(buildingName, wallsCity.L2_WoodenWall, type,
+		edb.addRecuitment(buildingName, wallsCity.L2_WoodenWall, type,
 				unitName, starting, UnitReplenishRate.getRate(replenishTurns) * replenishTmpMulti, max, bonus, requiresStr);
 
 		replenishTurns -= replBonus;
 		max++;
-		edb.insertRecruitmentBuildingCapabilities(buildingName, wallsCity.L3_StoneWall, type,
+		edb.addRecuitment(buildingName, wallsCity.L3_StoneWall, type,
 				unitName, starting, UnitReplenishRate.getRate(replenishTurns) * replenishTmpMulti, max, bonus, requiresStr);
 
 		replenishTurns -= replBonus;
 		max++;
 		//starting++;
-		edb.insertRecruitmentBuildingCapabilities(buildingName, wallsCity.L4_LargeStoneWall, type,
+		edb.addRecuitment(buildingName, wallsCity.L4_LargeStoneWall, type,
 				unitName, starting, UnitReplenishRate.getRate(replenishTurns) * replenishTmpMulti, max, bonus, requiresStr);
 
 		replenishTurns -= (2 * replBonus);
 		max++;
 		starting++;
-		edb.insertRecruitmentBuildingCapabilities(buildingName, wallsCity.L5_HugeStoneWall, type,
+		edb.addRecuitment(buildingName, wallsCity.L5_HugeStoneWall, type,
 				unitName, starting, UnitReplenishRate.getRate(replenishTurns) * replenishTmpMulti, max, bonus, requiresStr);
 
 		// ##### CASTLE #####
@@ -124,28 +124,28 @@ public class NobilityManyGeneralsGovernors extends Feature {
 		replenishTurns = castleReplenishTurnsStarting;
 		replBonus = castleReplenishTurnsBonus;
 
-		edb.insertRecruitmentBuildingCapabilities(buildingName, wallsCastle.L1_MotteAndBailey, type,
+		edb.addRecuitment(buildingName, wallsCastle.L1_MotteAndBailey, type,
 				unitName, starting, UnitReplenishRate.getRate(replenishTurns) * replenishTmpMulti, max, bonus, requiresStr);
 
 		replenishTurns -= replBonus;
-		edb.insertRecruitmentBuildingCapabilities(buildingName, wallsCastle.L2_WoodenCastle, type,
+		edb.addRecuitment(buildingName, wallsCastle.L2_WoodenCastle, type,
 				unitName, starting, UnitReplenishRate.getRate(replenishTurns) * replenishTmpMulti, max, bonus, requiresStr);
 
 		replenishTurns -= replBonus;
 		max++;
-		edb.insertRecruitmentBuildingCapabilities(buildingName, wallsCastle.L3_Castle, type,
+		edb.addRecuitment(buildingName, wallsCastle.L3_Castle, type,
 				unitName, starting, UnitReplenishRate.getRate(replenishTurns) * replenishTmpMulti, max, bonus, requiresStr);
 
 		replenishTurns -= replBonus;
 		max++;
 		starting++;
-		edb.insertRecruitmentBuildingCapabilities(buildingName, wallsCastle.L4_Fortress, type,
+		edb.addRecuitment(buildingName, wallsCastle.L4_Fortress, type,
 				unitName, starting, UnitReplenishRate.getRate(replenishTurns) * replenishTmpMulti, max, bonus, requiresStr);
 
 		replenishTurns -= (2 * replBonus);
 		max++;
 		//starting++;
-		edb.insertRecruitmentBuildingCapabilities(buildingName, wallsCastle.L5_Citadel, type,
+		edb.addRecuitment(buildingName, wallsCastle.L5_Citadel, type,
 				unitName, starting, UnitReplenishRate.getRate(replenishTurns) * replenishTmpMulti, max, bonus, requiresStr);
 	}
 

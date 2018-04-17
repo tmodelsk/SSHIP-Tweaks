@@ -48,18 +48,18 @@ public class FactionsSpecifics extends Feature {
 		turksRumBoost();
 
 		// ### DeBuff Crusade States - minus LAW
-		edb.insertIntoCityCastleWallsCapabilities("       law_bonus bonus -2 requires factions { jerusalem, }");
+		edb.addToCityCastleWallsCapabilities("       law_bonus bonus -2 requires factions { jerusalem, }");
 
 		// France: Eldest Daughter of the Church - Religion Bonus
-		edb.insertIntoCityCastleWallsCapabilities("       religion_level bonus 1 requires factions { france, }");
+		edb.addToCityCastleWallsCapabilities("       religion_level bonus 1 requires factions { france, }");
 
 		// Moors: -1 Law
-		edb.insertIntoCityCastleWallsCapabilities("		law_bonus bonus -1 requires factions { moors, }");
+		edb.addToCityCastleWallsCapabilities("		law_bonus bonus -1 requires factions { moors, }");
 	}
 
 	protected void holyRomanEmpireLawMinus() throws PatcherLibBaseEx {
 
-		edb.insertIntoCityCastleWallsCapabilities("		law_bonus bonus -3 requires factions { hre, }");
+		edb.addToCityCastleWallsCapabilities("		law_bonus bonus -3 requires factions { hre, }");
 	}
 
 	protected void norwegianDanesBoostReplenishRates() throws PatcherLibBaseEx {
@@ -84,32 +84,32 @@ public class FactionsSpecifics extends Feature {
 
 		// # MARKETS
 		attributeStr = "       trade_base_income_bonus bonus 1";
-		edb.insertIntoBuildingCapabilities("market", "corn_exchange", "city", attributeStr + requires);
-		edb.insertIntoBuildingCapabilities("market", "market", "city", attributeStr + requires);
-		edb.insertIntoBuildingCapabilities("market", "fairground", "city", attributeStr + requires);
-		edb.insertIntoBuildingCapabilities("market", "great_market", "city", attributeStr + requires);
-		edb.insertIntoBuildingCapabilities("market", "merchants_quarter", "city", attributeStr + requires);
+		edb.addCapabilities("market", "corn_exchange", "city", attributeStr + requires);
+		edb.addCapabilities("market", "market", "city", attributeStr + requires);
+		edb.addCapabilities("market", "fairground", "city", attributeStr + requires);
+		edb.addCapabilities("market", "great_market", "city", attributeStr + requires);
+		edb.addCapabilities("market", "merchants_quarter", "city", attributeStr + requires);
 		// corn_exchange market fairground
-		edb.insertIntoBuildingCapabilities("market_castle", "corn_exchange", "castle", attributeStr + requires);
-		edb.insertIntoBuildingCapabilities("market_castle", "market", "castle", attributeStr + requires);
-		edb.insertIntoBuildingCapabilities("market_castle", "fairground", "castle", attributeStr + requires);
+		edb.addCapabilities("market_castle", "corn_exchange", "castle", attributeStr + requires);
+		edb.addCapabilities("market_castle", "market", "castle", attributeStr + requires);
+		edb.addCapabilities("market_castle", "fairground", "castle", attributeStr + requires);
 
 		// # PORTS: port shipwright dockyard naval_drydock
-		edb.insertIntoBuildingCapabilities("port", "port", "city", attributeStr + requires);
-		edb.insertIntoBuildingCapabilities("port", "shipwright", "city", attributeStr + requires);
-		edb.insertIntoBuildingCapabilities("port", "dockyard", "city", attributeStr + requires);
-		edb.insertIntoBuildingCapabilities("port", "naval_drydock", "city", attributeStr + requires);
+		edb.addCapabilities("port", "port", "city", attributeStr + requires);
+		edb.addCapabilities("port", "shipwright", "city", attributeStr + requires);
+		edb.addCapabilities("port", "dockyard", "city", attributeStr + requires);
+		edb.addCapabilities("port", "naval_drydock", "city", attributeStr + requires);
 		// c_port c_shipwright c_dockyard c_naval_drydock
-		edb.insertIntoBuildingCapabilities("castle_port", "c_port", "castle", attributeStr + requires);
-		edb.insertIntoBuildingCapabilities("castle_port", "c_dockyard", "castle", attributeStr + requires);
-		edb.insertIntoBuildingCapabilities("castle_port", "c_naval_drydock", "castle", attributeStr + requires);
+		edb.addCapabilities("castle_port", "c_port", "castle", attributeStr + requires);
+		edb.addCapabilities("castle_port", "c_dockyard", "castle", attributeStr + requires);
+		edb.addCapabilities("castle_port", "c_naval_drydock", "castle", attributeStr + requires);
 
 		// # SEA TRADES : merchants_wharf warehouse docklands
-		edb.insertIntoBuildingCapabilities("sea_trade", "merchants_wharf", "city", attributeStr + requires);
-		edb.insertIntoBuildingCapabilities("sea_trade", "warehouse", "city", attributeStr + requires);
-		edb.insertIntoBuildingCapabilities("sea_trade", "docklands", "city", attributeStr + requires);
+		edb.addCapabilities("sea_trade", "merchants_wharf", "city", attributeStr + requires);
+		edb.addCapabilities("sea_trade", "warehouse", "city", attributeStr + requires);
+		edb.addCapabilities("sea_trade", "docklands", "city", attributeStr + requires);
 
-		edb.insertIntoBuildingCapabilities("castle_sea_trade", "merchants_wharf", "castle", attributeStr + requires);
+		edb.addCapabilities("castle_sea_trade", "merchants_wharf", "castle", attributeStr + requires);
 	}
 
 	protected void byzantium() throws PatcherLibBaseEx {
@@ -174,17 +174,17 @@ public class FactionsSpecifics extends Feature {
 		// # CITIES ### :
 		String attributeStr = "       trade_base_income_bonus bonus -2";    // -1
 		newLine = attributeStr + requiresByz;
-		edb.insertIntoBuildingCapabilities("core_building", "wooden_pallisade", "city", newLine);
-		edb.insertIntoBuildingCapabilities("core_building", "wooden_wall", "city", newLine);
-		edb.insertIntoBuildingCapabilities("core_building", "stone_wall", "city", newLine);
-		edb.insertIntoBuildingCapabilities("core_building", "large_stone_wall", "city", newLine);
-		edb.insertIntoBuildingCapabilities("core_building", "huge_stone_wall", "city", newLine);
+		edb.addCapabilities("core_building", "wooden_pallisade", "city", newLine);
+		edb.addCapabilities("core_building", "wooden_wall", "city", newLine);
+		edb.addCapabilities("core_building", "stone_wall", "city", newLine);
+		edb.addCapabilities("core_building", "large_stone_wall", "city", newLine);
+		edb.addCapabilities("core_building", "huge_stone_wall", "city", newLine);
 		// # Castles #
-		edb.insertIntoBuildingCapabilities("core_castle_building", "motte_and_bailey", "castle", newLine);
-		edb.insertIntoBuildingCapabilities("core_castle_building", "wooden_castle", "castle", newLine);
-		edb.insertIntoBuildingCapabilities("core_castle_building", "castle", "castle", newLine);
-		edb.insertIntoBuildingCapabilities("core_castle_building", "fortress", "castle", newLine);
-		edb.insertIntoBuildingCapabilities("core_castle_building", "citadel", "castle", newLine);
+		edb.addCapabilities("core_castle_building", "motte_and_bailey", "castle", newLine);
+		edb.addCapabilities("core_castle_building", "wooden_castle", "castle", newLine);
+		edb.addCapabilities("core_castle_building", "castle", "castle", newLine);
+		edb.addCapabilities("core_castle_building", "fortress", "castle", newLine);
+		edb.addCapabilities("core_castle_building", "citadel", "castle", newLine);
 
 
 		// ###### TRADE BUIDLINGS MINUS - Bizantium ONLY #####
@@ -192,27 +192,27 @@ public class FactionsSpecifics extends Feature {
 		// corn_exchange market fairground great_market merchants_quarter
 		attributeStr = "       trade_base_income_bonus bonus -2";
 		newLine = attributeStr + requiresByz;
-		edb.insertIntoBuildingCapabilities("market", "corn_exchange", "city", newLine);
-		edb.insertIntoBuildingCapabilities("market", "market", "city", newLine);
-		edb.insertIntoBuildingCapabilities("market", "fairground", "city", newLine);
-		edb.insertIntoBuildingCapabilities("market", "great_market", "city", newLine);
-		edb.insertIntoBuildingCapabilities("market", "merchants_quarter", "city", newLine);
+		edb.addCapabilities("market", "corn_exchange", "city", newLine);
+		edb.addCapabilities("market", "market", "city", newLine);
+		edb.addCapabilities("market", "fairground", "city", newLine);
+		edb.addCapabilities("market", "great_market", "city", newLine);
+		edb.addCapabilities("market", "merchants_quarter", "city", newLine);
 		// corn_exchange market fairground
-		edb.insertIntoBuildingCapabilities("market_castle", "market", "castle", newLine);
-		edb.insertIntoBuildingCapabilities("market_castle", "fairground", "castle", newLine);
+		edb.addCapabilities("market_castle", "market", "castle", newLine);
+		edb.addCapabilities("market_castle", "fairground", "castle", newLine);
 
 		// # PORTS
 		// port shipwright dockyard naval_drydock
-		edb.insertIntoBuildingCapabilities("port", "shipwright", "city", newLine);
-		edb.insertIntoBuildingCapabilities("port", "dockyard", "city", newLine);
-		edb.insertIntoBuildingCapabilities("port", "naval_drydock", "city", newLine);
+		edb.addCapabilities("port", "shipwright", "city", newLine);
+		edb.addCapabilities("port", "dockyard", "city", newLine);
+		edb.addCapabilities("port", "naval_drydock", "city", newLine);
 		// c_port c_shipwright c_dockyard c_naval_drydock
-		edb.insertIntoBuildingCapabilities("castle_port", "c_dockyard", "castle", newLine);
-		edb.insertIntoBuildingCapabilities("castle_port", "c_naval_drydock", "castle", newLine);
+		edb.addCapabilities("castle_port", "c_dockyard", "castle", newLine);
+		edb.addCapabilities("castle_port", "c_naval_drydock", "castle", newLine);
 
 		// # SEA TRADES
-		edb.insertIntoBuildingCapabilities("sea_trade", "warehouse", "city", "       trade_base_income_bonus bonus -1" + requiresByz);
-		edb.insertIntoBuildingCapabilities("sea_trade", "docklands", "city", "       trade_base_income_bonus bonus -1" + requiresByz);
+		edb.addCapabilities("sea_trade", "warehouse", "city", "       trade_base_income_bonus bonus -1" + requiresByz);
+		edb.addCapabilities("sea_trade", "docklands", "city", "       trade_base_income_bonus bonus -1" + requiresByz);
 	}
 
 	protected void ByzantiumPopulationMinus(int bonusCity, int bonusCastle, String requiresSuffix) throws PatcherLibBaseEx {
@@ -223,25 +223,25 @@ public class FactionsSpecifics extends Feature {
 		String requiresByz = " requires factions { byzantium, }" + requiresSuffix;
 
 		int bonus = bonusCity;
-		//exportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_pallisade" , "city", attributeStr + requires );
-		edb.insertIntoBuildingCapabilities("core_building", "wooden_wall", "city", attributeStr + bonus + requiresByz);
+		//exportDescrBuilding.addCapabilities("core_building", "wooden_pallisade" , "city", attributeStr + requires );
+		edb.addCapabilities("core_building", "wooden_wall", "city", attributeStr + bonus + requiresByz);
 		bonus++;
-		edb.insertIntoBuildingCapabilities("core_building", "stone_wall", "city", attributeStr + bonus + requiresByz);
+		edb.addCapabilities("core_building", "stone_wall", "city", attributeStr + bonus + requiresByz);
 		bonus++;
-		edb.insertIntoBuildingCapabilities("core_building", "large_stone_wall", "city", attributeStr + bonus + requiresByz);
+		edb.addCapabilities("core_building", "large_stone_wall", "city", attributeStr + bonus + requiresByz);
 		bonus++;
-		edb.insertIntoBuildingCapabilities("core_building", "huge_stone_wall", "city", attributeStr + bonus + requiresByz);
+		edb.addCapabilities("core_building", "huge_stone_wall", "city", attributeStr + bonus + requiresByz);
 
 		// # Castles #
 		bonus = bonusCastle;
-		//exportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "motte_and_bailey" , "castle", attributeStr + requires );
-		edb.insertIntoBuildingCapabilities("core_castle_building", "wooden_castle", "castle", attributeStr + bonus + requiresByz);
+		//exportDescrBuilding.addCapabilities("core_castle_building", "motte_and_bailey" , "castle", attributeStr + requires );
+		edb.addCapabilities("core_castle_building", "wooden_castle", "castle", attributeStr + bonus + requiresByz);
 		bonus++;
-		edb.insertIntoBuildingCapabilities("core_castle_building", "castle", "castle", attributeStr + bonus + requiresByz);
+		edb.addCapabilities("core_castle_building", "castle", "castle", attributeStr + bonus + requiresByz);
 		bonus++;
-		edb.insertIntoBuildingCapabilities("core_castle_building", "fortress", "castle", attributeStr + bonus + requiresByz);
+		edb.addCapabilities("core_castle_building", "fortress", "castle", attributeStr + bonus + requiresByz);
 		bonus++;
-		edb.insertIntoBuildingCapabilities("core_castle_building", "citadel", "castle", attributeStr + bonus + requiresByz);
+		edb.addCapabilities("core_castle_building", "citadel", "castle", attributeStr + bonus + requiresByz);
 	}
 
 	protected void turksRumBoost() {

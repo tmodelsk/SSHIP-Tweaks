@@ -48,23 +48,23 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		int baseTmp = base;
 		val cityBonuses = new ArrayList<Integer>();
 
-		insertIntoBuildingCapabilities("core_building", "wooden_pallisade" , "city", attributeStr+ baseTmp + requires );
+		addCapabilities("core_building", "wooden_pallisade" , "city", attributeStr+ baseTmp + requires );
 		cityBonuses.add(baseTmp);
 		baseTmp *= multi;
 
-		insertIntoBuildingCapabilities("core_building", "wooden_wall" , "city", attributeStr+ baseTmp + requires);
+		addCapabilities("core_building", "wooden_wall" , "city", attributeStr+ baseTmp + requires);
 		cityBonuses.add(baseTmp);
 		baseTmp *= multi;
 
-		insertIntoBuildingCapabilities("core_building", "stone_wall" , "city", attributeStr+ baseTmp + requires );
+		addCapabilities("core_building", "stone_wall" , "city", attributeStr+ baseTmp + requires );
 		cityBonuses.add(baseTmp);
 		baseTmp *= multi;
 
-		insertIntoBuildingCapabilities("core_building", "large_stone_wall" , "city", attributeStr+ baseTmp + requires );
+		addCapabilities("core_building", "large_stone_wall" , "city", attributeStr+ baseTmp + requires );
 		cityBonuses.add(baseTmp);
 		baseTmp *= multi;
 
-		insertIntoBuildingCapabilities("core_building", "huge_stone_wall" , "city", attributeStr+ baseTmp + requires );
+		addCapabilities("core_building", "huge_stone_wall" , "city", attributeStr+ baseTmp + requires );
 		cityBonuses.add(baseTmp);
 
 		result.add(new Tuple2<>("City", cityBonuses));
@@ -72,23 +72,23 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		// # Castles #
 		baseTmp = base;
 		val castleBonuses = new ArrayList<Integer>();
-		insertIntoBuildingCapabilities("core_castle_building", "motte_and_bailey" , "castle", attributeStr+ baseTmp + requires );
+		addCapabilities("core_castle_building", "motte_and_bailey" , "castle", attributeStr+ baseTmp + requires );
 		castleBonuses.add(baseTmp);
 		baseTmp *= multi;
 
-		insertIntoBuildingCapabilities("core_castle_building", "wooden_castle" , "castle", attributeStr+ baseTmp  + requires);
+		addCapabilities("core_castle_building", "wooden_castle" , "castle", attributeStr+ baseTmp  + requires);
 		castleBonuses.add(baseTmp);
 		baseTmp *= multi;
 
-		insertIntoBuildingCapabilities("core_castle_building", "castle" , "castle", attributeStr+ baseTmp + requires );
+		addCapabilities("core_castle_building", "castle" , "castle", attributeStr+ baseTmp + requires );
 		castleBonuses.add(baseTmp);
 		baseTmp *= multi;
 
-		insertIntoBuildingCapabilities("core_castle_building", "fortress" , "castle", attributeStr+ baseTmp + requires );
+		addCapabilities("core_castle_building", "fortress" , "castle", attributeStr+ baseTmp + requires );
 		castleBonuses.add(baseTmp);
 		baseTmp *= multi;
 
-		insertIntoBuildingCapabilities("core_castle_building", "citadel" , "castle", attributeStr+ baseTmp + requires );
+		addCapabilities("core_castle_building", "citadel" , "castle", attributeStr+ baseTmp + requires );
 		castleBonuses.add(baseTmp);
 
 		result.add(new Tuple2<>("Castle", castleBonuses));
@@ -230,13 +230,13 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 
 		String recruitmentSlotBonusStr = "\t\t\trecruitment_slots bonus "+recruitmentSlotBonus+" requires not event_counter freeze_recr_pool 1 ; Patcher Added";
 
-		insertIntoBuildingCapabilities(buildingName, levelName, castleOrCity, recruitmentSlotBonusStr);
+		addCapabilities(buildingName, levelName, castleOrCity, recruitmentSlotBonusStr);
 	}
 	public void addPopulationGrowthBonus(String buildingName, String levelName, String castleOrCity, int populationGrowthBonus) throws PatcherLibBaseEx {
 
 		String populationGrowthBonusStr = "\t\t\tpopulation_growth_bonus bonus "+Integer.toString(populationGrowthBonus)+" ; Patcher Added";
 
-		insertIntoBuildingCapabilities(buildingName, levelName, castleOrCity, populationGrowthBonusStr);
+		addCapabilities(buildingName, levelName, castleOrCity, populationGrowthBonusStr);
 	}
 	/**  requirementsStr - without requirements label */
 	public void addPopulationGrowthBonus(String buildingName, String levelName, String castleOrCity, int populationGrowthBonus, String requirementsStr) throws PatcherLibBaseEx {
@@ -246,47 +246,47 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		populationGrowthBonusStr += " requires " + requirementsStr;
 		populationGrowthBonusStr += " ; Patcher Added";
 
-		insertIntoBuildingCapabilities(buildingName, levelName, castleOrCity, populationGrowthBonusStr);
+		addCapabilities(buildingName, levelName, castleOrCity, populationGrowthBonusStr);
 	}
 	public void addLawBonus(String buildingName, String levelName, String castleOrCity, int lawBonus) throws PatcherLibBaseEx {
 
 		String bonusStr = "\t\t\tlaw_bonus bonus "+Integer.toString(lawBonus)+" ; Patcher Added";
 
-		insertIntoBuildingCapabilities(buildingName, levelName, castleOrCity, bonusStr);
+		addCapabilities(buildingName, levelName, castleOrCity, bonusStr);
 	}
 
 
-	public void insertRecruitmentBuildingCapabilities(BuildingLevel buidlingLevel, String unitName, int starting, double replenish, int max, int bonus,
-													  String requirements) throws PatcherLibBaseEx {
-		insertRecruitmentBuildingCapabilities(buidlingLevel.Name, buidlingLevel.LevelName, buidlingLevel.SettlType.toLabelString(),
+	public void addRecuitment(BuildingLevel buidlingLevel, String unitName, int starting, double replenish, int max, int bonus,
+							  String requirements) throws PatcherLibBaseEx {
+		addRecuitment(buidlingLevel.Name, buidlingLevel.LevelName, buidlingLevel.SettlType.toLabelString(),
 				unitName, starting, replenish, max, bonus, requirements);
 	}
 
-	public void insertRecruitmentBuildingCapabilities(String buildingName, String levelName, String castleOrCity,
-													  String unitName, int starting, double replenish, int max, int bonus,
-													  String requirements) throws PatcherLibBaseEx {
+	public void addRecuitment(String buildingName, String levelName, String castleOrCity,
+							  String unitName, int starting, double replenish, int max, int bonus,
+							  String requirements) throws PatcherLibBaseEx {
 
 		if(requirements.contains("requires")) throw new PatcherLibBaseEx("Requirements contains 'requires' keyword!");
 
 		String line = "\t\t\trecruit_pool    \"" + unitName +"\"  "+ starting +"   "+ replenish +"   "+ max +"  "+ bonus +"  requires "+ requirements +" ; TM Patcher Added";
 
-		insertIntoBuildingCapabilities(buildingName, levelName, castleOrCity, line);
+		addCapabilities(buildingName, levelName, castleOrCity, line);
 	}
 
 
-	public void insertIntoBuildingCapabilities(BuildingLevel buidlingLevel, String newLine) {
-		insertIntoBuildingCapabilities(buidlingLevel.Name, buidlingLevel.LevelName, buidlingLevel.SettlType, newLine);
+	public void addCapabilities(BuildingLevel buidlingLevel, String newLine) {
+		addCapabilities(buidlingLevel.Name, buidlingLevel.LevelName, buidlingLevel.SettlType, newLine);
 	}
-	public void insertIntoBuildingCapabilities(String buildingName, String levelName, SettlType settlType, String newLine) {
-		insertIntoBuildingCapabilities(buildingName, levelName, settlType.toLabelString(), newLine);
+	public void addCapabilities(String buildingName, String levelName, SettlType settlType, String newLine) {
+		addCapabilities(buildingName, levelName, settlType.toLabelString(), newLine);
 	}
 
-	public void insertIntoBuildingCapabilities(String buildingName, String levelName, String newLine) {
+	public void addCapabilities(String buildingName, String levelName, String newLine) {
 		String castleOrCity = null;
-		insertIntoBuildingCapabilities(buildingName, levelName, castleOrCity, newLine);
+		addCapabilities(buildingName, levelName, castleOrCity, newLine);
 	}
 
-	public void insertIntoBuildingCapabilities(String buildingName, String levelName, String castleOrCity, String newLine) throws PatcherLibBaseEx {
+	public void addCapabilities(String buildingName, String levelName, String castleOrCity, String newLine) throws PatcherLibBaseEx {
 
 		LinesProcessor lines = _Lines;
 
@@ -315,12 +315,12 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 	}
 
 
-	public void insertIntoBuildingCapabilities(String buildingName, List<String> levels, SettlType settlType, String newLine) {
-		insertIntoBuildingCapabilities(buildingName, levels, settlType.toLabelString(), newLine);
+	public void addCapabilities(String buildingName, List<String> levels, SettlType settlType, String newLine) {
+		addCapabilities(buildingName, levels, settlType.toLabelString(), newLine);
 	}
-	public void insertIntoBuildingCapabilities(String buildingName, List<String> levels, String castleOrCity, String newLine) {
+	public void addCapabilities(String buildingName, List<String> levels, String castleOrCity, String newLine) {
 		for (val level: levels)
-			insertIntoBuildingCapabilities(buildingName, level, castleOrCity, newLine);
+			addCapabilities(buildingName, level, castleOrCity, newLine);
 	}
 
 	public void addToWallsRecruitmentSlots(int addNmber) {
@@ -341,7 +341,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		val ptr = Pattern.compile("(^\\s*recruitment_slots\\s+)(\\d+)(\\s+.*)");
 
 		for(val cityWallData : cityWallsList) {
-			val range = getBuildingCapabilitiesStartEnd(cityWallData.getItem1(), cityWallData.getItem2(), cityWallData.getItem3());
+			val range = getCapabilitiesStartEnd(cityWallData.getItem1(), cityWallData.getItem2(), cityWallData.getItem3());
 
 			for (int index = range.getStart(); index < range.getEnd(); index++) {
 				String line = _Lines.getLines().get(index);
@@ -359,11 +359,11 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		}
 	}
 
-	public Range<Integer, Integer> getBuildingCapabilitiesStartEnd(BuildingLevel bl) {
+	public Range<Integer, Integer> getCapabilitiesStartEnd(BuildingLevel bl) {
 		String cityOrCastle = bl.SettlType == null ? null : bl.SettlType.toLabelString();
-		return getBuildingCapabilitiesStartEnd(bl.Name, bl.LevelName, cityOrCastle);
+		return getCapabilitiesStartEnd(bl.Name, bl.LevelName, cityOrCastle);
 	}
-	public Range<Integer, Integer> getBuildingCapabilitiesStartEnd(String buildingName, String levelName, String castleOrCity) {
+	public Range<Integer, Integer> getCapabilitiesStartEnd(String buildingName, String levelName, String castleOrCity) {
 		LinesProcessor lines = _Lines;
 
 		String levelRegex = "^\\s*"+levelName;
@@ -508,31 +508,31 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 //		return result;
 	}
 
-	public void insertIntoCityCastleWallsCapabilities(String capabilityLine) throws PatcherLibBaseEx {
-		insertIntoCityWallsAllCapabilities(capabilityLine);
-		insertIntoCastleWallsAllCapabilities(capabilityLine);
+	public void addToCityCastleWallsCapabilities(String capabilityLine) throws PatcherLibBaseEx {
+		addToCityWallsAllCapabilities(capabilityLine);
+		addToCastleWallsAllCapabilities(capabilityLine);
 	}
 
-	public void insertIntoCityWallsAllCapabilities(String capability) throws PatcherLibBaseEx {
+	public void addToCityWallsAllCapabilities(String capability) throws PatcherLibBaseEx {
 
 		// ### CITIES ### : wooden_pallisade wooden_wall stone_wall large_stone_wall huge_stone_wall
 
-		insertIntoBuildingCapabilities("core_building", "wooden_pallisade" , "city", capability );
-		insertIntoBuildingCapabilities("core_building", "wooden_wall" , "city", capability );
-		insertIntoBuildingCapabilities("core_building", "stone_wall" , "city", capability );
-		insertIntoBuildingCapabilities("core_building", "large_stone_wall" , "city", capability );
-		insertIntoBuildingCapabilities("core_building", "huge_stone_wall" , "city", capability );
+		addCapabilities("core_building", "wooden_pallisade" , "city", capability );
+		addCapabilities("core_building", "wooden_wall" , "city", capability );
+		addCapabilities("core_building", "stone_wall" , "city", capability );
+		addCapabilities("core_building", "large_stone_wall" , "city", capability );
+		addCapabilities("core_building", "huge_stone_wall" , "city", capability );
 	}
 
-	public void insertIntoCastleWallsAllCapabilities(String capability) throws PatcherLibBaseEx {
+	public void addToCastleWallsAllCapabilities(String capability) throws PatcherLibBaseEx {
 		// ### CASTLES ###
 		// # Walls # - building core_castle_building
 		// levels motte_and_bailey wooden_castle castle fortress citadel
-		insertIntoBuildingCapabilities("core_castle_building", "motte_and_bailey" , "castle", capability );
-		insertIntoBuildingCapabilities("core_castle_building", "wooden_castle" , "castle", capability );
-		insertIntoBuildingCapabilities("core_castle_building", "castle" , "castle", capability );
-		insertIntoBuildingCapabilities("core_castle_building", "fortress" , "castle", capability );
-		insertIntoBuildingCapabilities("core_castle_building", "citadel" , "castle", capability );
+		addCapabilities("core_castle_building", "motte_and_bailey" , "castle", capability );
+		addCapabilities("core_castle_building", "wooden_castle" , "castle", capability );
+		addCapabilities("core_castle_building", "castle" , "castle", capability );
+		addCapabilities("core_castle_building", "fortress" , "castle", capability );
+		addCapabilities("core_castle_building", "citadel" , "castle", capability );
 	}
 
 	public UnitRecuitmentInfo parseUnitRecruitmentInfo(String recruitPoolStringLine) throws PatcherLibBaseEx {

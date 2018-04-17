@@ -60,7 +60,7 @@ public class FightForSurvival extends Feature {
 		requires = " requires " + condition;
 
 		addFlatMoneyBonus(0.75, EVENT_WARNING_NAME, requires); // last : 0.5
-		edb.insertIntoCityCastleWallsCapabilities("        law_bonus bonus 1" + requires);
+		edb.addToCityCastleWallsCapabilities("        law_bonus bonus 1" + requires);
 		insertConstructionCostBonus(5, requires);
 		insertConstructionTimeBonus(10, requires);
 
@@ -73,14 +73,14 @@ public class FightForSurvival extends Feature {
 		condition = "event_counter " + EVENT_DANGER_NAME + " 1";
 		requires = " requires " + condition;
 
-		edb.insertIntoCityCastleWallsCapabilities("        law_bonus bonus 2" + requires);                    // +20 % Law
-		edb.insertIntoCityCastleWallsCapabilities("        population_growth_bonus bonus 2" + requires);    // +0.5 % Pop Growth
-		edb.insertIntoCityCastleWallsCapabilities("        trade_base_income_bonus bonus 1" + requires);    // +1 Trade bonus
-		edb.insertIntoCityCastleWallsCapabilities("        religion_level bonus 1" + requires);            // +1 Religion
-		edb.insertIntoCityCastleWallsCapabilities("        recruits_morale_bonus bonus 1" + requires);        // +1 Morale
-		edb.insertIntoCityCastleWallsCapabilities("        recruits_exp_bonus bonus 1" + requires);        // +1 Experience
+		edb.addToCityCastleWallsCapabilities("        law_bonus bonus 2" + requires);                    // +20 % Law
+		edb.addToCityCastleWallsCapabilities("        population_growth_bonus bonus 2" + requires);    // +0.5 % Pop Growth
+		edb.addToCityCastleWallsCapabilities("        trade_base_income_bonus bonus 1" + requires);    // +1 Trade bonus
+		edb.addToCityCastleWallsCapabilities("        religion_level bonus 1" + requires);            // +1 Religion
+		edb.addToCityCastleWallsCapabilities("        recruits_morale_bonus bonus 1" + requires);        // +1 Morale
+		edb.addToCityCastleWallsCapabilities("        recruits_exp_bonus bonus 1" + requires);        // +1 Experience
 
-		edb.insertIntoCityCastleWallsCapabilities("        free_upkeep bonus 1" + requires);                // +2 Free Upkeep
+		edb.addToCityCastleWallsCapabilities("        free_upkeep bonus 1" + requires);                // +2 Free Upkeep
 		insertConstructionCostBonus(10, requires);
 		insertConstructionTimeBonus(6, requires);
 
@@ -93,15 +93,15 @@ public class FightForSurvival extends Feature {
 		condition = "event_counter " + EVENT_CRITICAL_NAME + " 1";
 		requires = " requires " + condition;
 
-		edb.insertIntoCityCastleWallsCapabilities("        law_bonus bonus 4" + requires);                    // +20 % Law
-		edb.insertIntoCityCastleWallsCapabilities("        population_growth_bonus bonus 3" + requires);    // +1 % Pop Growth
-		edb.insertIntoCityCastleWallsCapabilities("        trade_base_income_bonus bonus 2" + requires);    // +2 Trade bonus
-		edb.insertIntoCityCastleWallsCapabilities("        religion_level bonus 2" + requires);            // +2 Religion
-		edb.insertIntoCityCastleWallsCapabilities("        recruits_morale_bonus bonus 2" + requires);        // +2 Morale
-		edb.insertIntoCityCastleWallsCapabilities("        recruits_exp_bonus bonus 2" + requires);        // +2 Experience
-		edb.insertIntoCityCastleWallsCapabilities("        free_upkeep bonus 2" + requires);                // +2 Free Upkeep
+		edb.addToCityCastleWallsCapabilities("        law_bonus bonus 4" + requires);                    // +20 % Law
+		edb.addToCityCastleWallsCapabilities("        population_growth_bonus bonus 3" + requires);    // +1 % Pop Growth
+		edb.addToCityCastleWallsCapabilities("        trade_base_income_bonus bonus 2" + requires);    // +2 Trade bonus
+		edb.addToCityCastleWallsCapabilities("        religion_level bonus 2" + requires);            // +2 Religion
+		edb.addToCityCastleWallsCapabilities("        recruits_morale_bonus bonus 2" + requires);        // +2 Morale
+		edb.addToCityCastleWallsCapabilities("        recruits_exp_bonus bonus 2" + requires);        // +2 Experience
+		edb.addToCityCastleWallsCapabilities("        free_upkeep bonus 2" + requires);                // +2 Free Upkeep
 		// +1 Recruitment slot
-		edb.insertIntoCityCastleWallsCapabilities("        recruitment_slots 1 requires not event_counter freeze_recr_pool 1 and event_counter " + EVENT_CRITICAL_NAME + " 1");
+		edb.addToCityCastleWallsCapabilities("        recruitment_slots 1 requires not event_counter freeze_recr_pool 1 and event_counter " + EVENT_CRITICAL_NAME + " 1");
 		insertConstructionCostBonus(20, requires);
 		insertConstructionTimeBonus(4, requires);
 
@@ -129,8 +129,8 @@ public class FightForSurvival extends Feature {
 		String constructionStoneBonus = "        construction_cost_bonus_stone bonus ";
 		String constructionWoodenBonus = "        construction_cost_bonus_wooden bonus ";
 
-		edb.insertIntoCityCastleWallsCapabilities(constructionStoneBonus + bonus + requires);
-		edb.insertIntoCityCastleWallsCapabilities(constructionWoodenBonus + bonus + requires);
+		edb.addToCityCastleWallsCapabilities(constructionStoneBonus + bonus + requires);
+		edb.addToCityCastleWallsCapabilities(constructionWoodenBonus + bonus + requires);
 	}
 
 	private void insertConstructionTimeBonus(int turnsBonus, String requires) {
@@ -138,9 +138,9 @@ public class FightForSurvival extends Feature {
 		int bonus = (int) ((100.0 / (double) turnsBonus) + 1);
 
 		// #### CONSTRUCTION TIMES ######
-		edb.insertIntoCityCastleWallsCapabilities("construction_time_bonus_other bonus " + bonus + requires);
-		edb.insertIntoCityCastleWallsCapabilities("construction_time_bonus_religious bonus " + bonus + requires);
-		edb.insertIntoCityCastleWallsCapabilities("construction_time_bonus_defensive bonus " + bonus + requires);
+		edb.addToCityCastleWallsCapabilities("construction_time_bonus_other bonus " + bonus + requires);
+		edb.addToCityCastleWallsCapabilities("construction_time_bonus_religious bonus " + bonus + requires);
+		edb.addToCityCastleWallsCapabilities("construction_time_bonus_defensive bonus " + bonus + requires);
 	}
 
 	protected void createMonitorScripts() throws PatcherLibBaseEx {

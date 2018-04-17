@@ -159,7 +159,7 @@ public class RimlandHeartland extends Feature {
 
 		val bonusLine = Ctm.format(bonusTemplate, bonusValue, getSeaTradeBonusEventName(seaTradeLevel));
 
-		edb.insertIntoBuildingCapabilities(buildingName, marketLevels.get(marketLevel - 1), settlType, bonusLine);
+		edb.addCapabilities(buildingName, marketLevels.get(marketLevel - 1), settlType, bonusLine);
 	}
 
 	private void addSingleSeaTradeMinus(SettlType settlType, int marketLevel, int bonusNerfOffset) {
@@ -187,7 +187,7 @@ public class RimlandHeartland extends Feature {
 
 		// ## Find original bonus
 		val lines = edb.getLines();
-		val capabilitiesIndexes = edb.getBuildingCapabilitiesStartEnd(buildingName, marketLevels.get(marketLevel - 1), settlType.toLabelString());
+		val capabilitiesIndexes = edb.getCapabilitiesStartEnd(buildingName, marketLevels.get(marketLevel - 1), settlType.toLabelString());
 		//         trade_base_income_bonus bonus 4
 		val pattern = Pattern.compile("^\\s*trade_base_income_bonus\\s+bonus\\s+(\\d+)\\s*$");
 		val lineIndex = lines.findExpFirstRegexLine(pattern, capabilitiesIndexes);
@@ -203,19 +203,19 @@ public class RimlandHeartland extends Feature {
 			// Original bonus when SeaTradeEvent0 = 0
 			bonusLine = bonusBaseTemplate;
 			bonusLine = Ctm.format(bonusLine, bonusOrg, "not", 1);
-			edb.insertIntoBuildingCapabilities(buildingName, marketLevelName, settlType, bonusLine);
+			edb.addCapabilities(buildingName, marketLevelName, settlType, bonusLine);
 
 			// Original bonus when SeaTradeEvent0 = 1 and island or port
 			bonusLine = bonusBaseTemplate + " and " + islandCondition + " or " + portCondition;
 			bonusValue = debugMode ? bonusOrg * 10 : bonusOrg;
 			bonusLine = Ctm.format(bonusLine, bonusValue, "", 1);
-			edb.insertIntoBuildingCapabilities(buildingName, marketLevelName, settlType, bonusLine);
+			edb.addCapabilities(buildingName, marketLevelName, settlType, bonusLine);
 
 			// Nerfed bonus when SeaTradeEvent0 = 1 and not island and not port
 			bonusLine = bonusBaseTemplate + " and not " + islandCondition + " and not " + portCondition;
 			bonusValue = debugMode ? bonusNerfed * 100 : bonusNerfed;
 			bonusLine = Ctm.format(bonusLine, bonusValue, "", 1);
-			edb.insertIntoBuildingCapabilities(buildingName, marketLevelName, settlType, bonusLine);
+			edb.addCapabilities(buildingName, marketLevelName, settlType, bonusLine);
 
 			lines.remove(lineIndex);
 
@@ -377,8 +377,8 @@ public class RimlandHeartland extends Feature {
 			levelStr = Buildings.PortCastleLevels.get(portLevel - 1);
 		} else throw new PatcherNotSupportedEx("SettlementType: " + settlType);
 
-		edb.insertIntoBuildingCapabilities(building, levelStr, settlType, portRimlandLow);
-		edb.insertIntoBuildingCapabilities(building, levelStr, settlType, portRimlandHigh);
+		edb.addCapabilities(building, levelStr, settlType, portRimlandLow);
+		edb.addCapabilities(building, levelStr, settlType, portRimlandHigh);
 	}
 
 	private void rimlandProvincesHiddenResources() {
@@ -475,24 +475,24 @@ public class RimlandHeartland extends Feature {
 		// #### Trade Bonuses : Levels 1 & 2 - City & Castle = BONUS 1
 		for (int i = 1; i <= 2; i++) {
 			tradeBonus = Ctm.format(tradeBonusLandGateTemplate, 1);
-			edb.insertIntoBuildingCapabilities(Buildings.MarketCity, Buildings.MarketCityLevels.get(i - 1), SettlType.City, tradeBonus);
-			edb.insertIntoBuildingCapabilities(Buildings.MarketCastle, Buildings.MarketCastleLevels.get(i - 1), SettlType.Castle, tradeBonus);
+			edb.addCapabilities(Buildings.MarketCity, Buildings.MarketCityLevels.get(i - 1), SettlType.City, tradeBonus);
+			edb.addCapabilities(Buildings.MarketCastle, Buildings.MarketCastleLevels.get(i - 1), SettlType.Castle, tradeBonus);
 		}
 
 		// Level 3  - City & Castle = BONUS 2
 		tradeBonus = Ctm.format(tradeBonusLandGateTemplate, 2);
-		edb.insertIntoBuildingCapabilities(Buildings.MarketCity, Buildings.MarketCityLevels.get(2), SettlType.City, tradeBonus);
-		edb.insertIntoBuildingCapabilities(Buildings.MarketCastle, Buildings.MarketCastleLevels.get(2), SettlType.Castle, tradeBonus);
+		edb.addCapabilities(Buildings.MarketCity, Buildings.MarketCityLevels.get(2), SettlType.City, tradeBonus);
+		edb.addCapabilities(Buildings.MarketCastle, Buildings.MarketCastleLevels.get(2), SettlType.Castle, tradeBonus);
 
 		// Level 4 & 5  - City BONUS 3
 		for (int i = 4; i <= 5; i++) {
 			tradeBonus = Ctm.format(tradeBonusLandGateTemplate, 3);
-			edb.insertIntoBuildingCapabilities(Buildings.MarketCity, Buildings.MarketCityLevels.get(i - 1), SettlType.City, tradeBonus);
+			edb.addCapabilities(Buildings.MarketCity, Buildings.MarketCityLevels.get(i - 1), SettlType.City, tradeBonus);
 		}
 
 		// ### Law Minuses - always - addded into Walls
 		lawMinus = Ctm.format(orderLawMinusTemplate, -1);
-		edb.insertIntoCityCastleWallsCapabilities(lawMinus);
+		edb.addToCityCastleWallsCapabilities(lawMinus);
 
 	}
 

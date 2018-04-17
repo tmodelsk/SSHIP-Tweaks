@@ -36,7 +36,7 @@ public class RecruitmentSlotsBoost extends Feature {
 //		exportDescrBuilding.addRecruitemntSlotBonus("castle_barracks", "barracks", "castle", 3);
 //		exportDescrBuilding.addRecruitemntSlotBonus("castle_barracks", "armoury", "castle", 4);
 
-		_ExportDescrBuilding.insertIntoCityWallsAllCapabilities("		recruitment_slots 1 requires not event_counter freeze_recr_pool 1");
+		_ExportDescrBuilding.addToCityWallsAllCapabilities("		recruitment_slots 1 requires not event_counter freeze_recr_pool 1");
 	}
 
 	protected ExportDescrBuilding _ExportDescrBuilding;

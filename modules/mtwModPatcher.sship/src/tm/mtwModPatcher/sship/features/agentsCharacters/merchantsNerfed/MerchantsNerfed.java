@@ -83,13 +83,13 @@ public class MerchantsNerfed extends Feature {
 
 					String limitLine = "agent_limit merchant " + bl.Limit;
 					if(bl.Requires != null && !bl.Requires.isEmpty()) limitLine += " requires " + bl.Requires;
-					edb.insertIntoBuildingCapabilities(bLevel, limitLine);
+					edb.addCapabilities(bLevel, limitLine);
 				}
 			}
 		}
 	}
 	private void ensureAgentReruitmentExists(BuildingLevel buildingLevel, String require) {
-		val range = edb.getBuildingCapabilitiesStartEnd(buildingLevel);
+		val range = edb.getCapabilitiesStartEnd(buildingLevel);
 		val regex = Pattern.compile("^\\s*agent\\s+merchant\\s");
 
 		val index = edb.getLines().findFirstRegexLine(regex, range);
@@ -100,7 +100,7 @@ public class MerchantsNerfed extends Feature {
 			if(require == null) require = "";
 			else require = " and " + require;
 			for (val line : lines) {
-				edb.insertIntoBuildingCapabilities(buildingLevel, line + require);
+				edb.addCapabilities(buildingLevel, line + require);
 			}
 		}
 	}

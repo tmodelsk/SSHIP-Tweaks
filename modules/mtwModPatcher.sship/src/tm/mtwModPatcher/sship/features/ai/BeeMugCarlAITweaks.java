@@ -40,8 +40,8 @@ public class BeeMugCarlAITweaks extends Feature {
 		descrCampaignDb.setAttribute("/root/revolt/ai_revolt_modifier", 0.0001);    // org : 0.7
 
 		// ## BOOST Core Buildins For AI ##
-		exportDescrBuilding.insertIntoCityCastleWallsCapabilities("construction_cost_bonus_stone bonus 33 requires not event_counter is_the_player 1");
-		exportDescrBuilding.insertIntoCityCastleWallsCapabilities("construction_cost_bonus_wooden bonus 33 requires not event_counter is_the_player 1");
+		exportDescrBuilding.addToCityCastleWallsCapabilities("construction_cost_bonus_stone bonus 33 requires not event_counter is_the_player 1");
+		exportDescrBuilding.addToCityCastleWallsCapabilities("construction_cost_bonus_wooden bonus 33 requires not event_counter is_the_player 1");
 
 		// ### Add AI Hidden TRAITS - BOOSTS AI ####
 		addTraitsForAIBoost();
@@ -154,38 +154,38 @@ public class BeeMugCarlAITweaks extends Feature {
 		int recrBonus = 1;
 
 		// # Walls #
-		exportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_pallisade", "city", "       recruitment_slots bonus " + recrBonus + requires);
+		exportDescrBuilding.addCapabilities("core_building", "wooden_pallisade", "city", "       recruitment_slots bonus " + recrBonus + requires);
 		//recrBonus++;
 
-		exportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_wall", "city", "       recruitment_slots bonus " + recrBonus + requires);
+		exportDescrBuilding.addCapabilities("core_building", "wooden_wall", "city", "       recruitment_slots bonus " + recrBonus + requires);
 		recrBonus++;
 
-		exportDescrBuilding.insertIntoBuildingCapabilities("core_building", "stone_wall", "city", "       recruitment_slots bonus " + recrBonus + requires);
+		exportDescrBuilding.addCapabilities("core_building", "stone_wall", "city", "       recruitment_slots bonus " + recrBonus + requires);
 		//recrBonus++;
 
-		exportDescrBuilding.insertIntoBuildingCapabilities("core_building", "large_stone_wall", "city", "       recruitment_slots bonus " + recrBonus + requires);
+		exportDescrBuilding.addCapabilities("core_building", "large_stone_wall", "city", "       recruitment_slots bonus " + recrBonus + requires);
 		//recrBonus++;
 
-		exportDescrBuilding.insertIntoBuildingCapabilities("core_building", "huge_stone_wall", "city", "       recruitment_slots bonus " + recrBonus + requires);
+		exportDescrBuilding.addCapabilities("core_building", "huge_stone_wall", "city", "       recruitment_slots bonus " + recrBonus + requires);
 		//recrBonus++;
 
 		// ### CASTLES ###
 		// # Walls # - building core_castle_building
 		// levels motte_and_bailey wooden_castle castle fortress citadel
 		recrBonus = 1;
-		exportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "motte_and_bailey", "castle", "       recruitment_slots bonus " + recrBonus + requires);
+		exportDescrBuilding.addCapabilities("core_castle_building", "motte_and_bailey", "castle", "       recruitment_slots bonus " + recrBonus + requires);
 		recrBonus++;
 
-		exportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "wooden_castle", "castle", "       recruitment_slots bonus " + recrBonus + requires);
+		exportDescrBuilding.addCapabilities("core_castle_building", "wooden_castle", "castle", "       recruitment_slots bonus " + recrBonus + requires);
 		//recrBonus++;
 
-		exportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "castle", "castle", "       recruitment_slots bonus " + recrBonus + requires);
+		exportDescrBuilding.addCapabilities("core_castle_building", "castle", "castle", "       recruitment_slots bonus " + recrBonus + requires);
 		//recrBonus++;
 
-		exportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "fortress", "castle", "       recruitment_slots bonus " + recrBonus + requires);
+		exportDescrBuilding.addCapabilities("core_castle_building", "fortress", "castle", "       recruitment_slots bonus " + recrBonus + requires);
 		//recrBonus++;
 
-		exportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "citadel", "castle", "       recruitment_slots bonus " + recrBonus + requires);
+		exportDescrBuilding.addCapabilities("core_castle_building", "citadel", "castle", "       recruitment_slots bonus " + recrBonus + requires);
 		//recrBonus++;
 	}
 

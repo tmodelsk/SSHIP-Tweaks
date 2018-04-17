@@ -65,24 +65,24 @@ public class AlmughavarsReworked {
 		val reqLow = "factions { "+ FactionsDefs.toCsv(otherChristianAndSlaveFactions) +" }" + requireSuffix;
 
 		val building = new BuildingLevel(BarracksCastle, BarracksCastleLevels, SettlType.Castle);
-		edb.insertRecruitmentBuildingCapabilities(building, ALMUGHAVARS, 1, R8,1, 0 , reqHigh);
-		edb.insertRecruitmentBuildingCapabilities(building, ALMUGHAVARS, 0, R10,1, 0 , reqLow);
+		edb.addRecuitment(building, ALMUGHAVARS, 1, R8,1, 0 , reqHigh);
+		edb.addRecuitment(building, ALMUGHAVARS, 0, R10,1, 0 , reqLow);
 
 		building.nextLevel();
-		edb.insertRecruitmentBuildingCapabilities(building, ALMUGHAVARS, 1, R7,2, 0 , reqHigh);
-		edb.insertRecruitmentBuildingCapabilities(building, ALMUGHAVARS, 0, R9,1, 0 , reqLow);
+		edb.addRecuitment(building, ALMUGHAVARS, 1, R7,2, 0 , reqHigh);
+		edb.addRecuitment(building, ALMUGHAVARS, 0, R9,1, 0 , reqLow);
 
 		building.nextLevel();
-		edb.insertRecruitmentBuildingCapabilities(building, ALMUGHAVARS, 2, R6,3, 1 , reqHigh);
-		edb.insertRecruitmentBuildingCapabilities(building, ALMUGHAVARS, 1, R8,2, 0 , reqLow);
+		edb.addRecuitment(building, ALMUGHAVARS, 2, R6,3, 1 , reqHigh);
+		edb.addRecuitment(building, ALMUGHAVARS, 1, R8,2, 0 , reqLow);
 
 		building.nextLevel();
-		edb.insertRecruitmentBuildingCapabilities(building, ALMUGHAVARS, 2, R5,4, 2 , reqHigh);
-		edb.insertRecruitmentBuildingCapabilities(building, ALMUGHAVARS, 1, R7,3, 1 , reqLow);
+		edb.addRecuitment(building, ALMUGHAVARS, 2, R5,4, 2 , reqHigh);
+		edb.addRecuitment(building, ALMUGHAVARS, 1, R7,3, 1 , reqLow);
 
 		building.nextLevel();
-		edb.insertRecruitmentBuildingCapabilities(building, ALMUGHAVARS, 3, R4,5, 2 , reqHigh);
-		edb.insertRecruitmentBuildingCapabilities(building, ALMUGHAVARS, 1, R6,3, 1 , reqLow);
+		edb.addRecuitment(building, ALMUGHAVARS, 3, R4,5, 2 , reqHigh);
+		edb.addRecuitment(building, ALMUGHAVARS, 1, R6,3, 1 , reqLow);
 	}
 
 	private void mercenaryPools() {

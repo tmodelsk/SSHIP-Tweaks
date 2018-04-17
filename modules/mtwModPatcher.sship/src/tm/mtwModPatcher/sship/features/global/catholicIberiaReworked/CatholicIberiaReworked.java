@@ -85,19 +85,19 @@ public class CatholicIberiaReworked extends Feature {
 		val reqLow = "factions { jerusalem, pisa, venice, papal_states, hre, france, }" + requireHr;
 
 		val building = new BuildingLevel(MissileCastle, levels.get(1), SettlType.Castle);
-		edb.insertRecruitmentBuildingCapabilities(building, unit, 1, 0.25, 1, 0, reqHigh);
-		edb.insertRecruitmentBuildingCapabilities(building, unit, 0, 0.17, 1, 0, reqMedium);
-		edb.insertRecruitmentBuildingCapabilities(building, unit, 0, 0.13, 1, 0, reqLow);
+		edb.addRecuitment(building, unit, 1, 0.25, 1, 0, reqHigh);
+		edb.addRecuitment(building, unit, 0, 0.17, 1, 0, reqMedium);
+		edb.addRecuitment(building, unit, 0, 0.13, 1, 0, reqLow);
 
 		building.LevelName = levels.get(2);
-		edb.insertRecruitmentBuildingCapabilities(building, unit, 1, 0.34, 2, 0, reqHigh);
-		edb.insertRecruitmentBuildingCapabilities(building, unit, 1, 0.25, 2, 0, reqMedium);
-		edb.insertRecruitmentBuildingCapabilities(building, unit, 0, 0.17, 1, 0, reqLow);
+		edb.addRecuitment(building, unit, 1, 0.34, 2, 0, reqHigh);
+		edb.addRecuitment(building, unit, 1, 0.25, 2, 0, reqMedium);
+		edb.addRecuitment(building, unit, 0, 0.17, 1, 0, reqLow);
 
 		building.LevelName = levels.get(3);
-		edb.insertRecruitmentBuildingCapabilities(building, unit, 1, 0.5, 3, 0, reqHigh);
-		edb.insertRecruitmentBuildingCapabilities(building, unit, 1, 0.34, 3, 0, reqMedium);
-		edb.insertRecruitmentBuildingCapabilities(building, unit, 1, 0.25, 3, 0, reqLow);
+		edb.addRecuitment(building, unit, 1, 0.5, 3, 0, reqHigh);
+		edb.addRecuitment(building, unit, 1, 0.34, 3, 0, reqMedium);
+		edb.addRecuitment(building, unit, 1, 0.25, 3, 0, reqLow);
 	}
 	private void proffArcherRemoveAllFromIberia() {
 		// ### Remove all Prussian Archer recruitment from Iberia provinces
@@ -161,24 +161,24 @@ public class CatholicIberiaReworked extends Feature {
 		val reqLow = "factions { "+ FactionsDefs.toCsv(otherChristianAndSlaveFactions) +" }" + requireSuffix;
 
 		val building = new BuildingLevel(StablesCastle , StablesCastleLevels , SettlType.Castle);
-		edb.insertRecruitmentBuildingCapabilities(building , cabVillanos , 1, R11, 1, 0, reqHigh);
-		edb.insertRecruitmentBuildingCapabilities(building , cabVillanos , 0, R13, 1, 0, reqLow);
+		edb.addRecuitment(building , cabVillanos , 1, R11, 1, 0, reqHigh);
+		edb.addRecuitment(building , cabVillanos , 0, R13, 1, 0, reqLow);
 
 		building.nextLevel();
-		edb.insertRecruitmentBuildingCapabilities(building , cabVillanos , 1, R10, 1, 0, reqHigh);
-		edb.insertRecruitmentBuildingCapabilities(building , cabVillanos , 0, R12, 1, 0, reqLow);
+		edb.addRecuitment(building , cabVillanos , 1, R10, 1, 0, reqHigh);
+		edb.addRecuitment(building , cabVillanos , 0, R12, 1, 0, reqLow);
 
 		building.nextLevel();
-		edb.insertRecruitmentBuildingCapabilities(building , cabVillanos , 1, R9, 2, 1, reqHigh);
-		edb.insertRecruitmentBuildingCapabilities(building , cabVillanos , 0, R11, 1, 0, reqLow);
+		edb.addRecuitment(building , cabVillanos , 1, R9, 2, 1, reqHigh);
+		edb.addRecuitment(building , cabVillanos , 0, R11, 1, 0, reqLow);
 
 		building.nextLevel();
-		edb.insertRecruitmentBuildingCapabilities(building , cabVillanos , 1, R8, 2, 1, reqHigh);
-		edb.insertRecruitmentBuildingCapabilities(building , cabVillanos , 1, R10, 2, 0, reqLow);
+		edb.addRecuitment(building , cabVillanos , 1, R8, 2, 1, reqHigh);
+		edb.addRecuitment(building , cabVillanos , 1, R10, 2, 0, reqLow);
 
 		building.nextLevel();
-		edb.insertRecruitmentBuildingCapabilities(building , cabVillanos , 2, R7, 3, 2, reqHigh);
-		edb.insertRecruitmentBuildingCapabilities(building , cabVillanos , 1, R9, 2, 1, reqLow);
+		edb.addRecuitment(building , cabVillanos , 2, R7, 3, 2, reqHigh);
+		edb.addRecuitment(building , cabVillanos , 1, R9, 2, 1, reqLow);
 	}
 	private void removeAlforrats() {
 		edb.removeUnitRecruitment(ALFORRATS);

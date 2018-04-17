@@ -94,15 +94,15 @@ public class CatholicFactionsBoost extends Feature {
 		String attribStr = "        religion_level bonus ";
 
 		// # City # : temple_catholic : levels small_church church abbey cathedral huge_cathedral
-		//edb.insertIntoBuildingCapabilities("temple_catholic", "small_church", "city", attribStr + 0);
-		edb.insertIntoBuildingCapabilities(TempleCatholicCity, "church", CityType, attribStr + templeConversionRateBonus);
-		edb.insertIntoBuildingCapabilities(TempleCatholicCity, "abbey", CityType, attribStr + templeConversionRateBonus);
-		edb.insertIntoBuildingCapabilities(TempleCatholicCity, "cathedral", CityType, attribStr + templeConversionRateBonus +1);
-		edb.insertIntoBuildingCapabilities(TempleCatholicCity, "huge_cathedral", CityType, attribStr + templeConversionRateBonus +1);
+		//edb.addCapabilities("temple_catholic", "small_church", "city", attribStr + 0);
+		edb.addCapabilities(TempleCatholicCity, "church", CityType, attribStr + templeConversionRateBonus);
+		edb.addCapabilities(TempleCatholicCity, "abbey", CityType, attribStr + templeConversionRateBonus);
+		edb.addCapabilities(TempleCatholicCity, "cathedral", CityType, attribStr + templeConversionRateBonus +1);
+		edb.addCapabilities(TempleCatholicCity, "huge_cathedral", CityType, attribStr + templeConversionRateBonus +1);
 
 		// # Castle # : temple_catholic_castle : levels small_chapel chapel
-		edb.insertIntoBuildingCapabilities(TempleCatholicCastle, "small_chapel", CastleType, attribStr + templeConversionRateBonus);
-		edb.insertIntoBuildingCapabilities(TempleCatholicCastle, "chapel", CastleType, attribStr + templeConversionRateBonus +1);
+		edb.addCapabilities(TempleCatholicCastle, "small_chapel", CastleType, attribStr + templeConversionRateBonus);
+		edb.addCapabilities(TempleCatholicCastle, "chapel", CastleType, attribStr + templeConversionRateBonus +1);
 	}
 
 	@Override

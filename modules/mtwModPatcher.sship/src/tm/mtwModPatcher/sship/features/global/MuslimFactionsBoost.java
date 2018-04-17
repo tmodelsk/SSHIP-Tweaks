@@ -79,14 +79,14 @@ public class MuslimFactionsBoost extends Feature {
 		String attribStr = "        religion_level bonus "+templeConversionRateBonus;
 
 		// # City #
-		exportDescrBuilding.insertIntoBuildingCapabilities("temple_muslim", "small_masjid", "city", attribStr);
-		exportDescrBuilding.insertIntoBuildingCapabilities("temple_muslim", "masjid", "city", attribStr);
-		exportDescrBuilding.insertIntoBuildingCapabilities("temple_muslim", "minareted_masjid", "city", attribStr);
-		exportDescrBuilding.insertIntoBuildingCapabilities("temple_muslim", "jama", "city", attribStr);
-		exportDescrBuilding.insertIntoBuildingCapabilities("temple_muslim", "great_jama", "city", attribStr);
+		exportDescrBuilding.addCapabilities("temple_muslim", "small_masjid", "city", attribStr);
+		exportDescrBuilding.addCapabilities("temple_muslim", "masjid", "city", attribStr);
+		exportDescrBuilding.addCapabilities("temple_muslim", "minareted_masjid", "city", attribStr);
+		exportDescrBuilding.addCapabilities("temple_muslim", "jama", "city", attribStr);
+		exportDescrBuilding.addCapabilities("temple_muslim", "great_jama", "city", attribStr);
 		// # Castle #
-		exportDescrBuilding.insertIntoBuildingCapabilities("temple_muslim_castle", "c_small_masjid", "castle", attribStr);
-		exportDescrBuilding.insertIntoBuildingCapabilities("temple_muslim_castle", "c_masjid", "castle", attribStr);
+		exportDescrBuilding.addCapabilities("temple_muslim_castle", "c_small_masjid", "castle", attribStr);
+		exportDescrBuilding.addCapabilities("temple_muslim_castle", "c_masjid", "castle", attribStr);
 	}
 
 	private void jihadRequirement() throws XPathExpressionException {

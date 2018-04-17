@@ -3,10 +3,10 @@ package tm.mtwModPatcher.sship.features.armyUnits;
 import lombok.val;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LineNotFoundEx;
-import tm.mtwModPatcher.lib.managers.FactionsDefs;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
 import tm.mtwModPatcher.lib.data.unitModels.BattleModels;
+import tm.mtwModPatcher.lib.managers.FactionsDefs;
 
 import java.util.UUID;
 
@@ -55,7 +55,7 @@ public class TrebuchetEarlyAdoption extends Feature {
 		orgLine = lines.getLine(index);
 		lines.replaceLine(index, orgLine + buildingRequires);
 
-		exportDescrBuilding.insertRecruitmentBuildingCapabilities("castle_siege", "c_siege_works" ,"castle",
+		exportDescrBuilding.addRecuitment("castle_siege", "c_siege_works" ,"castle",
 				trebuchetName,1,0.067, 1, 0 , unitRequires);
 	}
 

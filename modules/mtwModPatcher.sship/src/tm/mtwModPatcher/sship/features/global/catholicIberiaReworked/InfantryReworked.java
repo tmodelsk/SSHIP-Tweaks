@@ -60,7 +60,7 @@ public class InfantryReworked {
 		edb.addToUnitRecruitment(SERGEANT_SPEARMEN, PORTUGAL, BarracksCastle, FRANCE);
 
 		// add Spearmen recruitment for 1st level barracks only for Aragon and in aragon, replenish 50% as in 2nd level.
-		edb.insertRecruitmentBuildingCapabilities(BarracksCastle, BarracksCastleLevels.get(0), CastleType, SERGEANT_SPEARMEN,
+		edb.addRecuitment(BarracksCastle, BarracksCastleLevels.get(0), CastleType, SERGEANT_SPEARMEN,
 				1, 0.08,1, 0 , "factions { aragon, } and not event_counter FULL_PLATE_ARMOR 1 and hidden_resource aragon");
 
 		// battleModels : Spearmen
@@ -106,12 +106,12 @@ public class InfantryReworked {
 		val condSpainPortugalEventNotRegions = fSpainPortugal + condEventNotRegions;
 
 		val lightMen = Units.LIGHT_MEN_AT_ARMS;
-		edb.insertRecruitmentBuildingCapabilities(barracks, lightMen, 1,0.13,1, 0, condAragonEventRegions);
-		edb.insertRecruitmentBuildingCapabilities(barracks, lightMen, 1,0.085,1, 0, condAragonEventNotRegions);
+		edb.addRecuitment(barracks, lightMen, 1,0.13,1, 0, condAragonEventRegions);
+		edb.addRecuitment(barracks, lightMen, 1,0.085,1, 0, condAragonEventNotRegions);
 
 		val lightSword = Units.LIGHT_SWORDSMEN;
-		edb.insertRecruitmentBuildingCapabilities(barracks, lightSword, 1,0.13,1, 0, condSpainPortugalEventRegions);
-		edb.insertRecruitmentBuildingCapabilities(barracks, lightSword, 1,0.085,1, 0, condSpainPortugalEventNotRegions);
+		edb.addRecuitment(barracks, lightSword, 1,0.13,1, 0, condSpainPortugalEventRegions);
+		edb.addRecuitment(barracks, lightSword, 1,0.085,1, 0, condSpainPortugalEventNotRegions);
 	}
 
 	private void removeSpearJavelinPeasantRecruitment() {

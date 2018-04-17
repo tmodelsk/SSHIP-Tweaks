@@ -32,8 +32,8 @@ public class BuildingTweaks extends Feature {
 		edb.setBuildingSettlementRequirement("castle_gallows", "c_gallows", null, "village");
 
 		// orphan Hospital : + Health Bonus
-		edb.insertIntoBuildingCapabilities("orphan", "foundling_hospital", "city", "				population_health_bonus bonus 1");
-		edb.insertIntoBuildingCapabilities("orphan", "orphanage", "city", "				population_health_bonus bonus 2");
+		edb.addCapabilities("orphan", "foundling_hospital", "city", "				population_health_bonus bonus 1");
+		edb.addCapabilities("orphan", "orphanage", "city", "				population_health_bonus bonus 2");
 
 		// PORT earlier:
 		edb.setBuildingSettlementRequirement(Buildings.PortCity, Buildings.PortCityLevels.get(0), SettlType.City, SettlementLevel.L2_Town);
@@ -44,9 +44,9 @@ public class BuildingTweaks extends Feature {
 		edb.setBuildingSettlementRequirement(Buildings.SeaTradeCastle, Buildings.SeaTradeCastleLevels.get(0), SettlType.Castle, SettlementLevel.L2_Town);
 
 		// city_hall :  levels town_hall council_chambers city_hall mayors_palace
-		//exportDescrBuilding.insertIntoBuildingCapabilities("city_hall", "council_chambers" , "city", "       recruitment_slots bonus 1  requires not event_counter freeze_recr_pool 1");
-		//exportDescrBuilding.insertIntoBuildingCapabilities("city_hall", "city_hall" , "city", "       recruitment_slots bonus 1  requires not event_counter freeze_recr_pool 1");
-		//exportDescrBuilding.insertIntoBuildingCapabilities("city_hall", "mayors_palace" , "city", "       recruitment_slots bonus 1  requires not event_counter freeze_recr_pool 1");
+		//exportDescrBuilding.addCapabilities("city_hall", "council_chambers" , "city", "       recruitment_slots bonus 1  requires not event_counter freeze_recr_pool 1");
+		//exportDescrBuilding.addCapabilities("city_hall", "city_hall" , "city", "       recruitment_slots bonus 1  requires not event_counter freeze_recr_pool 1");
+		//exportDescrBuilding.addCapabilities("city_hall", "mayors_palace" , "city", "       recruitment_slots bonus 1  requires not event_counter freeze_recr_pool 1");
 	}
 
 	private ExportDescrBuilding edb;

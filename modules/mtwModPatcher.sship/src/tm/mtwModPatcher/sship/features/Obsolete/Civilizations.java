@@ -82,47 +82,47 @@ public class Civilizations extends Feature {
 		String orthodoxFactions = "factions { " + FactionsDefs.ortodoxFactionsCsv() + " }";
 		// # 0
 		// farming_level 1 requires building_present_min_level core_building wooden_pallisade
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("farms" , "farms" , "        farming_level 1");
+		_ExportDescrBuilding.addCapabilities("farms" , "farms" , "        farming_level 1");
 
 		// # 1
 		//farming_level 2 requires building_present_min_level core_building wooden_pallisade
 		//farming_level 1 requires building_present_min_level core_castle_building wooden_castle
 
 		// Catholic +1
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("farms" , "farms\\+1" , "        farming_level 3 requires building_present_min_level core_building wooden_pallisade and "+catholicFactions);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("farms" , "farms\\+1" , "        farming_level 2 requires building_present_min_level core_castle_building wooden_castle and "+catholicFactions);
+		_ExportDescrBuilding.addCapabilities("farms" , "farms\\+1" , "        farming_level 3 requires building_present_min_level core_building wooden_pallisade and "+catholicFactions);
+		_ExportDescrBuilding.addCapabilities("farms" , "farms\\+1" , "        farming_level 2 requires building_present_min_level core_castle_building wooden_castle and "+catholicFactions);
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("farms" , "farms\\+2" , "        farming_level 2 requires building_present_min_level core_building wooden_pallisade and "+orthodoxFactions);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("farms" , "farms\\+1" , "        farming_level 2 requires building_present_min_level core_castle_building wooden_castle and "+orthodoxFactions);
+		_ExportDescrBuilding.addCapabilities("farms" , "farms\\+2" , "        farming_level 2 requires building_present_min_level core_building wooden_pallisade and "+orthodoxFactions);
+		_ExportDescrBuilding.addCapabilities("farms" , "farms\\+1" , "        farming_level 2 requires building_present_min_level core_castle_building wooden_castle and "+orthodoxFactions);
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("farms" , "farms\\+1" , "        farming_level 1 requires "+islamFactions);
+		_ExportDescrBuilding.addCapabilities("farms" , "farms\\+1" , "        farming_level 1 requires "+islamFactions);
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("farms" , "farms\\+1" , "        farming_level 1 requires building_present_min_level core_building wooden_pallisade and factions { mongols, "+FactionsDefs.turanianFactionsCsv()+" }");
+		_ExportDescrBuilding.addCapabilities("farms" , "farms\\+1" , "        farming_level 1 requires building_present_min_level core_building wooden_pallisade and factions { mongols, "+FactionsDefs.turanianFactionsCsv()+" }");
 
 
 		// # 2
 		//farming_level 3 requires factions { northern_european, moors, egypt, kwarezm, turks, rum, milan, eastern_european, greek, southern_european, }
 		//farming_level 2 requires factions { mongols, }
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("farms" , "farms\\+2" , "        farming_level 4 requires "+catholicFactions);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("farms" , "farms\\+2" , "        farming_level 3 requires "+orthodoxFactions);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("farms" , "farms\\+2" , "        farming_level 2 requires "+islamFactions);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("farms" , "farms\\+2" , "        farming_level 2 requires factions { mongols, }");
+		_ExportDescrBuilding.addCapabilities("farms" , "farms\\+2" , "        farming_level 4 requires "+catholicFactions);
+		_ExportDescrBuilding.addCapabilities("farms" , "farms\\+2" , "        farming_level 3 requires "+orthodoxFactions);
+		_ExportDescrBuilding.addCapabilities("farms" , "farms\\+2" , "        farming_level 2 requires "+islamFactions);
+		_ExportDescrBuilding.addCapabilities("farms" , "farms\\+2" , "        farming_level 2 requires factions { mongols, }");
 
 		// # 3
 		//farming_level 8 requires factions { northern_european, moors, egypt, kwarezm, turks, rum, milan, eastern_european, greek, southern_european, }
 		//farming_level 4 requires factions { mongols, }
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("farms" , "farms\\+3" , "        farming_level 9 requires "+catholicFactions);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("farms" , "farms\\+3" , "        farming_level 8 requires "+orthodoxFactions);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("farms" , "farms\\+3" , "        farming_level 7 requires "+islamFactions);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("farms" , "farms\\+3" , "        farming_level 4 requires factions { mongols, }");
+		_ExportDescrBuilding.addCapabilities("farms" , "farms\\+3" , "        farming_level 9 requires "+catholicFactions);
+		_ExportDescrBuilding.addCapabilities("farms" , "farms\\+3" , "        farming_level 8 requires "+orthodoxFactions);
+		_ExportDescrBuilding.addCapabilities("farms" , "farms\\+3" , "        farming_level 7 requires "+islamFactions);
+		_ExportDescrBuilding.addCapabilities("farms" , "farms\\+3" , "        farming_level 4 requires factions { mongols, }");
 
 		// # 4
 		//farming_level 12 requires factions { northern_european, moors, egypt, kwarezm, turks, rum, milan, eastern_european, greek, southern_european, }
 		//farming_level 6 requires factions { mongols, }
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("farms" , "farms\\+4" , "city" , "        farming_level 13 requires "+catholicFactions);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("farms" , "farms\\+4" , "city" , "        farming_level 12 requires "+orthodoxFactions);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("farms" , "farms\\+4" , "city" , "        farming_level 10 requires "+islamFactions);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("farms" , "farms\\+4" , "city" , "        farming_level 6 requires factions { mongols, }");
+		_ExportDescrBuilding.addCapabilities("farms" , "farms\\+4" , "city" , "        farming_level 13 requires "+catholicFactions);
+		_ExportDescrBuilding.addCapabilities("farms" , "farms\\+4" , "city" , "        farming_level 12 requires "+orthodoxFactions);
+		_ExportDescrBuilding.addCapabilities("farms" , "farms\\+4" , "city" , "        farming_level 10 requires "+islamFactions);
+		_ExportDescrBuilding.addCapabilities("farms" , "farms\\+4" , "city" , "        farming_level 6 requires factions { mongols, }");
 	}
 
 	protected void RomanCatholic() throws PatcherLibBaseEx {
@@ -141,14 +141,14 @@ public class Civilizations extends Feature {
 		String requires = " requires factions { "+ FactionsDefs.christianFactionsCsv()+" }";
 
 		// #### CONSTRUCTION COSTS ######
-		_ExportDescrBuilding.insertIntoCityCastleWallsCapabilities("construction_cost_bonus_other bonus 5"+requires);
-		_ExportDescrBuilding.insertIntoCityCastleWallsCapabilities("construction_cost_bonus_religious bonus 5"+requires);
-		_ExportDescrBuilding.insertIntoCityCastleWallsCapabilities("construction_cost_bonus_defensive bonus 5"+requires);
+		_ExportDescrBuilding.addToCityCastleWallsCapabilities("construction_cost_bonus_other bonus 5"+requires);
+		_ExportDescrBuilding.addToCityCastleWallsCapabilities("construction_cost_bonus_religious bonus 5"+requires);
+		_ExportDescrBuilding.addToCityCastleWallsCapabilities("construction_cost_bonus_defensive bonus 5"+requires);
 
 		// #### CONSTRUCTION TIMES ######
-		_ExportDescrBuilding.insertIntoCityCastleWallsCapabilities("construction_time_bonus_other bonus 21"+requires);
-		_ExportDescrBuilding.insertIntoCityCastleWallsCapabilities("construction_time_bonus_religious bonus 21"+requires);
-		_ExportDescrBuilding.insertIntoCityCastleWallsCapabilities("construction_time_bonus_defensive bonus 21"+requires);
+		_ExportDescrBuilding.addToCityCastleWallsCapabilities("construction_time_bonus_other bonus 21"+requires);
+		_ExportDescrBuilding.addToCityCastleWallsCapabilities("construction_time_bonus_religious bonus 21"+requires);
+		_ExportDescrBuilding.addToCityCastleWallsCapabilities("construction_time_bonus_defensive bonus 21"+requires);
 
 	}
 
@@ -159,17 +159,17 @@ public class Civilizations extends Feature {
 
 		// # CITIES ### :
 		String attributeStr = "       trade_base_income_bonus bonus "+bonus;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_pallisade" , "city", attributeStr + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_wall" , "city", attributeStr + requires);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "stone_wall" , "city", attributeStr + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "large_stone_wall" , "city", attributeStr + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "huge_stone_wall" , "city", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "wooden_pallisade" , "city", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "wooden_wall" , "city", attributeStr + requires);
+		_ExportDescrBuilding.addCapabilities("core_building", "stone_wall" , "city", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "large_stone_wall" , "city", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "huge_stone_wall" , "city", attributeStr + requires );
 		// # Castles #
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "motte_and_bailey" , "castle", attributeStr + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "wooden_castle" , "castle", attributeStr  + requires);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "castle" , "castle", attributeStr + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "fortress" , "castle", attributeStr + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "citadel" , "castle", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "motte_and_bailey" , "castle", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "wooden_castle" , "castle", attributeStr  + requires);
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "castle" , "castle", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "fortress" , "castle", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "citadel" , "castle", attributeStr + requires );
 	}
 
 	// Copied to CatholicFactionsBoost
@@ -180,15 +180,15 @@ public class Civilizations extends Feature {
 		String attribStr = "        religion_level bonus ";
 
 		// # City # : temple_catholic : levels small_church church abbey cathedral huge_cathedral
-		//exportDescrBuilding.insertIntoBuildingCapabilities("temple_catholic", "small_church", "city", attribStr + 0);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("temple_catholic", "church", "city", attribStr + 1);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("temple_catholic", "abbey", "city", attribStr + 1);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("temple_catholic", "cathedral", "city", attribStr + 2);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("temple_catholic", "huge_cathedral", "city", attribStr + 2);
+		//exportDescrBuilding.addCapabilities("temple_catholic", "small_church", "city", attribStr + 0);
+		_ExportDescrBuilding.addCapabilities("temple_catholic", "church", "city", attribStr + 1);
+		_ExportDescrBuilding.addCapabilities("temple_catholic", "abbey", "city", attribStr + 1);
+		_ExportDescrBuilding.addCapabilities("temple_catholic", "cathedral", "city", attribStr + 2);
+		_ExportDescrBuilding.addCapabilities("temple_catholic", "huge_cathedral", "city", attribStr + 2);
 
 		// # Castle # : temple_catholic_castle : levels small_chapel chapel
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("temple_catholic_castle", "small_chapel", "castle", attribStr + 1);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("temple_catholic_castle", "chapel", "castle", attribStr + 2);
+		_ExportDescrBuilding.addCapabilities("temple_catholic_castle", "small_chapel", "castle", attribStr + 1);
+		_ExportDescrBuilding.addCapabilities("temple_catholic_castle", "chapel", "castle", attribStr + 2);
 	}
 
 	protected void Orthodox() throws PatcherLibBaseEx {
@@ -209,7 +209,7 @@ public class Civilizations extends Feature {
 		//OrthodoxTradeBaseBonuses(-1);
 
 		// ##### Population Growth Flat minus
-		_ExportDescrBuilding.insertIntoCityCastleWallsCapabilities("        population_growth_bonus bonus -1"+requires);
+		_ExportDescrBuilding.addToCityCastleWallsCapabilities("        population_growth_bonus bonus -1"+requires);
 
 	}
 
@@ -219,28 +219,28 @@ public class Civilizations extends Feature {
 		int bonus = 1;
 		String attributeStr = "       law_bonus bonus ";
 		// # Walls #
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_pallisade" , "city", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "wooden_pallisade" , "city", attributeStr + bonus + requires );
 		//bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_wall" , "city", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "wooden_wall" , "city", attributeStr + bonus + requires );
 		//bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "stone_wall" , "city", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "stone_wall" , "city", attributeStr + bonus + requires );
 		//bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "large_stone_wall" , "city", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "large_stone_wall" , "city", attributeStr + bonus + requires );
 		bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "huge_stone_wall" , "city", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "huge_stone_wall" , "city", attributeStr + bonus + requires );
 
 		// ### CASTLES ###
 		// # Walls # - building core_castle_building  - levels motte_and_bailey wooden_castle castle fortress citadel
 		bonus= 1;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "motte_and_bailey" , "castle", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "motte_and_bailey" , "castle", attributeStr + bonus + requires );
 		//bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "wooden_castle" , "castle", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "wooden_castle" , "castle", attributeStr + bonus + requires );
 		//bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "castle" , "castle", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "castle" , "castle", attributeStr + bonus + requires );
 		//bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "fortress" , "castle", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "fortress" , "castle", attributeStr + bonus + requires );
 		bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "citadel" , "castle", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "citadel" , "castle", attributeStr + bonus + requires );
 	}
 
 	protected void OrthodoxTradeBaseBonuses(int bonus) throws PatcherLibBaseEx {
@@ -248,17 +248,17 @@ public class Civilizations extends Feature {
 		String requires = " requires factions { "+ FactionsDefs.ortodoxFactionsCsv()+" }";
 		// # CITIES ### :
 		String attributeStr = "       trade_base_income_bonus bonus " + bonus;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_pallisade" , "city", attributeStr + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_wall" , "city", attributeStr + requires);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "stone_wall" , "city", attributeStr + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "large_stone_wall" , "city", attributeStr + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "huge_stone_wall" , "city", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "wooden_pallisade" , "city", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "wooden_wall" , "city", attributeStr + requires);
+		_ExportDescrBuilding.addCapabilities("core_building", "stone_wall" , "city", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "large_stone_wall" , "city", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "huge_stone_wall" , "city", attributeStr + requires );
 		// # Castles #
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "motte_and_bailey" , "castle", attributeStr + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "wooden_castle" , "castle", attributeStr  + requires);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "castle" , "castle", attributeStr + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "fortress" , "castle", attributeStr + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "citadel" , "castle", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "motte_and_bailey" , "castle", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "wooden_castle" , "castle", attributeStr  + requires);
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "castle" , "castle", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "fortress" , "castle", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "citadel" , "castle", attributeStr + requires );
 	}
 
 	protected void Islam() throws PatcherLibBaseEx, IOException, SAXException, InstantiationException, ParserConfigurationException, IllegalAccessException {
@@ -302,7 +302,7 @@ public class Civilizations extends Feature {
 	protected void IslamHomelandBaseTradeBoost() throws PatcherLibBaseEx {
 		String requirements = " requires factions { egypt, milan, kwarezm, } and hidden_resource egypt or hidden_resource milan or hidden_resource kwarezm or hidden_resource crusader";
 
-		_ExportDescrBuilding.insertIntoCityCastleWallsCapabilities("       trade_base_income_bonus bonus 1 " + requirements);
+		_ExportDescrBuilding.addToCityCastleWallsCapabilities("       trade_base_income_bonus bonus 1 " + requirements);
 	}
 
 	protected void IslamFundamentalismHappinessBonus() throws PatcherLibBaseEx {
@@ -315,24 +315,24 @@ public class Civilizations extends Feature {
 		String lawAtr = "       law_bonus bonus -";
 		int lawShift=0, happinesShift=2;
 		// # Walls #
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_pallisade" , "city", happinessAtr + happinessBonus +  requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_pallisade" , "city", lawAtr + (bonus + lawShift) + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "wooden_pallisade" , "city", happinessAtr + happinessBonus +  requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "wooden_pallisade" , "city", lawAtr + (bonus + lawShift) + requires );
 		happinessBonus++;
 		//bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_wall" , "city", happinessAtr + happinessBonus +  requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_wall" , "city", lawAtr + (bonus + lawShift) + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "wooden_wall" , "city", happinessAtr + happinessBonus +  requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "wooden_wall" , "city", lawAtr + (bonus + lawShift) + requires );
 		happinessBonus++;
 		//bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "stone_wall" , "city", happinessAtr + happinessBonus +  requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "stone_wall" , "city", lawAtr + (bonus + lawShift) + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "stone_wall" , "city", happinessAtr + happinessBonus +  requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "stone_wall" , "city", lawAtr + (bonus + lawShift) + requires );
 		happinessBonus++;
 		//bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "large_stone_wall" , "city", happinessAtr + happinessBonus +  requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "large_stone_wall" , "city", lawAtr + (bonus + lawShift) + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "large_stone_wall" , "city", happinessAtr + happinessBonus +  requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "large_stone_wall" , "city", lawAtr + (bonus + lawShift) + requires );
 		happinessBonus++;
 		bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "huge_stone_wall" , "city", happinessAtr + happinessBonus +  requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "huge_stone_wall" , "city", lawAtr + (bonus + lawShift) + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "huge_stone_wall" , "city", happinessAtr + happinessBonus +  requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "huge_stone_wall" , "city", lawAtr + (bonus + lawShift) + requires );
 		happinessBonus++;
 		bonus++;
 
@@ -340,24 +340,24 @@ public class Civilizations extends Feature {
 		// # Walls # - building core_castle_building  - levels motte_and_bailey wooden_castle castle fortress citadel
 		bonus=1;
 		happinessBonus=1;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "motte_and_bailey" , "castle", happinessAtr + happinessBonus +  requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "motte_and_bailey" , "castle", lawAtr + (bonus + lawShift) + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "motte_and_bailey" , "castle", happinessAtr + happinessBonus +  requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "motte_and_bailey" , "castle", lawAtr + (bonus + lawShift) + requires );
 		happinessBonus++;
 		//bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "wooden_castle" , "castle", happinessAtr + happinessBonus +  requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_castle" , "castle", lawAtr + (bonus + lawShift) + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "wooden_castle" , "castle", happinessAtr + happinessBonus +  requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "wooden_castle" , "castle", lawAtr + (bonus + lawShift) + requires );
 		happinessBonus++;
 		//bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "castle" , "castle", happinessAtr + happinessBonus +  requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "castle" , "castle", lawAtr + (bonus + lawShift) + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "castle" , "castle", happinessAtr + happinessBonus +  requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "castle" , "castle", lawAtr + (bonus + lawShift) + requires );
 		//bonus++;
 		happinessBonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "fortress" , "castle", happinessAtr + happinessBonus +  requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "fortress" , "castle", lawAtr + (bonus + lawShift) + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "fortress" , "castle", happinessAtr + happinessBonus +  requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "fortress" , "castle", lawAtr + (bonus + lawShift) + requires );
 		bonus++;
 		happinessBonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "citadel" , "castle", happinessAtr + happinessBonus +  requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "citadel" , "castle", lawAtr + (bonus + lawShift) + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "citadel" , "castle", happinessAtr + happinessBonus +  requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "citadel" , "castle", lawAtr + (bonus + lawShift) + requires );
 		bonus++;
 		happinessBonus++;
 	}
@@ -370,17 +370,17 @@ public class Civilizations extends Feature {
 
 		// # CITIES ### :
 		attributeStr = "       trade_base_income_bonus bonus "+bonus;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_pallisade" , "city", attributeStr + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_wall" , "city", attributeStr + requires);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "stone_wall" , "city", attributeStr + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "large_stone_wall" , "city", attributeStr + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "huge_stone_wall" , "city", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "wooden_pallisade" , "city", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "wooden_wall" , "city", attributeStr + requires);
+		_ExportDescrBuilding.addCapabilities("core_building", "stone_wall" , "city", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "large_stone_wall" , "city", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "huge_stone_wall" , "city", attributeStr + requires );
 		// # Castles #
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "motte_and_bailey" , "castle", attributeStr + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "wooden_castle" , "castle", attributeStr  + requires);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "castle" , "castle", attributeStr + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "fortress" , "castle", attributeStr + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "citadel" , "castle", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "motte_and_bailey" , "castle", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "wooden_castle" , "castle", attributeStr  + requires);
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "castle" , "castle", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "fortress" , "castle", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "citadel" , "castle", attributeStr + requires );
 	}
 
 	protected void IslamBuildingsTradeMinuses() throws PatcherLibBaseEx {
@@ -391,27 +391,27 @@ public class Civilizations extends Feature {
 
 		// # MARKETS
 		// corn_exchange market fairground great_market merchants_quarter
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("market", "corn_exchange" , "city", "       trade_base_income_bonus bonus -1" + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("market", "market" , "city", "       trade_base_income_bonus bonus -1" + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("market", "fairground" , "city", "       trade_base_income_bonus bonus -1" + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("market", "great_market" , "city", "       trade_base_income_bonus bonus -1" + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("market", "merchants_quarter" , "city", "       trade_base_income_bonus bonus -1" + requires );
+		_ExportDescrBuilding.addCapabilities("market", "corn_exchange" , "city", "       trade_base_income_bonus bonus -1" + requires );
+		_ExportDescrBuilding.addCapabilities("market", "market" , "city", "       trade_base_income_bonus bonus -1" + requires );
+		_ExportDescrBuilding.addCapabilities("market", "fairground" , "city", "       trade_base_income_bonus bonus -1" + requires );
+		_ExportDescrBuilding.addCapabilities("market", "great_market" , "city", "       trade_base_income_bonus bonus -1" + requires );
+		_ExportDescrBuilding.addCapabilities("market", "merchants_quarter" , "city", "       trade_base_income_bonus bonus -1" + requires );
 		// corn_exchange market fairground
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("market_castle", "market" , "castle", "       trade_base_income_bonus bonus -1" + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("market_castle", "fairground" , "castle", "       trade_base_income_bonus bonus -1" + requires );
+		_ExportDescrBuilding.addCapabilities("market_castle", "market" , "castle", "       trade_base_income_bonus bonus -1" + requires );
+		_ExportDescrBuilding.addCapabilities("market_castle", "fairground" , "castle", "       trade_base_income_bonus bonus -1" + requires );
 
 		// # PORTS
 		// port shipwright dockyard naval_drydock
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("port", "shipwright" , "city", "       trade_base_income_bonus bonus -1" + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("port", "dockyard" , "city", "       trade_base_income_bonus bonus -1" + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("port", "naval_drydock" , "city", "       trade_base_income_bonus bonus -1" + requires );
+		_ExportDescrBuilding.addCapabilities("port", "shipwright" , "city", "       trade_base_income_bonus bonus -1" + requires );
+		_ExportDescrBuilding.addCapabilities("port", "dockyard" , "city", "       trade_base_income_bonus bonus -1" + requires );
+		_ExportDescrBuilding.addCapabilities("port", "naval_drydock" , "city", "       trade_base_income_bonus bonus -1" + requires );
 		// c_port c_shipwright c_dockyard c_naval_drydock
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("castle_port", "c_dockyard" , "castle", "       trade_base_income_bonus bonus -1" + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("castle_port", "c_naval_drydock" , "castle", "       trade_base_income_bonus bonus -1" + requires );
+		_ExportDescrBuilding.addCapabilities("castle_port", "c_dockyard" , "castle", "       trade_base_income_bonus bonus -1" + requires );
+		_ExportDescrBuilding.addCapabilities("castle_port", "c_naval_drydock" , "castle", "       trade_base_income_bonus bonus -1" + requires );
 
 		// # SEA TRADES
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("sea_trade", "warehouse" , "city", "       trade_base_income_bonus bonus -1" + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("sea_trade", "docklands" , "city", "       trade_base_income_bonus bonus -1" + requires );
+		_ExportDescrBuilding.addCapabilities("sea_trade", "warehouse" , "city", "       trade_base_income_bonus bonus -1" + requires );
+		_ExportDescrBuilding.addCapabilities("sea_trade", "docklands" , "city", "       trade_base_income_bonus bonus -1" + requires );
 	}
 	
 	protected void IslamFreeUpkeep() throws PatcherLibBaseEx {
@@ -420,17 +420,17 @@ public class Civilizations extends Feature {
 		 String requires = " requires factions { "+ FactionsDefs.islamFactionsCsv()+" }";
 
 		 // # CITIES ### : wooden_pallisade wooden_wall stone_wall large_stone_wall huge_stone_wall
-		 //exportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_pallisade" , "city", "       free_upkeep bonus "+1 + requires );
-		 //exportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_wall" , "city", "       free_upkeep bonus "+1 + requires);
-		 _ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "stone_wall" , "city", "       free_upkeep bonus "+1 + requires );
-		 _ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "large_stone_wall" , "city", "       free_upkeep bonus "+1 + requires );
-		 _ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "huge_stone_wall" , "city", "       free_upkeep bonus "+1 + requires );
+		 //exportDescrBuilding.addCapabilities("core_building", "wooden_pallisade" , "city", "       free_upkeep bonus "+1 + requires );
+		 //exportDescrBuilding.addCapabilities("core_building", "wooden_wall" , "city", "       free_upkeep bonus "+1 + requires);
+		 _ExportDescrBuilding.addCapabilities("core_building", "stone_wall" , "city", "       free_upkeep bonus "+1 + requires );
+		 _ExportDescrBuilding.addCapabilities("core_building", "large_stone_wall" , "city", "       free_upkeep bonus "+1 + requires );
+		 _ExportDescrBuilding.addCapabilities("core_building", "huge_stone_wall" , "city", "       free_upkeep bonus "+1 + requires );
 		 // # Castles #
-		 //exportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "motte_and_bailey" , "castle", "       free_upkeep bonus "+1 + requires );
-		 //exportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "wooden_castle" , "castle", "       free_upkeep bonus "+1  + requires);
-		 _ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "castle" , "castle", "       free_upkeep bonus "+1 + requires );
-		 _ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "fortress" , "castle", "       free_upkeep bonus "+1 + requires );
-		 _ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "citadel" , "castle", "       free_upkeep bonus "+1 + requires );
+		 //exportDescrBuilding.addCapabilities("core_castle_building", "motte_and_bailey" , "castle", "       free_upkeep bonus "+1 + requires );
+		 //exportDescrBuilding.addCapabilities("core_castle_building", "wooden_castle" , "castle", "       free_upkeep bonus "+1  + requires);
+		 _ExportDescrBuilding.addCapabilities("core_castle_building", "castle" , "castle", "       free_upkeep bonus "+1 + requires );
+		 _ExportDescrBuilding.addCapabilities("core_castle_building", "fortress" , "castle", "       free_upkeep bonus "+1 + requires );
+		 _ExportDescrBuilding.addCapabilities("core_castle_building", "citadel" , "castle", "       free_upkeep bonus "+1 + requires );
 	}
 
 	protected void IslamRecruitmentSlots() throws PatcherLibBaseEx {
@@ -454,14 +454,14 @@ public class Civilizations extends Feature {
 		String attribStr = "        religion_level bonus ";
 
 		// # City #
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("temple_muslim", "small_masjid", "city", attribStr + 1);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("temple_muslim", "masjid", "city", attribStr + 1);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("temple_muslim", "minareted_masjid", "city", attribStr + 1);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("temple_muslim", "jama", "city", attribStr + 1);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("temple_muslim", "great_jama", "city", attribStr + 1);
+		_ExportDescrBuilding.addCapabilities("temple_muslim", "small_masjid", "city", attribStr + 1);
+		_ExportDescrBuilding.addCapabilities("temple_muslim", "masjid", "city", attribStr + 1);
+		_ExportDescrBuilding.addCapabilities("temple_muslim", "minareted_masjid", "city", attribStr + 1);
+		_ExportDescrBuilding.addCapabilities("temple_muslim", "jama", "city", attribStr + 1);
+		_ExportDescrBuilding.addCapabilities("temple_muslim", "great_jama", "city", attribStr + 1);
 		// # Castle #
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("temple_muslim_castle", "c_small_masjid", "castle", attribStr + 1);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("temple_muslim_castle", "c_masjid", "castle", attribStr + 1);
+		_ExportDescrBuilding.addCapabilities("temple_muslim_castle", "c_small_masjid", "castle", attribStr + 1);
+		_ExportDescrBuilding.addCapabilities("temple_muslim_castle", "c_masjid", "castle", attribStr + 1);
 	}
 
 	protected void islamMilitaryBuildingsNoPenalties() throws PatcherLibBaseEx {
@@ -621,58 +621,58 @@ public class Civilizations extends Feature {
 		int bonus = 3;
 		String attributeStr = "       happiness_bonus bonus ";
 		// # Walls #
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_pallisade" , "city", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "wooden_pallisade" , "city", attributeStr + bonus + requires );
 		bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_wall" , "city", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "wooden_wall" , "city", attributeStr + bonus + requires );
 		bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "stone_wall" , "city", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "stone_wall" , "city", attributeStr + bonus + requires );
 		bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "large_stone_wall" , "city", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "large_stone_wall" , "city", attributeStr + bonus + requires );
 		bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "huge_stone_wall" , "city", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "huge_stone_wall" , "city", attributeStr + bonus + requires );
 		bonus++;
 
 		// ### CASTLES ###
 		// # Walls # - building core_castle_building  - levels motte_and_bailey wooden_castle castle fortress citadel
 		bonus=3;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "motte_and_bailey" , "castle", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "motte_and_bailey" , "castle", attributeStr + bonus + requires );
 		bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "wooden_castle" , "castle", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "wooden_castle" , "castle", attributeStr + bonus + requires );
 		bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "castle" , "castle", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "castle" , "castle", attributeStr + bonus + requires );
 		bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "fortress" , "castle", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "fortress" , "castle", attributeStr + bonus + requires );
 		bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "citadel" , "castle", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "citadel" , "castle", attributeStr + bonus + requires );
 		bonus++;
 
 		// #### LAW BONUS - to deal with corruption
 		bonus = 1;
 		attributeStr = "       law_bonus bonus ";
 		// # Walls #
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_pallisade" , "city", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "wooden_pallisade" , "city", attributeStr + bonus + requires );
 		bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_wall" , "city", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "wooden_wall" , "city", attributeStr + bonus + requires );
 		bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "stone_wall" , "city", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "stone_wall" , "city", attributeStr + bonus + requires );
 		bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "large_stone_wall" , "city", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "large_stone_wall" , "city", attributeStr + bonus + requires );
 		bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "huge_stone_wall" , "city", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "huge_stone_wall" , "city", attributeStr + bonus + requires );
 		bonus++;
 
 		// ### CASTLES ###
 		// # Walls # - building core_castle_building  - levels motte_and_bailey wooden_castle castle fortress citadel
 		bonus=1;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "motte_and_bailey" , "castle", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "motte_and_bailey" , "castle", attributeStr + bonus + requires );
 		bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "wooden_castle" , "castle", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "wooden_castle" , "castle", attributeStr + bonus + requires );
 		bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "castle" , "castle", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "castle" , "castle", attributeStr + bonus + requires );
 		bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "fortress" , "castle", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "fortress" , "castle", attributeStr + bonus + requires );
 		bonus++;
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "citadel" , "castle", attributeStr + bonus + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "citadel" , "castle", attributeStr + bonus + requires );
 		bonus++;
 
 	}
@@ -685,42 +685,42 @@ public class Civilizations extends Feature {
 
 		// # MARKETS
 		// corn_exchange market fairground great_market merchants_quarter
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("market", "corn_exchange" , "city", "       trade_base_income_bonus bonus -1" + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("market", "market" , "city", "       trade_base_income_bonus bonus -1" + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("market", "fairground" , "city", "       trade_base_income_bonus bonus -1" + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("market", "great_market" , "city", "       trade_base_income_bonus bonus -1" + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("market", "merchants_quarter" , "city", "       trade_base_income_bonus bonus -1" + requires );
+		_ExportDescrBuilding.addCapabilities("market", "corn_exchange" , "city", "       trade_base_income_bonus bonus -1" + requires );
+		_ExportDescrBuilding.addCapabilities("market", "market" , "city", "       trade_base_income_bonus bonus -1" + requires );
+		_ExportDescrBuilding.addCapabilities("market", "fairground" , "city", "       trade_base_income_bonus bonus -1" + requires );
+		_ExportDescrBuilding.addCapabilities("market", "great_market" , "city", "       trade_base_income_bonus bonus -1" + requires );
+		_ExportDescrBuilding.addCapabilities("market", "merchants_quarter" , "city", "       trade_base_income_bonus bonus -1" + requires );
 		// corn_exchange market fairground
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("market_castle", "market" , "castle", "       trade_base_income_bonus bonus -1" + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("market_castle", "fairground" , "castle", "       trade_base_income_bonus bonus -1" + requires );
+		_ExportDescrBuilding.addCapabilities("market_castle", "market" , "castle", "       trade_base_income_bonus bonus -1" + requires );
+		_ExportDescrBuilding.addCapabilities("market_castle", "fairground" , "castle", "       trade_base_income_bonus bonus -1" + requires );
 
 		// # PORTS
 		// port shipwright dockyard naval_drydock
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("port", "shipwright" , "city", "       trade_base_income_bonus bonus -1" + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("port", "dockyard" , "city", "       trade_base_income_bonus bonus -1" + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("port", "naval_drydock" , "city", "       trade_base_income_bonus bonus -1" + requires );
+		_ExportDescrBuilding.addCapabilities("port", "shipwright" , "city", "       trade_base_income_bonus bonus -1" + requires );
+		_ExportDescrBuilding.addCapabilities("port", "dockyard" , "city", "       trade_base_income_bonus bonus -1" + requires );
+		_ExportDescrBuilding.addCapabilities("port", "naval_drydock" , "city", "       trade_base_income_bonus bonus -1" + requires );
 		// c_port c_shipwright c_dockyard c_naval_drydock
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("castle_port", "c_dockyard" , "castle", "       trade_base_income_bonus bonus -1" + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("castle_port", "c_naval_drydock" , "castle", "       trade_base_income_bonus bonus -1" + requires );
+		_ExportDescrBuilding.addCapabilities("castle_port", "c_dockyard" , "castle", "       trade_base_income_bonus bonus -1" + requires );
+		_ExportDescrBuilding.addCapabilities("castle_port", "c_naval_drydock" , "castle", "       trade_base_income_bonus bonus -1" + requires );
 
 		// # SEA TRADES
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("sea_trade", "warehouse" , "city", "       trade_base_income_bonus bonus -1" + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("sea_trade", "docklands" , "city", "       trade_base_income_bonus bonus -1" + requires );
+		_ExportDescrBuilding.addCapabilities("sea_trade", "warehouse" , "city", "       trade_base_income_bonus bonus -1" + requires );
+		_ExportDescrBuilding.addCapabilities("sea_trade", "docklands" , "city", "       trade_base_income_bonus bonus -1" + requires );
 
 		// # WALLS - low based trade minus
 		// # CITIES ### :
 		attributeStr = "       trade_base_income_bonus bonus -3";
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_pallisade" , "city", attributeStr + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_wall" , "city", attributeStr + requires);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "stone_wall" , "city", attributeStr + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "large_stone_wall" , "city", attributeStr + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "huge_stone_wall" , "city", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "wooden_pallisade" , "city", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "wooden_wall" , "city", attributeStr + requires);
+		_ExportDescrBuilding.addCapabilities("core_building", "stone_wall" , "city", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "large_stone_wall" , "city", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "huge_stone_wall" , "city", attributeStr + requires );
 		// # Castles #
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "motte_and_bailey" , "castle", attributeStr + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "wooden_castle" , "castle", attributeStr  + requires);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "castle" , "castle", attributeStr + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "fortress" , "castle", attributeStr + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "citadel" , "castle", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "motte_and_bailey" , "castle", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "wooden_castle" , "castle", attributeStr  + requires);
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "castle" , "castle", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "fortress" , "castle", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "citadel" , "castle", attributeStr + requires );
 	}
 
 	protected void TuranianFreeUpkeep() throws PatcherLibBaseEx {
@@ -729,17 +729,17 @@ public class Civilizations extends Feature {
 		String requires = " requires factions { "+ FactionsDefs.turanianFactionsCsv()+" }";
 
 		// # CITIES ### : wooden_pallisade wooden_wall stone_wall large_stone_wall huge_stone_wall
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_pallisade" , "city", "       free_upkeep bonus "+2 + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_wall" , "city", "       free_upkeep bonus "+2 + requires);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "stone_wall" , "city", "       free_upkeep bonus "+2 + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "large_stone_wall" , "city", "       free_upkeep bonus "+3 + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "huge_stone_wall" , "city", "       free_upkeep bonus "+4 + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "wooden_pallisade" , "city", "       free_upkeep bonus "+2 + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "wooden_wall" , "city", "       free_upkeep bonus "+2 + requires);
+		_ExportDescrBuilding.addCapabilities("core_building", "stone_wall" , "city", "       free_upkeep bonus "+2 + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "large_stone_wall" , "city", "       free_upkeep bonus "+3 + requires );
+		_ExportDescrBuilding.addCapabilities("core_building", "huge_stone_wall" , "city", "       free_upkeep bonus "+4 + requires );
 		// # Castles #
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "motte_and_bailey" , "castle", "       free_upkeep bonus "+2 + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "wooden_castle" , "castle", "       free_upkeep bonus "+2  + requires);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "castle" , "castle", "       free_upkeep bonus "+2 + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "fortress" , "castle", "       free_upkeep bonus "+3 + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "citadel" , "castle", "       free_upkeep bonus "+4 + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "motte_and_bailey" , "castle", "       free_upkeep bonus "+2 + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "wooden_castle" , "castle", "       free_upkeep bonus "+2  + requires);
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "castle" , "castle", "       free_upkeep bonus "+2 + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "fortress" , "castle", "       free_upkeep bonus "+3 + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "citadel" , "castle", "       free_upkeep bonus "+4 + requires );
 	}
 
 	protected void TuranianRecruitmentSlots() throws PatcherLibBaseEx {
@@ -750,17 +750,17 @@ public class Civilizations extends Feature {
 		attrStr = "\t\t\trecruitment_slots bonus 3 requires not event_counter freeze_recr_pool 1 and "+requires+" ; Patcher Added";
 
 		// # CITIES ### : wooden_pallisade wooden_wall stone_wall large_stone_wall huge_stone_wall
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_pallisade" , "city", attrStr );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "wooden_wall" , "city", attrStr);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "stone_wall" , "city", attrStr );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "large_stone_wall" , "city", attrStr );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_building", "huge_stone_wall" , "city", attrStr );
+		_ExportDescrBuilding.addCapabilities("core_building", "wooden_pallisade" , "city", attrStr );
+		_ExportDescrBuilding.addCapabilities("core_building", "wooden_wall" , "city", attrStr);
+		_ExportDescrBuilding.addCapabilities("core_building", "stone_wall" , "city", attrStr );
+		_ExportDescrBuilding.addCapabilities("core_building", "large_stone_wall" , "city", attrStr );
+		_ExportDescrBuilding.addCapabilities("core_building", "huge_stone_wall" , "city", attrStr );
 		// # Castles #
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "motte_and_bailey" , "castle", attrStr+2 + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "wooden_castle" , "castle", attrStr+2  + requires);
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "castle" , "castle", attrStr );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "fortress" , "castle", attrStr );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("core_castle_building", "citadel" , "castle", attrStr );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "motte_and_bailey" , "castle", attrStr+2 + requires );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "wooden_castle" , "castle", attrStr+2  + requires);
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "castle" , "castle", attrStr );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "fortress" , "castle", attrStr );
+		_ExportDescrBuilding.addCapabilities("core_castle_building", "citadel" , "castle", attrStr );
 	}
 
 	protected void minesBonuses(String factionsCsv, int bonus) throws PatcherLibBaseEx {
@@ -770,11 +770,11 @@ public class Civilizations extends Feature {
 		attributeStr="mine_resource bonus "+bonus;
 
 		// levels mines mines+1
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("mines", "mines" , "city", attributeStr + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("mines", "mines\\+1" , "city", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("mines", "mines" , "city", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("mines", "mines\\+1" , "city", attributeStr + requires );
 
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("castle_mines", "c_mines" , "castle", attributeStr + requires );
-		_ExportDescrBuilding.insertIntoBuildingCapabilities("castle_mines", "c_mines\\+1" , "castle", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("castle_mines", "c_mines" , "castle", attributeStr + requires );
+		_ExportDescrBuilding.addCapabilities("castle_mines", "c_mines\\+1" , "castle", attributeStr + requires );
 	}
 
 	protected double WorldMultiplier;

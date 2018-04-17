@@ -84,9 +84,9 @@ public class AssasinsNumbersLimited extends Feature {
 		for(val factionName : factions) {
 			val agentLine = agentPrefix + factionName + agentSuffix + getAgentEventCounterFlag(factionName, AgentType.Assassin) + " 1";
 
-			exportDescrBuilding.insertIntoBuildingCapabilities("taverns" , "tavern" , "city" , agentLine);
-			exportDescrBuilding.insertIntoBuildingCapabilities("taverns" , "coaching_house" , "city" , agentLine);
-			exportDescrBuilding.insertIntoBuildingCapabilities("taverns" , "pleasure_palace" , "city" , agentLine);
+			exportDescrBuilding.addCapabilities("taverns" , "tavern" , "city" , agentLine);
+			exportDescrBuilding.addCapabilities("taverns" , "coaching_house" , "city" , agentLine);
+			exportDescrBuilding.addCapabilities("taverns" , "pleasure_palace" , "city" , agentLine);
 		}
 
 		// Academy :
@@ -100,7 +100,7 @@ public class AssasinsNumbersLimited extends Feature {
 		for(val factionName : factionsAcademy) {
 			val agentLine = agentPrefix + factionName + agentSuffix + getAgentEventCounterFlag(factionName, AgentType.Assassin) + " 1";
 
-			exportDescrBuilding.insertIntoBuildingCapabilities("castle_academic" , "academy" , "castle" , agentLine);
+			exportDescrBuilding.addCapabilities("castle_academic" , "academy" , "castle" , agentLine);
 		}
 
 	}
