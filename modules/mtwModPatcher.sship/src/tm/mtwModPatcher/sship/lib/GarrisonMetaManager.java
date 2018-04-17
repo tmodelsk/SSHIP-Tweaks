@@ -123,7 +123,6 @@ public class GarrisonMetaManager {
 		dict.add(type , berberArchersAllowedFactions , new UnitGarrisonInfo("Berber Archers" , "berber"));
 		
 		// Western Catholics & Ortodox Christians
-		// TODO : czy dobrze garrison ?
 		dict.add(type, ENGLAND, ARCHER_MILITIA, HiddenResources.ENGLAND );
 		dict.add(type, ENGLAND, ARCHER_MILITIA, HiddenResources.SCOTLAND );
 		dict.add(type, ENGLAND, ARCHER_MILITIA, HiddenResources.IRELAND );
