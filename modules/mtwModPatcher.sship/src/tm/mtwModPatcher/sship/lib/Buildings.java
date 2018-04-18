@@ -48,9 +48,8 @@ public class Buildings {
 	private static final List<String> TavernCityLevels1 = Arrays.asList("brothel", "inn", "tavern", "coaching_house", "pleasure_palace");
 	public static final BuildingLevel TavernCity = new BuildingLevel(TavernCity1, TavernCityLevels1, SettlType.City);
 
+	public static final BuildingLevel TavernCastle = new BuildingLevel("castle_taverns", Arrays.asList("c_brothel"), SettlType.Castle);
 
-	public static final String TavernCastle = "castle_taverns";
-	public static final List<String> TavernCastleLevels = Arrays.asList("c_brothel");
 
 	public static final String StoneMason = "stonemason";
 	public static final List<String> StoneMasonLevels = Arrays.asList("sitehut", "stonemason");
@@ -127,14 +126,17 @@ public class Buildings {
 
 
 
-	public final static tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.WallsCity WallsCity =
+	public final static tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.WallsCity WallsCitySpec =
 			tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.Buildings.WallsCity;
 
-	public final static tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.WallsCastle WallsCastle =
+	public final static tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.WallsCastle WallsCastleSpec =
 			tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.Buildings.WallsCastle;
 
-	public static final List<String> WallsCityLevels = Arrays.asList(WallsCity.L1_WoodenPalisade, WallsCity.L2_WoodenWall, WallsCity.L3_StoneWall, WallsCity.L4_LargeStoneWall, WallsCity.L5_HugeStoneWall);
-	public static final List<String> WallsCastleLevels = Arrays.asList(WallsCastle.L1_MotteAndBailey, WallsCastle.L2_WoodenCastle, WallsCastle.L3_Castle, WallsCastle.L4_Fortress, WallsCastle.L5_Citadel);
+	public static final List<String> WallsCityLevels = Arrays.asList(WallsCitySpec.L1_WoodenPalisade, WallsCitySpec.L2_WoodenWall, WallsCitySpec.L3_StoneWall, WallsCitySpec.L4_LargeStoneWall, WallsCitySpec.L5_HugeStoneWall);
+	public static final List<String> WallsCastleLevels = Arrays.asList(WallsCastleSpec.L1_MotteAndBailey, WallsCastleSpec.L2_WoodenCastle, WallsCastleSpec.L3_Castle, WallsCastleSpec.L4_Fortress, WallsCastleSpec.L5_Citadel);
+
+	public static final BuildingLevel WallsCity = new BuildingLevel(WallsCitySpec.Name, WallsCityLevels, SettlType.City);
+	public static final BuildingLevel WallsCastle = new BuildingLevel(WallsCastleSpec.Name, WallsCastleLevels, SettlType.Castle);
 
 	public final static String CityType = tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.Buildings.CityType;
 	public final static String CastleType = tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.Buildings.CastleType;

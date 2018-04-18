@@ -107,6 +107,7 @@ public class SsHipFeatures {
 
 		features.add(new AssasinsRemoved());
 		features.add(new AssasinsNumbersLimited());
+		features.add(new SpiesLoweredRecruitment());
 
 		features.add(new ProvincialTitlesFixJoC());
 		features.add(new GeneralsEducationTraitsFixes());
@@ -184,8 +185,6 @@ public class SsHipFeatures {
 			features.getEnabled( BeeMugCarlAITweaks.Id).disable();
 			features.getEnabled( CrusadeJihadMoreSettl.Id).disable();
 			features.getEnabled( AragonChapterHousesBoost.Id).disable();
-			features.getEnabled( BetterLogging.Id).disable();
-
 		}
 
 //		disableAll();
