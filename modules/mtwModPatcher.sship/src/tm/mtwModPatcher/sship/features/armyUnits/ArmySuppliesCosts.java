@@ -39,9 +39,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-/**
- * Additional amry supplies costs when in enemy lands
- */
+/** Additional army supplies costs when in enemy lands */
 public class ArmySuppliesCosts extends Feature {
 
 	@Override
@@ -56,10 +54,10 @@ public class ArmySuppliesCosts extends Feature {
 	@Override
 	public void executeUpdates() throws Exception {
 
-		exportDescrCharacterTraits = getFileRegisterForUpdated(ExportDescrCharacterTraits.class);
+		edCharacterTraits = getFileRegisterForUpdated(ExportDescrCharacterTraits.class);
 		campaignScript = getFileRegisterForUpdated(CampaignScript.class);
-		descrStrat = getFileRegisterForUpdated(DescrStratSectioned.class);
-		exportVnvs = getFileRegisterForUpdated(ExportVnvs.class);
+		dStrat = getFileRegisterForUpdated(DescrStratSectioned.class);
+		eVnvs = getFileRegisterForUpdated(ExportVnvs.class);
 
 		FactionExpensesAdditional factionExpenses = new FactionExpensesAdditional(campaignScript);
 		factionExpenses.ensureFactionVariablesExist();
@@ -184,7 +182,7 @@ public class ArmySuppliesCosts extends Feature {
 
 		// ### Monitor Event with given conditions list AND ArmySize Trait
 		MonitorEventBlock monitor = new MonitorEventBlock(monitorEvent,
-				tmp.stream().map(cc -> (Condition) cc).collect(Collectors.toList()));
+				tmp.stream().collect(Collectors.toList()));
 
 		if (armySize > 0)
 			monitor.andCondition(new TraitCondition("ArmySize", "=", armySize));
@@ -228,7 +226,7 @@ public class ArmySuppliesCosts extends Feature {
 
 	private void addArmySizeTraits() throws PatcherLibBaseEx {
 
-		LinesProcessor lines = exportDescrCharacterTraits.getLines();
+		LinesProcessor lines = edCharacterTraits.getLines();
 		int index = lines.findFirstByRexexLines("^;=+ VNV TRAITS START HERE ", "^;=+;");
 		if (index < 0) throw new PatcherLibBaseEx("Unable to find start of traits");
 		index += 2;
@@ -289,7 +287,7 @@ public class ArmySuppliesCosts extends Feature {
 	}
 
 	private void addArmySizeTraitsDescriptions(int fullStackCost) throws PatcherLibBaseEx {
-		LinesProcessor lines = exportVnvs.getLines();
+		LinesProcessor lines = eVnvs.getLines();
 
 		int insertIndex = lines.findExpFirstRegexLine("Listens_Teachings");
 
@@ -334,7 +332,7 @@ public class ArmySuppliesCosts extends Feature {
 	}
 
 	private void addArmySizeTriggers(boolean onlyForLocal, EventType characterEventType) throws PatcherLibBaseEx {
-		LinesProcessor lines = exportDescrCharacterTraits.getLines();
+		LinesProcessor lines = edCharacterTraits.getLines();
 		String str = "", nl = System.lineSeparator();
 		int index;
 
@@ -499,10 +497,10 @@ public class ArmySuppliesCosts extends Feature {
 	@Getter @Setter private boolean cumansExcluded;
 	@Getter @Setter private boolean siegeCostDisabled;
 
-	protected ExportDescrCharacterTraits exportDescrCharacterTraits;
+	protected ExportDescrCharacterTraits edCharacterTraits;
 	protected CampaignScript campaignScript;
-	protected DescrStratSectioned descrStrat;
-	protected ExportVnvs exportVnvs;
+	protected DescrStratSectioned dStrat;
+	protected ExportVnvs eVnvs;
 
 	@Override
 	public UUID getId() {
@@ -511,9 +509,7 @@ public class ArmySuppliesCosts extends Feature {
 
 	public static UUID Id = UUID.fromString("f10312bd-99a3-424e-800c-9ebc83930cf5");
 
-	/**
-	 * Additional amry supplies costs when in enemy lands
-	 */
+	/** Additional amry supplies costs when in enemy lands 	 */
 	public ArmySuppliesCosts() {
 		super("Army Supplies Costs");
 

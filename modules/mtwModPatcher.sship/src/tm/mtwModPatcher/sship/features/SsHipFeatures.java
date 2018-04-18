@@ -177,6 +177,7 @@ public class SsHipFeatures {
 		features.disableFeatureIfExists( CatholicIberiaUnitsRecruitmentIncreased.Id);
 
 		features.disableFeatureIfExists( AutoRunHotseat.Id);
+		features.disableFeatureIfExists( BetterLogging.Id);
 
 		if(!ConfigurationSettings.isDevEnvironment()) {
 
@@ -187,10 +188,9 @@ public class SsHipFeatures {
 			features.getEnabled( AragonChapterHousesBoost.Id).disable();
 		}
 
-//		disableAll();
-//		features.enableFeatureIfExists(UnitsBugFixes.Id);
-//		features.enableFeatureIfExists(CavalryNerfed.Id);
-//		features.enableFeatureIfExists(LongerBattles.Id);
+		for(val f :features.getFeaturesList()) {
+			f.setParamsDefaultValues();
+		}
 	}
 	public void disableAll() {
 		for (val ft : features.getFeaturesList()) {

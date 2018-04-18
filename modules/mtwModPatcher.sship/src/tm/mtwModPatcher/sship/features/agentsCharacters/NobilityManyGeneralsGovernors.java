@@ -16,16 +16,16 @@ import tm.mtwModPatcher.sship.features.global.PopulationResourcesLimited;
 
 import java.util.UUID;
 
-/** Created by tomek on 20.04.2017. */
+/** Adds very limited recruitment of bodyguard (generals) to every settlement (walls)*/
 public class NobilityManyGeneralsGovernors extends Feature {
 
 	@Override
 	public void setParamsCustomValues() {
-		cityReplenishTurnsStarting = 48; //44;
+		cityReplenishTurnsStarting = 52; //44;
 		cityReplenishTurnsBonus = 2;
-		castleReplenishTurnsStarting = 44; //40;
+		castleReplenishTurnsStarting = 48; //40;
 		castleReplenishTurnsBonus = 2;
-		aiReplenishTurnsMulti = 1.5;
+		aiReplenishTurnsMulti = 1.25;
 	}
 
 	@Override

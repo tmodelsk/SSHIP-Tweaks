@@ -34,9 +34,9 @@ public class FightForSurvival extends Feature {
 		dangerReplenishMult = 1.0;    // 1.20
 		criticalReplenishMult = 1.33;
 		switchOffMoneyLevel = 20000;
-		warningLevel = 6;
-		dangerLevel = 4;
-		criticalLevel = 2;
+		warningLevel = 5;
+		dangerLevel = 3;
+		criticalLevel = 1;
 	}
 
 	@Override
