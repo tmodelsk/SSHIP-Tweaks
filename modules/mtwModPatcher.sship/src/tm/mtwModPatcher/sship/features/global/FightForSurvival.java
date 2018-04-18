@@ -73,14 +73,14 @@ public class FightForSurvival extends Feature {
 		condition = "event_counter " + EVENT_DANGER_NAME + " 1";
 		requires = " requires " + condition;
 
-		edb.addToCityCastleWallsCapabilities("        law_bonus bonus 2" + requires);                    // +20 % Law
-		edb.addToCityCastleWallsCapabilities("        population_growth_bonus bonus 2" + requires);    // +0.5 % Pop Growth
-		edb.addToCityCastleWallsCapabilities("        trade_base_income_bonus bonus 1" + requires);    // +1 Trade bonus
-		edb.addToCityCastleWallsCapabilities("        religion_level bonus 1" + requires);            // +1 Religion
-		edb.addToCityCastleWallsCapabilities("        recruits_morale_bonus bonus 1" + requires);        // +1 Morale
-		edb.addToCityCastleWallsCapabilities("        recruits_exp_bonus bonus 1" + requires);        // +1 Experience
+		addBonus("        law_bonus bonus 2", requires);                    // +20 % Law
+		addBonus("        population_growth_bonus bonus 2", requires);    // +0.5 % Pop Growth
+		addBonus("        trade_base_income_bonus bonus 1", requires);    // +1 Trade bonus
+		addBonus("        religion_level bonus 1", requires);            // +1 Religion
+		addBonus("        recruits_morale_bonus bonus 1", requires);        // +1 Morale
+		addBonus("        recruits_exp_bonus bonus 1", requires);        // +1 Experience
 
-		edb.addToCityCastleWallsCapabilities("        free_upkeep bonus 1" + requires);                // +2 Free Upkeep
+		addBonus("        free_upkeep bonus 1", requires);                // +2 Free Upkeep
 		insertConstructionCostBonus(10, requires);
 		insertConstructionTimeBonus(6, requires);
 
@@ -93,13 +93,13 @@ public class FightForSurvival extends Feature {
 		condition = "event_counter " + EVENT_CRITICAL_NAME + " 1";
 		requires = " requires " + condition;
 
-		edb.addToCityCastleWallsCapabilities("        law_bonus bonus 4" + requires);                    // +20 % Law
-		edb.addToCityCastleWallsCapabilities("        population_growth_bonus bonus 3" + requires);    // +1 % Pop Growth
-		edb.addToCityCastleWallsCapabilities("        trade_base_income_bonus bonus 2" + requires);    // +2 Trade bonus
-		edb.addToCityCastleWallsCapabilities("        religion_level bonus 2" + requires);            // +2 Religion
-		edb.addToCityCastleWallsCapabilities("        recruits_morale_bonus bonus 2" + requires);        // +2 Morale
-		edb.addToCityCastleWallsCapabilities("        recruits_exp_bonus bonus 2" + requires);        // +2 Experience
-		edb.addToCityCastleWallsCapabilities("        free_upkeep bonus 2" + requires);                // +2 Free Upkeep
+		addBonus("        law_bonus bonus 4", requires);					// +20 % Law
+		addBonus("        population_growth_bonus bonus 3", requires);	// +1 % Pop Growth
+		addBonus("        trade_base_income_bonus bonus 2", requires);	// +2 Trade bonus
+		addBonus("        religion_level bonus 2", requires);				// +2 Religion
+		addBonus("        recruits_morale_bonus bonus 2", requires);		// +2 Morale
+		addBonus("        recruits_exp_bonus bonus 2", requires);        // +2 Experience
+		addBonus("        free_upkeep bonus 2", requires);				// +2 Free Upkeep
 		// +1 Recruitment slot
 		edb.addToCityCastleWallsCapabilities("        recruitment_slots 1 requires not event_counter freeze_recr_pool 1 and event_counter " + EVENT_CRITICAL_NAME + " 1");
 		insertConstructionCostBonus(20, requires);
@@ -113,6 +113,10 @@ public class FightForSurvival extends Feature {
 		// ## Final processing ##
 		unitsManager.enableFreeUpkeepAllUnits(null, edu);
 		unitsManager.addReplenishBonusEntryWithCondition(unitReplenishBonusConditionList, unitsToExclude, edb);
+	}
+
+	private void addBonus(String bonus, String require) {
+		edb.addToCityCastleWallsCapabilities(bonus + " " + require);
 	}
 
 	private void addFlatMoneyBonus(double factor, String eventName, String requires) {

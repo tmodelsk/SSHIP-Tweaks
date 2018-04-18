@@ -190,7 +190,7 @@ public class CatholicIberiaReworked extends Feature {
 
 		descrStrat.setToCastle(prov);
 		descrStrat.setFactionCreator(prov, FactionsDefs.ARAGON.symbol);
-		descrStrat.insertSettlementBuilding(prov, WallsCastle.Name, WallsCastle.L4_Fortress);
+		descrStrat.insertSettlementBuilding(prov, WallsCastleSpec.Name, WallsCastleSpec.L4_Fortress);
 		descrStrat.insertSettlementBuilding(prov, BarracksCastle, BarracksCastleLevels.get(1));
 		descrStrat.insertSettlementBuilding(prov, StablesCastle, StablesCastleLevels.get(0));
 		descrStrat.insertSettlementBuilding(prov, MissileCastle, MissileCastleLevels.get(0));
@@ -201,7 +201,7 @@ public class CatholicIberiaReworked extends Feature {
 		descrStrat.insertSettlementBuilding(prov, RiverAccess, RiverAccessLevel);
 		descrStrat.insertSettlementBuilding(prov, TempleCatholicCastle, TempleCatholicCastleLevels.get(1));
 		descrStrat.insertSettlementBuilding(prov, MonasteryCatholicCastle, MonasteryCatholicCastleLevels.get(0));
-		descrStrat.insertSettlementBuilding(prov, TavernCastle, TavernCastleLevels.get(0));
+		descrStrat.insertSettlementBuilding(prov, TavernCastle);
 		descrStrat.insertSettlementBuilding(prov, WaterSupply, WaterSupplyLevels.get(0));
 		descrStrat.insertSettlementBuilding(prov, Health, HealthLevels.get(0));
 		descrStrat.insertSettlementBuilding(prov, StoneMason, StoneMasonLevels.get(0));
@@ -261,8 +261,8 @@ public class CatholicIberiaReworked extends Feature {
 		factionsSect.moveSettlementBeforeSettl(prov, Provinces.Bordeaux);
 
 		factionsSect.setSetlementLevel(prov, SettlementLevel.L3_LargeTown);
-		factionsSect.removeSettlementBuilding(prov, WallsCastle.Name);
-		factionsSect.insertSettlementBuildingOnStart(prov, WallsCastle.Name, WallsCastle.L3_Castle);
+		factionsSect.removeSettlementBuilding(prov, WallsCastleSpec.Name);
+		factionsSect.insertSettlementBuildingOnStart(prov, WallsCastleSpec.Name, WallsCastleSpec.L3_Castle);
 
 		factionsSect.removeSettlementBuilding(prov, MissileCastle);
 		factionsSect.insertSettlementBuilding(prov, MissileCastle, MissileCastleLevels.get(1));

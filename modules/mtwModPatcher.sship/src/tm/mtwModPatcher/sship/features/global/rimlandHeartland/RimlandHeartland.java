@@ -207,13 +207,13 @@ public class RimlandHeartland extends Feature {
 
 			// Original bonus when SeaTradeEvent0 = 1 and island or port
 			bonusLine = bonusBaseTemplate + " and " + islandCondition + " or " + portCondition;
-			bonusValue = debugMode ? bonusOrg * 10 : bonusOrg;
+			bonusValue = debugMode ? (bonusOrg * 10) : bonusOrg;
 			bonusLine = Ctm.format(bonusLine, bonusValue, "", 1);
 			edb.addCapabilities(buildingName, marketLevelName, settlType, bonusLine);
 
 			// Nerfed bonus when SeaTradeEvent0 = 1 and not island and not port
 			bonusLine = bonusBaseTemplate + " and not " + islandCondition + " and not " + portCondition;
-			bonusValue = debugMode ? bonusNerfed * 100 : bonusNerfed;
+			bonusValue = debugMode ? (bonusNerfed * 100) : bonusNerfed;
 			bonusLine = Ctm.format(bonusLine, bonusValue, "", 1);
 			edb.addCapabilities(buildingName, marketLevelName, settlType, bonusLine);
 
@@ -280,7 +280,7 @@ public class RimlandHeartland extends Feature {
 
 		// Ports
 		for (int i = 0; i <= 2; i++) {
-			val operator = i < 2 ? "=" : ">=";
+			val operator = (i < 2) ? "=" : ">=";
 			monitorsBlock.add(monitorBuilder.createMainCounter(portCityLevels.get(i), operator, i + 1));
 			monitorsBlock.add(monitorBuilder.createMainCounter(portCastleLevels.get(i), operator, i + 1));
 		}
@@ -368,7 +368,7 @@ public class RimlandHeartland extends Feature {
 		val portRimlandLow = Ctm.format(template, bonusStr, lowBonus, HR_RIMLAND_LOW);
 		val portRimlandHigh = Ctm.format(template, bonusStr, mediumBonus, HR_RIMLAND_MEDIUM);
 
-		String building = "", levelStr = "";
+		String building, levelStr;
 		if (settlType == SettlType.City) {
 			building = Buildings.PortCity;
 			levelStr = Buildings.PortCityLevels.get(portLevel - 1);

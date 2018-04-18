@@ -60,8 +60,8 @@ public class MerchantsNerfed extends Feature {
 	private void addMerchantLimits() {
 		// ## Merchants can be produced only on city/castle walls / markets buildings
 		val walls = new ArrayList<BuildingLevel>();
-		Buildings.WallsCityLevels.forEach( l -> walls.add(new BuildingLevel(Buildings.WallsCity.Name, l, SettlType.City)));
-		Buildings.WallsCastleLevels.forEach( l -> walls.add(new BuildingLevel(Buildings.WallsCastle.Name, l, SettlType.Castle)));
+		Buildings.WallsCityLevels.forEach( l -> walls.add(new BuildingLevel(Buildings.WallsCitySpec.Name, l, SettlType.City)));
+		Buildings.WallsCastleLevels.forEach( l -> walls.add(new BuildingLevel(Buildings.WallsCastleSpec.Name, l, SettlType.Castle)));
 		for (val wallLevel: walls)
 			ensureAgentReruitmentExists(wallLevel, HiddenResources.HiddenResource + HiddenResources.Capital);
 
@@ -114,8 +114,8 @@ public class MerchantsNerfed extends Feature {
 		else if(bl.BuildingType != null) {
 			switch (bl.BuildingType) {
 				case Walls:
-					Buildings.WallsCityLevels.forEach( l -> res.add(new BuildingLevel(Buildings.WallsCity.Name, l, SettlType.City)));
-					Buildings.WallsCastleLevels.forEach( l -> res.add(new BuildingLevel(Buildings.WallsCastle.Name, l, SettlType.Castle)));
+					Buildings.WallsCityLevels.forEach( l -> res.add(new BuildingLevel(Buildings.WallsCitySpec.Name, l, SettlType.City)));
+					Buildings.WallsCastleLevels.forEach( l -> res.add(new BuildingLevel(Buildings.WallsCastleSpec.Name, l, SettlType.Castle)));
 					break;
 				default:
 					throw new PatcherNotSupportedEx("BuildingType: " + bl.BuildingType);
