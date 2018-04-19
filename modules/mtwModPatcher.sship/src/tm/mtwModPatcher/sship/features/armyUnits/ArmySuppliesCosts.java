@@ -46,6 +46,8 @@ public class ArmySuppliesCosts extends Feature {
 	public void setParamsCustomValues() {
 		fullStackFullCost = 3000;
 		aiMultiplier = 0.75;
+		oneQuarterSizeMulti = 0.24;
+		setHalfSizeMultiParam(0.5);
 		loggingEnabled = true;
 		cumansExcluded = true;
 		siegeCostDisabled = true;
@@ -154,7 +156,7 @@ public class ArmySuppliesCosts extends Feature {
 		namedCharsAndFamilyConditions.add(new IsNotAgentType(AgentType.General));
 
 		container.add(new CommentLine("All NamedChars & FamilyMembers in EnemyLands Charging (Not IsGeneral), not important is commander or not, " + commentSuffix));
-		container.add(createArmySizeMonitor(0, fullCost * 0.24, namedCharsAndFamilyConditions, "NotGeneral " + commentSuffix));
+		container.add(createArmySizeMonitor(0, fullCost * oneQuarterSizeMulti, namedCharsAndFamilyConditions, "NotGeneral " + commentSuffix));
 
 		// ### Army Size Monitors: Charging commanders (IsGeneral) ###
 		val conditionsPlusIsGeneral = new ArrayList<Condition>();
@@ -164,7 +166,7 @@ public class ArmySuppliesCosts extends Feature {
 
 		container.add(new CommentLine("Charging based on IsGeneral & ArmySize (NamedChars & Family Members), " + commentSuffix));
 		// # 0.25 * fullCost is already charged by commander NamedChar or FamilyMember #
-		container.add(createArmySizeMonitor(2, fullCost * 0.25, conditionsPlusIsGeneral, "General, ArmySize2, " + commentSuffix));
+		container.add(createArmySizeMonitor(2, fullCost * halfSizeMulti(), conditionsPlusIsGeneral, "General, ArmySize2, " + commentSuffix));
 		container.add(createArmySizeMonitor(3, fullCost * 0.50, conditionsPlusIsGeneral, "General, ArmySize3, " + commentSuffix));
 		container.add(createArmySizeMonitor(4, fullCost * 0.75, conditionsPlusIsGeneral, "General, ArmySize4, " + commentSuffix));
 
@@ -174,7 +176,6 @@ public class ArmySuppliesCosts extends Feature {
 	private MonitorEventBlock createArmySizeMonitor(int armySize, double cost, List<Condition> conditions) {
 		return createArmySizeMonitor(armySize, cost, conditions, "");
 	}
-
 	private MonitorEventBlock createArmySizeMonitor(int armySize, double cost, List<Condition> conditions, String commentSuffix) {
 
 		List<Condition> tmp = new ArrayList<>(conditions);    // make copy
@@ -476,6 +477,14 @@ public class ArmySuppliesCosts extends Feature {
 				feature -> ((ArmySuppliesCosts) feature).getAiMultiplier(),
 				(feature, value) -> ((ArmySuppliesCosts) feature).setAiMultiplier(value)));
 
+		parIds.add(new ParamIdDouble("OneQuarterSizeMultiplier", "Army 1/4 Size Multiplier",
+				feature -> ((ArmySuppliesCosts) feature).getOneQuarterSizeMulti(),
+				(feature, value) -> ((ArmySuppliesCosts) feature).setOneQuarterSizeMulti(value)));
+
+		parIds.add(new ParamIdDouble("HalfSizeMultiplier", "Army 1/2 Size Multiplier",
+				feature -> ((ArmySuppliesCosts) feature).getHalfSizeMultiParam(),
+				(feature, value) -> ((ArmySuppliesCosts) feature).setHalfSizeMultiParam(value)));
+
 		parIds.add(new ParamIdBoolean("IsCumansExcluded", "Is Cumans Excluded",
 				feature -> ((ArmySuppliesCosts) feature).isCumansExcluded(),
 				(feature, value) -> ((ArmySuppliesCosts) feature).setCumansExcluded(value)));
@@ -491,11 +500,37 @@ public class ArmySuppliesCosts extends Feature {
 		return parIds;
 	}
 
+	private void setHalfSizeMultiParam(double multi) {
+		val exMsg = "Half Size Multiplier shoud be greater than "+ halfSizeMultiOffset;
+		try {
+			halfSizeMulti(multi);	// performs validation check
+		}
+		catch (IllegalArgumentException ex) {
+			throw new PatcherLibBaseEx(exMsg, ex);
+		}
+
+		this.halfSizeMultiParam = multi;
+	}
+
 	@Getter @Setter private int fullStackFullCost;
 	@Getter @Setter private double aiMultiplier;
+	@Getter @Setter private double oneQuarterSizeMulti;
+	@Getter private double halfSizeMultiParam;
 	@Getter @Setter private boolean loggingEnabled;
 	@Getter @Setter private boolean cumansExcluded;
 	@Getter @Setter private boolean siegeCostDisabled;
+
+	private double halfSizeMultiOffset = 0.25;
+	private double halfSizeMulti() throws IllegalArgumentException {
+		return halfSizeMulti(halfSizeMultiParam);
+	}
+	private double halfSizeMulti(double paramValue) throws IllegalArgumentException {
+		val multi = paramValue - halfSizeMultiOffset;
+
+		if(multi <= 0) throw new IllegalArgumentException("Effective halfSizeMultiplier <= 0 !");
+
+		return multi;
+	}
 
 	protected ExportDescrCharacterTraits edCharacterTraits;
 	protected CampaignScript campaignScript;

@@ -15,7 +15,7 @@ public class FileEntityFactory {
 
 	@Getter @Setter public String rootPath;
 
-	protected static Map<String, FileEntity> FileEntitiesLoaded = new HashMap<>();
+	private static Map<String, FileEntity> FileEntitiesLoaded = new HashMap<>();
 
 	public <T extends FileEntity> T getFile(Class<T> clz) throws Exception {
 

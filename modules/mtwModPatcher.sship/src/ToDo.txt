@@ -1,0 +1,1 @@
+Poprawic Army Supplies Costs : raczej jest bug z monitorem dla basic general, jest w 4 instancjach per ArmySize, a pewnie wywoluje sie tylko pierwszy.

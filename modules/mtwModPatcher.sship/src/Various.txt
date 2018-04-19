@@ -1,0 +1,4 @@
+Ancillary templargm - moze dac dla Aragon ??
+Ancillary hospitalgm
+
+ Effect MovementPoints 5
