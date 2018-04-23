@@ -32,6 +32,7 @@ import tm.mtwModPatcher.lib.data.text.ExportVnvs;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.CampaignScript;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.FactionAiEcId;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.descrStrat.DescrStratSectioned;
+import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,11 +47,13 @@ public class ArmySuppliesCosts extends Feature {
 	public void setParamsCustomValues() {
 		fullStackFullCost = 3000;
 		aiMultiplier = 0.75;
-		oneQuarterSizeMulti = 0.24;
-		setHalfSizeMultiParam(0.5);
-		loggingEnabled = true;
-		cumansExcluded = true;
+		oneQuarterSizeMulti = 0.125;
+		setHalfSizeMultiParam(0.33);
+		setThreeQuarterSizeMultiParam(0.63);
+		captainsArmiesCostsEnabled = false;
 		siegeCostDisabled = true;
+		cumansExcluded = true;
+		loggingEnabled = ConfigurationSettings.isDevEnvironment();
 	}
 
 	@Override
@@ -84,10 +87,7 @@ public class ArmySuppliesCosts extends Feature {
 			conditions.add(new CharacterIsLocal());
 		// new TurnNumber(">",0)  , new IsNotBesieging()
 
-		// ## Captains Groups: Charge ONLY with small amount (1/20) -> unable to determine captain group ssize
-		// ## Captain group could be one unit, could be full stack
-		val captainsBlock = createArmyMonitorsForCaptains(fullStackFullCost / 10); // cost of 2 units on long campaign
-		rootRegion.add(captainsBlock);
+		addOptionalArmyMonitorsForCaptains(rootRegion);
 
 		// ## Create Army Size monitors based on InEnemyRegion Trait
 		val conditionsPlusInEnemyRegion0 = createConditionsPlusInEnemyRegion(0, conditions);
@@ -121,24 +121,6 @@ public class ArmySuppliesCosts extends Feature {
 		return conditionsPlus;
 	}
 
-	// Creates monitor for captains comnnaders - very special one
-	private ContainerBlock createArmyMonitorsForCaptains(double captainCost) {
-		val container = new ContainerBlock();
-
-		// ## Captains Groups: Charge ONLY with small amount (1/20) -> unable to determine captain group ssize
-		// ## Captain group could be one unit, could be full stack
-		val captainsConditions = new ArrayList<Condition>();
-		captainsConditions.add(new IsGeneral());
-		captainsConditions.add(new IsInEnemyLands());
-		captainsConditions.add(new IsAgentType(AgentType.General));
-		captainsConditions.add(new NotTraitCondition("ArmySize", ">", 0));    // na wszelki wypadek
-
-		container.add(new CommentLine("Captains (not NamedChar, not Family Member) in EnemyLands Charging"));
-		container.add(createArmySizeMonitor(0, captainCost, captainsConditions, "Captain"));
-
-		return container;
-	}
-
 	// Creates monitors for all ArmySizes & Generals basing on input conditions
 	private ScriptBlock createArmyMonitorsForAllArmySizes(double fullCost, List<Condition> conditions, String commentSuffix) {
 		ContainerBlock container = new ContainerBlock();
@@ -167,15 +149,12 @@ public class ArmySuppliesCosts extends Feature {
 		container.add(new CommentLine("Charging based on IsGeneral & ArmySize (NamedChars & Family Members), " + commentSuffix));
 		// # 0.25 * fullCost is already charged by commander NamedChar or FamilyMember #
 		container.add(createArmySizeMonitor(2, fullCost * halfSizeMulti(), conditionsPlusIsGeneral, "General, ArmySize2, " + commentSuffix));
-		container.add(createArmySizeMonitor(3, fullCost * 0.50, conditionsPlusIsGeneral, "General, ArmySize3, " + commentSuffix));
-		container.add(createArmySizeMonitor(4, fullCost * 0.75, conditionsPlusIsGeneral, "General, ArmySize4, " + commentSuffix));
+		container.add(createArmySizeMonitor(3, fullCost * threeQuarterSizeMulti(), conditionsPlusIsGeneral, "General, ArmySize3, " + commentSuffix));
+		container.add(createArmySizeMonitor(4, fullCost * fullSizeMulti(), conditionsPlusIsGeneral, "General, ArmySize4, " + commentSuffix));
 
 		return container;
 	}
 
-	private MonitorEventBlock createArmySizeMonitor(int armySize, double cost, List<Condition> conditions) {
-		return createArmySizeMonitor(armySize, cost, conditions, "");
-	}
 	private MonitorEventBlock createArmySizeMonitor(int armySize, double cost, List<Condition> conditions, String commentSuffix) {
 
 		List<Condition> tmp = new ArrayList<>(conditions);    // make copy
@@ -223,6 +202,36 @@ public class ArmySuppliesCosts extends Feature {
 		}
 
 		return monitor;
+	}
+
+	private void addOptionalArmyMonitorsForCaptains(RegionBlock rootRegion) {
+		/** ## Captains Groups: Charge ONLY with small amount (1/20) -> unable to determine captain group ssize
+		 * ## Captain group could be one unit, could be full stack */
+		if(captainsArmiesCostsEnabled) {
+			val captainsBlock = createArmyMonitorsForCaptains(fullStackFullCost / 10); // cost of 2 units on long campaign
+			rootRegion.add(captainsBlock);
+		}
+	}
+	// Creates monitor for captains commanders - very special one
+	private ContainerBlock createArmyMonitorsForCaptains(double captainCost) {
+		val container = new ContainerBlock();
+
+		/** ## Captains Groups: Charge ONLY with small amount (1/20) -> unable to determine captain group ssize
+		 * ## Captain group could be one unit, could be full stack */
+		val captainsConditions = new ArrayList<Condition>();
+		captainsConditions.add(new IsGeneral());
+		captainsConditions.add(new IsInEnemyLands());
+		captainsConditions.add(new IsAgentType(AgentType.General));
+		captainsConditions.add(new NotTraitCondition("ArmySize", ">", 0));    // na wszelki wypadek
+
+		container.add(new CommentLine("Captains (not NamedChar, not Family Member) in EnemyLands Charging"));
+		container.add(createArmySizeMonitor(0, captainCost, captainsConditions, "Captain"));
+
+		return container;
+	}
+
+	private MonitorEventBlock createArmySizeMonitor(int armySize, double cost, List<Condition> conditions) {
+		return createArmySizeMonitor(armySize, cost, conditions, "");
 	}
 
 	private void addArmySizeTraits() throws PatcherLibBaseEx {
@@ -286,7 +295,6 @@ public class ArmySuppliesCosts extends Feature {
 
 		lines.insertAt(index, str);
 	}
-
 	private void addArmySizeTraitsDescriptions(int fullStackCost) throws PatcherLibBaseEx {
 		LinesProcessor lines = eVnvs.getLines();
 
@@ -316,7 +324,6 @@ public class ArmySuppliesCosts extends Feature {
 
 		lines.insertAt(insertIndex, str);
 	}
-
 	private String getArmySizeTriggerCostCsvDescr(int armySize, int fullStackCost) {
 		int fullCost = (int) (fullStackCost / (4.0 / armySize));
 
@@ -331,7 +338,6 @@ public class ArmySuppliesCosts extends Feature {
 
 		return str;
 	}
-
 	private void addArmySizeTriggers(boolean onlyForLocal, EventType characterEventType) throws PatcherLibBaseEx {
 		LinesProcessor lines = edCharacterTraits.getLines();
 		String str = "", nl = System.lineSeparator();
@@ -485,6 +491,18 @@ public class ArmySuppliesCosts extends Feature {
 				feature -> ((ArmySuppliesCosts) feature).getHalfSizeMultiParam(),
 				(feature, value) -> ((ArmySuppliesCosts) feature).setHalfSizeMultiParam(value)));
 
+		parIds.add(new ParamIdDouble("ThreeQuarterSizeMultiplier", "Army 3/4 Size Multiplier",
+				feature -> ((ArmySuppliesCosts) feature).getThreeQuarterSizeMultiParam(),
+				(feature, value) -> ((ArmySuppliesCosts) feature).setThreeQuarterSizeMultiParam(value)));
+
+		parIds.add(new ParamIdBoolean("CaptainsArmiesCostsEnabled", "Captains Armies Costs Enabled",
+				feature -> ((ArmySuppliesCosts) feature).isCaptainsArmiesCostsEnabled(),
+				(feature, value) -> ((ArmySuppliesCosts) feature).setCaptainsArmiesCostsEnabled(value)));
+
+		parIds.add(new ParamIdBoolean("IsSiegeCostDisabled", "Is SSHIP Siege Cost Disabled",
+				feature -> ((ArmySuppliesCosts) feature).isSiegeCostDisabled(),
+				(feature, value) -> ((ArmySuppliesCosts) feature).setSiegeCostDisabled(value)));
+
 		parIds.add(new ParamIdBoolean("IsCumansExcluded", "Is Cumans Excluded",
 				feature -> ((ArmySuppliesCosts) feature).isCumansExcluded(),
 				(feature, value) -> ((ArmySuppliesCosts) feature).setCumansExcluded(value)));
@@ -493,15 +511,11 @@ public class ArmySuppliesCosts extends Feature {
 				feature -> ((ArmySuppliesCosts) feature).isLoggingEnabled(),
 				(feature, value) -> ((ArmySuppliesCosts) feature).setLoggingEnabled(value)));
 
-		parIds.add(new ParamIdBoolean("IsSiegeCostDisabled", "Is SSHIP Siege Cost Disabled",
-				feature -> ((ArmySuppliesCosts) feature).isSiegeCostDisabled(),
-				(feature, value) -> ((ArmySuppliesCosts) feature).setSiegeCostDisabled(value)));
-
 		return parIds;
 	}
 
 	private void setHalfSizeMultiParam(double multi) {
-		val exMsg = "Half Size Multiplier shoud be greater than "+ halfSizeMultiOffset;
+		val exMsg = "1/2 Size Multiplier shoud be greater than "+ oneQuarterSizeMulti;
 		try {
 			halfSizeMulti(multi);	// performs validation check
 		}
@@ -511,23 +525,55 @@ public class ArmySuppliesCosts extends Feature {
 
 		this.halfSizeMultiParam = multi;
 	}
+	private void setThreeQuarterSizeMultiParam(double multi) {
+		val exMsg = "3/4 Size Multiplier shoud be greater than "+ oneQuarterSizeMulti;
+		try {
+			threeQuarterSizeMulti(multi);	// performs validation check
+		}
+		catch (IllegalArgumentException ex) {
+			throw new PatcherLibBaseEx(exMsg, ex);
+		}
+
+		this.threeQuarterSizeMultiParam = multi;
+	}
 
 	@Getter @Setter private int fullStackFullCost;
 	@Getter @Setter private double aiMultiplier;
 	@Getter @Setter private double oneQuarterSizeMulti;
 	@Getter private double halfSizeMultiParam;
-	@Getter @Setter private boolean loggingEnabled;
-	@Getter @Setter private boolean cumansExcluded;
+	@Getter private double threeQuarterSizeMultiParam;
+	@Getter @Setter private boolean captainsArmiesCostsEnabled;
 	@Getter @Setter private boolean siegeCostDisabled;
+	@Getter @Setter private boolean cumansExcluded;
+	@Getter @Setter private boolean loggingEnabled;
 
-	private double halfSizeMultiOffset = 0.25;
+	//private double halfSizeMultiOffset = 0.25;
 	private double halfSizeMulti() throws IllegalArgumentException {
 		return halfSizeMulti(halfSizeMultiParam);
 	}
 	private double halfSizeMulti(double paramValue) throws IllegalArgumentException {
-		val multi = paramValue - halfSizeMultiOffset;
+		val multi = paramValue - oneQuarterSizeMulti;
 
 		if(multi <= 0) throw new IllegalArgumentException("Effective halfSizeMultiplier <= 0 !");
+
+		return multi;
+	}
+
+	private double threeQuarterSizeMulti() throws IllegalArgumentException {
+		return threeQuarterSizeMulti(threeQuarterSizeMultiParam);
+	}
+	private double threeQuarterSizeMulti(double paramValue) throws IllegalArgumentException {
+		val multi = paramValue - oneQuarterSizeMulti;
+
+		if(multi <= 0) throw new IllegalArgumentException("Effective threeQuarterSizeMulti <= 0 !");
+
+		return multi;
+	}
+
+	private double fullSizeMulti() throws IllegalArgumentException {
+		val multi = 1.0 - oneQuarterSizeMulti;
+
+		if(multi <= 0) throw new IllegalArgumentException("Effective FillSizeMulti <= 0 !");
 
 		return multi;
 	}

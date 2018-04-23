@@ -14,6 +14,7 @@ import tm.mtwModPatcher.lib.common.entities.SettlementLevel;
 import tm.mtwModPatcher.lib.common.entities.SettlementLevelConverter;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingLevel;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.SettlType;
+import tm.mtwModPatcher.lib.data.exportDescrUnit.UnitDef;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -106,6 +107,9 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		int endCapabilityIndex = lines.findExpFirstRegexLine("^\\s*\\{", capabilityIndex+2);
 
 		lines.removeAllRegexLinesInRange(regexStr, capabilityIndex, endCapabilityIndex);
+	}
+	public void removeUnitRecruitment(UnitDef unit) {
+		removeUnitRecruitment(unit.Name);
 	}
 	public void removeUnitRecruitment(String unitName) {
 		 //        recruit_pool  "EE Peasants"  2   0.077   2  0  requires factions { russia, kievan_rus, hungary, lithuania, }

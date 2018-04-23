@@ -1,13 +1,16 @@
 package tm.mtwModPatcher.sship.features.global.catholicIberiaReworked;
 
 import lombok.val;
+import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.entities.FactionInfo;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingLevel;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.SettlType;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.StatMental;
+import tm.mtwModPatcher.lib.data.exportDescrUnit.UnitDef;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.WeaponAttributes;
+import tm.mtwModPatcher.lib.data.text.ExportUnits;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrMercenaries;
 import tm.mtwModPatcher.lib.managers.FactionsDefs;
 
@@ -17,47 +20,59 @@ import static tm.mtwModPatcher.lib.common.entities.UnitReplenishRate.*;
 import static tm.mtwModPatcher.lib.data.exportDescrUnit.UnitDef.MERCENARY_UNIT;
 import static tm.mtwModPatcher.lib.data.exportDescrUnit.WeaponStat.SOUND_TYPE_SPEAR;
 import static tm.mtwModPatcher.lib.managers.FactionsDefs.SLAVE;
-import static tm.mtwModPatcher.sship.lib.Buildings.BarracksCastle;
-import static tm.mtwModPatcher.sship.lib.Buildings.BarracksCastleLevels;
-import static tm.mtwModPatcher.sship.lib.Units.ALMUGHAVARS;
-import static tm.mtwModPatcher.sship.lib.Units.DISMOUNTED_SWORD_MAILED_KNIGHTS;
+import static tm.mtwModPatcher.sship.lib.Buildings.*;
+import static tm.mtwModPatcher.sship.lib.Units.*;
 
 public class AlmughavarsReworked {
-/* http://medieval2.heavengames.com/m2tw/mod_portal/tutorials/export_descr_units_file_guide/index.shtml  */
+	private UnitDef footUnit;
+	private UnitDef mountedUnit;
+	/* http://medieval2.heavengames.com/m2tw/mod_portal/tutorials/export_descr_units_file_guide/index.shtml  */
 
 	public void execute() {
+		footUnit = edu.loadUnit(ALMUGHAVARS);
+		mountedUnit = edu.loadUnit(CABALLEROS_VILLANOS);
+
 		unitStatFixes();
 
 		// ## Add Almughavars recuitment ##
-		barracksRecruitment();
+		footBarracksRecruitment();
+		mountedStableRecruitment();
 
 		mercenaryPools();
 	}
 
 	private void unitStatFixes() {
-		val unit = edu.loadUnit(ALMUGHAVARS);
 
-		unit.addOwnershipAll(FactionsDefs.christianFactionInfos());
-		unit.addOwnershipAll(SLAVE);
+		footUnit.addOwnershipAll(FactionsDefs.christianFactionInfos());
+		footUnit.addOwnershipAll(SLAVE);
 
 		// # Adjust recuit cost
 		val footKnights = edu.loadUnit(DISMOUNTED_SWORD_MAILED_KNIGHTS);
 
-		unit.StatCost.Cost = footKnights.StatCost.Cost;
-		unit.StatCost.Upkeep = unit.Soldier.NumberOfMen * 5;
+		footUnit.StatCost.Cost = footKnights.StatCost.Cost;
+		footUnit.upkeepByHugeMenMulti(2.25);
 
-		// Give spear
-		unit.StatSec.SoundType = SOUND_TYPE_SPEAR;
-		unit.StatSecAttr.add(WeaponAttributes.SPEAR);
+		footUnit.StatSec.SoundType = SOUND_TYPE_SPEAR;		// Give spear
+		footUnit.StatSecAttr.add(WeaponAttributes.SPEAR);	// Give spear
 
-		// Some better discipline
-		unit.StatMental.Discipline = StatMental.DISCIPLINE_DISCIPLINED;
+		footUnit.StatMental.Discipline = StatMental.DISCIPLINE_DISCIPLINED;	// Some better discipline
+		footUnit.addAttribute(MERCENARY_UNIT);	// Mercenaries
 
-		// Mercenaries
-		unit.addAttribute(MERCENARY_UNIT);
+		// #### Mounted ######
+		mountedUnit.addOwnershipAll(iberiaChristianFactions);
+		mountedUnit.addOwnershipAll(otherChristianAndSlaveFactions);
+		mountedUnit.addAttribute(UnitDef.MERCENARY_UNIT);
+		mountedUnit.StatMental.Discipline = StatMental.DISCIPLINE_DISCIPLINED;
+		mountedUnit.StatMental.Morale = footUnit.StatMental.Morale;
+
+		eUnits.replaceName(mountedUnit, "Mounted Almughavars");
+		val almughavarsDescr = eUnits.loadDescription(footUnit);
+		eUnits.replaceDescription(mountedUnit, almughavarsDescr);
+
+		mountedUnit.upkeepByHugeMenMulti(8);
 	}
 
-	private void barracksRecruitment() {
+	private void footBarracksRecruitment() {
 		edb.removeUnitRecruitment(ALMUGHAVARS);
 		val requireSuffix = " and hidden_resource aragon";
 
@@ -85,13 +100,48 @@ public class AlmughavarsReworked {
 		edb.addRecuitment(building, ALMUGHAVARS, 1, R6,3, 1 , reqLow);
 	}
 
-	private void mercenaryPools() {
-		val unitName = ALMUGHAVARS;
-		val highReplenish = "	unit "+ unitName +"			exp 2 cost 550 replenish 0.067 - 0.10 max 1 initial 1 religions { catholic }";	// replenish 0.07 - 0.17
-		val lowwReplenish = "	unit "+ unitName +"			exp 1 cost 550 replenish 0.05 - 0.067 max 1 initial 1 religions { catholic }";	// replenish 0.07 - 0.17
+	private void mountedStableRecruitment() throws PatcherLibBaseEx {
+		val cabVillanos = CABALLEROS_VILLANOS;
+		edb.removeUnitRecruitment(mountedUnit);
 
-		descrMercenaries.addUnitRecruitmentLine("Pyrenaes" , highReplenish);
-		descrMercenaries.addUnitRecruitmentLine("Spain" , lowwReplenish);
+		val requireSuffix = " and hidden_resource aragon";
+
+		val reqHigh = "factions { "+ FactionsDefs.toCsv(iberiaChristianFactions) +" }" + requireSuffix;
+		val reqLow = "factions { "+ FactionsDefs.toCsv(otherChristianAndSlaveFactions) +" }" + requireSuffix;
+
+		val building = new BuildingLevel(StablesCastle , StablesCastleLevels , SettlType.Castle);
+		edb.addRecuitment(building , cabVillanos , 1, R11, 1, 0, reqHigh);
+		edb.addRecuitment(building , cabVillanos , 0, R13, 1, 0, reqLow);
+
+		building.nextLevel();
+		edb.addRecuitment(building , cabVillanos , 1, R10, 1, 0, reqHigh);
+		edb.addRecuitment(building , cabVillanos , 0, R12, 1, 0, reqLow);
+
+		building.nextLevel();
+		edb.addRecuitment(building , cabVillanos , 1, R9, 2, 1, reqHigh);
+		edb.addRecuitment(building , cabVillanos , 0, R11, 1, 0, reqLow);
+
+		building.nextLevel();
+		edb.addRecuitment(building , cabVillanos , 1, R8, 2, 1, reqHigh);
+		edb.addRecuitment(building , cabVillanos , 1, R10, 2, 0, reqLow);
+
+		building.nextLevel();
+		edb.addRecuitment(building , cabVillanos , 2, R7, 3, 2, reqHigh);
+		edb.addRecuitment(building , cabVillanos , 1, R9, 2, 1, reqLow);
+	}
+
+	private void mercenaryPools() {
+		val footHighReplenish = 	"exp 2 cost 650 replenish 0.067 - 0.10 max 2 initial 2 religions { catholic }";	// replenish 0.07 - 0.17
+		val footLowReplenish  = 	"exp 1 cost 650 replenish 0.05 - 0.067 max 1 initial 1 religions { catholic }";	// replenish 0.07 - 0.17
+
+		val mountedHighReplenish =	"exp 2 cost 1050 replenish 0.05 - 0.09 max 1 initial 1 religions { catholic }";	// replenish 0.07 - 0.17
+		val mountedLowReplenish  = 	"exp 1 cost 1050 replenish 0.03 - 0.05 max 1 initial 0 religions { catholic }";	// replenish 0.07 - 0.17
+
+		descrMercenaries.addUnitRecruitmentLine(DescrMercenaries.PYRENAES , footUnit, footHighReplenish);
+		descrMercenaries.addUnitRecruitmentLine(DescrMercenaries.SPAIN , footUnit, footLowReplenish);
+
+		descrMercenaries.addUnitRecruitmentLine(DescrMercenaries.PYRENAES , mountedUnit, mountedHighReplenish);
+		descrMercenaries.addUnitRecruitmentLine(DescrMercenaries.SPAIN , mountedUnit, mountedLowReplenish);
 	}
 
 
@@ -102,6 +152,7 @@ public class AlmughavarsReworked {
 
 		edb = ctx.edb;
 		edu = ctx.edu;
+		eUnits = ctx.eUnits;
 		descrMercenaries = ctx.descrMercenaries;
 
 		iberiaChristianFactions = ctx.iberiaChristianFactions;
@@ -110,6 +161,7 @@ public class AlmughavarsReworked {
 
 	private final ExportDescrBuilding edb;
 	private final ExportDescrUnitTyped edu;
+	private ExportUnits eUnits;
 	private final DescrMercenaries descrMercenaries;
 
 	private final List<FactionInfo> iberiaChristianFactions;

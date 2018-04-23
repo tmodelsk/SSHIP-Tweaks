@@ -108,7 +108,7 @@ public class ExportDescrUnitTyped extends FileEntity {
 
 		u.Name = getValue("type" , unitLines);
 
-		u.Dictionary = getValue("dictionary" , unitLines);
+		u.Dictionary = Dictionary.parse( getValue("dictionary" , unitLines) );
 		u.Category = getValue("category" , unitLines).trim();
 		u.Class = getValue("class" , unitLines).trim();
 		u.VoiceType = getValue("voice_type" , unitLines);
@@ -397,7 +397,7 @@ public class ExportDescrUnitTyped extends FileEntity {
 	protected void saveUnit(UnitDef unit, BufferedWriter bw) throws IOException {
 
 		writeUnitAttrib("type" , unit.Name , bw);
-		writeUnitAttrib("dictionary" , unit.Dictionary , bw);
+		writeUnitAttrib("dictionary" , unit.Dictionary.toEduString() , bw);
 		writeUnitAttrib("category" , unit.Category , bw);
 		writeUnitAttrib("class" , unit.Class , bw);
 

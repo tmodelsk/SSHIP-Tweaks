@@ -1,8 +1,11 @@
 package tm.mtwModPatcher.lib.data.world.maps.campaign;
 
+import lombok.val;
+import tm.common.Ctm;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessorFileEntity;
+import tm.mtwModPatcher.lib.data.exportDescrUnit.UnitDef;
 
 import java.util.HashSet;
 import java.util.List;
@@ -129,6 +132,11 @@ public class DescrMercenaries extends LinesProcessorFileEntity {
 			addUnitRecruitmentLine(poolName, unitLineStr);
 	}
 
+	public void addUnitRecruitmentLine(String poolName, UnitDef unit, String replenishStr) throws PatcherLibBaseEx {
+		val unitLineStr = Ctm.format("	unit {0}			{1}", unit.Name, replenishStr);
+		addUnitRecruitmentLine(poolName, unitLineStr);
+	}
+
 	public void addUnitRecruitmentLine(String poolName, String unitLineStr) throws PatcherLibBaseEx {
 		LinesProcessor lines = _Lines;
 
@@ -139,6 +147,9 @@ public class DescrMercenaries extends LinesProcessorFileEntity {
 		lines.insertAt(index + 2 , unitLineStr);
 
 	}
+
+	public static final String PYRENAES = "Pyrenaes";
+	public static final String SPAIN = "Spain";
 
 	public DescrMercenaries() {
 		super("data\\world\\maps\\campaign\\imperial_campaign\\descr_mercenaries.txt");

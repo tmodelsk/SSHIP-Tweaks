@@ -10,7 +10,7 @@ import java.util.Collection;
 public class UnitDef {
 
 	public String Name;		// type
-	public String Dictionary;
+	public Dictionary Dictionary;
 	public String Category;
 	public String Class;
 
@@ -68,6 +68,10 @@ public class UnitDef {
 
 	public int RecruitPriorityOffset;
 	public String LastComment;
+
+	public void upkeepByHugeMenMulti(double hugeMulti) {
+		this.StatCost.Upkeep = (int)(this.Soldier.NumberOfMen * 2.5 * hugeMulti );
+	}
 
 	public void addAttribute(String attributeName) {
 		if(Attributes.contains(attributeName)) return;

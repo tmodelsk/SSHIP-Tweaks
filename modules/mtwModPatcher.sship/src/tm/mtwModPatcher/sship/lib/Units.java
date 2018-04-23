@@ -41,6 +41,7 @@ public class Units {
 
 	public final static String ALFORRATS = "Alforrats";
 	public final static String CABALLEROS_VILLANOS = "Caballeros Villanos";
+	public final static String MOUNTED_ALMUGHAVARS = CABALLEROS_VILLANOS;
 	public final static String MOUNTED_SERGEANTS = "Mounted Sergeants";
 
 

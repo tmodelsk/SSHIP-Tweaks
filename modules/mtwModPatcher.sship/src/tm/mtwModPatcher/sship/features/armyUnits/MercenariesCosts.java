@@ -7,9 +7,9 @@ import lombok.val;
 import tm.common.collections.ArrayUniqueList;
 import tm.common.collections.ListUnique;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
+import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamId;
 import tm.mtwModPatcher.lib.common.core.features.params.ParamIdDouble;
-import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.UnitDef;
@@ -28,10 +28,8 @@ public class MercenariesCosts extends Feature {
 
 	@Override
 	public void executeUpdates() throws Exception {
-		descrMercenaries = fileEntityFactory.getFile(DescrMercenaries.class);
-		registerForUpdate(descrMercenaries);
-		edu = fileEntityFactory.getFile(ExportDescrUnitTyped.class);
-		registerForUpdate(edu);
+		descrMercenaries = getFileRegisterForUpdated(DescrMercenaries.class);
+		edu = getFileRegisterForUpdated(ExportDescrUnitTyped.class);
 		edb = getFileRegisterForUpdated(ExportDescrBuilding.class);
 
 		LinesProcessor lines = edb.getLines();

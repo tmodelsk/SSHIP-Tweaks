@@ -5,9 +5,6 @@ import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessorFile
 
 import java.util.List;
 
-/**
- * Created by tomek on 22.04.2017.
- */
 public class HistoricEvents extends LinesProcessorFileEntity {
 
 	public void insertAtStartOfFile(List<String> linesToInsert) {

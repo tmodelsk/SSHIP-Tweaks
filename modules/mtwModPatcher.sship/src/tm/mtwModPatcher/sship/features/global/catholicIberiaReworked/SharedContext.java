@@ -3,6 +3,7 @@ package tm.mtwModPatcher.sship.features.global.catholicIberiaReworked;
 import tm.mtwModPatcher.lib.common.entities.FactionInfo;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
+import tm.mtwModPatcher.lib.data.text.ExportUnits;
 import tm.mtwModPatcher.lib.data.unitModels.BattleModels;
 import tm.mtwModPatcher.lib.data.world.maps.base.DescrRegions;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrMercenaries;
@@ -19,6 +20,7 @@ public class SharedContext {
 
 	public ExportDescrBuilding edb;
 	public ExportDescrUnitTyped edu;
+	public ExportUnits eUnits;
 	public DescrMercenaries descrMercenaries;
 	public DescrStratSectioned descrStrat;
 	public FactionsSection factionsSection;

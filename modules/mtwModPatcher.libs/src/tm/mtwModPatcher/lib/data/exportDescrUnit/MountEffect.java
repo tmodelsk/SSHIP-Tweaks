@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.val;
 import tm.common.Ctm;
 
-/** Created by tomek on 29.10.2017 */
 public class MountEffect {
 
 	@Getter

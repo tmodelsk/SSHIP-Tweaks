@@ -115,8 +115,8 @@ public class InfantryReworked {
 	}
 
 	private void removeSpearJavelinPeasantRecruitment() {
-		edb.removeUnitRecruitment(JAVELINMEN , iberiaChristianFactions);
-		edb.removeUnitRecruitment(LUSITANIAN_JAVELINMEN , iberiaChristianFactions);
+		//edb.removeUnitRecruitment(JAVELINMEN , iberiaChristianFactions);
+		//edb.removeUnitRecruitment(LUSITANIAN_JAVELINMEN , iberiaChristianFactions);
 		edb.removeUnitRecruitment(PEASANTS , iberiaChristianFactions);
 		edb.removeUnitRecruitment(SPEAR_MILITIA , ARAGON);
 	}

@@ -10,6 +10,7 @@ import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingLevel;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.SettlType;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
+import tm.mtwModPatcher.lib.data.text.ExportUnits;
 import tm.mtwModPatcher.lib.data.unitModels.BattleModels;
 import tm.mtwModPatcher.lib.data.world.maps.base.DescrRegions;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrMercenaries;
@@ -24,7 +25,6 @@ import tm.mtwModPatcher.sship.lib.Provinces;
 import java.util.*;
 import java.util.regex.Pattern;
 
-import static tm.mtwModPatcher.lib.common.entities.UnitReplenishRate.*;
 import static tm.mtwModPatcher.lib.managers.FactionsDefs.*;
 import static tm.mtwModPatcher.sship.lib.Buildings.*;
 import static tm.mtwModPatcher.sship.lib.Units.*;
@@ -143,44 +143,6 @@ public class CatholicIberiaReworked extends Feature {
 		 TODO: dodac battleModels : dodac dla Mounted Seargent .
 		*/
 
-
-		caballerosVillanosReworked();
-		removeAlforrats();
-	}
-	private void caballerosVillanosReworked() throws PatcherLibBaseEx {
-		String cabVillanos = CABALLEROS_VILLANOS;
-		val unit = edu.loadUnit(cabVillanos);
-
-		edb.removeUnitRecruitment(cabVillanos);
-		unit.addOwnershipAll(iberiaChristianFactions);
-		unit.addOwnershipAll(otherChristianAndSlaveFactions);
-
-		val requireSuffix = " and hidden_resource aragon";
-
-		val reqHigh = "factions { "+ FactionsDefs.toCsv(iberiaChristianFactions) +" }" + requireSuffix;
-		val reqLow = "factions { "+ FactionsDefs.toCsv(otherChristianAndSlaveFactions) +" }" + requireSuffix;
-
-		val building = new BuildingLevel(StablesCastle , StablesCastleLevels , SettlType.Castle);
-		edb.addRecuitment(building , cabVillanos , 1, R11, 1, 0, reqHigh);
-		edb.addRecuitment(building , cabVillanos , 0, R13, 1, 0, reqLow);
-
-		building.nextLevel();
-		edb.addRecuitment(building , cabVillanos , 1, R10, 1, 0, reqHigh);
-		edb.addRecuitment(building , cabVillanos , 0, R12, 1, 0, reqLow);
-
-		building.nextLevel();
-		edb.addRecuitment(building , cabVillanos , 1, R9, 2, 1, reqHigh);
-		edb.addRecuitment(building , cabVillanos , 0, R11, 1, 0, reqLow);
-
-		building.nextLevel();
-		edb.addRecuitment(building , cabVillanos , 1, R8, 2, 1, reqHigh);
-		edb.addRecuitment(building , cabVillanos , 1, R10, 2, 0, reqLow);
-
-		building.nextLevel();
-		edb.addRecuitment(building , cabVillanos , 2, R7, 3, 2, reqHigh);
-		edb.addRecuitment(building , cabVillanos , 1, R9, 2, 1, reqLow);
-	}
-	private void removeAlforrats() {
 		edb.removeUnitRecruitment(ALFORRATS);
 	}
 
@@ -361,6 +323,7 @@ public class CatholicIberiaReworked extends Feature {
 	private void initFileEntitiesAndSubModules() throws Exception {
 		edb = getFileRegisterForUpdated(ExportDescrBuilding.class);
 		edu = getFileRegisterForUpdated(ExportDescrUnitTyped.class);
+		eUnits = getFileRegisterForUpdated(ExportUnits.class);
 		descrMercenaries = getFileRegisterForUpdated(DescrMercenaries.class);
 		descrStrat = getFileRegisterForUpdated(DescrStratSectioned.class);
 		factionsSection = descrStrat.Factions;
@@ -370,6 +333,7 @@ public class CatholicIberiaReworked extends Feature {
 		val sharedCtx = new SharedContext();
 		sharedCtx.edb = edb;
 		sharedCtx.edu = edu;
+		sharedCtx.eUnits = eUnits;
 		sharedCtx.descrMercenaries = descrMercenaries;
 		sharedCtx.descrStrat = descrStrat;
 		sharedCtx.factionsSection = factionsSection;
@@ -409,6 +373,7 @@ public class CatholicIberiaReworked extends Feature {
 
 	private ExportDescrBuilding edb;
 	private ExportDescrUnitTyped edu;
+	private ExportUnits eUnits;
 	private DescrMercenaries descrMercenaries;
 	private DescrStratSectioned descrStrat;
 	private FactionsSection factionsSection;
