@@ -355,8 +355,8 @@ public class CatholicIberiaReworked extends Feature {
 		super("Catholic Iberia reworked");
 		allSpainHiddenResList = Arrays.asList(HiddenResources.Aragon, HiddenResources.Spain, HiddenResources.Portugal, HiddenResources.Andalusia);
 
-		addCategory("Global");
-		addCategory("Units");
+		addCategory(CATEGORY_CAMPAIGN);
+		addCategory(CATEGORY_UNITS);
 
 		addOverrideTask(new OverrideUnitInfosTask());
 

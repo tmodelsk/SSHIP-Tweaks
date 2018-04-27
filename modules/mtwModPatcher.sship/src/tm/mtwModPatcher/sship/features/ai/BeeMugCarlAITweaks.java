@@ -206,7 +206,7 @@ public class BeeMugCarlAITweaks extends Feature {
 	public BeeMugCarlAITweaks() {
 		super("BeeMugCarl AI tweaks");
 
-		addCategory("Campaign");
+		addCategory(CATEGORY_CAMPAIGN);
 
 		setDescriptionShort("Additional AI related tweaks by BeeMugCarl");
 		setDescriptionUrl("http://tmsship.wikidot.com/beemugcarl-ai-tweaks");

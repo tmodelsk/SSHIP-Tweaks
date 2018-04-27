@@ -68,6 +68,7 @@ public class SsHipFeatures {
 		features.add(new ArmySuppliesCosts());
 		features.add(new MaxTreasuryLimited());
 		features.add(new BeeMugCarlAITweaks());
+		features.add(new TraitsBoostForSpecificFactions());
 		//features.add(new SkynetBattleAi(inputStreamProvider));
 
 		features.add(new CampaignAisCompilation(resourcesProvider));

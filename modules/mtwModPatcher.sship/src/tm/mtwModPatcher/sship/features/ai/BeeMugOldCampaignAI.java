@@ -67,7 +67,8 @@ public class BeeMugOldCampaignAI extends Feature {
 	public BeeMugOldCampaignAI() {
 		super("BeeMugCarl campaign AI");
 
-		addCategory("Campaign");
+		addCategory(CATEGORY_CAMPAIGN);
+		addCategory(CATEGORY_AI);
 
 		setDescriptionShort("Very good alternative campaign AI created by BeeMugCarl");
 		setDescriptionUrl("http://tmsship.wikidot.com/beemugcarl-campaign-ai");

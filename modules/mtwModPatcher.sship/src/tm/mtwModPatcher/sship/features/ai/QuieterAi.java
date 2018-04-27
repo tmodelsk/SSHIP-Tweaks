@@ -60,6 +60,9 @@ public class QuieterAi extends CampaignAiConfigurator {
 	public QuieterAi(ResourcesProvider resourcesProvider) {
 		super("Quieter AI [kaiser29]", resourcesProvider);
 
+		addCategory(CATEGORY_CAMPAIGN);
+		addCategory(CATEGORY_AI);
+
 		setDescriptionUrl("http://tmsship.wikidot.com/campaign-ai-s-compilation");
 	}
 

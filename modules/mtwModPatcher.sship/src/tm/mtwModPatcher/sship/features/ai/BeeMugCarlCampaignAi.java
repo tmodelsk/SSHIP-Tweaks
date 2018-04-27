@@ -52,7 +52,8 @@ public class BeeMugCarlCampaignAi extends CampaignAiConfigurator {
 	public BeeMugCarlCampaignAi(ResourcesProvider resourcesProvider) {
 		super("BeeMugCarl Campaign AI", resourcesProvider);
 
-		addCategory("Campaign");
+		addCategory(CATEGORY_CAMPAIGN);
+		addCategory(CATEGORY_AI);
 
 		setDescriptionShort("Very good alternative campaign AI created by BeeMugCarl");
 		setDescriptionUrl("http://tmsship.wikidot.com/beemugcarl-campaign-ai");

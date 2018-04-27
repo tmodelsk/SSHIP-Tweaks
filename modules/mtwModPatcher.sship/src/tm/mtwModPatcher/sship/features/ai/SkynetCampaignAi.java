@@ -36,8 +36,8 @@ public class SkynetCampaignAi extends CampaignAiConfigurator {
 	public SkynetCampaignAi(ResourcesProvider resourcesProvider) {
 		super("Skynet Campaign AI [z3n]", resourcesProvider);
 
-		addCategory("Campaign");
-		addCategory("AI");
+		addCategory(CATEGORY_CAMPAIGN);
+		addCategory(CATEGORY_AI);
 
 		setDescriptionShort("Skynet Campaign AI [z3n]");
 		setDescriptionUrl("http://tmsship.wikidot.com/campaign-ai-s-compilation");
