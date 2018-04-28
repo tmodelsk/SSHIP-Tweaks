@@ -271,4 +271,5 @@ public abstract class Feature {
 	public static final String CATEGORY_CAMPAIGN = "Campaign";
 	public static final String CATEGORY_AI = "AI";
 	public static final String CATEGORY_UNITS = "Units";
+	public static final String CATEGORY_BATTLE = "Battle";
 }
