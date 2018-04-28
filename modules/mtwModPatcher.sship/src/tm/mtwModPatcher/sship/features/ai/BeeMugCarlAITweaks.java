@@ -5,17 +5,13 @@ import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
 import tm.mtwModPatcher.lib.data._root.DescrCampaignDb;
 import tm.mtwModPatcher.lib.data._root.DescrCharacter;
-import tm.mtwModPatcher.lib.data._root.DescrSMFactions;
 import tm.mtwModPatcher.lib.data._root.ExportDescrCharacterTraits;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.text.ExportVnvs;
-import tm.mtwModPatcher.lib.data.world.maps.campaign.descrStrat.DescrStratSectioned;
 
 import java.util.UUID;
 
-/**
- * http://www.twcenter.net/forums/showthread.php?594662-%2805-04-2016%29-My-new-and-improved-AI-errr-3-0
- */
+/** http://www.twcenter.net/forums/showthread.php?594662-%2805-04-2016%29-My-new-and-improved-AI-errr-3-0  */
 public class BeeMugCarlAITweaks extends Feature {
 
 	@Override
@@ -28,8 +24,6 @@ public class BeeMugCarlAITweaks extends Feature {
 		descrCampaignDb = getFileRegisterForUpdated(DescrCampaignDb.class);
 		exportDescrBuilding = getFileRegisterForUpdated(ExportDescrBuilding.class);
 		exportDescrCharacterTraits = getFileRegisterForUpdated(ExportDescrCharacterTraits.class);
-		descrStratSectioned = getFileRegisterForUpdated(DescrStratSectioned.class);
-		descrSMFactions = getFileRegisterForUpdated(DescrSMFactions.class);
 		descrCharacter = getFileRegisterForUpdated(DescrCharacter.class);
 		exportVnvs = getFileRegisterForUpdated(ExportVnvs.class);
 
@@ -84,15 +78,17 @@ public class BeeMugCarlAITweaks extends Feature {
 		str += "   Effect Command 1" + nl;
 		str += "   Effect LineOfSight 6" + nl;
 		str += "   Effect PersonalSecurity 2" + nl;
-		str += "   Effect SiegeEngineering 50" + nl;
+		str += "   Effect SiegeEngineering 25" + nl;
 		str += "   Effect Attack 1" + nl;
-		//str+="   Effect Loyalty 2"+nl;
-		//str += "   Effect Chivalry 1" + nl;
-		str += "   Effect BattleSurgery 15" + nl;	// 30
-		//str+="   Effect HitPoints 1"+nl;
-		str+="   Effect TaxCollection 10"+nl;
+		str += "   Effect BattleSurgery 10" + nl;	// 30
+		str += "   Effect TaxCollection 10" + nl;
 		str += "   Effect Construction 10" + nl;
 		str += "" + nl;
+
+		//str += "   Effect Loyalty 2" + nl;
+		//str += "   Effect Chivalry 1" + nl;
+		//str+="   Effect HitPoints 1"+nl;
+
 
 		lines.insertAt(index, str);
 		str = "";
@@ -116,7 +112,6 @@ public class BeeMugCarlAITweaks extends Feature {
 		str += "" + nl;
 
 		lines.insertAt(index, str);
-		str = "";
 
 		/*
 		Effect Fertility 3
@@ -144,14 +139,13 @@ public class BeeMugCarlAITweaks extends Feature {
 		exportVnvs.insertAtStartOfFile(str);
 	}
 
-	protected void AddRecruitmentSlotsForAi() throws PatcherLibBaseEx {
+	@SuppressWarnings("unused")
+	private void AddRecruitmentSlotsForAi() throws PatcherLibBaseEx {
 
 		// SSHIP OLD : recruitment_slots 1 requires not event_counter freeze_recr_pool 1
 		String requires = " requires not event_counter freeze_recr_pool 1 and not event_counter is_the_player 1";
 		// ### CITIES ### : wooden_pallisade wooden_wall stone_wall large_stone_wall huge_stone_wall
-
-		// ## Village ## - no bonus - no building
-		int recrBonus = 1;
+		int recrBonus = 1;	// ## Village ## - no bonus - no building
 
 		// # Walls #
 		exportDescrBuilding.addCapabilities("core_building", "wooden_pallisade", "city", "       recruitment_slots bonus " + recrBonus + requires);
@@ -169,9 +163,9 @@ public class BeeMugCarlAITweaks extends Feature {
 		exportDescrBuilding.addCapabilities("core_building", "huge_stone_wall", "city", "       recruitment_slots bonus " + recrBonus + requires);
 		//recrBonus++;
 
-		// ### CASTLES ###
-		// # Walls # - building core_castle_building
-		// levels motte_and_bailey wooden_castle castle fortress citadel
+		/* ### CASTLES ###
+		   # Walls # - building core_castle_building
+		     levels motte_and_bailey wooden_castle castle fortress citadel */
 		recrBonus = 1;
 		exportDescrBuilding.addCapabilities("core_castle_building", "motte_and_bailey", "castle", "       recruitment_slots bonus " + recrBonus + requires);
 		recrBonus++;
@@ -189,13 +183,11 @@ public class BeeMugCarlAITweaks extends Feature {
 		//recrBonus++;
 	}
 
-	protected DescrCampaignDb descrCampaignDb;
-	protected ExportDescrBuilding exportDescrBuilding;
-	protected ExportDescrCharacterTraits exportDescrCharacterTraits;
-	protected DescrStratSectioned descrStratSectioned;
-	protected DescrSMFactions descrSMFactions;
-	protected DescrCharacter descrCharacter;
-	protected ExportVnvs exportVnvs;
+	private DescrCampaignDb descrCampaignDb;
+	private ExportDescrBuilding exportDescrBuilding;
+	private ExportDescrCharacterTraits exportDescrCharacterTraits;
+	private DescrCharacter descrCharacter;
+	private ExportVnvs exportVnvs;
 
 	@Override
 	public UUID getId() {

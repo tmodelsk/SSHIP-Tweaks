@@ -6,9 +6,6 @@ import tm.mtwModPatcher.lib.data._root.ExportDescrCharacterTraits;
 
 import java.util.UUID;
 
-/**
- * Created by tomek on 22.04.2017.
- */
 public class StrategyDreadBuildingsDisable extends Feature {
 
 	@Override
