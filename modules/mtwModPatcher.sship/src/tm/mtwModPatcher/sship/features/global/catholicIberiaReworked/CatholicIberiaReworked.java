@@ -7,8 +7,7 @@ import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
 import tm.mtwModPatcher.lib.common.entities.FactionInfo;
 import tm.mtwModPatcher.lib.common.entities.SettlementLevel;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
-import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingLevel;
-import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.SettlType;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.Building;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
 import tm.mtwModPatcher.lib.data.text.ExportUnits;
 import tm.mtwModPatcher.lib.data.unitModels.BattleModels;
@@ -77,24 +76,23 @@ public class CatholicIberiaReworked extends Feature {
 	}
 	private void proffArchersAddToAragonRegion() {
 		val unit = PRUSSIAN_ARCHERS;
-		val levels = MissileCastleLevels;
 		val requireHr = " and not event_counter HEAVY_MAIL_ARMOR 1 and hidden_resource "+HiddenResources.Aragon;
 
 		val reqHigh = "factions { england, aragon, spain, portugal, }" + requireHr;
 		val reqMedium = "factions { russia, kievan_rus, slave, }" + requireHr;
 		val reqLow = "factions { jerusalem, pisa, venice, papal_states, hre, france, }" + requireHr;
 
-		val building = new BuildingLevel(MissileCastle, levels.get(1), SettlType.Castle);
+		Building building = MissleCastleTree.level(2);
 		edb.addRecuitment(building, unit, 1, 0.25, 1, 0, reqHigh);
 		edb.addRecuitment(building, unit, 0, 0.17, 1, 0, reqMedium);
 		edb.addRecuitment(building, unit, 0, 0.13, 1, 0, reqLow);
 
-		building.LevelName = levels.get(2);
+		building = building.next();
 		edb.addRecuitment(building, unit, 1, 0.34, 2, 0, reqHigh);
 		edb.addRecuitment(building, unit, 1, 0.25, 2, 0, reqMedium);
 		edb.addRecuitment(building, unit, 0, 0.17, 1, 0, reqLow);
 
-		building.LevelName = levels.get(3);
+		building = building.next();
 		edb.addRecuitment(building, unit, 1, 0.5, 3, 0, reqHigh);
 		edb.addRecuitment(building, unit, 1, 0.34, 3, 0, reqMedium);
 		edb.addRecuitment(building, unit, 1, 0.25, 3, 0, reqLow);
@@ -154,7 +152,7 @@ public class CatholicIberiaReworked extends Feature {
 		descrStrat.setFactionCreator(prov, FactionsDefs.ARAGON.symbol);
 		descrStrat.insertSettlementBuilding(prov, WallsCastleSpec.Name, WallsCastleSpec.L4_Fortress);
 		descrStrat.insertSettlementBuilding(prov, BarracksCastle, BarracksCastleLevels.get(1));
-		descrStrat.insertSettlementBuilding(prov, StablesCastle, StablesCastleLevels.get(0));
+		descrStrat.insertSettlementBuilding(prov, StablesCastleSymbol, StablesCastleLevels.get(0));
 		descrStrat.insertSettlementBuilding(prov, MissileCastle, MissileCastleLevels.get(0));
 
 		descrStrat.insertSettlementBuilding(prov, MarketCastle, MarketCastleLevels.get(2));
@@ -163,7 +161,7 @@ public class CatholicIberiaReworked extends Feature {
 		descrStrat.insertSettlementBuilding(prov, RiverAccess, RiverAccessLevel);
 		descrStrat.insertSettlementBuilding(prov, TempleCatholicCastle, TempleCatholicCastleLevels.get(1));
 		descrStrat.insertSettlementBuilding(prov, MonasteryCatholicCastle, MonasteryCatholicCastleLevels.get(0));
-		descrStrat.insertSettlementBuilding(prov, TavernCastle);
+		descrStrat.insertSettlementBuilding(prov, TavernCastle.first());
 		descrStrat.insertSettlementBuilding(prov, WaterSupply, WaterSupplyLevels.get(0));
 		descrStrat.insertSettlementBuilding(prov, Health, HealthLevels.get(0));
 		descrStrat.insertSettlementBuilding(prov, StoneMason, StoneMasonLevels.get(0));
@@ -229,8 +227,8 @@ public class CatholicIberiaReworked extends Feature {
 		factionsSect.removeSettlementBuilding(prov, MissileCastle);
 		factionsSect.insertSettlementBuilding(prov, MissileCastle, MissileCastleLevels.get(1));
 
-		factionsSect.removeSettlementBuilding(prov, StablesCastle);
-		factionsSect.insertSettlementBuilding(prov, StablesCastle, StablesCastleLevels.get(2));
+		factionsSect.removeSettlementBuilding(prov, StablesCastleSymbol);
+		factionsSect.insertSettlementBuilding(prov, StablesCastleSymbol, StablesCastleLevels.get(2));
 
 		factionsSect.insertSettlementBuilding(prov, TempleCatholicCastle, TempleCatholicCastleLevels.get(0));
 

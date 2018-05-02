@@ -1,17 +1,15 @@
 package tm.mtwModPatcher.sship.lib;
 
-import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingLevel;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingTree;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.SettlType;
 
 import java.util.Arrays;
 import java.util.List;
 
-/**
- * Created by tomek on 14.10.2017.
- */
+/** SSHIP Buildings */
 public class Buildings {
 
-	public static final BuildingLevel CouncilCity = new BuildingLevel("city_hall", SettlType.City, "town_hall council_chambers city_hall mayors_palace");
+	public static final BuildingTree CouncilCity = new BuildingTree("city_hall", SettlType.City, "town_hall council_chambers city_hall mayors_palace");
 
 	// ### Guilds ###
 	public static final String MerchantGuild = "guild_merchants_guild";
@@ -25,6 +23,9 @@ public class Buildings {
 	public static final String MarketCastle = "market_castle";
 	public static final List<String> MarketCityLevels = Arrays.asList("corn_exchange", "market", "fairground", "great_market", "merchants_quarter");
 	public static final List<String> MarketCastleLevels = Arrays.asList("corn_exchange", "market", "fairground");
+
+	public static final BuildingTree MarketCityTree = new BuildingTree(MarketCity, MarketCityLevels, SettlType.City);
+	public static final BuildingTree MarketCastleTree = new BuildingTree(MarketCastle, MarketCastleLevels, SettlType.Castle);
 
 	public  static final String RoadCity = "hinterland_roads";
 	public  static final String RoadCastle = "hinterland_castle_roads";
@@ -46,9 +47,9 @@ public class Buildings {
 
 	private static final String TavernCity1 = "taverns";
 	private static final List<String> TavernCityLevels1 = Arrays.asList("brothel", "inn", "tavern", "coaching_house", "pleasure_palace");
-	public static final BuildingLevel TavernCity = new BuildingLevel(TavernCity1, TavernCityLevels1, SettlType.City);
+	public static final BuildingTree TavernCity = new BuildingTree(TavernCity1, TavernCityLevels1, SettlType.City);
 
-	public static final BuildingLevel TavernCastle = new BuildingLevel("castle_taverns", Arrays.asList("c_brothel"), SettlType.Castle);
+	public static final BuildingTree TavernCastle = new BuildingTree("castle_taverns", Arrays.asList("c_brothel"), SettlType.Castle);
 
 
 	public static final String StoneMason = "stonemason";
@@ -67,18 +68,18 @@ public class Buildings {
 	public static final String BakeryCastle = "castle_bakery";
 	public static final String BakeryCastleLevel = "c_bakery";
 
-	public static final BuildingLevel TempleMuslimCity = new BuildingLevel("temple_muslim", SettlType.City,"small_masjid masjid minareted_masjid jama great_jama");
-	public static final BuildingLevel TempleMuslimCastle = new BuildingLevel("temple_muslim_castle", SettlType.Castle,"c_small_masjid c_masjid");
+	public static final BuildingTree TempleMuslimCity = new BuildingTree("temple_muslim", SettlType.City,"small_masjid masjid minareted_masjid jama great_jama");
+	public static final BuildingTree TempleMuslimCastle = new BuildingTree("temple_muslim_castle", SettlType.Castle,"c_small_masjid c_masjid");
 
 	public static final String TempleCatholicCity = "temple_catholic";
-	public static final BuildingLevel TempleCathCity = new BuildingLevel(TempleCatholicCity, Arrays.asList("small_church", "church", "abbey", "cathedral", "huge_cathedral"), SettlType.City);
+	public static final BuildingTree TempleCathCity = new BuildingTree(TempleCatholicCity, Arrays.asList("small_church", "church", "abbey", "cathedral", "huge_cathedral"), SettlType.City);
 
 	public static final String TempleCatholicCastle = "temple_catholic_castle";
 	public static final List<String> TempleCatholicCastleLevels = Arrays.asList("small_chapel", "chapel");
-	public static final BuildingLevel TempleCathCastle = new BuildingLevel(TempleCatholicCastle, TempleCatholicCastleLevels, SettlType.Castle);
+	public static final BuildingTree TempleCathCastle = new BuildingTree(TempleCatholicCastle, TempleCatholicCastleLevels, SettlType.Castle);
 
-	public static final BuildingLevel TempleOrthodoxCity = new BuildingLevel("temple_orthodox" , SettlType.City, "small_church_o church_o abbey_o cathedral_o huge_cathedral_o");
-	public static final BuildingLevel TempleOrthodoxCastle = new BuildingLevel("temple_orthodox_castle" , SettlType.Castle, "small_chapel_o chapel_o");
+	public static final BuildingTree TempleOrthodoxCity = new BuildingTree("temple_orthodox" , SettlType.City, "small_church_o church_o abbey_o cathedral_o huge_cathedral_o");
+	public static final BuildingTree TempleOrthodoxCastle = new BuildingTree("temple_orthodox_castle" , SettlType.Castle, "small_chapel_o chapel_o");
 
 	public static final String MonasteryCatholicCity = "friar";
 	public static final List<String> MonasteryCatholicCityLevels = Arrays.asList("monastery", "medical_care", "hospital");
@@ -102,17 +103,16 @@ public class Buildings {
 
 	public static final String BarracksCastle = "castle_barracks";
 	public static final List<String> BarracksCastleLevels = Arrays.asList("mustering_hall", "garrison_quarters", "drill_square", "barracks", "armoury");
-	public static final BuildingLevel BarracksCastle_1 = new BuildingLevel(BarracksCastle, BarracksCastleLevels, SettlType.Castle);
-	public static final BuildingLevel BarracksCastle_2 = BarracksCastle_1.createNextLevel();
-	public static final BuildingLevel BarracksCastle_3 = BarracksCastle_2.createNextLevel();
-	public static final BuildingLevel BarracksCastle_4 = BarracksCastle_3.createNextLevel();
-	public static final BuildingLevel BarracksCastle_5 = BarracksCastle_4.createNextLevel();
+	public static final  BuildingTree BarracksCastleTree = new BuildingTree(BarracksCastle, BarracksCastleLevels, SettlType.Castle);
 
 	public static final String MissileCastle = "missiles";
 	public static final List<String> MissileCastleLevels = Arrays.asList("bowyer", "practice_range", "archery_range", "marksmans_range");
+	public static final BuildingTree MissleCastleTree = new BuildingTree(MissileCastle, MissileCastleLevels, SettlType.Castle);
 
-	public static final String StablesCastle = "equestrian";
+	public static final String StablesCastleSymbol = "equestrian";
 	public static final List<String> StablesCastleLevels = Arrays.asList("stables", "knights_stables", "barons_stables", "earls_stables", "kings_stables");
+
+	public static final BuildingTree StableCastle = new BuildingTree(StablesCastleSymbol, StablesCastleLevels , SettlType.Castle);
 
 
 	public static final String ItalianTraders = "Italian_Traders";
@@ -139,8 +139,8 @@ public class Buildings {
 	public static final List<String> WallsCityLevels = Arrays.asList(WallsCitySpec.L1_WoodenPalisade, WallsCitySpec.L2_WoodenWall, WallsCitySpec.L3_StoneWall, WallsCitySpec.L4_LargeStoneWall, WallsCitySpec.L5_HugeStoneWall);
 	public static final List<String> WallsCastleLevels = Arrays.asList(WallsCastleSpec.L1_MotteAndBailey, WallsCastleSpec.L2_WoodenCastle, WallsCastleSpec.L3_Castle, WallsCastleSpec.L4_Fortress, WallsCastleSpec.L5_Citadel);
 
-	public static final BuildingLevel WallsCity = new BuildingLevel(WallsCitySpec.Name, WallsCityLevels, SettlType.City);
-	public static final BuildingLevel WallsCastle = new BuildingLevel(WallsCastleSpec.Name, WallsCastleLevels, SettlType.Castle);
+	public static final BuildingTree WallsCity = new BuildingTree(WallsCitySpec.Name, WallsCityLevels, SettlType.City);
+	public static final BuildingTree WallsCastle = new BuildingTree(WallsCastleSpec.Name, WallsCastleLevels, SettlType.Castle);
 
 	public final static String CityType = tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.Buildings.CityType;
 	public final static String CastleType = tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.Buildings.CastleType;

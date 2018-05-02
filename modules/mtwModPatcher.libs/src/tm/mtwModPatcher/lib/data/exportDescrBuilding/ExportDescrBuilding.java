@@ -12,7 +12,9 @@ import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessorFile
 import tm.mtwModPatcher.lib.common.entities.FactionInfo;
 import tm.mtwModPatcher.lib.common.entities.SettlementLevel;
 import tm.mtwModPatcher.lib.common.entities.SettlementLevelConverter;
-import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingLevel;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.Building;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingSimple;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingTree;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.SettlType;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.UnitDef;
 
@@ -260,9 +262,9 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 	}
 
 
-	public void addRecuitment(BuildingLevel buidlingLevel, String unitName, int starting, double replenish, int max, int bonus,
+	public void addRecuitment(Building buidling, String unitName, int starting, double replenish, int max, int bonus,
 							  String requirements) throws PatcherLibBaseEx {
-		addRecuitment(buidlingLevel.Name, buidlingLevel.LevelName, buidlingLevel.SettlType.toLabelString(),
+		addRecuitment(buidling.name, buidling.levelName, buidling.settlType.toLabelString(),
 				unitName, starting, replenish, max, bonus, requirements);
 	}
 
@@ -277,11 +279,11 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		addCapabilities(buildingName, levelName, castleOrCity, line);
 	}
 
-	public void addCapabilitiesAllLevels(BuildingLevel buidlingLevel, String newLine) {
-		buidlingLevel.levels().forEach( bl -> addCapabilities(bl, newLine));
+	public void addCapabilitiesAllLevels(BuildingTree buildingTree, String newLine) {
+		buildingTree.levels().forEach(bl -> addCapabilities(bl, newLine));
 	}
-	public void addCapabilities(BuildingLevel buidlingLevel, String newLine) {
-		addCapabilities(buidlingLevel.Name, buidlingLevel.LevelName, buidlingLevel.SettlType, newLine);
+	public void addCapabilities(BuildingSimple buidlingLevel, String newLine) {
+		addCapabilities(buidlingLevel.name, buidlingLevel.levelName, buidlingLevel.settlType, newLine);
 	}
 	public void addCapabilities(String buildingName, String levelName, SettlType settlType, String newLine) {
 		addCapabilities(buildingName, levelName, settlType.toLabelString(), newLine);
@@ -365,9 +367,9 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		}
 	}
 
-	public Range<Integer, Integer> getCapabilitiesStartEnd(BuildingLevel bl) {
-		String cityOrCastle = bl.SettlType == null ? null : bl.SettlType.toLabelString();
-		return getCapabilitiesStartEnd(bl.Name, bl.LevelName, cityOrCastle);
+	public Range<Integer, Integer> getCapabilitiesStartEnd(BuildingSimple bl) {
+		String cityOrCastle = bl.settlType == null ? null : bl.settlType.toLabelString();
+		return getCapabilitiesStartEnd(bl.name, bl.levelName, cityOrCastle);
 	}
 	public Range<Integer, Integer> getCapabilitiesStartEnd(String buildingName, String levelName, String castleOrCity) {
 		LinesProcessor lines = _Lines;

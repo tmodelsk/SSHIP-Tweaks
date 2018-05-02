@@ -4,8 +4,7 @@ import lombok.val;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 import tm.mtwModPatcher.lib.common.entities.FactionInfo;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
-import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingLevel;
-import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.SettlType;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.Building;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.StatMental;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.UnitDef;
@@ -13,6 +12,7 @@ import tm.mtwModPatcher.lib.data.exportDescrUnit.WeaponAttributes;
 import tm.mtwModPatcher.lib.data.text.ExportUnits;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.DescrMercenaries;
 import tm.mtwModPatcher.lib.managers.FactionsDefs;
+import tm.mtwModPatcher.sship.lib.Buildings;
 
 import java.util.List;
 
@@ -20,7 +20,6 @@ import static tm.mtwModPatcher.lib.common.entities.UnitReplenishRate.*;
 import static tm.mtwModPatcher.lib.data.exportDescrUnit.UnitDef.MERCENARY_UNIT;
 import static tm.mtwModPatcher.lib.data.exportDescrUnit.WeaponStat.SOUND_TYPE_SPEAR;
 import static tm.mtwModPatcher.lib.managers.FactionsDefs.SLAVE;
-import static tm.mtwModPatcher.sship.lib.Buildings.*;
 import static tm.mtwModPatcher.sship.lib.Units.*;
 
 public class AlmughavarsReworked {
@@ -79,25 +78,26 @@ public class AlmughavarsReworked {
 		val reqHigh = "factions { "+ FactionsDefs.toCsv(iberiaChristianFactions) +" }" + requireSuffix;
 		val reqLow = "factions { "+ FactionsDefs.toCsv(otherChristianAndSlaveFactions) +" }" + requireSuffix;
 
-		val building = new BuildingLevel(BarracksCastle, BarracksCastleLevels, SettlType.Castle);
-		edb.addRecuitment(building, ALMUGHAVARS, 1, R8,1, 0 , reqHigh);
-		edb.addRecuitment(building, ALMUGHAVARS, 0, R10,1, 0 , reqLow);
+		val barracksTree = Buildings.BarracksCastleTree;
+		Building b = barracksTree.first();
+		edb.addRecuitment(b, ALMUGHAVARS, 1, R8,1, 0 , reqHigh);
+		edb.addRecuitment(b, ALMUGHAVARS, 0, R10,1, 0 , reqLow);
 
-		building.nextLevel();
-		edb.addRecuitment(building, ALMUGHAVARS, 1, R7,2, 0 , reqHigh);
-		edb.addRecuitment(building, ALMUGHAVARS, 0, R9,1, 0 , reqLow);
+		b=b.next();
+		edb.addRecuitment(b, ALMUGHAVARS, 1, R7,2, 0 , reqHigh);
+		edb.addRecuitment(b, ALMUGHAVARS, 0, R9,1, 0 , reqLow);
 
-		building.nextLevel();
-		edb.addRecuitment(building, ALMUGHAVARS, 2, R6,3, 1 , reqHigh);
-		edb.addRecuitment(building, ALMUGHAVARS, 1, R8,2, 0 , reqLow);
+		b=b.next();
+		edb.addRecuitment(b, ALMUGHAVARS, 2, R6,3, 1 , reqHigh);
+		edb.addRecuitment(b, ALMUGHAVARS, 1, R8,2, 0 , reqLow);
 
-		building.nextLevel();
-		edb.addRecuitment(building, ALMUGHAVARS, 2, R5,4, 2 , reqHigh);
-		edb.addRecuitment(building, ALMUGHAVARS, 1, R7,3, 1 , reqLow);
+		b=b.next();
+		edb.addRecuitment(b, ALMUGHAVARS, 2, R5,4, 2 , reqHigh);
+		edb.addRecuitment(b, ALMUGHAVARS, 1, R7,3, 1 , reqLow);
 
-		building.nextLevel();
-		edb.addRecuitment(building, ALMUGHAVARS, 3, R4,5, 2 , reqHigh);
-		edb.addRecuitment(building, ALMUGHAVARS, 1, R6,3, 1 , reqLow);
+		b=b.next();
+		edb.addRecuitment(b, ALMUGHAVARS, 3, R4,5, 2 , reqHigh);
+		edb.addRecuitment(b, ALMUGHAVARS, 1, R6,3, 1 , reqLow);
 	}
 
 	private void mountedStableRecruitment() throws PatcherLibBaseEx {
@@ -109,25 +109,27 @@ public class AlmughavarsReworked {
 		val reqHigh = "factions { "+ FactionsDefs.toCsv(iberiaChristianFactions) +" }" + requireSuffix;
 		val reqLow = "factions { "+ FactionsDefs.toCsv(otherChristianAndSlaveFactions) +" }" + requireSuffix;
 
-		val building = new BuildingLevel(StablesCastle , StablesCastleLevels , SettlType.Castle);
-		edb.addRecuitment(building , cabVillanos , 1, R11, 1, 0, reqHigh);
-		edb.addRecuitment(building , cabVillanos , 0, R13, 1, 0, reqLow);
+		val stableTree = Buildings.StableCastle;
 
-		building.nextLevel();
-		edb.addRecuitment(building , cabVillanos , 1, R10, 1, 0, reqHigh);
-		edb.addRecuitment(building , cabVillanos , 0, R12, 1, 0, reqLow);
+		Building b = stableTree.first();
+		edb.addRecuitment(b , cabVillanos , 1, R11, 1, 0, reqHigh);
+		edb.addRecuitment(b , cabVillanos , 0, R13, 1, 0, reqLow);
 
-		building.nextLevel();
-		edb.addRecuitment(building , cabVillanos , 1, R9, 2, 1, reqHigh);
-		edb.addRecuitment(building , cabVillanos , 0, R11, 1, 0, reqLow);
+		b=b.next();
+		edb.addRecuitment(b , cabVillanos , 1, R10, 1, 0, reqHigh);
+		edb.addRecuitment(b , cabVillanos , 0, R12, 1, 0, reqLow);
 
-		building.nextLevel();
-		edb.addRecuitment(building , cabVillanos , 1, R8, 2, 1, reqHigh);
-		edb.addRecuitment(building , cabVillanos , 1, R10, 2, 0, reqLow);
+		b=b.next();
+		edb.addRecuitment(b , cabVillanos , 1, R9, 2, 1, reqHigh);
+		edb.addRecuitment(b , cabVillanos , 0, R11, 1, 0, reqLow);
 
-		building.nextLevel();
-		edb.addRecuitment(building , cabVillanos , 2, R7, 3, 2, reqHigh);
-		edb.addRecuitment(building , cabVillanos , 1, R9, 2, 1, reqLow);
+		b=b.next();
+		edb.addRecuitment(b , cabVillanos , 1, R8, 2, 1, reqHigh);
+		edb.addRecuitment(b , cabVillanos , 1, R10, 2, 0, reqLow);
+
+		b=b.next();
+		edb.addRecuitment(b , cabVillanos , 2, R7, 3, 2, reqHigh);
+		edb.addRecuitment(b , cabVillanos , 1, R9, 2, 1, reqLow);
 	}
 
 	private void mercenaryPools() {

@@ -2,9 +2,7 @@ package tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings;
 
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
 
-/**
- * Created by tomek on 12.10.2017.
- */
+/** */
 public enum SettlType {
 
 	City,

@@ -2,9 +2,6 @@ package tm.mtwModPatcher.sship.features.agentsCharacters.merchantsNerfed;
 
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.SettlType;
 
-/**
- * Created by tomek on 15.10.2017.
- */
 public class BuildingLimit {
 
 	public String DisplayName;

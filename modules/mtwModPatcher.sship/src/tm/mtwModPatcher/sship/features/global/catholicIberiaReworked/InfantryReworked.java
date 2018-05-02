@@ -5,7 +5,6 @@ import tm.mtwModPatcher.lib.common.entities.FactionInfo;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.exportDescrUnit.ExportDescrUnitTyped;
 import tm.mtwModPatcher.lib.data.unitModels.BattleModels;
-import tm.mtwModPatcher.sship.lib.Buildings;
 import tm.mtwModPatcher.sship.lib.Units;
 
 import java.util.Arrays;
@@ -92,7 +91,7 @@ public class InfantryReworked {
 		battleModels.copyModelBlocksData(models, iberiaChristianFactions, JERUSALEM);
 	}
 	private void lightSwordsmen() {
-		val barracks = Buildings.BarracksCastle_3;
+		val barracks = BarracksCastleTree.level(3);
 
 		val condEventRegions = "and not event_counter first_watch 1 and hidden_resource aragon or hidden_resource spain or hidden_resource portugal";
 		val condEventNotRegions = "and not event_counter first_watch 1 and not hidden_resource aragon and not hidden_resource spain and not hidden_resource portugal";

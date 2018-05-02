@@ -3,7 +3,8 @@ package tm.mtwModPatcher.sship.features.agentsCharacters;
 import lombok.val;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
-import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingLevel;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.Building;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingTree;
 import tm.mtwModPatcher.sship.lib.Buildings;
 
 import java.util.UUID;
@@ -36,28 +37,29 @@ public class SpiesLoweredRecruitment extends Feature {
 		addSpyToBuilding(Buildings.WallsCastle, capitalCondition, 1, 1, 1, 1 ,1);
 
 	}
-	private void addSpyToBuilding(BuildingLevel building, int ... agentLimit) {
+	private void addSpyToBuilding(BuildingTree building, int ... agentLimit) {
 		addSpyToBuilding(building, null,  agentLimit);
 	}
-	private void addSpyToBuilding(BuildingLevel building, String addCondition, int ... agentLimit) {
+	private void addSpyToBuilding(BuildingTree buildingTree, String addCondition, int ... agentLimit) {
 		boolean isNext = false;
 
-		BuildingLevel tmpBuilding = building;
+		Building building = buildingTree.first();
 
 		for(int limit : agentLimit) {
-			if(isNext) tmpBuilding = tmpBuilding.createNextLevel();
+			if(isNext) building = building.next();
 
-			addSpyToBuilding(tmpBuilding, limit, addCondition);
+			addSpyToBuilding(building, limit, addCondition);
 			isNext = true;
 		}
 	}
-	private void addSpyToBuilding(BuildingLevel building, int agentLimit) {
+	@SuppressWarnings("unused")
+	private void addSpyToBuilding(Building building, int agentLimit) {
 		addSpyToBuilding(building, agentLimit, null);
 	}
-	private void addSpyToBuilding(BuildingLevel building, int agentLimit, String addCondition) {
+	private void addSpyToBuilding(Building building, int agentLimit, String addCondition) {
 		String requires = " requires factions { northern_european, middle_eastern, eastern_european, greek, southern_european, }";
 
-		if(addCondition != null && !addCondition.isEmpty())
+		if((addCondition != null) && !addCondition.isEmpty())
 			requires += " " + addCondition;
 
 		edb.addCapabilities(building, "	agent spy 0"+requires);

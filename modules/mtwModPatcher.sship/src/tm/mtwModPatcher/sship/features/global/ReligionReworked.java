@@ -4,7 +4,7 @@ import lombok.val;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
-import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingLevel;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingTree;
 import tm.mtwModPatcher.lib.data.world.maps.base.DescrRegions;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.descrStrat.DescrStratSectioned;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.descrStrat.FactionsSection;
@@ -30,7 +30,7 @@ public class ReligionReworked extends Feature {
 		initFileEntities();
 
 		cleanUp();
-		addNativeTemples();
+		//addNativeTemples();
 		templeLevels();
 
 		edb.addToCityCastleWallsCapabilities("religion_level bonus 1");
@@ -42,13 +42,14 @@ public class ReligionReworked extends Feature {
 		addTempleCastleLevelsFromCity(Buildings.TempleOrthodoxCastle , Buildings.TempleOrthodoxCity);
 	}
 
-	private void addTempleCastleLevelsFromCity(BuildingLevel templeCastle, BuildingLevel templeCity) {
-		val templeCityLevels = templeCity.levelNames();
+	private void addTempleCastleLevelsFromCity(BuildingTree templeCastle, BuildingTree templeCity) {
+		val templeCityLevels = templeCity.levels();
 
-		templeCastle.addLevel(templeCityLevels.get(2));
-		templeCastle.addLevel(templeCityLevels.get(3));
+		templeCastle.addLevel(templeCityLevels.get(2).levelName);
+		templeCastle.addLevel(templeCityLevels.get(3).levelName);
 	}
 
+	@SuppressWarnings("unused")
 	private void addNativeTemples() throws IOException {
 		val templeFilePath = ConfigurationSettings.VariousDataPath() + "\\TempleTemplate-edb.txt";
 		val templeLines = LinesProcessor.load(templeFilePath);
@@ -97,7 +98,7 @@ public class ReligionReworked extends Feature {
 		edb.addToCityCastleWallsCapabilities("agent "+ExportDescrBuilding.AGENT_PRIEST+" 0 requires factions { aragon, }");
 	}
 
-	private int nativeReligionFactor = 1;
+	private int nativeReligionFactor = 1;	// 2 dziala zle dla 33 stopni
 
 	private DescrStratSectioned dStrat;
 	private FactionsSection factions;

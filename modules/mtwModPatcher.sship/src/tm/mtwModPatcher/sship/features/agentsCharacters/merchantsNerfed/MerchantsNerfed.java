@@ -3,6 +3,7 @@ package tm.mtwModPatcher.sship.features.agentsCharacters.merchantsNerfed;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.val;
+import tm.common.Range;
 import tm.common.collections.ArrayUniqueList;
 import tm.common.collections.ListUnique;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
@@ -13,8 +14,8 @@ import tm.mtwModPatcher.lib.common.core.features.params.*;
 import tm.mtwModPatcher.lib.data._root.DescrSettlementMechanics;
 import tm.mtwModPatcher.lib.data._root.ExportDescrGuilds;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
-import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingLevel;
-import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.SettlType;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingSimple;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingTree;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.descrStrat.DescrStratSectioned;
 import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
 import tm.mtwModPatcher.sship.features.agentsCharacters.MerchantsRemoved;
@@ -59,17 +60,11 @@ public class MerchantsNerfed extends Feature {
 
 	private void addMerchantLimits() {
 		// ## Merchants can be produced only on city/castle walls / markets buildings
-		val walls = new ArrayList<BuildingLevel>();
-		Buildings.WallsCityLevels.forEach( l -> walls.add(new BuildingLevel(Buildings.WallsCitySpec.Name, l, SettlType.City)));
-		Buildings.WallsCastleLevels.forEach( l -> walls.add(new BuildingLevel(Buildings.WallsCastleSpec.Name, l, SettlType.Castle)));
-		for (val wallLevel: walls)
-			ensureAgentReruitmentExists(wallLevel, HiddenResources.HiddenResource + HiddenResources.Capital);
+		ensureAgentReruitmentExists(Buildings.WallsCity, HiddenResources.HiddenResource + HiddenResources.Capital);
+		ensureAgentReruitmentExists(Buildings.WallsCastle, HiddenResources.HiddenResource + HiddenResources.Capital);
 
-		val markets = new ArrayList<BuildingLevel>();
-		Buildings.MarketCityLevels.forEach( m -> markets.add(new BuildingLevel(Buildings.MarketCity, m , SettlType.City)));
-		Buildings.MarketCastleLevels.forEach( m -> markets.add(new BuildingLevel(Buildings.MarketCastle, m , SettlType.Castle)));
-		for (val marketLevel: markets)
-			ensureAgentReruitmentExists(marketLevel, null);
+		ensureAgentReruitmentExists(Buildings.MarketCityTree, null);
+		ensureAgentReruitmentExists(Buildings.MarketCastleTree, null);
 
 		val limitParams = buildings.getBuildingsParams();
 
@@ -88,8 +83,11 @@ public class MerchantsNerfed extends Feature {
 			}
 		}
 	}
-	private void ensureAgentReruitmentExists(BuildingLevel buildingLevel, String require) {
-		val range = edb.getCapabilitiesStartEnd(buildingLevel);
+	private void ensureAgentReruitmentExists(BuildingTree buildingTree, String require) {
+		val rangeStart = edb.getCapabilitiesStartEnd(buildingTree.first());
+		val rangeEnd = edb.getCapabilitiesStartEnd(buildingTree.last());
+		val range = new Range<Integer, Integer>( rangeStart.getStart() , rangeEnd.getEnd() );
+
 		val regex = Pattern.compile("^\\s*agent\\s+merchant\\s");
 
 		val index = edb.getLines().findFirstRegexLine(regex, range);
@@ -100,22 +98,24 @@ public class MerchantsNerfed extends Feature {
 			if(require == null) require = "";
 			else require = " and " + require;
 			for (val line : lines) {
-				edb.addCapabilities(buildingLevel, line + require);
+				edb.addCapabilitiesAllLevels(buildingTree, line + require);
 			}
 		}
 	}
 
-	private List<BuildingLevel> resolveBuidlingNameLevels(BuildingLimit bl) {
-		val res = new ArrayList<BuildingLevel>();
+	private List<BuildingSimple> resolveBuidlingNameLevels(BuildingLimit bl) {
+		val res = new ArrayList<BuildingSimple>();
 
 		if(bl.Building != null) {
-			res.add(new BuildingLevel(bl.Building, bl.Level, bl.SettlType));
+			res.add(new BuildingSimple(bl.Building, bl.Level, bl.SettlType));
 		}
 		else if(bl.BuildingType != null) {
 			switch (bl.BuildingType) {
 				case Walls:
-					Buildings.WallsCityLevels.forEach( l -> res.add(new BuildingLevel(Buildings.WallsCitySpec.Name, l, SettlType.City)));
-					Buildings.WallsCastleLevels.forEach( l -> res.add(new BuildingLevel(Buildings.WallsCastleSpec.Name, l, SettlType.Castle)));
+					//Buildings.WallsCityLevels.forEach( l -> res.add(new BuildingTree(Buildings.WallsCitySpec.Name, l, SettlType.City)));
+					res.addAll(Buildings.WallsCity.levels());
+					//Buildings.WallsCastleLevels.forEach( l -> res.add(new BuildingTree(Buildings.WallsCastleSpec.Name, l, SettlType.Castle)));
+					res.addAll(Buildings.WallsCastle.levels());
 					break;
 				default:
 					throw new PatcherNotSupportedEx("BuildingType: " + bl.BuildingType);
