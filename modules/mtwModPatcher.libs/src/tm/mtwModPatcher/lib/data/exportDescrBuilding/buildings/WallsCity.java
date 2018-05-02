@@ -1,8 +1,5 @@
 package tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings;
 
-/**
- * Created by tomek on 22.04.2017.
- */
 public class WallsCity {
 
 	public final String Name="core_building";

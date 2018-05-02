@@ -89,8 +89,8 @@ public class BetterLogging extends Feature {
 	public BetterLogging() {
 		super("Better campaign logging");
 
-		addCategory("Various");
-		addCategory("Tools");
+		addCategory(CATEGORY_VARIOUS);
+		addCategory(CATEGORY_TOOLS);
 
 		setDescriptionShort("Better campaign logging - creates some additional helper system.log.txt entries -> End of Turn, etc. ");
 		setDescriptionUrl("http://tmsship.wikidot.com/better-campaign-logging");

@@ -70,7 +70,7 @@ public class AutoRunHotseat extends Feature {
 	public AutoRunHotseat() {
 		super("AutoRunHotseat");
 
-		addCategory("Tools");
+		addCategory(CATEGORY_TOOLS);
 
 		setDescriptionShort("AutoRunHotseat mode, stopsonce per 25 turns");
 	}

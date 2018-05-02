@@ -17,7 +17,7 @@ import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingLevel;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.SettlType;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.descrStrat.DescrStratSectioned;
 import tm.mtwModPatcher.lib.engines.ConfigurationSettings;
-import tm.mtwModPatcher.sship.features.agentsCharacters.MerchantsRemovedFtr;
+import tm.mtwModPatcher.sship.features.agentsCharacters.MerchantsRemoved;
 import tm.mtwModPatcher.sship.lib.Buildings;
 import tm.mtwModPatcher.sship.lib.HiddenResources;
 
@@ -242,7 +242,7 @@ public class MerchantsNerfed extends Feature {
 	public Set<UUID> getConflictingFeatures() {
 		val conflicts = new HashSet<UUID>();
 
-		conflicts.add(MerchantsRemovedFtr.Id);
+		conflicts.add(MerchantsRemoved.Id);
 
 		return conflicts;
 	}

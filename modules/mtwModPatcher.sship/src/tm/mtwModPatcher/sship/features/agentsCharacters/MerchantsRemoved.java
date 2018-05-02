@@ -22,7 +22,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /** Removes all merchants */
-public class MerchantsRemovedFtr extends Feature {
+public class MerchantsRemoved extends Feature {
 
 	@Override
 	public void setParamsCustomValues() {
@@ -33,20 +33,13 @@ public class MerchantsRemovedFtr extends Feature {
 
 	@Override
 	public void executeUpdates() throws Exception {
-
-		descrStrat = fileEntityFactory.getFile(DescrStratSectioned.class);
-		registerForUpdate(descrStrat);
-
-		edb = fileEntityFactory.getFile(ExportDescrBuilding.class);
-		registerForUpdate(edb);
-
+		descrStrat = getFileRegisterForUpdated(DescrStratSectioned.class);
+		edb = getFileRegisterForUpdated(ExportDescrBuilding.class);
 		descrSettlementMechanics = getFileRegisterForUpdated(DescrSettlementMechanics.class);
-
-		exportDescrGuilds = fileEntityFactory.getFile(ExportDescrGuilds.class);
-		registerForUpdate(exportDescrGuilds);
+		exportDescrGuilds = getFileRegisterForUpdated(ExportDescrGuilds.class);
 
 		// ### Disable ALL MERCHANTS ###
-		DisableAllMerchants_LowerGuildReqs();
+		disableAllMerchantsLowerGuildReqs();
 
 		// ##### Boost various Incomes - to equalize removed mwechants #####
 		// ## Boost MINING income ##
@@ -54,29 +47,9 @@ public class MerchantsRemovedFtr extends Feature {
 
 		// ## Boost TRADE income - to equalize removed mwechants ##
 		descrSettlementMechanics.updateAttributeByMultiplier("/root/factor_modifiers/factor[@name='SIF_TRADE']/pip_modifier", "value", tradeMulti);
-
-		// ## Boost Farming income ##
-		//_DescrSettlementMechanics.updateAttributeByMultiplier("/root/factor_modifiers/factor[@name='SIF_FARMS']/pip_modifier", "value", 1.15);
-
-		// ## Boost Taxes income ##
-		//_DescrSettlementMechanics.updateAttributeByMultiplier("/root/factor_modifiers/factor[@name='SIF_TAXES']/pip_modifier", "value", 1.1);
-
-		// ## Boost Buildings Trade bonuses ##
-		//BoostBuildingTradeBonuses(1);
-
-		//UpdateKingsPurses();
-
-		// ## Boost GARRISON influenc to City ORDER
-		//_DescrSettlementMechanics.updateAttributeByMultiplier("/root/factor_modifiers/factor[@name='SOF_GARRISON']/pip_modifier", "value", 2.0);
-
-		//_DescrSettlementMechanics.updateAttributeByMultiplier("/root/factor_modifiers/factor[@name='SOF_BUILDINGS_LAW']/pip_modifier", "value", 1.1);
-		//_DescrSettlementMechanics.updateAttributeByMultiplier("/root/factor_modifiers/factor[@name='SOF_BUILDINGS_FUN']/pip_modifier", "value", 1.1);
-
-		// ## Boost Corruption - to hit large empires ##
-		//_DescrSettlementMechanics.updateAttributeByMultiplier("/root/factor_modifiers/factor[@name='SIF_CORRUPTION']/pip_modifier", "value", 1.25);
 	}
 
-	private void DisableAllMerchants_LowerGuildReqs() throws PatcherLibBaseEx {
+	private void disableAllMerchantsLowerGuildReqs() throws PatcherLibBaseEx {
 		int lastLine = 0, index=0;
 
 		LinesProcessor descrStratChars = descrStrat.Factions.content().lines();
@@ -97,19 +70,19 @@ public class MerchantsRemovedFtr extends Feature {
 
 		// ## Building Definitions - remove all merchants production capabilities ##
 		//         agent merchant  0  requires factions { northern_european, }
-		//edb.lines().removeAllRegexLines("^\\s*agent\\s+merchant\\s");
+		edb.getLines().removeAllRegexLines("^\\s*agent\\s+merchant\\s");
 		//         agent_limit merchant 1
-		//edb.lines().removeAllRegexLines("^\\s*agent_limit\\s+merchant\\s+");
+		edb.getLines().removeAllRegexLines("^\\s*agent_limit\\s+merchant\\s+");
 
 		// ## Lower requirement for Merchant Guild by 4 times (no bonuses from merchants on resources) ##
-		//int merchantGuildLine = exportDescrGuilds.FindFirstExactLine("Guild merchants_guild");
-		//if(merchantGuildLine < 0) throw new PatcherLibBaseEx("No Guild merchants_guild marker");
+		int merchantGuildLine = exportDescrGuilds.FindFirstExactLine("Guild merchants_guild");
+		if(merchantGuildLine < 0) throw new PatcherLibBaseEx("No Guild merchants_guild marker");
 		// ORG : levels 100 250 400
-		//exportDescrGuilds.ReplaceLine(merchantGuildLine+2, " levels " + merchantGuildLevelsStr);
+		exportDescrGuilds.ReplaceLine(merchantGuildLine+2, " levels " + merchantGuildLevelsStr);
 	}
 
-	@Deprecated()
-	protected void BoostBuildingTradeBonuses(int addBonus) throws PatcherLibBaseEx {
+	@Deprecated
+	protected void boostBuildingTradeBonuses(int addBonus) throws PatcherLibBaseEx {
 		int index = 0;
 		String tradeBonusRegexStr="(^\\s*trade_base_income_bonus\\s+bonus\\s+)(\\d+)(.*)", bonusPrefix, bonusSufix, bonusValueStr;
 		Pattern pattern = Pattern.compile(tradeBonusRegexStr);
@@ -144,28 +117,28 @@ public class MerchantsRemovedFtr extends Feature {
 
 		ParamIdDouble parDouble;
 		parDouble= new ParamIdDouble("TradeMulti", "Trade Multiplier", (f) -> {
-			MerchantsRemovedFtr thisFtr = (MerchantsRemovedFtr)f;
+			MerchantsRemoved thisFtr = (MerchantsRemoved)f;
 			return thisFtr.tradeMulti;
 		}, ((f, value) -> {
-			MerchantsRemovedFtr thisFtr = (MerchantsRemovedFtr)f;
+			MerchantsRemoved thisFtr = (MerchantsRemoved)f;
 			thisFtr.tradeMulti = value;
 		} ));
 		parIds.add(parDouble);
 
 		parDouble= new ParamIdDouble("MiningMulti", "Mining Multiplier", (f) -> {
-			MerchantsRemovedFtr thisFtr = (MerchantsRemovedFtr)f;
+			MerchantsRemoved thisFtr = (MerchantsRemoved)f;
 			return thisFtr.miningMulti;
 		}, ((f, value) -> {
-			MerchantsRemovedFtr thisFtr = (MerchantsRemovedFtr)f;
+			MerchantsRemoved thisFtr = (MerchantsRemoved)f;
 			thisFtr.miningMulti = value;
 		} ));
 		parIds.add(parDouble);
 
 		val parString= new ParamIdString("MerchantGuildLevels", "Merchant Guild Levels", (f) -> {
-			MerchantsRemovedFtr thisFtr = (MerchantsRemovedFtr)f;
+			MerchantsRemoved thisFtr = (MerchantsRemoved)f;
 			return thisFtr.merchantGuildLevelsStr;
 		}, ((f, value) -> {
-			MerchantsRemovedFtr thisFtr = (MerchantsRemovedFtr)f;
+			MerchantsRemoved thisFtr = (MerchantsRemoved)f;
 			thisFtr.merchantGuildLevelsStr = value;
 		} ));
 		parIds.add(parString);
@@ -188,7 +161,7 @@ public class MerchantsRemovedFtr extends Feature {
 	}
 	public static UUID Id = UUID.fromString("a0aa32d2-f475-4207-a0b5-cee3f5649994");
 
-	public MerchantsRemovedFtr() {
+	public MerchantsRemoved() {
 
 		super("Remove merchants");
 		addCategory("Economy");

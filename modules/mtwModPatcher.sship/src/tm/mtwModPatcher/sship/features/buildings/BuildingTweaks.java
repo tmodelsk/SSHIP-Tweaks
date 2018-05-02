@@ -8,15 +8,10 @@ import tm.mtwModPatcher.sship.lib.Buildings;
 
 import java.util.UUID;
 
-/**
- * Created by Tomek on 2016-04-23.
- */
 public class BuildingTweaks extends Feature {
 
 	@Override
-	public void setParamsCustomValues() {
-
-	}
+	public void setParamsCustomValues() { }
 
 	@Override
 	public void executeUpdates() throws Exception {

@@ -1,0 +1,26 @@
+building {buildingName}
+{
+  convert_to {buildingName}
+  religion {religion}
+  levels {levelName}
+  {
+    {levelName} requires factions { northern_european, middle_eastern, eastern_european, greek, southern_european, }
+    {
+      convert_to 0
+      capability
+      {
+
+      }
+      material wooden
+      construction  3
+      cost  650
+      settlement_min village
+      upgrades
+      {
+      }
+    }
+  }
+  plugins
+  {
+  }
+}

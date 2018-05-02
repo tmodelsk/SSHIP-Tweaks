@@ -26,6 +26,7 @@ import tm.mtwModPatcher.sship.features.layout.WatchtowersToVillages;
 import tm.mtwModPatcher.sship.features.map.*;
 import tm.mtwModPatcher.sship.features.tools.AutoRunHotseat;
 import tm.mtwModPatcher.sship.features.tools.BetterLogging;
+import tm.mtwModPatcher.sship.features.tools.DisableAllReligion;
 import tm.mtwModPatcher.sship.lib.GarrisonManager;
 
 /** Christianitas Mod SSHIP Feature */
@@ -60,7 +61,7 @@ public class SsHipFeatures {
 		features.add(new NonSpearInfantryAttackBoost());
 
 		features.add(new MerchantsNerfed());
-		features.add(new MerchantsRemovedFtr());
+		features.add(new MerchantsRemoved());
 		features.add(new WorldEconomyScaling());
 		features.add(new SettlementUnrestLowered());
 		features.add(new RecruitmentSlotsBoost());
@@ -103,6 +104,7 @@ public class SsHipFeatures {
 		features.add(new SlowerArmies());
 
 		features.add(new BuildingTweaks());
+		features.add(new ReligionReworked());
 		features.add(new TemplesTweaks());
 		features.add(new FactionBalancingFtr());
 
@@ -141,6 +143,8 @@ public class SsHipFeatures {
 
 		features.add(new BetterLogging());
 		features.add(new AutoRunHotseat());
+		features.add(new DisableAllReligion());
+		//features.add(new CatharsHereticTemple());
 
 		initializeFeatures(features);
 		garrisonManager.setFeatureContsiner(features);
@@ -164,7 +168,7 @@ public class SsHipFeatures {
 		features.disableFeatureIfExists( SkynetCampaignAi.Id);
 		features.disableFeatureIfExists( WatchtowersToForts.Id);
 		features.disableFeatureIfExists( NonSpearInfantryAttackBoost.Id);
-		features.disableFeatureIfExists( MerchantsRemovedFtr.Id);
+		features.disableFeatureIfExists( MerchantsRemoved.Id);
 		features.disableFeatureIfExists( AssasinsNumbersLimited.Id );
 		features.disableFeatureIfExists( AssasinsHomeProtectors.Id );
 		features.disableFeatureIfExists( NoDreadOnAssasinations.Id );

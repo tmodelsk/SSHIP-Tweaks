@@ -67,14 +67,18 @@ public class Buildings {
 	public static final String BakeryCastle = "castle_bakery";
 	public static final String BakeryCastleLevel = "c_bakery";
 
-	public static final String TempleMuslimCity = "temple_muslim";
-	public static final String TempleMuslimCastle = "temple_muslim_castle";
+	public static final BuildingLevel TempleMuslimCity = new BuildingLevel("temple_muslim", SettlType.City,"small_masjid masjid minareted_masjid jama great_jama");
+	public static final BuildingLevel TempleMuslimCastle = new BuildingLevel("temple_muslim_castle", SettlType.Castle,"c_small_masjid c_masjid");
 
 	public static final String TempleCatholicCity = "temple_catholic";
-	public static final List<String> TempleCatholicCityLevels = Arrays.asList("small_church", "church", "abbey", "cathedral", "huge_cathedral");
+	public static final BuildingLevel TempleCathCity = new BuildingLevel(TempleCatholicCity, Arrays.asList("small_church", "church", "abbey", "cathedral", "huge_cathedral"), SettlType.City);
+
 	public static final String TempleCatholicCastle = "temple_catholic_castle";
 	public static final List<String> TempleCatholicCastleLevels = Arrays.asList("small_chapel", "chapel");
+	public static final BuildingLevel TempleCathCastle = new BuildingLevel(TempleCatholicCastle, TempleCatholicCastleLevels, SettlType.Castle);
 
+	public static final BuildingLevel TempleOrthodoxCity = new BuildingLevel("temple_orthodox" , SettlType.City, "small_church_o church_o abbey_o cathedral_o huge_cathedral_o");
+	public static final BuildingLevel TempleOrthodoxCastle = new BuildingLevel("temple_orthodox_castle" , SettlType.Castle, "small_chapel_o chapel_o");
 
 	public static final String MonasteryCatholicCity = "friar";
 	public static final List<String> MonasteryCatholicCityLevels = Arrays.asList("monastery", "medical_care", "hospital");

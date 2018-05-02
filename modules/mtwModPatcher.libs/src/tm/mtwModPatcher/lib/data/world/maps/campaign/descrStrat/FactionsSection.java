@@ -17,6 +17,27 @@ import java.util.regex.Pattern;
 
 public class FactionsSection extends SectionDocTextLines {
 
+	public void removeAgentType(String agentType) throws PatcherLibBaseEx {
+		int lastLine = 0, index=0;
+
+		val regex = Pattern.compile("^character\\s.+,\\s*"+ agentType +"\\s*,.+age\\s+");
+		val lines = content().lines();
+
+		// ## Disable all starting merchant agentsCharacters - Campaing starting data
+		while(index >= 0) {
+			// Merchant add ex :
+			// character	Panelo Zorzi, merchant, male, age 30, x 239, y 113
+			index = lines.findFirstRegexLine(regex);
+
+			if(index >= 0) {
+				lines.removeRange(index, index+1);
+			}
+		}
+	}
+
+	public static final String AGENT_MERCHANT = "merchant";
+	public static final String AGENT_PRIEST = "priest";
+
 	public void insertSettlementBuilding(String provinceName, String name, String level) throws PatcherLibBaseEx {
 		val endIndex = loadSettlemenBlockEndIndex(provinceName);
 

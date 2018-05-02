@@ -11,9 +11,7 @@ import java.util.*;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 
-/**
- * Combines Settlement Logic from various files
- * */
+/** Combines Settlement Logic from various files */
 public class SettlementManager {
 	public List<SettlementInfo> getAllSettlements() throws PatcherLibBaseEx {
 

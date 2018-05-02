@@ -277,7 +277,9 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		addCapabilities(buildingName, levelName, castleOrCity, line);
 	}
 
-
+	public void addCapabilitiesAllLevels(BuildingLevel buidlingLevel, String newLine) {
+		buidlingLevel.levels().forEach( bl -> addCapabilities(bl, newLine));
+	}
 	public void addCapabilities(BuildingLevel buidlingLevel, String newLine) {
 		addCapabilities(buidlingLevel.Name, buidlingLevel.LevelName, buidlingLevel.SettlType, newLine);
 	}
@@ -480,36 +482,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 	}
 
 	public String getSettlementLevelStr(SettlementLevel level) throws PatcherLibBaseEx {
-
 		return SettlementLevelConverter.toSettlementLevelStr(level);
-
-//		String result;
-//
-//		switch (level) {
-//
-//			case L1_Village:
-//				result="village";
-//				break;
-//			case L2_Town:
-//				result="town";
-//				break;
-//			case L3_LargeTown:
-//				result="large_town";
-//				break;
-//			case L4_City:
-//				result="city";
-//				break;
-//			case L5_LargeCity:
-//				result="large_city";
-//				break;
-//			case L6_HugeCity:
-//				result="huge_city";
-//				break;
-//			default:
-//				throw new PatcherLibBaseEx("Not implemented exception !");
-//		}
-//
-//		return result;
 	}
 
 	public void addToCityCastleWallsCapabilities(String capabilityLine) throws PatcherLibBaseEx {
@@ -636,7 +609,14 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		return recruitments.stream().map( urli -> (UnitRecuitmentInfo)urli).collect(Collectors.toList());
 	}
 
+	public void removeAgentRecruitment(String agentType) {
+		val lines = getLines();
+		//         agent_limit merchant 1
+		lines.removeAllRegexLines(Ctm.format("^\\s*agent_limit\\s+{0}\\s+", agentType));
 
+		// ## Remove all merchants production capabilities: agent merchant  0  requires ....
+		lines.removeAllRegexLines(Ctm.format("^\\s*agent\\s+{0}\\s", agentType));
+	}
 
 	public ExportDescrBuilding() {
 		super("data\\export_descr_buildings.txt");
@@ -645,6 +625,9 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 	public final static String TradeBonus = "trade_base_income_bonus bonus ";
 	public final static String IncomeBonus = "income_bonus bonus ";
 	public final static String LawBonus = "law_bonus bonus ";
+	public final static String ReligionBonus = "religion_level bonus ";
+
+	public static final String AGENT_PRIEST = "priest";
 
 	public final static String HiddenResource = "hidden_resource ";
 	private final static String nullStr = null;

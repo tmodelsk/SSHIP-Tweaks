@@ -257,8 +257,8 @@ public class LinesProcessor {
 		_Lines.add(lineIndex, line.replaceAll(toReplace, replaceWith));
 	}
 
-	public void replaceInAllLines(String search, String newText) {
-		val patt = Pattern.compile(search);
+	public void replaceInAllLines(String searchRegex, String newText) {
+		val patt = Pattern.compile(searchRegex);
 
 		int index = 0;
 		while (true) {
@@ -266,7 +266,7 @@ public class LinesProcessor {
 			if (index >= 0) {
 				// found
 				String line = getLine(index);
-				line = line.replaceAll(search, newText);
+				line = line.replaceAll(searchRegex, newText);
 				replaceLine(index, line);
 				index++;
 			} else break;

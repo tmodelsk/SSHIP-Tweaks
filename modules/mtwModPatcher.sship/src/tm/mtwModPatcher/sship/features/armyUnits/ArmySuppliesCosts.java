@@ -578,10 +578,10 @@ public class ArmySuppliesCosts extends Feature {
 		return multi;
 	}
 
-	protected ExportDescrCharacterTraits edCharacterTraits;
-	protected CampaignScript campaignScript;
-	protected DescrStratSectioned dStrat;
-	protected ExportVnvs eVnvs;
+	private ExportDescrCharacterTraits edCharacterTraits;
+	private CampaignScript campaignScript;
+	private DescrStratSectioned dStrat;
+	private ExportVnvs eVnvs;
 
 	@Override
 	public UUID getId() {

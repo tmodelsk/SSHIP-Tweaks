@@ -272,4 +272,7 @@ public abstract class Feature {
 	public static final String CATEGORY_AI = "AI";
 	public static final String CATEGORY_UNITS = "Units";
 	public static final String CATEGORY_BATTLE = "Battle";
+
+	public static final String CATEGORY_VARIOUS = "Various";
+	public static final String CATEGORY_TOOLS = "Tools";
 }
