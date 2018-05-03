@@ -131,7 +131,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		for (val unitRecr : unitReqruitments) {
 			val require = unitRecr.getUnitRequireSimple();
 
-			if(require != null && require.Factions.contains(faction)) {
+			if((require != null) && require.Factions.contains(faction)) {
 
 				val unitRecrNew = unitRecr.clone();
 				val requireNew = unitRecrNew.getUnitRequireSimple();
@@ -143,6 +143,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		}
 	}
 
+	@SuppressWarnings("unused")
 	public void addToUnitRecruitment(String unitName, FactionInfo faction, List<FactionInfo> requiredFactions) {
 		val patt = Pattern.compile("^\\s*recruit_pool\\s+\"" +unitName+ "\"\\s+");
 		val requiredFactionsStr = requiredFactions.stream().map(fi -> fi.symbol).collect(Collectors.toList());
@@ -151,7 +152,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		for (val unitRecr : unitReqruitments) {
 			val require = unitRecr.getUnitRequireSimple();
 
-			if(require != null && !require.Factions.contains(faction)
+			if((require != null) && !require.Factions.contains(faction.symbol)
 					&& CollectionUtils.isAllFirstElementsAreInSecond(requiredFactionsStr, require.Factions)) {
 
 				val unitRecrNew = unitRecr.clone();
@@ -172,7 +173,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 	}
 	public void addToUnitRecruitment(String unitName, FactionInfo faction, String buildingName, String additionalHiddenResource, FactionInfo requiredFaction) {
 
-		List addHiddenResources = additionalHiddenResource != null ? Arrays.asList(additionalHiddenResource) : null;
+		List<String> addHiddenResources = (additionalHiddenResource != null) ? Arrays.asList(additionalHiddenResource) : null;
 
 		addToUnitRecruitment(unitName, faction, buildingName, addHiddenResources, Arrays.asList(requiredFaction));
 	}
@@ -186,12 +187,12 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		val patt = Pattern.compile("^\\s*recruit_pool\\s+\"" +unitName+ "\"\\s+");
 		val requiredFactionsStr = requiredFactions.stream().map(fi -> fi.symbol).collect(Collectors.toList());
 
-		val unitReqruitments = buildingName != null ? findRecruitmentsByRegex(patt, buildingName) : findRecruitmentsByRegex(patt);
+		val unitReqruitments = (buildingName != null) ? findRecruitmentsByRegex(patt, buildingName) : findRecruitmentsByRegex(patt);
 		Pattern notHiddenResourceRegex = Pattern.compile("not\\s+hidden_resource");
 		for (val unitRecr : unitReqruitments) {
 			val require = unitRecr.getUnitRequireSimple();
 
-			if(require != null && !require.Factions.contains(faction.symbol)
+			if((require != null) && !require.Factions.contains(faction.symbol)
 					&& CollectionUtils.isAllFirstElementsAreInSecond(requiredFactionsStr, require.Factions)) {
 
 				val unitRecrNew = unitRecr.clone();
@@ -201,7 +202,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 
 				if(additionalHiddenResources != null) {
 					String hrPrefix, globalPrefix="", secondHrPrefix = "";
-					val restConditions = requireNew.RestConditions != null ? requireNew.RestConditions : "";
+					val restConditions = (requireNew.RestConditions != null) ? requireNew.RestConditions : "";
 
 					if( notHiddenResourceRegex.matcher(restConditions).find())
 						hrPrefix = " and not hidden_resource ";
@@ -213,16 +214,17 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 						hrPrefix = " hidden_resource ";
 					}
 
-					String newRestCond = restConditions;
-					newRestCond += globalPrefix;
+					StringBuilder newRestCond = new StringBuilder(restConditions);
+					newRestCond.append(globalPrefix);
 					boolean isSecond = false;
 					for(String hiddenRes : additionalHiddenResources) {
-						if(isSecond) newRestCond += secondHrPrefix;
-						newRestCond += hrPrefix + hiddenRes;
+						if(isSecond)
+							newRestCond.append(secondHrPrefix);
+						newRestCond.append(hrPrefix).append(hiddenRes);
 						isSecond = true;
 					}
 
-					requireNew.RestConditions = newRestCond;
+					requireNew.RestConditions = newRestCond.toString();
 				}
 
 				unitRecrNew.setRequirementStr(requireNew);
@@ -238,13 +240,13 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 
 		addCapabilities(buildingName, levelName, castleOrCity, recruitmentSlotBonusStr);
 	}
+	@SuppressWarnings("unused")
 	public void addPopulationGrowthBonus(String buildingName, String levelName, String castleOrCity, int populationGrowthBonus) throws PatcherLibBaseEx {
 
 		String populationGrowthBonusStr = "\t\t\tpopulation_growth_bonus bonus "+Integer.toString(populationGrowthBonus)+" ; Patcher Added";
 
 		addCapabilities(buildingName, levelName, castleOrCity, populationGrowthBonusStr);
 	}
-	/**  requirementsStr - without requirements label */
 	public void addPopulationGrowthBonus(String buildingName, String levelName, String castleOrCity, int populationGrowthBonus, String requirementsStr) throws PatcherLibBaseEx {
 
 		String populationGrowthBonusStr = "\t\t\tpopulation_growth_bonus bonus "+Integer.toString(populationGrowthBonus);
@@ -254,6 +256,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 
 		addCapabilities(buildingName, levelName, castleOrCity, populationGrowthBonusStr);
 	}
+	@SuppressWarnings("unused")
 	public void addLawBonus(String buildingName, String levelName, String castleOrCity, int lawBonus) throws PatcherLibBaseEx {
 
 		String bonusStr = "\t\t\tlaw_bonus bonus "+Integer.toString(lawBonus)+" ; Patcher Added";
@@ -291,6 +294,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 
 	public void addCapabilities(String buildingName, String levelName, String newLine) {
 		String castleOrCity = null;
+		//noinspection ConstantConditions
 		addCapabilities(buildingName, levelName, castleOrCity, newLine);
 	}
 
@@ -299,7 +303,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		LinesProcessor lines = _Lines;
 
 		String levelRegex = "^\\s*"+levelName;
-		if(castleOrCity != null && !castleOrCity.isEmpty())
+		if((castleOrCity != null) && !castleOrCity.isEmpty())
 			levelRegex += "\\s+"+castleOrCity;
 		levelRegex += "\\s+requires\\s+factions\\s+";
 
@@ -333,17 +337,17 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 
 	public void addToWallsRecruitmentSlots(int addNmber) {
 		val cityWallsList = Arrays.asList(
-				new Tuple3<String, String, String>("core_building", "wooden_pallisade" , "city"),
-				new Tuple3<String, String, String>("core_building", "wooden_wall" , "city"),
-				new Tuple3<String, String, String>("core_building", "stone_wall" , "city"),
-				new Tuple3<String, String, String>("core_building", "large_stone_wall" , "city"),
-				new Tuple3<String, String, String>("core_building", "huge_stone_wall" , "city"),
+				new Tuple3<>("core_building", "wooden_pallisade", "city"),
+				new Tuple3<>("core_building", "wooden_wall", "city"),
+				new Tuple3<>("core_building", "stone_wall", "city"),
+				new Tuple3<>("core_building", "large_stone_wall", "city"),
+				new Tuple3<>("core_building", "huge_stone_wall", "city"),
 
-				new Tuple3<String, String, String>("core_castle_building", "motte_and_bailey" , "castle"),
-				new Tuple3<String, String, String>("core_castle_building", "wooden_castle" , "castle"),
-				new Tuple3<String, String, String>("core_castle_building", "castle" , "castle"),
-				new Tuple3<String, String, String>("core_castle_building", "fortress" , "castle"),
-				new Tuple3<String, String, String>("core_castle_building", "citadel" , "castle"));
+				new Tuple3<>("core_castle_building", "motte_and_bailey", "castle"),
+				new Tuple3<>("core_castle_building", "wooden_castle", "castle"),
+				new Tuple3<>("core_castle_building", "castle", "castle"),
+				new Tuple3<>("core_castle_building", "fortress", "castle"),
+				new Tuple3<>("core_castle_building", "citadel", "castle"));
 
 		// recruitment_slots 1 requires not event_counter freeze_recr_pool 1
 		val ptr = Pattern.compile("(^\\s*recruitment_slots\\s+)(\\d+)(\\s+.*)");
@@ -368,14 +372,14 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 	}
 
 	public Range<Integer, Integer> getCapabilitiesStartEnd(BuildingSimple bl) {
-		String cityOrCastle = bl.settlType == null ? null : bl.settlType.toLabelString();
+		String cityOrCastle = (bl.settlType == null) ? null : bl.settlType.toLabelString();
 		return getCapabilitiesStartEnd(bl.name, bl.levelName, cityOrCastle);
 	}
 	public Range<Integer, Integer> getCapabilitiesStartEnd(String buildingName, String levelName, String castleOrCity) {
 		LinesProcessor lines = _Lines;
 
 		String levelRegex = "^\\s*"+levelName;
-		if(castleOrCity != null && !castleOrCity.isEmpty())
+		if((castleOrCity != null) && !castleOrCity.isEmpty())
 			levelRegex += "\\s+"+castleOrCity;
 		levelRegex += "\\s+requires\\s+factions\\s+";
 
@@ -390,14 +394,14 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 
 		int capabilityBracketEnd = lines.findExpFirstRegexLine("^\\s+}",capabilityBracekStart);
 
-		return new Range<Integer, Integer>(capabilityBracekStart, capabilityBracketEnd);
+		return new Range<>(capabilityBracekStart, capabilityBracketEnd);
 	}
 
 	public int findBuildingCapabilityIndex(String buildingName, String levelName, String castleOrCity) throws PatcherLibBaseEx {
 		LinesProcessor lines = _Lines;
 
 		String levelRegex = "^\\s*"+levelName;
-		if(castleOrCity != null && !castleOrCity.isEmpty())
+		if((castleOrCity != null) && !castleOrCity.isEmpty())
 			levelRegex += "\\s+"+castleOrCity;
 		levelRegex += "\\s+requires\\s+factions\\s+";
 
@@ -414,7 +418,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		LinesProcessor lines = _Lines;
 
 		String levelRegex = "^\\s*"+levelName;
-		if(castleOrCity != null && !castleOrCity.isEmpty())
+		if((castleOrCity != null) && !castleOrCity.isEmpty())
 			levelRegex += "\\s+"+castleOrCity;
 		levelRegex += "\\s+requires\\s+factions\\s+";
 
@@ -426,6 +430,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 
 		return settlementRequirement;
 	}
+	@SuppressWarnings("unused")
 	public int findExpBuidlingStart(String buildingName) throws PatcherLibBaseEx {
 		LinesProcessor lines = _Lines;
 
@@ -455,7 +460,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		LinesProcessor lines = _Lines;
 
 		String levelRegex = "^\\s*"+levelName;
-		if(castleOrCity != null && !castleOrCity.isEmpty())
+		if((castleOrCity != null) && !castleOrCity.isEmpty())
 			levelRegex += "\\s+"+castleOrCity;
 		levelRegex += "\\s+requires\\s+factions\\s+";
 
@@ -540,6 +545,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 					if (rateOrg > relpenishRateMin) {
 						isUpdated = true;
 
+						@SuppressWarnings("RedundantCast")
 						double newRate = 1.0 / (Double) (rateOrg + replenishRateAddition);
 						double rounded = Math.ceil(newRate * 1000) / 1000;
 
@@ -599,14 +605,6 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		return res;
 	}
 
-	public int countBuildings() {
-		val pattern = Pattern.compile("^\\s*levels\\s+(.*)");
-		int index = 0;
-		int counter = 0;
-		
-		return counter;
-	}
-
 	public static List<UnitRecuitmentInfo> toUnitRecuitmentInfo(List<UnitRecuitmentLineInfo> recruitments) {
 		return recruitments.stream().map( urli -> (UnitRecuitmentInfo)urli).collect(Collectors.toList());
 	}
@@ -627,10 +625,12 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 	public final static String TradeBonus = "trade_base_income_bonus bonus ";
 	public final static String IncomeBonus = "income_bonus bonus ";
 	public final static String LawBonus = "law_bonus bonus ";
+	@SuppressWarnings("unused")
 	public final static String ReligionBonus = "religion_level bonus ";
 
 	public static final String AGENT_PRIEST = "priest";
 
+	@SuppressWarnings("unused")
 	public final static String HiddenResource = "hidden_resource ";
 	private final static String nullStr = null;
 

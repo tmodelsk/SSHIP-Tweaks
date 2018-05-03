@@ -98,7 +98,7 @@ public class ReligionReworked extends Feature {
 		edb.addToCityCastleWallsCapabilities("agent "+ExportDescrBuilding.AGENT_PRIEST+" 0 requires factions { aragon, }");
 	}
 
-	private int nativeReligionFactor = 1;	// 2 dziala zle dla 33 stopni
+	private final int nativeReligionFactor = 1;	// 2 dziala zle dla 33 stopni
 
 	private DescrStratSectioned dStrat;
 	private FactionsSection factions;
