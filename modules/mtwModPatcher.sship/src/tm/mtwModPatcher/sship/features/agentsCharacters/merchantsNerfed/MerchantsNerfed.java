@@ -86,7 +86,7 @@ public class MerchantsNerfed extends Feature {
 	private void ensureAgentReruitmentExists(BuildingTree buildingTree, String require) {
 		val rangeStart = edb.getCapabilitiesStartEnd(buildingTree.first());
 		val rangeEnd = edb.getCapabilitiesStartEnd(buildingTree.last());
-		val range = new Range<Integer, Integer>( rangeStart.getStart() , rangeEnd.getEnd() );
+		val range = new Range<Integer, Integer>( rangeStart.start() , rangeEnd.end() );
 
 		val regex = Pattern.compile("^\\s*agent\\s+merchant\\s");
 

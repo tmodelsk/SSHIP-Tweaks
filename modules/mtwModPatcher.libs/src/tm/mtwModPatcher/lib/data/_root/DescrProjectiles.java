@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 public class DescrProjectiles extends LinesProcessorFileEntity {
 
 	public void setAttributeValue(String projectilneName, String attributeName, String valueStr) throws PatcherLibBaseEx {
-		LinesProcessor lines = _Lines;
+		LinesProcessor lines = _lines;
 		Pair<Integer,Integer> projLines = loadProjectileLines(projectilneName);
 
 		int index = lines.findFirstRegexLine("^" + attributeName + "\\s+" , projLines.getKey() , projLines.getValue());
@@ -35,11 +35,11 @@ public class DescrProjectiles extends LinesProcessorFileEntity {
 
 		while (index >= 0) {
 
-			index = _Lines.findFirstRegexLine(p, index+1);
+			index = _lines.findFirstRegexLine(p, index+1);
 
 			if(index > 0) {
 				// ## Parse name ##
-				String line = _Lines.getLine(index);
+				String line = _lines.getLine(index);
 				Matcher m = p.matcher(line);
 				if(m.find())	result.add(m.group(1));
 				else throw new PatcherLibBaseEx("Unable to parse projectile name in add : "+line);
@@ -51,7 +51,7 @@ public class DescrProjectiles extends LinesProcessorFileEntity {
 
 	protected Pair<Integer,Integer> loadProjectileLines(String projectileName) throws PatcherLibBaseEx {
 
-		LinesProcessor lines = _Lines;
+		LinesProcessor lines = _lines;
 
 		int start = lines.findExpFirstRegexLine("^projectile\\s+" + projectileName + "\\s*$");
 

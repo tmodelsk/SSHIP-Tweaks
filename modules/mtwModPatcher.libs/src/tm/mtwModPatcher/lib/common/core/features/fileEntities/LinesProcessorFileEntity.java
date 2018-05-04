@@ -11,13 +11,13 @@ import java.io.*;
  */
 public class LinesProcessorFileEntity extends FileEntity {
 
-	protected LinesProcessor _Lines;
+	protected LinesProcessor _lines;
 
 	public LinesProcessor getLines() {
-		return _Lines;
+		return _lines;
 	}
 	public void setLines(LinesProcessor lines) {
-		_Lines = lines;
+		_lines = lines;
 	}
 
 	public LinesProcessorFileEntity(String filePath) {
@@ -30,8 +30,8 @@ public class LinesProcessorFileEntity extends FileEntity {
 	@Override
 	public void load() throws ParserConfigurationException, IOException, SAXException {
 
-		_Lines = new LinesProcessor(filePath);
-		_Lines.setLines(loadAsTextLines());
+		_lines = new LinesProcessor(filePath);
+		_lines.setLines(loadAsTextLines());
 	}
 
 	@Override
@@ -48,7 +48,7 @@ public class LinesProcessorFileEntity extends FileEntity {
 
 		BufferedWriter bw = new BufferedWriter(writer);
 
-		_Lines.saveChanges(bw);
+		_lines.saveChanges(bw);
 
 		bw.close();
 		fos.close();

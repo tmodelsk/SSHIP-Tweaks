@@ -14,7 +14,7 @@ public class DescrSMFactions extends LinesProcessorFileEntity {
 
 	public void updateFactionAtttribute(String factionName, String attribute, String value) throws PatcherLibBaseEx {
 
-		LinesProcessor lines = _Lines;
+		LinesProcessor lines = _lines;
 
 		int factionIndexc = lines.findFirstRegexLine("^faction\\s+"+factionName);
 

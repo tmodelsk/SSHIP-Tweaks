@@ -26,8 +26,8 @@ public class DescrMercenaries extends LinesProcessorFileEntity {
 		Pattern pattern = Pattern.compile("(^\\s*unit\\s+)(" +  unitName + ")(\\s+exp.+cost\\s+)(\\d+)(.+)");
 
 
-		for(int i=0; i<_Lines.getLines().size(); i++) {
-			String line = _Lines.getLine(i);
+		for(int i = 0; i< _lines.getLines().size(); i++) {
+			String line = _lines.getLine(i);
 
 			Matcher matcher = pattern.matcher(line);
 
@@ -50,7 +50,7 @@ public class DescrMercenaries extends LinesProcessorFileEntity {
 
 				line = prefix+unitNameRaw+middle+costUpdated+suffix;
 
-				_Lines.replaceLine(i, line);
+				_lines.replaceLine(i, line);
 			}
 		}
 	}
@@ -65,8 +65,8 @@ public class DescrMercenaries extends LinesProcessorFileEntity {
 		Pattern pattern = Pattern.compile("(^\\s*unit\\s+)(.+)(\\s+exp.+cost\\s+)(\\d+)(.+)");
 
 
-		for(int i=0; i<_Lines.getLines().size(); i++) {
-			String line = _Lines.getLine(i);
+		for(int i = 0; i< _lines.getLines().size(); i++) {
+			String line = _lines.getLine(i);
 
 			Matcher matcher = pattern.matcher(line);
 
@@ -91,7 +91,7 @@ public class DescrMercenaries extends LinesProcessorFileEntity {
 
 				line = prefix+unitNameRaw+middle+costUpdated+suffix;
 
-				_Lines.replaceLine(i, line);
+				_lines.replaceLine(i, line);
 
 				if(!unitNames.contains(unitName)) unitNames.add(unitName);
 			}
@@ -110,8 +110,8 @@ public class DescrMercenaries extends LinesProcessorFileEntity {
 		Pattern pattern = Pattern.compile("(^\\s*unit\\s+)(.+)(\\s+exp.+cost\\s+)(\\d+)(.+)");
 
 
-		for(int i=0; i<_Lines.getLines().size(); i++) {
-			String line = _Lines.getLine(i);
+		for(int i = 0; i< _lines.getLines().size(); i++) {
+			String line = _lines.getLine(i);
 
 			Matcher matcher = pattern.matcher(line);
 
@@ -138,7 +138,7 @@ public class DescrMercenaries extends LinesProcessorFileEntity {
 	}
 
 	public void addUnitRecruitmentLine(String poolName, String unitLineStr) throws PatcherLibBaseEx {
-		LinesProcessor lines = _Lines;
+		LinesProcessor lines = _lines;
 
 		int index = lines.findExpFirstRegexLine("^pool\\s+"+poolName);
 

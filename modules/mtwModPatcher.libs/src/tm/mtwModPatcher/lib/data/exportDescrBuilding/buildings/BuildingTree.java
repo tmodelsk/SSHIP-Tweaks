@@ -28,7 +28,7 @@ public class BuildingTree {
 	}
 
 	public void addLevel(String levelName) {
-		buildings.add(new Building(this, levelName, buildings.size()+2));
+		buildings.add(new Building(this, levelName, buildings.size() + 1));
 	}
 
 	public BuildingTree(String name, SettlType settlType, String levelsStr) {

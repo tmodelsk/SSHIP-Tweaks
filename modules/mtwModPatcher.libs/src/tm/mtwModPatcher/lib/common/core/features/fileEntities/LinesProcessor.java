@@ -13,9 +13,7 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-/**
- * Lines Processor - multiple lines & processing
- */
+/** Lines Processor - multiple lines & processing */
 public class LinesProcessor {
 
 	public static LinesProcessor load(String fullPath, InputStreamProvider inputStreamProvider) throws IOException {
@@ -86,7 +84,11 @@ public class LinesProcessor {
 		return endIndex;
 	}
 
-	// Returns subsetCopy COPY of source Lines
+	/** Returns subsetCopy COPY of source Lines */
+	public LinesProcessor subsetCopy(Range<Integer, Integer> range) {
+		return subsetCopy(range.start(), range.end());
+	}
+	/** Returns subsetCopy COPY of source Lines */
 	public LinesProcessor subsetCopy(int start, int endInclusive) {
 		LinesProcessor subLines = new LinesProcessor();
 
@@ -101,14 +103,14 @@ public class LinesProcessor {
 		return subLines;
 	}
 
-	// Returns subsetCopy COPY of source Lines
+	/** Returns subsetCopy COPY of source Lines */
 	public LinesProcessor subsetCopy(int start) {
 		LinesProcessor subLines = new LinesProcessor();
 
 		List<String> lines = new ArrayList<>();
 
 		lines.addAll(_Lines.subList(start, _Lines.size()));
-		//lines.add(_Lines.getFirst(_Lines.size()-1));
+		//lines.add(_lines.getFirst(_lines.size()-1));
 
 		subLines.setLines(lines);
 
@@ -292,7 +294,7 @@ public class LinesProcessor {
 		val index = findFirstRegexLine(regex, rangeInclusive);
 
 		if(index < 0) throw new LineNotFoundEx(Ctm.format("EDB: Not found in [{0},{1}] reg: {2}",
-				rangeInclusive.getStart(), rangeInclusive.getEnd(), regex.toString()));
+				rangeInclusive.start(), rangeInclusive.end(), regex.toString()));
 
 		return index;
 	}
@@ -336,7 +338,7 @@ public class LinesProcessor {
 	}
 
 	public int findFirstRegexLine(Pattern pattern, Range<Integer, Integer> rangeInclusive) {
-		return findFirstRegexLine(pattern, rangeInclusive.getStart(), rangeInclusive.getEnd());
+		return findFirstRegexLine(pattern, rangeInclusive.start(), rangeInclusive.end());
 	}
 	// Finds rexeg add BETWEEN startFromIndex & endIndex - all inclusive
 	public int findFirstRegexLine(Pattern pattern, int startFromIndex, int endIndexInclusive) throws PatcherLibBaseEx {

@@ -7,6 +7,7 @@ import tm.common.Tuple2;
 import tm.common.Tuple3;
 import tm.common.collections.CollectionUtils;
 import tm.mtwModPatcher.lib.common.core.features.PatcherLibBaseEx;
+import tm.mtwModPatcher.lib.common.core.features.fileEntities.LineNotFoundEx;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessorFileEntity;
 import tm.mtwModPatcher.lib.common.entities.FactionInfo;
@@ -104,7 +105,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		if(capabilityIndex < 0) throw new PatcherLibBaseEx("Building not found: "+buildingName+" "+levelName+" "+castleOrCity);
 
 		// Find end of this block
-		LinesProcessor lines = _Lines;
+		LinesProcessor lines = _lines;
 
 		int endCapabilityIndex = lines.findExpFirstRegexLine("^\\s*\\{", capabilityIndex+2);
 
@@ -116,7 +117,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 	public void removeUnitRecruitment(String unitName) {
 		 //        recruit_pool  "EE Peasants"  2   0.077   2  0  requires factions { russia, kievan_rus, hungary, lithuania, }
 		val patt = Pattern.compile("^\\s*recruit_pool\\s+\"" +unitName+ "\"\\s+");
-		_Lines.removeAllRegexLines(patt);
+		_lines.removeAllRegexLines(patt);
 	}
 	public void removeUnitRecruitment(String unitName, FactionInfo faction) {
 		removeUnitRecruitment(unitName, faction.symbol);
@@ -264,7 +265,6 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		addCapabilities(buildingName, levelName, castleOrCity, bonusStr);
 	}
 
-
 	public void addRecuitment(Building buidling, String unitName, int starting, double replenish, int max, int bonus,
 							  String requirements) throws PatcherLibBaseEx {
 		addRecuitment(buidling.name, buidling.levelName, buidling.settlType.toLabelString(),
@@ -300,7 +300,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 
 	public void addCapabilities(String buildingName, String levelName, String castleOrCity, String newLine) throws PatcherLibBaseEx {
 
-		LinesProcessor lines = _Lines;
+		LinesProcessor lines = _lines;
 
 		String levelRegex = "^\\s*"+levelName;
 		if((castleOrCity != null) && !castleOrCity.isEmpty())
@@ -355,8 +355,8 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		for(val cityWallData : cityWallsList) {
 			val range = getCapabilitiesStartEnd(cityWallData.getItem1(), cityWallData.getItem2(), cityWallData.getItem3());
 
-			for (int index = range.getStart(); index < range.getEnd(); index++) {
-				String line = _Lines.getLines().get(index);
+			for (int index = range.start(); index < range.end(); index++) {
+				String line = _lines.getLines().get(index);
 
 				val m = ptr.matcher(line);
 				if(m.find()) {
@@ -365,7 +365,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 					val suffix = m.group(3);
 
 					line = prefix + (number + addNmber) + suffix;
-					_Lines.replaceLine(index, line);
+					_lines.replaceLine(index, line);
 				}
 			}
 		}
@@ -376,7 +376,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		return getCapabilitiesStartEnd(bl.name, bl.levelName, cityOrCastle);
 	}
 	public Range<Integer, Integer> getCapabilitiesStartEnd(String buildingName, String levelName, String castleOrCity) {
-		LinesProcessor lines = _Lines;
+		LinesProcessor lines = _lines;
 
 		String levelRegex = "^\\s*"+levelName;
 		if((castleOrCity != null) && !castleOrCity.isEmpty())
@@ -398,7 +398,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 	}
 
 	public int findBuildingCapabilityIndex(String buildingName, String levelName, String castleOrCity) throws PatcherLibBaseEx {
-		LinesProcessor lines = _Lines;
+		LinesProcessor lines = _lines;
 
 		String levelRegex = "^\\s*"+levelName;
 		if((castleOrCity != null) && !castleOrCity.isEmpty())
@@ -414,8 +414,11 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		return  capabilityIndex;
 	}
 
-	public int findBuidlingRequiresLine(String buildingName, String levelName, String castleOrCity) throws PatcherLibBaseEx {
-		LinesProcessor lines = _Lines;
+	public int findBuildingRequiresLine(BuildingSimple building) throws PatcherLibBaseEx {
+		return findBuildingRequiresLine(building.name, building.levelName, SettlType.toLabelString(building.settlType));
+	}
+	public int findBuildingRequiresLine(String buildingName, String levelName, String castleOrCity) throws PatcherLibBaseEx {
+		LinesProcessor lines = _lines;
 
 		String levelRegex = "^\\s*"+levelName;
 		if((castleOrCity != null) && !castleOrCity.isEmpty())
@@ -431,24 +434,32 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		return settlementRequirement;
 	}
 	@SuppressWarnings("unused")
-	public int findExpBuidlingStart(String buildingName) throws PatcherLibBaseEx {
-		LinesProcessor lines = _Lines;
+	public int findExpBuildingTreeStart(String buildingName) throws PatcherLibBaseEx {
+		LinesProcessor lines = _lines;
 
 		int settlementRequirement = lines.findExpFirstRegexLine("^building\\s+"+buildingName+"\\s*$");
 
 		return settlementRequirement;
 	}
-	public Range<Integer, Integer> findExpBuidlingRange(String buildingName) throws PatcherLibBaseEx {
-		LinesProcessor lines = _Lines;
+	public Range<Integer, Integer> findExpBuildingTreeRange(String buildingName) throws PatcherLibBaseEx {
+		LinesProcessor lines = _lines;
 
 		int settlStartIndex = lines.findExpFirstRegexLine("^building\\s+"+buildingName+"\\s*$");
 		int endIndex = lines.findCurrentBlockEndBracket(settlStartIndex+2);
 
 		return new Range<>(settlStartIndex, endIndex);
 	}
+	public Range<Integer, Integer> findExpBuildingRange(BuildingSimple building) {
+		val start = findBuildingRequiresLine(building);
+		if(start < 0) throw new LineNotFoundEx("building "+building.name);
+
+		val end = getLines().findCurrentBlockEndBracket(start+2);
+
+		return new Range<>(start, end);
+	}
 
 	public void addBuildingRequirement(String buildingName, String levelName, String castleOrCity, String additionalRequirement) {
-		val index = findBuidlingRequiresLine(buildingName, levelName, castleOrCity);
+		val index = findBuildingRequiresLine(buildingName, levelName, castleOrCity);
 		if(index <=0 ) throw new PatcherLibBaseEx(Ctm.format("Builidng ({0},{1},{2}) not found", buildingName, levelName, castleOrCity));
 
 		val orgLine = getLines().getLine(index);
@@ -457,7 +468,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 	}
 
 	public int findBuidlingSettlementRequirementLine(String buildingName, String levelName, String castleOrCity) throws PatcherLibBaseEx {
-		LinesProcessor lines = _Lines;
+		LinesProcessor lines = _lines;
 
 		String levelRegex = "^\\s*"+levelName;
 		if((castleOrCity != null) && !castleOrCity.isEmpty())
@@ -485,11 +496,44 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		int index = findBuidlingSettlementRequirementLine(buildingName, levelName, castleOrCity);
 		if(index < 0) throw new PatcherLibBaseEx("Building not found: "+buildingName+" "+levelName+" "+castleOrCity);
 
-		_Lines.replaceLine(index, "      settlement_min "+settlementStr);
+		_lines.replaceLine(index, "      settlement_min "+settlementStr);
 	}
+	public void rewriteBuildingTreeLevels(BuildingTree buildingTree) {
+		String levelsSsv="";
+		for(val level : buildingTree.levels())
+			//noinspection StringConcatenationInLoop
+			levelsSsv += level.levelName + " ";
+		levelsSsv = levelsSsv.trim();
 
-	public String getSettlementLevelStr(SettlementLevel level) throws PatcherLibBaseEx {
-		return SettlementLevelConverter.toSettlementLevelStr(level);
+		val levelsNew = "  levels "+levelsSsv;
+
+		val start = findExpBuildingTreeStart(buildingTree.Name);
+		val levelsIndex = getLines().findExpFirstRegexLine("^\\s*levels\\s+", start+1);
+
+		getLines().replaceLine(levelsIndex, levelsNew);
+	}
+	public void setBuildingUpgrade(BuildingSimple building, Building upgradeBuilding) {
+		val lines = getLines();
+		val range = findExpBuildingRange(building);
+
+		val upgradesIndex = lines.findExpFirstRegexLine("^\\s*upgrades", range.start());
+		lines.removeRange(upgradesIndex, range.end()-1);
+
+		val upgradesNewLines = new ArrayList<String>();
+		upgradesNewLines.add("      upgrades");
+		upgradesNewLines.add("      {");
+
+		if(upgradeBuilding != null)
+			upgradesNewLines.add("        " + upgradeBuilding.levelName);
+
+		upgradesNewLines.add("      }");
+
+		lines.insertAt(upgradesIndex, upgradesNewLines);
+	}
+	public void setBuildingUpgradeNextInTree(Building building) {
+		val upgradeBuilding = building.isNext() ? building.next() : null;
+
+		setBuildingUpgrade(building, upgradeBuilding);
 	}
 
 	public void addToCityCastleWallsCapabilities(String capabilityLine) throws PatcherLibBaseEx {
@@ -524,7 +568,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 	}
 
 	public void updateUnitReplenishRates(String unitName , double relpenishRateMin , double replenishRateAddition) throws PatcherLibBaseEx {
-		LinesProcessor lines = _Lines;
+		LinesProcessor lines = _lines;
 
 		// ###### Loop throught all "recruit_pool ... " lines of building capabilities ######
 		// recruit_pool  "Bondir"  1   0.13   1  0  requires factions { norway, denmark, } and hidden_resource denmark or hidden_resource norway
@@ -588,9 +632,9 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 		List<UnitRecuitmentLineInfo> res = new ArrayList<>();
 
 		val lines = getLines();
-		val buildingRange = findExpBuidlingRange(buildingName);
-		val endIndex = buildingRange.getEnd();
-		int index = buildingRange.getStart();
+		val buildingRange = findExpBuildingTreeRange(buildingName);
+		val endIndex = buildingRange.end();
+		int index = buildingRange.start();
 		do {
 			index = lines.findFirstRegexLine(regexPattern, index+1, endIndex);
 			if(index < 0) break;
@@ -616,6 +660,10 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 
 		// ## Remove all merchants production capabilities: agent merchant  0  requires ....
 		lines.removeAllRegexLines(Ctm.format("^\\s*agent\\s+{0}\\s", agentType));
+	}
+
+	public static String getSettlementLevelStr(SettlementLevel level) throws PatcherLibBaseEx {
+		return SettlementLevelConverter.toSettlementLevelStr(level);
 	}
 
 	public ExportDescrBuilding() {

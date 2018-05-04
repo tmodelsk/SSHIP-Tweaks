@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
 public class ExportDescrUnit extends LinesProcessorFileEntity {
 
 	public void updateCostAndUpkeepByMultipliers(String unitName, double costMultiplier, double upkeepMultiplier) throws PatcherLibBaseEx {
-		LinesProcessor lines = _Lines;
+		LinesProcessor lines = _lines;
 
 		int lineIndex = lines.findFirstLineByLinePath(Arrays.asList(
 				"^type\\s+"+unitName+"\\s*$",
@@ -53,7 +53,7 @@ public class ExportDescrUnit extends LinesProcessorFileEntity {
 	}
 
 	public void updateUpkeepByMultiplier(String unitName, double multiplier) throws PatcherLibBaseEx {
-		LinesProcessor lines = _Lines;
+		LinesProcessor lines = _lines;
 
 		int lineIndex = lines.findFirstLineByLinePath(Arrays.asList(
 				"^type\\s+"+unitName+"\\s*$",
@@ -93,11 +93,11 @@ public class ExportDescrUnit extends LinesProcessorFileEntity {
 		while(index  >= 0) {
 
 			// attributes       sea_faring, can_withdraw
-			index = _Lines.findFirstRegexLine("^attributes\\s+", index + 1 );
+			index = _lines.findFirstRegexLine("^attributes\\s+", index + 1 );
 
 			if(index >= 0) {
-				tmpLine = _Lines.getLine(index);
-				_Lines.replaceLine(index, tmpLine+", "+attribute);
+				tmpLine = _lines.getLine(index);
+				_lines.replaceLine(index, tmpLine+", "+attribute);
 			}
 		}
 	}
@@ -113,7 +113,7 @@ public class ExportDescrUnit extends LinesProcessorFileEntity {
 	}
 
 	protected void AddOwnership(String unitName, String factionName, String ownershipTagName) throws PatcherLibBaseEx {
-		LinesProcessor lines = _Lines;
+		LinesProcessor lines = _lines;
 
 		int lineIndex = lines.findFirstLineByLinePath(Arrays.asList(
 				"^type\\s+"+unitName+"\\s*$",

@@ -19,12 +19,12 @@ public class DescrCultures extends LinesProcessorFileEntity {
 
 		String regexStr = "(^"+characterName +"\\s+\\w+.tga\\s+\\w+.tga\\s+\\w+.tga\\s+)(\\d+)(\\s+)(\\d+)(\\s+\\d+)";
 
-		int index = _Lines.findFirstRegexLine(regexStr);
+		int index = _lines.findFirstRegexLine(regexStr);
 		// should find firts one
 		if (index < 0) throw new PatcherLibBaseEx("Character '" + characterName + "' definition add not found!");
 
 		while(index >= 0) {
-			String lineOrg = _Lines.getLine(index);
+			String lineOrg = _lines.getLine(index);
 
 			Pattern pattern = Pattern.compile(regexStr);
 			Matcher matcher = pattern.matcher(lineOrg);
@@ -40,8 +40,8 @@ public class DescrCultures extends LinesProcessorFileEntity {
 
 				if(recruitmentTurns != null) recruitmentTurnsStr = recruitmentTurns.toString();
 
-				_Lines.replaceLine(index, prefixStr + cost + suffixStr1+recruitmentTurnsStr+suffixStr2);
-				index = _Lines.findFirstRegexLine(regexStr, index+1);
+				_lines.replaceLine(index, prefixStr + cost + suffixStr1+recruitmentTurnsStr+suffixStr2);
+				index = _lines.findFirstRegexLine(regexStr, index+1);
 			}
 			else throw new PatcherLibBaseEx("Bad msgFormat of character add");
 		}

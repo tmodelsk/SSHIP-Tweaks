@@ -1,9 +1,11 @@
 package tm.mtwModPatcher.sship.features.global;
 
 import lombok.val;
+import tm.common.Range;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.Building;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingTree;
 import tm.mtwModPatcher.lib.data.world.maps.base.DescrRegions;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.descrStrat.DescrStratSectioned;
@@ -42,11 +44,34 @@ public class ReligionReworked extends Feature {
 		addTempleCastleLevelsFromCity(Buildings.TempleOrthodoxCastle , Buildings.TempleOrthodoxCity);
 	}
 
-	private void addTempleCastleLevelsFromCity(BuildingTree templeCastle, BuildingTree templeCity) {
-		val templeCityLevels = templeCity.levels();
+	private void addTempleCastleLevelsFromCity(BuildingTree templeCastleTree, BuildingTree templeCityTree) {
 
-		templeCastle.addLevel(templeCityLevels.get(2).levelName);
-		templeCastle.addLevel(templeCityLevels.get(3).levelName);
+		templeCastleTree.addLevel(templeCityTree.level(3).levelName);
+		templeCastleTree.addLevel(templeCityTree.level(4).levelName);
+
+		copyCityTempleIntoCastle(templeCityTree.level(3), templeCastleTree);
+		copyCityTempleIntoCastle(templeCityTree.level(4), templeCastleTree);
+
+		edb.setBuildingUpgradeNextInTree(templeCastleTree.level(2));
+		edb.setBuildingUpgradeNextInTree(templeCastleTree.level(3));
+		edb.setBuildingUpgradeNextInTree(templeCastleTree.level(4));
+	}
+
+	private void copyCityTempleIntoCastle(Building templeCity, BuildingTree templeCastleTree) {
+		Range<Integer, Integer> templeLevelRange = edb.findExpBuildingRange(templeCity);
+		LinesProcessor templeCityLines;
+		templeCityLines = edb.getLines().subsetCopy(templeLevelRange);
+
+		String firstLine = templeCityLines.getLine(0);
+		firstLine = firstLine.replace("city" , "castle");
+		templeCityLines.replaceLine(0, firstLine);
+
+		val templeCastleRange = edb.findExpBuildingTreeRange(templeCastleTree.Name);
+
+		val index = templeCastleRange.end()-4; //  }(levels) plugins { }
+		edb.getLines().insertAt(index, templeCityLines.getLines());
+
+		edb.rewriteBuildingTreeLevels(templeCastleTree);
 	}
 
 	@SuppressWarnings("unused")

@@ -1,16 +1,26 @@
 package tm.common;
 
-import lombok.Getter;
-import lombok.Setter;
-
 /** Range / Tuple / Pair on generics */
 public class Range<S,E> {
 
-	@Getter @Setter
-	private S start;
 
-	@Getter @Setter
+	private S start;
+	public S start() {
+		return start;
+	}
+	public void start(S start) {
+		this.start = start;
+	}
+
+
 	private E end;
+
+	public E end() {
+		return end;
+	}
+	public void end(E end) {
+		this.end = end;
+	}
 
 	public Range(S start, E end) {
 		this.start = start;

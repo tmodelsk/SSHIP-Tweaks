@@ -8,9 +8,8 @@ public enum SettlType {
 	City,
 	Castle;
 
-	public String toLabelString() {
-
-		SettlType settlType =  this;
+	public static String toLabelString(SettlType settlType) {
+		if(settlType == null) return null;
 
 		String castleOrCity;
 		switch (settlType) {
@@ -25,5 +24,9 @@ public enum SettlType {
 		}
 
 		return castleOrCity;
+	}
+
+	public String toLabelString() {
+		return toLabelString(this);
 	}
 }

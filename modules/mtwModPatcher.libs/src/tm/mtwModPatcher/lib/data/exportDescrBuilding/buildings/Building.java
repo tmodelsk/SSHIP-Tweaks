@@ -24,6 +24,10 @@ public class Building extends BuildingSimple {
 		return buildingTree.level(levelNumber+1);
 	}
 
+	public boolean isNext() {
+		return  levelNumber < buildingTree.size();
+	}
+
 	public Building(String name, SettlType settlType, String levelName, int levelNumber) {
 		super(name, levelName, settlType);
 		this.levelNumber = levelNumber;

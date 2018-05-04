@@ -49,7 +49,7 @@ public class TrebuchetEarlyAdoption extends Feature {
 		val lines = exportDescrBuilding.getLines();
 
 		// ## Castle Siege ##
-		index = exportDescrBuilding.findBuidlingRequiresLine("castle_siege", "c_siege_works" ,"castle");
+		index = exportDescrBuilding.findBuildingRequiresLine("castle_siege", "c_siege_works" ,"castle");
 		if(index <=0) throw new LineNotFoundEx("City siege building not found");
 
 		orgLine = lines.getLine(index);

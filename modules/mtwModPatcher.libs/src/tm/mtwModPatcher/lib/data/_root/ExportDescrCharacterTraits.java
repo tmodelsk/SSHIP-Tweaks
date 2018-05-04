@@ -12,7 +12,7 @@ import java.util.regex.Pattern;
 public class ExportDescrCharacterTraits extends LinesProcessorFileEntity {
 
 	public void commentNegativeChivalryFromTraitEffect(String traitName, String levelName) throws PatcherLibBaseEx {
-		LinesProcessor lines = _Lines;
+		LinesProcessor lines = _lines;
 
 		int traitStart = lines.findFirstRegexLine("^\\s*Trait\\s+"+traitName);
 		if(traitStart < 0) throw new PatcherLibBaseEx("Trait "+traitName+" not found!");
@@ -34,25 +34,25 @@ public class ExportDescrCharacterTraits extends LinesProcessorFileEntity {
 	public void commentAffectTraitInTrigger(String triggerName, String traitName) {
 		val index = loadIndexOfAffectTraitInTrigger(triggerName, traitName);
 
-		_Lines.commentLine(index);
+		_lines.commentLine(index);
 	}
 
 	public void setAffectTraitChanceInTrigger(String triggerName, String traitName, int chance) {
 		val index = loadIndexOfAffectTraitInTrigger(triggerName, traitName);
 
-		val pair = parseAffectTraitLineInTrigger(_Lines.getLine(index));
+		val pair = parseAffectTraitLineInTrigger(_lines.getLine(index));
 
 		val newLine = pair.getKey()+" " + chance;
-		_Lines.replaceLine(index, newLine);
+		_lines.replaceLine(index, newLine);
 	}
 
 	public void multiplyAffectTraitChanceInTrigger(String triggerName, String traitName, double chanceMulti) {
 		val index = loadIndexOfAffectTraitInTrigger(triggerName, traitName);
 
-		val pair = parseAffectTraitLineInTrigger(_Lines.getLine(index));
+		val pair = parseAffectTraitLineInTrigger(_lines.getLine(index));
 
 		val newLine = pair.getKey()+" " + (int)(pair.getValue()*chanceMulti);
-		_Lines.replaceLine(index, newLine);
+		_lines.replaceLine(index, newLine);
 
 	}
 
@@ -73,7 +73,7 @@ public class ExportDescrCharacterTraits extends LinesProcessorFileEntity {
 	}
 
 	public int loadIndexOfAffectTraitInTrigger(String triggerName, String traitName) {
-		LinesProcessor lines = _Lines;
+		LinesProcessor lines = _lines;
 
 		int traitStart = lines.findFirstRegexLine("^\\s*Trigger\\s+"+triggerName);
 		if(traitStart < 0) throw new PatcherLibBaseEx("Trigger "+triggerName+" not found!");
@@ -90,7 +90,7 @@ public class ExportDescrCharacterTraits extends LinesProcessorFileEntity {
 
 	public void insertNewAttribute(String traitName, String levelName, String attrubuteStr) throws PatcherLibBaseEx {
 
-		LinesProcessor lines = _Lines;
+		LinesProcessor lines = _lines;
 
 		int traitStart = lines.findFirstRegexLine("^\\s*Trait\\s+"+traitName);
 		if(traitStart < 0) throw new PatcherLibBaseEx("Trait "+traitName+" not found!");
