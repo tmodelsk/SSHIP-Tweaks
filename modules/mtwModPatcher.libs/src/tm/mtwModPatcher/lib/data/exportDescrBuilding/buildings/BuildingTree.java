@@ -6,8 +6,8 @@ import java.util.List;
 
 /** Buidling Tree */
 public class BuildingTree {
-	public final String Name;
-	public final SettlType SettlType;
+	public final String name;
+	public final SettlType settlType;
 
 	private List<Building> buildings = new ArrayList<>();
 
@@ -35,8 +35,8 @@ public class BuildingTree {
 		this(name, Arrays.asList(levelsStr.split(" ")), settlType);
 	}
 	public BuildingTree(String name, List<String> levelNames, SettlType settlType) {
-		Name = name;
-		SettlType = settlType;
+		this.name = name;
+		this.settlType = settlType;
 
 		for(int i=0; i<levelNames.size(); i++) {
 			buildings.add(new Building(this, levelNames.get(i), i+1));

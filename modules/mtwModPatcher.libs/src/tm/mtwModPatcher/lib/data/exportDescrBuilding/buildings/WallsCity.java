@@ -9,4 +9,7 @@ public class WallsCity {
 	public final String L3_StoneWall="stone_wall";
 	public final String L4_LargeStoneWall="large_stone_wall";
 	public final String L5_HugeStoneWall="huge_stone_wall";
+
+
+	public static final WallsCity INSTANCE = new WallsCity();
 }

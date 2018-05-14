@@ -24,10 +24,10 @@ public class TemplesTweaks extends Feature {
 
 		/* ### Muslims Mosques ### */
 		// # City #
-		edb.setBuildingSettlementRequirement(TempleMuslimCity.Name, "masjid", CityType, SettlementLevel.L1_Village);
+		edb.setBuildingSettlementRequirement(TempleMuslimCity.name, "masjid", CityType, SettlementLevel.L1_Village);
 
 		// # Castle #
-		edb.setBuildingSettlementRequirement(TempleMuslimCastle.Name, "c_small_masjid", CastleType, SettlementLevel.L1_Village);
+		edb.setBuildingSettlementRequirement(TempleMuslimCastle.name, "c_small_masjid", CastleType, SettlementLevel.L1_Village);
 
 		/* ### Catholic Churches ### */
 		// # City #

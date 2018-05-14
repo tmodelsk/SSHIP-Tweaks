@@ -11,4 +11,13 @@ public class BuildingSimple {
 		this.levelName = levelName;
 		this.settlType = settlType;
 	}
+
+	@Override
+	public String toString() {
+		return "BuildingSimple{" +
+				"name=" + name +
+				"," + levelName +
+				", " + settlType +
+				'}';
+	}
 }

@@ -1,11 +1,14 @@
 package tm.mtwModPatcher.sship.features.global;
 
 import lombok.val;
+import tm.common.Ctm;
 import tm.common.Range;
 import tm.mtwModPatcher.lib.common.core.features.Feature;
 import tm.mtwModPatcher.lib.common.core.features.fileEntities.LinesProcessor;
+import tm.mtwModPatcher.lib.common.entities.Religion;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.ExportDescrBuilding;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.Building;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingSimple;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingTree;
 import tm.mtwModPatcher.lib.data.world.maps.base.DescrRegions;
 import tm.mtwModPatcher.lib.data.world.maps.campaign.descrStrat.DescrStratSectioned;
@@ -16,16 +19,15 @@ import tm.mtwModPatcher.sship.features.buildings.TemplesTweaks;
 import tm.mtwModPatcher.sship.lib.Buildings;
 
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.UUID;
+import java.util.*;
 
 public class ReligionReworked extends Feature {
 	@Override
 	public void setParamsCustomValues() {
 
 	}
+
+	private double templeFullMulti = 0.9;
 
 	@Override
 	public void executeUpdates() throws Exception {
@@ -35,7 +37,71 @@ public class ReligionReworked extends Feature {
 		//addNativeTemples();
 		templeLevels();
 
-		edb.addToCityCastleWallsCapabilities("religion_level bonus 1");
+		addBonuses();
+
+		//edb.addToCityCastleWallsCapabilities("religion_level bonus 1");
+	}
+
+	private void addBonuses() {
+		val bonuses = new ArrayList<SettReligionBonus>();
+
+		int maxTotal = (int) (100 * templeFullMulti);
+
+		BuildingTree templeTree = Buildings.TempleCathCity;
+		Religion religion = Religion.Catholic;
+
+		BuildingSimple temple;
+
+		for(int wallLev = 1; wallLev <= Buildings.WallsCity.size(); wallLev++) {
+			val bs = new SettReligionBonus(Buildings.WallsCity.level(wallLev));
+			bonuses.add(bs);
+
+			for(int templeLevel=1; templeLevel <= wallLev; templeLevel++) {
+
+				temple = templeTree.level(templeLevel);
+				double min=0;
+				double step = ((double)maxTotal) / ((double)wallLev);
+				double max= step;
+
+				//bs.add(temple, templeLevel, null , religion);
+				//bs.add(temple, -1, 90 , religion);
+
+				for(int i=1; i<=templeLevel; i++) {
+					bs.add(temple, 1, (int)max , religion);
+					min += step;
+					max += step;
+				}
+			}
+		}
+
+		bonuses.forEach( bn -> addBonuses(bn));
+	}
+
+	private void addBonuses(SettReligionBonus settReligionBonus) {
+		// building_present_min_level logging_camp logging_camp
+		val wallLevel = settReligionBonus.wallLevel;
+		String wallReq = Ctm.format("building_present_min_level {0} {1}", wallLevel.name, wallLevel.levelName);
+
+		if(wallLevel.isNext()) {
+			val nextLevel = wallLevel.next();
+			wallReq += Ctm.format(" and not building_present_min_level {0} {1}", nextLevel.name, nextLevel.levelName);
+		}
+
+		// region_religion catholic XX
+		for(val bn : settReligionBonus.bonuses) {
+
+			String rangeReq="";
+			if( bn.religionMax != null )
+				rangeReq = Ctm.format("not region_religion {0} {1}",
+						bn.religionType.toStrLabel(), bn.religionMax);
+
+			String bonusLine = Ctm.format("        {0} {1} requires {2}",
+					edb.ReligionBonus, bn.bonus, rangeReq);
+			if(wallReq != null)
+				bonusLine += " and "+wallReq;
+
+			edb.addCapabilities(bn.temple, bonusLine);
+		}
 	}
 
 	private void templeLevels() {
@@ -66,7 +132,7 @@ public class ReligionReworked extends Feature {
 		firstLine = firstLine.replace("city" , "castle");
 		templeCityLines.replaceLine(0, firstLine);
 
-		val templeCastleRange = edb.findExpBuildingTreeRange(templeCastleTree.Name);
+		val templeCastleRange = edb.findExpBuildingTreeRange(templeCastleTree.name);
 
 		val index = templeCastleRange.end()-4; //  }(levels) plugins { }
 		edb.getLines().insertAt(index, templeCityLines.getLines());
@@ -119,8 +185,8 @@ public class ReligionReworked extends Feature {
 				<priest_conversion_rate_offset float="0.005"/>
 		 */
 
-		edb.addToCityCastleWallsCapabilities("agent_limit "+ExportDescrBuilding.AGENT_PRIEST+" 1 ");
-		edb.addToCityCastleWallsCapabilities("agent "+ExportDescrBuilding.AGENT_PRIEST+" 0 requires factions { aragon, }");
+		//edb.addToCityCastleWallsCapabilities("agent_limit "+ExportDescrBuilding.AGENT_PRIEST+" 1 ");
+		//edb.addToCityCastleWallsCapabilities("agent "+ExportDescrBuilding.AGENT_PRIEST+" 0 requires factions { aragon, }");
 	}
 
 	private final int nativeReligionFactor = 1;	// 2 dziala zle dla 33 stopni
@@ -161,4 +227,47 @@ public class ReligionReworked extends Feature {
 		return Id;
 	}
 	public static UUID Id = UUID.fromString("b8578518-e77e-4ecc-8579-37cfdeadbcbd");
+
+	public static class SettReligionBonus {
+
+		public final Building wallLevel;
+		private final List<TempleBonusRange> bonuses = new ArrayList<>();
+
+		public SettReligionBonus add(BuildingSimple temple, int bonus, Integer religionMax, Religion religion) {
+			return add(new TempleBonusRange(temple, bonus, religionMax, religion));
+		}
+		public SettReligionBonus add(TempleBonusRange bonus) {
+			bonuses.add(bonus);
+			return this;
+		}
+
+		public SettReligionBonus(Building wallLevel) {
+			this.wallLevel = wallLevel;
+		}
+	}
+
+	public static class TempleBonusRange {
+
+		public final BuildingSimple temple;
+		public final int bonus;
+		public final Integer religionMax;
+		public final Religion religionType;
+
+		public TempleBonusRange(BuildingSimple temple, int bonus, Integer religionMax, Religion religionType) {
+			this.temple = temple;
+			this.bonus = bonus;
+			this.religionMax = religionMax;
+			this.religionType = religionType;
+		}
+
+		@Override
+		public String toString() {
+			return "{" +
+					" " + temple +
+					" , bonus=" + bonus +
+					", " + religionMax +
+					", " + religionType +
+					'}';
+		}
+	}
 }

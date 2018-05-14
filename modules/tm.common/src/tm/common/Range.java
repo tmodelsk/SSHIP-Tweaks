@@ -28,4 +28,10 @@ public class Range<S,E> {
 	}
 
 	public Range() {}
+
+
+	@Override
+	public String toString() {
+		return "Range{" + start + "," + end +'}';
+	}
 }

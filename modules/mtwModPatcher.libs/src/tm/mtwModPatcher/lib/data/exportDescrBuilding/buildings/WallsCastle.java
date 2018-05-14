@@ -12,4 +12,6 @@ public class WallsCastle {
 	public final String L3_Castle="castle";
 	public final String L4_Fortress="fortress";
 	public final String L5_Citadel="citadel";
+
+	public static final WallsCastle INSTANCE = new WallsCastle();
 }

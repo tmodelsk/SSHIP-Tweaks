@@ -507,7 +507,7 @@ public class ExportDescrBuilding extends LinesProcessorFileEntity {
 
 		val levelsNew = "  levels "+levelsSsv;
 
-		val start = findExpBuildingTreeStart(buildingTree.Name);
+		val start = findExpBuildingTreeStart(buildingTree.name);
 		val levelsIndex = getLines().findExpFirstRegexLine("^\\s*levels\\s+", start+1);
 
 		getLines().replaceLine(levelsIndex, levelsNew);

@@ -2,6 +2,8 @@ package tm.mtwModPatcher.sship.lib;
 
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.BuildingTree;
 import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.SettlType;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.WallsCastleTree;
+import tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.WallsCityTree;
 
 import java.util.Arrays;
 import java.util.List;
@@ -139,8 +141,8 @@ public class Buildings {
 	public static final List<String> WallsCityLevels = Arrays.asList(WallsCitySpec.L1_WoodenPalisade, WallsCitySpec.L2_WoodenWall, WallsCitySpec.L3_StoneWall, WallsCitySpec.L4_LargeStoneWall, WallsCitySpec.L5_HugeStoneWall);
 	public static final List<String> WallsCastleLevels = Arrays.asList(WallsCastleSpec.L1_MotteAndBailey, WallsCastleSpec.L2_WoodenCastle, WallsCastleSpec.L3_Castle, WallsCastleSpec.L4_Fortress, WallsCastleSpec.L5_Citadel);
 
-	public static final BuildingTree WallsCity = new BuildingTree(WallsCitySpec.Name, WallsCityLevels, SettlType.City);
-	public static final BuildingTree WallsCastle = new BuildingTree(WallsCastleSpec.Name, WallsCastleLevels, SettlType.Castle);
+	public static final WallsCityTree WallsCity = new WallsCityTree(WallsCityLevels);
+	public static final WallsCastleTree WallsCastle = new WallsCastleTree(WallsCastleLevels);
 
 	public final static String CityType = tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.Buildings.CityType;
 	public final static String CastleType = tm.mtwModPatcher.lib.data.exportDescrBuilding.buildings.Buildings.CastleType;

@@ -34,7 +34,7 @@ public class Building extends BuildingSimple {
 	}
 
 	public Building(BuildingTree buildingTree, String levelName, int levelNumber ) {
-		super(buildingTree.Name, levelName, buildingTree.SettlType);
+		super(buildingTree.name, levelName, buildingTree.settlType);
 		this.buildingTree = buildingTree;
 		this.levelNumber = levelNumber;
 	}

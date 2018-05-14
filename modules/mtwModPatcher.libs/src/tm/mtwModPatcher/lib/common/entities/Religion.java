@@ -1,12 +1,29 @@
 package tm.mtwModPatcher.lib.common.entities;
 
-/**
- * Created by Tomek on 2016-11-15.
- */
+import tm.mtwModPatcher.lib.common.core.features.PatcherNotSupportedEx;
+
 public enum Religion {
 
 	Catholic,
 	Orthodox,
 	Islam,
-	Pagan
+	Pagan;
+
+	public String toStrLabel() {
+		switch (this) {
+			case Catholic:
+				return "catholic";
+			case Orthodox:
+				return "orthodox";
+			case Islam:
+				return "islam";
+			case Pagan:
+				return "pagan";
+
+			default:
+				throw new PatcherNotSupportedEx("Not supported: "+this);
+		}
+	}
+
+
 }
